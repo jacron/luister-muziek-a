@@ -1,0 +1,48 @@
+<!--<datalist id="composers">-->
+  <!--<option *ngFor="let opt of composers" value="{{ opt.Name }}"></option>-->
+<!--</datalist>-->
+<!--<input type="text" list="composers" [(ngModel)]="composer">-->
+<form>
+  <div>
+    <mat-form-field>
+      <mat-select placeholder="Composer" [(ngModel)]="selectedComposerId" name="composer">
+        <mat-option>-- select --</mat-option>
+        <mat-option *ngFor="let opt of composers" [value]="opt.ID">
+          {{ opt.Name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-form-field>
+      <mat-select placeholder="Performer" [(ngModel)]="selectedPerformerId" name="performer">
+        <mat-option>-- select --</mat-option>
+        <mat-option *ngFor="let opt of performers" [value]="opt.ID">
+          {{ opt.Name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button=""
+          (click)="getAlbumsComponist()">get</button>
+</form>
+
+<div class="list">
+<ul>
+  <li *ngFor="let mother of albumsContainer.mothers">
+    <a (click)="getAlbum(mother)">{{ mother.Title }}</a>
+  </li>
+
+</ul>
+<ul>
+  <li *ngFor="let child of albumsContainer.children">
+    <app-album-thumb [album]="child"></app-album-thumb>
+  </li>
+</ul>
+<div *ngIf="selectedAlbum">
+  {{ selectedAlbum.Title }}
+  <ul>
+    <li *ngFor="let album of albums" class="thumb">
+      <app-album-thumb [album]="album"></app-album-thumb>
+    </li>
+  </ul>
+</div>
+</div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 const requestUrl = 'http://127.0.0.1:8010/ajax/';
 
@@ -17,16 +17,34 @@ export class MusicService {
       params});
   }
 
-  updateAlbumTitle(id, title) {
+  getAlbumById(id) {
     const params = new HttpParams()
-      .set('cmd', 'update_album_title')
-      .set('albumid', id)
-      .set('title', title);
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(requestUrl, params, {
-      headers: headers
-    });
+      .set('cmd', 'album_by_id')
+      .set('id', id);
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+  }
+
+  // updateAlbumTitle(id, title) {
+  //   const params = new HttpParams()
+  //     .set('cmd', 'update_album_title')
+  //     .set('albumid', id)
+  //     .set('title', title);
+  //   const headers = new HttpHeaders();
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http.post(requestUrl, params, {
+  //     headers: headers
+  //   });
+  // }
+
+  getAlbumAlbums(albumId) {
+    const params = new HttpParams()
+      .set('cmd', 'album_albums')
+      .set('albumId', albumId);
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
   }
 
   getAlbumsComponist(componistId) {
@@ -41,6 +59,15 @@ export class MusicService {
   getComposers() {
     const params = new HttpParams()
       .set('cmd', 'componisten')
+      .set('format', '%Last, %First');
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+  }
+
+  getPerformers() {
+    const params = new HttpParams()
+      .set('cmd', 'performers')
       .set('format', '%Last, %First');
     return this.http.get(requestUrl, {
       responseType: 'json',

@@ -1,38 +1,29 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
-<label>Path</label>
-<input type="text" placeholder="album path"
-       (click)="selectPath($event)"
-       (keydown)="albumPath($event)"
-       [(ngModel)]="path"
-       class="luister-path"
->
-<a href="{{albumHref}}">{{ albumTitle }}</a>
-<datalist id="composers">
-  <option *ngFor="let opt of composers" value="{{ opt.Name }}"></option>
-</datalist>
-<input type="text" list="composers" [(ngModel)]="composer">
-<select [(ngModel)]="selectedComposerId">
-  <option *ngFor="let opt of composers" value="{{ opt.ID }}">{{ opt.Name }}</option>
-</select>
-<button (click)="getAlbumsComponist(selectedComposerId)">get</button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><img src="assets/brand/favicon.ico"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<div #topicTitle contenteditable="true" [textContent]="testTitle"
-     (input)="model=topicTitle.innerText"
-     (keydown)="albumTitleKeydown($event, 1, topicTitle.innerText)"></div>
-
-<ul>
-  <li *ngFor="let mother of albums.mothers">
-    <div #topicTitle contenteditable="true" [textContent]="mother.Title"
-         (input)="model=topicTitle.innerText"
-         (keydown)="albumTitleKeydown($event, mother.ID, topicTitle.innerText)"></div>
-  </li>
-
-</ul>
-<ul>
-  <li *ngFor="let child of albums.children">{{ child.Title }}</li>
-</ul>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" [class.active]="prouter.url == '/'">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" [class.active]="prouter.url == '/search'">
+        <a class="nav-link" href="search">Search</a>
+      </li>
+      <li class="nav-item" [class.active]="prouter.url == '/tools'">
+        <a class="nav-link" href="tools">Tools</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" (input)="search()" type="search" placeholder="Search" aria-label="Search">
+      <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+    </form>
+  </div>
+</nav>
+<router-outlet></router-outlet>
+<!-- Routed views go here -->
