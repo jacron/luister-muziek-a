@@ -1,4 +1,4 @@
-<div *ngIf="album">
-<img src="{{ imgUrl }}{{ album.ID }}/album" class="thumb">
-{{ album.Title }}
+<div *ngIf="album" class="album">
+<img attr.data-src="{{ imgUrl }}{{ album.ID }}/album" class="thumb lazy">
+  <div>{{ album.Title }}</div>
 </div>

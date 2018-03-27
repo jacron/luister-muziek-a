@@ -1,3 +1,16 @@
 .list {
   margin-top: 20px;
 }
+.selected-image {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  display: inline-block;
+  padding: 10px;
+  margin-right: 5px;
+  //text-align: center;
+}
+.selected-image img {
+  height: 40px;
+  //margin: 0 auto;
+}

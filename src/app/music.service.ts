@@ -74,4 +74,11 @@ export class MusicService {
       params});
   }
 
+  getCollections() {
+    const params = new HttpParams()
+      .set('cmd', 'collections');
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+  }
 }
