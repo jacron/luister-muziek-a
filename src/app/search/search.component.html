@@ -15,10 +15,10 @@
              matInput
              [matAutocomplete]="auto1"
              [(ngModel)]="selectedComposer"
-             (change)="onComposerChange()"
              (click)="select($event)"
              name="composer">
       <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+        <mat-option>-- clear --</mat-option>
         <mat-option *ngFor="let opt of (composers | typedName:selectedComposer)" [value]="opt">
           {{ opt.Name }}
         </mat-option>
@@ -34,53 +34,62 @@
            aria-label="Text" matInput
            [matAutocomplete]="auto2"
            [(ngModel)]="selectedPerformer"
-           (change)="onComposerChange()"
            (click)="select($event)"
            name="performer">
     <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+      <mat-option>-- clear --</mat-option>
       <mat-option *ngFor="let opt of (performers | typedName:selectedPerformer)" [value]="opt">
         {{ opt.Name }}
       </mat-option>
     </mat-autocomplete><br>
 
+
+    <!-- select collection (autocomplete) -->
+    <div class="selected-image">
+      <img *ngIf="selectedCollection && selectedCollection.ID"
+           src="{{ imgUrl }}{{ selectedCollection.ID }}/album">
+    </div>
+    <input type="text"
+           placeholder="Collection"
+           aria-label="Text" matInput
+           [matAutocomplete]="auto3"
+           [(ngModel)]="selectedCollection"
+           (click)="select($event)"
+           name="performer">
+    <mat-autocomplete #auto3="matAutocomplete"
+                      class="collections"
+                      [displayWith]="displayTitleFn" #collectionSelect>
+      <mat-option>-- clear --</mat-option>
+      <mat-option *ngFor="let opt of (collections | typedTitle:selectedCollection)" [value]="opt">
+        <div class="selected-image">
+          <img src="{{ imgUrl }}{{ opt.ID }}/album">
+        </div>
+        {{ opt.Title }}
+      </mat-option>
+    </mat-autocomplete><br>
+
+    <!-- select collection (select) -->
+    <!--<div class="selected-image">-->
+      <!--<img *ngIf="selectedCollectionId"-->
+           <!--src="{{ imgUrl }}{{ selectedCollectionId }}/album">-->
+    <!--</div><br>-->
     <!--<mat-form-field>-->
-      <!--<mat-select placeholder="Composer"-->
-                  <!--#composerSelect-->
-                  <!--[(ngModel)]="selectedComposerId"-->
-                  <!--(keydown)="onComposerSelectKey($event)"-->
-                  <!--name="composer">-->
+      <!--<mat-select placeholder="Collection" #collectionSelect-->
+                  <!--[(ngModel)]="selectedCollectionId" name="collection">-->
         <!--<mat-option>&#45;&#45; select &#45;&#45;</mat-option>-->
-        <!--<mat-option *ngFor="let opt of composers"-->
-                    <!--[value]="opt.ID">-->
+        <!--<mat-option *ngFor="let opt of collections" [value]="opt.ID">-->
           <!--<div class="selected-image">-->
-            <!--<img class="lazy" attr.data-src="{{ imgUrl }}{{ opt.ID }}/componist" style="height:30px;">-->
+            <!--<img class="lazy" attr.data-src="{{ imgUrl }}{{ opt.ID }}/album">-->
           <!--</div>-->
-          <!--{{ opt.Name }}-->
+          <!--{{ opt.Title }}-->
         <!--</mat-option>-->
       <!--</mat-select>-->
     <!--</mat-form-field><br>-->
+    <!--<div class="selected-image">-->
+      <!--<img *ngIf="selectedPerformerId"-->
+        <!--src="{{ imgUrl }}{{ selectedPerformerId }}/performer">-->
+    <!--</div>-->
 
-    <!-- select collection (select) -->
-    <div class="selected-image">
-      <img *ngIf="selectedCollectionId"
-           src="{{ imgUrl }}{{ selectedCollectionId }}/album">
-    </div><br>
-    <mat-form-field>
-      <mat-select placeholder="Collection" #collectionSelect
-                  [(ngModel)]="selectedCollectionId" name="collection">
-        <mat-option>-- select --</mat-option>
-        <mat-option *ngFor="let opt of collections" [value]="opt.ID">
-          <div class="selected-image">
-            <img class="lazy" attr.data-src="{{ imgUrl }}{{ opt.ID }}/album">
-          </div>
-          {{ opt.Title }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field><br>
-    <div class="selected-image">
-      <img *ngIf="selectedPerformerId"
-        src="{{ imgUrl }}{{ selectedPerformerId }}/performer">
-    </div>
     <!--<mat-form-field>-->
       <!--<mat-select placeholder="Performer" #performerSelect-->
                   <!--[(ngModel)]="selectedPerformerId" name="performer">-->

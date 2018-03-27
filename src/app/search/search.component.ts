@@ -20,14 +20,17 @@ export class SearchComponent implements OnInit, AfterViewInit {
   composers: Person[];
   performers: Person[];
   composerId = -1;
+  performerId = -1;
+  collectionId = -1;
   collections: Album[];
-  selectedCollectionId = null;
+  // selectedCollectionId = null;
   selectedAlbum: Album;
   imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
-  selectedComposer = null;
-  selectedPerformer = null;
+  selectedComposer: Person = null;
+  selectedPerformer: Person = null;
+  selectedCollection: Album = null;
   @ViewChild('collectionSelect') collectionSelectElem: MatSelect;
 
   constructor(private musicService: MusicService,
@@ -39,9 +42,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   handleParams(params) {
     if (params) {
-      console.log(params);
       this.fetchThings(params);
-      this.composerId = +params.idc;
+      this.composerId = +params.idcomp;
+      this.performerId = +params.idperf;
+      this.collectionId = +params.idcoll;
     } else {
       this.albumsContainer = new Albums();
     }
@@ -49,7 +53,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   fetchThings(params) {
     this.albums = [];
-    this.musicService.getAlbumsComponist(params.idc).subscribe(
+    this.musicService.getSearchedAlbums(params).subscribe(
       (albums: Albums) => {
         this.albumsContainer = albums;
         setTimeout(() => {
@@ -64,19 +68,43 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   getComposerById(id: number): Person {
     for (let i = 0; i < this.composers.length; i++) {
-      const composer = this.composers[i];
-      if (composer.ID === id) {
-        return composer;
+      const person = this.composers[i];
+      if (person.ID === id) {
+        return person;
+      }
+    }
+    return null;
+  }
+
+  getPerformerById(id: number): Person {
+    for (let i = 0; i < this.performers.length; i++) {
+      const person = this.performers[i];
+      if (person.ID === id) {
+        return person;
+      }
+    }
+    return null;
+  }
+
+  getCollectionById(id: number): Album {
+    for (let i = 0; i < this.collections.length; i++) {
+      const album = this.collections[i];
+      if (album.ID === id) {
+        return album;
       }
     }
     return null;
   }
 
   getAlbumsComponist() {
+    const idcomp = this.selectedComposer ? this.selectedComposer.ID : -1;
+    const idperf = this.selectedPerformer ? this.selectedPerformer.ID : -1;
+    const idcoll = this.selectedCollection ? this.selectedCollection.ID : -1;
     this.router.navigate(['/search',
       {
-        idc: this.selectedComposer.ID,
-        // idp: this.selectedPerformerId
+        idcomp: idcomp,
+        idperf: idperf,
+        idcoll: idcoll
       }
     ]).then(() => {
     });
@@ -102,7 +130,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.musicService.getComposers().subscribe(
       (people: Person[]) => {
         this.composers = people;
-        console.log(this.composerId);
         if (this.composerId !== -1) {
           this.selectedComposer = this.getComposerById(this.composerId);
         }
@@ -116,6 +143,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.musicService.getPerformers().subscribe(
       (people: Person[]) => {
         this.performers = people;
+        if (this.performerId !== -1) {
+          this.selectedPerformer = this.getPerformerById(this.performerId);
+        }
       },
       err => console.error(err),
       () => console.log('performers fetched')
@@ -126,6 +156,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.musicService.getCollections().subscribe(
       (collections: Album[]) => {
         this.collections = collections;
+        if (this.collectionId !== -1) {
+          this.selectedCollection = this.getCollectionById(this.collectionId);
+        }
       },
       err => console.error(err),
       () => console.log('collections fetched')
@@ -165,7 +198,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   setLazy() {
     this.lazyImages = document.querySelectorAll('.lazy');
-    console.log('lazyImages.length', this.lazyImages.length);
+    // console.log('lazyImages.length', this.lazyImages.length);
   }
 
   lazy() {
@@ -182,31 +215,32 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }, 200);
   }
 
-  loadOnScroll() {
-    this.setLazy();
-    this.lazyLoad();
-  }
+  // loadOnScroll() {
+  //   this.setLazy();
+  //   this.lazyLoad();
+  // }
 
-  registerPanelScrollEvent(selectElem) {
-    this.loadOnScroll();
-    const panel = selectElem.panel.nativeElement;
-    panel.addEventListener('scroll', () => this.loadOnScroll());
-  }
+  // registerPanelScrollEvent(selectElem) {
+  //   console.log(selectElem);
+  //   this.loadOnScroll();
+  //   const panel = selectElem.panel.nativeElement;
+  //   panel.addEventListener('scroll', () => this.loadOnScroll());
+  // }
 
-  registerPanelOpenEvent(selectElem) {
-    selectElem.onOpen.subscribe(() => this.registerPanelScrollEvent(selectElem));
-  }
+  // registerPanelOpenEvent(selectElem) {
+  //   console.log(selectElem);
+  // }
 
   displayFn(person): string {
     return person ? person.Name : person;
   }
 
-  select(e) {
-    e.target.select();
+  displayTitleFn(album): string {
+    return album ? album.Title : album;
   }
 
-  onComposerChange() {
-    console.log(this.selectedComposer);
+  select(e) {
+    e.target.select();
   }
 
   ngOnInit() {
@@ -214,7 +248,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.getComposers();
     this.getPerformers();
     this.getCollections();
-    this.registerPanelOpenEvent(this.collectionSelectElem);
+    // this.registerPanelOpenEvent(this.collectionSelectElem);
+    // this.registerPanelScrollEvent(this.collectionSelectElem);
   }
 
 

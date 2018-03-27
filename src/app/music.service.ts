@@ -47,13 +47,13 @@ export class MusicService {
       params});
   }
 
-  getAlbumsComponist(componistId) {
-    const params = new HttpParams()
+  getSearchedAlbums(params) {
+    const httpParams = new HttpParams()
       .set('cmd', 'albums_componist')
-      .set('componistId', componistId);
+      .set('componistId', params.idcomp);
     return this.http.get(requestUrl, {
       responseType: 'json',
-      params});
+      params: httpParams});
   }
 
   getComposers() {

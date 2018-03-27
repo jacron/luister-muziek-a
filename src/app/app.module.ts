@@ -16,6 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AlbumThumbComponent } from './album-thumb/album-thumb.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { TypedNamePipe } from './typed-name.pipe';
+import { TypedTitlePipe } from './typed-title.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TypedNamePipe } from './typed-name.pipe';
     WelcomeComponent,
     ToolsComponent,
     AlbumThumbComponent,
-    TypedNamePipe
+    TypedNamePipe,
+    TypedTitlePipe
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
