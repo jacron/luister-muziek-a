@@ -47,10 +47,31 @@ export class MusicService {
       params});
   }
 
+  // getSearchedAlbums(params) {
+  //   const httpParams = new HttpParams()
+  //     .set('cmd', 'albums_componist')
+  //     .set('componistId', params.idcomp)
+  //     .set('performerId', params.idperf)
+  //     .set('collectionId', params.idcoll)
+  //   ;
+  //   return this.http.get(requestUrl, {
+  //     responseType: 'json',
+  //     params: httpParams});
+  // }
+
   getSearchedAlbums(params) {
+    const idcomp = +params.idcomp === -1 ? null : params.idcomp,
+      idperf = +params.idperf === -1 ? null : params.idperf,
+      idcoll = +params.idcoll === -1 ? null : params.idcoll;
+    console.log(idperf);
+    const cql = {
+      componist: idcomp,
+      performer: idperf,
+      collection: idcoll
+    };
     const httpParams = new HttpParams()
-      .set('cmd', 'albums_componist')
-      .set('componistId', params.idcomp);
+      .set('cmd', 'cql_search')
+      .set('cql', JSON.stringify(cql));
     return this.http.get(requestUrl, {
       responseType: 'json',
       params: httpParams});

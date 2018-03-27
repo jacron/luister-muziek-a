@@ -6,6 +6,9 @@ import {Album} from '../classes/Album';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {MatSelect} from '@angular/material';
+import {forkJoin} from 'rxjs/observable/forkJoin';
+// import {Observable} from 'rxjs/Observable';
+
 
 @Component({
   selector: 'app-search',
@@ -133,6 +136,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         if (this.composerId !== -1) {
           this.selectedComposer = this.getComposerById(this.composerId);
         }
+        this.getPerformers();
       },
       err => console.error(err),
       () => console.log('componisten fetched')
@@ -144,7 +148,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
       (people: Person[]) => {
         this.performers = people;
         if (this.performerId !== -1) {
-          this.selectedPerformer = this.getPerformerById(this.performerId);
+          // setTimeout(() => {
+            this.selectedPerformer = this.getPerformerById(this.performerId);
+          // }, 100);
+          this.getCollections();
         }
       },
       err => console.error(err),
@@ -157,7 +164,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
       (collections: Album[]) => {
         this.collections = collections;
         if (this.collectionId !== -1) {
-          this.selectedCollection = this.getCollectionById(this.collectionId);
+          // setTimeout(() => {
+            this.selectedCollection = this.getCollectionById(this.collectionId);
+          // }, 100);
         }
       },
       err => console.error(err),
@@ -243,11 +252,41 @@ export class SearchComponent implements OnInit, AfterViewInit {
     e.target.select();
   }
 
+  setSelected() {
+    if (this.composerId !== -1) {
+      this.selectedComposer = this.getComposerById(this.composerId);
+    }
+    if (this.performerId !== -1) {
+      this.selectedPerformer = this.getPerformerById(this.performerId);
+      // console.log(this.selectedPerformer);
+    }
+    if (this.collectionId !== -1) {
+      this.selectedCollection = this.getCollectionById(this.collectionId);
+    }
+  }
+
   ngOnInit() {
     this.albumsContainer = new Albums();
-    this.getComposers();
-    this.getPerformers();
-    this.getCollections();
+    const composers = this.musicService.getComposers();
+    const performers = this.musicService.getPerformers();
+    const collections = this.musicService.getCollections();
+    forkJoin(composers, performers, collections)
+      .subscribe(
+        (results) => {
+          // console.log(results);
+          this.composers = <Person[]>results[0];
+          this.performers = <Person[]>results[1];
+          this.collections = <Album[]>results[2];
+        },
+        err => console.error(err),
+        () => {
+          console.log('all three collections are fetched');
+          this.setSelected();
+        }
+      );
+    // this.getComposers();
+    // this.getPerformers();
+    // this.getCollections();
     // this.registerPanelOpenEvent(this.collectionSelectElem);
     // this.registerPanelScrollEvent(this.collectionSelectElem);
   }

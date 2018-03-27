@@ -31,12 +31,14 @@
     </div>
     <input type="text"
            placeholder="Performer"
-           aria-label="Text" matInput
+           aria-label="Text"
+           matInput
            [matAutocomplete]="auto2"
            [(ngModel)]="selectedPerformer"
            (click)="select($event)"
            name="performer">
-    <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+    <mat-autocomplete #auto2="matAutocomplete"
+                      [displayWith]="displayFn">
       <mat-option>-- clear --</mat-option>
       <mat-option *ngFor="let opt of (performers | typedName:selectedPerformer)" [value]="opt">
         {{ opt.Name }}
@@ -51,19 +53,20 @@
     </div>
     <input type="text"
            placeholder="Collection"
-           aria-label="Text" matInput
+           aria-label="Text"
+           matInput
            [matAutocomplete]="auto3"
            [(ngModel)]="selectedCollection"
            (click)="select($event)"
            name="performer">
     <mat-autocomplete #auto3="matAutocomplete"
-                      class="collections"
-                      [displayWith]="displayTitleFn" #collectionSelect>
+                      [displayWith]="displayTitleFn"
+                      #collectionSelect>
       <mat-option>-- clear --</mat-option>
       <mat-option *ngFor="let opt of (collections | typedTitle:selectedCollection)" [value]="opt">
-        <div class="selected-image">
-          <img src="{{ imgUrl }}{{ opt.ID }}/album">
-        </div>
+        <!--<div class="selected-image">-->
+          <!--<img src="{{ imgUrl }}{{ opt.ID }}/album">-->
+        <!--</div>-->
         {{ opt.Title }}
       </mat-option>
     </mat-autocomplete><br>
