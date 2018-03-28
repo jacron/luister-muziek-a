@@ -57,8 +57,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
   fetchThings(params) {
     this.albums = [];
     this.musicService.getSearchedAlbums(params).subscribe(
-      (albums: Albums) => {
-        this.albumsContainer = albums;
+      (albums: Album[]) => {
+        // this.albumsContainer = albums;
+        this.albums = albums;
+        console.log(albums);
         setTimeout(() => {
           this.setLazy();
           this.lazyLoad();
@@ -265,8 +267,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit() {
-    this.albumsContainer = new Albums();
+  getTypeAheads() {
     const composers = this.musicService.getComposers();
     const performers = this.musicService.getPerformers();
     const collections = this.musicService.getCollections();
@@ -284,11 +285,11 @@ export class SearchComponent implements OnInit, AfterViewInit {
           this.setSelected();
         }
       );
-    // this.getComposers();
-    // this.getPerformers();
-    // this.getCollections();
-    // this.registerPanelOpenEvent(this.collectionSelectElem);
-    // this.registerPanelScrollEvent(this.collectionSelectElem);
+  }
+
+  ngOnInit() {
+    this.albumsContainer = new Albums();
+    this.getTypeAheads();
   }
 
 
