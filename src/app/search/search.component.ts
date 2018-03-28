@@ -150,14 +150,32 @@ export class SearchComponent implements OnInit, AfterViewInit {
     });
   }
 
+  replace_album(album: Album) {
+    album.ID = +album.ID;
+    for (let i = 0; i < this.albums.length; i++) {
+      // console.log(this.albums[i].ID, album.ID);
+      if (this.albums[i].ID === album.ID) {
+        console.log(album);
+        // this.albums[i] = album;
+        this.albums[i].album_performers = album.album_performers;
+        break;
+      }
+    }
+  }
+
   lazyLoad() {
     const that = this;
     this.lazyImages.forEach((image) => {
       if (that.elementInViewport(image)) {
         const dataSrc = image.getAttribute(that.lazyAttribute);
         if (dataSrc) {
-          image.src = dataSrc;
-          image.removeAttribute(that.lazyAttribute);
+          that.musicService.getAlbumById(image.id).subscribe(
+            (album: Album) => that.replace_album(album)
+          );
+          // setTimeout(() => {
+            image.src = dataSrc;
+            image.removeAttribute(that.lazyAttribute);
+          // }, 1000);
         }
       }
     });

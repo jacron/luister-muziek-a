@@ -11,7 +11,7 @@ import { AlbumComponent } from './album/album.component';
 import { SearchComponent } from './search/search.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
-import {MatAutocompleteModule, MatButtonModule, MatIconModule, MatSelectModule} from '@angular/material';
+import {MatAutocompleteModule, MatButtonModule, MatCardModule, MatIconModule, MatSelectModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AlbumThumbComponent } from './album-thumb/album-thumb.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
@@ -41,6 +41,7 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
     MatSelectModule,
     MatAutocompleteModule,
     MatIconModule,
+    MatCardModule,
     HttpClientModule,
     AppRoutingModule
   ],

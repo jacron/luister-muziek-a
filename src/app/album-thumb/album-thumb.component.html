@@ -1,5 +1,19 @@
-<div *ngIf="album" class="album">
-  <a href="search/{{ album.ID }}">
-<img attr.data-src="{{ imgUrl }}{{ album.ID }}/album" class="thumb lazy"></a>
-  <div>{{ album.Title }}</div>
+<div *ngIf="album" class="album card">
+  <mat-card-header>
+    <a href="search/{{ album.ID }}">
+      <img mat-card-avatar
+           attr.data-src="{{ imgUrl }}{{ album.ID }}/album"
+           id="{{ album.ID }}"
+           class="thumb lazy"></a>
+    <mat-card-title>{{ album.Title }}</mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content>
+    <span *ngIf="album.album_performers">
+    {{ album.album_performers[0].FullName }}
+    </span>
+  </mat-card-content>
+  <mat-card-actions>
+    <button>play</button><mat-icon>player</mat-icon>
+  </mat-card-actions>
 </div>
