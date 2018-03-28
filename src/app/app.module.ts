@@ -17,6 +17,7 @@ import { AlbumThumbComponent } from './album-thumb/album-thumb.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { TypedNamePipe } from './typed-name.pipe';
 import { TypedTitlePipe } from './typed-title.pipe';
+import { AlbumDetailsComponent } from './album-details/album-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TypedTitlePipe } from './typed-title.pipe';
     ToolsComponent,
     AlbumThumbComponent,
     TypedNamePipe,
-    TypedTitlePipe
+    TypedTitlePipe,
+    AlbumDetailsComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

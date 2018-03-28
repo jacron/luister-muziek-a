@@ -64,26 +64,29 @@ export class MusicService {
       params: httpParams});
   }
 
-  getComposers() {
+  getComposers(selection) {
     const params = new HttpParams()
       .set('cmd', 'componisten')
+      .set('selection', selection)
       .set('format', '%Last, %First');
     return this.http.get(requestUrl, {
       responseType: 'json',
       params});
   }
 
-  getPerformers() {
+  getPerformers(selection) {
     const params = new HttpParams()
       .set('cmd', 'performers')
+      .set('selection', JSON.stringify(selection))
       .set('format', '%Last, %First');
     return this.http.get(requestUrl, {
       responseType: 'json',
       params});
   }
 
-  getCollections() {
+  getCollections(selection) {
     const params = new HttpParams()
+      .set('selection', selection)
       .set('cmd', 'collections');
     return this.http.get(requestUrl, {
       responseType: 'json',

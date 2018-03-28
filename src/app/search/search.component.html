@@ -17,7 +17,9 @@
              [(ngModel)]="selectedComposer"
              (click)="select($event)"
              name="composer">
-      <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+      <mat-autocomplete #auto1="matAutocomplete"
+                        (optionSelected)="onSelectionChange()"
+                        [displayWith]="displayFn">
         <mat-option *ngFor="let opt of (composers | typedName:selectedComposer)" [value]="opt">
           {{ opt.Name }}
         </mat-option>
@@ -40,11 +42,15 @@
            (click)="select($event)"
            name="performer">
     <mat-autocomplete #auto2="matAutocomplete"
+                      (optionSelected)="onSelectionChange()"
                       [displayWith]="displayFn">
       <mat-option *ngFor="let opt of (performers | typedName:selectedPerformer)" [value]="opt">
         {{ opt.Name }}
       </mat-option>
-    </mat-autocomplete><br>
+    </mat-autocomplete>
+    <div *ngIf="selectedPerformer" class="reset" (click)="selectedPerformer = null">
+      <mat-icon>clear</mat-icon></div>
+    <br>
 
 
     <!-- select collection (autocomplete) -->
@@ -62,14 +68,18 @@
            name="performer">
     <mat-autocomplete #auto3="matAutocomplete"
                       [displayWith]="displayTitleFn"
+                      (optionSelected)="onSelectionChange()"
                       #collectionSelect>
       <mat-option *ngFor="let opt of (collections | typedTitle:selectedCollection)" [value]="opt">
-        <div class="selected-image">
-          <img src="{{ imgUrl }}{{ opt.ID }}/album">
-        </div>
+        <!--<div class="selected-image">-->
+          <!--<img src="{{ imgUrl }}{{ opt.ID }}/album">-->
+        <!--</div>-->
         {{ opt.Title }}
       </mat-option>
-    </mat-autocomplete><br>
+    </mat-autocomplete>
+    <div *ngIf="selectedCollection" class="reset" (click)="selectedCollection = null">
+      <mat-icon>clear</mat-icon></div>
+    <br>
 
   </div>
   <button mat-raised-button=""
@@ -77,27 +87,28 @@
 </form>
 
 <div class="list">
-<ul>
-  <li *ngFor="let mother of albumsContainer.mothers">
-    <a (click)="getAlbum(mother)">{{ mother.Title }}</a>
-  </li>
-</ul>
-<ul>
-  <li *ngFor="let child of albumsContainer.children">
-    <app-album-thumb [album]="child"></app-album-thumb>
-  </li>
-</ul>
-<ul>
-  <li *ngFor="let album of albums" class="thumb">
-    <app-album-thumb [album]="album"></app-album-thumb>
-  </li>
-</ul>
-<div *ngIf="selectedAlbum">
-  {{ selectedAlbum.Title }}
+  <ul>
+    <li *ngFor="let mother of albumsContainer.mothers">
+      <a (click)="getAlbum(mother)">{{ mother.Title }}</a>
+    </li>
+  </ul>
+  <ul>
+    <li *ngFor="let child of albumsContainer.children">
+      <app-album-thumb [album]="child"></app-album-thumb>
+    </li>
+  </ul>
   <ul>
     <li *ngFor="let album of albums" class="thumb">
       <app-album-thumb [album]="album"></app-album-thumb>
     </li>
   </ul>
+  <div *ngIf="selectedAlbum">
+    {{ selectedAlbum.Title }}
+    <ul>
+      <li *ngFor="let album of albums" class="thumb">
+        <app-album-thumb [album]="album"></app-album-thumb>
+      </li>
+    </ul>
+  </div>
 </div>
-</div>
+<app-album-details [album]="album"></app-album-details>

@@ -11,6 +11,7 @@ const appRoutes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'welcome', component: WelcomeComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'search/:idalbum', component: SearchComponent },
   { path: 'search/:idcomp/:idperf/:idcoll', component: SearchComponent },
   { path: 'tools', component: ToolsComponent },
   { path: 'album/:id', component: AlbumComponent },

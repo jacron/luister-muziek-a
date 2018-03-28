@@ -19,12 +19,14 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   albumsContainer: Albums;
   albums: Album[];
+  album: Album;
 
   composers: Person[];
   performers: Person[];
   composerId = -1;
   performerId = -1;
   collectionId = -1;
+  albumId = -1;
   collections: Album[];
   // selectedCollectionId = null;
   selectedAlbum: Album;
@@ -44,23 +46,35 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   handleParams(params) {
+    console.log(params);
     if (params) {
-      this.fetchThings(params);
-      this.composerId = +params.idcomp;
-      this.performerId = +params.idperf;
-      this.collectionId = +params.idcoll;
+      if (params.idcomp) {
+        this.composerId = +params.idcomp;
+        this.performerId = +params.idperf;
+        this.collectionId = +params.idcoll;
+        this.fetchThings(params);
+      } else {
+        this.albumId = +params.idalbum;
+        this.fetchAlbum();
+      }
     } else {
       this.albumsContainer = new Albums();
     }
+  }
+
+  fetchAlbum() {
+    this.musicService.getAlbumById(this.albumId).subscribe(
+      (album: Album) => {
+        this.album = album;
+      }
+    );
   }
 
   fetchThings(params) {
     this.albums = [];
     this.musicService.getSearchedAlbums(params).subscribe(
       (albums: Album[]) => {
-        // this.albumsContainer = albums;
         this.albums = albums;
-        console.log(albums);
         setTimeout(() => {
           this.setLazy();
           this.lazyLoad();
@@ -117,63 +131,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   getAlbum(album) {
     this.router.navigate(['/album', album.ID]).then();
-  }
-
-  // getAlbumAlbums(album) {
-  //   this.musicService.getAlbumAlbums(album.ID).subscribe(
-  //     (albums: Album[]) => {
-  //       this.albums = albums;
-  //       this.albumsContainer = new Albums();
-  //       this.selectedAlbum = album;
-  //     },
-  //     err => console.error(err),
-  //     () => console.log('album albums fetched')
-  //   );
-  // }
-
-  getComposers() {
-    this.musicService.getComposers().subscribe(
-      (people: Person[]) => {
-        this.composers = people;
-        if (this.composerId !== -1) {
-          this.selectedComposer = this.getComposerById(this.composerId);
-        }
-        this.getPerformers();
-      },
-      err => console.error(err),
-      () => console.log('componisten fetched')
-    );
-  }
-
-  getPerformers() {
-    this.musicService.getPerformers().subscribe(
-      (people: Person[]) => {
-        this.performers = people;
-        if (this.performerId !== -1) {
-          // setTimeout(() => {
-            this.selectedPerformer = this.getPerformerById(this.performerId);
-          // }, 100);
-          this.getCollections();
-        }
-      },
-      err => console.error(err),
-      () => console.log('performers fetched')
-    );
-  }
-
-  getCollections() {
-    this.musicService.getCollections().subscribe(
-      (collections: Album[]) => {
-        this.collections = collections;
-        if (this.collectionId !== -1) {
-          // setTimeout(() => {
-            this.selectedCollection = this.getCollectionById(this.collectionId);
-          // }, 100);
-        }
-      },
-      err => console.error(err),
-      () => console.log('collections fetched')
-    );
   }
 
   elementInViewport(el) {
@@ -267,14 +224,31 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onSelectionChange() {
+    // console.log(this.selectedComposer);
+    // console.log(this.selectedCollection);
+    // this.getTypeAheads();
+  }
+
   getTypeAheads() {
-    const composers = this.musicService.getComposers();
-    const performers = this.musicService.getPerformers();
-    const collections = this.musicService.getCollections();
+    // const selection = {
+    //   idcomp: this.selectedComposer ? this.selectedComposer.ID : null,
+    //   idperf: this.selectedPerformer ? this.selectedPerformer.ID : null,
+    //   idcoll: this.selectedCollection ? this.selectedCollection.ID : null
+    // };
+    // const selection = {
+    //   idcomp: this.composerId,
+    //   idperf: this.performerId,
+    //   idcoll: this.collectionId
+    // };
+    // console.log(selection);
+    const selection = null;
+    const composers = this.musicService.getComposers(selection);
+    const performers = this.musicService.getPerformers(selection);
+    const collections = this.musicService.getCollections(selection);
     forkJoin(composers, performers, collections)
       .subscribe(
         (results) => {
-          // console.log(results);
           this.composers = <Person[]>results[0];
           this.performers = <Person[]>results[1];
           this.collections = <Album[]>results[2];
