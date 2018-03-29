@@ -20,6 +20,7 @@
          title="Reveal in Finder"
          (click)="openFinder(album.ID)">
     <app-album-pieces [pieces]="album.pieces"></app-album-pieces>
-    <app-album-cuesheets [cuesheets]="album.cuesheets"></app-album-cuesheets>
+    <app-album-cuesheets [cuesheets]="album.cuesheets" [albumid]="album.ID">
+    </app-album-cuesheets>
   </mat-card-content>
 </div>

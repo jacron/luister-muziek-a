@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Album} from '../classes/Album';
 import {environment} from '../../environments/environment';
-import {isBoolean} from 'util';
 import {MusicService} from '../music.service';
 
 @Component({

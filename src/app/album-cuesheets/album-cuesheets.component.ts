@@ -10,10 +10,18 @@ import {MusicService} from '../music.service';
 export class AlbumCuesheetsComponent implements OnInit {
 
   @Input('cuesheets') cuesheets: Cuesheet[];
+  @Input('albumid') albumid: number;
+
   constructor(  private musicService: MusicService ) { }
 
   play(id) {
     this.musicService.play(id).subscribe(
+      (response) => console.log(response)
+    );
+  }
+
+  edit(id, albumid) {
+    this.musicService.editCue(id, albumid).subscribe(
       (response) => console.log(response)
     );
   }
