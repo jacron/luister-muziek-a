@@ -1,19 +1,25 @@
-<div *ngIf="album" class="album card">
-  <mat-card-header>
+<div *ngIf="album" class="album">
     <a href="search/{{ album.ID }}">
-      <img mat-card-avatar
+      <img
            attr.data-src="{{ imgUrl }}{{ album.ID }}/album"
            id="{{ album.ID }}"
            class="thumb lazy"></a>
-    <mat-card-title>{{ album.Title }}</mat-card-title>
-
-  </mat-card-header>
-  <mat-card-content>
-    <span *ngIf="album.album_performers">
-    {{ album.album_performers[0].FullName }}
-    </span>
+    <div class="side">
+      <div>{{ album.Title }}</div>
+      <app-album-persons [persons]="album.album_componisten"></app-album-persons>
+      <app-album-persons [persons]="album.album_performers"></app-album-persons>
+    </div>
+  <mat-icon class="opener" (click)="album.expanded = !album.expanded"
+            [class.expanded]="album.expanded"
+  >
+    keyboard_arrow_down</mat-icon>
+<hr>
+  <mat-card-content *ngIf="album.expanded">
+    <img src="assets/finder.png"
+         class="finder"
+         title="Reveal in Finder"
+         (click)="openFinder(album.ID)">
+    <app-album-pieces [pieces]="album.pieces"></app-album-pieces>
+    <app-album-cuesheets [cuesheets]="album.cuesheets"></app-album-cuesheets>
   </mat-card-content>
-  <mat-card-actions>
-    <button>play</button><mat-icon>player</mat-icon>
-  </mat-card-actions>
 </div>

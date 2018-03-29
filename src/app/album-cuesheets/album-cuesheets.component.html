@@ -1,0 +1,5 @@
+<div *ngFor="let cuesheet of cuesheets">
+  <mat-icon class="play" (click)="play(cuesheet.ID)">
+    play_circle_filled</mat-icon>
+  <span>{{ cuesheet.Title }}</span>
+</div>

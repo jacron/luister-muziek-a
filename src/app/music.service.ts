@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 const requestUrl = 'http://127.0.0.1:8010/ajax/';
 
@@ -8,6 +8,30 @@ export class MusicService {
 
   constructor(private http: HttpClient) { }
 
+  openFinder(id) {
+    const params = new HttpParams()
+      .set('cmd', 'openfinder')
+      .set('objectid', id)
+      .set('kind', 'album')
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
+  play(id) {
+    const params = new HttpParams()
+      .set('cmd', 'play')
+      .set('arg', id)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
   getAlbumByPath(path) {
     const params = new HttpParams()
       .set('cmd', 'album_by_path')

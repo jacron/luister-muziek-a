@@ -4,8 +4,11 @@ export class Album {
   Title: string;
   // AlbumID: number;
   ID: number;
-  Path: string;
+  // Path: string;
   album_performers: Person[];
-  // Componist: string;
+  album_componisten: Person[];
+  pieces: any[];
+  cuesheets: any[];
+  expanded: boolean;
 }
 

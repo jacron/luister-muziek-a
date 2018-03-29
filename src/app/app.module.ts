@@ -11,13 +11,16 @@ import { AlbumComponent } from './album/album.component';
 import { SearchComponent } from './search/search.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
-import {MatAutocompleteModule, MatButtonModule, MatCardModule, MatIconModule, MatSelectModule} from '@angular/material';
+import {MatAutocompleteModule, MatButtonModule, MatCardModule, MatExpansionModule, MatIconModule, MatSelectModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AlbumThumbComponent } from './album-thumb/album-thumb.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { TypedNamePipe } from './typed-name.pipe';
 import { TypedTitlePipe } from './typed-title.pipe';
 import { AlbumDetailsComponent } from './album-details/album-details.component';
+import { AlbumPersonsComponent } from './album-persons/album-persons.component';
+import { AlbumPiecesComponent } from './album-pieces/album-pieces.component';
+import { AlbumCuesheetsComponent } from './album-cuesheets/album-cuesheets.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
     AlbumThumbComponent,
     TypedNamePipe,
     TypedTitlePipe,
-    AlbumDetailsComponent
+    AlbumDetailsComponent,
+    AlbumPersonsComponent,
+    AlbumPiecesComponent,
+    AlbumCuesheetsComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -42,6 +48,7 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
     MatAutocompleteModule,
     MatIconModule,
     MatCardModule,
+    MatExpansionModule,
     HttpClientModule,
     AppRoutingModule
   ],

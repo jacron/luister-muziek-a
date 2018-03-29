@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   handleParams(params) {
-    console.log(params);
+    // console.log(params);
     if (params) {
       if (params.idcomp) {
         this.composerId = +params.idcomp;
@@ -150,14 +150,16 @@ export class SearchComponent implements OnInit, AfterViewInit {
     });
   }
 
-  replace_album(album: Album) {
+  augment_album(album: Album) {
     album.ID = +album.ID;
     for (let i = 0; i < this.albums.length; i++) {
-      // console.log(this.albums[i].ID, album.ID);
+      const a = this.albums[i];
       if (this.albums[i].ID === album.ID) {
-        console.log(album);
-        // this.albums[i] = album;
-        this.albums[i].album_performers = album.album_performers;
+        // console.log(album);
+        a.album_performers = album.album_performers;
+        a.album_componisten = album.album_componisten;
+        a.pieces = album.pieces;
+        a.cuesheets = album.cuesheets;
         break;
       }
     }
@@ -170,7 +172,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         const dataSrc = image.getAttribute(that.lazyAttribute);
         if (dataSrc) {
           that.musicService.getAlbumById(image.id).subscribe(
-            (album: Album) => that.replace_album(album)
+            (album: Album) => that.augment_album(album)
           );
           // setTimeout(() => {
             image.src = dataSrc;
