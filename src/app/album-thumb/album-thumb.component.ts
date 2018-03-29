@@ -22,6 +22,17 @@ export class AlbumThumbComponent implements OnInit {
     );
   }
 
+  restorePieces(album) {
+    console.log(album);
+    this.album = album;
+  }
+
+  refetch(albumId) {
+    this.musicService.refetch(albumId).subscribe(
+      (response) => this.restorePieces(response)
+    );
+  }
+
   ngOnInit() {
   }
 

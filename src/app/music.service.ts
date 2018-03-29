@@ -8,6 +8,18 @@ export class MusicService {
 
   constructor(private http: HttpClient) { }
 
+  refetch(id) {
+    const params = new HttpParams()
+      .set('cmd', 'refetch')
+      .set('albumid', id)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   openFinder(id) {
     const params = new HttpParams()
       .set('cmd', 'openfinder')
@@ -75,14 +87,14 @@ export class MusicService {
   //   });
   // }
 
-  getAlbumAlbums(albumId) {
-    const params = new HttpParams()
-      .set('cmd', 'album_albums')
-      .set('albumId', albumId);
-    return this.http.get(requestUrl, {
-      responseType: 'json',
-      params});
-  }
+  // getAlbumAlbums(albumId) {
+  //   const params = new HttpParams()
+  //     .set('cmd', 'album_albums')
+  //     .set('albumId', albumId);
+  //   return this.http.get(requestUrl, {
+  //     responseType: 'json',
+  //     params});
+  // }
 
   getSearchedAlbums(params) {
     const idcomp = +params.idcomp === -1 ? null : params.idcomp,

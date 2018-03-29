@@ -19,6 +19,11 @@
          class="finder"
          title="Reveal in Finder"
          (click)="openFinder(album.ID)">
+    <mat-icon class="refetch"
+              (click)="refetch(album.ID)"
+              title="Refetch pieces and cuesheets">
+      replay
+    </mat-icon>
     <app-album-pieces [pieces]="album.pieces"></app-album-pieces>
     <app-album-cuesheets [cuesheets]="album.cuesheets" [albumid]="album.ID">
     </app-album-cuesheets>
