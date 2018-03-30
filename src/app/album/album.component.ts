@@ -35,23 +35,6 @@ export class AlbumComponent implements OnInit {
     }
   }
 
-  // updateAlbumTitle(id, title) {
-  //   this.musicService.updateAlbumTitle(id, title).subscribe(
-  //     (msg) => console.log(msg)
-  //   );
-  // }
-
-  // albumTitleKeydown(e, id, title) {
-  //   console.log(id, title);
-  //   if (e.key === 'Enter') {
-  //     e.preventDefault();
-  //     this.updateAlbumTitle(id, title);
-  //   }
-  //   if (e.key === 'Tab') {
-  //     this.updateAlbumTitle(id, title);
-  //   }
-  // }
-
   ngOnInit() {
   }
 

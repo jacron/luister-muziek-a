@@ -19,7 +19,7 @@
              name="composer">
       <mat-autocomplete #auto1="matAutocomplete"
                         (optionSelected)="onSelectionChange()"
-                        [displayWith]="displayFn">
+                        [displayWith]="displayNameFn">
         <mat-option *ngFor="let opt of (composers | typedName:selectedComposer)" [value]="opt">
           {{ opt.Name }}
         </mat-option>
@@ -43,7 +43,7 @@
            name="performer">
     <mat-autocomplete #auto2="matAutocomplete"
                       (optionSelected)="onSelectionChange()"
-                      [displayWith]="displayFn">
+                      [displayWith]="displayNameFn">
       <mat-option *ngFor="let opt of (performers | typedName:selectedPerformer)" [value]="opt">
         {{ opt.Name }}
       </mat-option>
@@ -81,6 +81,29 @@
       <mat-icon>clear</mat-icon></div>
     <br>
 
+    <!-- select tag (autocomplete) -->
+    <div class="selected-image">
+    </div>
+    <input type="text"
+           placeholder="Tag"
+           aria-label="Text"
+           matInput
+           [matAutocomplete]="auto4"
+           [(ngModel)]="selectedTag"
+           (click)="select($event)"
+           name="tag">
+    <mat-autocomplete #auto4="matAutocomplete"
+                      [displayWith]="displayNameFn"
+                      (optionSelected)="onSelectionChange()"
+                      #tagSelect>
+      <mat-option *ngFor="let opt of (tags | typedName:selectedTag)" [value]="opt">
+        {{ opt.Name }}
+      </mat-option>
+    </mat-autocomplete>
+    <div *ngIf="selectedTag" class="reset" (click)="selectedTag = null">
+      <mat-icon>clear</mat-icon></div>
+    <br>
+
   </div>
   <button mat-raised-button=""
           (click)="getAlbumsComponist()">get</button>
@@ -97,7 +120,7 @@
       <app-album-thumb [album]="child"></app-album-thumb>
     </li>
   </ul>
-  <ul>
+  <ul *ngIf="albums.length">
     <li *ngFor="let album of albums" class="thumb">
       <app-album-thumb [album]="album"></app-album-thumb>
     </li>

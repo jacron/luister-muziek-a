@@ -1,4 +1,5 @@
 import {Person} from './Person';
+import {Tag} from './Tag';
 
 export class Album {
   Title: string;
@@ -8,10 +9,7 @@ export class Album {
   album_performers: Person[];
   album_componisten: Person[];
   album_metatags: any;
-  album_tags: {
-    Name: string,
-    ID: number
-  };
+  album_tags: Tag;
   pieces: any[];
   cuesheets: any[];
   expanded: boolean;

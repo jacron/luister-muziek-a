@@ -12,7 +12,7 @@ const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'search', component: SearchComponent },
   { path: 'album/:idalbum', component: AlbumComponent },
-  { path: 'search/:idcomp/:idperf/:idcoll', component: SearchComponent },
+  { path: 'search/:idcomp/:idperf/:idcoll/:idtag', component: SearchComponent },
   { path: 'tools', component: ToolsComponent },
   { path: 'album/:id', component: AlbumComponent },
   { path: '**', component: PageNotFoundComponent }

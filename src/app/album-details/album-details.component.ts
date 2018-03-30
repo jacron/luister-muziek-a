@@ -5,6 +5,8 @@ import {Person} from '../classes/Person';
 import {MusicService} from '../music.service';
 import {MatDialog} from '@angular/material';
 import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
+import {Router} from '@angular/router';
+import {Tag} from '../classes/Tag';
 
 @Component({
   selector: 'app-album-details',
@@ -21,6 +23,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private musicService: MusicService,
+    private router: Router,
     private dialog: MatDialog
   ) { }
 
@@ -37,16 +40,73 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  removeComposer(composer: Person) {
+  toComposer(composer: Person) {
+    this.router.navigate(['/search',
+      {
+        idcomp: composer.ID,
+        idperf: -1,
+        idcoll: -1
+      }
+    ]).then(() => {
+    });
 
+  }
+
+  toPerformer(performer: Person) {
+    this.router.navigate(['/search',
+      {
+        idcomp: -1,
+        idperf: performer.ID,
+        idcoll: -1
+      }
+    ]).then(() => {
+    });
+  }
+
+  updateAlbumTitle(id, title) {
+    this.musicService.updateAlbumTitle(id, title).subscribe(
+      (msg) => console.log(msg)
+    );
+  }
+
+  albumTitleKeydown(e, id, title) {
+    console.log(id, title);
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      this.updateAlbumTitle(id, title);
+    }
+    if (e.key === 'Tab') {
+      this.updateAlbumTitle(id, title);
+    }
+  }
+
+  toTag(tag: Tag) {
+    // todo: search getting tag option
+  }
+
+  openAddComposer() {
+
+  }
+
+  removeItem(persons, id) {
+    for (let i = 0; i < persons.length; i++) {
+      if (persons[i].ID === id) {
+        // todo: remove link to person from album
+        persons.splice(i, 1);
+      }
+    }
+  }
+
+  removeComposer(composer: Person) {
+    this.removeItem(this.album.album_componisten, composer.ID);
   }
 
   removePerformer(performer: Person) {
-
+    this.removeItem(this.album.album_performers, performer.ID)
   }
 
-  removeTag(tag: string) {
-
+  removeTag(tag: Tag) {
+    this.removeItem(this.album.album_tags, tag.ID);
   }
 
   openFinder(id) {

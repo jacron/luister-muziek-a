@@ -75,17 +75,17 @@ export class MusicService {
       params});
   }
 
-  // updateAlbumTitle(id, title) {
-  //   const params = new HttpParams()
-  //     .set('cmd', 'update_album_title')
-  //     .set('albumid', id)
-  //     .set('title', title);
-  //   const headers = new HttpHeaders();
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.post(requestUrl, params, {
-  //     headers: headers
-  //   });
-  // }
+  updateAlbumTitle(id, title) {
+    const params = new HttpParams()
+      .set('cmd', 'update_album_title')
+      .set('albumid', id)
+      .set('title', title);
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(requestUrl, params, {
+      headers: headers
+    });
+  }
 
   // getAlbumAlbums(albumId) {
   //   const params = new HttpParams()
@@ -99,11 +99,13 @@ export class MusicService {
   getSearchedAlbums(params) {
     const idcomp = +params.idcomp === -1 ? null : params.idcomp,
       idperf = +params.idperf === -1 ? null : params.idperf,
-      idcoll = +params.idcoll === -1 ? null : params.idcoll;
+      idcoll = +params.idcoll === -1 ? null : params.idcoll,
+      idtag = +params.idtag === -1 ? null : params.idtag;
     const cql = {
       componist: idcomp,
       performer: idperf,
-      mother: idcoll
+      mother: idcoll,
+      tag: idtag
     };
     const httpParams = new HttpParams()
       .set('cmd', 'cql_search')
@@ -137,6 +139,15 @@ export class MusicService {
     const params = new HttpParams()
       .set('selection', selection)
       .set('cmd', 'collections');
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+  }
+
+  getTags(selection) {
+    const params = new HttpParams()
+      .set('selection', selection)
+      .set('cmd', 'tags');
     return this.http.get(requestUrl, {
       responseType: 'json',
       params});

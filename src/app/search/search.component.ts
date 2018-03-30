@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {MatSelect} from '@angular/material';
 import {forkJoin} from 'rxjs/observable/forkJoin';
+import {Tag} from '../classes/Tag';
 // import {Observable} from 'rxjs/Observable';
 
 
@@ -26,16 +27,18 @@ export class SearchComponent implements OnInit, AfterViewInit {
   composerId = -1;
   performerId = -1;
   collectionId = -1;
+  tagId = -1;
   albumId = -1;
   collections: Album[];
-  // selectedCollectionId = null;
-  selectedAlbum: Album;
+  tags: Tag[];
   imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
+  selectedAlbum: Album;
   selectedComposer: Person = null;
   selectedPerformer: Person = null;
   selectedCollection: Album = null;
+  selectedTag: Tag = null;
   @ViewChild('collectionSelect') collectionSelectElem: MatSelect;
 
   constructor(private musicService: MusicService,
@@ -52,10 +55,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
         this.composerId = +params.idcomp;
         this.performerId = +params.idperf;
         this.collectionId = +params.idcoll;
+        this.tagId = +params.idtag;
         this.fetchThings(params);
-      } else {
-        this.albumId = +params.idalbum;
-        this.fetchAlbum();
       }
     } else {
       this.albumsContainer = new Albums();
@@ -75,13 +76,14 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.musicService.getSearchedAlbums(params).subscribe(
       (albums: Album[]) => {
         this.albums = albums;
+        console.log(albums);
         setTimeout(() => {
           this.setLazy();
           this.lazyLoad();
         }, 100);
       },
       err => console.error(err),
-      () => console.log('componist albums fetched')
+      () => console.log('searched albums fetched')
     );
   }
 
@@ -119,11 +121,13 @@ export class SearchComponent implements OnInit, AfterViewInit {
     const idcomp = this.selectedComposer ? this.selectedComposer.ID : -1;
     const idperf = this.selectedPerformer ? this.selectedPerformer.ID : -1;
     const idcoll = this.selectedCollection ? this.selectedCollection.ID : -1;
+    const idtag = this.selectedTag ? this.selectedTag.ID : -1;
     this.router.navigate(['/search',
       {
         idcomp: idcomp,
         idperf: idperf,
-        idcoll: idcoll
+        idcoll: idcoll,
+        idtag: idtag
       }
     ]).then(() => {
     });
@@ -219,7 +223,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   //   console.log(selectElem);
   // }
 
-  displayFn(person): string {
+  displayNameFn(person): string {
     return person ? person.Name : person;
   }
 
@@ -270,15 +274,17 @@ export class SearchComponent implements OnInit, AfterViewInit {
     // };
     // console.log(selection);
     const selection = null;
-    const composers = this.musicService.getComposers(selection);
-    const performers = this.musicService.getPerformers(selection);
-    const collections = this.musicService.getCollections(selection);
-    forkJoin(composers, performers, collections)
+    const qcomposers = this.musicService.getComposers(selection);
+    const qperformers = this.musicService.getPerformers(selection);
+    const qcollections = this.musicService.getCollections(selection);
+    const qtags = this.musicService.getTags(selection);
+    forkJoin(qcomposers, qperformers, qcollections, qtags)
       .subscribe(
         (results) => {
           this.composers = <Person[]>results[0];
           this.performers = <Person[]>results[1];
           this.collections = <Album[]>results[2];
+          this.tags = <Tag[]>results[3];
         },
         err => console.error(err),
         () => {
