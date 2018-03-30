@@ -10,6 +10,9 @@
   margin-right: 5px;
   //text-align: center;
 }
+.person-image-col {
+  max-width: 80px;
+}
 .selected-image img {
   height: 70px;
   //margin: 0 auto;
@@ -26,4 +29,18 @@ ul {
 .reset mat-icon {
   color: #999;
   cursor: pointer;
+}
+.label {
+  position: relative;
+  top: 20px;
+  left: 10px;
+  font-size: 2px;
+  height: 0;
+  transition: all 1s;
+}
+.label.selected {
+  top: 0;
+  left: 0;
+  height: 14px;
+  font-size: 12px;
 }

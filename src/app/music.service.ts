@@ -137,8 +137,9 @@ export class MusicService {
 
   getCollections(selection) {
     const params = new HttpParams()
+      .set('cmd', 'collections')
       .set('selection', selection)
-      .set('cmd', 'collections');
+    ;
     return this.http.get(requestUrl, {
       responseType: 'json',
       params});
@@ -146,8 +147,9 @@ export class MusicService {
 
   getTags(selection) {
     const params = new HttpParams()
+      .set('cmd', 'tags')
       .set('selection', selection)
-      .set('cmd', 'tags');
+    ;
     return this.http.get(requestUrl, {
       responseType: 'json',
       params});
@@ -176,4 +178,27 @@ export class MusicService {
       requestUrl, params, { headers: headers}
     );
   }
+
+  getComposerById(id: number) {
+    const params = new HttpParams()
+      .set('cmd', 'composer_by_id')
+      .set('id', id.toString())
+    ;
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+
+  }
+
+  getPerformerById(id: number) {
+    const params = new HttpParams()
+      .set('cmd', 'performer_by_id')
+      .set('id', id.toString())
+    ;
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+
+  }
+
 }

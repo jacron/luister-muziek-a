@@ -1,6 +1,7 @@
 <mat-card *ngIf="album" class="album " style="margin-bottom: 20px;">
   <div class="row">
     <mat-toolbar style="margin: -14px 0 14px;">
+      <mat-toolbar-row>
       <div #topicTitle contenteditable="true" [textContent]="album.Title"
       (input)="model=topicTitle.innerText"
       (keydown)="albumTitleKeydown($event, album.ID, topicTitle.innerText)"></div>
@@ -23,6 +24,13 @@
                 (click)="tagedit()"
                 matTooltip="Tag Editor"
       >edit</mat-icon>
+      </mat-toolbar-row>
+      <mat-toolbar-row class="sub">
+        <a  *ngIf="album.mother"
+            (click)="toCollection(album.mother.ID)">
+          {{ album.mother.Title }}
+        </a>
+      </mat-toolbar-row>
     </mat-toolbar>
   </div>
   <div class="row">

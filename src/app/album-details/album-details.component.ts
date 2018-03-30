@@ -40,6 +40,17 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
     });
   }
 
+  toCollection(id) {
+    this.router.navigate(['/search',
+      {
+        idcomp: -1,
+        idperf: -1,
+        idcoll: id
+      }
+    ]).then(() => {
+    });
+  }
+
   toComposer(composer: Person) {
     this.router.navigate(['/search',
       {
@@ -49,7 +60,6 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
       }
     ]).then(() => {
     });
-
   }
 
   toPerformer(performer: Person) {

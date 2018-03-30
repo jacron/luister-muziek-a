@@ -76,7 +76,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.musicService.getSearchedAlbums(params).subscribe(
       (albums: Album[]) => {
         this.albums = albums;
-        console.log(albums);
+        // console.log(albums);
         setTimeout(() => {
           this.setLazy();
           this.lazyLoad();
@@ -87,34 +87,34 @@ export class SearchComponent implements OnInit, AfterViewInit {
     );
   }
 
-  getComposerById(id: number): Person {
-    for (let i = 0; i < this.composers.length; i++) {
-      const person = this.composers[i];
-      if (person.ID === id) {
-        return person;
+  getItemById(items: any[], id: number) {
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      if (item.ID === id) {
+        return item;
       }
     }
     return null;
+  }
+
+  getComposerById(id: number): Person {
+    const item = this.getItemById(this.composers, id);
+    return <Person>item;
   }
 
   getPerformerById(id: number): Person {
-    for (let i = 0; i < this.performers.length; i++) {
-      const person = this.performers[i];
-      if (person.ID === id) {
-        return person;
-      }
-    }
-    return null;
+    const item = this.getItemById(this.performers, id);
+    return <Person>item;
   }
 
   getCollectionById(id: number): Album {
-    for (let i = 0; i < this.collections.length; i++) {
-      const album = this.collections[i];
-      if (album.ID === id) {
-        return album;
-      }
-    }
-    return null;
+    const item = this.getItemById(this.collections, id);
+    return <Album>item;
+  }
+
+  getTagById(id: number): Tag {
+    const item = this.getItemById(this.tags, id);
+    return <Tag>item;
   }
 
   getAlbumsComponist() {
@@ -235,30 +235,62 @@ export class SearchComponent implements OnInit, AfterViewInit {
     e.target.select();
   }
 
+  setComposer(person: Person) {
+    console.log(person);
+    this.selectedComposer = person;
+    document.title = person.FullName;
+  }
+
+  setPerformer(person: Person) {
+    console.log(person);
+    this.selectedPerformer = person;
+    if (document.title.length) { document.title += ', '; }
+    document.title += person.FullName;
+  }
+
+  getComposer(id) {
+    this.musicService.getComposerById(id).subscribe(
+      (person: Person) => this.setComposer(person),
+      (err) => console.log(err),
+      () => console.log('composer fetched')
+    );
+  }
+
+  getPerformer(id) {
+    this.musicService.getPerformerById(id).subscribe(
+      (person: Person) => this.setPerformer(person),
+      (err) => console.log(err),
+      () => console.log('composer fetched')
+    );
+  }
+
   setSelected() {
-    let title = '';
+    document.title = '';
     if (this.composerId !== -1) {
-      this.selectedComposer = this.getComposerById(this.composerId);
-      title += this.selectedComposer.FullName;
+      this.getComposer(this.composerId);
     }
     if (this.performerId !== -1) {
-      this.selectedPerformer = this.getPerformerById(this.performerId);
-      // console.log(this.selectedPerformer);
-      if (title.length) { title += ', '; }
-      title += this.selectedPerformer.FullName;
+      this.getPerformer(this.performerId);
     }
     if (this.collectionId !== -1) {
       this.selectedCollection = this.getCollectionById(this.collectionId);
-      if (title.length) { title += ', '; }
-      title += this.selectedCollection.Title;
+      if (document.title.length) { document.title += ', '; }
+      document.title += this.selectedCollection.Title;
     }
-    document.title = title;
+    if (this.tagId !== -1) {
+      this.selectedTag = this.getTagById(this.tagId);
+      if (document.title.length) { document.title += ', '; }
+      document.title += this.selectedTag.Name;
+    }
   }
 
-  onSelectionChange() {
-    // console.log(this.selectedComposer);
-    // console.log(this.selectedCollection);
-    // this.getTypeAheads();
+  onSelectionChange(person) {
+    if (person === 'composer') {
+      this.getComposer(this.selectedComposer.ID);
+    }
+    if (person === 'performer') {
+      this.getPerformer(this.selectedPerformer.ID);
+    }
   }
 
   getTypeAheads() {

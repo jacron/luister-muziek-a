@@ -5,10 +5,18 @@
 <form>
   <div>
     <!-- select composer (autocomplete) -->
-    <div class="selected-image">
-      <img *ngIf="selectedComposer && selectedComposer.ID"
-           src="{{ imgUrl }}{{ selectedComposer.ID }}/componist">
+    <div class="row">
+      <div class="col person-image-col">
+        <div class="selected-image">
+          <img *ngIf="selectedComposer && selectedComposer.ID"
+               src="{{ imgUrl }}{{ selectedComposer.ID }}/componist">
+        </div>
+      </div>
+      <div class="col" *ngIf="selectedComposer && selectedComposer.ID">
+        {{ selectedComposer.Birth }} - {{ selectedComposer.Death }}
+      </div>
     </div>
+    <div class="label" [class.selected]="selectedComposer">Composer</div>
       <input type="text"
              placeholder="Composer"
              aria-label="Text"
@@ -18,7 +26,7 @@
              (click)="select($event)"
              name="composer">
       <mat-autocomplete #auto1="matAutocomplete"
-                        (optionSelected)="onSelectionChange()"
+                        (optionSelected)="onSelectionChange('composer')"
                         [displayWith]="displayNameFn">
         <mat-option *ngFor="let opt of (composers | typedName:selectedComposer)" [value]="opt">
           {{ opt.Name }}
@@ -29,10 +37,18 @@
     <br>
 
     <!-- select performer (autocomplete) -->
-    <div class="selected-image">
-      <img *ngIf="selectedPerformer && selectedPerformer.ID"
+    <div class="row">
+      <div class="col person-image-col">
+        <div class="selected-image">
+          <img *ngIf="selectedPerformer && selectedPerformer.ID"
            src="{{ imgUrl }}{{ selectedPerformer.ID }}/performer">
+        </div>
+      </div>
+      <div class="col" *ngIf="selectedPerformer && selectedPerformer.ID">
+        {{ selectedPerformer.Birth }} - {{ selectedPerformer.Death }}
+      </div>
     </div>
+    <div class="label" [class.selected]="selectedPerformer">Performer</div>
     <input type="text"
            placeholder="Performer"
            aria-label="Text"
@@ -42,7 +58,7 @@
            (click)="select($event)"
            name="performer">
     <mat-autocomplete #auto2="matAutocomplete"
-                      (optionSelected)="onSelectionChange()"
+                      (optionSelected)="onSelectionChange('performer')"
                       [displayWith]="displayNameFn">
       <mat-option *ngFor="let opt of (performers | typedName:selectedPerformer)" [value]="opt">
         {{ opt.Name }}
@@ -58,6 +74,7 @@
       <img *ngIf="selectedCollection && selectedCollection.ID"
            src="{{ imgUrl }}{{ selectedCollection.ID }}/album">
     </div>
+    <div class="label" [class.selected]="selectedCollection">Collection</div>
     <input type="text"
            placeholder="Collection"
            aria-label="Text"
@@ -82,8 +99,7 @@
     <br>
 
     <!-- select tag (autocomplete) -->
-    <div class="selected-image">
-    </div>
+    <div class="label" [class.selected]="selectedTag">Tag</div>
     <input type="text"
            placeholder="Tag"
            aria-label="Text"
@@ -120,11 +136,14 @@
       <app-album-thumb [album]="child"></app-album-thumb>
     </li>
   </ul>
-  <ul *ngIf="albums.length">
-    <li *ngFor="let album of albums" class="thumb">
-      <app-album-thumb [album]="album"></app-album-thumb>
-    </li>
-  </ul>
+  <div *ngIf="albums.length">
+    {{ albums.length }} albums
+    <ul>
+      <li *ngFor="let album of albums" class="thumb">
+        <app-album-thumb [album]="album"></app-album-thumb>
+      </li>
+    </ul>
+  </div>
   <div *ngIf="selectedAlbum">
     {{ selectedAlbum.Title }}
     <ul>
