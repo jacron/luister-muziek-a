@@ -4,10 +4,10 @@ export class Album {
   Title: string;
   // AlbumID: number;
   ID: number;
-  // Path: string;
+  Path: string;
   album_performers: Person[];
   album_componisten: Person[];
-  // album_metatags: string[];
+  album_metatags: any;
   album_tags: {
     Name: string,
     ID: number

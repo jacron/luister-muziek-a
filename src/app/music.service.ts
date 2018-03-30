@@ -153,4 +153,16 @@ export class MusicService {
       requestUrl, params, { headers: headers}
     );
   }
+
+  tagEditor(path) {
+    const params = new HttpParams()
+      .set('cmd', 'tageditor')
+      .set('path', path)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
 }

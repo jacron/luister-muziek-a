@@ -4,18 +4,22 @@
       <span class="title">{{ album.Title }}</span>
       <span class="horizontal-spacer"></span>
       <mat-icon class="album-control"
-                title="Reveal in Finder"
-                (click)="openFinder(album.ID)">
-        open_in_browser</mat-icon>
+                matTooltip="Reveal in Finder"
+                (click)="openFinder(album.ID)"
+      >open_in_browser</mat-icon>
       <mat-icon class="album-control"
                 (click)="refetch(album.ID)"
-                title="Refetch pieces and cuesheets">
-        replay
+                matTooltip="Refetch pieces and cuesheets"
+      >replay
       </mat-icon>
       <mat-icon class="album-control"
-                title="pause the player"
                 (click)="pause()"
+                matTooltip="Pause player"
       >pause</mat-icon>
+      <mat-icon class="album-control"
+                (click)="tagedit()"
+                matTooltip="Tag Editor"
+      >edit</mat-icon>
     </mat-toolbar>
   </div>
   <div class="row">
@@ -50,6 +54,13 @@
              src="{{ imgBackUrl }}{{ album.ID }}/album"
              (click)="openPic('back')"
              class="back-thumb">
+    </div>
+    <div class="col">
+      <table class="tags">
+        <tr *ngFor="let key of objectKeys(album.album_metatags)">
+          <td class="key">{{ key }}</td><td>{{ album.album_metatags[key] }}</td>
+        </tr>
+      </table>
     </div>
   </div>
   <div class="row" style="margin-top: 20px">

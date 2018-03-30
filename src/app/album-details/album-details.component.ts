@@ -14,10 +14,11 @@ import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
 export class AlbumDetailsComponent implements OnInit, AfterViewInit {
   imgUrl = environment.apiServer + '/image/';
   imgBackUrl = environment.apiServer + '/imageback/';
-
   @Input('album') album: Album;
   removable = true;
   chevron = 'keyboard_arrow_down';
+  objectKeys = Object.keys;
+
   constructor(
     private musicService: MusicService,
     private dialog: MatDialog
@@ -58,6 +59,10 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
     console.log(album);
     this.album.pieces = album.pieces;
     this.album.cuesheets = album.cuesheets;
+  }
+
+  tagedit() {
+    this.musicService.tagEditor(this.album.Path).subscribe();
   }
 
   pause() {

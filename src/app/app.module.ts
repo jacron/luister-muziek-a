@@ -13,7 +13,7 @@ import {WelcomeComponent} from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
 import {
   MatAutocompleteModule, MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatExpansionModule, MatIconModule,
-  MatSelectModule, MatToolbarModule
+  MatSelectModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AlbumThumbComponent } from './album-thumb/album-thumb.component';
@@ -57,6 +57,7 @@ import { DialogPicComponent } from './dialog-pic/dialog-pic.component';
     MatChipsModule,
     MatToolbarModule,
     MatDialogModule,
+    MatTooltipModule,
     HttpClientModule,
     AppRoutingModule
   ],

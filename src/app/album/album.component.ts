@@ -21,7 +21,7 @@ export class AlbumComponent implements OnInit {
 
   openAlbum(album: Album): void {
     this.album = album;
-    // console.log(album);
+    console.log(album);
   }
 
   handleParams(params) {

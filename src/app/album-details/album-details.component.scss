@@ -32,7 +32,7 @@ img.back-thumb {
   //top: 10px;
   cursor: pointer;
   opacity: .6;
-  padding: 0 14px;
+  padding: 0 20px;
 }
 .horizontal-spacer {
   flex: 1 1 auto;
@@ -60,4 +60,10 @@ img.back-thumb {
 .pieces.visible {
   max-height: 2000px;
   overflow-y: auto;
+}
+.tags td {
+  vertical-align: top;
+}
+.key {
+  color: brown;
 }
