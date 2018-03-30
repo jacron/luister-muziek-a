@@ -12,9 +12,24 @@ export class AlbumPiecesComponent implements OnInit {
 
   constructor( private musicService: MusicService ) { }
 
+  getPieceById(id) {
+    for (let i = 0; i < this.pieces.length; i++) {
+      if (this.pieces[i].ID === id) {
+        return this.pieces[i];
+      }
+    }
+    return null;
+  }
+
+  onPlayed(response, id) {
+    console.log(response);
+    const piece = this.getPieceById(id);
+    piece.played = true;
+  }
+
   play(id) {
     this.musicService.play(id).subscribe(
-      (response) => console.log(response)
+      (response) => this.onPlayed(response, id)
     );
   }
 

@@ -11,6 +11,9 @@ img.back-thumb {
 }
 .title {
   font-size: 20px;
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 .composers .mat-chip:not(.mat-basic-chip) {
   background-color: #ffeeee;
@@ -44,7 +47,17 @@ img.back-thumb {
   font-size: 30px;
   color: #999;
   cursor: pointer;
+  z-index: 1;
 }
 .opener.expanded {
-  transform: rotate(180deg);
+  //transform: rotate(180deg);
+}
+.pieces {
+  max-height: 0;
+  transition: max-height .25s ease-in;
+  overflow-y: hidden;
+}
+.pieces.visible {
+  max-height: 2000px;
+  overflow-y: auto;
 }

@@ -7,10 +7,15 @@ export class Album {
   // Path: string;
   album_performers: Person[];
   album_componisten: Person[];
+  // album_metatags: string[];
+  album_tags: {
+    Name: string,
+    ID: number
+  };
   pieces: any[];
   cuesheets: any[];
   expanded: boolean;
   album_back_image: boolean;
-  album_folder_image: boolean;
+  // album_folder_image: boolean;
 }
 

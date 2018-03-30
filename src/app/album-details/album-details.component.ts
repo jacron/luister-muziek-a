@@ -17,6 +17,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
 
   @Input('album') album: Album;
   removable = true;
+  chevron = 'keyboard_arrow_down';
   constructor(
     private musicService: MusicService,
     private dialog: MatDialog
@@ -43,6 +44,10 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
 
   }
 
+  removeTag(tag: string) {
+
+  }
+
   openFinder(id) {
     this.musicService.openFinder(id).subscribe(
       (response) => console.log(response)
@@ -55,10 +60,19 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
     this.album.cuesheets = album.cuesheets;
   }
 
+  pause() {
+    this.musicService.controlPlayer('pause').subscribe();
+  }
+
   refetch(albumId) {
     this.musicService.refetch(albumId).subscribe(
       (response: Album) => this.restorePieces(response)
     );
+  }
+
+  toggle() {
+    this.album.expanded = !this.album.expanded;
+    this.chevron = this.album.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
   }
 
   ngAfterViewInit() {

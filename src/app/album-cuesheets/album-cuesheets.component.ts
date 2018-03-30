@@ -14,9 +14,24 @@ export class AlbumCuesheetsComponent implements OnInit {
 
   constructor(  private musicService: MusicService ) { }
 
+  getCuesheetById(id) {
+    for (let i = 0; i < this.cuesheets.length; i++) {
+      if (this.cuesheets[i].ID === id) {
+        return this.cuesheets[i];
+      }
+    }
+    return null;
+  }
+
+  onPlayed(response, id) {
+    console.log(response);
+    const cuesheet = this.getCuesheetById(id);
+    cuesheet.played = true;
+  }
+
   play(id) {
     this.musicService.play(id).subscribe(
-      (response) => console.log(response)
+      (response) => this.onPlayed(response, id)
     );
   }
 

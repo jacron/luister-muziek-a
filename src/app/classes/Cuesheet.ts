@@ -7,4 +7,5 @@ export class Cuesheet {
   cue: Cue[];
   Code: string;
   Invalid: boolean;
+  played: boolean;
 }

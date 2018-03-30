@@ -1,5 +1,8 @@
 <div *ngFor="let cuesheet of cuesheets">
-  <mat-icon class="play" (click)="play(cuesheet.ID)">
+  <mat-icon
+    [class.played]="cuesheet.played"
+      class="play"
+      (click)="play(cuesheet.ID)">
     play_circle_filled</mat-icon>
   <span>{{ cuesheet.Title }}</span>
   <mat-icon class="edit" (click)="edit(cuesheet.ID, albumid)">

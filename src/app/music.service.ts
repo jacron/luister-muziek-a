@@ -141,4 +141,16 @@ export class MusicService {
       responseType: 'json',
       params});
   }
+
+  controlPlayer(cmd) {
+    const params = new HttpParams()
+      .set('cmd', 'controlplayer')
+      .set('mode', cmd)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
 }

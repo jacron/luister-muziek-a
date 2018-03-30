@@ -232,16 +232,23 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   setSelected() {
+    let title = '';
     if (this.composerId !== -1) {
       this.selectedComposer = this.getComposerById(this.composerId);
+      title += this.selectedComposer.FullName;
     }
     if (this.performerId !== -1) {
       this.selectedPerformer = this.getPerformerById(this.performerId);
       // console.log(this.selectedPerformer);
+      if (title.length) { title += ', '; }
+      title += this.selectedPerformer.FullName;
     }
     if (this.collectionId !== -1) {
       this.selectedCollection = this.getCollectionById(this.collectionId);
+      if (title.length) { title += ', '; }
+      title += this.selectedCollection.Title;
     }
+    document.title = title;
   }
 
   onSelectionChange() {
