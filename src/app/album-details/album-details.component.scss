@@ -1,3 +1,50 @@
-img {
+img.thumb {
   width: 300px;
+}
+img.back-thumb {
+  width: 100px;
+  position: absolute;
+  bottom: 0;
+}
+.first {
+  max-width: 320px;
+}
+.title {
+  font-size: 20px;
+}
+.composers .mat-chip:not(.mat-basic-chip) {
+  background-color: #ffeeee;
+}
+.performers .mat-chip:not(.mat-basic-chip) {
+  background-color: #eeffee;
+}
+.finder {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  opacity: .8;
+}
+.album-control {
+  //position: relative;
+  //top: 10px;
+  cursor: pointer;
+  opacity: .6;
+  padding: 0 14px;
+}
+.horizontal-spacer {
+  flex: 1 1 auto;
+}
+.vertical-spacer {
+  flex: 1 1 auto;
+}
+.opener {
+  //float: right;
+  //position: relative;
+  //top: 140px;
+  font-size: 30px;
+  color: #999;
+  cursor: pointer;
+}
+.opener.expanded {
+  transform: rotate(180deg);
 }

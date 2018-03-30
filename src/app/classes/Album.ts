@@ -10,5 +10,7 @@ export class Album {
   pieces: any[];
   cuesheets: any[];
   expanded: boolean;
+  album_back_image: boolean;
+  album_folder_image: boolean;
 }
 

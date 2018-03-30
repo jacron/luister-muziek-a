@@ -19,11 +19,16 @@ export class AlbumComponent implements OnInit {
     route.params.subscribe(params => this.handleParams(params));
   }
 
+  openAlbum(album: Album): void {
+    this.album = album;
+    // console.log(album);
+  }
+
   handleParams(params) {
     if (params) {
       console.log(params);
-      this.musicService.getAlbumById(params.id).subscribe(
-        (album: Album) => this.album = album,
+      this.musicService.getAlbumById(params.idalbum).subscribe(
+        (album: Album) => this.openAlbum(album),
         err => console.error(err),
         () => console.log('componist albums fetched')
       );

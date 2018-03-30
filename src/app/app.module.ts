@@ -11,7 +11,10 @@ import { AlbumComponent } from './album/album.component';
 import { SearchComponent } from './search/search.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
-import {MatAutocompleteModule, MatButtonModule, MatCardModule, MatExpansionModule, MatIconModule, MatSelectModule} from '@angular/material';
+import {
+  MatAutocompleteModule, MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatExpansionModule, MatIconModule,
+  MatSelectModule, MatToolbarModule
+} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AlbumThumbComponent } from './album-thumb/album-thumb.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
@@ -21,6 +24,7 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
 import { AlbumPersonsComponent } from './album-persons/album-persons.component';
 import { AlbumPiecesComponent } from './album-pieces/album-pieces.component';
 import { AlbumCuesheetsComponent } from './album-cuesheets/album-cuesheets.component';
+import { DialogPicComponent } from './dialog-pic/dialog-pic.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,8 @@ import { AlbumCuesheetsComponent } from './album-cuesheets/album-cuesheets.compo
     AlbumDetailsComponent,
     AlbumPersonsComponent,
     AlbumPiecesComponent,
-    AlbumCuesheetsComponent
+    AlbumCuesheetsComponent,
+    DialogPicComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -49,8 +54,14 @@ import { AlbumCuesheetsComponent } from './album-cuesheets/album-cuesheets.compo
     MatIconModule,
     MatCardModule,
     MatExpansionModule,
+    MatChipsModule,
+    MatToolbarModule,
+    MatDialogModule,
     HttpClientModule,
     AppRoutingModule
+  ],
+  entryComponents: [
+    DialogPicComponent
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [

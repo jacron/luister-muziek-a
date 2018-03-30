@@ -1,5 +1,63 @@
-<div *ngIf="album" class="album card">
-  <a href="search/{{ album.ID }}">
-    <img attr.data-src="{{ imgUrl }}{{ album.ID }}/album" class="thumb lazy"></a>
-  <div>{{ album.Title }}</div>
-</div>
+<mat-card *ngIf="album" class="album ">
+  <div class="row">
+    <mat-toolbar style="margin: -14px 0 14px;">
+      <span class="title">{{ album.Title }}</span>
+      <span class="horizontal-spacer"></span>
+      <mat-icon class="album-control"
+                title="Reveal in Finder"
+                (click)="openFinder(album.ID)">
+        open_in_browser</mat-icon>
+      <mat-icon class="album-control"
+                (click)="refetch(album.ID)"
+                title="Refetch pieces and cuesheets">
+        replay
+      </mat-icon>
+    </mat-toolbar>
+
+  </div>
+  <div class="row">
+    <div class="col first">
+        <img src="{{ imgUrl }}{{ album.ID }}/album"
+             (click)="openPic('front')"
+             class="thumb">
+    </div>
+    <div class="col">
+      <mat-chip-list class="composers">
+        <mat-chip *ngFor="let composer of album.album_componisten "
+        [removable]="removable" (remove)="removeComposer(composer)">
+          {{ composer.FullName }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+      <mat-chip-list class="performers">
+        <mat-chip *ngFor="let performer of album.album_performers"
+                  [removable]="removable" (remove)="removePerformer(performer)">
+          {{ performer.FullName }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+        <img *ngIf="album.album_back_image"
+             src="{{ imgBackUrl }}{{ album.ID }}/album"
+             (click)="openPic('back')"
+             class="back-thumb">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <app-album-cuesheets [cuesheets]="album.cuesheets" [albumid]="album.ID"></app-album-cuesheets>
+    </div>
+  </div>
+  <div class="row" style="margin-top: -30px">
+      <span class="horizontal-spacer"></span>
+      <mat-icon class="opener" (click)="album.expanded = !album.expanded"
+                [class.expanded]="album.expanded"
+      >
+        keyboard_arrow_down</mat-icon>&nbsp;
+  </div>
+  <div class="row">
+    <div class="col">
+      <app-album-pieces *ngIf="album.expanded"
+                        [pieces]="album.pieces"></app-album-pieces>
+    </div>
+  </div>
+</mat-card>

@@ -22,14 +22,15 @@ export class AlbumThumbComponent implements OnInit {
     );
   }
 
-  restorePieces(album) {
+  restorePieces(album: Album) {
     console.log(album);
-    this.album = album;
+    this.album.pieces = album.pieces;
+    this.album.cuesheets = album.cuesheets
   }
 
   refetch(albumId) {
     this.musicService.refetch(albumId).subscribe(
-      (response) => this.restorePieces(response)
+      (response: Album) => this.restorePieces(response)
     );
   }
 
