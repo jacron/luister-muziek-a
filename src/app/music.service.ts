@@ -87,20 +87,11 @@ export class MusicService {
     });
   }
 
-  // getAlbumAlbums(albumId) {
-  //   const params = new HttpParams()
-  //     .set('cmd', 'album_albums')
-  //     .set('albumId', albumId);
-  //   return this.http.get(requestUrl, {
-  //     responseType: 'json',
-  //     params});
-  // }
-
   getSearchedAlbums(params) {
-    const idcomp = +params.idcomp === -1 ? null : params.idcomp,
-      idperf = +params.idperf === -1 ? null : params.idperf,
-      idcoll = +params.idcoll === -1 ? null : params.idcoll,
-      idtag = +params.idtag === -1 ? null : params.idtag;
+    const idcomp = params.idcomp === -1 ? null : params.idcomp.toString(),
+      idperf = params.idperf === -1 ? null : params.idperf.toString(),
+      idcoll = params.idcoll === -1 ? null : params.idcoll.toString(),
+      idtag = params.idtag === -1 ? null : params.idtag.toString();
     const cql = {
       componist: idcomp,
       performer: idperf,
@@ -201,21 +192,17 @@ export class MusicService {
 
   }
 
-  getDiscidInfo(discid: string) {
-    const params = new HttpParams()
-      .set('discid', discid)
-      .set('page', '1')
-    ;
-    const request_url = 'http://www.freedb.org/freedb_discid_check.php';
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'text/html');
-    headers.append('Accept', 'text/html');
-    // return this.http.get(request_url);
-    return this.http.get(request_url, {
-      responseType: 'text',
-      params});
-    // return this.http.post(
-    //   request_url, params, { headers: headers}
-    // );
-  }
+  // getDiscidInfo(discid: string) {
+  //   const params = new HttpParams()
+  //     .set('discid', discid)
+  //     .set('page', '1')
+  //   ;
+  //   const request_url = 'http://www.freedb.org/freedb_discid_check.php';
+  //   const headers = new HttpHeaders();
+  //   headers.append('Content-Type', 'text/html');
+  //   headers.append('Accept', 'text/html');
+  //   return this.http.get(request_url, {
+  //     responseType: 'text',
+  //     params});
+  // }
 }

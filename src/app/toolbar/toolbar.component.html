@@ -3,7 +3,19 @@
     <div #topicTitle contenteditable="true" [textContent]="album.Title"
          (input)="model=topicTitle.innerText"
          (keydown)="albumTitleKeydown($event, album.ID, topicTitle.innerText)"></div>
-    <!--<span class="title">{{ album.Title }}</span>-->
+  </mat-toolbar-row>
+  <mat-toolbar-row class="sub">
+    <mat-icon (click)="back()"
+              class="navig"
+              [class.disabled]="!navBackwards"
+    >keyboard_arrow_left</mat-icon>
+    <a  (click)="toSearch()">
+      {{ searchTitle }}
+    </a>
+    <mat-icon (click)="forward()"
+              class="navig"
+              [class.disabled]="!navForwards"
+    >keyboard_arrow_right</mat-icon>
     <span class="horizontal-spacer"></span>
     <mat-icon class="album-control"
               waves-light waves-effect mdbRippleRadius
@@ -26,11 +38,5 @@
               (click)="tagedit()"
               matTooltip="Tag Editor"
     >edit</mat-icon>
-  </mat-toolbar-row>
-  <mat-toolbar-row class="sub">
-    <a  *ngIf="album.mother"
-        (click)="toCollection(album.mother.ID)">
-      {{ album.mother.Title }}
-    </a>
   </mat-toolbar-row>
 </mat-toolbar>

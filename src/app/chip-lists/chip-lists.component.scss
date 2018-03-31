@@ -10,9 +10,9 @@ mat-chip:hover .mat-icon {
   display: inline-block;
 }
 
-.composers .mat-chip:not(.mat-basic-chip) {
+.composers.mat-chip:not(.mat-basic-chip) {
   background-color: #ffeeee;
 }
-.performers .mat-chip:not(.mat-basic-chip) {
+.performers.mat-chip:not(.mat-basic-chip) {
   background-color: #eeffee;
 }

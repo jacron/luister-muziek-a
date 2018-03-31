@@ -1,7 +1,3 @@
-<!--<datalist id="composers">-->
-  <!--<option *ngFor="let opt of composers" value="{{ opt.Name }}"></option>-->
-<!--</datalist>-->
-<!--<input type="text" list="composers" [(ngModel)]="composer">-->
 <form>
   <div>
     <!-- select composer (autocomplete) -->
@@ -41,10 +37,13 @@
       <div class="col person-image-col">
         <div class="selected-image">
           <img *ngIf="selectedPerformer && selectedPerformer.ID"
-           src="{{ imgUrl }}{{ selectedPerformer.ID }}/performer">
+               style="margin-top: 12px"
+               src="{{ imgUrl }}{{ selectedPerformer.ID }}/performer">
         </div>
       </div>
-      <div class="col" *ngIf="selectedPerformer && selectedPerformer.ID">
+      <div class="col" *ngIf="selectedPerformer && selectedPerformer.ID"
+           style="margin-top: 12px"
+      >
         {{ selectedPerformer.Birth }} - {{ selectedPerformer.Death }}
       </div>
     </div>
@@ -72,6 +71,7 @@
     <!-- select collection (autocomplete) -->
     <div class="selected-image">
       <img *ngIf="selectedCollection && selectedCollection.ID"
+           style="margin-top: 12px"
            src="{{ imgUrl }}{{ selectedCollection.ID }}/album">
     </div>
     <div class="label" [class.selected]="selectedCollection">Collection</div>
@@ -126,16 +126,6 @@
 </form>
 
 <div class="list">
-  <ul>
-    <li *ngFor="let mother of albumsContainer.mothers">
-      <a (click)="getAlbum(mother)">{{ mother.Title }}</a>
-    </li>
-  </ul>
-  <ul>
-    <li *ngFor="let child of albumsContainer.children">
-      <app-album-thumb [album]="child"></app-album-thumb>
-    </li>
-  </ul>
   <div *ngIf="albums && albums.length">
     {{ albums.length }} albums
     <ul>
@@ -144,13 +134,4 @@
       </li>
     </ul>
   </div>
-  <div *ngIf="selectedAlbum">
-    {{ selectedAlbum.Title }}
-    <ul>
-      <li *ngFor="let album of albums" class="thumb">
-        <app-album-thumb [album]="album"></app-album-thumb>
-      </li>
-    </ul>
-  </div>
 </div>
-<app-album-details [album]="album"></app-album-details>

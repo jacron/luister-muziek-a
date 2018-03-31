@@ -1,15 +1,13 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {MusicService} from '../music.service';
-import {Albums} from '../classes/Albums';
 import {Person} from '../classes/Person';
 import {Album} from '../classes/Album';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
-import {MatSelect} from '@angular/material';
 import {forkJoin} from 'rxjs/observable/forkJoin';
 import {Tag} from '../classes/Tag';
-// import {Observable} from 'rxjs/Observable';
-
+import {StorageService} from '../storage.service';
+import {SearchParams} from '../classes/SearchParams';
 
 @Component({
   selector: 'app-search',
@@ -18,64 +16,50 @@ import {Tag} from '../classes/Tag';
 })
 export class SearchComponent implements OnInit, AfterViewInit {
 
-  albumsContainer: Albums;
   albums: Album[];
   album: Album;
 
   composers: Person[];
   performers: Person[];
-  composerId = -1;
-  performerId = -1;
-  collectionId = -1;
-  tagId = -1;
-  albumId = -1;
   collections: Album[];
   tags: Tag[];
   imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
-  selectedAlbum: Album;
+  params: SearchParams;
   selectedComposer: Person = null;
   selectedPerformer: Person = null;
   selectedCollection: Album = null;
   selectedTag: Tag = null;
-  @ViewChild('collectionSelect') collectionSelectElem: MatSelect;
 
   constructor(private musicService: MusicService,
               private route: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private storageService: StorageService
               ) {
     route.params.subscribe(params => this.handleParams(params));
   }
 
   handleParams(params) {
-    // console.log(params);
     if (params) {
+      // console.log(params);
       if (params.idcomp) {
-        this.composerId = +params.idcomp;
-        this.performerId = +params.idperf;
-        this.collectionId = +params.idcoll;
-        this.tagId = +params.idtag;
-        this.fetchThings(params);
+        this.params = new SearchParams(params);
+        this.storageService.storeSearchParameters(params);
+        this.fetchThings(this.params);
+        // this.setSelected();
       }
-    } else {
-      this.albumsContainer = new Albums();
     }
-  }
-
-  fetchAlbum() {
-    this.musicService.getAlbumById(this.albumId).subscribe(
-      (album: Album) => {
-        this.album = album;
-      }
-    );
   }
 
   fetchThings(params) {
     this.albums = [];
+    console.log(params);
     this.musicService.getSearchedAlbums(params).subscribe(
       (albums: Album[]) => {
         this.albums = albums;
+        this.storageService.storeAlbums(albums);
+        // this.setSelected();
         // console.log(albums);
         setTimeout(() => {
           this.setLazy();
@@ -88,6 +72,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   getItemById(items: any[], id: number) {
+    if (!items) {
+      console.log('items undefined');
+      return null;
+    }
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
       if (item.ID === id) {
@@ -95,16 +83,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
       }
     }
     return null;
-  }
-
-  getComposerById(id: number): Person {
-    const item = this.getItemById(this.composers, id);
-    return <Person>item;
-  }
-
-  getPerformerById(id: number): Person {
-    const item = this.getItemById(this.performers, id);
-    return <Person>item;
   }
 
   getCollectionById(id: number): Album {
@@ -133,17 +111,16 @@ export class SearchComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getAlbum(album) {
-    this.router.navigate(['/album', album.ID]).then();
-  }
-
   elementInViewport(el) {
-    const rect = el.getBoundingClientRect();
+    const rect = el.getBoundingClientRect(),
+        height = (window.innerHeight || document.documentElement.clientHeight),
+        width = (window.innerWidth || document.documentElement.clientWidth),
+        diff = 10;
     return (
       rect.bottom >= 0 &&
       rect.right >= 0 &&
-      rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.left <= (window.innerWidth || document.documentElement.clientWidth)
+      rect.top - diff <= height &&
+      rect.left <= width
     );
   }
 
@@ -178,10 +155,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
           that.musicService.getAlbumById(image.id).subscribe(
             (album: Album) => that.augment_album(album)
           );
-          // setTimeout(() => {
-            image.src = dataSrc;
-            image.removeAttribute(that.lazyAttribute);
-          // }, 1000);
+          image.src = dataSrc;
+          image.removeAttribute(that.lazyAttribute);
         }
       }
     });
@@ -190,7 +165,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   setLazy() {
     this.lazyImages = document.querySelectorAll('.lazy');
-    // console.log('lazyImages.length', this.lazyImages.length);
   }
 
   lazy() {
@@ -207,22 +181,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }, 200);
   }
 
-  // loadOnScroll() {
-  //   this.setLazy();
-  //   this.lazyLoad();
-  // }
-
-  // registerPanelScrollEvent(selectElem) {
-  //   console.log(selectElem);
-  //   this.loadOnScroll();
-  //   const panel = selectElem.panel.nativeElement;
-  //   panel.addEventListener('scroll', () => this.loadOnScroll());
-  // }
-
-  // registerPanelOpenEvent(selectElem) {
-  //   console.log(selectElem);
-  // }
-
   displayNameFn(person): string {
     return person ? person.Name : person;
   }
@@ -236,13 +194,11 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   setComposer(person: Person) {
-    console.log(person);
     this.selectedComposer = person;
     document.title = person.FullName;
   }
 
   setPerformer(person: Person) {
-    console.log(person);
     this.selectedPerformer = person;
     if (document.title.length) { document.title += ', '; }
     document.title += person.FullName;
@@ -265,23 +221,46 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   setSelected() {
+    console.log(this.params);
     document.title = '';
-    if (this.composerId !== -1) {
-      this.getComposer(this.composerId);
-    }
-    if (this.performerId !== -1) {
-      this.getPerformer(this.performerId);
-    }
-    if (this.collectionId !== -1) {
-      this.selectedCollection = this.getCollectionById(this.collectionId);
+    if (this.params.idcoll !== -1) {
+      this.selectedCollection = this.getCollectionById(this.params.idcoll);
       if (document.title.length) { document.title += ', '; }
       document.title += this.selectedCollection.Title;
     }
-    if (this.tagId !== -1) {
-      this.selectedTag = this.getTagById(this.tagId);
+    if (this.params.idtag !== -1) {
+      this.selectedTag = this.getTagById(this.params.idtag);
       if (document.title.length) { document.title += ', '; }
       document.title += this.selectedTag.Name;
     }
+    const qcomposer = this.params.idcomp !== -1 ?
+      this.musicService.getComposerById(this.params.idcomp) : null;
+    const qperformer = this.params.idperf !== -1 ?
+      this.musicService.getPerformerById(this.params.idperf) : null;
+    console.log(qcomposer);
+    console.log(qperformer);
+    if (qcomposer && qperformer) {
+      forkJoin(qcomposer, qperformer).subscribe(
+        (results) => {
+          this.setComposer(<Person>results[0]);
+          this.setPerformer(<Person>results[1]);
+          this.storageService.storeSearchTitle(document.title);
+        },
+        err => console.error(err),
+        () => console.log('persons set')
+      );
+    } else if (qcomposer) {
+      qcomposer.subscribe((composer: Person) => {
+        this.setComposer(composer);
+        this.storageService.storeSearchTitle(document.title);
+      });
+    } else if (qperformer) {
+      qperformer.subscribe((performer: Person) => {
+        this.setPerformer(performer);
+        this.storageService.storeSearchTitle(document.title);
+      });
+    }
+
   }
 
   onSelectionChange(person) {
@@ -293,19 +272,12 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }
   }
 
+  getSelection() {
+    return null;
+  }
+
   getTypeAheads() {
-    // const selection = {
-    //   idcomp: this.selectedComposer ? this.selectedComposer.ID : null,
-    //   idperf: this.selectedPerformer ? this.selectedPerformer.ID : null,
-    //   idcoll: this.selectedCollection ? this.selectedCollection.ID : null
-    // };
-    // const selection = {
-    //   idcomp: this.composerId,
-    //   idperf: this.performerId,
-    //   idcoll: this.collectionId
-    // };
-    // console.log(selection);
-    const selection = null;
+    const selection = this.getSelection();
     const qcomposers = this.musicService.getComposers(selection);
     const qperformers = this.musicService.getPerformers(selection);
     const qcollections = this.musicService.getCollections(selection);
@@ -326,36 +298,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
       );
   }
 
-  parseFreedb(text) {
-    // console.log(text);
-    const lines = text.split('\n');
-    console.log(lines.length);
-    let start = null, end = null;
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      console.log(line);
-      // '<!-- // FREEDB RAW DATA -->'
-
-      if (line.indexOf('FREEDB RAW DATA') !== -1) {
-        start = i;
-      } else if (start && line.indexOf('-->') !== -1) {
-        end = i;
-        break;
-      }
-    }
-    console.log(start, end);
-  }
-
   ngOnInit() {
-    this.albumsContainer = new Albums();
     this.getTypeAheads();
-
-    // test
-    // this.musicService.getDiscidInfo('550AFB17').subscribe(
-    //   (response) => this.parseFreedb(response),
-    //   (err) => console.log(err),
-    //   () => console.log('discid fetched')
-    // );
   }
 
 

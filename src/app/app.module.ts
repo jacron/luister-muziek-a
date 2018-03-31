@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AlbumComponent } from './album/album.component';
 import { SearchComponent } from './search/search.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
@@ -27,12 +26,12 @@ import { AlbumCuesheetsComponent } from './album-cuesheets/album-cuesheets.compo
 import { DialogPicComponent } from './dialog-pic/dialog-pic.component';
 import { ChipListsComponent } from './chip-lists/chip-lists.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import {StorageService} from './storage.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    AlbumComponent,
     SearchComponent,
     WelcomeComponent,
     ToolsComponent,
@@ -71,7 +70,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
     MusicService,
-    TypedNamePipe
+    TypedNamePipe,
+    StorageService
   ],
   bootstrap: [AppComponent]
 })

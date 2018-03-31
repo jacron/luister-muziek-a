@@ -1,12 +1,11 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {Album} from '../classes/Album';
 import {environment} from '../../environments/environment';
-import {Person} from '../classes/Person';
 import {MusicService} from '../music.service';
 import {MatDialog} from '@angular/material';
 import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
-import {Router} from '@angular/router';
-import {Tag} from '../classes/Tag';
+import {ActivatedRoute, Router} from '@angular/router';
+import {StorageService} from '../storage.service';
 
 @Component({
   selector: 'app-album-details',
@@ -23,8 +22,26 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
   constructor(
     private musicService: MusicService,
     private router: Router,
-    private dialog: MatDialog
-  ) { }
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
+    private storageService: StorageService
+  ) {     route.params.subscribe(params => this.handleParams(params));
+  }
+
+  openAlbum(album: Album): void {
+    this.album = album;
+    // console.log(album);
+  }
+
+  handleParams(params) {
+    if (params) {
+      this.musicService.getAlbumById(params.idalbum).subscribe(
+        (album: Album) => this.openAlbum(album),
+        err => console.error(err),
+        () => console.log('album fetched')
+      );
+    }
+  }
 
   openPic(mode): void {
     const imgUrl = this.imgUrl + this.album.ID + '/album';
@@ -49,6 +66,8 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    console.log(this.storageService.retrieveAlbums());
+    console.log(this.storageService.retrieveSearchTitle());
   }
 
 }
