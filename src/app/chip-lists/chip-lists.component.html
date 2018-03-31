@@ -2,7 +2,9 @@
   <mat-chip *ngFor="let composer of album.album_componisten "
             class="composers"
             [removable]="removable" (remove)="removeComposer(composer)">
-    <!--<img src="{{ imgUrl }}{{ composer.ID }}/componist" class="avatar">-->
+    <img src="{{ imgUrl }}{{ composer.ID }}/componist"
+         (click)="openPicComposer(composer.ID)"
+         class="avatar">
     <a (click)="toComposer(composer)">{{ composer.FullName }}</a>
     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
   </mat-chip>
@@ -10,12 +12,16 @@
   <mat-chip *ngFor="let performer of album.album_performers"
             class="performers"
             [removable]="removable" (remove)="removePerformer(performer)">
-    <!--<img src="{{ imgUrl }}{{ performer.ID }}/performer" class="avatar">-->
+    <img src="{{ imgUrl }}{{ performer.ID }}/performer"
+         (click)="openPicPerformer(performer.ID)"
+         class="avatar">
     <a (click)="toPerformer(performer)">{{ performer.FullName }}</a>
     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
   </mat-chip>
   <mat-chip *ngFor="let tag of album.album_tags"
-            [removable]="removable" (remove)="removeTag(tag)">
+            class="tag-chip"
+            [removable]="removable"
+            (remove)="removeTag(tag)">
     <a (click)="toTag(tag)">{{ tag.Name }}</a>
     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
   </mat-chip>

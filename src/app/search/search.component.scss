@@ -1,21 +1,19 @@
+@import "../app-variables";
+
 .list {
   margin-top: 20px;
 }
 .selected-image {
   width: 70px;
-  //height: 70px;
   overflow: hidden;
   display: inline-block;
-  //padding: 10px;
   margin-right: 5px;
-  //text-align: center;
+  & img {
+    height: 70px;
+  }
 }
 .person-image-col {
   max-width: 80px;
-}
-.selected-image img {
-  height: 70px;
-  //margin: 0 auto;
 }
 .mat-option {
   height: auto;
@@ -25,10 +23,16 @@ ul {
 }
 .reset {
   float: right;
-}
-.reset mat-icon {
-  color: #999;
-  cursor: pointer;
+  text-align: right;
+  & mat-icon {
+    font-size: 16px;
+    color: #999;
+    cursor: pointer;
+    transition: color $control-hover-transition-time;
+  }
+  &:hover mat-icon {
+    color: $control-hover-color;
+  }
 }
 .label {
   position: relative;
@@ -37,12 +41,12 @@ ul {
   font-size: 2px;
   height: 0;
   transition: all 1s;
-}
-.label.selected {
-  top: 0;
-  left: 0;
-  height: 14px;
-  font-size: 12px;
+  &.selected {
+    top: 0;
+    left: 0;
+    height: 14px;
+    font-size: 12px;
+  }
 }
 img.thumb {
   height: 100px;
@@ -57,4 +61,8 @@ img.thumb {
   position: relative;
   top: 20px;
   left: 10px;
+}
+.get-albums {
+  width: 100%;
+  margin-top: 20px;
 }

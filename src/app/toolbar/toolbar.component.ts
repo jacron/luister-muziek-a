@@ -17,6 +17,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
   albums: Album[];
   navForwards: boolean;
   navBackwards: boolean;
+  musicAlbumUrl = 'http://localhost:8010/album/';
 
   constructor(    private musicService: MusicService,
                   private router: Router,
@@ -42,6 +43,10 @@ export class ToolbarComponent implements OnInit, OnChanges {
     this.musicService.openFinder(id).subscribe(
       (response) => console.log(response)
     );
+  }
+
+  openMusic(id) {
+    window.open(this.musicAlbumUrl + id, 'music');
   }
 
   restorePieces(album: Album) {

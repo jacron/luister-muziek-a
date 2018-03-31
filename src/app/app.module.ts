@@ -27,6 +27,7 @@ import { DialogPicComponent } from './dialog-pic/dialog-pic.component';
 import { ChipListsComponent } from './chip-lists/chip-lists.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import {StorageService} from './storage.service';
+import { AlbumMetatagsComponent } from './album-metatags/album-metatags.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {StorageService} from './storage.service';
     AlbumCuesheetsComponent,
     DialogPicComponent,
     ChipListsComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    AlbumMetatagsComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

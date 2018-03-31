@@ -4,6 +4,8 @@ import {Person} from '../classes/Person';
 import {Tag} from '../classes/Tag';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-chip-lists',
@@ -13,10 +15,12 @@ import {environment} from '../../environments/environment';
 export class ChipListsComponent implements OnInit {
 
   @Input('album') album: Album;
-  removable = true;
+  removable = false;
   imgUrl = environment.apiServer + '/image/';
 
-  constructor(    private router: Router,
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
   ) { }
 
   removeItem(persons, id) {
@@ -38,6 +42,23 @@ export class ChipListsComponent implements OnInit {
 
   removeTag(tag: Tag) {
     this.removeItem(this.album.album_tags, tag.ID);
+  }
+
+  openPicDialog(imgUrl) {
+    this.dialog.open(DialogPicComponent, {
+      width: '80%',
+      data: {
+        imgUrl: imgUrl,
+      }
+    });
+  }
+
+  openPicComposer(id): void {
+    this.openPicDialog(this.imgUrl + id + '/componist');
+  }
+
+  openPicPerformer(id): void {
+    this.openPicDialog(this.imgUrl + id + '/performer');
   }
 
   openAddComposer() {

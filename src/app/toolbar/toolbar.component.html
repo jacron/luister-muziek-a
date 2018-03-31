@@ -22,6 +22,12 @@
     <span class="horizontal-spacer"></span>
     <mat-icon class="album-control"
               waves-light waves-effect mdbRippleRadius
+              matTooltip="Open in music"
+              (click)="openMusic(album.ID)"
+            >queue_music
+    </mat-icon>
+    <mat-icon class="album-control"
+              waves-light waves-effect mdbRippleRadius
               matTooltip="Reveal in Finder"
               (click)="openFinder(album.ID)"
     >open_in_browser</mat-icon>

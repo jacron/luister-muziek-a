@@ -16,7 +16,6 @@ export class AlbumDetailsComponent implements OnInit {
   imgBackUrl = environment.apiServer + '/imageback/';
   @Input('album') album: Album;
   chevron = 'keyboard_arrow_down';
-  objectKeys = Object.keys;
 
   constructor(
     private musicService: MusicService,
@@ -30,6 +29,7 @@ export class AlbumDetailsComponent implements OnInit {
     this.album = album;
     this.chevron = 'keyboard_arrow_down';
     // console.log(album);
+    document.title = album.Title;
   }
 
   handleParams(params) {

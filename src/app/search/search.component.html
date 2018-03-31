@@ -101,6 +101,7 @@
     <br>
 
     <!-- select tag (autocomplete) -->
+    <div class="selected-image"></div>
     <div class="label" [class.selected]="selectedTag">Tag</div>
     <input type="text"
            placeholder="Tag"
@@ -124,7 +125,7 @@
 
   </div>
   <button mat-raised-button=""
-          style="width: 100%;"
+          class="get-albums"
           (click)="getAlbumsComponist()">get</button>
 </form>
 

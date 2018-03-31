@@ -1,8 +1,9 @@
 <div *ngFor="let cuesheet of cuesheets">
   <mat-icon
     [class.played]="cuesheet.played"
-      class="play"
-      (click)="play(cuesheet.ID)">
+    class="play"
+    waves-light waves-effect mdbRippleRadius
+    (click)="play(cuesheet.ID)">
     play_circle_filled</mat-icon>
   <span #topicTitle contenteditable="true"
        class="title"
@@ -10,7 +11,9 @@
        (input)="model=topicTitle.innerText"
        (keydown)="titleKeydown($event, cuesheet.ID, topicTitle.innerText)">
   </span>
-  <mat-icon class="edit" (click)="edit(cuesheet.ID)">
+  <mat-icon class="edit"
+            waves-light waves-effect mdbRippleRadius
+            (click)="edit(cuesheet.ID)">
     edit
   </mat-icon>
 </div>

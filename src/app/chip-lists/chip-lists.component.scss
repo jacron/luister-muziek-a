@@ -1,6 +1,6 @@
 .avatar {
-  height: 30px;
-  border-radius: 16px;
+  height: 20px;
+  border-radius: 6px;
   margin-right: 4px;
 }
 .mat-icon {
@@ -15,4 +15,8 @@ mat-chip:hover .mat-icon {
 }
 .performers.mat-chip:not(.mat-basic-chip) {
   background-color: #eeffee;
+}
+.tag-chip {
+  position: relative;
+  top: -5px;
 }

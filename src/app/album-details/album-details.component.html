@@ -16,12 +16,7 @@
              class="thumb">
     </div>
     <div class="col">
-      <table class="tags">
-        <tr *ngFor="let key of objectKeys(album.album_metatags)">
-          <td class="key">{{ key }}</td>
-          <td>{{ album.album_metatags[key].join(', ') }}</td>
-        </tr>
-      </table>
+      <app-album-metatags [tags]="album.album_metatags"></app-album-metatags>
       <img *ngIf="album.album_back_image"
            src="{{ imgBackUrl }}{{ album.ID }}/album"
            (click)="openPic('back')"
@@ -35,10 +30,14 @@
   </div>
   <div class="row">
     <div class="col">
-      <mat-icon class="opener" (click)="toggle()"
-                [class.expanded]="album.expanded"
-      >{{ chevron }}
+      <div class="opener">
+        <div class="count">{{ album.pieces.length }}</div>
+        <mat-icon (click)="toggle()"
+                  [class.expanded]="album.expanded"
+                  waves-light waves-effect mdbRippleRadius
+        >{{ chevron }}
         </mat-icon>
+      </div>
     </div>
   </div>
   <div class="row">

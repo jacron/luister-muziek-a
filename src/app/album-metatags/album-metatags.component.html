@@ -1,0 +1,6 @@
+<table class="tags">
+  <tr *ngFor="let key of objectKeys(tags)">
+    <td class="key">{{ key }}</td>
+    <td>{{ tags[key].join(', ') }}</td>
+  </tr>
+</table>

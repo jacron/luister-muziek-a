@@ -1,3 +1,5 @@
+@import "../app-variables";
+
 .play {
   opacity: .6;
   position: relative;
@@ -11,8 +13,12 @@
 .edit {
   opacity: .6;
   position: relative;
-  top: 1px;
+  top: 4px;
   color: brown;
   cursor: pointer;
   font-size: 14px;
+  transition: color $control-hover-transition-time;
+  &:hover {
+    color: $control-hover-color;
+  }
 }

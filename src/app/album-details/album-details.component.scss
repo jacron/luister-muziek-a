@@ -1,10 +1,12 @@
 img.thumb {
   width: 300px;
+  border: 1px solid #bfbfbf;
 }
 img.back-thumb {
   width: 100px;
   position: absolute;
   bottom: 0;
+  border: 1px solid #bfbfbf;
 }
 .first {
   max-width: 320px;
@@ -12,10 +14,23 @@ img.back-thumb {
 .opener {
   position: absolute;
   right: 20px;
-  bottom: 8px;
+  bottom: -6px;
   font-size: 30px;
   color: #999;
+  text-align: center;
+  transition: color .35s;
+  padding: 3px;
+}
+.opener mat-icon {
   cursor: pointer;
+}
+.opener:hover {
+  color: #0033bb;
+}
+.count {
+  font-size: 12px;
+  margin-bottom: -6px;
+  cursor: default;
 }
 .opener.expanded {
   //transform: rotate(180deg);
@@ -28,12 +43,6 @@ img.back-thumb {
 .pieces.visible {
   max-height: 2000px;
   overflow-y: auto;
-}
-.tags td {
-  vertical-align: top;
-}
-.key {
-  color: brown;
 }
 .chips {
   margin: 4px 0 4px -14px;
