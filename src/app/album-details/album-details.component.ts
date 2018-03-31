@@ -28,6 +28,7 @@ export class AlbumDetailsComponent implements OnInit {
 
   openAlbum(album: Album): void {
     this.album = album;
+    this.chevron = 'keyboard_arrow_down';
     // console.log(album);
   }
 

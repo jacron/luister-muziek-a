@@ -18,7 +18,8 @@
     <div class="col">
       <table class="tags">
         <tr *ngFor="let key of objectKeys(album.album_metatags)">
-          <td class="key">{{ key }}</td><td>{{ album.album_metatags[key] }}</td>
+          <td class="key">{{ key }}</td>
+          <td>{{ album.album_metatags[key].join(', ') }}</td>
         </tr>
       </table>
       <img *ngIf="album.album_back_image"

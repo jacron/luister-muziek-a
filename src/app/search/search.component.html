@@ -5,6 +5,7 @@
       <div class="col person-image-col">
         <div class="selected-image">
           <img *ngIf="selectedComposer && selectedComposer.ID"
+               (click)="openPicComposer()"
                src="{{ imgUrl }}{{ selectedComposer.ID }}/componist">
         </div>
       </div>
@@ -38,6 +39,7 @@
         <div class="selected-image">
           <img *ngIf="selectedPerformer && selectedPerformer.ID"
                style="margin-top: 12px"
+               (click)="openPicPerformer()"
                src="{{ imgUrl }}{{ selectedPerformer.ID }}/performer">
         </div>
       </div>
@@ -122,16 +124,26 @@
 
   </div>
   <button mat-raised-button=""
+          style="width: 100%;"
           (click)="getAlbumsComponist()">get</button>
 </form>
 
 <div class="list">
   <div *ngIf="albums && albums.length">
     {{ albums.length }} albums
-    <ul>
-      <li *ngFor="let album of albums" class="thumb">
-        <app-album-thumb [album]="album"></app-album-thumb>
-      </li>
-    </ul>
+        <div class="row" *ngFor="let album of albums" >
+          <div class="col" style="max-width: 120px;">
+            <a href="album/{{ album.ID }}">
+              <img
+                attr.data-src="{{ imgUrl }}{{ album.ID }}/album"
+                id="{{ album.ID }}"
+                class="thumb lazy"></a>
+          </div>
+          <div class="col">
+            <div>{{ album.Title }}</div>
+            <app-album-persons [persons]="album.album_componisten"></app-album-persons>
+            <app-album-persons [persons]="album.album_performers"></app-album-persons>
+          </div>
+        </div>
   </div>
 </div>

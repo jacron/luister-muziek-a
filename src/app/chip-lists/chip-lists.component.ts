@@ -49,7 +49,8 @@ export class ChipListsComponent implements OnInit {
       {
         idcomp: composer.ID,
         idperf: -1,
-        idcoll: -1
+        idcoll: -1,
+        idtag: -1
       }
     ]).then(() => {
     });
@@ -60,7 +61,8 @@ export class ChipListsComponent implements OnInit {
       {
         idcomp: -1,
         idperf: performer.ID,
-        idcoll: -1
+        idcoll: -1,
+        idtag: -1
       }
     ]).then(() => {
     });

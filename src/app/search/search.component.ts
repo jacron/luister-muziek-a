@@ -8,6 +8,8 @@ import {forkJoin} from 'rxjs/observable/forkJoin';
 import {Tag} from '../classes/Tag';
 import {StorageService} from '../storage.service';
 import {SearchParams} from '../classes/SearchParams';
+import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-search',
@@ -35,6 +37,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   constructor(private musicService: MusicService,
               private route: ActivatedRoute,
               private router: Router,
+              private dialog: MatDialog,
               private storageService: StorageService
               ) {
     route.params.subscribe(params => this.handleParams(params));
@@ -54,13 +57,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   fetchThings(params) {
     this.albums = [];
-    console.log(params);
     this.musicService.getSearchedAlbums(params).subscribe(
       (albums: Album[]) => {
         this.albums = albums;
         this.storageService.storeAlbums(albums);
-        // this.setSelected();
-        // console.log(albums);
         setTimeout(() => {
           this.setLazy();
           this.lazyLoad();
@@ -136,7 +136,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     for (let i = 0; i < this.albums.length; i++) {
       const a = this.albums[i];
       if (this.albums[i].ID === album.ID) {
-        // console.log(album);
+        console.log(album);
         a.album_performers = album.album_performers;
         a.album_componisten = album.album_componisten;
         a.pieces = album.pieces;
@@ -173,12 +173,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
     const that = this;
     window.onscroll = function() { that.lazyLoad(); };
     window.onresize = function() { that.lazyLoad(); };
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.lazy();
-    }, 200);
   }
 
   displayNameFn(person): string {
@@ -237,8 +231,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
       this.musicService.getComposerById(this.params.idcomp) : null;
     const qperformer = this.params.idperf !== -1 ?
       this.musicService.getPerformerById(this.params.idperf) : null;
-    console.log(qcomposer);
-    console.log(qperformer);
     if (qcomposer && qperformer) {
       forkJoin(qcomposer, qperformer).subscribe(
         (results) => {
@@ -266,9 +258,13 @@ export class SearchComponent implements OnInit, AfterViewInit {
   onSelectionChange(person) {
     if (person === 'composer') {
       this.getComposer(this.selectedComposer.ID);
+      this.params.idcomp = this.selectedComposer.ID;
+      this.setSelected();
     }
     if (person === 'performer') {
       this.getPerformer(this.selectedPerformer.ID);
+      this.params.idperf = this.selectedPerformer.ID;
+      this.setSelected();
     }
   }
 
@@ -296,6 +292,30 @@ export class SearchComponent implements OnInit, AfterViewInit {
           this.setSelected();
         }
       );
+  }
+
+  openPicDialog(imgUrl) {
+    this.dialog.open(DialogPicComponent, {
+      width: '80%',
+      data: {
+        imgUrl: imgUrl,
+      }
+    });
+  }
+
+  openPicComposer(): void {
+    this.openPicDialog(this.imgUrl + this.selectedComposer.ID + '/componist');
+  }
+
+  openPicPerformer(): void {
+    const imgUrl = this.imgUrl + this.selectedPerformer.ID + '/performer';
+    this.openPicDialog(imgUrl);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.lazy();
+    }, 200);
   }
 
   ngOnInit() {

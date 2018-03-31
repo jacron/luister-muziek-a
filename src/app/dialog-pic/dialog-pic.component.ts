@@ -20,11 +20,15 @@ export class DialogPicComponent implements OnInit {
     }
 
   toggleUrl() {
-    this.imgUrl = this.mode === 'front' ? this.data.imgUrl : this.data.backUrl;
+    if (this.mode) {
+      this.imgUrl = this.mode === 'front' ? this.data.imgUrl : this.data.backUrl;
+    } else {
+      this.imgUrl = this.data.imgUrl;
+    }
   }
 
   toggleMode() {
-    if (this.data.backUrl) {
+    if (this.data.backUrl && this.mode) {
       this.mode = this.mode === 'front' ? 'back' : 'front';
       this.toggleUrl();
     }
@@ -34,9 +38,5 @@ export class DialogPicComponent implements OnInit {
     this.mode = this.data.mode;
     this.toggleUrl();
   }
-
-  // onNoClick(): void {
-  //   this.dialogRef.close();
-  // }
 
 }
