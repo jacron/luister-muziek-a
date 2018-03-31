@@ -1,0 +1,18 @@
+.avatar {
+  height: 30px;
+  border-radius: 16px;
+  margin-right: 4px;
+}
+.mat-icon {
+  display: none;
+}
+mat-chip:hover .mat-icon {
+  display: inline-block;
+}
+
+.composers .mat-chip:not(.mat-basic-chip) {
+  background-color: #ffeeee;
+}
+.performers .mat-chip:not(.mat-basic-chip) {
+  background-color: #eeffee;
+}

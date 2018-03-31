@@ -6,54 +6,16 @@ img.back-thumb {
   position: absolute;
   bottom: 0;
 }
-.sub {
-  font-size: 14px;
-  color: #999999;
-  height: 30px;
-  padding-bottom: 18px;
-}
 .first {
   max-width: 320px;
 }
-.title {
-  font-size: 20px;
-  width: 100%;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-}
-.composers .mat-chip:not(.mat-basic-chip) {
-  background-color: #ffeeee;
-}
-.performers .mat-chip:not(.mat-basic-chip) {
-  background-color: #eeffee;
-}
-.finder {
-  width: 22px;
-  height: 22px;
-  cursor: pointer;
-  opacity: .8;
-}
-.album-control {
-  //position: relative;
-  //top: 10px;
-  cursor: pointer;
-  opacity: .6;
-  padding: 0 20px;
-}
-.horizontal-spacer {
-  flex: 1 1 auto;
-}
-.vertical-spacer {
-  flex: 1 1 auto;
-}
 .opener {
-  //float: right;
-  //position: relative;
-  //top: 140px;
+  position: absolute;
+  right: 20px;
+  bottom: 8px;
   font-size: 30px;
   color: #999;
   cursor: pointer;
-  z-index: 1;
 }
 .opener.expanded {
   //transform: rotate(180deg);

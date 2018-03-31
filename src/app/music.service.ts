@@ -201,4 +201,21 @@ export class MusicService {
 
   }
 
+  getDiscidInfo(discid: string) {
+    const params = new HttpParams()
+      .set('discid', discid)
+      .set('page', '1')
+    ;
+    const request_url = 'http://www.freedb.org/freedb_discid_check.php';
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'text/html');
+    headers.append('Accept', 'text/html');
+    // return this.http.get(request_url);
+    return this.http.get(request_url, {
+      responseType: 'text',
+      params});
+    // return this.http.post(
+    //   request_url, params, { headers: headers}
+    // );
+  }
 }

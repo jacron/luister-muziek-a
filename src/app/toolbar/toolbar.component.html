@@ -1,0 +1,36 @@
+<mat-toolbar style="margin: -14px 0 14px;">
+  <mat-toolbar-row>
+    <div #topicTitle contenteditable="true" [textContent]="album.Title"
+         (input)="model=topicTitle.innerText"
+         (keydown)="albumTitleKeydown($event, album.ID, topicTitle.innerText)"></div>
+    <!--<span class="title">{{ album.Title }}</span>-->
+    <span class="horizontal-spacer"></span>
+    <mat-icon class="album-control"
+              waves-light waves-effect mdbRippleRadius
+              matTooltip="Reveal in Finder"
+              (click)="openFinder(album.ID)"
+    >open_in_browser</mat-icon>
+    <mat-icon class="album-control"
+              waves-light waves-effect mdbRippleRadius
+              (click)="refetch(album.ID)"
+              matTooltip="Refetch pieces and cuesheets"
+    >replay
+    </mat-icon>
+    <mat-icon class="album-control"
+              waves-light waves-effect mdbRippleRadius
+              (click)="pause()"
+              matTooltip="Pause player"
+    >pause</mat-icon>
+    <mat-icon class="album-control"
+              waves-light waves-effect mdbRippleRadius
+              (click)="tagedit()"
+              matTooltip="Tag Editor"
+    >edit</mat-icon>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="sub">
+    <a  *ngIf="album.mother"
+        (click)="toCollection(album.mother.ID)">
+      {{ album.mother.Title }}
+    </a>
+  </mat-toolbar-row>
+</mat-toolbar>

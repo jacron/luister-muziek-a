@@ -136,7 +136,7 @@
       <app-album-thumb [album]="child"></app-album-thumb>
     </li>
   </ul>
-  <div *ngIf="albums.length">
+  <div *ngIf="albums && albums.length">
     {{ albums.length }} albums
     <ul>
       <li *ngFor="let album of albums" class="thumb">

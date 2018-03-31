@@ -326,9 +326,36 @@ export class SearchComponent implements OnInit, AfterViewInit {
       );
   }
 
+  parseFreedb(text) {
+    // console.log(text);
+    const lines = text.split('\n');
+    console.log(lines.length);
+    let start = null, end = null;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      console.log(line);
+      // '<!-- // FREEDB RAW DATA -->'
+
+      if (line.indexOf('FREEDB RAW DATA') !== -1) {
+        start = i;
+      } else if (start && line.indexOf('-->') !== -1) {
+        end = i;
+        break;
+      }
+    }
+    console.log(start, end);
+  }
+
   ngOnInit() {
     this.albumsContainer = new Albums();
     this.getTypeAheads();
+
+    // test
+    // this.musicService.getDiscidInfo('550AFB17').subscribe(
+    //   (response) => this.parseFreedb(response),
+    //   (err) => console.log(err),
+    //   () => console.log('discid fetched')
+    // );
   }
 
 

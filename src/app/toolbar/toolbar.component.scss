@@ -1,0 +1,26 @@
+.horizontal-spacer {
+  flex: 1 1 auto;
+}
+.sub {
+  font-size: 14px;
+  color: #999999;
+  height: 30px;
+  padding-bottom: 18px;
+}
+.title {
+  font-size: 20px;
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+.album-control {
+  cursor: pointer;
+  opacity: .6;
+  padding: 2px 4px;
+  margin: 0 6px;
+  transition: color .35s;
+  font-size: 18px;
+}
+.album-control:hover {
+  color: #0033bb;
+}

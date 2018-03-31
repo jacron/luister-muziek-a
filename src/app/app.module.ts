@@ -25,6 +25,8 @@ import { AlbumPersonsComponent } from './album-persons/album-persons.component';
 import { AlbumPiecesComponent } from './album-pieces/album-pieces.component';
 import { AlbumCuesheetsComponent } from './album-cuesheets/album-cuesheets.component';
 import { DialogPicComponent } from './dialog-pic/dialog-pic.component';
+import { ChipListsComponent } from './chip-lists/chip-lists.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { DialogPicComponent } from './dialog-pic/dialog-pic.component';
     AlbumPersonsComponent,
     AlbumPiecesComponent,
     AlbumCuesheetsComponent,
-    DialogPicComponent
+    DialogPicComponent,
+    ChipListsComponent,
+    ToolbarComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
