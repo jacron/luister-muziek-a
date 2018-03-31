@@ -87,6 +87,19 @@ export class MusicService {
     });
   }
 
+  updateCuesheetTitle(id, albumid, title) {
+    const params = new HttpParams()
+      .set('cmd', 'update_cuesheet_title')
+      .set('id', id)
+      .set('albumid', albumid)
+      .set('title', title);
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(requestUrl, params, {
+      headers: headers
+    });
+  }
+
   getSearchedAlbums(params) {
     const idcomp = params.idcomp === -1 ? null : params.idcomp.toString(),
       idperf = params.idperf === -1 ? null : params.idperf.toString(),

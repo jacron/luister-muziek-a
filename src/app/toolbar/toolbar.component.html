@@ -1,8 +1,11 @@
-<mat-toolbar style="margin: -14px 0 14px;">
+<mat-toolbar style="margin: -14px 0 0;">
   <mat-toolbar-row>
-    <div #topicTitle contenteditable="true" [textContent]="album.Title"
+    <div #topicTitle contenteditable="true"
+         class="title"
+         [textContent]="album.Title"
          (input)="model=topicTitle.innerText"
-         (keydown)="albumTitleKeydown($event, album.ID, topicTitle.innerText)"></div>
+         (keydown)="albumTitleKeydown($event, album.ID, topicTitle.innerText)">
+    </div>
   </mat-toolbar-row>
   <mat-toolbar-row class="sub">
     <mat-icon (click)="back()"

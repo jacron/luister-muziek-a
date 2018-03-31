@@ -1,18 +1,17 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import {Album} from '../classes/Album';
 import {environment} from '../../environments/environment';
 import {MusicService} from '../music.service';
 import {MatDialog} from '@angular/material';
 import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {StorageService} from '../storage.service';
 
 @Component({
   selector: 'app-album-details',
   templateUrl: './album-details.component.html',
   styleUrls: ['./album-details.component.scss']
 })
-export class AlbumDetailsComponent implements OnInit, AfterViewInit {
+export class AlbumDetailsComponent implements OnInit {
   imgUrl = environment.apiServer + '/image/';
   imgBackUrl = environment.apiServer + '/imageback/';
   @Input('album') album: Album;
@@ -23,8 +22,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
     private musicService: MusicService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
-    private storageService: StorageService
+    private dialog: MatDialog
   ) {     route.params.subscribe(params => this.handleParams(params));
   }
 
@@ -61,13 +59,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit {
     this.chevron = this.album.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
   }
 
-  ngAfterViewInit() {
-    // console.log(this.album);
-  }
-
   ngOnInit() {
-    console.log(this.storageService.retrieveAlbums());
-    console.log(this.storageService.retrieveSearchTitle());
   }
 
 }

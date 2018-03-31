@@ -35,10 +35,19 @@ export class AlbumCuesheetsComponent implements OnInit {
     );
   }
 
-  edit(id, albumid) {
-    this.musicService.editCue(id, albumid).subscribe(
+  edit(id) {
+    this.musicService.editCue(id, this.albumid).subscribe(
       (response) => console.log(response)
     );
+  }
+
+  titleKeydown(e, id, title) {
+    if (e.key === 'Enter') {
+      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
+        (response) => console.log(response)
+      );
+      e.preventDefault();
+    }
   }
 
   ngOnInit() {

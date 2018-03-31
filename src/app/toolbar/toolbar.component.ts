@@ -24,7 +24,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes) {
-    console.log(changes);
     this.enableNavig();
   }
 
@@ -103,9 +102,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
       return;
     }
     this.navBackwards = this.navForwards = true;
-    console.log(+this.album.ID);
     for (let i = 0; i < this.albums.length; i++) {
-      console.log(i, this.albums[i].ID);
       if (this.albums[i].ID === +this.album.ID) {
         if (i === 0) {
           this.navBackwards = false;

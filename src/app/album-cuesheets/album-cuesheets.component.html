@@ -4,8 +4,13 @@
       class="play"
       (click)="play(cuesheet.ID)">
     play_circle_filled</mat-icon>
-  <span>{{ cuesheet.Title }}</span>
-  <mat-icon class="edit" (click)="edit(cuesheet.ID, albumid)">
+  <span #topicTitle contenteditable="true"
+       class="title"
+       [textContent]="cuesheet.Title"
+       (input)="model=topicTitle.innerText"
+       (keydown)="titleKeydown($event, cuesheet.ID, topicTitle.innerText)">
+  </span>
+  <mat-icon class="edit" (click)="edit(cuesheet.ID)">
     edit
   </mat-icon>
 </div>
