@@ -35,11 +35,6 @@ bg-grey scrolling-navbar" [containerInside]="false">
   </logo>
   <links>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active waves-light" mdbRippleRadius
-          [class.active]="prouter.url == '/'">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item waves-light" mdbRippleRadius
           [class.active]="prouter.url.indexOf('/search') === 0">
         <a class="nav-link" href="search">Search</a>
@@ -48,17 +43,17 @@ bg-grey scrolling-navbar" [containerInside]="false">
         <a class="nav-link" href="tools">Tools</a>
       </li>
     </ul>
-    <ul class="navbar-nav nav-flex-icons">
-      <li class="nav-item waves-light" mdbRippleRadius>
-        <a class="nav-link"><i class="fa fa-facebook"></i></a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius>
-        <a class="nav-link"><i class="fa fa-twitter"></i></a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius>
-        <a class="nav-link"><i class="fa fa-instagram"></i></a>
-      </li>
-    </ul>
+    <!--<ul class="navbar-nav nav-flex-icons">-->
+      <!--<li class="nav-item waves-light" mdbRippleRadius>-->
+        <!--<a class="nav-link"><i class="fa fa-facebook"></i></a>-->
+      <!--</li>-->
+      <!--<li class="nav-item waves-light" mdbRippleRadius>-->
+        <!--<a class="nav-link"><i class="fa fa-twitter"></i></a>-->
+      <!--</li>-->
+      <!--<li class="nav-item waves-light" mdbRippleRadius>-->
+        <!--<a class="nav-link"><i class="fa fa-instagram"></i></a>-->
+      <!--</li>-->
+    <!--</ul>-->
   </links>
 </mdb-navbar>
 <main>

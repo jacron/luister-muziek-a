@@ -46,6 +46,19 @@ export class MusicService {
     );
   }
 
+  renameCue(id, albumid) {
+    const params = new HttpParams()
+      .set('cmd', 'cuesheet_title_from_filename')
+      .set('id', id)
+      .set('albumid', albumid)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   play(id) {
     const params = new HttpParams()
       .set('cmd', 'play')

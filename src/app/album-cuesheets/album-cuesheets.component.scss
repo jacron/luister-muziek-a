@@ -10,7 +10,8 @@
 .played {
   color: red;
 }
-.edit {
+.edit,
+.rename {
   opacity: .6;
   position: relative;
   top: 4px;
@@ -21,4 +22,7 @@
   &:hover {
     color: $control-hover-color;
   }
+}
+.rename {
+  color: green;
 }

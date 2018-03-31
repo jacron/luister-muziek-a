@@ -41,12 +41,23 @@ export class AlbumCuesheetsComponent implements OnInit {
     );
   }
 
+  rename(cuesheet) {
+    this.musicService.renameCue(cuesheet.ID, this.albumid).subscribe(
+      (response) => cuesheet.Title = response
+    );
+  }
+
   titleKeydown(e, id, title) {
     if (e.key === 'Enter') {
       this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
         (response) => console.log(response)
       );
       e.preventDefault();
+    }
+    if (e.key === 'Tab') {
+      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
+        (response) => console.log(response)
+      );
     }
   }
 
