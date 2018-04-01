@@ -11,12 +11,16 @@
        (input)="model=topicTitle.innerText"
        (keydown)="titleKeydown($event, cuesheet.ID, topicTitle.innerText)">
   </span>
+  <span *ngIf="cuesheet.cue.performer">
+    ({{ cuesheet.cue.performer }})
+  </span>
   <mat-icon class="edit"
             waves-light waves-effect mdbRippleRadius
             (click)="edit(cuesheet.ID)">
     edit
   </mat-icon>
   <mat-icon class="rename"
+            *ngIf="renaming"
             waves-light waves-effect mdbRippleRadius
             (click)="rename(cuesheet)">
     edit

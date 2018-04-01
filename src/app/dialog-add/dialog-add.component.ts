@@ -40,7 +40,7 @@ export class DialogAddComponent implements OnInit {
   }
 
   onKeyDownTag(e, selected) {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && selected && typeof selected === 'string') {
       console.log(selected);
       this.musicService.newTag(selected, this.data.album.ID).subscribe(
         (response) => this.afterNewTag(response)
@@ -54,7 +54,7 @@ export class DialogAddComponent implements OnInit {
   }
 
   onKeyDownPerformer(e, selected) {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && selected && typeof selected === 'string') {
       console.log(selected);
       this.musicService.newPerformer(selected, this.data.album.ID).subscribe(
         (response) => this.afterNewPerformer(response)
@@ -68,7 +68,7 @@ export class DialogAddComponent implements OnInit {
   }
 
   onKeyDownComposer(e, selected) {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && selected && typeof selected === 'string') {
       console.log(selected);
       this.musicService.newComposer(selected, this.data.album.ID).subscribe(
         (response) => this.afterNewComposer(response)

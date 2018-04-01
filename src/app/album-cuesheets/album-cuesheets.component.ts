@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cuesheet} from '../classes/Cuesheet';
 import {MusicService} from '../music.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-album-cuesheets',
@@ -11,6 +12,7 @@ export class AlbumCuesheetsComponent implements OnInit {
 
   @Input('cuesheets') cuesheets: Cuesheet[];
   @Input('albumid') albumid: number;
+  renaming = environment.renamingCuesheet;
 
   constructor(  private musicService: MusicService ) { }
 
@@ -62,7 +64,7 @@ export class AlbumCuesheetsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.cuesheets);
+    console.log(this.cuesheets);
   }
 
 }

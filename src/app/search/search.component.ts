@@ -216,6 +216,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   setSelected() {
     console.log(this.params);
+    if (!this.params) {
+      return;
+    }
     document.title = '';
     if (this.params.idcoll !== -1) {
       this.selectedCollection = this.getCollectionById(this.params.idcoll);
@@ -256,6 +259,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   onSelectionChange(person) {
+    if (!this.params) {
+      return;
+    }
     if (person === 'composer') {
       this.getComposer(this.selectedComposer.ID);
       this.params.idcomp = this.selectedComposer.ID;
