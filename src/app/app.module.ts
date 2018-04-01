@@ -29,6 +29,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import {StorageService} from './storage.service';
 import { AlbumMetatagsComponent } from './album-metatags/album-metatags.component';
 import { DialogAddComponent } from './dialog-add/dialog-add.component';
+import { DialogPersonComponent } from './dialog-person/dialog-person.component';
+import { DialogTagComponent } from './dialog-tag/dialog-tag.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { DialogAddComponent } from './dialog-add/dialog-add.component';
     ChipListsComponent,
     ToolbarComponent,
     AlbumMetatagsComponent,
-    DialogAddComponent
+    DialogAddComponent,
+    DialogPersonComponent,
+    DialogTagComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -70,7 +74,9 @@ import { DialogAddComponent } from './dialog-add/dialog-add.component';
   ],
   entryComponents: [
     DialogPicComponent,
-    DialogAddComponent
+    DialogAddComponent,
+    DialogPersonComponent,
+    DialogTagComponent
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [

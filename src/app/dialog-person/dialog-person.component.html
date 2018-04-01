@@ -1,0 +1,29 @@
+<div #topicTitle contenteditable="true"
+      class="title"
+      [textContent]="data.person.FullName"
+      (input)="model=topicTitle.innerText"
+      (keydown)="nameKeydown($event, data.person.ID, topicTitle.innerText)">
+</div>
+<div #birth contenteditable="true"
+     class="title"
+     [textContent]="data.person.Birth"
+     (input)="model=topicTitle.innerText"
+     (keydown)="birthKeydown($event, data.person.ID, topicTitle.innerText)">
+</div>
+<div #death contenteditable="true"
+     class="title"
+     [textContent]="data.person.Death"
+     (input)="model=topicTitle.innerText"
+     (keydown)="deathKeydown($event, data.person.ID, topicTitle.innerText)">
+</div>
+<img src="{{ imgUrl }}{{ data.person.ID }}/{{ data.type }}" class="thumb">
+<div class="controls">
+  <mat-icon
+    waves-light waves-effect mdbRippleRadius
+    (click)="toGoogle()" class="album-control">
+    search</mat-icon>
+  <mat-icon
+    waves-light waves-effect mdbRippleRadius
+    (click)="paste()" class="album-control">
+    content_paste</mat-icon>
+</div>

@@ -63,11 +63,10 @@ export class DialogAddComponent implements OnInit {
 
   onComposerAdded(response) {
     console.log(response);
-    // console.log(this.selectedComposer);
-    // console.log(this.data.album.album_componisten);
     const composer = this.selectedComposer;
     composer.FullName = this.getFullName(composer);
     this.data.album.album_componisten.push(composer);
+    this.selectedComposer = null;
   }
 
   onComposerChange() {
@@ -82,6 +81,7 @@ export class DialogAddComponent implements OnInit {
     const performer = this.selectedPerformer;
     performer.FullName = this.getFullName(performer);
     this.data.album.album_performers.push(performer);
+    this.selectedPerformer = null;
   }
 
   onPerformerChange() {
@@ -94,6 +94,7 @@ export class DialogAddComponent implements OnInit {
   onTagAdded(response) {
     console.log(response);
     this.data.album.album_tags.push(this.selectedTag);
+    this.selectedTag = null;
   }
 
   onTagChange() {

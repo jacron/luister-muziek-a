@@ -1,0 +1,6 @@
+<span #topicTitle contenteditable="true"
+      class="title"
+      [textContent]="data.tag.Name"
+      (input)="model=topicTitle.innerText"
+      (keydown)="titleKeydown($event, data.tag.ID, topicTitle.innerText)">
+  </span>

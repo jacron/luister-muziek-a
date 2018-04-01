@@ -1,4 +1,7 @@
-<app-chip-lists [album]="data.album" [removable]="true"></app-chip-lists>
+<app-chip-lists [album]="data.album"
+                [removable]="true"
+                [editable]="true"
+></app-chip-lists>
 <div>
   <!-- select composer (autocomplete) -->
   <div class="label" [class.selected]="selectedComposer">Composer</div>

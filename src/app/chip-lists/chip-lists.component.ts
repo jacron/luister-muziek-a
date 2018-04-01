@@ -7,6 +7,8 @@ import {environment} from '../../environments/environment';
 import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
 import {MatDialog} from '@angular/material';
 import {MusicService} from '../music.service';
+import {DialogPersonComponent} from '../dialog-person/dialog-person.component';
+import {DialogTagComponent} from '../dialog-tag/dialog-tag.component';
 
 @Component({
   selector: 'app-chip-lists',
@@ -17,6 +19,7 @@ export class ChipListsComponent implements OnInit {
 
   @Input('album') album: Album;
   @Input('removable') removable: boolean;
+  @Input('editable') editable: boolean;
   imgUrl = environment.apiServer + '/image/';
 
   constructor(
@@ -75,10 +78,20 @@ export class ChipListsComponent implements OnInit {
     this.openPicDialog(this.imgUrl + id + '/performer');
   }
 
-  toComposer(composer: Person) {
+  editPerson(person: Person, type: string) {
+    this.dialog.open(DialogPersonComponent, {
+      width: '70%',
+      data: {
+        person: person,
+        type: type
+      }
+    });
+  }
+
+  goToComposer(idComp) {
     this.router.navigate(['/search',
       {
-        idcomp: composer.ID,
+        idcomp: idComp,
         idperf: -1,
         idcoll: -1,
         idtag: -1
@@ -87,28 +100,60 @@ export class ChipListsComponent implements OnInit {
     });
   }
 
-  toPerformer(performer: Person) {
+  toComposer(composer: Person) {
+    if (this.editable) {
+      this.editPerson(composer, 'componist');
+    } else {
+      this.goToComposer(composer.ID);
+    }
+  }
+
+  goToPerformer(idPerf) {
     this.router.navigate(['/search',
       {
         idcomp: -1,
-        idperf: performer.ID,
+        idperf: idPerf,
         idcoll: -1,
         idtag: -1
+      }
+    ]).then(() => {
+    });
+  }
+  toPerformer(performer: Person) {
+    if (this.editable) {
+      this.editPerson(performer, 'performer');
+    } else {
+      this.goToPerformer(performer.ID);
+    }
+  }
+
+  editTag(tag: Tag) {
+    this.dialog.open(DialogTagComponent, {
+      width: '70%',
+      data: {
+        tag: tag
+      }
+    });
+  }
+
+  goToTag(idTag) {
+    this.router.navigate(['/search',
+      {
+        idcomp: -1,
+        idperf: -1,
+        idcoll: -1,
+        idtag: idTag
       }
     ]).then(() => {
     });
   }
 
   toTag(tag: Tag) {
-    this.router.navigate(['/search',
-      {
-        idcomp: -1,
-        idperf: -1,
-        idcoll: -1,
-        idtag: tag.ID
-      }
-    ]).then(() => {
-    });
+    if (this.editable) {
+      this.editTag(tag);
+    } else {
+      this.goToTag(tag.ID);
+    }
   }
 
   ngOnInit() {
