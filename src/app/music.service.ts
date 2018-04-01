@@ -123,6 +123,45 @@ export class MusicService {
   // }
 
   /* POST */
+  newTag(name, albumId) {
+    const params = new HttpParams()
+      .set('cmd', 'new_tag')
+      .set('name', name)
+      .set('albumid', albumId)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
+  newPerformer(name, albumId) {
+    const params = new HttpParams()
+      .set('cmd', 'new_performer')
+      .set('name', name)
+      .set('albumid', albumId)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
+  newComposer(name, albumId) {
+    const params = new HttpParams()
+      .set('cmd', 'new_componist')
+      .set('name', name)
+      .set('albumid', albumId)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   refetch(id) {
     const params = new HttpParams()
       .set('cmd', 'refetch')

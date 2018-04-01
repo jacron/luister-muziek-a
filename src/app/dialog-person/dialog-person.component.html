@@ -18,10 +18,12 @@
 </div>
 <img src="{{ imgUrl }}{{ data.person.ID }}/{{ data.type }}" class="thumb">
 <div class="controls">
+  <a href="{{googleUrl + data.person.FullName }}"
+     target="'person">
   <mat-icon
     waves-light waves-effect mdbRippleRadius
-    (click)="toGoogle()" class="album-control">
-    search</mat-icon>
+    class="album-control">
+    search</mat-icon></a>
   <mat-icon
     waves-light waves-effect mdbRippleRadius
     (click)="paste()" class="album-control">

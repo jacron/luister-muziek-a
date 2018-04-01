@@ -34,6 +34,48 @@ export class DialogAddComponent implements OnInit {
     return person ? person.Name : person;
   }
 
+  afterNewTag(response) {
+    console.log(response);
+    this.data.album.album_tags.push(response);
+  }
+
+  onKeyDownTag(e, selected) {
+    if (e.key === 'Enter') {
+      console.log(selected);
+      this.musicService.newTag(selected, this.data.album.ID).subscribe(
+        (response) => this.afterNewTag(response)
+      );
+    }
+  }
+
+  afterNewPerformer(response) {
+    console.log(response);
+    this.data.album.album_performers.push(response);
+  }
+
+  onKeyDownPerformer(e, selected) {
+    if (e.key === 'Enter') {
+      console.log(selected);
+      this.musicService.newPerformer(selected, this.data.album.ID).subscribe(
+        (response) => this.afterNewPerformer(response)
+      );
+    }
+  }
+
+  afterNewComposer(response) {
+    console.log(response);
+    this.data.album.album_componisten.push(response);
+  }
+
+  onKeyDownComposer(e, selected) {
+    if (e.key === 'Enter') {
+      console.log(selected);
+      this.musicService.newComposer(selected, this.data.album.ID).subscribe(
+        (response) => this.afterNewComposer(response)
+      );
+    }
+  }
+
   getTypeAheads() {
     const selection = null;
     const qcomposers = this.musicService.getComposers(selection);

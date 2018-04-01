@@ -4,14 +4,14 @@
 ></app-chip-lists>
 <div>
   <!-- select composer (autocomplete) -->
-  <div class="label" [class.selected]="selectedComposer">Composer</div>
   <input type="text"
-         placeholder="Composer"
+         placeholder="Add Composer"
          aria-label="Text"
          matInput
          [matAutocomplete]="auto1"
          [(ngModel)]="selectedComposer"
          (click)="select($event)"
+         (keydown)="onKeyDownComposer($event, selectedComposer)"
          name="composer">
   <mat-autocomplete #auto1="matAutocomplete"
                     (optionSelected)="onComposerChange()"
@@ -20,19 +20,17 @@
       {{ opt.Name }}
     </mat-option>
   </mat-autocomplete>
-  <div *ngIf="selectedComposer" class="reset" (click)="selectedComposer = null">
-    <mat-icon>clear</mat-icon></div>
   <br>
 
   <!-- select performer (autocomplete) -->
-  <div class="label" [class.selected]="selectedPerformer">Performer</div>
   <input type="text"
-         placeholder="Performer"
+         placeholder="Add Performer"
          aria-label="Text"
          matInput
          [matAutocomplete]="auto2"
          [(ngModel)]="selectedPerformer"
          (click)="select($event)"
+         (keydown)="onKeyDownPerformer($event, selectedPerformer)"
          name="performer">
   <mat-autocomplete #auto2="matAutocomplete"
                     (optionSelected)="onPerformerChange()"
@@ -41,20 +39,18 @@
       {{ opt.Name }}
     </mat-option>
   </mat-autocomplete>
-  <div *ngIf="selectedPerformer" class="reset" (click)="selectedPerformer = null">
-    <mat-icon>clear</mat-icon></div>
   <br>
 
   <!-- select tag (autocomplete) -->
   <div class="selected-image"></div>
-  <div class="label" [class.selected]="selectedTag">Tag</div>
   <input type="text"
-         placeholder="Tag"
+         placeholder="Add Tag"
          aria-label="Text"
          matInput
          [matAutocomplete]="auto4"
          [(ngModel)]="selectedTag"
          (click)="select($event)"
+         (keydown)="onKeyDownTag($event, selectedTag)"
          name="tag">
   <mat-autocomplete #auto4="matAutocomplete"
                     [displayWith]="displayNameFn"
@@ -64,8 +60,6 @@
       {{ opt.Name }}
     </mat-option>
   </mat-autocomplete>
-  <div *ngIf="selectedTag" class="reset" (click)="selectedTag = null">
-    <mat-icon>clear</mat-icon></div>
   <br>
 
 </div>
