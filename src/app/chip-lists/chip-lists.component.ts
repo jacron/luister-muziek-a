@@ -80,7 +80,7 @@ export class ChipListsComponent implements OnInit {
 
   editPerson(person: Person, type: string) {
     this.dialog.open(DialogPersonComponent, {
-      width: '70%',
+      width: '50%',
       data: {
         person: person,
         type: type
@@ -129,7 +129,7 @@ export class ChipListsComponent implements OnInit {
 
   editTag(tag: Tag) {
     this.dialog.open(DialogTagComponent, {
-      width: '70%',
+      width: '50%',
       data: {
         tag: tag
       }

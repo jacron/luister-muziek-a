@@ -198,6 +198,19 @@ export class MusicService {
     });
   }
 
+  pastePersonImage(personId, type) {
+    const params = new HttpParams()
+      .set('cmd', 'paste_person')
+      .set('id', personId)
+      .set('type', type)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(requestUrl, params, {
+      headers: headers
+    });
+  }
+
   updateCuesheetTitle(id, albumid, title) {
     const params = new HttpParams()
       .set('cmd', 'update_cuesheet_title')

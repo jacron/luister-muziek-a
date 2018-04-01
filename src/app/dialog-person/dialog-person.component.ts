@@ -12,6 +12,7 @@ import {environment} from '../../environments/environment';
 export class DialogPersonComponent implements OnInit {
 
   imgUrl = environment.apiServer + '/image/';
+  googleUrl = environment.googleUrl;
 
   constructor(private musicService: MusicService,
               public dialogRef: MatDialogRef<AlbumDetailsComponent>,
@@ -62,11 +63,21 @@ export class DialogPersonComponent implements OnInit {
   }
 
   toGoogle() {
+    window.open(this.googleUrl + this.data.person.FullName, 'person');
+  }
 
+  afterPaste(response) {
+    console.log(response);
+    const saved = this.data.type;
+    this.data.type = 'dummy';
+    setTimeout(() => {
+      this.data.type = saved;
+    }, 0);
   }
 
   paste() {
-
+    this.musicService.pastePersonImage(this.data.person.ID, this.data.type)
+      .subscribe((response) => this.afterPaste(response));
   }
 
   ngOnInit() {
