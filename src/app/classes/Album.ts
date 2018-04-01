@@ -9,7 +9,7 @@ export class Album {
   album_performers: Person[];
   album_componisten: Person[];
   album_metatags: any;
-  album_tags: Tag;
+  album_tags: Tag[];
   pieces: any[];
   cuesheets: any[];
   expanded: boolean;

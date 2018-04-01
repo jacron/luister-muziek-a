@@ -28,6 +28,7 @@ import { ChipListsComponent } from './chip-lists/chip-lists.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import {StorageService} from './storage.service';
 import { AlbumMetatagsComponent } from './album-metatags/album-metatags.component';
+import { DialogAddComponent } from './dialog-add/dialog-add.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AlbumMetatagsComponent } from './album-metatags/album-metatags.componen
     DialogPicComponent,
     ChipListsComponent,
     ToolbarComponent,
-    AlbumMetatagsComponent
+    AlbumMetatagsComponent,
+    DialogAddComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -67,7 +69,8 @@ import { AlbumMetatagsComponent } from './album-metatags/album-metatags.componen
     AppRoutingModule
   ],
   entryComponents: [
-    DialogPicComponent
+    DialogPicComponent,
+    DialogAddComponent
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [

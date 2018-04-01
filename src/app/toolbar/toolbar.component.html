@@ -20,6 +20,14 @@
               [class.disabled]="!navForwards"
     >keyboard_arrow_right</mat-icon>
     <span class="horizontal-spacer"></span>
+
+    <!-- icons on the right -->
+    <mat-icon class="album-control"
+              waves-light waves-effect mdbRippleRadius
+              matTooltip="Add some"
+              (click)="addSome(album)"
+    >add
+    </mat-icon>
     <mat-icon class="album-control"
               waves-light waves-effect mdbRippleRadius
               matTooltip="Open in music"

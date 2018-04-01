@@ -1,7 +1,8 @@
 <mat-chip-list>
   <mat-chip *ngFor="let composer of album.album_componisten "
             class="composers"
-            [removable]="removable" (remove)="removeComposer(composer)">
+            [removable]="removable"
+            (remove)="removeComposer(composer)">
     <img src="{{ imgUrl }}{{ composer.ID }}/componist"
          (click)="openPicComposer(composer.ID)"
          class="avatar">
@@ -11,7 +12,8 @@
   <!--<mat-chip (click)="openAddComposer()">+</mat-chip>-->
   <mat-chip *ngFor="let performer of album.album_performers"
             class="performers"
-            [removable]="removable" (remove)="removePerformer(performer)">
+            [removable]="removable"
+            (remove)="removePerformer(performer)">
     <img src="{{ imgUrl }}{{ performer.ID }}/performer"
          (click)="openPicPerformer(performer.ID)"
          class="avatar">

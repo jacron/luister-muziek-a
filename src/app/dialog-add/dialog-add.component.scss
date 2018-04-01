@@ -1,0 +1,29 @@
+@import "../app-variables";
+
+.reset {
+  float: right;
+  text-align: right;
+  & mat-icon {
+    font-size: 16px;
+    color: #999;
+    cursor: pointer;
+    transition: color $control-hover-transition-time;
+  }
+  &:hover mat-icon {
+    color: $control-hover-color;
+  }
+}
+.label {
+  position: relative;
+  top: 20px;
+  left: 10px;
+  font-size: 2px;
+  height: 0;
+  transition: all 1s;
+  &.selected {
+    top: 0;
+    left: 0;
+    height: 14px;
+    font-size: 12px;
+  }
+}

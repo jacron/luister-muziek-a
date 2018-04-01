@@ -3,6 +3,9 @@ import {Album} from '../classes/Album';
 import {MusicService} from '../music.service';
 import {Router} from '@angular/router';
 import {StorageService} from '../storage.service';
+import {MatDialog} from '@angular/material';
+import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
+import {DialogAddComponent} from '../dialog-add/dialog-add.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -21,7 +24,8 @@ export class ToolbarComponent implements OnInit, OnChanges {
 
   constructor(    private musicService: MusicService,
                   private router: Router,
-                  private storageService: StorageService
+                  private storageService: StorageService,
+                  private dialog: MatDialog,
   ) { }
 
   ngOnChanges(changes) {
@@ -43,6 +47,15 @@ export class ToolbarComponent implements OnInit, OnChanges {
     this.musicService.openFinder(id).subscribe(
       (response) => console.log(response)
     );
+  }
+
+  addSome(album: Album) {
+    this.dialog.open(DialogAddComponent, {
+      width: '80%',
+      data: {
+        album: album
+      }
+    });
   }
 
   openMusic(id) {

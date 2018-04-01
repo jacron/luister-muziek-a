@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
 import {MatDialog} from '@angular/material';
+import {MusicService} from '../music.service';
 
 @Component({
   selector: 'app-chip-lists',
@@ -15,33 +16,46 @@ import {MatDialog} from '@angular/material';
 export class ChipListsComponent implements OnInit {
 
   @Input('album') album: Album;
-  removable = false;
+  @Input('removable') removable: boolean;
   imgUrl = environment.apiServer + '/image/';
 
   constructor(
     private router: Router,
     private dialog: MatDialog,
+    private musicService: MusicService
   ) { }
 
-  removeItem(persons, id) {
-    for (let i = 0; i < persons.length; i++) {
-      if (persons[i].ID === id) {
-        // todo: remove link to person from album
-        persons.splice(i, 1);
+  getItemIndex(items, id) {
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].ID === id) {
+        return i;
       }
     }
+    return -1;
   }
 
   removeComposer(composer: Person) {
-    this.removeItem(this.album.album_componisten, composer.ID);
+    const items = this.album.album_componisten;
+    const index = this.getItemIndex(items, composer.ID);
+    this.musicService.removeComposer(composer.ID, this.album.ID).subscribe(
+      (response) => items.splice(index, 1)
+    );
   }
 
   removePerformer(performer: Person) {
-    this.removeItem(this.album.album_performers, performer.ID);
+    const items = this.album.album_performers;
+    const index = this.getItemIndex(items, performer.ID);
+    this.musicService.removePerformer(performer.ID, this.album.ID).subscribe(
+      (response) => items.splice(index, 1)
+  );
   }
 
   removeTag(tag: Tag) {
-    this.removeItem(this.album.album_tags, tag.ID);
+    const items = this.album.album_tags;
+    const index = this.getItemIndex(items, tag.ID);
+    this.musicService.removeTag(tag.ID, this.album.ID).subscribe(
+      (response) => items.splice(index, 1)
+    );
   }
 
   openPicDialog(imgUrl) {
@@ -59,10 +73,6 @@ export class ChipListsComponent implements OnInit {
 
   openPicPerformer(id): void {
     this.openPicDialog(this.imgUrl + id + '/performer');
-  }
-
-  openAddComposer() {
-
   }
 
   toComposer(composer: Person) {
@@ -90,7 +100,15 @@ export class ChipListsComponent implements OnInit {
   }
 
   toTag(tag: Tag) {
-    // todo: search getting tag option
+    this.router.navigate(['/search',
+      {
+        idcomp: -1,
+        idperf: -1,
+        idcoll: -1,
+        idtag: tag.ID
+      }
+    ]).then(() => {
+    });
   }
 
   ngOnInit() {

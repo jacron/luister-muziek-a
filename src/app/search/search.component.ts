@@ -136,7 +136,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     for (let i = 0; i < this.albums.length; i++) {
       const a = this.albums[i];
       if (this.albums[i].ID === album.ID) {
-        console.log(album);
+        // console.log(album);
         a.album_performers = album.album_performers;
         a.album_componisten = album.album_componisten;
         a.pieces = album.pieces;
