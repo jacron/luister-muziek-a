@@ -14,6 +14,14 @@
   <span *ngIf="cuesheet.cue.performer">
     ({{ cuesheet.cue.performer }})
   </span>
+  <span *ngIf="cuesheet.discid || cuesheet.asin">
+    [
+    <a href="{{ freedbUrl }}{{ cuesheet.discid }}" target="freedb">
+      {{ cuesheet.discid }}</a>,
+    <a href="{{ amazonUrl }}{{ cuesheet.asin }}" target="amazon">
+      {{ cuesheet.asin }}</a>
+    ]
+  </span>
   <mat-icon class="edit"
             waves-light waves-effect mdbRippleRadius
             (click)="edit(cuesheet.ID)">

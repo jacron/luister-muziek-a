@@ -1,11 +1,13 @@
 import {Cue} from './Cue';
 
 export class Cuesheet {
-  Filename: string;
+  // Filename: string;
   Title: string;
   ID: number;
   cue: Cue;
-  Code: string;
-  Invalid: boolean;
+  // Code: string;
+  // Invalid: boolean;
   played: boolean;
+  asin: string;
+  discid: string;
 }

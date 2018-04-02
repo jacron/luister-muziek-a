@@ -4,7 +4,6 @@ import {MusicService} from '../music.service';
 import {Router} from '@angular/router';
 import {StorageService} from '../storage.service';
 import {MatDialog} from '@angular/material';
-import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
 import {DialogAddComponent} from '../dialog-add/dialog-add.component';
 
 @Component({
@@ -72,10 +71,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
     this.musicService.tagEditor(this.album.Path).subscribe();
   }
 
-  pause() {
-    this.musicService.controlPlayer('pause').subscribe();
-  }
-
   refetch(albumId) {
     this.musicService.refetch(albumId).subscribe(
       (response: Album) => this.restorePieces(response)
@@ -83,8 +78,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   website() {
-    console.log(this.album.website);
-    // window.open('file:///' + this.album.website);
     this.musicService.openwebsite(this.album.ID)
       .subscribe();
   }
