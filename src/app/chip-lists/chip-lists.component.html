@@ -26,6 +26,7 @@
   </mat-chip>
   <mat-chip *ngFor="let tag of album.album_tags"
             class="tag-chip"
+            [class.elevate]="showimage"
             [removable]="removable"
             (remove)="removeTag(tag)">
     <a (click)="toTag(tag)">{{ tag.Name }}</a>

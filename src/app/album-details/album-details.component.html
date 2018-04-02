@@ -20,7 +20,7 @@
              class="thumb">
     </div>
     <div class="col">
-      <app-album-metatags [tags]="album.album_metatags"></app-album-metatags>
+      <app-album-metatags [album]="album"></app-album-metatags>
       <img *ngIf="album.album_back_image"
            src="{{ imgBackUrl }}{{ album.ID }}/album"
            (click)="openPic('back')"

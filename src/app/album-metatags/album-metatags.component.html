@@ -1,6 +1,14 @@
 <table class="tags">
   <tr *ngFor="let key of objectKeys(tags)">
     <td class="key">{{ key }}</td>
-    <td>{{ tags[key].join(', ') }}</td>
+    <td>
+      <!--{{ tags[key].join(', ') }}-->
+      <span #topicTitle contenteditable="true"
+            class="title"
+            [textContent]="tags[key].join('/')"
+            (input)="model=topicTitle.innerText"
+            (keydown)="titleKeydown($event, key, topicTitle.innerText)">
+  </span>
+    </td>
   </tr>
 </table>

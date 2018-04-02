@@ -108,21 +108,21 @@ export class MusicService {
 
   }
 
-  // getDiscidInfo(discid: string) {
-  //   const params = new HttpParams()
-  //     .set('discid', discid)
-  //     .set('page', '1')
-  //   ;
-  //   const request_url = 'http://www.freedb.org/freedb_discid_check.php';
-  //   const headers = new HttpHeaders();
-  //   headers.append('Content-Type', 'text/html');
-  //   headers.append('Accept', 'text/html');
-  //   return this.http.get(request_url, {
-  //     responseType: 'text',
-  //     params});
-  // }
-
   /* POST */
+  updateAlbumMetatag(albumId, key, text) {
+    const params = new HttpParams()
+      .set('cmd', 'update_metatag')
+      .set('tag', key)
+      .set('value', text)
+      .set('albumid', albumId)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   newTag(name, albumId) {
     const params = new HttpParams()
       .set('cmd', 'new_tag')

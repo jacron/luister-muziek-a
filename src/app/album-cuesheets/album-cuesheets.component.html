@@ -16,9 +16,9 @@
   </span>
   <span *ngIf="cuesheet.discid || cuesheet.asin">
     [
-    <a href="{{ freedbUrl }}{{ cuesheet.discid }}" target="freedb">
+    <a href="{{ freedbUrl }}{{ cuesheet.discid }}" target="freedb" tabindex="-1">
       {{ cuesheet.discid }}</a>,
-    <a href="{{ amazonUrl }}{{ cuesheet.asin }}" target="amazon">
+    <a href="{{ amazonUrl }}{{ cuesheet.asin }}" target="amazon" tabindex="-1">
       {{ cuesheet.asin }}</a>
     ]
   </span>
