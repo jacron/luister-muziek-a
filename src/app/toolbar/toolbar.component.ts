@@ -1,9 +1,9 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {Album} from '../classes/Album';
 import {MusicService} from '../music.service';
 import {Router} from '@angular/router';
 import {StorageService} from '../storage.service';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatMenuTrigger} from '@angular/material';
 import {DialogAddComponent} from '../dialog-add/dialog-add.component';
 
 @Component({
@@ -14,6 +14,7 @@ import {DialogAddComponent} from '../dialog-add/dialog-add.component';
 export class ToolbarComponent implements OnInit, OnChanges {
 
   @Input('album') album: Album;
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   searchTitle: string;
   searchParams: any;
   albums: Album[];
@@ -29,6 +30,10 @@ export class ToolbarComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes) {
     this.enableNavig();
+  }
+
+  openMenu() {
+    this.trigger.openMenu();
   }
 
   albumTitleKeydown(e, id, title) {

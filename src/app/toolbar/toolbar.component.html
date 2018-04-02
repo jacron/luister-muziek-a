@@ -11,50 +11,78 @@
     <mat-icon (click)="back()"
               class="navig"
               [class.disabled]="!navBackwards"
-    >keyboard_arrow_left</mat-icon>
-    <a  (click)="toSearch()">
+    >keyboard_arrow_left
+    </mat-icon>
+    <a (click)="toSearch()">
       {{ searchTitle }}
     </a>
     <mat-icon (click)="forward()"
               class="navig"
               [class.disabled]="!navForwards"
-    >keyboard_arrow_right</mat-icon>
+    >keyboard_arrow_right
+    </mat-icon>
     <span class="horizontal-spacer"></span>
 
     <!-- icons on the right -->
-    <mat-icon class="album-control"
-              waves-light waves-effect mdbRippleRadius
-              matTooltip="Add some"
+    <button mat-icon-button [matMenuTriggerFor]="menu" (mousemove)="openMenu()">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item
               (click)="addSome(album)"
-    >add
-    </mat-icon>
-    <mat-icon class="album-control"
-              waves-light waves-effect mdbRippleRadius
-              matTooltip="Open in music"
+      >
+        <mat-icon class="album-control"
+                  waves-light waves-effect mdbRippleRadius
+        >add
+        </mat-icon>
+        <span>edit additional</span>
+      </button>
+      <button mat-menu-item
               (click)="openMusic(album.ID)"
-            >queue_music
-    </mat-icon>
-    <mat-icon class="album-control"
-              waves-light waves-effect mdbRippleRadius
-              matTooltip="Reveal in Finder"
+      >
+        <mat-icon class="album-control"
+                  waves-light waves-effect mdbRippleRadius
+        >queue_music
+        </mat-icon>
+        <span>Open in 'music'</span>
+      </button>
+      <button mat-menu-item
               (click)="openFinder(album.ID)"
-    >open_in_browser</mat-icon>
-    <mat-icon class="album-control"
-              waves-light waves-effect mdbRippleRadius
+      >
+        <mat-icon class="album-control"
+                  waves-light waves-effect mdbRippleRadius
+        >open_in_browser
+        </mat-icon>
+        <span>Reveal in Finder</span>
+      </button>
+      <button mat-menu-item
               (click)="refetch(album.ID)"
-              matTooltip="Refetch pieces and cuesheets"
-    >replay
-    </mat-icon>
-    <mat-icon class="album-control"
+      >
+        <mat-icon class="album-control"
+                  waves-light waves-effect mdbRippleRadius
+        >replay
+        </mat-icon>
+        <span>Refetch pieces and cuesheets</span>
+      </button>
+      <button mat-menu-item
               *ngIf="album.website"
-              waves-light waves-effect mdbRippleRadius
               (click)="website()"
-              matTooltip="To website"
-    >web</mat-icon>
-    <mat-icon class="album-control"
-              waves-light waves-effect mdbRippleRadius
+      >
+        <mat-icon class="album-control"
+                  waves-light waves-effect mdbRippleRadius
+        >web
+        </mat-icon>
+        <span>Go to website</span>
+      </button>
+      <button mat-menu-item
               (click)="tagedit()"
-              matTooltip="Tag Editor"
-    >edit</mat-icon>
+      >
+        <mat-icon class="album-control"
+                  waves-light waves-effect mdbRippleRadius
+        >edit
+        </mat-icon>
+        <span>Open Tag Editor</span>
+      </button>
+    </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

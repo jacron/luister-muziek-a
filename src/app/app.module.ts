@@ -11,7 +11,7 @@ import { SearchComponent } from './search/search.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
 import {
-  MatAutocompleteModule, MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatExpansionModule, MatIconModule,
+  MatAutocompleteModule, MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatExpansionModule, MatIconModule, MatMenuModule,
   MatSelectModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -68,6 +68,7 @@ import { DialogTagComponent } from './dialog-tag/dialog-tag.component';
     MatChipsModule,
     MatToolbarModule,
     MatDialogModule,
+    MatMenuModule,
     MatTooltipModule,
     HttpClientModule,
     AppRoutingModule
