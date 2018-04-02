@@ -13,7 +13,7 @@ export class DialogPicComponent implements OnInit {
   mode: string;
 
   constructor(
-    public dialogRef: MatDialogRef<AlbumDetailsComponent>,
+    // public dialogRef: MatDialogRef<AlbumDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     // console.log(data);

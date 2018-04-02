@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Album} from '../classes/Album';
 import {Person} from '../classes/Person';
 import {Tag} from '../classes/Tag';
@@ -21,6 +21,7 @@ export class ChipListsComponent implements OnInit {
   @Input('removable') removable: boolean;
   @Input('editable') editable: boolean;
   @Input('showimage') showimage: boolean;
+  @Output('close') close = new EventEmitter();
   imgUrl = environment.apiServer + '/image/';
 
   constructor(
@@ -80,12 +81,17 @@ export class ChipListsComponent implements OnInit {
   }
 
   editPerson(person: Person, type: string) {
-    this.dialog.open(DialogPersonComponent, {
+    const dialogRef = this.dialog.open(DialogPersonComponent, {
       width: '50%',
       data: {
         person: person,
-        type: type
+        type: type,
+        albumid: this.album
       }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.close.emit(result);
     });
   }
 
@@ -102,11 +108,13 @@ export class ChipListsComponent implements OnInit {
   }
 
   toComposer(composer: Person) {
-    if (this.editable) {
+    // if (this.editable)
+    {
       this.editPerson(composer, 'componist');
-    } else {
-      this.goToComposer(composer.ID);
     }
+    // else {
+    //   this.goToComposer(composer.ID);
+    // }
   }
 
   goToPerformer(idPerf) {
@@ -121,11 +129,13 @@ export class ChipListsComponent implements OnInit {
     });
   }
   toPerformer(performer: Person) {
-    if (this.editable) {
+    // if (this.editable)
+    {
       this.editPerson(performer, 'performer');
-    } else {
-      this.goToPerformer(performer.ID);
     }
+    // else {
+    //   this.goToPerformer(performer.ID);
+    // }
   }
 
   editTag(tag: Tag) {
@@ -150,11 +160,13 @@ export class ChipListsComponent implements OnInit {
   }
 
   toTag(tag: Tag) {
-    if (this.editable) {
+    // if (this.editable)
+    {
       this.editTag(tag);
-    } else {
-      this.goToTag(tag.ID);
     }
+    // else {
+    //   this.goToTag(tag.ID);
+    // }
   }
 
   ngOnInit() {

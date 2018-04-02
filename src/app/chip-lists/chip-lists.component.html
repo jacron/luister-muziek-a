@@ -1,4 +1,4 @@
-<mat-chip-list>
+<mat-chip-list *ngIf="album">
   <mat-chip *ngFor="let composer of album.album_componisten "
             class="composers"
             [removable]="removable"

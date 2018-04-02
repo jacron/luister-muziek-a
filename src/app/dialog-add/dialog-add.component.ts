@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Person} from '../classes/Person';
 import {Tag} from '../classes/Tag';
-// import {Album} from '../classes/Album';
 import {forkJoin} from 'rxjs/observable/forkJoin';
 import {MusicService} from '../music.service';
 import {AlbumDetailsComponent} from '../album-details/album-details.component';
@@ -28,6 +27,13 @@ export class DialogAddComponent implements OnInit {
 
   select(e) {
     e.target.select();
+  }
+
+  close(e) {
+    console.log('result dialog person: ', e);
+    if (e === 'leave') {
+      this.dialogRef.close(e);
+    }
   }
 
   displayNameFn(person): string {

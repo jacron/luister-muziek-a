@@ -18,7 +18,9 @@ export class AlbumMetatagsComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges() {
-    this.tags = this.album.album_metatags;
+    if (this.album) {
+      this.tags = this.album.album_metatags;
+    }
   }
 
   titleKeydown(e, key, text) {
@@ -36,7 +38,9 @@ export class AlbumMetatagsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.tags = this.album.album_metatags;
+    if (this.album) {
+      this.tags = this.album.album_metatags;
+    }
   }
 
 }

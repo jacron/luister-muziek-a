@@ -262,6 +262,22 @@ export class MusicService {
     });
   }
 
+  updatePerson(personId, albumid, type, text, field) {
+    const params = new HttpParams()
+      .set('cmd', 'update_person')
+      .set('id', personId)
+      .set('type', type)
+      .set('field', field)
+      .set('text', text)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(requestUrl, params, {
+      headers: headers
+    });
+  }
+
+
   updateCuesheetTitle(id, albumid, title) {
     const params = new HttpParams()
       .set('cmd', 'update_cuesheet_title')

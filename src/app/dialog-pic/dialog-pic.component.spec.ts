@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogPicComponent } from './dialog-pic.component';
+import {MatDialogModule, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MusicService} from '../music.service';
 
 describe('DialogPicComponent', () => {
   let component: DialogPicComponent;
@@ -8,7 +11,18 @@ describe('DialogPicComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogPicComponent ]
+      imports: [ MatDialogModule],
+      declarations: [ DialogPicComponent ],
+      providers: [
+        {
+          provide: MatDialogRef,
+          useValue: {}
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {}
+        }
+      ],
     })
     .compileComponents();
   }));

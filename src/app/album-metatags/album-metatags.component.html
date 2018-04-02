@@ -1,4 +1,4 @@
-<table class="tags">
+<table class="tags" *ngIf="tags">
   <tr *ngFor="let key of objectKeys(tags)">
     <td class="key">{{ key }}</td>
     <td>

@@ -16,17 +16,17 @@ export class DialogTagComponent implements OnInit {
   ) { }
 
   titleKeydown(e, id, title) {
-    if (e.key === 'Enter') {
-      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
-        (response) => console.log(response)
-      );
-      e.preventDefault();
-    }
-    if (e.key === 'Tab') {
-      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
-        (response) => console.log(response)
-      );
-    }
+    // if (e.key === 'Enter') {
+    //   this.musicService.updateCuesheetTitle(id, this.data.albumid, title).subscribe(
+    //     (response) => console.log(response)
+    //   );
+    //   e.preventDefault();
+    // }
+    // if (e.key === 'Tab') {
+    //   this.musicService.updateCuesheetTitle(id, this.data.albumid, title).subscribe(
+    //     (response) => console.log(response)
+    //   );
+    // }
   }
 
   ngOnInit() {

@@ -1,8 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {AlbumDetailsComponent} from '../album-details/album-details.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {MusicService} from '../music.service';
 import {environment} from '../../environments/environment';
+import {Router} from '@angular/router';
+import {ToolbarComponent} from '../toolbar/toolbar.component';
+import {ChipListsComponent} from '../chip-lists/chip-lists.component';
 
 @Component({
   selector: 'app-dialog-person',
@@ -15,55 +17,46 @@ export class DialogPersonComponent implements OnInit {
   googleUrl = environment.googleUrl;
 
   constructor(private musicService: MusicService,
-              public dialogRef: MatDialogRef<AlbumDetailsComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any
+              public dialogRef: MatDialogRef<ChipListsComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private router: Router
   ) { }
 
+  updatePerson(id, text, field) {
+    this.musicService.updatePerson(id, this.data.albumid, this.data.type, text,
+      field).subscribe(
+      (response) => console.log(response)
+    );
+  }
 
-  nameKeydown(e, id, title) {
+  nameKeydown(e, id, type, text) {
     if (e.key === 'Enter') {
-      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
-        (response) => console.log(response)
-      );
+      this.updatePerson(id, text, 'Name');
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
-        (response) => console.log(response)
-      );
+      this.updatePerson(id, text, 'Name');
     }
   }
 
-  birthKeydown(e, id, title) {
+  birthKeydown(e, id, type, text) {
     if (e.key === 'Enter') {
-      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
-        (response) => console.log(response)
-      );
+      this.updatePerson(id, text, 'Birth');
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
-        (response) => console.log(response)
-      );
+      this.updatePerson(id, text, 'Birth');
     }
   }
 
-  deathKeydown(e, id, title) {
+  deathKeydown(e, id, type, text) {
     if (e.key === 'Enter') {
-      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
-        (response) => console.log(response)
-      );
+      this.updatePerson(id, text, 'Death');
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
-        (response) => console.log(response)
-      );
+      this.updatePerson(id, text, 'Death');
     }
-  }
-
-  toGoogle() {
-    window.open(this.googleUrl + this.data.person.FullName, 'person');
   }
 
   afterPaste(response) {
@@ -73,6 +66,25 @@ export class DialogPersonComponent implements OnInit {
     setTimeout(() => {
       this.data.type = saved;
     }, 0);
+  }
+
+  toSearch() {
+    let
+      idcomp = -1,
+      idperf = -1;
+    if (this.data.type === 'componist') {
+      idcomp = this.data.person.ID;
+    } else if (this.data.type === 'performer') {
+      idperf = this.data.person.ID;
+    }
+    this.router.navigate(['/search',
+      {
+        idcomp: idcomp,
+        idperf: idperf,
+        idcoll: -1,
+        idtag: -1
+      }
+    ]).then(() => this.dialogRef.close('leave'));
   }
 
   paste() {

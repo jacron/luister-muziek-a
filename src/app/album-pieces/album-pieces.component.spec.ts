@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlbumPiecesComponent } from './album-pieces.component';
+import {MatIconModule} from '@angular/material';
+import {MusicService} from '../music.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('AlbumPiecesComponent', () => {
   let component: AlbumPiecesComponent;
@@ -8,7 +11,9 @@ describe('AlbumPiecesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlbumPiecesComponent ]
+      declarations: [ AlbumPiecesComponent ],
+      imports: [MatIconModule, HttpClientModule],
+      providers: [MusicService]
     })
     .compileComponents();
   }));

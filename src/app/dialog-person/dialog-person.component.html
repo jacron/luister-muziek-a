@@ -20,12 +20,31 @@
 <div class="controls">
   <a href="{{googleUrl + data.person.FullName }}"
      target="'person">
+    <button class=""
+            waves-light waves-effect mdbRippleRadius
+    >
   <mat-icon
-    waves-light waves-effect mdbRippleRadius
     class="album-control">
-    search</mat-icon></a>
+    search</mat-icon>
+      <span>Google</span>
+    </button>
+  </a>
+  <button class=""
+          waves-light waves-effect mdbRippleRadius
+          (click)="paste()"
+  >
   <mat-icon
-    waves-light waves-effect mdbRippleRadius
-    (click)="paste()" class="album-control">
+    class="album-control">
     content_paste</mat-icon>
+    <span>Plak</span>
+  </button>
+  <button class=""
+          waves-light waves-effect mdbRippleRadius
+          (click)="toSearch()"
+  >
+  <mat-icon
+    class="album-control">
+    assignment</mat-icon>
+    <span>Albums</span>
+  </button>
 </div>

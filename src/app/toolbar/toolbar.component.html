@@ -1,4 +1,4 @@
-<mat-toolbar style="margin: -14px 0 0;">
+<mat-toolbar style="margin: -14px 0 0;" *ngIf="album">
   <mat-toolbar-row>
     <div #topicTitle contenteditable="true"
          class="title"
@@ -65,7 +65,7 @@
         <span>Reload pieces</span>
       </button>
       <button mat-menu-item
-              *ngIf="album.website"
+              *ngIf="album && album.website"
               (click)="website()"
       >
         <mat-icon class="album-control"
