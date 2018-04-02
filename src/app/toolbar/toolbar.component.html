@@ -46,10 +46,11 @@
     >replay
     </mat-icon>
     <mat-icon class="album-control"
+              *ngIf="album.website"
               waves-light waves-effect mdbRippleRadius
-              (click)="pause()"
-              matTooltip="Pause player"
-    >pause</mat-icon>
+              (click)="website()"
+              matTooltip="To website"
+    >web</mat-icon>
     <mat-icon class="album-control"
               waves-light waves-effect mdbRippleRadius
               (click)="tagedit()"

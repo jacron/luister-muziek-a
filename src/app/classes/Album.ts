@@ -14,7 +14,8 @@ export class Album {
   cuesheets: any[];
   expanded: boolean;
   album_back_image: boolean;
-  mother: Album;
+  // mother: Album;
+  website: string;
   // album_folder_image: boolean;
 }
 

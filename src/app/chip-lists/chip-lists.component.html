@@ -3,9 +3,11 @@
             class="composers"
             [removable]="removable"
             (remove)="removeComposer(composer)">
-    <img src="{{ imgUrl }}{{ composer.ID }}/componist"
-         (click)="openPicComposer(composer.ID)"
-         class="avatar">
+    <img
+      *ngIf="showimage"
+      src="{{ imgUrl }}{{ composer.ID }}/componist"
+      (click)="openPicComposer(composer.ID)"
+      class="avatar">
     <a (click)="toComposer(composer)">{{ composer.FullName }}</a>
     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
   </mat-chip>
@@ -14,9 +16,11 @@
             class="performers"
             [removable]="removable"
             (remove)="removePerformer(performer)">
-    <img src="{{ imgUrl }}{{ performer.ID }}/performer"
-         (click)="openPicPerformer(performer.ID)"
-         class="avatar">
+    <img
+      *ngIf="showimage"
+      src="{{ imgUrl }}{{ performer.ID }}/performer"
+      (click)="openPicPerformer(performer.ID)"
+      class="avatar">
     <a (click)="toPerformer(performer)">{{ performer.FullName }}</a>
     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
   </mat-chip>

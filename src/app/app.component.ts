@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {MusicService} from './music.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,14 @@ export class AppComponent {
   prouter;
 
   constructor(
+    private musicService: MusicService,
     private router: Router
   ) {
     this.prouter = router;
+  }
+
+  play(cmd) {
+    this.musicService.controlPlayer(cmd).subscribe();
   }
 
   search() {

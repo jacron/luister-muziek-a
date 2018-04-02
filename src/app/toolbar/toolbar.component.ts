@@ -82,6 +82,13 @@ export class ToolbarComponent implements OnInit, OnChanges {
     );
   }
 
+  website() {
+    console.log(this.album.website);
+    // window.open('file:///' + this.album.website);
+    this.musicService.openwebsite(this.album.ID)
+      .subscribe();
+  }
+
   updateAlbumTitle(id, title) {
     this.musicService.updateAlbumTitle(id, title).subscribe(
       (msg) => console.log(msg)

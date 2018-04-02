@@ -162,6 +162,18 @@ export class MusicService {
     );
   }
 
+  openwebsite(albumid) {
+    const params = new HttpParams()
+      .set('cmd', 'openwebsite')
+      .set('albumid', albumid)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   refetch(id) {
     const params = new HttpParams()
       .set('cmd', 'refetch')

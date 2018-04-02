@@ -20,6 +20,7 @@ export class ChipListsComponent implements OnInit {
   @Input('album') album: Album;
   @Input('removable') removable: boolean;
   @Input('editable') editable: boolean;
+  @Input('showimage') showimage: boolean;
   imgUrl = environment.apiServer + '/image/';
 
   constructor(
