@@ -1,22 +1,32 @@
-<div #topicTitle contenteditable="true"
-      class="title"
-      [textContent]="personName"
-      (input)="model=topicTitle.innerText"
-      (keydown)="nameKeydown($event, topicTitle.innerText)">
+<mat-dialog-title><h2>{{ person.Name }}</h2></mat-dialog-title>
+<mat-dialog-content>
+<div #name contenteditable="true"
+      class="name"
+      [textContent]="person.Name"
+      (input)="model=name.innerText"
+      (keydown)="fieldKeydown($event, name.innerText, 'Name')">
 </div>
-<div #birth contenteditable="true"
-     class="title"
-     [textContent]="personBirth"
-     (input)="model=topicTitle.innerText"
-     (keydown)="birthKeydown($event, birth.innerText)">
-</div>
-<div #death contenteditable="true"
-     class="title"
-     [textContent]="personDeath"
-     (input)="model=topicTitle.innerText"
-     (keydown)="deathKeydown($event, death.innerText)">
+  <div #role contenteditable="true"
+    class="role"
+    [textContent]="person.Role"
+    (input)="model=role.innerText"
+    (keydown)="fieldKeydown($event, role.innerText, 'Role')">
+  </div>
+<div class="years">
+  <div #birth contenteditable="true"
+        class="title"
+        [textContent]="person.Birth"
+        (input)="model=birth.innerText"
+        (keydown)="fieldKeydown($event, birth.innerText, 'Birth')">
+  </div> - <div #death contenteditable="true"
+         class="title"
+         [textContent]="person.Death"
+         (input)="model=death.innerText"
+         (keydown)="fieldKeydown($event, death.innerText, 'Death')">
+    </div>
 </div>
 <img src="{{ imgUrl }}{{ data.person.ID }}/{{ data.type }}" class="thumb">
+</mat-dialog-content>
 <mat-dialog-actions class="controls">
   <a href="{{googleUrl + data.person.FullName }}"
      target="'person"

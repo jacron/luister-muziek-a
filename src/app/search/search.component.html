@@ -134,7 +134,7 @@
     {{ albums.length }} albums
         <div class="row" *ngFor="let album of albums" >
           <div class="col" style="max-width: 120px;">
-            <a href="album/{{ album.ID }}">
+            <a (click)="toAlbum(album.ID)">
               <img
                 attr.data-src="{{ imgUrl }}{{ album.ID }}/album"
                 id="{{ album.ID }}"

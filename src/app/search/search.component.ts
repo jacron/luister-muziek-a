@@ -95,6 +95,14 @@ export class SearchComponent implements OnInit, AfterViewInit {
     return <Tag>item;
   }
 
+  toAlbum(id) {
+    this.router.navigate(['/album', id]).then(() => {
+      this.storageService.storeSearchTitle(document.title);
+      this.storageService.storeSearchParameters(this.params);
+    });
+
+  }
+
   getAlbumsComponist() {
     const idcomp = this.selectedComposer ? this.selectedComposer.ID : -1;
     const idperf = this.selectedPerformer ? this.selectedPerformer.ID : -1;

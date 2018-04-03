@@ -114,7 +114,6 @@ export class MusicService {
     return this.http.get(requestUrl, {
       responseType: 'json',
       params});
-
   }
 
   getPerformerById(id: number) {
@@ -125,7 +124,6 @@ export class MusicService {
     return this.http.get(requestUrl, {
       responseType: 'json',
       params});
-
   }
 
   /* POST */

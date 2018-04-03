@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {MusicService} from '../music.service';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
+import {Person} from '../classes/Person';
 
 @Component({
   selector: 'app-dialog-person',
@@ -13,9 +14,7 @@ export class DialogPersonComponent implements OnInit {
 
   imgUrl = environment.apiServer + '/image/';
   googleUrl = environment.googleUrl;
-  personName: string;
-  personBirth: string;
-  personDeath: string;
+  person: Person;
   albumCount: number;
 
   constructor(private musicService: MusicService,
@@ -42,38 +41,19 @@ export class DialogPersonComponent implements OnInit {
     );
   }
 
-  nameKeydown(e, text) {
+  fieldKeydown(e, text, field) {
     if (e.key === 'Enter') {
-      this.updatePerson(text, 'Name');
+      this.updatePerson(text, field);
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.updatePerson(text, 'Name');
-    }
-  }
-
-  birthKeydown(e, text) {
-    if (e.key === 'Enter') {
-      this.updatePerson(text, 'Birth');
-      e.preventDefault();
-    }
-    if (e.key === 'Tab') {
-      this.updatePerson(text, 'Birth');
-    }
-  }
-
-  deathKeydown(e, text) {
-    if (e.key === 'Enter') {
-      this.updatePerson(text, 'Death');
-      e.preventDefault();
-    }
-    if (e.key === 'Tab') {
-      this.updatePerson(text, 'Death');
+      this.updatePerson(text, field);
     }
   }
 
   afterPaste(response) {
     console.log(response);
+    // work-around for refreshing image (src)
     const saved = this.data.type;
     this.data.type = 'dummy';
     setTimeout(() => {
@@ -111,9 +91,15 @@ export class DialogPersonComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.personName = this.data.person.FullName;
-    this.personBirth = this.data.person.Birth;
-    this.personDeath = this.data.person.Death;
+    const dPerson = this.data.person;
+    this.person = {
+      ID: dPerson.ID,
+      FullName: dPerson.FullName,
+      Name: dPerson.FullName,
+      Birth: dPerson.Birth,
+      Death: dPerson.Death,
+      Role: dPerson.Role
+    };
     this.musicService.getAlbumCountForPerson(this.data.person.ID, this.data.type)
       .subscribe(
       (response) => this.afterAlbumCount(response)
