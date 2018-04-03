@@ -36,6 +36,17 @@ export class MusicService {
       params});
   }
 
+  getAlbumCountForPerson(id, type) {
+    const params = new HttpParams()
+      .set('cmd', 'album_count_for_person')
+      .set('id', id)
+      .set('type', type)
+    ;
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+  }
+
   getSearchedAlbums(params) {
     const idcomp = params.idcomp === -1 ? null : params.idcomp.toString(),
       idperf = params.idperf === -1 ? null : params.idperf.toString(),

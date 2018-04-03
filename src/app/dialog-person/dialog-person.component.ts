@@ -14,6 +14,9 @@ export class DialogPersonComponent implements OnInit {
   imgUrl = environment.apiServer + '/image/';
   googleUrl = environment.googleUrl;
   personName: string;
+  personBirth: string;
+  personDeath: string;
+  albumCount: number;
 
   constructor(private musicService: MusicService,
               public dialogRef: MatDialogRef<DialogPersonComponent>,
@@ -21,9 +24,9 @@ export class DialogPersonComponent implements OnInit {
               private router: Router
   ) { }
 
-  afterUpdate(response, text) {
+  afterUpdate(response, text, field) {
     console.log(response);
-    this.data.person.FullName = text;
+    this.data.person[field] = text;
   }
 
   updatePerson(text, field) {
@@ -35,7 +38,7 @@ export class DialogPersonComponent implements OnInit {
         text: text
       })
       .subscribe(
-      (response) => this.afterUpdate(response, text)
+      (response) => this.afterUpdate(response, text, field)
     );
   }
 
@@ -102,8 +105,19 @@ export class DialogPersonComponent implements OnInit {
       .subscribe((response) => this.afterPaste(response));
   }
 
+  afterAlbumCount(response) {
+    console.log(response);
+    this.albumCount = response;
+  }
+
   ngOnInit() {
     this.personName = this.data.person.FullName;
+    this.personBirth = this.data.person.Birth;
+    this.personDeath = this.data.person.Death;
+    this.musicService.getAlbumCountForPerson(this.data.person.ID, this.data.type)
+      .subscribe(
+      (response) => this.afterAlbumCount(response)
+    );
   }
 
 }

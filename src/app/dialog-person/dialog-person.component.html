@@ -6,56 +6,51 @@
 </div>
 <div #birth contenteditable="true"
      class="title"
-     [textContent]="data.person.Birth"
+     [textContent]="personBirth"
      (input)="model=topicTitle.innerText"
-     (keydown)="birthKeydown($event, topicTitle.innerText)">
+     (keydown)="birthKeydown($event, birth.innerText)">
 </div>
 <div #death contenteditable="true"
      class="title"
-     [textContent]="data.person.Death"
+     [textContent]="personDeath"
      (input)="model=topicTitle.innerText"
-     (keydown)="deathKeydown($event, topicTitle.innerText)">
+     (keydown)="deathKeydown($event, death.innerText)">
 </div>
 <img src="{{ imgUrl }}{{ data.person.ID }}/{{ data.type }}" class="thumb">
 <mat-dialog-actions class="controls">
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu>
   <a href="{{googleUrl + data.person.FullName }}"
-     target="'person">
+     target="'person"
+     style="width: 100%"
+  >
     <button
       mat-menu-item
-      class=""
       waves-light waves-effect mdbRippleRadius
     >
-  <mat-icon
-    class="album-control">
-    search</mat-icon>
+      <mat-icon
+        class="album-control">
+        search</mat-icon>
       <span>Google</span>
     </button>
   </a>
   <button
     mat-menu-item
-    class=""
     waves-light waves-effect mdbRippleRadius
     (click)="paste()"
   >
-  <mat-icon
-    class="album-control">
-    content_paste</mat-icon>
-    <span>Plak</span>
+    <mat-icon
+      class="album-control">
+      content_paste</mat-icon>
+    <span>Paste image</span>
   </button>
   <button
     mat-menu-item
-    class=""
     waves-light waves-effect mdbRippleRadius
     (click)="toSearch()"
   >
-  <mat-icon
-    class="album-control">
-    assignment</mat-icon>
+    <mat-icon
+      class="album-control">
+      assignment</mat-icon>
     <span>Albums</span>
+    (<span>{{ albumCount }}</span>)
   </button>
-  </mat-menu>
 </mat-dialog-actions>
