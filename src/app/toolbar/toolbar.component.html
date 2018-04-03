@@ -1,6 +1,7 @@
 <mat-toolbar style="margin: -14px 0 0;" *ngIf="album">
   <mat-toolbar-row>
-    <div #topicTitle contenteditable="true"
+    <div #topicTitle
+         contenteditable="true"
          class="title"
          [textContent]="album.Title"
          (input)="model=topicTitle.innerText"
@@ -8,19 +9,35 @@
     </div>
   </mat-toolbar-row>
   <mat-toolbar-row class="sub">
-    <mat-icon (click)="back()"
-              class="navig"
-              [class.disabled]="!navBackwards"
-    >keyboard_arrow_left
-    </mat-icon>
-    <a (click)="toSearch()">
-      {{ searchTitle }}
-    </a>
-    <mat-icon (click)="forward()"
-              class="navig"
-              [class.disabled]="!navForwards"
-    >keyboard_arrow_right
-    </mat-icon>
+    <div #topicDescription
+         contenteditable="true"
+         [textContent]="album.Description"
+         (input)="model=topicDescription.innerText"
+         (keydown)="albumDescriptionKeydown($event, album.ID, topicDescription.innerText)">
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="sub">
+    <div>
+      <mat-icon (click)="back()"
+                class="navig"
+                [class.disabled]="!navBackwards"
+      >keyboard_arrow_left
+      </mat-icon>
+      <a (click)="toSearch()" style="position: relative; top: -7px;">
+        <span>{{ searchTitle }}</span>
+      </a>
+      <mat-icon (click)="forward()"
+                class="navig"
+                [class.disabled]="!navForwards"
+      >keyboard_arrow_right
+      </mat-icon>
+    </div>
+    <div *ngIf="album.mother">
+      <a (click)="toCollection()"
+         style="position: relative; top: -5px;margin-left: 32px;">
+        <span>{{ album.mother.Title }}</span>
+      </a>
+    </div>
     <span class="horizontal-spacer"></span>
 
     <!-- icons on the right -->

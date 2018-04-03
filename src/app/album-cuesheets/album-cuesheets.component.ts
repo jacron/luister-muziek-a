@@ -13,7 +13,7 @@ export class AlbumCuesheetsComponent implements OnInit {
   @Input('cuesheets') cuesheets: Cuesheet[];
   @Input('albumid') albumid: number;
   renaming = environment.renamingCuesheet;
-  freedbUrl = environment.freedbUrl;
+  freedbUrl = environment.musicbrainz;  // freedbUrl;
   amazonUrl = environment.amazonUrl;
 
   constructor(  private musicService: MusicService ) { }

@@ -8,6 +8,11 @@
       <div>{{ album.Title }}</div>
       <app-album-persons [persons]="album.album_componisten"></app-album-persons>
       <app-album-persons [persons]="album.album_performers"></app-album-persons>
+      <app-chip-lists [album]="album"
+                      [removable]="false"
+                      [editable]="false"
+                      [showimage]="false"
+      ></app-chip-lists>
     </div>
   <mat-icon class="opener" (click)="album.expanded = !album.expanded"
             [class.expanded]="album.expanded"

@@ -267,6 +267,18 @@ export class MusicService {
     });
   }
 
+  updateAlbumDescription(id, text) {
+    const params = new HttpParams()
+      .set('cmd', 'update_album_description')
+      .set('albumid', id)
+      .set('description', text);
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(requestUrl, params, {
+      headers: headers
+    });
+  }
+
   pastePersonImage(personId, type) {
     const params = new HttpParams()
       .set('cmd', 'paste_person')

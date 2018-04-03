@@ -132,6 +132,8 @@
 <div class="list">
   <div *ngIf="albums && albums.length">
     {{ albums.length }} albums
+    <a *ngIf="selectedCollection && selectedCollection.website" (click)="websiteCollection()">
+      - website</a>
         <div class="row" *ngFor="let album of albums" >
           <div class="col" style="max-width: 120px;">
             <a (click)="toAlbum(album.ID)">
@@ -142,8 +144,13 @@
           </div>
           <div class="col">
             <div>{{ album.Title }}</div>
-            <app-album-persons [persons]="album.album_componisten"></app-album-persons>
-            <app-album-persons [persons]="album.album_performers"></app-album-persons>
+            <!--<app-album-persons [persons]="album.album_componisten"></app-album-persons>-->
+            <!--<app-album-persons [persons]="album.album_performers"></app-album-persons>-->
+            <app-chip-lists [album]="album"
+                            [removable]="false"
+                            [editable]="false"
+                            [showimage]="false"
+            ></app-chip-lists>
           </div>
         </div>
   </div>

@@ -147,6 +147,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         // console.log(album);
         a.album_performers = album.album_performers;
         a.album_componisten = album.album_componisten;
+        a.album_tags = album.album_tags;
         a.pieces = album.pieces;
         a.cuesheets = album.cuesheets;
         break;
@@ -222,6 +223,20 @@ export class SearchComponent implements OnInit, AfterViewInit {
     );
   }
 
+  setCollection(album: Album) {
+    this.selectedCollection = album;
+    if (document.title.length) { document.title += ', '; }
+    document.title += this.selectedCollection.Title;
+  }
+
+  websiteCollection() {
+    // console.log(this.selectedCollection);
+    this.musicService.openwebsite(this.selectedCollection.ID)
+      .subscribe(
+        (results) => console.log(results)
+      );
+  }
+
   setSelected() {
     console.log(this.params);
     if (!this.params) {
@@ -229,9 +244,12 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }
     document.title = '';
     if (this.params.idcoll !== -1) {
-      this.selectedCollection = this.getCollectionById(this.params.idcoll);
-      if (document.title.length) { document.title += ', '; }
-      document.title += this.selectedCollection.Title;
+      this.musicService.getAlbumById(this.params.idcoll).subscribe(
+        (results) => this.setCollection(<Album>results)
+      );
+      // this.selectedCollection = this.getCollectionById(this.params.idcoll);
+      // if (document.title.length) { document.title += ', '; }
+      // document.title += this.selectedCollection.Title;
     }
     if (this.params.idtag !== -1) {
       this.selectedTag = this.getTagById(this.params.idtag);
@@ -242,6 +260,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
       this.musicService.getComposerById(this.params.idcomp) : null;
     const qperformer = this.params.idperf !== -1 ?
       this.musicService.getPerformerById(this.params.idperf) : null;
+    // const qcollection = this.params.idcoll !== -1 ?
+    //   this.musicService.getAlbumById(this.params.idcoll) : null;
     if (qcomposer && qperformer) {
       forkJoin(qcomposer, qperformer).subscribe(
         (results) => {
@@ -263,7 +283,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         this.storageService.storeSearchTitle(document.title);
       });
     }
-
+    console.log(this.selectedCollection);
   }
 
   onSelectionChange(person) {

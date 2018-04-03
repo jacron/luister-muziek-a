@@ -47,6 +47,17 @@ export class ToolbarComponent implements OnInit, OnChanges {
     }
   }
 
+  albumDescriptionKeydown(e, id, title) {
+    console.log(id, title);
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      this.updateAlbumDescription(id, title);
+    }
+    if (e.key === 'Tab') {
+      this.updateAlbumDescription(id, title);
+    }
+  }
+
   openFinder(id) {
     this.musicService.openFinder(id).subscribe(
       (response) => console.log(response)
@@ -93,10 +104,28 @@ export class ToolbarComponent implements OnInit, OnChanges {
     );
   }
 
+  updateAlbumDescription(id, title) {
+    this.musicService.updateAlbumDescription(id, title).subscribe(
+      (msg) => console.log(msg)
+    );
+  }
+
   toSearch() {
     console.log(this.searchParams);
     this.router.navigate(['/search',
       this.searchParams
+    ]).then(() => {
+    });
+  }
+
+  toCollection() {
+    this.router.navigate(['/search',
+      {
+        idcoll: this.album.mother.ID,
+        idcomp: -1,
+        idperf: -1,
+        idtag: -1
+      }
     ]).then(() => {
     });
   }
@@ -138,6 +167,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    console.log(this.album);
     this.albums = this.storageService.retrieveAlbums();
     this.enableNavig();
     this.searchTitle = this.storageService.retrieveSearchTitle();

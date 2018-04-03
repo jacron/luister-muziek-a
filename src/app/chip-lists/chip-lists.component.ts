@@ -88,12 +88,20 @@ export class ChipListsComponent implements OnInit {
         type: type,
         albumid: this.album
       },
-      autoFocus: false
+      autoFocus: false,
+      // hasBackdrop: false
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.close.emit(result);
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.close.emit(result);
+    // });
+    // dialogRef.keydownEvents()
+    //   .filter((e: KeyboardEvent) => e.code === 'Escape')
+    //   // .take(1)
+    //   .subscribe(() => {
+    //     // dialogRef.close();
+    //     console.log('closed');
+    //   });
   }
 
   toComposer(composer: Person) {
@@ -112,9 +120,9 @@ export class ChipListsComponent implements OnInit {
       },
       autoFocus: false
     });
-    dialogRef.afterClosed().subscribe(result => {
-      this.close.emit(result);
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.close.emit(result);
+    // });
   }
 
   toTag(tag: Tag) {
