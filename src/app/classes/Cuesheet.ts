@@ -6,7 +6,7 @@ export class Cuesheet {
   ID: number;
   cue: Cue;
   // Code: string;
-  // Invalid: boolean;
+  Invalid: boolean;
   played: boolean;
   asin: string;
   discid: string;

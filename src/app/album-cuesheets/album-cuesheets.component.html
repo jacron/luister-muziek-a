@@ -1,6 +1,8 @@
-<div *ngFor="let cuesheet of cuesheets">
+<div *ngFor="let cuesheet of cuesheets"
+>
   <mat-icon
     [class.played]="cuesheet.played"
+    [class.invalid]="cuesheet.Invalid"
     class="play"
     waves-light waves-effect mdbRippleRadius
     (click)="play(cuesheet.ID)">
@@ -39,5 +41,11 @@
             waves-light waves-effect mdbRippleRadius
             (click)="rename(cuesheet)">
     edit
+  </mat-icon>
+  <mat-icon class="delete"
+            *ngIf="deleting"
+            waves-light waves-effect mdbRippleRadius
+            (click)="delete(cuesheet)">
+    delete
   </mat-icon>
 </div>

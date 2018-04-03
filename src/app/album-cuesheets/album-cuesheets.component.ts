@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Cuesheet} from '../classes/Cuesheet';
 import {MusicService} from '../music.service';
 import {environment} from '../../environments/environment';
+import {Album} from '../classes/Album';
 
 @Component({
   selector: 'app-album-cuesheets',
@@ -13,6 +14,7 @@ export class AlbumCuesheetsComponent implements OnInit {
   @Input('cuesheets') cuesheets: Cuesheet[];
   @Input('albumid') albumid: number;
   renaming = environment.renamingCuesheet;
+  deleting = environment.deletingCuesheet;
   freedbUrl = environment.musicbrainz;  // freedbUrl;
   amazonUrl = environment.amazonUrl;
 
@@ -49,6 +51,28 @@ export class AlbumCuesheetsComponent implements OnInit {
     this.musicService.renameCue(cuesheet.ID, this.albumid).subscribe(
       (response) => cuesheet.Title = response
     );
+  }
+
+  restorePieces(album: Album) {
+    console.log(album);
+    // this.album.pieces = album.pieces;
+    this.cuesheets = album.cuesheets;
+  }
+
+  afterDelete(response) {
+    console.log(response);
+    this.musicService.refetch(this.albumid).subscribe(
+      (album: Album) => this.restorePieces(album)
+    );
+  }
+
+  delete(cuesheet: Cuesheet) {
+    if (confirm('delete "' + cuesheet.Title + '"?')) {
+      this.musicService.deleteCue(cuesheet.ID, this.albumid)
+        .subscribe((response) => this.afterDelete(response)
+        );
+    }
+
   }
 
   titleKeydown(e, id, title) {

@@ -8,10 +8,14 @@
   cursor: pointer;
 }
 .played {
+  color: brown;
+}
+.invalid {
   color: red;
 }
 .edit,
-.rename {
+.rename,
+.delete {
   opacity: .6;
   position: relative;
   top: 4px;
@@ -25,4 +29,7 @@
 }
 .rename {
   color: green;
+}
+.delete {
+  color: red;
 }

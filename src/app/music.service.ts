@@ -243,6 +243,19 @@ export class MusicService {
     );
   }
 
+  deleteCue(id, albumid) {
+    const params = new HttpParams()
+      .set('cmd', 'removecuesheet')
+      .set('id', id)
+      .set('albumid', albumid)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   play(id) {
     const params = new HttpParams()
       .set('cmd', 'play')
