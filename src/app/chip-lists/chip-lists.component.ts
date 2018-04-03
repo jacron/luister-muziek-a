@@ -43,7 +43,7 @@ export class ChipListsComponent implements OnInit {
     const items = this.album.album_componisten;
     const index = this.getItemIndex(items, composer.ID);
     this.musicService.removeComposer(composer.ID, this.album.ID).subscribe(
-      (response) => items.splice(index, 1)
+      () => items.splice(index, 1)
     );
   }
 
@@ -51,7 +51,7 @@ export class ChipListsComponent implements OnInit {
     const items = this.album.album_performers;
     const index = this.getItemIndex(items, performer.ID);
     this.musicService.removePerformer(performer.ID, this.album.ID).subscribe(
-      (response) => items.splice(index, 1)
+      () => items.splice(index, 1)
   );
   }
 
@@ -59,7 +59,7 @@ export class ChipListsComponent implements OnInit {
     const items = this.album.album_tags;
     const index = this.getItemIndex(items, tag.ID);
     this.musicService.removeTag(tag.ID, this.album.ID).subscribe(
-      (response) => items.splice(index, 1)
+      () => items.splice(index, 1)
     );
   }
 
@@ -87,7 +87,8 @@ export class ChipListsComponent implements OnInit {
         person: person,
         type: type,
         albumid: this.album
-      }
+      },
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -95,78 +96,29 @@ export class ChipListsComponent implements OnInit {
     });
   }
 
-  goToComposer(idComp) {
-    this.router.navigate(['/search',
-      {
-        idcomp: idComp,
-        idperf: -1,
-        idcoll: -1,
-        idtag: -1
-      }
-    ]).then(() => {
-    });
-  }
-
   toComposer(composer: Person) {
-    // if (this.editable)
-    {
-      this.editPerson(composer, 'componist');
-    }
-    // else {
-    //   this.goToComposer(composer.ID);
-    // }
+    this.editPerson(composer, 'componist');
   }
 
-  goToPerformer(idPerf) {
-    this.router.navigate(['/search',
-      {
-        idcomp: -1,
-        idperf: idPerf,
-        idcoll: -1,
-        idtag: -1
-      }
-    ]).then(() => {
-    });
-  }
   toPerformer(performer: Person) {
-    // if (this.editable)
-    {
-      this.editPerson(performer, 'performer');
-    }
-    // else {
-    //   this.goToPerformer(performer.ID);
-    // }
+    this.editPerson(performer, 'performer');
   }
 
   editTag(tag: Tag) {
-    this.dialog.open(DialogTagComponent, {
+    const dialogRef = this.dialog.open(DialogTagComponent, {
       width: '50%',
       data: {
         tag: tag
-      }
+      },
+      autoFocus: false
     });
-  }
-
-  goToTag(idTag) {
-    this.router.navigate(['/search',
-      {
-        idcomp: -1,
-        idperf: -1,
-        idcoll: -1,
-        idtag: idTag
-      }
-    ]).then(() => {
+    dialogRef.afterClosed().subscribe(result => {
+      this.close.emit(result);
     });
   }
 
   toTag(tag: Tag) {
-    // if (this.editable)
-    {
-      this.editTag(tag);
-    }
-    // else {
-    //   this.goToTag(tag.ID);
-    // }
+    this.editTag(tag);
   }
 
   ngOnInit() {

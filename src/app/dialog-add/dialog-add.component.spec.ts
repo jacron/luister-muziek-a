@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogAddComponent } from './dialog-add.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {TypedNamePipe} from '../typed-name.pipe';
-import {MatAutocompleteModule, MatIconModule, MatMenuModule} from '@angular/material';
+import {MatAutocompleteModule, MatDialogRef, MatIconModule, MatMenuModule} from '@angular/material';
 import {MatDialogModule, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MusicService} from '../music.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -18,6 +18,10 @@ describe('DialogAddComponent', () => {
       imports: [ MatAutocompleteModule, HttpClientModule, MatDialogModule,
         MatMenuModule, MatIconModule],
       providers: [TypedNamePipe, MusicService,
+        {
+          provide: MatDialogRef,
+          useValue: {}
+        },
         {
         provide: MAT_DIALOG_DATA,
         useValue: {}

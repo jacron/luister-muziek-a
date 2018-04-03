@@ -1,6 +1,22 @@
-<span #topicTitle contenteditable="true"
-      class="title"
-      [textContent]="data.tag.Name"
-      (input)="model=topicTitle.innerText"
-      (keydown)="titleKeydown($event, data.tag.ID, topicTitle.innerText)">
+<mat-dialog-content>
+  <span #topicTitle contenteditable="true"
+  class="title"
+  [textContent]="tagname"
+  (input)="model=topicTitle.innerText"
+  (keydown)="titleKeydown($event, topicTitle.innerText)">
   </span>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class=""
+          waves-light waves-effect mdbRippleRadius
+          (click)="toSearch()"
+          mat-dialog-close=""
+  >
+    <mat-icon
+      class="album-control">
+      assignment</mat-icon>
+    <span>Albums</span>
+    (<span>{{albumCount}}</span>)
+  </button>
+
+</mat-dialog-actions>

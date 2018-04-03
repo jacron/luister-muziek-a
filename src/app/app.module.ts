@@ -11,7 +11,8 @@ import { SearchComponent } from './search/search.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
 import {
-  MatAutocompleteModule, MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatExpansionModule, MatIconModule, MatMenuModule,
+  MatAutocompleteModule, MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatExpansionModule, MatIconModule, MatInputModule,
+  MatMenuModule,
   MatSelectModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -46,10 +47,10 @@ import { DialogTagComponent } from './dialog-tag/dialog-tag.component';
     AlbumPersonsComponent,
     AlbumPiecesComponent,
     AlbumCuesheetsComponent,
-    DialogPicComponent,
     ChipListsComponent,
     ToolbarComponent,
     AlbumMetatagsComponent,
+    DialogPicComponent,
     DialogAddComponent,
     DialogPersonComponent,
     DialogTagComponent
@@ -59,6 +60,7 @@ import { DialogTagComponent } from './dialog-tag/dialog-tag.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,  // needed for ngModel
+    MatInputModule,
     MatButtonModule,
     MatSelectModule,
     MatAutocompleteModule,

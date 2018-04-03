@@ -27,6 +27,15 @@ export class MusicService {
       params});
   }
 
+  getAlbumCountForTag(id) {
+    const params = new HttpParams()
+      .set('cmd', 'album_count_for_tag')
+      .set('id', id);
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+  }
+
   getSearchedAlbums(params) {
     const idcomp = params.idcomp === -1 ? null : params.idcomp.toString(),
       idperf = params.idperf === -1 ? null : params.idperf.toString(),
@@ -262,13 +271,13 @@ export class MusicService {
     });
   }
 
-  updatePerson(personId, albumid, type, text, field) {
+  updatePerson(options) {
     const params = new HttpParams()
       .set('cmd', 'update_person')
-      .set('id', personId)
-      .set('type', type)
-      .set('field', field)
-      .set('text', text)
+      .set('personId', options.personId)
+      .set('type', options.type)
+      .set('field', options.field)
+      .set('text', options.text)
     ;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -393,4 +402,17 @@ export class MusicService {
     );
   }
 
+  updateAlbumTagName(id: number, name: any) {
+    const params = new HttpParams()
+      .set('cmd', 'update_tag_name')
+      .set('id', id.toString())
+      .set('name', name)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+
+  }
 }

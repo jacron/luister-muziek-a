@@ -3,8 +3,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {MusicService} from '../music.service';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
-import {ToolbarComponent} from '../toolbar/toolbar.component';
-import {ChipListsComponent} from '../chip-lists/chip-lists.component';
 
 @Component({
   selector: 'app-dialog-person',
@@ -15,47 +13,59 @@ export class DialogPersonComponent implements OnInit {
 
   imgUrl = environment.apiServer + '/image/';
   googleUrl = environment.googleUrl;
+  personName: string;
 
   constructor(private musicService: MusicService,
-              public dialogRef: MatDialogRef<ChipListsComponent>,
+              public dialogRef: MatDialogRef<DialogPersonComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private router: Router
   ) { }
 
-  updatePerson(id, text, field) {
-    this.musicService.updatePerson(id, this.data.albumid, this.data.type, text,
-      field).subscribe(
-      (response) => console.log(response)
+  afterUpdate(response, text) {
+    console.log(response);
+    this.data.person.FullName = text;
+  }
+
+  updatePerson(text, field) {
+    this.musicService.updatePerson (
+      {
+        personId: this.data.person.ID,
+        type: this.data.type,
+        field: field,
+        text: text
+      })
+      .subscribe(
+      (response) => this.afterUpdate(response, text)
     );
   }
 
-  nameKeydown(e, id, type, text) {
+  nameKeydown(e, text) {
     if (e.key === 'Enter') {
-      this.updatePerson(id, text, 'Name');
+      this.updatePerson(text, 'Name');
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.updatePerson(id, text, 'Name');
+      this.updatePerson(text, 'Name');
     }
   }
 
-  birthKeydown(e, id, type, text) {
+  birthKeydown(e, text) {
     if (e.key === 'Enter') {
-      this.updatePerson(id, text, 'Birth');
+      this.updatePerson(text, 'Birth');
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.updatePerson(id, text, 'Birth');
+      this.updatePerson(text, 'Birth');
     }
   }
 
-  deathKeydown(e, id, type, text) {
+  deathKeydown(e, text) {
     if (e.key === 'Enter') {
-      this.updatePerson(id, text, 'Death');
+      this.updatePerson(text, 'Death');
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.updatePerson(id, text, 'Death');
+      this.updatePerson(text, 'Death');
     }
   }
 
@@ -93,6 +103,7 @@ export class DialogPersonComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.personName = this.data.person.FullName;
   }
 
 }

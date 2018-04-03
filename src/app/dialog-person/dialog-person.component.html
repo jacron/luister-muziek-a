@@ -1,27 +1,33 @@
 <div #topicTitle contenteditable="true"
       class="title"
-      [textContent]="data.person.FullName"
+      [textContent]="personName"
       (input)="model=topicTitle.innerText"
-      (keydown)="nameKeydown($event, data.person.ID, topicTitle.innerText)">
+      (keydown)="nameKeydown($event, topicTitle.innerText)">
 </div>
 <div #birth contenteditable="true"
      class="title"
      [textContent]="data.person.Birth"
      (input)="model=topicTitle.innerText"
-     (keydown)="birthKeydown($event, data.person.ID, topicTitle.innerText)">
+     (keydown)="birthKeydown($event, topicTitle.innerText)">
 </div>
 <div #death contenteditable="true"
      class="title"
      [textContent]="data.person.Death"
      (input)="model=topicTitle.innerText"
-     (keydown)="deathKeydown($event, data.person.ID, topicTitle.innerText)">
+     (keydown)="deathKeydown($event, topicTitle.innerText)">
 </div>
 <img src="{{ imgUrl }}{{ data.person.ID }}/{{ data.type }}" class="thumb">
-<div class="controls">
+<mat-dialog-actions class="controls">
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu>
   <a href="{{googleUrl + data.person.FullName }}"
      target="'person">
-    <button class=""
-            waves-light waves-effect mdbRippleRadius
+    <button
+      mat-menu-item
+      class=""
+      waves-light waves-effect mdbRippleRadius
     >
   <mat-icon
     class="album-control">
@@ -29,22 +35,27 @@
       <span>Google</span>
     </button>
   </a>
-  <button class=""
-          waves-light waves-effect mdbRippleRadius
-          (click)="paste()"
+  <button
+    mat-menu-item
+    class=""
+    waves-light waves-effect mdbRippleRadius
+    (click)="paste()"
   >
   <mat-icon
     class="album-control">
     content_paste</mat-icon>
     <span>Plak</span>
   </button>
-  <button class=""
-          waves-light waves-effect mdbRippleRadius
-          (click)="toSearch()"
+  <button
+    mat-menu-item
+    class=""
+    waves-light waves-effect mdbRippleRadius
+    (click)="toSearch()"
   >
   <mat-icon
     class="album-control">
     assignment</mat-icon>
     <span>Albums</span>
   </button>
-</div>
+  </mat-menu>
+</mat-dialog-actions>
