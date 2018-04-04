@@ -3,4 +3,5 @@ export class Piece {
   ID: number;
   // LibraryCode: string;
   played: boolean;
+  checked: boolean;
 }

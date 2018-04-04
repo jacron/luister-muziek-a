@@ -1,7 +1,15 @@
 <div *ngFor="let piece of pieces">
   <mat-icon class="play"
+            *ngIf="!editable"
             [class.played]="piece.played"
             (click)="play(piece.ID)">
     play_circle_filled</mat-icon>
+  <mat-checkbox *ngIf="editable"
+        [(ngModel)]="piece.checked"
+  >
   <span>{{ piece.Name }}</span>
+  </mat-checkbox>
 </div>
+<button *ngIf="editable"
+        (click)="createCue()"
+>Create</button>

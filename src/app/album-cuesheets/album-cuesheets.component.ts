@@ -90,7 +90,7 @@ export class AlbumCuesheetsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.cuesheets);
+    // console.log(this.cuesheets);
   }
 
 }

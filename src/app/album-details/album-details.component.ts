@@ -5,6 +5,7 @@ import {MusicService} from '../music.service';
 import {MatDialog} from '@angular/material';
 import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DialogPiecesComponent} from '../dialog-pieces/dialog-pieces.component';
 
 @Component({
   selector: 'app-album-details',
@@ -56,8 +57,14 @@ export class AlbumDetailsComponent implements OnInit {
   }
 
   toggle() {
-    this.album.expanded = !this.album.expanded;
-    this.chevron = this.album.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
+    const dialogRef = this.dialog.open(DialogPiecesComponent, {
+      width: '99%',
+      data: {
+        pieces: this.album.pieces
+      }
+    });
+    // this.album.expanded = !this.album.expanded;
+    // this.chevron = this.album.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
   }
 
   ngOnInit() {

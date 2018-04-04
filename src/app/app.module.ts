@@ -11,7 +11,8 @@ import { SearchComponent } from './search/search.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
 import {
-  MatAutocompleteModule, MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatExpansionModule, MatIconModule, MatInputModule,
+  MatAutocompleteModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatExpansionModule,
+  MatIconModule, MatInputModule,
   MatMenuModule,
   MatSelectModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
@@ -32,6 +33,7 @@ import { AlbumMetatagsComponent } from './album-metatags/album-metatags.componen
 import { DialogAddComponent } from './dialog-add/dialog-add.component';
 import { DialogPersonComponent } from './dialog-person/dialog-person.component';
 import { DialogTagComponent } from './dialog-tag/dialog-tag.component';
+import { DialogPiecesComponent } from './dialog-pieces/dialog-pieces.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { DialogTagComponent } from './dialog-tag/dialog-tag.component';
     DialogPicComponent,
     DialogAddComponent,
     DialogPersonComponent,
-    DialogTagComponent
+    DialogTagComponent,
+    DialogPiecesComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -72,6 +75,7 @@ import { DialogTagComponent } from './dialog-tag/dialog-tag.component';
     MatDialogModule,
     MatMenuModule,
     MatTooltipModule,
+    MatCheckboxModule,
     HttpClientModule,
     AppRoutingModule
   ],
@@ -79,7 +83,8 @@ import { DialogTagComponent } from './dialog-tag/dialog-tag.component';
     DialogPicComponent,
     DialogAddComponent,
     DialogPersonComponent,
-    DialogTagComponent
+    DialogTagComponent,
+    DialogPiecesComponent
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [

@@ -9,6 +9,7 @@ import {MusicService} from '../music.service';
 })
 export class AlbumPiecesComponent implements OnInit {
   @Input('pieces') pieces: Piece[];
+  @Input('editable') editable: boolean;
 
   constructor( private musicService: MusicService ) { }
 
@@ -31,6 +32,17 @@ export class AlbumPiecesComponent implements OnInit {
     this.musicService.play(id).subscribe(
       (response) => this.onPlayed(response, id)
     );
+  }
+
+  createCue() {
+    const ids = [];
+    this.pieces.forEach((piece) => {
+      // console.log(piece);
+      if (piece.checked) {
+        ids.push(piece.ID);
+      }
+    });
+    console.log(ids);
   }
 
   ngOnInit() {
