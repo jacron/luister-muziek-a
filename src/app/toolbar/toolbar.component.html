@@ -17,6 +17,7 @@
     </div>
   </mat-toolbar-row>
   <mat-toolbar-row class="sub">
+    <!-- collection (navigated) -->
     <div>
       <mat-icon (click)="back()"
                 class="navig"
@@ -32,7 +33,8 @@
       >keyboard_arrow_right
       </mat-icon>
     </div>
-    <div *ngIf="album.mother">
+    <!-- collection (mother) -->
+    <div *ngIf="album.mother && album.mother.ID != searchParams.idcoll">
       <a (click)="toCollection()"
          style="position: relative; top: -5px;margin-left: 32px;">
         <span>{{ album.mother.Title }}</span>
@@ -41,7 +43,8 @@
     <span class="horizontal-spacer"></span>
 
     <!-- icons on the right -->
-    <button mat-icon-button [matMenuTriggerFor]="menu" (mousemove)="openMenu()">
+    <button mat-icon-button [matMenuTriggerFor]="menu"
+            (mousemove)="openMenu()">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">

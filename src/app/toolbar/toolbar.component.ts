@@ -33,7 +33,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   openMenu() {
-    this.trigger.openMenu();
+    // this.trigger.openMenu();
   }
 
   albumTitleKeydown(e, id, title) {
