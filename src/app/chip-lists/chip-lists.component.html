@@ -5,7 +5,7 @@
             (remove)="removeComposer(composer)">
     <img
       *ngIf="showimage"
-      src="{{ imgUrl }}{{ composer.ID }}/componist"
+      src="{{ imgUrl }}{{ composer.ID }}/componist/-1/20"
       (click)="openPicComposer(composer.ID)"
       class="avatar">
     <a (click)="toComposer(composer)">{{ composer.FullName }}</a>
@@ -18,7 +18,7 @@
             (remove)="removePerformer(performer)">
     <img
       *ngIf="showimage"
-      src="{{ imgUrl }}{{ performer.ID }}/performer"
+      src="{{ imgUrl }}{{ performer.ID }}/performer/-1/20"
       (click)="openPicPerformer(performer.ID)"
       class="avatar">
     <a (click)="toPerformer(performer)">{{ performer.FullName }}</a>

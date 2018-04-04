@@ -167,7 +167,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.album);
+    // console.log(this.album);
     this.albums = this.storageService.retrieveAlbums();
     this.enableNavig();
     this.searchTitle = this.storageService.retrieveSearchTitle();

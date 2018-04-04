@@ -22,7 +22,7 @@
     <div class="col">
       <app-album-metatags [album]="album"></app-album-metatags>
       <img *ngIf="album.album_back_image"
-           src="{{ imgBackUrl }}{{ album.ID }}/album"
+           src="{{ imgBackUrl }}{{ album.ID }}/album/100/-1"
            (click)="openPic('back')"
            class="back-thumb">
     </div>
