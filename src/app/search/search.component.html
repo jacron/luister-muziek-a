@@ -124,9 +124,12 @@
     <br>
 
   </div>
+  <!--<button mat-raised-button=""-->
+          <!--class="get-albums"-->
+          <!--(click)="getAlbumsComponist(false)">get covers</button>-->
   <button mat-raised-button=""
           class="get-albums"
-          (click)="getAlbumsComponist()">get</button>
+          (click)="getAlbumsComponist(true)">get list</button>
 </form>
 
 <div class="list">
@@ -134,24 +137,42 @@
     {{ albums.length }} albums
     <a *ngIf="selectedCollection && selectedCollection.website" (click)="websiteCollection()">
       - website</a>
-        <div class="row" *ngFor="let album of albums" >
-          <div class="col" style="max-width: 120px;">
-            <a (click)="toAlbum(album.ID)">
-              <img
-                attr.data-src="{{ imgUrl }}{{ album.ID }}/album/-1/100"
-                id="{{ album.ID }}"
-                class="thumb lazy"></a>
-          </div>
-          <div class="col">
-            <div>{{ album.Title }}</div>
-            <!--<app-album-persons [persons]="album.album_componisten"></app-album-persons>-->
-            <!--<app-album-persons [persons]="album.album_performers"></app-album-persons>-->
-            <app-chip-lists [album]="album"
-                            [removable]="false"
-                            [editable]="false"
-                            [showimage]="false"
-            ></app-chip-lists>
-          </div>
+    <!--<mat-checkbox [(ngModel)]="list"></mat-checkbox>-->
+    <div *ngIf="list">
+      <div class="row" *ngFor="let album of albums" >
+        <div class="col" style="max-width: 120px;">
+          <a (click)="toAlbum(album.ID)">
+            <img *ngIf="list"
+                 attr.data-src="{{ imgUrl }}{{ album.ID }}/album/-1/100"
+                 attr.albumid="{{ album.ID }}"
+                 class="lazy thumb"
+            >
+          </a>
         </div>
+        <div class="col" *ngIf="list">
+          <div>{{ album.Title }}</div>
+          <app-chip-lists [album]="album"
+                          [removable]="false"
+                          [editable]="false"
+                          [showimage]="false"
+          ></app-chip-lists>
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="!list">
+      <div class="row">
+        <div class="col"  *ngFor="let album of albums">
+          <a (click)="toAlbum(album.ID)">
+            <img
+                 attr.data-src="{{ imgUrl }}{{ album.ID }}/album/300/-1"
+                 attr.albumid="{{ album.ID }}"
+                 class="lazy details"
+            >
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

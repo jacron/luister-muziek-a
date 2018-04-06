@@ -60,7 +60,8 @@ export class AlbumDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogPiecesComponent, {
       width: '99%',
       data: {
-        pieces: this.album.pieces
+        pieces: this.album.pieces,
+        albumId: this.album.ID
       }
     });
     // this.album.expanded = !this.album.expanded;

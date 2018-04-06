@@ -33,6 +33,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   selectedPerformer: Person = null;
   selectedCollection: Album = null;
   selectedTag: Tag = null;
+  list = true;
 
   constructor(private musicService: MusicService,
               private route: ActivatedRoute,
@@ -103,7 +104,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   }
 
-  getAlbumsComponist() {
+  getAlbumsComponist(list) {
+    this.list = list;
     const idcomp = this.selectedComposer ? this.selectedComposer.ID : -1;
     const idperf = this.selectedPerformer ? this.selectedPerformer.ID : -1;
     const idcoll = this.selectedCollection ? this.selectedCollection.ID : -1;
@@ -140,17 +142,18 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   augment_album(album: Album) {
-    album.ID = +album.ID;
-    for (let i = 0; i < this.albums.length; i++) {
-      const a = this.albums[i];
-      if (this.albums[i].ID === album.ID) {
-        // console.log(album);
-        a.album_performers = album.album_performers;
-        a.album_componisten = album.album_componisten;
-        a.album_tags = album.album_tags;
-        a.pieces = album.pieces;
-        a.cuesheets = album.cuesheets;
-        break;
+    if (this.list) {
+      album.ID = +album.ID;
+      for (let i = 0; i < this.albums.length; i++) {
+        const a = this.albums[i];
+        if (this.albums[i].ID === album.ID) {
+          a.album_performers = album.album_performers;
+          a.album_componisten = album.album_componisten;
+          a.album_tags = album.album_tags;
+          a.pieces = album.pieces;
+          a.cuesheets = album.cuesheets;
+          break;
+        }
       }
     }
   }
@@ -161,7 +164,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
       if (that.elementInViewport(image)) {
         const dataSrc = image.getAttribute(that.lazyAttribute);
         if (dataSrc) {
-          that.musicService.getAlbumById(image.id).subscribe(
+          that.musicService.getAlbumById(image.getAttribute('albumid')).subscribe(
             (album: Album) => that.augment_album(album)
           );
           image.src = dataSrc;

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Piece} from '../classes/Piece';
 import {MusicService} from '../music.service';
+import {PieceService} from '../piece.service';
 
 @Component({
   selector: 'app-album-pieces',
@@ -9,9 +10,11 @@ import {MusicService} from '../music.service';
 })
 export class AlbumPiecesComponent implements OnInit {
   @Input('pieces') pieces: Piece[];
-  @Input('editable') editable: boolean;
 
-  constructor( private musicService: MusicService ) { }
+  constructor(
+    private musicService: MusicService,
+    private pieceService: PieceService
+  ) { }
 
   getPieceById(id) {
     for (let i = 0; i < this.pieces.length; i++) {
@@ -34,15 +37,8 @@ export class AlbumPiecesComponent implements OnInit {
     );
   }
 
-  createCue() {
-    const ids = [];
-    this.pieces.forEach((piece) => {
-      // console.log(piece);
-      if (piece.checked) {
-        ids.push(piece.ID);
-      }
-    });
-    console.log(ids);
+  displayName(s) {
+    return this.pieceService.displayName(s);
   }
 
   ngOnInit() {

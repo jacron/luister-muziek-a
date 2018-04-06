@@ -256,6 +256,21 @@ export class MusicService {
     );
   }
 
+  makeCuesheet(cueName, ids, albumid) {
+    const params = new HttpParams()
+      .set('cmd', 'makecuesheet')
+      .set('ids2', ids)
+      .set('name', cueName)
+      .set('albumid', albumid)
+    ;
+    console.log(params);
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   play(id) {
     const params = new HttpParams()
       .set('cmd', 'play')

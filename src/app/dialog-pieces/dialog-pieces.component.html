@@ -1,5 +1,29 @@
-<div class="row">
-  <div class="col pieces">
-    <app-album-pieces [pieces]="data.pieces" [editable]="true"></app-album-pieces>
-  </div>
+<div style="text-align: right">
+  <button (click)="selectAllPieces(true)">select all</button>
+  <button (click)="selectAllPieces(false)">select none</button>
 </div>
+<mat-dialog-content>
+  <!--(mousedown)="onMouseDown($event)"-->
+  <!--(mousemove)="onMouseMove($event)"-->
+  <!--(mouseup)="onMouseUp($event)"-->
+<!--&gt;-->
+  <div *ngFor="let piece of data.pieces; let i = index">
+    <mat-checkbox
+                  [(ngModel)]="piece.checked"
+                  (change)="onPieceCheck($event, piece)"
+                  (click)="onPieceClick($event, piece, i)"
+    >
+      <span>{{ displayName(piece.Name) }}</span>
+    </mat-checkbox>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <mat-form-field class="example-full-width" style="width: 100%">
+    <input matInput placeholder="Cuesheet Name" [(ngModel)]="cueName">
+    <button mat-button *ngIf="cueName" matSuffix mat-icon-button aria-label="Clear" (click)="cueName=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button (click)="createCue()">Create</button>
+  <button (click)="lcs()">lcs</button>
+</mat-dialog-actions>
