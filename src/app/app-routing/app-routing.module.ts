@@ -4,8 +4,8 @@ import {ToolsComponent} from '../tools/tools.component';
 import {PageNotFoundComponent} from '../page-not-found/page-not-found.component';
 import {RouterModule, Routes} from '@angular/router';
 import {WelcomeComponent} from '../welcome/welcome.component';
-import {SearchComponent} from '../search/search.component';
-import {AlbumDetailsComponent} from '../album-details/album-details.component';
+import {SearchComponent} from '../components/search/search.component';
+import {AlbumDetailsComponent} from '../components/album-details/album-details.component';
 
 const appRoutes: Routes = [
   { path: '', component: WelcomeComponent },

@@ -1,8 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "app/app-variables";
+
 li {
   list-style: none;
 }
 ul {
 
+}
+.horizontal-spacer {
+  flex: 1 1 auto;
+}
+.album-control {
+  cursor: pointer;
+  padding: 2px 4px;
+  margin: 0 6px;
+  transition: color $control-hover-transition-time;
+  font-size: 18px;
+  &:hover {
+    color: $control-hover-color;
+  }
 }

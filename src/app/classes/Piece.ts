@@ -4,4 +4,5 @@ export class Piece {
   // LibraryCode: string;
   played: boolean;
   checked: boolean;
+  created: boolean;
 }

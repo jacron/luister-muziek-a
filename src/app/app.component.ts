@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {MusicService} from './music.service';
+import {MusicService} from './services/music.service';
 
 @Component({
   selector: 'app-root',

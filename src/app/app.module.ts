@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { MusicService } from './music.service';
+import { MusicService } from './services/music.service';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from './components/search/search.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
 import {
@@ -17,24 +17,24 @@ import {
   MatSelectModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { AlbumThumbComponent } from './album-thumb/album-thumb.component';
+import { AlbumThumbComponent } from './components/album-thumb/album-thumb.component';
 import { AppRoutingModule} from './app-routing/app-routing.module';
-import { TypedNamePipe } from './typed-name.pipe';
-import { TypedTitlePipe } from './typed-title.pipe';
-import { AlbumDetailsComponent } from './album-details/album-details.component';
-import { AlbumPersonsComponent } from './album-persons/album-persons.component';
-import { AlbumPiecesComponent } from './album-pieces/album-pieces.component';
-import { AlbumCuesheetsComponent } from './album-cuesheets/album-cuesheets.component';
-import { DialogPicComponent } from './dialog-pic/dialog-pic.component';
-import { ChipListsComponent } from './chip-lists/chip-lists.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { TypedNamePipe } from './pipes/typed-name.pipe';
+import { TypedTitlePipe } from './pipes/typed-title.pipe';
+import { AlbumDetailsComponent } from './components/album-details/album-details.component';
+import { AlbumPersonsComponent } from './components/album-persons/album-persons.component';
+import { AlbumPiecesComponent } from './components/album-pieces/album-pieces.component';
+import { AlbumCuesheetsComponent } from './components/album-cuesheets/album-cuesheets.component';
+import { DialogPicComponent } from './dialogs/dialog-pic/dialog-pic.component';
+import { ChipListsComponent } from './components/chip-lists/chip-lists.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { StorageService} from './storage.service';
-import { AlbumMetatagsComponent } from './album-metatags/album-metatags.component';
-import { DialogAddComponent } from './dialog-add/dialog-add.component';
-import { DialogPersonComponent } from './dialog-person/dialog-person.component';
-import { DialogTagComponent } from './dialog-tag/dialog-tag.component';
-import { DialogPiecesComponent } from './dialog-pieces/dialog-pieces.component';
-import {PieceService} from './piece.service';
+import { AlbumMetatagsComponent } from './components/album-metatags/album-metatags.component';
+import { DialogAddComponent } from './dialogs/dialog-add/dialog-add.component';
+import { DialogPersonComponent } from './dialogs/dialog-person/dialog-person.component';
+import { DialogTagComponent } from './dialogs/dialog-tag/dialog-tag.component';
+import { DialogPiecesComponent } from './dialogs/dialog-pieces/dialog-pieces.component';
+import {PieceService} from './services/piece.service';
 
 @NgModule({
   declarations: [

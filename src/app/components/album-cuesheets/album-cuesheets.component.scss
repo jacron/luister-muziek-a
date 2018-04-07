@@ -1,0 +1,35 @@
+@import "../../app-variables";
+
+.play {
+  opacity: .6;
+  position: relative;
+  top: 7px;
+  color: orange;
+  cursor: pointer;
+}
+.played {
+  color: brown;
+}
+.invalid {
+  color: red;
+}
+.edit,
+.rename,
+.delete {
+  opacity: .6;
+  position: relative;
+  top: 4px;
+  color: brown;
+  cursor: pointer;
+  font-size: 14px;
+  transition: color $control-hover-transition-time;
+  &:hover {
+    color: $control-hover-color;
+  }
+}
+.rename {
+  color: green;
+}
+.delete {
+  color: red;
+}

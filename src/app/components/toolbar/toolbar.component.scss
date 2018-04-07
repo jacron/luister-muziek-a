@@ -1,0 +1,29 @@
+@import "../../app-variables";
+
+.sub {
+  font-size: 14px;
+  color: #999999;
+  height: 30px;
+  padding-bottom: 18px;
+}
+.title {
+  font-size: 20px;
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+.navig {
+  cursor: pointer;
+}
+.disabled {
+  opacity: .3;
+}
+.edit-pieces {
+  color: blue !important;
+}
+.edit-additionals {
+  color: green !important;
+}
+.edit-tags {
+  color: brown !important;
+}

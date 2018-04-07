@@ -1,0 +1,36 @@
+<mat-dialog-content>
+  <!--(mousedown)="onMouseDown($event)"-->
+  <!--(mousemove)="onMouseMove($event)"-->
+  <!--(mouseup)="onMouseUp($event)"-->
+<!--&gt;-->
+  <div *ngFor="let piece of data.pieces; let i = index">
+    <mat-checkbox
+                  [(ngModel)]="piece.checked"
+                  (change)="onPieceCheck($event, piece)"
+                  (click)="onPieceClick($event, piece, i)"
+                  [class.created]="piece.created"
+    >
+      <span>{{ displayName(piece.Name) }}</span>
+    </mat-checkbox>
+  </div>
+  <div *ngFor="let cue of created">
+    {{ cue }}
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <mat-form-field class="example-full-width" style="width: 100%">
+    <input matInput placeholder="Cuesheet Name" [(ngModel)]="cueName">
+    <button mat-button *ngIf="cueName"
+            matSuffix mat-icon-button aria-label="Clear"
+            (click)="cueName=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-raised-button (click)="lcs()">lcs</button>
+  <button mat-raised-button (click)="createCue()">Create</button>
+  <button mat-raised-button (click)="selectAllPieces(false)">select none</button>
+  <button mat-raised-button (click)="selectAllPieces(true)">select all</button>
+  <!--<button mat-raised-button (click)="autoCreate()">Auto</button>-->
+  <span class="horizontal-spacer"></span>
+  <button mat-raised-button (click)="reload()">Reload</button>
+</mat-dialog-actions>

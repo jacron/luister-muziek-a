@@ -1,7 +1,0 @@
-<div *ngFor="let piece of pieces">
-  <mat-icon class="play"
-            [class.played]="piece.played"
-            (click)="play(piece.ID)">
-    play_circle_filled</mat-icon>
-  <span>{{ displayName(piece.Name) }}</span>
-</div>

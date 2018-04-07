@@ -1,0 +1,124 @@
+<mat-toolbar style="margin: -14px 0 0;" *ngIf="album">
+  <mat-toolbar-row>
+    <div #topicTitle
+         contenteditable="true"
+         class="title"
+         [textContent]="album.Title"
+         (input)="model=topicTitle.innerText"
+         (keydown)="albumTitleKeydown($event, album.ID, topicTitle.innerText)">
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="sub">
+    <div #topicDescription
+         contenteditable="true"
+         [textContent]="album.Description"
+         (input)="model=topicDescription.innerText"
+         (keydown)="albumDescriptionKeydown($event, album.ID, topicDescription.innerText)">
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="sub">
+    <!-- collection (navigated) -->
+    <div>
+      <mat-icon (click)="back()"
+                class="navig"
+                [class.disabled]="!navBackwards"
+      >keyboard_arrow_left
+      </mat-icon>
+      <a (click)="toSearch()" style="position: relative; top: -7px;">
+        <span>{{ searchTitle }}</span>
+      </a>
+      <mat-icon (click)="forward()"
+                class="navig"
+                [class.disabled]="!navForwards"
+      >keyboard_arrow_right
+      </mat-icon>
+    </div>
+    <!-- collection (mother) -->
+    <div *ngIf="album.mother && album.mother.ID != searchParams.idcoll">
+      <a (click)="toCollection()"
+         style="position: relative; top: -5px;margin-left: 32px;">
+        <span>{{ album.mother.Title }}</span>
+      </a>
+    </div>
+    <span class="horizontal-spacer"></span>
+
+    <!-- icons on the right -->
+    <button mat-icon-button [matMenuTriggerFor]="menu"
+            (mousemove)="openMenu()">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <!-- make cusheets from pieces -->
+      <button mat-menu-item
+              (click)="editPieces()"
+      >
+        <mat-icon class="album-control edit-pieces"
+                  waves-light waves-effect mdbRippleRadius
+        >edit
+        </mat-icon>
+        <span>New Cuesheets</span>
+      </button>
+      <!-- edit additionals (composer/performer/tag) -->
+      <button mat-menu-item
+              (click)="addSome()"
+      >
+        <mat-icon class="album-control edit-additionals"
+                  waves-light waves-effect mdbRippleRadius
+        >edit
+        </mat-icon>
+        <span>Edit Additionals</span>
+      </button>
+      <!-- open tag editor -->
+      <button mat-menu-item
+              (click)="tagedit()"
+      >
+        <mat-icon class="album-control edit-tags"
+                  waves-light waves-effect mdbRippleRadius
+        >edit
+        </mat-icon>
+        <span>Edit Tags</span>
+      </button>
+      <!-- open album in 'music' -->
+      <button mat-menu-item
+              (click)="openMusic(album.ID)"
+      >
+        <mat-icon class="album-control"
+                  waves-light waves-effect mdbRippleRadius
+        >queue_music
+        </mat-icon>
+        <span>Open in 'music'</span>
+      </button>
+      <!-- open in Finder -->
+      <button mat-menu-item
+              (click)="openFinder(album.ID)"
+      >
+        <mat-icon class="album-control"
+                  waves-light waves-effect mdbRippleRadius
+        >open_in_browser
+        </mat-icon>
+        <span>Reveal in Finder</span>
+      </button>
+      <!-- Reload pieces -->
+      <button mat-menu-item
+              (click)="refetch(album.ID)"
+      >
+        <mat-icon class="album-control"
+                  waves-light waves-effect mdbRippleRadius
+        >replay
+        </mat-icon>
+        <span>Reload Pieces</span>
+      </button>
+      <!-- to website (if any) -->
+      <button mat-menu-item
+              *ngIf="album && album.website"
+              (click)="website()"
+      >
+        <mat-icon class="album-control"
+                  waves-light waves-effect mdbRippleRadius
+        >web
+        </mat-icon>
+        <span>Go to Website</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
