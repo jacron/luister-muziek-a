@@ -14,6 +14,15 @@ export class PieceService {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
+  updatePieceName(pieceId, pieceName, name, albumId) {
+    const oldDisplayName = this.displayName(pieceName),
+      newName = pieceName.replace(oldDisplayName, name);
+    this.musicService.updatePieceName(pieceId, albumId, newName)
+      .subscribe(
+        (response) => console.log(response)
+      );
+  }
+
   displayName(s) {
     // ltrim numeric
     const parts = s.split(' ');
@@ -99,7 +108,9 @@ export class PieceService {
   }
 
   setChecked(keys: number[], pieces: Piece[]) {
-    keys.sort();
+    keys.sort((a, b) => {
+      return a - b;
+    });
     console.log(keys);
     for (let k = 1; k < keys.length; k++) {
       const current = keys[k - 1],

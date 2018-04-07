@@ -11,10 +11,15 @@
                   [(ngModel)]="piece.checked"
                   (change)="onPieceCheck($event, piece)"
                   (click)="onPieceClick($event, piece, i)"
-                  [class.created]="piece.created"
     >
-      <span>{{ displayName(piece.Name) }}</span>
+      <!--<span>{{ displayName(piece.Name) }}</span>-->
     </mat-checkbox>
+    <span #topicTitle contenteditable="true"
+          [textContent]="displayName(piece.Name)"
+          (input)="model=topicTitle.innerText"
+          [class.created]="piece.created"
+          (keydown)="nameKeydown($event, piece, topicTitle.innerText)">
+  </span>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>

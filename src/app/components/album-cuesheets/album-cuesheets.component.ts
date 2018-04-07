@@ -15,7 +15,8 @@ export class AlbumCuesheetsComponent implements OnInit {
   @Input('albumid') albumid: number;
   renaming = environment.renamingCuesheet;
   deleting = environment.deletingCuesheet;
-  freedbUrl = environment.musicbrainz;  // freedbUrl;
+  freedbUrl = environment.freedbUrl;
+  musicbrainzUrl = environment.musicbrainz;
   amazonUrl = environment.amazonUrl;
 
   constructor(  private musicService: MusicService ) { }

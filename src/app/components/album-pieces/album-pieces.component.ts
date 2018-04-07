@@ -43,27 +43,17 @@ export class AlbumPiecesComponent implements OnInit {
     return this.pieceService.displayName(s);
   }
 
-  updatePieceName(id, name) {
-    this.musicService.updatePieceName(id, this.album.ID, name)
-      .subscribe(
-      (response) => console.log(response)
-    );
-  }
-
   nameKeydown(e, piece: Piece, name) {
-    const oldDisplayName = this.displayName(piece.Name),
-          newName = piece.Name.replace(oldDisplayName, name);
     if (e.key === 'Enter') {
-      this.updatePieceName(piece.ID, newName);
+      this.pieceService.updatePieceName(piece.ID, piece.Name, name, this.album.ID);
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.updatePieceName(piece.ID, newName);
+      this.pieceService.updatePieceName(piece.ID, piece.Name, name, this.album.ID);
     }
   }
 
   ngOnInit() {
-    // console.log(this.pieces);
   }
 
 }

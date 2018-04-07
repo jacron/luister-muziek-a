@@ -18,6 +18,11 @@
   </span>
   <span *ngIf="cuesheet.discid || cuesheet.asin">
     [
+    <a href="{{ musicbrainzUrl }}{{ cuesheet.discid }}"
+       target="musicbrainz" tabindex="-1"
+       title="musicbrainz"
+    >
+      {{ cuesheet.discid }}</a>,
     <a href="{{ freedbUrl }}{{ cuesheet.discid }}"
        target="freedb" tabindex="-1"
        title="freedb"

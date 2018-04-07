@@ -12,9 +12,6 @@ import {Album} from '../../classes/Album';
 })
 export class DialogPiecesComponent implements OnInit {
   cueName: string;
-  // moving = false;
-  // yStart: number;
-  // yEnd: number;
   created: string[] = [];
   @ViewChildren(MatCheckbox, { read: ElementRef }) checkBoxes: QueryList<MatCheckbox>;
 
@@ -64,6 +61,18 @@ export class DialogPiecesComponent implements OnInit {
     return this.pieceService.displayName(s);
   }
 
+  nameKeydown(e, piece: Piece, name) {
+    if (e.key === 'Enter') {
+      this.pieceService.updatePieceName(piece.ID, piece.Name, name,
+        this.data.albumId);
+      e.preventDefault();
+    }
+    if (e.key === 'Tab') {
+      this.pieceService.updatePieceName(piece.ID, piece.Name, name,
+        this.data.albumId);
+    }
+  }
+
   selectAllPieces(mode) {
     this.data.pieces.forEach((piece) => {
       piece.checked = mode;
@@ -107,45 +116,6 @@ export class DialogPiecesComponent implements OnInit {
       () => that.created.push(that.cueName)
     );
   }
-
-  // onMouseDown(e) {
-  //   console.log('down', e);
-  //   this.moving = true;
-  //   this.yStart = e.clientY;
-  // }
-  //
-  // onMouseMove(e) {
-  //   // if (this.moving) {
-  //     // console.log('move', e);
-  //   // }
-  // }
-  //
-  // onMouseUp(e) {
-  //   console.log('up', e);
-  //   this.moving = false;
-  //   this.yEnd = e.clientY;
-  //   console.log(this.checkBoxes);
-  //   const ids = [];
-  //   this.checkBoxes.forEach((box) => {
-  //     // console.log(box);
-  //     const top = box.nativeElement.offsetTop,
-  //       id = box.nativeElement.id;
-  //     console.log(top, id);
-  //     if (this.yStart < top && top < this.yEnd) {
-  //       const parts = id.split('-');
-  //       ids.push(+parts[2]);
-  //     }
-  //   });
-  //   console.log(ids);
-  //   const pieces = this.data.pieces;
-  //   for (let k = 0; k < pieces.length; k++) {
-  //     ids.forEach((id) => {
-  //       if (k === id) {
-  //         pieces[k].checked = true;
-  //       }
-  //     });
-  //   }
-  // }
 
   ngOnInit() {
   }
