@@ -24,15 +24,6 @@ export class DialogPiecesComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  // getPieceById(id) {
-  //   for (let i = 0; i < this.data.pieces.length; i++) {
-  //     if (this.data.pieces[i].ID === id) {
-  //       return this.data.pieces[i];
-  //     }
-  //   }
-  //   return null;
-  // }
-
   onPieceCheck(e, piece: Piece) {
     if (!this.cueName) {
       this.cueName = this.displayName(piece.Name);
@@ -89,67 +80,9 @@ export class DialogPiecesComponent implements OnInit {
     }
   }
 
-  similar() {
-    const titles = [],
-     ids = [];
-    let active = false,
-      common = '',
-      old_common = '';
-    for (let i = 0; i < this.data.pieces; i++) {
-      const piece: Piece = this.data.pieces[i];
-      if (piece.checked) {
-        active = true;
-      }
-      if (active) {
-        piece.checked = false;
-        ids.push(piece.ID);
-        titles.push(this.pieceService.displayName(piece.Name));
-        common = this.pieceService.makeCuesheetName(titles);
-        if (titles.length > 2 && common.length < old_common.length - 2) {
-          titles.pop();
-          ids.pop();
-          piece.checked = true;
-          break;
-        }
-        old_common = common;
-      }
-    }
-    return {
-      titles: titles,
-      ids: ids
-    };
-  }
-
-  lcs_pieces() {
-    let titles = [],
-        ids = [];
-    this.data.pieces.forEach((piece: Piece) => {
-      if (piece.checked) {
-        titles.push(this.pieceService.displayName(piece.Name));
-        ids.push(piece.ID.toString());
-      }
-    });
-    if (titles.length === 1) {
-      const data = this.similar();
-      titles = data.titles;
-      ids = data.ids;
-    }
-    this.cueName = this.pieceService.makeCuesheetName(titles);
-    return ids;
-  }
-
   autoCreate() {
     this.checkOne();
-    let ids = [];
-    do {
-      ids = this.lcs_pieces();
-      if (ids.length) {
-        this.musicService.makeCuesheet(this.cueName, ids,
-          this.data.albumId).subscribe(
-          () => this.created.push(this.cueName)
-        );
-      }
-    } while (ids.length);
+    this.pieceService.autoCuesheets(this.data.albumId, this.data.pieces);
   }
 
   getIds() {

@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import {Piece} from '../classes/Piece';
+import {MusicService} from './music.service';
 
 @Injectable()
 export class PieceService {
 
-  constructor() { }
+  constructor(
+    private musicService: MusicService
+  ) { }
 
   isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -105,6 +109,76 @@ export class PieceService {
         }
       }
     }
+  }
+
+  similar(pieces) {
+    const titles = [],
+      ids = [];
+    let active = false,
+      common = '',
+      old_common = '';
+    for (let i = 0; i < pieces; i++) {
+      const piece: Piece = pieces[i];
+      if (piece.checked) {
+        active = true;
+      }
+      if (active) {
+        piece.checked = false;
+        ids.push(piece.ID);
+        titles.push(this.displayName(piece.Name));
+        common = this.makeCuesheetName(titles);
+        if (titles.length > 2 && common.length < old_common.length - 2) {
+          titles.pop();
+          ids.pop();
+          piece.checked = true;
+          break;
+        }
+        old_common = common;
+      }
+    }
+    return {
+      titles: titles,
+      ids: ids
+    };
+  }
+
+  lcs_pieces(pieces) {
+    let titles = [],
+      ids = [];
+    pieces.forEach((piece: Piece) => {
+      if (piece.checked) {
+        titles.push(this.displayName(piece.Name));
+        ids.push(piece.ID.toString());
+      }
+    });
+    if (titles.length === 1) {
+      const data = this.similar(pieces);
+      titles = data.titles;
+      ids = data.ids;
+    }
+    const cueName = this.makeCuesheetName(titles);
+    return {
+      ids: ids,
+      cueName: cueName
+    };
+  }
+
+  afterCreation(cueName) {
+    console.log(cueName);
+    // this.created.push(cueName)
+  }
+
+  autoCuesheets(albumId, pieces) {
+    let data;
+    do {
+      data = this.lcs_pieces(pieces);
+      if (data.ids.length) {
+        this.musicService.makeCuesheet(data.cueName, data.ids,
+          albumId).subscribe(
+          () => this.afterCreation(data.cueName)
+        );
+      }
+    } while (data.ids.length);
   }
 
 }
