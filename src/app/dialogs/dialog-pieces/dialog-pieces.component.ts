@@ -82,7 +82,10 @@ export class DialogPiecesComponent implements OnInit {
 
   autoCreate() {
     this.checkOne();
-    this.pieceService.autoCuesheets(this.data.albumId, this.data.pieces);
+    const that = this;
+    this.pieceService.autoCuesheets(this.data.albumId, this.data.pieces).then(
+      (titles: string[]) => that.created = titles
+    );
   }
 
   getIds() {

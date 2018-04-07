@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Piece} from '../classes/Piece';
 import {MusicService} from './music.service';
+import {forkJoin} from 'rxjs/observable/forkJoin';
 
 @Injectable()
 export class PieceService {
@@ -89,24 +90,39 @@ export class PieceService {
     return common;
   }
 
-  selectSiblingsInbetween(e, i, pieces) {
+  getKeys(pieces: Piece[]): number[] {
     const keys = [];
-    if (e.shiftKey) {
-      for (let k = 0; k < pieces.length; k++) {
-        if (pieces[k].checked) { keys.push(k); }
-      }
-      keys.push(i);
+    for (let k = 0; k < pieces.length; k++) {
+      if (pieces[k].checked) { keys.push(k); }
     }
-    // console.log(keys);
-    if (keys.length > 1) {
-      for (let k = 1; k < keys.length; k++) {
-        const first = keys[k - 1],
-          last = keys[k];
-        if (last - first > 1) {
-          for (let j = first + 1; j <= last; j++) {
-            pieces[j].checked = true;
-          }
+    return keys;
+  }
+
+  setChecked(keys: number[], pieces: Piece[]) {
+    keys.sort();
+    console.log(keys);
+    for (let k = 1; k < keys.length; k++) {
+      const current = keys[k - 1],
+            previous = keys[k];
+      if (previous - current > 1) {
+        for (let j = current + 1; j <= previous; j++) {
+          pieces[j].checked = true;
         }
+      }
+    }
+  }
+
+  selectSiblingsInbetween(e, i: number, pieces: Piece[]) {
+    /**
+     * Als je een item aanklikt met de shit-toets ingedrukt,
+     * wil je dat tussenliggende items eveneens geselecteerd worden.
+     * @type {any[]}
+     */
+    if (e.shiftKey) {
+      const keys = this.getKeys(pieces);
+      keys.push(i); // add currently clicked item
+      if (keys.length > 1) {
+        this.setChecked(keys, pieces);
       }
     }
   }
@@ -117,7 +133,7 @@ export class PieceService {
     let active = false,
       common = '',
       old_common = '';
-    for (let i = 0; i < pieces; i++) {
+    for (let i = 0; i < pieces.length; i++) {
       const piece: Piece = pieces[i];
       if (piece.checked) {
         active = true;
@@ -127,6 +143,7 @@ export class PieceService {
         ids.push(piece.ID);
         titles.push(this.displayName(piece.Name));
         common = this.makeCuesheetName(titles);
+        // evaluate similarity
         if (titles.length > 2 && common.length < old_common.length - 2) {
           titles.pop();
           ids.pop();
@@ -151,6 +168,7 @@ export class PieceService {
         ids.push(piece.ID.toString());
       }
     });
+    console.log(titles, ids);
     if (titles.length === 1) {
       const data = this.similar(pieces);
       titles = data.titles;
@@ -163,22 +181,25 @@ export class PieceService {
     };
   }
 
-  afterCreation(cueName) {
-    console.log(cueName);
-    // this.created.push(cueName)
-  }
-
   autoCuesheets(albumId, pieces) {
-    let data;
-    do {
-      data = this.lcs_pieces(pieces);
-      if (data.ids.length) {
-        this.musicService.makeCuesheet(data.cueName, data.ids,
-          albumId).subscribe(
-          () => this.afterCreation(data.cueName)
-        );
-      }
-    } while (data.ids.length);
+    const promise = new Promise((resolve, reject) => {
+      let data;
+      const q = [];
+      const titles = [];
+      do {
+        data = this.lcs_pieces(pieces);
+        console.log(data);
+        if (data.ids.length) {
+          q.push(this.musicService.makeCuesheet(data.cueName, data.ids,
+            albumId));
+          titles.push(data.cueName);
+        }
+      } while (data.ids.length);
+      forkJoin(q).subscribe(
+        () => resolve(titles)
+      );
+    });
+    return promise;
   }
 
 }
