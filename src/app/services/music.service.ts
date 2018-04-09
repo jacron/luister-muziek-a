@@ -182,6 +182,31 @@ export class MusicService {
     );
   }
 
+  pastePersonImage(personId, type) {
+    const params = new HttpParams()
+      .set('cmd', 'paste_person')
+      .set('id', personId)
+      .set('type', type)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(requestUrl, params, {
+      headers: headers
+    });
+  }
+
+  pasteFolder(albumid) {
+    const params = new HttpParams()
+      .set('cmd', 'paste_folder')
+      .set('albumid', albumid)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   openwebsite(albumid) {
     const params = new HttpParams()
       .set('cmd', 'openwebsite')
@@ -301,19 +326,6 @@ export class MusicService {
       .set('cmd', 'update_album_description')
       .set('albumid', id)
       .set('description', text);
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(requestUrl, params, {
-      headers: headers
-    });
-  }
-
-  pastePersonImage(personId, type) {
-    const params = new HttpParams()
-      .set('cmd', 'paste_person')
-      .set('id', personId)
-      .set('type', type)
-    ;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(requestUrl, params, {
