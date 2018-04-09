@@ -5,6 +5,7 @@ import {forkJoin} from 'rxjs/observable/forkJoin';
 import {MusicService} from '../../services/music.service';
 import {AlbumDetailsComponent} from '../../components/album-details/album-details.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'app-dialog-add',
@@ -21,6 +22,7 @@ export class DialogAddComponent implements OnInit {
   tags: Tag[];
 
   constructor(private musicService: MusicService,
+              private personService: PersonService,
               public dialogRef: MatDialogRef<AlbumDetailsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any
               ) { }
@@ -37,17 +39,13 @@ export class DialogAddComponent implements OnInit {
   }
 
   renderComposerOpt(opt) {
-    if (this.selectedComposer) {
-      return opt.FullName.replace(this.selectedComposer, '<b>' + this.selectedComposer + '</b>');
-    }
-    return opt.FullName;
+    return this.personService.hightlightMatch(opt.FullName,
+      this.selectedComposer);
   }
 
   renderPerformerOpt(opt) {
-    if (this.selectedPerformer) {
-      return opt.FullName.replace(this.selectedPerformer, '<b>' + this.selectedPerformer + '</b>');
-    }
-    return opt.FullName;
+    return this.personService.hightlightMatch(opt.FullName,
+      this.selectedPerformer);
   }
 
   displayNameFn(person): string {

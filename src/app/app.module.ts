@@ -35,6 +35,7 @@ import { DialogPersonComponent } from './dialogs/dialog-person/dialog-person.com
 import { DialogTagComponent } from './dialogs/dialog-tag/dialog-tag.component';
 import { DialogPiecesComponent } from './dialogs/dialog-pieces/dialog-pieces.component';
 import {PieceService} from './services/piece.service';
+import {PersonService} from './services/person.service';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import {PieceService} from './services/piece.service';
   providers: [
     MusicService,
     PieceService,
+    PersonService,
     TypedNamePipe,
     TypedTitlePipe,
     StorageService,

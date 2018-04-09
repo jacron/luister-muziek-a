@@ -14,7 +14,12 @@
        (keydown)="titleKeydown($event, cuesheet.ID, topicTitle.innerText)">
   </span>
   <span *ngIf="cuesheet.cue.performer">
-    ({{ cuesheet.cue.performer }})
+    <span>(</span>
+    <a (click)="addPerformer(p)"
+       *ngFor="let p of cuesheet.cue.performers; let i = index">
+      {{ p }}<span *ngIf="i < cuesheet.cue.performers.length - 1">,</span>
+    </a>
+    <span>)</span>
   </span>
   <span *ngIf="cuesheet.discid || cuesheet.asin">
     [

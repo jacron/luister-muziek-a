@@ -25,8 +25,8 @@
       <mat-autocomplete #auto1="matAutocomplete"
                         (optionSelected)="onSelectionChange('composer')"
                         [displayWith]="displayNameFn">
-        <mat-option *ngFor="let opt of (composers | typedName:selectedComposer)" [value]="opt">
-          {{ opt.Name }}
+        <mat-option *ngFor="let opt of (composers | typedName:selectedComposer)"
+                    [value]="opt" [innerHTML]="renderComposerOpt(opt)">
         </mat-option>
       </mat-autocomplete>
     <div *ngIf="selectedComposer" class="reset" (click)="selectedComposer = null">
@@ -61,8 +61,8 @@
     <mat-autocomplete #auto2="matAutocomplete"
                       (optionSelected)="onSelectionChange('performer')"
                       [displayWith]="displayNameFn">
-      <mat-option *ngFor="let opt of (performers | typedName:selectedPerformer)" [value]="opt">
-        {{ opt.Name }}
+      <mat-option *ngFor="let opt of (performers | typedName:selectedPerformer)"
+                  [value]="opt" [innerHTML]="renderPerformerOpt(opt)">
       </mat-option>
     </mat-autocomplete>
     <div *ngIf="selectedPerformer" class="reset" (click)="selectedPerformer = null">
@@ -115,7 +115,8 @@
                       [displayWith]="displayNameFn"
                       (optionSelected)="onSelectionChange()"
                       #tagSelect>
-      <mat-option *ngFor="let opt of (tags | typedName:selectedTag)" [value]="opt">
+      <mat-option *ngFor="let opt of (tags | typedName:selectedTag)"
+                  [value]="opt">
         {{ opt.Name }}
       </mat-option>
     </mat-autocomplete>

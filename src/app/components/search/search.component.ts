@@ -10,6 +10,7 @@ import {StorageService} from '../../storage.service';
 import {SearchParams} from '../../classes/SearchParams';
 import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component';
 import {MatDialog} from '@angular/material';
+import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'app-search',
@@ -36,6 +37,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   list = true;
 
   constructor(private musicService: MusicService,
+              private personService: PersonService,
               private route: ActivatedRoute,
               private router: Router,
               private dialog: MatDialog,
@@ -347,6 +349,16 @@ export class SearchComponent implements OnInit, AfterViewInit {
   openPicPerformer(): void {
     const imgUrl = this.imgUrl + this.selectedPerformer.ID + '/performer';
     this.openPicDialog(imgUrl);
+  }
+
+  renderComposerOpt(opt) {
+    return this.personService.hightlightMatch(opt.FullName,
+      this.selectedComposer);
+  }
+
+  renderPerformerOpt(opt) {
+    return this.personService.hightlightMatch(opt.FullName,
+      this.selectedPerformer);
   }
 
   ngAfterViewInit() {

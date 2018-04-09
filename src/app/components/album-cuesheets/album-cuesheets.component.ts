@@ -30,6 +30,10 @@ export class AlbumCuesheetsComponent implements OnInit {
     return null;
   }
 
+  addPerformer(name) {
+    console.log(name.trim());
+  }
+
   onPlayed(response, id) {
     console.log(response);
     const cuesheet = this.getCuesheetById(id);
