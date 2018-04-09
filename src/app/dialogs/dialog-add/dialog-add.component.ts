@@ -36,8 +36,22 @@ export class DialogAddComponent implements OnInit {
     }
   }
 
+  renderComposerOpt(opt) {
+    if (this.selectedComposer) {
+      return opt.FullName.replace(this.selectedComposer, '<b>' + this.selectedComposer + '</b>');
+    }
+    return opt.FullName;
+  }
+
+  renderPerformerOpt(opt) {
+    if (this.selectedPerformer) {
+      return opt.FullName.replace(this.selectedPerformer, '<b>' + this.selectedPerformer + '</b>');
+    }
+    return opt.FullName;
+  }
+
   displayNameFn(person): string {
-    return person ? person.Name : person;
+    return person ? person.FullName : person;
   }
 
   afterNewTag(response) {
@@ -101,18 +115,18 @@ export class DialogAddComponent implements OnInit {
       );
   }
 
-  getFullName(person: Person) {
-    const parts = person.Name.split(', ');
-    if (parts.length > 1) {
-      return parts[1] + ' ' + parts[0];
-    }
-    return person.Name;
-  }
+  // getFullName(person: Person) {
+  //   const parts = person.Name.split(', ');
+  //   if (parts.length > 1) {
+  //     return parts[1] + ' ' + parts[0];
+  //   }
+  //   return person.Name;
+  // }
 
   onComposerAdded(response) {
     console.log(response);
     const composer = this.selectedComposer;
-    composer.FullName = this.getFullName(composer);
+    // composer.FullName = this.getFullName(composer);
     this.data.album.album_componisten.push(composer);
     this.selectedComposer = null;
   }
@@ -127,7 +141,7 @@ export class DialogAddComponent implements OnInit {
   onPerformerAdded(response) {
     console.log(response);
     const performer = this.selectedPerformer;
-    performer.FullName = this.getFullName(performer);
+    // performer.FullName = this.getFullName(performer);
     this.data.album.album_performers.push(performer);
     this.selectedPerformer = null;
   }

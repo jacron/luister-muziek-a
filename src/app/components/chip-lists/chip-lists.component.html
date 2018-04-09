@@ -6,7 +6,7 @@
     <img
       *ngIf="showimage"
       src="{{ imgUrl }}{{ composer.ID }}/componist/-1/20"
-      (click)="openPicComposer(composer.ID)"
+      (click)="openPicComposer(composer)"
       class="avatar">
     <a (click)="toComposer(composer)">{{ composer.FullName }}</a>
     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -19,7 +19,7 @@
     <img
       *ngIf="showimage"
       src="{{ imgUrl }}{{ performer.ID }}/performer/-1/20"
-      (click)="openPicPerformer(performer.ID)"
+      (click)="openPicPerformer(performer)"
       class="avatar">
     <a (click)="toPerformer(performer)">{{ performer.FullName }}</a>
     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>

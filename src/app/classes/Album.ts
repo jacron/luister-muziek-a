@@ -18,5 +18,7 @@ export class Album {
   mother: Album;
   website: string;
   // album_folder_image: boolean;
+
+  // constructor() { this.expanded = true; }
 }
 

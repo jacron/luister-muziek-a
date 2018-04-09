@@ -70,7 +70,8 @@ export class MusicService {
     const params = new HttpParams()
       .set('cmd', 'componisten')
       .set('selection', selection)
-      .set('format', '%Last, %First');
+      // .set('format', '%Last, %First')
+    ;
     return this.http.get(requestUrl, {
       responseType: 'json',
       params});
@@ -80,7 +81,8 @@ export class MusicService {
     const params = new HttpParams()
       .set('cmd', 'performers')
       .set('selection', JSON.stringify(selection))
-      .set('format', '%Last, %First');
+      // .set('format', '%Last, %First')
+    ;
     return this.http.get(requestUrl, {
       responseType: 'json',
       params});

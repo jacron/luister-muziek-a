@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {AlbumDetailsComponent} from '../../components/album-details/album-details.component';
 
@@ -11,10 +11,14 @@ export class DialogPicComponent implements OnInit {
 
   imgUrl: string;
   mode: string;
+  name: string;
+  @ViewChild('picContainer') picContainer: ElementRef;
 
   constructor(
     // public dialogRef: MatDialogRef<AlbumDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private renderer: Renderer2
+
   ) {
     // console.log(data);
     }
@@ -36,7 +40,15 @@ export class DialogPicComponent implements OnInit {
 
   ngOnInit() {
     this.mode = this.data.mode;
+    this.name = this.data.name;
+    console.log(this.data);
     this.toggleUrl();
+
+    // console.log(this.picContainer);
+    // console.log(this.renderer);
+    // const el = this.picContainer.nativeElement;
+    // this.picContainer.setStyle('height: 200px');
+    // this.picContainer.nativeElement.clientHeight = 200;
   }
 
 }

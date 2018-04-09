@@ -63,21 +63,22 @@ export class ChipListsComponent implements OnInit {
     );
   }
 
-  openPicDialog(imgUrl) {
+  openPicDialog(imgUrl, person: Person) {
     this.dialog.open(DialogPicComponent, {
       width: '80%',
       data: {
         imgUrl: imgUrl,
+        name: person.FullName
       }
     });
   }
 
-  openPicComposer(id): void {
-    this.openPicDialog(this.imgUrl + id + '/componist');
+  openPicComposer(person: Person): void {
+    this.openPicDialog(this.imgUrl + person.ID + '/componist', person);
   }
 
-  openPicPerformer(id): void {
-    this.openPicDialog(this.imgUrl + id + '/performer');
+  openPicPerformer(person: Person): void {
+    this.openPicDialog(this.imgUrl + person.ID + '/performer', person);
   }
 
   editPerson(person: Person, type: string) {
@@ -86,7 +87,8 @@ export class ChipListsComponent implements OnInit {
       data: {
         person: person,
         type: type,
-        albumid: this.album
+        albumid: this.album,
+        personName: person.FullName
       },
       autoFocus: false,
       // hasBackdrop: false
