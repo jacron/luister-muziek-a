@@ -103,7 +103,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
       this.storageService.storeSearchTitle(document.title);
       this.storageService.storeSearchParameters(this.params);
     });
-
   }
 
   getAlbumsComponist(list) {

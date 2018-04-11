@@ -26,9 +26,9 @@ export class AlbumDetailsComponent {
   }
 
   openAlbum(album: Album): void {
+    // console.log(album);
     this.album = album;
     this.chevron = 'keyboard_arrow_down';
-    // console.log(album);
     document.title = album.Title;
     // this.album.expanded = true;
   }

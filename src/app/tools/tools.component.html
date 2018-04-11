@@ -1,8 +1,17 @@
-<label>Path</label>
-<input type="text" placeholder="album path"
-       (click)="selectPath($event)"
-       (keydown)="albumPath($event)"
-       [(ngModel)]="path"
-       class="luister-path"
->
-<a href="{{albumHref}}">{{ albumTitle }}</a>
+<mat-card>
+  <input type="text"
+         placeholder="album path"
+         matInput
+         (click)="selectPath($event)"
+         (keydown)="albumPathGet($event)"
+         [(ngModel)]="path"
+         class="luister-path"
+  >
+  <button mat-raised-button (click)="getAlbum()">
+    get album</button>
+  <a (click)="toAlbum()"
+     *ngIf="album"
+  >{{ album.Title }}</a>
+  <button mat-raised-button (click)="uploadAlbum()">
+    upload album</button>
+</mat-card>

@@ -33,10 +33,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
     this.enableNavig();
   }
 
-  openMenu() {
-    // this.trigger.openMenu();
-  }
-
   albumTitleKeydown(e, id, title) {
     console.log(id, title);
     if (e.key === 'Enter') {
@@ -66,7 +62,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   editPieces() {
-    const dialogRef = this.dialog.open(DialogPiecesComponent, {
+    this.dialog.open(DialogPiecesComponent, {
       width: '99%',
       data: {
         pieces: this.album.pieces,

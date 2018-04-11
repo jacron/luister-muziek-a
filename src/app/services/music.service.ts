@@ -129,6 +129,17 @@ export class MusicService {
   }
 
   /* POST */
+  uploadAlbumByPath(path) {
+    const params = new HttpParams()
+      .set('cmd', 'upload')
+      .set('path', this.encodeSemiColon(path));
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   updateAlbumMetatag(albumId, key, text) {
     const params = new HttpParams()
       .set('cmd', 'update_metatag')
@@ -387,10 +398,15 @@ export class MusicService {
     );
   }
 
+  encodeSemiColon(s) {
+    return s.replace(';', '&semi-colon');
+  }
+
   tagEditor(path) {
+    // console.log(path);
     const params = new HttpParams()
       .set('cmd', 'tageditor')
-      .set('path', path)
+      .set('path', this.encodeSemiColon(path))
     ;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
