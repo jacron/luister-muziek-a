@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MusicService} from '../services/music.service';
+import {Code} from '../classes/Code';
 
 @Component({
   selector: 'app-codes',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CodesComponent implements OnInit {
 
-  constructor() { }
+  codes: Code[];
+
+  constructor(
+    private musicService: MusicService
+  ) { }
+
+  afterGet(response) {
+    this.codes = response;
+  }
 
   ngOnInit() {
+    this.musicService.getCodes().subscribe(
+      (response) => this.afterGet(response)
+    );
   }
 
 }

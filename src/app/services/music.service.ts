@@ -9,6 +9,14 @@ export class MusicService {
   constructor(private http: HttpClient) { }
 
   /* GET */
+  getCodes() {
+    const params = new HttpParams()
+      .set('cmd', 'codes');
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+  }
+
   getAlbumByPath(path) {
     const params = new HttpParams()
       .set('cmd', 'album_by_path')
