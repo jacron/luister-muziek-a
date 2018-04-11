@@ -3,23 +3,12 @@
   border-radius: 6px;
   margin-right: 4px;
 }
-//.mat-icon {
-//  display: none;
-//}
-//mat-chip:hover .mat-icon {
-//  display: inline-block;
-//}
-
 .composers.mat-chip:not(.mat-basic-chip) {
   background-color: #ffeeee;
 }
 .performers.mat-chip:not(.mat-basic-chip) {
   background-color: #eeffee;
 }
-//.tag-chip {
-//  position: relative;
-//  top: -5px;
-//}
 .elevate {
   position: relative;
   top: -6px;

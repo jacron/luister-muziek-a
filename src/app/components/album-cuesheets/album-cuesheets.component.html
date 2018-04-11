@@ -7,55 +7,41 @@
     waves-light waves-effect mdbRippleRadius
     (click)="play(cuesheet.ID)">
     play_circle_filled</mat-icon>
-  <span #topicTitle contenteditable="true"
-       class="title"
-       [textContent]="cuesheet.Title"
-       (input)="model=topicTitle.innerText"
-       (keydown)="titleKeydown($event, cuesheet.ID, topicTitle.innerText)">
+  <app-cuesheet-menu [cuesheet]="cuesheet" [album]="album"></app-cuesheet-menu>
+  <span class="text">
+    <span #topicTitle contenteditable="true"
+          class="title"
+          [textContent]="cuesheet.Title"
+          (input)="model=topicTitle.innerText"
+          (keydown)="titleKeydown($event, cuesheet.ID, topicTitle.innerText)">
+    </span>
+    <span *ngIf="cuesheet.cue.performer">
+      <span>(</span>
+      <a (click)="addPerformer(p)"
+         *ngFor="let p of cuesheet.cue.performers; let i = index">
+        {{ p }}<span *ngIf="i < cuesheet.cue.performers.length - 1">,</span>
+      </a>
+      <span>)</span>
+    </span>
+    <span *ngIf="cuesheet.discid || cuesheet.asin">
+      [
+      <a href="{{ musicbrainzUrl }}{{ cuesheet.discid }}"
+         target="musicbrainz" tabindex="-1"
+         title="musicbrainz"
+      >
+        {{ cuesheet.discid }}</a>,
+      <a href="{{ freedbUrl }}{{ cuesheet.discid }}"
+         target="freedb" tabindex="-1"
+         title="freedb"
+      >
+        {{ cuesheet.discid }}</a>,
+      <a href="{{ amazonUrl }}{{ cuesheet.asin }}"
+         target="amazon" tabindex="-1"
+         title="amazon"
+         style="color: orange"
+      >
+        {{ cuesheet.asin }}</a>
+      ]
+    </span>
   </span>
-  <span *ngIf="cuesheet.cue.performer">
-    <span>(</span>
-    <a (click)="addPerformer(p)"
-       *ngFor="let p of cuesheet.cue.performers; let i = index">
-      {{ p }}<span *ngIf="i < cuesheet.cue.performers.length - 1">,</span>
-    </a>
-    <span>)</span>
-  </span>
-  <span *ngIf="cuesheet.discid || cuesheet.asin">
-    [
-    <a href="{{ musicbrainzUrl }}{{ cuesheet.discid }}"
-       target="musicbrainz" tabindex="-1"
-       title="musicbrainz"
-    >
-      {{ cuesheet.discid }}</a>,
-    <a href="{{ freedbUrl }}{{ cuesheet.discid }}"
-       target="freedb" tabindex="-1"
-       title="freedb"
-    >
-      {{ cuesheet.discid }}</a>,
-    <a href="{{ amazonUrl }}{{ cuesheet.asin }}"
-       target="amazon" tabindex="-1"
-       title="amazon"
-       style="color: orange"
-    >
-      {{ cuesheet.asin }}</a>
-    ]
-  </span>
-  <mat-icon class="edit"
-            waves-light waves-effect mdbRippleRadius
-            (click)="edit(cuesheet.ID)">
-    edit
-  </mat-icon>
-  <mat-icon class="rename"
-            *ngIf="renaming"
-            waves-light waves-effect mdbRippleRadius
-            (click)="rename(cuesheet)">
-    edit
-  </mat-icon>
-  <mat-icon class="delete"
-            *ngIf="deleting"
-            waves-light waves-effect mdbRippleRadius
-            (click)="delete(cuesheet)">
-    delete
-  </mat-icon>
 </div>

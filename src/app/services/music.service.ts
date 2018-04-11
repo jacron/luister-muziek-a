@@ -257,7 +257,7 @@ export class MusicService {
     );
   }
 
-  renameCue(id, albumid) {
+  nameCueFromFilename(id, albumid) {
     const params = new HttpParams()
       .set('cmd', 'cuesheet_title_from_filename')
       .set('id', id)

@@ -32,9 +32,6 @@ img.back-thumb {
   margin-bottom: -6px;
   cursor: default;
 }
-.opener.expanded {
-  //transform: rotate(180deg);
-}
 .pieces {
   max-height: 0;
   transition: max-height .25s ease-in;
@@ -45,7 +42,7 @@ img.back-thumb {
   overflow-y: auto;
 }
 .chips {
-  margin: 4px 0 4px -14px;
+  margin: 14px 0 14px -14px;
 }
 .cuesheets {
   margin-top: 20px;

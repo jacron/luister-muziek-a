@@ -12,9 +12,7 @@ import {Album} from '../../classes/Album';
 export class AlbumCuesheetsComponent implements OnInit {
 
   @Input('cuesheets') cuesheets: Cuesheet[];
-  @Input('albumid') albumid: number;
-  renaming = environment.renamingCuesheet;
-  deleting = environment.deletingCuesheet;
+  @Input('album') album: Album;
   freedbUrl = environment.freedbUrl;
   musicbrainzUrl = environment.musicbrainz;
   amazonUrl = environment.amazonUrl;
@@ -46,49 +44,15 @@ export class AlbumCuesheetsComponent implements OnInit {
     );
   }
 
-  edit(id) {
-    this.musicService.editCue(id, this.albumid).subscribe(
-      (response) => console.log(response)
-    );
-  }
-
-  rename(cuesheet) {
-    this.musicService.renameCue(cuesheet.ID, this.albumid).subscribe(
-      (response) => cuesheet.Title = response
-    );
-  }
-
-  restorePieces(album: Album) {
-    console.log(album);
-    // this.album.pieces = album.pieces;
-    this.cuesheets = album.cuesheets;
-  }
-
-  afterDelete(response) {
-    console.log(response);
-    this.musicService.refetch(this.albumid).subscribe(
-      (album: Album) => this.restorePieces(album)
-    );
-  }
-
-  delete(cuesheet: Cuesheet) {
-    if (confirm('delete "' + cuesheet.Title + '"?')) {
-      this.musicService.deleteCue(cuesheet.ID, this.albumid)
-        .subscribe((response) => this.afterDelete(response)
-        );
-    }
-
-  }
-
   titleKeydown(e, id, title) {
     if (e.key === 'Enter') {
-      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
+      this.musicService.updateCuesheetTitle(id, this.album.ID, title).subscribe(
         (response) => console.log(response)
       );
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.musicService.updateCuesheetTitle(id, this.albumid, title).subscribe(
+      this.musicService.updateCuesheetTitle(id, this.album.ID, title).subscribe(
         (response) => console.log(response)
       );
     }

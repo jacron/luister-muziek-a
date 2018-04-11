@@ -1,0 +1,29 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon class="menu-trigger">more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <!-- Edit cuesheet -->
+  <button mat-menu-item
+          (click)="edit(cuesheet.ID)">
+    <mat-icon class="edit"
+              waves-light waves-effect mdbRippleRadius>
+      edit
+    </mat-icon><span>Edit text</span>
+  </button>
+  <!-- Name cuesheet from filename -->
+  <button mat-menu-item
+          (click)="nameFromFilename(cuesheet)">
+    <mat-icon class="rename"
+              waves-light waves-effect mdbRippleRadius>
+      edit
+    </mat-icon><span>Take name from filename</span>
+  </button>
+  <!-- Delete cuesheet -->
+  <button mat-menu-item
+          (click)="delete(cuesheet)">
+    <mat-icon class="delete"
+              waves-light waves-effect mdbRippleRadius>
+      delete
+    </mat-icon><span>Delete cuesheet file</span>
+  </button>
+</mat-menu>
