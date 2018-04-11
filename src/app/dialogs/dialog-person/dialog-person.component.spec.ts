@@ -2,12 +2,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogPersonComponent } from './dialog-person.component';
 import {MatDialogModule, MatDialogRef, MatIconModule} from '@angular/material';
-import {MusicService} from '../services/music.service';
+import {MusicService} from '../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {Person} from '../classes/Person';
-import {RouterModule} from '@angular/router';
+import {Person} from '../../classes/Person';
+// import {RouterModule} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 
 describe('DialogPersonComponent', () => {

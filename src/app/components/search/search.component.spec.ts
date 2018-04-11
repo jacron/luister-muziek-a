@@ -9,6 +9,7 @@ import {MusicService} from '../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
 import {StorageService} from '../../storage.service';
+import {PersonService} from '../../services/person.service';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -19,7 +20,8 @@ describe('SearchComponent', () => {
       declarations: [ SearchComponent, TypedNamePipe, TypedTitlePipe],
       imports: [MatAutocompleteModule, MatIconModule, HttpClientModule,
         RouterTestingModule.withRoutes([]), MatDialogModule],
-      providers: [TypedNamePipe, TypedTitlePipe, MusicService, StorageService],
+      providers: [TypedNamePipe, TypedTitlePipe, MusicService, StorageService,
+        PersonService],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();
