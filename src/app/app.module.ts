@@ -37,6 +37,7 @@ import { DialogPiecesComponent } from './dialogs/dialog-pieces/dialog-pieces.com
 import {PieceService} from './services/piece.service';
 import {PersonService} from './services/person.service';
 import { CuesheetMenuComponent } from './components/cuesheet-menu/cuesheet-menu.component';
+import { CodesComponent } from './codes/codes.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { CuesheetMenuComponent } from './components/cuesheet-menu/cuesheet-menu.
     DialogPersonComponent,
     DialogTagComponent,
     DialogPiecesComponent,
-    CuesheetMenuComponent
+    CuesheetMenuComponent,
+    CodesComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

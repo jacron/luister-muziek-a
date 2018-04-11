@@ -11,7 +11,12 @@ bg-grey scrolling-navbar" [containerInside]="false">
           [class.active]="prouter.url.indexOf('/search') === 0">
         <a class="nav-link" href="search">Search</a>
       </li>
-      <li class="nav-item waves-light" mdbRippleRadius>
+      <li class="nav-item waves-light" mdbRippleRadius
+          [class.active]="prouter.url.indexOf('/codes') === 0">
+        <a class="nav-link" href="codes">Codes</a>
+      </li>
+      <li class="nav-item waves-light" mdbRippleRadius
+          [class.active]="prouter.url.indexOf('/tools') === 0">
         <a class="nav-link" href="tools">Tools</a>
       </li>
     </ul>

@@ -6,6 +6,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {WelcomeComponent} from '../welcome/welcome.component';
 import {SearchComponent} from '../components/search/search.component';
 import {AlbumDetailsComponent} from '../components/album-details/album-details.component';
+import {CodesComponent} from '../codes/codes.component';
 
 const appRoutes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -14,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'album/:idalbum', component: AlbumDetailsComponent },
   { path: 'search/:idcomp/:idperf/:idcoll/:idtag', component: SearchComponent },
   { path: 'tools', component: ToolsComponent },
-  // { path: 'album/:id', component: AlbumComponent },
+  { path: 'codes', component: CodesComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

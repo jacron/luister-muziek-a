@@ -399,7 +399,7 @@ export class MusicService {
   }
 
   encodeSemiColon(s) {
-    return s.replace(';', '&semi-colon');
+    return s.replace(/;/g, '&semi-colon');
   }
 
   tagEditor(path) {
