@@ -23,6 +23,13 @@ export class CuesheetMenuComponent implements OnInit {
     );
   }
 
+  nameToFilename(cuesheet: Cuesheet) {
+    this.musicService.nameCueToFilename(cuesheet.ID, this.album.ID,
+      cuesheet.Title).subscribe(
+        response => console.log(response)
+    );
+  }
+
   nameFromFilename(cuesheet) {
     this.musicService.nameCueFromFilename(cuesheet.ID, this.album.ID).subscribe(
       (response) => cuesheet.Title = response

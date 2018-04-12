@@ -12,7 +12,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
 import {
   MatAutocompleteModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatExpansionModule,
-  MatIconModule, MatInputModule,
+  MatIconModule, MatInputModule, MatListModule,
   MatMenuModule,
   MatSelectModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
@@ -37,7 +37,8 @@ import { DialogPiecesComponent } from './dialogs/dialog-pieces/dialog-pieces.com
 import {PieceService} from './services/piece.service';
 import {PersonService} from './services/person.service';
 import { CuesheetMenuComponent } from './components/cuesheet-menu/cuesheet-menu.component';
-import { CodesComponent } from './codes/codes.component';
+import { CodeComponent } from './code/code.component';
+import { CodeListComponent } from './code-list/code-list.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { CodesComponent } from './codes/codes.component';
     DialogTagComponent,
     DialogPiecesComponent,
     CuesheetMenuComponent,
-    CodesComponent
+    CodeComponent,
+    CodeListComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -82,6 +84,7 @@ import { CodesComponent } from './codes/codes.component';
     MatMenuModule,
     MatTooltipModule,
     MatCheckboxModule,
+    MatListModule,
     HttpClientModule,
     AppRoutingModule
   ],

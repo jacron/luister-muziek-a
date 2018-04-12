@@ -18,6 +18,14 @@
       edit
     </mat-icon><span>Take name from filename</span>
   </button>
+  <!-- Change filename to cuesheet name -->
+  <button mat-menu-item
+          (click)="nameToFilename(cuesheet)">
+    <mat-icon class="rename"
+              waves-light waves-effect mdbRippleRadius>
+      edit
+    </mat-icon><span>Change filename to cuesheet name</span>
+  </button>
   <!-- Delete cuesheet -->
   <button mat-menu-item
           (click)="delete(cuesheet)">

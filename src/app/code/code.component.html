@@ -1,0 +1,11 @@
+<mat-card>
+  <ul>
+    <li *ngFor="let code of codes">
+      <div *ngIf="!code.Range">
+        <a href="code/list/{{ code.Code }}">
+          <span>{{ code.Description }}</span>
+        </a>
+      </div>
+    </li>
+  </ul>
+</mat-card>

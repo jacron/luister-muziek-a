@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import {MusicService} from '../services/music.service';
 import {Code} from '../classes/Code';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SearchParams} from '../classes/SearchParams';
 
 @Component({
   selector: 'app-codes',
-  templateUrl: './codes.component.html',
-  styleUrls: ['./codes.component.scss']
+  templateUrl: './code.component.html',
+  styleUrls: ['./code.component.scss']
 })
-export class CodesComponent implements OnInit {
+export class CodeComponent implements OnInit {
 
   codes: Code[];
 
   constructor(
-    private musicService: MusicService
-  ) { }
+    private musicService: MusicService,
+  ) {
+  }
 
   afterGet(response) {
     this.codes = response;

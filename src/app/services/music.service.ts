@@ -17,6 +17,17 @@ export class MusicService {
       params});
   }
 
+  getCode(code) {
+    const params = new HttpParams()
+      .set('cmd', 'code')
+      .set('code', code)
+      .set('favorite', 'false')
+    ;
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+  }
+
   getAlbumByPath(path) {
     const params = new HttpParams()
       .set('cmd', 'album_by_path')
@@ -137,6 +148,32 @@ export class MusicService {
   }
 
   /* POST */
+  updateLibraryCodeAlias(code, text) {
+    const params = new HttpParams()
+      .set('cmd', 'update_librarycode_alias')
+      .set('code', code)
+      .set('text', text)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
+  updateLibraryCodeTitle(code, text) {
+    const params = new HttpParams()
+      .set('cmd', 'update_librarycode_title')
+      .set('code', code)
+      .set('text', text)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   uploadAlbumByPath(path) {
     const params = new HttpParams()
       .set('cmd', 'upload')
@@ -289,6 +326,20 @@ export class MusicService {
     );
   }
 
+  nameCueToFilename(id, albumid, title) {
+    const params = new HttpParams()
+      .set('cmd', 'cuesheet_title_to_filename')
+      .set('id', id)
+      .set('albumid', albumid)
+      .set('title', title)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
   deleteCue(id, albumid) {
     const params = new HttpParams()
       .set('cmd', 'removecuesheet')
@@ -308,6 +359,19 @@ export class MusicService {
       .set('ids2', ids)
       .set('name', cueName)
       .set('albumid', albumid)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
+  toggleFavoriteLibrarycode(code, favorite) {
+    const params = new HttpParams()
+      .set('cmd', 'toggle_code_favorite')
+      .set('code', code)
+      .set('favorite', favorite)
     ;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');

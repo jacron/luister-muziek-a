@@ -1,0 +1,51 @@
+<mat-checkbox [(ngModel)]="fav">
+
+</mat-checkbox><a class="title">favorites</a>
+<ul>
+  <li *ngFor="let item of libraryCodes">
+    <mat-card *ngIf="item.Favorite || !fav">
+      <mat-card-header>
+        <mat-checkbox [(ngModel)]="item.Favorite"
+                      class="checkbox"
+                      (change)="changeFavorite($event, item)">
+        </mat-checkbox>
+        <a (click)="openGoogle(item)" class="title">
+          {{ item.k_code }}</a>
+      </mat-card-header>
+      <mat-card-content>
+    <div #topicTitle contenteditable="true"
+          class="title"
+          [textContent]="item.Title"
+          (input)="model=topicTitle.innerText"
+          (keydown)="titleKeydown($event, item.k_code, topicTitle.innerText)">
+    </div>
+    <div #topicAlias contenteditable="true"
+          class="title"
+          [textContent]="item.Alias"
+          (input)="model=topicAlias.innerText"
+          (keydown)="aliasKeydown($event, item.k_code, topicAlias.innerText)">
+    </div>
+        <img src="{{ imageUrl }}{{ item.k_code }}/librarycode/">
+        <ul>
+          <li *ngFor="let piece of item.pieces">
+            <mat-icon
+              [class.played]="piece.played"
+              class="play"
+              waves-light waves-effect mdbRippleRadius
+              (click)="play(piece)">
+              play_circle_filled</mat-icon>
+            <a href="album/{{ piece.Album.ID }}">
+              {{ piece.Piece.Name }}
+              <span *ngIf="piece.performers.length">(
+                <span *ngFor="let performer of piece.performers; let i = index">
+                  {{ performer.FullName }}
+                  <span *ngIf="i < piece.performers.length - 1">, </span>
+                </span>
+                )</span>
+            </a>
+          </li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </li>
+</ul>

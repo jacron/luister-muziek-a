@@ -34,7 +34,7 @@
       </mat-icon>
     </div>
     <!-- collection (mother) -->
-    <div *ngIf="album.mother && album.mother.ID != searchParams.idcoll">
+    <div *ngIf="album.mother && searchParams && searchParams.idcoll && album.mother.ID != searchParams.idcoll">
       <a (click)="toCollection()"
          style="position: relative; top: -5px;margin-left: 32px;">
         <span>{{ album.mother.Title }}</span>

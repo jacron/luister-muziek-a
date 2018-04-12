@@ -44,17 +44,19 @@ export class AlbumCuesheetsComponent implements OnInit {
     );
   }
 
+  update(id, title) {
+    this.musicService.updateCuesheetTitle(id, this.album.ID, title).subscribe(
+      (response) => console.log(response)
+    );
+  }
+
   titleKeydown(e, id, title) {
     if (e.key === 'Enter') {
-      this.musicService.updateCuesheetTitle(id, this.album.ID, title).subscribe(
-        (response) => console.log(response)
-      );
+      this.update(id, title);
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.musicService.updateCuesheetTitle(id, this.album.ID, title).subscribe(
-        (response) => console.log(response)
-      );
+      this.update(id, title);
     }
   }
 
