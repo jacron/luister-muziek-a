@@ -25,7 +25,9 @@
          (keydown)="fieldKeydown($event, death.innerText, 'Death')">
     </div>
 </div>
-<img src="{{ imgUrl }}{{ data.person.ID }}/{{ data.type }}" class="thumb">
+<img src="{{ imgUrl }}{{ data.person.ID }}/{{ data.type }}"
+     (click)="openPicPerson()"
+     class="thumb">
 </mat-dialog-content>
 <mat-dialog-actions class="controls">
   <a href="{{googleUrl + data.person.Name }}"

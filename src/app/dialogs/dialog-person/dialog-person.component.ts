@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {MusicService} from '../../services/music.service';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
 import {Person} from '../../classes/Person';
+import {DialogPicComponent} from '../dialog-pic/dialog-pic.component';
 
 @Component({
   selector: 'app-dialog-person',
@@ -20,8 +21,24 @@ export class DialogPersonComponent implements OnInit {
   constructor(private musicService: MusicService,
               public dialogRef: MatDialogRef<DialogPersonComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
+              private dialog: MatDialog,
               private router: Router
   ) { }
+
+  openPicDialog(imgUrl, person: Person) {
+    this.dialog.open(DialogPicComponent, {
+      width: '80%',
+      data: {
+        imgUrl: imgUrl,
+        name: person.FullName
+      }
+    });
+  }
+
+  openPicPerson() {
+    this.openPicDialog(this.imgUrl + this.data.person.ID + '/' +
+      this.data.type, this.data.person);
+  }
 
   afterUpdate(response, text, field) {
     console.log(response);
