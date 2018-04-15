@@ -3,6 +3,7 @@ import {Cuesheet} from '../../classes/Cuesheet';
 import {MusicService} from '../../services/music.service';
 import {environment} from '../../../environments/environment';
 import {Album} from '../../classes/Album';
+import {Person} from '../../classes/Person';
 
 @Component({
   selector: 'app-album-cuesheets',
@@ -28,8 +29,18 @@ export class AlbumCuesheetsComponent implements OnInit {
     return null;
   }
 
+  afterAddPerformer(response: Person) {
+    // console.log(response);
+    this.musicService.getPerformerById(response.ID).subscribe(
+      performer => this.album.album_performers.push(<Person>performer)
+    );
+  }
+
   addPerformer(name) {
     console.log(name.trim());
+    this.musicService.newPerformer(name.trim(), this.album.ID).subscribe(
+      response => this.afterAddPerformer(<Person>response)
+    );
   }
 
   onPlayed(response, id) {
