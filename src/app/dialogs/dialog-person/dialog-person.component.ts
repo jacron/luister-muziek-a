@@ -86,7 +86,6 @@ export class DialogPersonComponent implements OnInit {
   }
 
   afterAlbumCount(response) {
-    console.log(response);
     this.albumCount = response;
   }
 
