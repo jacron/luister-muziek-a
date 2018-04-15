@@ -29,7 +29,9 @@ export class AlbumDetailsComponent {
     // console.log(album);
     this.album = album;
     this.chevron = 'keyboard_arrow_down';
-    document.title = album.Title;
+    if (album) {
+      document.title = album.Title;
+    }
     // this.album.expanded = true;
   }
 
