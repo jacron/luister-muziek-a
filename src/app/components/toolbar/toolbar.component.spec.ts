@@ -5,7 +5,7 @@ import {MatDialogModule, MatIconModule, MatMenuModule, MatToolbarModule} from '@
 import {MusicService} from '../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
-import {StorageService} from '../../storage.service';
+import {StorageService} from '../../services/storage.service';
 import {Album} from '../../classes/Album';
 
 describe('ToolbarComponent', () => {

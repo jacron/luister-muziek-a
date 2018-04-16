@@ -28,7 +28,7 @@ import { AlbumCuesheetsComponent } from './components/album-cuesheets/album-cues
 import { DialogPicComponent } from './dialogs/dialog-pic/dialog-pic.component';
 import { ChipListsComponent } from './components/chip-lists/chip-lists.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { StorageService} from './storage.service';
+import { StorageService} from './services/storage.service';
 import { AlbumMetatagsComponent } from './components/album-metatags/album-metatags.component';
 import { DialogAddComponent } from './dialogs/dialog-add/dialog-add.component';
 import { DialogPersonComponent } from './dialogs/dialog-person/dialog-person.component';
@@ -39,6 +39,7 @@ import {PersonService} from './services/person.service';
 import { CuesheetMenuComponent } from './components/cuesheet-menu/cuesheet-menu.component';
 import { CodeComponent } from './code/code.component';
 import { CodeListComponent } from './code-list/code-list.component';
+import {WeatherService} from './services/weather.service';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { CodeListComponent } from './code-list/code-list.component';
     TypedNamePipe,
     TypedTitlePipe,
     StorageService,
+    WeatherService,
     MatDialogModule
   ],
   bootstrap: [AppComponent]

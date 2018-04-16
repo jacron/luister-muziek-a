@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {forkJoin} from 'rxjs/observable/forkJoin';
 import {Tag} from '../../classes/Tag';
-import {StorageService} from '../../storage.service';
+import {StorageService} from '../../services/storage.service';
 import {SearchParams} from '../../classes/SearchParams';
 import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component';
 import {MatDialog} from '@angular/material';

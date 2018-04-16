@@ -4,6 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
+  apiWeather: 'http://api.openweathermap.org/data/2.5/weather?',
+  apiWeatherKey: 'f9ce00dd6d4f56c2087a820370bb1ab0',
+  windkaartUrl: 'http://members.ziggo.nl/hbruch/weer/windrichting.html',
   apiServer: 'http://127.0.0.1:8010',
   renamingCuesheet: true,
   deletingCuesheet: true,

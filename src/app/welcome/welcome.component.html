@@ -4,3 +4,37 @@
     <td>{{ infos[key] }}</td>
   </tr>
 </table>
+<!--<table *ngIf="w_data">-->
+  <!--<tr *ngFor="let key of objectKeys(w_data)">-->
+    <!--<td>{{ key }}</td>-->
+    <!--<td *ngIf="!isObject(wdata[key])">{{ wdata[key] }}</td>-->
+    <!--<td *ngIf="isObject(wdata[key])">-->
+      <!--<table>-->
+      <!--<tr *ngFor="let key2 of objectKeys(wdata[key])">-->
+        <!--<td>{{ key2 }}</td>-->
+        <!--<td>{{ wdata[key][key2] }}</td>-->
+      <!--</tr>-->
+    <!--</table></td>-->
+  <!--</tr>-->
+<!--</table>-->
+<button mat-raised-button (click)="getWeather()">get weather</button>
+<div style="color: red">{{ w_error }}</div>
+<div *ngIf="w_data">
+  <h2>{{ w_data.name }}</h2>
+  <div>{{ w_data.coord.lat }}, {{ w_data.coord.lon }}</div>
+  <div>laatst opgehaald: {{ w_data.stored }}</div>
+  <h3>{{ w_data.weather[0].main }}</h3>
+  <h4>{{ w_data.weather[0].description }}</h4>
+  <div>zon op: {{ getTime(w_data.sys.sunrise) }},
+    zon onder: {{ getTime(w_data.sys.sunset) }}</div>
+  <div>windsnelheid: {{ getSpeed(w_data.wind.speed )}},
+  windrichting: {{ getDirection(w_data.wind.deg) }} ({{ w_data.wind.deg }}&deg;)</div>
+  <div>temperatuur: {{ getTemp(w_data.main.temp) }}&deg;,
+    max: {{ getTemp(w_data.main.temp_max) }}&deg;,
+    min: {{ getTemp(w_data.main.temp_min) }}&deg;</div>
+  <div>luchtdruk: {{ w_data.main.pressure }}</div>
+  <div>vochtigheid: {{ w_data.main.humidity }}</div>
+  <div>zicht: {{ w_data.visibility }}</div>
+  <div>bewolking: {{ w_data.clouds.all }}</div>
+</div>
+<a href="{{ windkaartUrl }}" target="_blank">wind kaart</a>

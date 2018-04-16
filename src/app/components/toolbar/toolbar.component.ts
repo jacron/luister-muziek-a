@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {Album} from '../../classes/Album';
 import {MusicService} from '../../services/music.service';
 import {Router} from '@angular/router';
-import {StorageService} from '../../storage.service';
+import {StorageService} from '../../services/storage.service';
 import {MatDialog, MatMenuTrigger} from '@angular/material';
 import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
 import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.component';

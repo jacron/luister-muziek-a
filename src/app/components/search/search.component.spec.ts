@@ -8,7 +8,7 @@ import {TypedTitlePipe} from '../../pipes/typed-title.pipe';
 import {MusicService} from '../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
-import {StorageService} from '../../storage.service';
+import {StorageService} from '../../services/storage.service';
 import {PersonService} from '../../services/person.service';
 
 describe('SearchComponent', () => {

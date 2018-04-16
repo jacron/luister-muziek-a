@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
-const requestUrl = 'http://127.0.0.1:8010/ajax/';
+// const requestUrl = 'http://127.0.0.1:8010/ajax/';
 
 @Injectable()
 export class MusicService {
 
+  requestUrl = environment.apiServer + '/ajax/';
   constructor(private http: HttpClient) { }
 
   /* GET */
   getInfos() {
     const params = new HttpParams()
       .set('cmd', 'infos');
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -20,7 +22,7 @@ export class MusicService {
   getCodes() {
     const params = new HttpParams()
       .set('cmd', 'codes');
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -31,7 +33,7 @@ export class MusicService {
       .set('code', code)
       .set('favorite', 'false')
     ;
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -40,7 +42,7 @@ export class MusicService {
     const params = new HttpParams()
       .set('cmd', 'album_by_path')
       .set('path', path);
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -49,7 +51,7 @@ export class MusicService {
     const params = new HttpParams()
       .set('cmd', 'album_by_id')
       .set('id', id);
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -58,7 +60,7 @@ export class MusicService {
     const params = new HttpParams()
       .set('cmd', 'album_count_for_tag')
       .set('id', id);
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -69,7 +71,7 @@ export class MusicService {
       .set('id', id)
       .set('type', type)
     ;
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -88,7 +90,7 @@ export class MusicService {
     const httpParams = new HttpParams()
       .set('cmd', 'cql_search')
       .set('cql', JSON.stringify(cql));
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params: httpParams});
   }
@@ -99,7 +101,7 @@ export class MusicService {
       .set('selection', selection)
       // .set('format', '%Last, %First')
     ;
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -110,7 +112,7 @@ export class MusicService {
       .set('selection', JSON.stringify(selection))
       // .set('format', '%Last, %First')
     ;
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -120,7 +122,7 @@ export class MusicService {
       .set('cmd', 'collections')
       .set('selection', selection)
     ;
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -130,7 +132,7 @@ export class MusicService {
       .set('cmd', 'tags')
       .set('selection', selection)
     ;
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -140,7 +142,7 @@ export class MusicService {
       .set('cmd', 'composer_by_id')
       .set('id', id.toString())
     ;
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -150,7 +152,7 @@ export class MusicService {
       .set('cmd', 'performer_by_id')
       .set('id', id.toString())
     ;
-    return this.http.get(requestUrl, {
+    return this.http.get(this.requestUrl, {
       responseType: 'json',
       params});
   }
@@ -165,7 +167,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -178,7 +180,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -189,7 +191,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -203,7 +205,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -216,7 +218,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -229,7 +231,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -242,7 +244,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -254,7 +256,7 @@ export class MusicService {
     ;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(requestUrl, params, {
+    return this.http.post(this.requestUrl, params, {
       headers: headers
     });
   }
@@ -267,7 +269,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -279,7 +281,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -291,7 +293,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -304,7 +306,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -317,7 +319,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -330,7 +332,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -344,7 +346,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -357,7 +359,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -371,7 +373,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -384,7 +386,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -396,7 +398,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -407,7 +409,7 @@ export class MusicService {
       .set('title', title);
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(requestUrl, params, {
+    return this.http.post(this.requestUrl, params, {
       headers: headers
     });
   }
@@ -419,7 +421,7 @@ export class MusicService {
       .set('description', text);
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(requestUrl, params, {
+    return this.http.post(this.requestUrl, params, {
       headers: headers
     });
   }
@@ -434,7 +436,7 @@ export class MusicService {
     ;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(requestUrl, params, {
+    return this.http.post(this.requestUrl, params, {
       headers: headers
     });
   }
@@ -448,7 +450,7 @@ export class MusicService {
       .set('name', name);
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(requestUrl, params, {
+    return this.http.post(this.requestUrl, params, {
       headers: headers
     });
   }
@@ -461,7 +463,7 @@ export class MusicService {
       .set('title', title);
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(requestUrl, params, {
+    return this.http.post(this.requestUrl, params, {
       headers: headers
     });
   }
@@ -474,7 +476,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -491,7 +493,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -504,7 +506,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -517,7 +519,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -530,7 +532,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -543,7 +545,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -556,7 +558,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -569,7 +571,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -582,7 +584,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 
@@ -594,7 +596,7 @@ export class MusicService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
-      requestUrl, params, { headers: headers}
+      this.requestUrl, params, { headers: headers}
     );
   }
 

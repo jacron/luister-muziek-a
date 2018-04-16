@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Album} from './classes/Album';
+import {Album} from '../classes/Album';
 
 @Injectable()
 export class StorageService {
@@ -7,9 +7,19 @@ export class StorageService {
   keyAlbums = 'lmuzalbums';
   keySearchTitle = 'lmuztitle';
   keySearchParms = 'lmuzparms';
+  keyWeather = 'openweather';
   storage = sessionStorage;
 
   constructor() { }
+
+  prettyDateTime() {
+    const d = new Date();
+    return d.toLocaleString();
+  }
+
+  storeWeather(data) {
+    this.storage.setItem(this.keyWeather, JSON.stringify(data));
+  }
 
   storeAlbums(albums: Album[]) {
     this.storage.setItem(this.keyAlbums, JSON.stringify(albums));
@@ -21,6 +31,10 @@ export class StorageService {
 
   storeSearchParameters(parms) {
     this.storage.setItem(this.keySearchParms, JSON.stringify(parms));
+  }
+
+  retrieveWeather() {
+    return JSON.parse(this.storage.getItem(this.keyWeather));
   }
 
   retrieveAlbums() {
