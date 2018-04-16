@@ -9,6 +9,14 @@ export class MusicService {
   constructor(private http: HttpClient) { }
 
   /* GET */
+  getInfos() {
+    const params = new HttpParams()
+      .set('cmd', 'infos');
+    return this.http.get(requestUrl, {
+      responseType: 'json',
+      params});
+  }
+
   getCodes() {
     const params = new HttpParams()
       .set('cmd', 'codes');
@@ -576,6 +584,18 @@ export class MusicService {
     return this.http.post(
       requestUrl, params, { headers: headers}
     );
-
   }
+
+  split(p) {
+    const params = new HttpParams()
+      .set('cmd', 'tmp_split')
+      .set('path', p)
+    ;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      requestUrl, params, { headers: headers}
+    );
+  }
+
 }

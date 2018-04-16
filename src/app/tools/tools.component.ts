@@ -11,10 +11,8 @@ import {Router} from '@angular/router';
 export class ToolsComponent implements OnInit {
 
   path: string;
+  pathCue: string;
   album: Album;
-  albumHref: string;
-  albumTitle: string;
-  albumUrl = 'http://127.0.0.1:8010/album/';
 
   constructor(
     private musicService: MusicService,
@@ -39,6 +37,10 @@ export class ToolsComponent implements OnInit {
     );
   }
 
+  split() {
+    this.musicService.split(this.pathCue).subscribe();
+  }
+
   uploadAlbum() {
     this.musicService.uploadAlbumByPath(this.path).subscribe(
       (album: Album) => this.presentAlbum(album),
@@ -53,11 +55,11 @@ export class ToolsComponent implements OnInit {
     }
   }
 
-  albumPathUpload(e) {
-    if (e.key === 'Enter') {
-      this.uploadAlbum();
-    }
-  }
+  // albumPathUpload(e) {
+  //   if (e.key === 'Enter') {
+  //     this.uploadAlbum();
+  //   }
+  // }
 
   toAlbum() {
     this.router.navigate(['/album', this.album.ID]).then(() => {
@@ -68,7 +70,7 @@ export class ToolsComponent implements OnInit {
 
   ngOnInit() {
     // test path
-    this.path = '/Volumes/Media/Audio/Klassiek/Componisten/Bach/Mattheus Passion/Frans Bruggen';
+    // this.path = '/Volumes/Media/Audio/Klassiek/Componisten/Bach/Mattheus Passion/Frans Bruggen';
   }
 
 }

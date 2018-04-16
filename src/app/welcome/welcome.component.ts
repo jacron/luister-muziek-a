@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MusicService} from '../services/music.service';
 
 @Component({
   selector: 'app-welcome',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
+  infos;
+  objectKeys = Object.keys;
 
-  constructor() { }
+  constructor(
+    private musicService: MusicService
+  ) { }
+
+  afterGetInfos(response) {
+    this.infos = response;
+  }
 
   ngOnInit() {
+    this.musicService.getInfos().subscribe(
+      response => this.afterGetInfos(response)
+    );
   }
 
 }

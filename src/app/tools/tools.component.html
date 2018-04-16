@@ -15,3 +15,15 @@
   <button mat-raised-button (click)="uploadAlbum()">
     upload album</button>
 </mat-card>
+<mat-card>
+  <input type="text"
+         placeholder="cuesheet path"
+         matInput
+         (click)="selectPath($event)"
+         [(ngModel)]="pathCue"
+         class="luister-path"
+  >
+  <button mat-raised-button (click)="split()">
+    split
+  </button>
+</mat-card>

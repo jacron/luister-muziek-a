@@ -1,3 +1,6 @@
-<p>
-  welcome works!
-</p>
+<table *ngIf="infos">
+  <tr *ngFor="let key of objectKeys(infos)">
+    <td>{{ key }}</td>
+    <td>{{ infos[key] }}</td>
+  </tr>
+</table>
