@@ -1,40 +1,34 @@
-<table *ngIf="infos">
-  <tr *ngFor="let key of objectKeys(infos)">
-    <td>{{ key }}</td>
-    <td>{{ infos[key] }}</td>
-  </tr>
-</table>
-<!--<table *ngIf="w_data">-->
-  <!--<tr *ngFor="let key of objectKeys(w_data)">-->
-    <!--<td>{{ key }}</td>-->
-    <!--<td *ngIf="!isObject(wdata[key])">{{ wdata[key] }}</td>-->
-    <!--<td *ngIf="isObject(wdata[key])">-->
-      <!--<table>-->
-      <!--<tr *ngFor="let key2 of objectKeys(wdata[key])">-->
-        <!--<td>{{ key2 }}</td>-->
-        <!--<td>{{ wdata[key][key2] }}</td>-->
-      <!--</tr>-->
-    <!--</table></td>-->
-  <!--</tr>-->
-<!--</table>-->
-<button mat-raised-button (click)="getWeather()">get weather</button>
+<!--<ul>-->
+  <!--<li><a href="{{ buienradarUrl }}" target="_blank">buienradar</a></li>-->
+<!--</ul>-->
 <div style="color: red">{{ w_error }}</div>
-<div *ngIf="w_data">
-  <h2>{{ w_data.name }}</h2>
-  <div>{{ w_data.coord.lat }}, {{ w_data.coord.lon }}</div>
-  <div>laatst opgehaald: {{ w_data.stored }}</div>
-  <h3>{{ w_data.weather[0].main }}</h3>
-  <h4>{{ w_data.weather[0].description }}</h4>
-  <div>zon op: {{ getTime(w_data.sys.sunrise) }},
-    zon onder: {{ getTime(w_data.sys.sunset) }}</div>
-  <div>windsnelheid: {{ getSpeed(w_data.wind.speed )}},
-  windrichting: {{ getDirection(w_data.wind.deg) }} ({{ w_data.wind.deg }}&deg;)</div>
-  <div>temperatuur: {{ getTemp(w_data.main.temp) }}&deg;,
-    max: {{ getTemp(w_data.main.temp_max) }}&deg;,
-    min: {{ getTemp(w_data.main.temp_min) }}&deg;</div>
-  <div>luchtdruk: {{ w_data.main.pressure }}</div>
-  <div>vochtigheid: {{ w_data.main.humidity }}</div>
-  <div>zicht: {{ w_data.visibility }}</div>
-  <div>bewolking: {{ w_data.clouds.all }}</div>
+<!--<div *ngIf="w_data">-->
+  <!--<h2>{{ w_data.name }}</h2>-->
+  <!--<div>{{ w_data.coord.lat }}, {{ w_data.coord.lon }}</div>-->
+  <!--<div>laatst opgehaald: {{ w_data.stored }}</div>-->
+  <!--<h3>{{ w_data.weather[0].main }}</h3>-->
+  <!--<h4>{{ w_data.weather[0].description }}</h4>-->
+  <!--<div>zon op: {{ getTime(w_data.sys.sunrise) }},-->
+    <!--zon onder: {{ getTime(w_data.sys.sunset) }}</div>-->
+  <!--<div>windsnelheid: {{ getSpeed(w_data.wind.speed )}},-->
+    <!--<span matTooltip="90: Oost - 180: Zuid - 270: West - 360: Noord"-->
+          <!--[matTooltipClass]="'wind-tooltip'">-->
+      <!--windrichting</span>: {{ getDirection(w_data.wind.deg) }}-->
+    <!--({{ w_data.wind.deg }}&deg;)-->
+  <!--</div>-->
+  <!--<div>temperatuur: {{ getTemp(w_data.main.temp) }}&deg;,-->
+    <!--max: {{ getTemp(w_data.main.temp_max) }}&deg;,-->
+    <!--min: {{ getTemp(w_data.main.temp_min) }}&deg;</div>-->
+  <!--<div>luchtdruk: {{ w_data.main.pressure }}</div>-->
+  <!--<div>vochtigheid: {{ w_data.main.humidity }}</div>-->
+  <!--<div>zicht: {{ w_data.visibility }}</div>-->
+  <!--<div>bewolking: {{ w_data.clouds.all }}</div>-->
+<div>
+  <button mat-raised-button (click)="getWeather()">get weather</button>
 </div>
-<a href="{{ windkaartUrl }}" target="_blank">wind kaart</a>
+<!--</div>-->
+<div>laatst opgehaald: {{ liveweerData.stored }}</div>
+<app-live-weer [lwdata]="liveweerData"></app-live-weer>
+<a href="https://www.buienradar.nl" target="_blank"><img border="0" src="https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512"></a>
+<img src="{{ windBft }}" width="569" height="622" border="0" alt="Windkracht in Beaufort (bft) en Windrichting">
+<img src="{{ tempMap }}" width="569" height="622" border="0" alt="Windkracht in Beaufort (bft) en Windrichting">

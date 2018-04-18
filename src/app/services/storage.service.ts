@@ -8,6 +8,7 @@ export class StorageService {
   keySearchTitle = 'lmuztitle';
   keySearchParms = 'lmuzparms';
   keyWeather = 'openweather';
+  keyLiveWeer = 'liveweer';
   storage = sessionStorage;
 
   constructor() { }
@@ -19,6 +20,10 @@ export class StorageService {
 
   storeWeather(data) {
     this.storage.setItem(this.keyWeather, JSON.stringify(data));
+  }
+
+  storeLiveWeer(data) {
+    this.storage.setItem(this.keyLiveWeer, JSON.stringify(data));
   }
 
   storeAlbums(albums: Album[]) {
@@ -35,6 +40,10 @@ export class StorageService {
 
   retrieveWeather() {
     return JSON.parse(this.storage.getItem(this.keyWeather));
+  }
+
+  retrieveLiveWeer() {
+    return JSON.parse(this.storage.getItem(this.keyLiveWeer));
   }
 
   retrieveAlbums() {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MusicService} from '../services/music.service';
-import {Code} from '../classes/Code';
+import {MusicService} from '../../services/music.service';
+import {Code} from '../../classes/Code';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SearchParams} from '../classes/SearchParams';
+import {SearchParams} from '../../classes/SearchParams';
 
 @Component({
   selector: 'app-codes',

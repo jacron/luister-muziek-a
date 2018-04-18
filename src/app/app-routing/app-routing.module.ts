@@ -6,8 +6,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {WelcomeComponent} from '../welcome/welcome.component';
 import {SearchComponent} from '../components/search/search.component';
 import {AlbumDetailsComponent} from '../components/album-details/album-details.component';
-import {CodeComponent} from '../code/code.component';
-import {CodeListComponent} from '../code-list/code-list.component';
+import {CodeComponent} from '../components/code/code.component';
+import {CodeListComponent} from '../components/code-list/code-list.component';
+import {SettingsComponent} from '../components/settings/settings.component';
 
 const appRoutes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   { path: 'code/:idcode', component: CodeComponent },
   { path: 'code/list/:code/:fav', component: CodeListComponent },
   { path: 'code/list/:code', component: CodeListComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

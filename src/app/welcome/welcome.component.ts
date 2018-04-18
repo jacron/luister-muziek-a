@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MusicService} from '../services/music.service';
 import {WeatherService} from '../services/weather.service';
 import {StorageService} from '../services/storage.service';
 import {environment} from '../../environments/environment';
@@ -10,37 +9,39 @@ import {environment} from '../../environments/environment';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-  infos;
   w_data;
   w_error;
-  objectKeys = Object.keys;
-  windkaartUrl = environment.windkaartUrl;
+  liveweerData;
+  windBft = environment.windMap;
+  tempMap = environment.tempMap;
+  buienradarUrl = environment.buienradar;
+  // windInfo = '90: Oost&#13; 180: Zuid';
+  // http://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/windkracht.png
+  // http://www.knmi.nl/actueel/images/windbftgmt.png
 
   constructor(
-    private musicService: MusicService,
     private weatherService: WeatherService,
     private storageService: StorageService
   ) { }
 
   afterGetData(response) {
-    console.log(response);
-    if (response.cod === 200) {
-      this.w_data = response;
-      this.w_data.stored = this.storageService.prettyDateTime();
-      this.storageService.storeWeather(this.w_data);
-    } else {
-      this.w_error = response.cod;
-    }
+    console.log(response.liveweer[0]);
+    this.liveweerData = response.liveweer[0];
+    this.liveweerData.stored = this.storageService.prettyDateTime();
+    this.storageService.storeLiveWeer(response.liveweer[0]);
+    // if (response.cod === 200) {
+    //   this.w_data = response;
+    //   this.w_data.stored = this.storageService.prettyDateTime();
+    //   this.storageService.storeWeather(this.w_data);
+    // } else {
+    //   this.w_error = response.cod;
+    // }
   }
 
   getWeather() {
     this.weatherService.getData().subscribe(
       response => this.afterGetData(response)
     );
-  }
-
-  isObject(s) {
-    return typeof s === 'object';
   }
 
   getTime(t) {
@@ -71,16 +72,9 @@ export class WelcomeComponent implements OnInit {
     return temp;
   }
 
-  afterGetInfos(response) {
-    this.infos = response;
-  }
-
   ngOnInit() {
-    this.musicService.getInfos().subscribe(
-      response => this.afterGetInfos(response)
-    );
     this.w_data = this.storageService.retrieveWeather();
-    // console.log(this.w_data);
+    this.liveweerData = this.storageService.retrieveLiveWeer();
   }
 
 }

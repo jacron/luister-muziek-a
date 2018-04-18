@@ -3,31 +3,43 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 // Nieuwland (Home)
-const lat = 52.205880,
-  lng = 5.366183;
+// const lat = 52.205880,
+//   lng = 5.366183;
+// afgerond door apiserver tot 52.21, 5.37, wat iets noordelijker en
+// oostelijker is, maar het scheelt weinig, zie
+// https://www.latlong.net/Show-Latitude-Longitude.html
 
 @Injectable()
 export class WeatherService {
 
-  requestUrl = environment.apiWeather;
-  requestApiKey = environment.apiWeatherKey;
-  //  apiWeather: 'api.openweathermap.org/data/2.5/weather?q=Amersfoort&lang=nl',
-  // https://www.latlong.net/
-  constructor(private http: HttpClient) { }
+  openweathermap = {
+    requestUrl: environment.apiWeather,
+    requestApiKey: environment.apiWeatherKey
+  };
+  weerlive = {
+    requestUrl: environment.weerliveApi,
+  };
+  latlng = {
+    lat: 52.205880,
+    lng: 5.366183
+  };
+
+
+  constructor(private http: HttpClient) {
+  }
 
   /* GET */
   getData() {
-    // const params = new HttpParams()
-    //   .set('cmd', 'infos');
     return this.http.get(this.getUrl(), {
       responseType: 'json'
     });
   }
 
   getUrl() {
-    return this.requestUrl + 'lat=' + lat + '&lon=' + lng +
-      '&lang=nl' + '&units=metric' +
-      '&APPID=' + this.requestApiKey;
+    //   return this.requestUrl + 'lat=' + lat + '&lon=' + lng +
+    //     '&lang=nl' + '&units=metric' +
+    //     '&APPID=' + this.requestApiKey;
+    // }
+    return this.weerlive.requestUrl + this.latlng.lat + ',' + this.latlng.lng;
   }
-
 }
