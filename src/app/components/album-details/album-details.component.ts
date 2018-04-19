@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AlbumDetailsComponent {
   imgUrl = environment.apiServer + '/image/';
-  imgBackUrl = environment.apiServer + '/imageback/';
+  imgBackUrl = environment.apiServer + '/image/back/';
   @Input('album') album: Album;
   chevron = 'keyboard_arrow_down';
 
@@ -26,13 +26,11 @@ export class AlbumDetailsComponent {
   }
 
   openAlbum(album: Album): void {
-    // console.log(album);
     this.album = album;
     this.chevron = 'keyboard_arrow_down';
     if (album) {
       document.title = album.Title;
     }
-    // this.album.expanded = true;
   }
 
   handleParams(params) {
@@ -49,7 +47,6 @@ export class AlbumDetailsComponent {
     const imgUrl = this.imgUrl + this.album.ID + '/album';
     const backUrl = this.album.album_back_image ? this.imgBackUrl + this.album.ID + '/album' : null;
     this.dialog.open(DialogPicComponent, {
-      // width: '70%',
       data: {
         imgUrl: imgUrl,
         backUrl: backUrl,

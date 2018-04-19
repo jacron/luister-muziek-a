@@ -9,19 +9,17 @@ import {environment} from '../../environments/environment';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-  w_data;
-  w_error;
+  imgUrl = environment.apiServer + '/image/br/';
   liveweerData;
-  windBft = environment.windMap;
-  tempMap = environment.tempMap;
-  buienradarUrl = environment.buienradar;
-  // windInfo = '90: Oost&#13; 180: Zuid';
-  // http://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/windkracht.png
-  // http://www.knmi.nl/actueel/images/windbftgmt.png
+  windBft = environment.weather.windMap;
+  tempMap = environment.weather.tempMap;
+  buienradarApi = environment.weather.buienradarApi + 'w=500&h=512';
+  brProxyUrl = environment.apiServer + '/image/br/';
+  brMode = 'still';
 
   constructor(
     private weatherService: WeatherService,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) { }
 
   afterGetData(response) {
@@ -29,13 +27,6 @@ export class WelcomeComponent implements OnInit {
     this.liveweerData = response.liveweer[0];
     this.liveweerData.stored = this.storageService.prettyDateTime();
     this.storageService.storeLiveWeer(response.liveweer[0]);
-    // if (response.cod === 200) {
-    //   this.w_data = response;
-    //   this.w_data.stored = this.storageService.prettyDateTime();
-    //   this.storageService.storeWeather(this.w_data);
-    // } else {
-    //   this.w_error = response.cod;
-    // }
   }
 
   getWeather() {
@@ -44,36 +35,11 @@ export class WelcomeComponent implements OnInit {
     );
   }
 
-  getTime(t) {
-    const d = new Date(t * 1000),
-      minutes = '0' + d.getMinutes();
-    return d.getHours() + ':' + minutes.substr(-2);
-  }
-
-  getSpeed(m) {
-    return m;
-  }
-
-  getDirection(deg) {
-    const trans = {
-      360: 'N',
-      45: 'NO',
-      90: 'O',
-      135: 'ZO',
-      180: 'Z',
-      225: 'ZW',
-      270: 'W',
-      315: 'NW'
-    };
-    return trans[deg];
-  }
-
-  getTemp(temp) {
-    return temp;
+  openBr() {
+    this.brMode = 'dynamic';
   }
 
   ngOnInit() {
-    this.w_data = this.storageService.retrieveWeather();
     this.liveweerData = this.storageService.retrieveLiveWeer();
   }
 
