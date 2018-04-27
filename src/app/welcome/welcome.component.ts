@@ -23,10 +23,15 @@ export class WelcomeComponent implements OnInit {
   ) { }
 
   afterGetData(response) {
-    console.log(response.liveweer[0]);
-    this.liveweerData = response.liveweer[0];
-    this.liveweerData.stored = this.storageService.prettyDateTime();
-    this.storageService.storeLiveWeer(response.liveweer[0]);
+    // console.log(response);
+    const weer = response.liveweer[0];
+    if (weer) {
+      this.liveweerData = response.liveweer[0];
+      this.liveweerData.stored = this.storageService.prettyDateTime();
+      this.storageService.storeLiveWeer(response.liveweer[0]);
+    } else {
+      console.error('no response for weer!');
+    }
   }
 
   getWeather() {
