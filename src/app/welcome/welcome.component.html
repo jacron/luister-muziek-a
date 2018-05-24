@@ -1,7 +1,7 @@
 <div>
   <button mat-raised-button (click)="getWeather()">get weather</button>
 </div>
-<div>laatst opgehaald: {{ liveweerData.stored }}</div>
+<div *ngIf="liveweerData">laatst opgehaald: {{ liveweerData.stored }}</div>
 <app-live-weer [lwdata]="liveweerData"></app-live-weer>
 <img src="{{ brProxyUrl }}" (click)="openBr()"
      title="Click for dynamic"
