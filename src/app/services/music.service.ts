@@ -7,10 +7,43 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class MusicService {
 
-  requestUrl = environment.apiServer + '/ajax/';
+  requestUrl = environment.apiServer;
   constructor(private http: HttpClient) { }
 
+  getJson(cmd) {
+    return this.http.get(this.requestUrl + cmd, {
+      responseType: 'json'});
+  }
+
   /* GET */
+  getComposers() {
+    return this.getJson('/composers');
+  }
+
+  getPerformers() {
+    return this.getJson('/performers');
+  }
+
+  getCollections() {
+    return this.getJson('/collections');
+  }
+
+  getTags() {
+    return this.getJson('/tags');
+  }
+
+  getComposerById(id: number) {
+    return this.getJson('/composers/' + id);
+  }
+
+  getPerformerById(id: number) {
+    return this.getJson('/performers/' + id);
+  }
+
+  getAlbumById(id) {
+    return this.getJson('/albums/' + id);
+  }
+
   getInfos() {
     const params = new HttpParams()
       .set('cmd', 'infos');
@@ -47,15 +80,6 @@ export class MusicService {
       params});
   }
 
-  getAlbumById(id) {
-    const params = new HttpParams()
-      .set('cmd', 'album_by_id')
-      .set('id', id);
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
-  }
-
   getAlbumCountForTag(id) {
     const params = new HttpParams()
       .set('cmd', 'album_count_for_tag')
@@ -77,84 +101,12 @@ export class MusicService {
   }
 
   getSearchedAlbums(params) {
-    const idcomp = params.idcomp === -1 ? null : params.idcomp.toString(),
-      idperf = params.idperf === -1 ? null : params.idperf.toString(),
-      idcoll = params.idcoll === -1 ? null : params.idcoll.toString(),
-      idtag = params.idtag === -1 ? null : params.idtag.toString();
-    const cql = {
-      componist: idcomp,
-      performer: idperf,
-      mother: idcoll,
-      tag: idtag
-    };
-    const httpParams = new HttpParams()
-      .set('cmd', 'cql_search')
-      .set('cql', JSON.stringify(cql));
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params: httpParams});
-  }
-
-  getComposers(selection) {
-    const params = new HttpParams()
-      .set('cmd', 'componisten')
-      .set('selection', selection)
-      // .set('format', '%Last, %First')
-    ;
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
-  }
-
-  getPerformers(selection) {
-    const params = new HttpParams()
-      .set('cmd', 'performers')
-      .set('selection', JSON.stringify(selection))
-      // .set('format', '%Last, %First')
-    ;
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
-  }
-
-  getCollections(selection) {
-    const params = new HttpParams()
-      .set('cmd', 'collections')
-      .set('selection', selection)
-    ;
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
-  }
-
-  getTags(selection) {
-    const params = new HttpParams()
-      .set('cmd', 'tags')
-      .set('selection', selection)
-    ;
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
-  }
-
-  getComposerById(id: number) {
-    const params = new HttpParams()
-      .set('cmd', 'composer_by_id')
-      .set('id', id.toString())
-    ;
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
-  }
-
-  getPerformerById(id: number) {
-    const params = new HttpParams()
-      .set('cmd', 'performer_by_id')
-      .set('id', id.toString())
-    ;
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
+    const search = 'zoek'; // todo: get search (title)
+    const url = this.requestUrl + 'cql/' + search + '/' +
+      params.idcomp + '/' + params.idperf + '/' + params.idcoll + '/' +
+      params.idtag;
+    return this.http.get(url, {
+      responseType: 'json'});
   }
 
   /* POST */

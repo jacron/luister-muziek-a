@@ -1,13 +1,1 @@
-<div>
-  <button mat-raised-button (click)="getWeather()">get weather</button>
-</div>
-<div *ngIf="liveweerData">laatst opgehaald: {{ liveweerData.stored }}</div>
-<app-live-weer [lwdata]="liveweerData"></app-live-weer>
-<img src="{{ brProxyUrl }}" (click)="openBr()"
-     title="Click for dynamic"
-     *ngIf="brMode == 'still'">
-<a href="https://www.buienradar.nl" target="_blank" *ngIf="brMode != 'still'">
-  <img src="{{ buienradarApi }}">
-</a>
-<img src="{{ windBft }}" width="569" height="622" border="0" alt="Windkracht in Beaufort (bft) en Windrichting">
-<img src="{{ tempMap }}" width="569" height="622" border="0" alt="Windkracht in Beaufort (bft) en Windrichting">
+<div>Welcome!</div>

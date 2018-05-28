@@ -39,9 +39,7 @@ import {PersonService} from './services/person.service';
 import { CuesheetMenuComponent } from './components/cuesheet-menu/cuesheet-menu.component';
 import { CodeComponent } from './components/code/code.component';
 import { CodeListComponent } from './components/code-list/code-list.component';
-import {WeatherService} from './services/weather.service';
 import { SettingsComponent } from './components/settings/settings.component';
-import { LiveWeerComponent } from './components/live-weer/live-weer.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +67,7 @@ import { LiveWeerComponent } from './components/live-weer/live-weer.component';
     CodeComponent,
     CodeListComponent,
     SettingsComponent,
-    LiveWeerComponent
+
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -108,7 +106,6 @@ import { LiveWeerComponent } from './components/live-weer/live-weer.component';
     TypedNamePipe,
     TypedTitlePipe,
     StorageService,
-    WeatherService,
     MatDialogModule
   ],
   bootstrap: [AppComponent]

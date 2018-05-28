@@ -41,11 +41,7 @@ export class DialogPicComponent implements OnInit {
   ngOnInit() {
     this.mode = this.data.mode;
     this.name = this.data.name;
-    console.log(this.data);
     this.toggleUrl();
-
-    // console.log(this.picContainer);
-    // console.log(this.renderer);
     // const el = this.picContainer.nativeElement;
     // this.picContainer.setStyle('height: 200px');
     // this.picContainer.nativeElement.clientHeight = 200;

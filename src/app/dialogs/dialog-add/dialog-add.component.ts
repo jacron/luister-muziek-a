@@ -95,10 +95,9 @@ export class DialogAddComponent implements OnInit {
   }
 
   getTypeAheads() {
-    const selection = null;
-    const qcomposers = this.musicService.getComposers(selection);
-    const qperformers = this.musicService.getPerformers(selection);
-    const qtags = this.musicService.getTags(selection);
+    const qcomposers = this.musicService.getComposers();
+    const qperformers = this.musicService.getPerformers();
+    const qtags = this.musicService.getTags();
     forkJoin(qcomposers, qperformers, qtags)
       .subscribe(
         (results) => {

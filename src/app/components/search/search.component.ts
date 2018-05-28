@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   performers: Person[];
   collections: Album[];
   tags: Tag[];
-  imgUrl = environment.apiServer + '/image/';
+  imgUrl = environment.apiServer + 'image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
   params: SearchParams;
@@ -312,13 +312,14 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   getTypeAheads() {
     const selection = this.getSelection();
-    const qcomposers = this.musicService.getComposers(selection);
-    const qperformers = this.musicService.getPerformers(selection);
-    const qcollections = this.musicService.getCollections(selection);
-    const qtags = this.musicService.getTags(selection);
+    const qcomposers = this.musicService.getComposers();
+    const qperformers = this.musicService.getPerformers();
+    const qcollections = this.musicService.getCollections();
+    const qtags = this.musicService.getTags();
     forkJoin(qcomposers, qperformers, qcollections, qtags)
       .subscribe(
         (results) => {
+          // console.log('results', results);
           this.composers = <Person[]>results[0];
           this.performers = <Person[]>results[1];
           this.collections = <Album[]>results[2];

@@ -144,7 +144,7 @@
         <div class="col" style="max-width: 120px;">
           <a (click)="toAlbum(album.ID)">
             <img *ngIf="list"
-                 attr.data-src="{{ imgUrl }}{{ album.ID }}/album/-1/100"
+                 attr.data-src="{{ imgUrl }}{{ album.ID }}/album/-1/100/"
                  attr.albumid="{{ album.ID }}"
                  class="lazy thumb"
             >
@@ -166,7 +166,7 @@
         <div class="col"  *ngFor="let album of albums">
           <a (click)="toAlbum(album.ID)">
             <img
-                 attr.data-src="{{ imgUrl }}{{ album.ID }}/album/300/-1"
+                 attr.data-src="{{ imgUrl }}{{ album.ID }}/album/300/-1/"
                  attr.albumid="{{ album.ID }}"
                  class="lazy details"
             >
