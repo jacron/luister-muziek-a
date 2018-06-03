@@ -89,7 +89,8 @@ export class DialogAddComponent implements OnInit {
     if (e.key === 'Enter' && selected && typeof selected === 'string') {
       console.log(selected);
       this.musicService.newComposer(selected, this.data.album.ID).subscribe(
-        (response) => this.afterNewComposer(response)
+        (response) => this.afterNewComposer(response),
+        (error) => console.error(error)
       );
     }
   }

@@ -57,7 +57,8 @@ export class ToolbarComponent implements OnInit, OnChanges {
 
   openFinder(id) {
     this.musicService.openFinder(id).subscribe(
-      (response) => console.log(response)
+      response => {},
+      error => console.error(error)
     );
   }
 

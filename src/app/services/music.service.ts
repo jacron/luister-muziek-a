@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {catchError} from 'rxjs/operators';
 
 // const requestUrl = 'http://127.0.0.1:8010/ajax/';
 
@@ -10,12 +11,12 @@ export class MusicService {
   requestUrl = environment.apiServer;
   constructor(private http: HttpClient) { }
 
+  /* GET */
   getJson(cmd) {
     return this.http.get(this.requestUrl + cmd, {
       responseType: 'json'});
   }
 
-  /* GET */
   getComposers() {
     return this.getJson('/composers');
   }
@@ -45,39 +46,15 @@ export class MusicService {
   }
 
   getInfos() {
-    const params = new HttpParams()
-      .set('cmd', 'infos');
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
+    return this.getJson('/infos');
   }
 
   getCodes() {
-    const params = new HttpParams()
-      .set('cmd', 'codes');
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
+    return this.getJson('/codes');
   }
 
   getCode(code) {
-    const params = new HttpParams()
-      .set('cmd', 'code')
-      .set('code', code)
-      .set('favorite', 'false')
-    ;
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
-  }
-
-  getAlbumByPath(path) {
-    const params = new HttpParams()
-      .set('cmd', 'album_by_path')
-      .set('path', path);
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
+    return this.getJson('/codes/' + code + '/false');
   }
 
   getAlbumCountForTag(id) {
@@ -102,7 +79,7 @@ export class MusicService {
 
   getSearchedAlbums(params) {
     const search = 'zoek'; // todo: get search (title)
-    const url = this.requestUrl + 'cql/' + search + '/' +
+    const url = this.requestUrl + '/cql/' + search + '/' +
       params.idcomp + '/' + params.idperf + '/' + params.idcoll + '/' +
       params.idtag;
     return this.http.get(url, {
@@ -110,6 +87,117 @@ export class MusicService {
   }
 
   /* POST */
+  postForm(cmd, params) {
+    console.log('cmd', cmd);
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      this.requestUrl + cmd, params, { headers: headers},
+    );
+  }
+
+  postHeaders() {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return headers;
+  }
+
+  getAlbumByPath(path) {
+    return this.postForm('/album/path', { path: path });
+  }
+
+  editCue(id, albumid) {
+    return this.postForm('/edit/cuesheet', {id: id, albumid: albumid});
+  }
+
+  deleteCue(id, albumid) {
+    return this.postForm('/delete/cueheet', {id: id, albumid: albumid});
+  }
+
+  openFinder(id) {
+    const params = {objectid: id};
+    // const params = new HttpParams()
+    //   .set('objectid', id);
+    return this.postForm('/finder/album', params);
+  }
+
+  addComposer(composerId: number, albumId: number) {
+    return this.postForm('/composer/add',
+      {composerId: composerId, albumId: albumId});
+  }
+
+  addPerformer(performerId: number, albumId: number) {
+    return this.postForm('/performer/add',
+      {performerId: performerId, albumId: albumId});
+  }
+
+  addTag(tagId: number, albumId: number) {
+    return this.postForm('/tag/add',
+      {tagId: tagId, albumId: albumId});
+  }
+
+  newPerformer(name, albumId) {
+    return this.postForm('/performer/new', {
+      albumid: albumId,
+      name: name
+    });
+  }
+
+  newComposer(name, albumId) {
+    return this.postForm('/composer/new', {
+      albumid: albumId,
+      name: name
+    });
+  }
+
+  removeComposer(composerId: number, albumId: number) {
+    return this.postForm('/composer/remove', {
+      composerId: composerId, albumId: albumId
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'remove_componist')
+    //   .set('id', composerId.toString())
+    //   .set('albumid', albumId.toString())
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
+  }
+
+  removePerformer(performerId: number, albumId: number) {
+    return this.postForm('/performer/remove', {
+      performerId: performerId, albumId: albumId
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'remove_performer')
+    //   .set('id', performerId.toString())
+    //   .set('albumid', albumId.toString())
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
+  }
+
+  removeTag(tagId: number, albumId: number) {
+      return this.postForm('/tag/remove', {
+        tagId: tagId, albumId: albumId
+      });
+    // const params = new HttpParams()
+    //   .set('cmd', 'remove_tag')
+    //   .set('id', tagId.toString())
+    //   .set('albumid', albumId.toString())
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
+  }
+
   updateLibraryCodeAlias(code, text) {
     const params = new HttpParams()
       .set('cmd', 'update_librarycode_alias')
@@ -174,32 +262,6 @@ export class MusicService {
     );
   }
 
-  newPerformer(name, albumId) {
-    const params = new HttpParams()
-      .set('cmd', 'new_performer')
-      .set('name', name)
-      .set('albumid', albumId)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  newComposer(name, albumId) {
-    const params = new HttpParams()
-      .set('cmd', 'new_componist')
-      .set('name', name)
-      .set('albumid', albumId)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
   pastePersonImage(personId, type) {
     const params = new HttpParams()
       .set('cmd', 'paste_person')
@@ -249,32 +311,6 @@ export class MusicService {
     );
   }
 
-  openFinder(id) {
-    const params = new HttpParams()
-      .set('cmd', 'openfinder')
-      .set('objectid', id)
-      .set('kind', 'album')
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  editCue(id, albumid) {
-    const params = new HttpParams()
-      .set('cmd', 'editcuesheet')
-      .set('id', id)
-      .set('albumid', albumid)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
   nameCueFromFilename(id, albumid) {
     const params = new HttpParams()
       .set('cmd', 'cuesheet_title_from_filename')
@@ -294,19 +330,6 @@ export class MusicService {
       .set('id', id)
       .set('albumid', albumid)
       .set('title', title)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  deleteCue(id, albumid) {
-    const params = new HttpParams()
-      .set('cmd', 'removecuesheet')
-      .set('id', id)
-      .set('albumid', albumid)
     ;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -441,84 +464,6 @@ export class MusicService {
     const params = new HttpParams()
       .set('cmd', 'tageditor')
       .set('path', this.encodeSemiColon(path))
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  addComposer(composerId: number, albumId: number) {
-    const params = new HttpParams()
-      .set('cmd', 'add_componist')
-      .set('componistid', composerId.toString())
-      .set('albumid', albumId.toString())
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  addPerformer(performerId: number, albumId: number) {
-    const params = new HttpParams()
-      .set('cmd', 'add_performer')
-      .set('performerid', performerId.toString())
-      .set('albumid', albumId.toString())
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  addTag(tagId: number, albumId: number) {
-    const params = new HttpParams()
-      .set('cmd', 'add_tag')
-      .set('tagid', tagId.toString())
-      .set('albumid', albumId.toString())
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  removeComposer(composerId: number, albumId: number) {
-    const params = new HttpParams()
-      .set('cmd', 'remove_componist')
-      .set('id', composerId.toString())
-      .set('albumid', albumId.toString())
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  removePerformer(performerId: number, albumId: number) {
-    const params = new HttpParams()
-      .set('cmd', 'remove_performer')
-      .set('id', performerId.toString())
-      .set('albumid', albumId.toString())
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  removeTag(tagId: number, albumId: number) {
-    const params = new HttpParams()
-      .set('cmd', 'remove_tag')
-      .set('id', tagId.toString())
-      .set('albumid', albumId.toString())
     ;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');

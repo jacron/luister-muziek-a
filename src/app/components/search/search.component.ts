@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   performers: Person[];
   collections: Album[];
   tags: Tag[];
-  imgUrl = environment.apiServer + 'image/';
+  imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
   params: SearchParams;

@@ -73,6 +73,16 @@ export class DialogPiecesComponent implements OnInit {
     }
   }
 
+  piecesSelected() {
+    let n = 0;
+    for (let i = 0; i < this.data.pieces.length; i++) {
+      if (this.data.pieces[i].checked) {
+        n++;
+      }
+    }
+    return n;
+  }
+
   selectAllPieces(mode) {
     this.data.pieces.forEach((piece) => {
       piece.checked = mode;
