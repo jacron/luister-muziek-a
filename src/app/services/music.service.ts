@@ -59,24 +59,10 @@ export class MusicService {
 
   getAlbumCountForTag(id) {
     return this.getJson('/tag/albums/count/' + id);
-    // const params = new HttpParams()
-    //   .set('cmd', 'album_count_for_tag')
-    //   .set('id', id);
-    // return this.http.get(this.requestUrl, {
-    //   responseType: 'json',
-    //   params});
   }
 
   getAlbumCountForPerson(id, type) {
     return this.getJson('/person/albums/count/' + id);
-    // const params = new HttpParams()
-    //   .set('cmd', 'album_count_for_person')
-    //   .set('id', id)
-    //   .set('type', type)
-    // ;
-    // return this.http.get(this.requestUrl, {
-    //   responseType: 'json',
-    //   params});
   }
 
   getSearchedAlbums(params) {
@@ -90,7 +76,6 @@ export class MusicService {
 
   /* POST */
   postForm(cmd, params) {
-    console.log('cmd', cmd);
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(
@@ -182,6 +167,30 @@ export class MusicService {
       return this.postForm('/tag/remove', {
         tagId: tagId, albumId: albumId
       });
+  }
+
+  refetch(id) {
+    return this.postForm('/pieces/reload', {
+      albumId: id
+    });
+  }
+
+  updateCuesheetTitle(id, albumid, title) {
+    return this.postForm('/cuesheet/update', {
+      albumId: albumid,
+      pieceId: id,
+      title: title
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'update_cuesheet_title')
+    //   .set('id', id)
+    //   .set('albumid', albumid)
+    //   .set('title', title);
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(this.requestUrl, params, {
+    //   headers: headers
+    // });
   }
 
   updateLibraryCodeAlias(code, text) {
@@ -277,18 +286,6 @@ export class MusicService {
     const params = new HttpParams()
       .set('cmd', 'openwebsite')
       .set('albumid', albumid)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  refetch(id) {
-    const params = new HttpParams()
-      .set('cmd', 'refetch')
-      .set('albumid', id)
     ;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -409,19 +406,6 @@ export class MusicService {
       .set('pieceid', id)
       .set('albumid', albumid)
       .set('name', name);
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.requestUrl, params, {
-      headers: headers
-    });
-  }
-
-  updateCuesheetTitle(id, albumid, title) {
-    const params = new HttpParams()
-      .set('cmd', 'update_cuesheet_title')
-      .set('id', id)
-      .set('albumid', albumid)
-      .set('title', title);
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.requestUrl, params, {

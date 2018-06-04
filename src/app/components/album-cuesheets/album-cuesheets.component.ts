@@ -55,7 +55,7 @@ export class AlbumCuesheetsComponent implements OnInit {
 
   update(id, title) {
     this.musicService.updateCuesheetTitle(id, this.album.ID, title).subscribe(
-      (response) => console.log(response)
+      () => {}
     );
   }
 

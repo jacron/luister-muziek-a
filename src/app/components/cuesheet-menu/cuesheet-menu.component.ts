@@ -19,25 +19,25 @@ export class CuesheetMenuComponent implements OnInit {
 
   edit(id) {
     this.musicService.editCue(id, this.album.ID).subscribe(
-      (response) => console.log(response),
+      () => {},
       (error) => console.error(error)
     );
   }
 
-  nameToFilename(cuesheet: Cuesheet) {
-    this.musicService.nameCueToFilename(cuesheet.ID, this.album.ID,
-      cuesheet.Title).subscribe(
-        response => console.log(response)
-    );
-  }
+  // nameToFilename(cuesheet: Cuesheet) {
+  //   this.musicService.nameCueToFilename(cuesheet.ID, this.album.ID,
+  //     cuesheet.Title).subscribe(
+  //       response => console.log(response)
+  //   );
+  // }
 
-  nameFromFilename(cuesheet) {
-    this.musicService.nameCueFromFilename(cuesheet.ID, this.album.ID).subscribe(
-      (response) => cuesheet.Title = response
-    );
-  }
+  // nameFromFilename(cuesheet) {
+  //   this.musicService.nameCueFromFilename(cuesheet.ID, this.album.ID).subscribe(
+  //     (response) => cuesheet.Title = response
+  //   );
+  // }
 
-  afterDelete(response) {
+  afterDelete() {
     this.musicService.refetch(this.album.ID).subscribe(
       (album: Album) => this.album.cuesheets = album.cuesheets
     );
@@ -46,7 +46,7 @@ export class CuesheetMenuComponent implements OnInit {
   delete(cuesheet: Cuesheet) {
     if (confirm('delete "' + cuesheet.Title + '"?')) {
       this.musicService.deleteCue(cuesheet.ID, this.album.ID)
-        .subscribe((response) => this.afterDelete(response)
+        .subscribe((response) => this.afterDelete()
         );
     }
   }
