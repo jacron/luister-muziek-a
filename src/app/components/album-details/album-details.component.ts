@@ -38,7 +38,7 @@ export class AlbumDetailsComponent {
       this.musicService.getAlbumById(params.idalbum).subscribe(
         (album: Album) => this.openAlbum(album),
         err => console.error(err),
-        () => console.log('album fetched')
+        () => {}
       );
     }
   }

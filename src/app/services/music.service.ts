@@ -58,23 +58,25 @@ export class MusicService {
   }
 
   getAlbumCountForTag(id) {
-    const params = new HttpParams()
-      .set('cmd', 'album_count_for_tag')
-      .set('id', id);
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
+    return this.getJson('/tag/albums/count/' + id);
+    // const params = new HttpParams()
+    //   .set('cmd', 'album_count_for_tag')
+    //   .set('id', id);
+    // return this.http.get(this.requestUrl, {
+    //   responseType: 'json',
+    //   params});
   }
 
   getAlbumCountForPerson(id, type) {
-    const params = new HttpParams()
-      .set('cmd', 'album_count_for_person')
-      .set('id', id)
-      .set('type', type)
-    ;
-    return this.http.get(this.requestUrl, {
-      responseType: 'json',
-      params});
+    return this.getJson('/person/albums/count/' + id);
+    // const params = new HttpParams()
+    //   .set('cmd', 'album_count_for_person')
+    //   .set('id', id)
+    //   .set('type', type)
+    // ;
+    // return this.http.get(this.requestUrl, {
+    //   responseType: 'json',
+    //   params});
   }
 
   getSearchedAlbums(params) {
@@ -108,6 +110,20 @@ export class MusicService {
 
   editCue(id, albumid) {
     return this.postForm('/edit/cuesheet', {id: id, albumid: albumid});
+  }
+
+  tagEditor(path) {
+    return this.postForm('/tag/editor', { path: path});
+    // console.log(path);
+    // const params = new HttpParams()
+    //   .set('cmd', 'tageditor')
+    //   .set('path', this.encodeSemiColon(path))
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
   }
 
   deleteCue(id, albumid) {
@@ -154,48 +170,18 @@ export class MusicService {
     return this.postForm('/composer/remove', {
       composerId: composerId, albumId: albumId
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'remove_componist')
-    //   .set('id', composerId.toString())
-    //   .set('albumid', albumId.toString())
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
   }
 
   removePerformer(performerId: number, albumId: number) {
     return this.postForm('/performer/remove', {
       performerId: performerId, albumId: albumId
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'remove_performer')
-    //   .set('id', performerId.toString())
-    //   .set('albumid', albumId.toString())
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
   }
 
   removeTag(tagId: number, albumId: number) {
       return this.postForm('/tag/remove', {
         tagId: tagId, albumId: albumId
       });
-    // const params = new HttpParams()
-    //   .set('cmd', 'remove_tag')
-    //   .set('id', tagId.toString())
-    //   .set('albumid', albumId.toString())
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
   }
 
   updateLibraryCodeAlias(code, text) {
@@ -457,19 +443,6 @@ export class MusicService {
 
   encodeSemiColon(s) {
     return s.replace(/;/g, '&semi-colon');
-  }
-
-  tagEditor(path) {
-    // console.log(path);
-    const params = new HttpParams()
-      .set('cmd', 'tageditor')
-      .set('path', this.encodeSemiColon(path))
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
   }
 
   updateAlbumTagName(id: number, name: any) {
