@@ -103,7 +103,7 @@ export class DialogPersonComponent implements OnInit {
   }
 
   afterAlbumCount(response) {
-    this.albumCount = response;
+    this.albumCount = response.count;
   }
 
   ngOnInit() {

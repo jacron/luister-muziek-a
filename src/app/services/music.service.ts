@@ -61,8 +61,8 @@ export class MusicService {
     return this.getJson('/tag/albums/count/' + id);
   }
 
-  getAlbumCountForPerson(id, type) {
-    return this.getJson('/person/albums/count/' + id);
+  getAlbumCountForPerson(id, person_type) {
+    return this.getJson('/person/albums/count/' + id + '/' + person_type);
   }
 
   getSearchedAlbums(params) {
@@ -181,16 +181,91 @@ export class MusicService {
       pieceId: id,
       title: title
     });
+  }
+
+  updateAlbumTitle(albumid, title) {
+    return this.postForm('/album/update/title', {
+      albumId: albumid,
+      title: title
+    });
     // const params = new HttpParams()
-    //   .set('cmd', 'update_cuesheet_title')
-    //   .set('id', id)
-    //   .set('albumid', albumid)
+    //   .set('cmd', 'update_album_title')
+    //   .set('albumid', id)
     //   .set('title', title);
     // const headers = new HttpHeaders();
     // headers.append('Content-Type', 'application/json');
     // return this.http.post(this.requestUrl, params, {
     //   headers: headers
     // });
+  }
+
+  updateAlbumDescription(albumid, text) {
+    return this.postForm('/album/update/description', {
+      albumId: albumid,
+      description: text
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'update_album_description')
+    //   .set('albumid', id)
+    //   .set('description', text);
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(this.requestUrl, params, {
+    //   headers: headers
+    // });
+  }
+
+  updatePerson(options) {
+    return this.postForm('/person/update', {
+      personId: options.personId,
+      personType: options.type,
+      field: options.field,
+      text: options.text
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'update_person')
+    //   .set('personId', options.personId)
+    //   .set('type', options.type)
+    //   .set('field', options.field)
+    //   .set('text', options.text)
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(this.requestUrl, params, {
+    //   headers: headers
+    // });
+  }
+
+
+  updatePieceName(id, albumid, name) {
+    return this.postForm('/piece/update', {
+      albumId: albumid,
+      pieceId: id,
+      name: name,
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'update_piece_name')
+    //   .set('pieceid', id)
+    //   .set('albumid', albumid)
+    //   .set('name', name);
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(this.requestUrl, params, {
+    //   headers: headers
+    // });
+  }
+
+  pastePersonImage(personId, type) {
+    return this.postForm('/image/paste/person', {
+      personId: personId,
+      type: type
+    });
+  }
+
+  pasteAlbumImage(albumid) {
+    return this.postForm('/image/paste/album', {
+      albumId: albumid,
+    });
   }
 
   updateLibraryCodeAlias(code, text) {
@@ -249,31 +324,6 @@ export class MusicService {
       .set('cmd', 'new_tag')
       .set('name', name)
       .set('albumid', albumId)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  pastePersonImage(personId, type) {
-    const params = new HttpParams()
-      .set('cmd', 'paste_person')
-      .set('id', personId)
-      .set('type', type)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.requestUrl, params, {
-      headers: headers
-    });
-  }
-
-  pasteFolder(albumid) {
-    const params = new HttpParams()
-      .set('cmd', 'paste_folder')
-      .set('albumid', albumid)
     ;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -358,59 +408,6 @@ export class MusicService {
     return this.http.post(
       this.requestUrl, params, { headers: headers}
     );
-  }
-
-  updateAlbumTitle(id, title) {
-    const params = new HttpParams()
-      .set('cmd', 'update_album_title')
-      .set('albumid', id)
-      .set('title', title);
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.requestUrl, params, {
-      headers: headers
-    });
-  }
-
-  updateAlbumDescription(id, text) {
-    const params = new HttpParams()
-      .set('cmd', 'update_album_description')
-      .set('albumid', id)
-      .set('description', text);
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.requestUrl, params, {
-      headers: headers
-    });
-  }
-
-  updatePerson(options) {
-    const params = new HttpParams()
-      .set('cmd', 'update_person')
-      .set('personId', options.personId)
-      .set('type', options.type)
-      .set('field', options.field)
-      .set('text', options.text)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.requestUrl, params, {
-      headers: headers
-    });
-  }
-
-
-  updatePieceName(id, albumid, name) {
-    const params = new HttpParams()
-      .set('cmd', 'update_piece_name')
-      .set('pieceid', id)
-      .set('albumid', albumid)
-      .set('name', name);
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.requestUrl, params, {
-      headers: headers
-    });
   }
 
   controlPlayer(cmd) {

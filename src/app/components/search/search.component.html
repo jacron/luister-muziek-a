@@ -5,7 +5,7 @@
       <div class="col person-image-col">
         <div class="selected-image">
           <img *ngIf="selectedComposer && selectedComposer.ID"
-               (click)="openPicComposer()"
+               (click)="editPerson(selectedComposer, 'componist')"
                src="{{ imgUrl }}{{ selectedComposer.ID }}/componist">
         </div>
       </div>
@@ -39,7 +39,7 @@
         <div class="selected-image">
           <img *ngIf="selectedPerformer && selectedPerformer.ID"
                style="margin-top: 12px"
-               (click)="openPicPerformer()"
+               (click)="editPerson(selectedPerformer, 'performer')"
                src="{{ imgUrl }}{{ selectedPerformer.ID }}/performer">
         </div>
       </div>

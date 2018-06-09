@@ -11,6 +11,7 @@ import {SearchParams} from '../../classes/SearchParams';
 import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component';
 import {MatDialog} from '@angular/material';
 import {PersonService} from '../../services/person.service';
+import {DialogPersonComponent} from '../../dialogs/dialog-person/dialog-person.component';
 
 @Component({
   selector: 'app-search',
@@ -339,6 +340,19 @@ export class SearchComponent implements OnInit, AfterViewInit {
       data: {
         imgUrl: imgUrl,
       }
+    });
+  }
+
+  editPerson(person: Person, type: string) {
+    const dialogRef = this.dialog.open(DialogPersonComponent, {
+      width: '50%',
+      data: {
+        person: person,
+        type: type,
+        albumid: this.album,
+        personName: person.FullName
+      },
+      autoFocus: false,
     });
   }
 

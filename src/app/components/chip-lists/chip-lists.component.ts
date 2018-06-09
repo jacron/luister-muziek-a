@@ -91,19 +91,7 @@ export class ChipListsComponent implements OnInit {
         personName: person.FullName
       },
       autoFocus: false,
-      // hasBackdrop: false
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.close.emit(result);
-    // });
-    // dialogRef.keydownEvents()
-    //   .filter((e: KeyboardEvent) => e.code === 'Escape')
-    //   // .take(1)
-    //   .subscribe(() => {
-    //     // dialogRef.close();
-    //     console.log('closed');
-    //   });
   }
 
   toComposer(composer: Person) {

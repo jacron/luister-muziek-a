@@ -106,8 +106,8 @@ export class ToolbarComponent implements OnInit, OnChanges {
       .subscribe();
   }
 
-  pasteFolder() {
-    this.musicService.pasteFolder(this.album.ID).subscribe();
+  pasteAlbumImage() {
+    this.musicService.pasteAlbumImage(this.album.ID).subscribe();
   }
 
   updateAlbumTitle(id, title) {
