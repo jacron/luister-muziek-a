@@ -13,6 +13,7 @@ export class DialogTagComponent implements OnInit {
 
   tagname: string;
   albumCount: number;
+  model;
 
   constructor(private musicService: MusicService,
               private router: Router,

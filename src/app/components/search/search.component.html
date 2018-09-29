@@ -87,7 +87,7 @@
            name="performer">
     <mat-autocomplete #auto3="matAutocomplete"
                       [displayWith]="displayTitleFn"
-                      (optionSelected)="onSelectionChange()"
+                      (optionSelected)="onSelectionChange('collection')"
                       #collectionSelect>
       <mat-option *ngFor="let opt of (collections | typedTitle:selectedCollection)" [value]="opt">
         <!--<div class="selected-image">-->
@@ -113,7 +113,7 @@
            name="tag">
     <mat-autocomplete #auto4="matAutocomplete"
                       [displayWith]="displayNameFn"
-                      (optionSelected)="onSelectionChange()"
+                      (optionSelected)="onSelectionChange('tag')"
                       #tagSelect>
       <mat-option *ngFor="let opt of (tags | typedName:selectedTag)"
                   [value]="opt">

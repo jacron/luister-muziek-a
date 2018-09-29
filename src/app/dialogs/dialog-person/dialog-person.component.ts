@@ -17,6 +17,7 @@ export class DialogPersonComponent implements OnInit {
   googleUrl = environment.googleUrl;
   person: Person;
   albumCount: number;
+  model;
 
   constructor(private musicService: MusicService,
               public dialogRef: MatDialogRef<DialogPersonComponent>,

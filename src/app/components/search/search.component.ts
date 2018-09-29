@@ -291,16 +291,17 @@ export class SearchComponent implements OnInit, AfterViewInit {
     console.log(this.selectedCollection);
   }
 
-  onSelectionChange(person) {
+  onSelectionChange(type) {
+    // todo: add types for tag and collection
     if (!this.params) {
       return;
     }
-    if (person === 'composer') {
+    if (type === 'composer') {
       this.getComposer(this.selectedComposer.ID);
       this.params.idcomp = this.selectedComposer.ID;
       this.setSelected();
     }
-    if (person === 'performer') {
+    if (type === 'performer') {
       this.getPerformer(this.selectedPerformer.ID);
       this.params.idperf = this.selectedPerformer.ID;
       this.setSelected();
