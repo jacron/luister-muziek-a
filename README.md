@@ -43,5 +43,12 @@ Solution: upgrade node-sass to 4.9.3 (after adding a line to package.json)
 
 ## Back-end
 
-localhost:5000 needed
+ apiServer: 'http://localhost:5000/api',
+
+nb 
+
+music-api:5005
+music:8080
+
+
 
