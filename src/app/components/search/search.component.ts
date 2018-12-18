@@ -8,7 +8,7 @@ import {forkJoin} from 'rxjs/observable/forkJoin';
 import {Tag} from '../../classes/Tag';
 import {StorageService} from '../../services/storage.service';
 import {SearchParams} from '../../classes/SearchParams';
-import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component';
+// import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component';
 import {MatDialog} from '@angular/material';
 import {PersonService} from '../../services/person.service';
 import {DialogPersonComponent} from '../../dialogs/dialog-person/dialog-person.component';
@@ -22,19 +22,22 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   albums: Album[];
   album: Album;
-
   composers: Person[];
   performers: Person[];
   collections: Album[];
   tags: Tag[];
+  instruments;
   imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
   params: SearchParams;
-  selectedComposer: Person = null;
-  selectedPerformer: Person = null;
-  selectedCollection: Album = null;
-  selectedTag: Tag = null;
+  selectedComposer;
+  selectedComposerID;
+  selectedPerformer;
+  selectedPerformerID;
+  selectedCollection;
+  selectedInstrument;
+  selectedTag;
   list = true;
 
   constructor(private musicService: MusicService,
@@ -49,12 +52,18 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   handleParams(params) {
     if (params) {
-      // console.log(params);
+      console.log(params);
       if (params.idcomp) {
+        this.selectedComposerID = params.idcomp;
         this.params = new SearchParams(params);
         this.storageService.storeSearchParameters(params);
         this.fetchThings(this.params);
-        // this.setSelected();
+      }
+      if (params.idperf) {
+        this.selectedPerformerID = params.idperf;
+        this.params = new SearchParams(params);
+        this.storageService.storeSearchParameters(params);
+        this.fetchThings(this.params);
       }
     }
   }
@@ -89,11 +98,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
     return null;
   }
 
-  getCollectionById(id: number): Album {
-    const item = this.getItemById(this.collections, id);
-    return <Album>item;
-  }
-
   getTagById(id: number): Tag {
     const item = this.getItemById(this.tags, id);
     return <Tag>item;
@@ -106,18 +110,20 @@ export class SearchComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getAlbumsComponist(list) {
+  getAlbums(list) {
     this.list = list;
-    const idcomp = this.selectedComposer ? this.selectedComposer.ID : -1;
-    const idperf = this.selectedPerformer ? this.selectedPerformer.ID : -1;
-    const idcoll = this.selectedCollection ? this.selectedCollection.ID : -1;
-    const idtag = this.selectedTag ? this.selectedTag.ID : -1;
+    const idcomp = this.selectedComposerID ? this.selectedComposerID : -1;
+    const idperf = this.selectedPerformerID ? this.selectedPerformerID : -1;
+    const idcoll = this.selectedCollection ? this.selectedCollection : -1;
+    const idtag = this.selectedTag ? this.selectedTag : -1;
+    const idinstrument = this.selectedInstrument ? this.selectedInstrument : -1;
     this.router.navigate(['/search',
       {
         idcomp: idcomp,
         idperf: idperf,
         idcoll: idcoll,
-        idtag: idtag
+        idtag: idtag,
+        idinstrument: idinstrument
       }
     ]).then(() => {
     });
@@ -308,44 +314,30 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getSelection() {
-    return null;
-  }
-
   getTypeAheads() {
-    const selection = this.getSelection();
-    const qcomposers = this.musicService.getComposers();
-    const qperformers = this.musicService.getPerformers();
+    const qcomposers = this.musicService.getComposers('dropdown');
+    const qperformers = this.musicService.getPerformers('dropdown');
     const qcollections = this.musicService.getCollections();
     const qtags = this.musicService.getTags();
-    forkJoin(qcomposers, qperformers, qcollections, qtags)
+    const qinstruments = this.musicService.getInstruments();
+    forkJoin(qcomposers, qperformers, qcollections, qtags, qinstruments)
       .subscribe(
         (results) => {
-          // console.log('results', results);
           this.composers = <Person[]>results[0];
           this.performers = <Person[]>results[1];
           this.collections = <Album[]>results[2];
           this.tags = <Tag[]>results[3];
+          this.instruments = results[4];
         },
         err => console.error(err),
         () => {
-          console.log('all three collections are fetched');
           this.setSelected();
         }
       );
   }
 
-  openPicDialog(imgUrl) {
-    this.dialog.open(DialogPicComponent, {
-      width: '80%',
-      data: {
-        imgUrl: imgUrl,
-      }
-    });
-  }
-
   editPerson(person: Person, type: string) {
-    const dialogRef = this.dialog.open(DialogPersonComponent, {
+    this.dialog.open(DialogPersonComponent, {
       width: '50%',
       data: {
         person: person,
@@ -355,15 +347,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
       },
       autoFocus: false,
     });
-  }
-
-  openPicComposer(): void {
-    this.openPicDialog(this.imgUrl + this.selectedComposer.ID + '/componist');
-  }
-
-  openPicPerformer(): void {
-    const imgUrl = this.imgUrl + this.selectedPerformer.ID + '/performer';
-    this.openPicDialog(imgUrl);
   }
 
   renderComposerOpt(opt) {
@@ -385,6 +368,5 @@ export class SearchComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.getTypeAheads();
   }
-
 
 }

@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {catchError} from 'rxjs/operators';
-
-// const requestUrl = 'http://127.0.0.1:8010/ajax/';
 
 @Injectable()
 export class MusicService {
@@ -17,12 +14,12 @@ export class MusicService {
       responseType: 'json'});
   }
 
-  getComposers() {
-    return this.getJson('/composers');
+  getComposers(mode) {
+    return this.getJson('/composers/mode/' + mode);
   }
 
-  getPerformers() {
-    return this.getJson('/performers');
+  getPerformers(mode) {
+    return this.getJson('/performers/mode/' + mode);
   }
 
   getCollections() {
@@ -31,6 +28,10 @@ export class MusicService {
 
   getTags() {
     return this.getJson('/tags');
+  }
+
+  getInstruments() {
+    return this.getJson('/instruments');
   }
 
   getComposerById(id: number) {
@@ -69,7 +70,7 @@ export class MusicService {
     const search = 'zoek'; // todo: get search (title)
     const url = this.requestUrl + '/cql/' + search + '/' +
       params.idcomp + '/' + params.idperf + '/' + params.idcoll + '/' +
-      params.idtag;
+      params.idtag + '/' + params.idinstrument;
     return this.http.get(url, {
       responseType: 'json'});
   }
@@ -83,12 +84,6 @@ export class MusicService {
     );
   }
 
-  postHeaders() {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return headers;
-  }
-
   getAlbumByPath(path) {
     return this.postForm('/album/path', { path: path });
   }
@@ -99,16 +94,6 @@ export class MusicService {
 
   tagEditor(path) {
     return this.postForm('/tag/editor', { path: path});
-    // console.log(path);
-    // const params = new HttpParams()
-    //   .set('cmd', 'tageditor')
-    //   .set('path', this.encodeSemiColon(path))
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
   }
 
   deleteCue(id, albumid) {
@@ -117,8 +102,6 @@ export class MusicService {
 
   openFinder(id) {
     const params = {objectid: id};
-    // const params = new HttpParams()
-    //   .set('objectid', id);
     return this.postForm('/finder/album', params);
   }
 
@@ -220,15 +203,6 @@ export class MusicService {
       pieceId: id,
       name: name,
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'play')
-    //   .set('arg', id)
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
   }
 
   controlPlayer(cmd) {
@@ -324,43 +298,43 @@ export class MusicService {
     });
   }
 
-  nameCueFromFilename(id, albumId) {
-    // not implemented
-    return this.postForm('/cuesheet/namefromfilename', {
-      albumId: albumId,
-      pieceId: id,
-    });
-    // const params = new HttpParams()
-    //   .set('cmd', 'cuesheet_title_from_filename')
-    //   .set('id', id)
-    //   .set('albumid', albumid)
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
-  }
+  // nameCueFromFilename(id, albumId) {
+  //   // not implemented
+  //   return this.postForm('/cuesheet/namefromfilename', {
+  //     albumId: albumId,
+  //     pieceId: id,
+  //   });
+  //   // const params = new HttpParams()
+  //   //   .set('cmd', 'cuesheet_title_from_filename')
+  //   //   .set('id', id)
+  //   //   .set('albumid', albumid)
+  //   // ;
+  //   // const headers = new HttpHeaders();
+  //   // headers.append('Content-Type', 'application/json');
+  //   // return this.http.post(
+  //   //   this.requestUrl, params, { headers: headers}
+  //   // );
+  // }
 
-  nameCueToFilename(id, albumId, title) {
-    // not implemented
-    return this.postForm('/cuesheet/nametofilename', {
-      albumId: albumId,
-      pieceId: id,
-      title: title,
-    });
-    // const params = new HttpParams()
-    //   .set('cmd', 'cuesheet_title_to_filename')
-    //   .set('id', id)
-    //   .set('albumid', albumid)
-    //   .set('title', title)
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
-  }
+  // nameCueToFilename(id, albumId, title) {
+  //   // not implemented
+  //   return this.postForm('/cuesheet/nametofilename', {
+  //     albumId: albumId,
+  //     pieceId: id,
+  //     title: title,
+  //   });
+  //   // const params = new HttpParams()
+  //   //   .set('cmd', 'cuesheet_title_to_filename')
+  //   //   .set('id', id)
+  //   //   .set('albumid', albumid)
+  //   //   .set('title', title)
+  //   // ;
+  //   // const headers = new HttpHeaders();
+  //   // headers.append('Content-Type', 'application/json');
+  //   // return this.http.post(
+  //   //   this.requestUrl, params, { headers: headers}
+  //   // );
+  // }
 
   makeCuesheet(cueName, ids, albumId) {
     return this.postForm('/cuesheet/make', {

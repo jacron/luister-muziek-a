@@ -1,4 +1,4 @@
 export class Componist {
-  name: string;
-  id: string;
+  FullName: string;
+  ID: string;
 }

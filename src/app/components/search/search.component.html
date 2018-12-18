@@ -1,10 +1,10 @@
 <form>
-  <div>
+  <mat-card>
     <!-- select composer (autocomplete) -->
     <div class="row">
       <div class="col person-image-col">
         <div class="selected-image">
-          <img *ngIf="selectedComposer && selectedComposer.ID"
+          <img *ngIf="selectedComposer"
                (click)="editPerson(selectedComposer, 'componist')"
                src="{{ imgUrl }}{{ selectedComposer.ID }}/componist">
         </div>
@@ -13,127 +13,53 @@
         {{ selectedComposer.Birth }} - {{ selectedComposer.Death }}
       </div>
     </div>
-    <div class="label" [class.selected]="selectedComposer">Composer</div>
-      <input type="text"
-             placeholder="Composer"
-             aria-label="Text"
-             matInput
-             [matAutocomplete]="auto1"
-             [(ngModel)]="selectedComposer"
-             (click)="select($event)"
-             name="composer">
-      <mat-autocomplete #auto1="matAutocomplete"
-                        (optionSelected)="onSelectionChange('composer')"
-                        [displayWith]="displayNameFn">
-        <mat-option *ngFor="let opt of (composers | typedName:selectedComposer)"
-                    [value]="opt" [innerHTML]="renderComposerOpt(opt)">
+    <mat-form-field>
+      <mat-select placeholder="Composer" [(value)]="selectedComposerID">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let componist of composers" value="{{componist.ID}}">
+          {{componist.ReversedName}}
         </mat-option>
-      </mat-autocomplete>
-    <div *ngIf="selectedComposer" class="reset" (click)="selectedComposer = null">
-      <mat-icon>clear</mat-icon></div>
-    <br>
-
-    <!-- select performer (autocomplete) -->
-    <div class="row">
-      <div class="col person-image-col">
-        <div class="selected-image">
-          <img *ngIf="selectedPerformer && selectedPerformer.ID"
-               style="margin-top: 12px"
-               (click)="editPerson(selectedPerformer, 'performer')"
-               src="{{ imgUrl }}{{ selectedPerformer.ID }}/performer">
-        </div>
-      </div>
-      <div class="col" *ngIf="selectedPerformer && selectedPerformer.ID"
-           style="margin-top: 12px"
-      >
-        {{ selectedPerformer.Birth }} - {{ selectedPerformer.Death }}
-      </div>
-    </div>
-    <div class="label" [class.selected]="selectedPerformer">Performer</div>
-    <input type="text"
-           placeholder="Performer"
-           aria-label="Text"
-           matInput
-           [matAutocomplete]="auto2"
-           [(ngModel)]="selectedPerformer"
-           (click)="select($event)"
-           name="performer">
-    <mat-autocomplete #auto2="matAutocomplete"
-                      (optionSelected)="onSelectionChange('performer')"
-                      [displayWith]="displayNameFn">
-      <mat-option *ngFor="let opt of (performers | typedName:selectedPerformer)"
-                  [value]="opt" [innerHTML]="renderPerformerOpt(opt)">
-      </mat-option>
-    </mat-autocomplete>
-    <div *ngIf="selectedPerformer" class="reset" (click)="selectedPerformer = null">
-      <mat-icon>clear</mat-icon></div>
-    <br>
-
-
-    <!-- select collection (autocomplete) -->
-    <div class="selected-image">
-      <img *ngIf="selectedCollection && selectedCollection.ID"
-           style="margin-top: 12px"
-           src="{{ imgUrl }}{{ selectedCollection.ID }}/album">
-    </div>
-    <div class="label" [class.selected]="selectedCollection">Collection</div>
-    <input type="text"
-           placeholder="Collection"
-           aria-label="Text"
-           matInput
-           [matAutocomplete]="auto3"
-           [(ngModel)]="selectedCollection"
-           (click)="select($event)"
-           name="performer">
-    <mat-autocomplete #auto3="matAutocomplete"
-                      [displayWith]="displayTitleFn"
-                      (optionSelected)="onSelectionChange('collection')"
-                      #collectionSelect>
-      <mat-option *ngFor="let opt of (collections | typedTitle:selectedCollection)" [value]="opt">
-        <!--<div class="selected-image">-->
-          <!--<img src="{{ imgUrl }}{{ opt.ID }}/album">-->
-        <!--</div>-->
-        {{ opt.Title }}
-      </mat-option>
-    </mat-autocomplete>
-    <div *ngIf="selectedCollection" class="reset" (click)="selectedCollection = null">
-      <mat-icon>clear</mat-icon></div>
-    <br>
-
-    <!-- select tag (autocomplete) -->
-    <div class="selected-image"></div>
-    <div class="label" [class.selected]="selectedTag">Tag</div>
-    <input type="text"
-           placeholder="Tag"
-           aria-label="Text"
-           matInput
-           [matAutocomplete]="auto4"
-           [(ngModel)]="selectedTag"
-           (click)="select($event)"
-           name="tag">
-    <mat-autocomplete #auto4="matAutocomplete"
-                      [displayWith]="displayNameFn"
-                      (optionSelected)="onSelectionChange('tag')"
-                      #tagSelect>
-      <mat-option *ngFor="let opt of (tags | typedName:selectedTag)"
-                  [value]="opt">
-        {{ opt.Name }}
-      </mat-option>
-    </mat-autocomplete>
-    <div *ngIf="selectedTag" class="reset" (click)="selectedTag = null">
-      <mat-icon>clear</mat-icon></div>
-    <br>
-
-  </div>
-  <!--<button mat-raised-button=""-->
-          <!--class="get-albums"-->
-          <!--(click)="getAlbumsComponist(false)">get covers</button>-->
-  <button mat-raised-button
-          class="get-albums"
-          (click)="getAlbumsComponist(true)">get list</button>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Performer" [(value)]="selectedPerformerID">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let item of performers" value="{{item.ID}}">
+          {{item.ReversedName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Collection" [(value)]="selectedCollection">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let item of collections" value="{{item.ID}}">
+          {{item.Title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Tag" [(value)]="selectedTag">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let item of tags" value="{{item.ID}}">
+          {{item.Name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Instrument" [(value)]="selectedInstrument">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let item of instruments" value="{{item.ID}}">
+          {{item.Name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button
+            class="get-albums"
+            (click)="getAlbums(true)">get albums</button>
+  </mat-card>
 </form>
-
-<div class="list">
+<mat-card>
+  <div class="list">
   <div *ngIf="albums && albums.length">
     {{ albums.length }} albums
     <a *ngIf="selectedCollection && selectedCollection.website" (click)="websiteCollection()">
@@ -177,3 +103,4 @@
     </div>
   </div>
 </div>
+</mat-card>
