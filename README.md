@@ -5,8 +5,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Api server
 
 api-server needed:
-http://localhost:5000/api, project music_a? no, search another one...
+http://localhost:5000/api, project music-api,
+of http://music-api/api
 
+vhost:
+music-client, pad luister-muziek-a/dist;
+
+vergeet niet htaccess aan te passen(?) 
+https://github.com/mgechev/angular-seed/wiki/Deploying-prod-build-to-Apache-2;
+deze moet wel in build komen te staan, dus plaatsen in src en opnemen in .angular-cli.json/assets
+
+ng build zonder --prod
 
 ## Development server
 

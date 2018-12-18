@@ -68,6 +68,9 @@ export class PieceService {
     if (name.endsWith(':')) {
       name = name.substr(0, name.length - 1);
     }
+    if (name.startsWith('- ')) {
+      name = name.substr(2);
+    }
     return name;
   }
 
@@ -111,7 +114,7 @@ export class PieceService {
     keys.sort((a, b) => {
       return a - b;
     });
-    console.log(keys);
+    // console.log(keys);
     for (let k = 1; k < keys.length; k++) {
       const current = keys[k - 1],
             previous = keys[k];

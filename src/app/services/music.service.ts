@@ -94,7 +94,7 @@ export class MusicService {
   }
 
   editCue(id, albumid) {
-    return this.postForm('/edit/cuesheet', {id: id, albumid: albumid});
+    return this.postForm('/cuesheet/edit', {id: id, albumid: albumid});
   }
 
   tagEditor(path) {
@@ -112,7 +112,7 @@ export class MusicService {
   }
 
   deleteCue(id, albumid) {
-    return this.postForm('/delete/cueheet', {id: id, albumid: albumid});
+    return this.postForm('/cuesheet/delete', {id: id, albumid: albumid});
   }
 
   openFinder(id) {
@@ -188,15 +188,6 @@ export class MusicService {
       albumId: albumid,
       title: title
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'update_album_title')
-    //   .set('albumid', id)
-    //   .set('title', title);
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(this.requestUrl, params, {
-    //   headers: headers
-    // });
   }
 
   updateAlbumDescription(albumid, text) {
@@ -204,15 +195,6 @@ export class MusicService {
       albumId: albumid,
       description: text
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'update_album_description')
-    //   .set('albumid', id)
-    //   .set('description', text);
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(this.requestUrl, params, {
-    //   headers: headers
-    // });
   }
 
   updatePerson(options) {
@@ -222,18 +204,6 @@ export class MusicService {
       field: options.field,
       text: options.text
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'update_person')
-    //   .set('personId', options.personId)
-    //   .set('type', options.type)
-    //   .set('field', options.field)
-    //   .set('text', options.text)
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(this.requestUrl, params, {
-    //   headers: headers
-    // });
   }
 
 
@@ -243,16 +213,28 @@ export class MusicService {
       pieceId: id,
       name: name,
     });
+  }
+
+  play(id) {
+    return this.postForm('/play', {
+      pieceId: id,
+      name: name,
+    });
     // const params = new HttpParams()
-    //   .set('cmd', 'update_piece_name')
-    //   .set('pieceid', id)
-    //   .set('albumid', albumid)
-    //   .set('name', name);
+    //   .set('cmd', 'play')
+    //   .set('arg', id)
+    // ;
     // const headers = new HttpHeaders();
     // headers.append('Content-Type', 'application/json');
-    // return this.http.post(this.requestUrl, params, {
-    //   headers: headers
-    // });
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
+  }
+
+  controlPlayer(cmd) {
+    return this.postForm('/play/control', {
+      cmd: cmd,
+    });
   }
 
   pastePersonImage(personId, type) {
@@ -269,186 +251,189 @@ export class MusicService {
   }
 
   updateLibraryCodeAlias(code, text) {
-    const params = new HttpParams()
-      .set('cmd', 'update_librarycode_alias')
-      .set('code', code)
-      .set('text', text)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+    // not implemented
+    return this.postForm('/code/update/alias', {
+      code: code,
+      text: text
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'update_librarycode_alias')
+    //   .set('code', code)
+    //   .set('text', text)
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
   }
 
   updateLibraryCodeTitle(code, text) {
-    const params = new HttpParams()
-      .set('cmd', 'update_librarycode_title')
-      .set('code', code)
-      .set('text', text)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+    // not implemented
+    return this.postForm('/code/update/title', {
+      code: code,
+      text: text
+    });
   }
 
   uploadAlbumByPath(path) {
-    const params = new HttpParams()
-      .set('cmd', 'upload')
-      .set('path', this.encodeSemiColon(path));
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+    // not implemented
+    return this.postForm('/album/upload', {
+      path: this.encodeSemiColon(path),
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'upload')
+    //   .set('path', this.encodeSemiColon(path));
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
   }
 
   updateAlbumMetatag(albumId, key, text) {
-    const params = new HttpParams()
-      .set('cmd', 'update_metatag')
-      .set('tag', key)
-      .set('value', text)
-      .set('albumid', albumId)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+    // not implemented
+    return this.postForm('/album/update/metatag', {
+      key: key,
+      text: text,
+      albumId: albumId
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'update_metatag')
+    //   .set('tag', key)
+    //   .set('value', text)
+    //   .set('albumid', albumId)
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
   }
 
   newTag(name, albumId) {
-    const params = new HttpParams()
-      .set('cmd', 'new_tag')
-      .set('name', name)
-      .set('albumid', albumId)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+    return this.postForm('/tag/new', {
+      name: name,
+      albumId: albumId
+    });
   }
 
-  openwebsite(albumid) {
-    const params = new HttpParams()
-      .set('cmd', 'openwebsite')
-      .set('albumid', albumid)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+  openwebsite(albumId) {
+    return this.postForm('/openwebsite', {
+      albumId: albumId
+    });
   }
 
-  nameCueFromFilename(id, albumid) {
-    const params = new HttpParams()
-      .set('cmd', 'cuesheet_title_from_filename')
-      .set('id', id)
-      .set('albumid', albumid)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+  nameCueFromFilename(id, albumId) {
+    // not implemented
+    return this.postForm('/cuesheet/namefromfilename', {
+      albumId: albumId,
+      pieceId: id,
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'cuesheet_title_from_filename')
+    //   .set('id', id)
+    //   .set('albumid', albumid)
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
   }
 
-  nameCueToFilename(id, albumid, title) {
-    const params = new HttpParams()
-      .set('cmd', 'cuesheet_title_to_filename')
-      .set('id', id)
-      .set('albumid', albumid)
-      .set('title', title)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+  nameCueToFilename(id, albumId, title) {
+    // not implemented
+    return this.postForm('/cuesheet/nametofilename', {
+      albumId: albumId,
+      pieceId: id,
+      title: title,
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'cuesheet_title_to_filename')
+    //   .set('id', id)
+    //   .set('albumid', albumid)
+    //   .set('title', title)
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
   }
 
-  makeCuesheet(cueName, ids, albumid) {
-    const params = new HttpParams()
-      .set('cmd', 'makecuesheet')
-      .set('ids2', ids)
-      .set('name', cueName)
-      .set('albumid', albumid)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+  makeCuesheet(cueName, ids, albumId) {
+    return this.postForm('/cuesheet/make', {
+      ids: ids,
+      name: cueName,
+      albumId: albumId
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'makecuesheet')
+    //   .set('ids2', ids)
+    //   .set('name', cueName)
+    //   .set('albumid', albumid)
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
   }
 
   toggleFavoriteLibrarycode(code, favorite) {
-    const params = new HttpParams()
-      .set('cmd', 'toggle_code_favorite')
-      .set('code', code)
-      .set('favorite', favorite)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  play(id) {
-    const params = new HttpParams()
-      .set('cmd', 'play')
-      .set('arg', id)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
-  }
-
-  controlPlayer(cmd) {
-    const params = new HttpParams()
-      .set('cmd', 'controlplayer')
-      .set('mode', cmd)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+    return this.postForm('/code/favorite/toggle', {
+      code: code,
+      favorite: favorite
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'toggle_code_favorite')
+    //   .set('code', code)
+    //   .set('favorite', favorite)
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
   }
 
   encodeSemiColon(s) {
     return s.replace(/;/g, '&semi-colon');
   }
 
-  updateAlbumTagName(id: number, name: any) {
-    const params = new HttpParams()
-      .set('cmd', 'update_tag_name')
-      .set('id', id.toString())
-      .set('name', name)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+  updateAlbumTagName(albumId: number, name: any) {
+    // not implemented
+    return this.postForm('/album/tag/update', {
+      albumId: albumId,
+      name: name
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'update_tag_name')
+    //   .set('id', id.toString())
+    //   .set('name', name)
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
   }
 
-  split(p) {
-    const params = new HttpParams()
-      .set('cmd', 'tmp_split')
-      .set('path', p)
-    ;
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(
-      this.requestUrl, params, { headers: headers}
-    );
+  split(path) {
+    // not implemented
+    return this.postForm('/split', {
+      path: path
+    });
+    // const params = new HttpParams()
+    //   .set('cmd', 'tmp_split')
+    //   .set('path', p)
+    // ;
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // return this.http.post(
+    //   this.requestUrl, params, { headers: headers}
+    // );
   }
 
 }

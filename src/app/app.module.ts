@@ -40,6 +40,8 @@ import { CuesheetMenuComponent } from './components/cuesheet-menu/cuesheet-menu.
 import { CodeComponent } from './components/code/code.component';
 import { CodeListComponent } from './components/code-list/code-list.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { ComponistComponent } from './componist/componist.component';
+import { PerformerComponent } from './performer/performer.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { SettingsComponent } from './components/settings/settings.component';
     CodeComponent,
     CodeListComponent,
     SettingsComponent,
+    ComponistComponent,
+    PerformerComponent,
 
   ],
   imports: [

@@ -12,6 +12,14 @@ bg-grey scrolling-navbar" [containerInside]="false">
         <a class="nav-link" href="search">Search</a>
       </li>
       <li class="nav-item waves-light" mdbRippleRadius
+          [class.active]="prouter.url.indexOf('/componist') === 0">
+        <a class="nav-link" href="componist">Componist</a>
+      </li>
+      <li class="nav-item waves-light" mdbRippleRadius
+          [class.active]="prouter.url.indexOf('/performer') === 0">
+        <a class="nav-link" href="performer">Performer</a>
+      </li>
+      <li class="nav-item waves-light" mdbRippleRadius
           [class.active]="prouter.url.indexOf('/code') === 0">
         <a class="nav-link" href="code">Code</a>
       </li>
