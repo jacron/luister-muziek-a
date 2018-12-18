@@ -120,19 +120,19 @@ export class MusicService {
       {tagId: tagId, albumId: albumId});
   }
 
-  newPerformer(name, albumId) {
-    return this.postForm('/performer/new', {
-      albumid: albumId,
-      name: name
-    });
-  }
-
-  newComposer(name, albumId) {
-    return this.postForm('/composer/new', {
-      albumid: albumId,
-      name: name
-    });
-  }
+  // newPerformer(name, albumId) {
+  //   return this.postForm('/performer/new', {
+  //     albumid: albumId,
+  //     name: name
+  //   });
+  // }
+  //
+  // newComposer(name, albumId) {
+  //   return this.postForm('/composer/new', {
+  //     albumid: albumId,
+  //     name: name
+  //   });
+  // }
 
   removeComposer(composerId: number, albumId: number) {
     return this.postForm('/composer/remove', {

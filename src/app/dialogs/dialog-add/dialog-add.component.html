@@ -4,64 +4,28 @@
                 [showimage]="true"
                 (close)="close($event)"
 ></app-chip-lists>
-<div>
-  <!-- select composer (autocomplete) -->
-  <input type="text"
-         placeholder="Add Composer"
-         aria-label="Text"
-         matInput
-         [matAutocomplete]="auto1"
-         [(ngModel)]="selectedComposer"
-         (click)="select($event)"
-         (keydown)="onKeyDownComposer($event, selectedComposer)"
-         name="composer">
-  <mat-autocomplete #auto1="matAutocomplete"
-                    (optionSelected)="onComposerChange()"
-                    [displayWith]="displayNameFn">
-    <mat-option *ngFor="let opt of (composers | typedName:selectedComposer)"
-                [value]="opt" [innerHTML]="renderComposerOpt(opt)">
-    </mat-option>
-  </mat-autocomplete>
+<div class="dialog-additionals">
+  <mat-form-field>
+    <mat-select placeholder="Composer" [(value)]="idcomp">
+      <mat-option *ngFor="let componist of composers" value="{{componist.ID}}">
+        {{componist.ReversedName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field><button mat-button (click)="addComposer()">+</button>
   <br>
-
-  <!-- select performer (autocomplete) -->
-  <input type="text"
-         placeholder="Add Performer"
-         aria-label="Text"
-         matInput
-         [matAutocomplete]="auto2"
-         [(ngModel)]="selectedPerformer"
-         (click)="select($event)"
-         (keydown)="onKeyDownPerformer($event, selectedPerformer)"
-         name="performer">
-  <mat-autocomplete #auto2="matAutocomplete"
-                    (optionSelected)="onPerformerChange()"
-                    [displayWith]="displayNameFn">
-    <mat-option *ngFor="let opt of (performers | typedName:selectedPerformer)"
-                [value]="opt" [innerHTML]="renderPerformerOpt(opt)">
-    </mat-option>
-  </mat-autocomplete>
+  <mat-form-field>
+    <mat-select placeholder="Performer" [(value)]="idperf">
+      <mat-option *ngFor="let item of performers" value="{{item.ID}}">
+        {{item.ReversedName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field><button mat-button (click)="addPerformer()">+</button>
   <br>
-
-  <!-- select tag (autocomplete) -->
-  <div class="selected-image"></div>
-  <input type="text"
-         placeholder="Add Tag"
-         aria-label="Text"
-         matInput
-         [matAutocomplete]="auto4"
-         [(ngModel)]="selectedTag"
-         (click)="select($event)"
-         (keydown)="onKeyDownTag($event, selectedTag)"
-         name="tag">
-  <mat-autocomplete #auto4="matAutocomplete"
-                    [displayWith]="displayNameFn"
-                    (optionSelected)="onTagChange()"
-                    #tagSelect>
-    <mat-option *ngFor="let opt of (tags | typedName:selectedTag)" [value]="opt">
-      {{ opt.Name }}
-    </mat-option>
-  </mat-autocomplete>
-  <br>
-
+  <mat-form-field>
+    <mat-select placeholder="Tag" [(value)]="idtag">
+      <mat-option *ngFor="let item of tags" value="{{item.ID}}">
+        {{item.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field><button mat-button (click)="addTag()">+</button>
 </div>

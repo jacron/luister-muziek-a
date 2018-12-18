@@ -8,10 +8,8 @@ import {forkJoin} from 'rxjs/observable/forkJoin';
 import {Tag} from '../../classes/Tag';
 import {StorageService} from '../../services/storage.service';
 import {SearchParams} from '../../classes/SearchParams';
-// import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component';
 import {MatDialog} from '@angular/material';
 import {PersonService} from '../../services/person.service';
-import {DialogPersonComponent} from '../../dialogs/dialog-person/dialog-person.component';
 
 @Component({
   selector: 'app-search',
@@ -30,14 +28,12 @@ export class SearchComponent implements OnInit, AfterViewInit {
   imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
-  params: SearchParams;
-  selectedComposer;
-  selectedComposerID;
-  selectedPerformer;
-  selectedPerformerID;
-  selectedCollection;
-  selectedInstrument;
-  selectedTag;
+  // params: SearchParams;
+  idcomp = -1;
+  idperf = -1;
+  idcoll = -1;
+  idtag = -1;
+  idinstrument = -1;
   list = true;
 
   constructor(private musicService: MusicService,
@@ -47,24 +43,24 @@ export class SearchComponent implements OnInit, AfterViewInit {
               private dialog: MatDialog,
               private storageService: StorageService
               ) {
-    route.params.subscribe(params => this.handleParams(params));
+    route.params.subscribe(params => this.handleParams(<SearchParams>params));
   }
 
-  handleParams(params) {
+  toParams(params: SearchParams) {
+    this.idcomp = params.idcomp;
+    this.idperf = params.idperf;
+    this.idcoll = params.idcoll;
+    this.idtag = params.idtag;
+    this.idinstrument = params.idinstrument;
+  }
+
+  handleParams(params: SearchParams) {
     if (params) {
       console.log(params);
-      if (params.idcomp) {
-        this.selectedComposerID = params.idcomp;
-        this.params = new SearchParams(params);
-        this.storageService.storeSearchParameters(params);
-        this.fetchThings(this.params);
-      }
-      if (params.idperf) {
-        this.selectedPerformerID = params.idperf;
-        this.params = new SearchParams(params);
-        this.storageService.storeSearchParameters(params);
-        this.fetchThings(this.params);
-      }
+      // this.params = params;
+      this.storageService.storeSearchParameters(params);
+      this.fetchThings(params);
+      this.toParams(params);
     }
   }
 
@@ -84,48 +80,30 @@ export class SearchComponent implements OnInit, AfterViewInit {
     );
   }
 
-  getItemById(items: any[], id: number) {
-    if (!items) {
-      console.log('items undefined');
-      return null;
-    }
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      if (item.ID === id) {
-        return item;
-      }
-    }
-    return null;
-  }
-
-  getTagById(id: number): Tag {
-    const item = this.getItemById(this.tags, id);
-    return <Tag>item;
-  }
-
   toAlbum(id) {
     this.router.navigate(['/album', id]).then(() => {
-      this.storageService.storeSearchTitle(document.title);
-      this.storageService.storeSearchParameters(this.params);
+      // this.storageService.storeSearchTitle(document.title);
+      // this.storageService.storeSearchParameters(this.params);
     });
   }
 
-  getAlbums(list) {
+  resetFilters() {
+    this.idperf = this.idcoll = this.idcomp = this.idtag =
+      this.idinstrument = -1;
+  }
+
+  getAlbums(list: boolean) {
     this.list = list;
-    const idcomp = this.selectedComposerID ? this.selectedComposerID : -1;
-    const idperf = this.selectedPerformerID ? this.selectedPerformerID : -1;
-    const idcoll = this.selectedCollection ? this.selectedCollection : -1;
-    const idtag = this.selectedTag ? this.selectedTag : -1;
-    const idinstrument = this.selectedInstrument ? this.selectedInstrument : -1;
-    this.router.navigate(['/search',
-      {
-        idcomp: idcomp,
-        idperf: idperf,
-        idcoll: idcoll,
-        idtag: idtag,
-        idinstrument: idinstrument
-      }
-    ]).then(() => {
+    const params: SearchParams = {
+      idcomp: this.idcomp,
+      idperf: this.idperf,
+      idcoll: this.idcoll,
+      idtag: this.idtag,
+      idinstrument: this.idinstrument
+    };
+    // console.log(this.params);
+    this.router.navigate(['/search', params])
+      .then(() => {
     });
   }
 
@@ -195,125 +173,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
     window.onresize = function() { that.lazyLoad(); };
   }
 
-  displayNameFn(person): string {
-    return person ? person.Name : person;
-  }
-
-  displayTitleFn(album): string {
-    return album ? album.Title : album;
-  }
-
-  select(e) {
-    e.target.select();
-  }
-
-  setComposer(person: Person) {
-    this.selectedComposer = person;
-    document.title = person.FullName;
-  }
-
-  setPerformer(person: Person) {
-    this.selectedPerformer = person;
-    if (document.title.length) { document.title += ', '; }
-    document.title += person.FullName;
-  }
-
-  getComposer(id) {
-    this.musicService.getComposerById(id).subscribe(
-      (person: Person) => this.setComposer(person),
-      (err) => console.log(err),
-      () => console.log('composer fetched')
-    );
-  }
-
-  getPerformer(id) {
-    this.musicService.getPerformerById(id).subscribe(
-      (person: Person) => this.setPerformer(person),
-      (err) => console.log(err),
-      () => console.log('composer fetched')
-    );
-  }
-
-  setCollection(album: Album) {
-    this.selectedCollection = album;
-    if (document.title.length) { document.title += ', '; }
-    document.title += this.selectedCollection.Title;
-  }
-
-  websiteCollection() {
-    // console.log(this.selectedCollection);
-    this.musicService.openwebsite(this.selectedCollection.ID)
-      .subscribe(
-        (results) => console.log(results)
-      );
-  }
-
-  setSelected() {
-    console.log(this.params);
-    if (!this.params) {
-      return;
-    }
-    document.title = '';
-    if (this.params.idcoll !== -1) {
-      this.musicService.getAlbumById(this.params.idcoll).subscribe(
-        (results) => this.setCollection(<Album>results)
-      );
-      // this.selectedCollection = this.getCollectionById(this.params.idcoll);
-      // if (document.title.length) { document.title += ', '; }
-      // document.title += this.selectedCollection.Title;
-    }
-    if (this.params.idtag !== -1) {
-      this.selectedTag = this.getTagById(this.params.idtag);
-      if (document.title.length) { document.title += ', '; }
-      document.title += this.selectedTag.Name;
-    }
-    const qcomposer = this.params.idcomp !== -1 ?
-      this.musicService.getComposerById(this.params.idcomp) : null;
-    const qperformer = this.params.idperf !== -1 ?
-      this.musicService.getPerformerById(this.params.idperf) : null;
-    // const qcollection = this.params.idcoll !== -1 ?
-    //   this.musicService.getAlbumById(this.params.idcoll) : null;
-    if (qcomposer && qperformer) {
-      forkJoin(qcomposer, qperformer).subscribe(
-        (results) => {
-          this.setComposer(<Person>results[0]);
-          this.setPerformer(<Person>results[1]);
-          this.storageService.storeSearchTitle(document.title);
-        },
-        err => console.error(err),
-        () => console.log('persons set')
-      );
-    } else if (qcomposer) {
-      qcomposer.subscribe((composer: Person) => {
-        this.setComposer(composer);
-        this.storageService.storeSearchTitle(document.title);
-      });
-    } else if (qperformer) {
-      qperformer.subscribe((performer: Person) => {
-        this.setPerformer(performer);
-        this.storageService.storeSearchTitle(document.title);
-      });
-    }
-    console.log(this.selectedCollection);
-  }
-
-  onSelectionChange(type) {
-    // todo: add types for tag and collection
-    if (!this.params) {
-      return;
-    }
-    if (type === 'composer') {
-      this.getComposer(this.selectedComposer.ID);
-      this.params.idcomp = this.selectedComposer.ID;
-      this.setSelected();
-    }
-    if (type === 'performer') {
-      this.getPerformer(this.selectedPerformer.ID);
-      this.params.idperf = this.selectedPerformer.ID;
-      this.setSelected();
-    }
-  }
-
   getTypeAheads() {
     const qcomposers = this.musicService.getComposers('dropdown');
     const qperformers = this.musicService.getPerformers('dropdown');
@@ -331,32 +190,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
         },
         err => console.error(err),
         () => {
-          this.setSelected();
+          // this.setSelected();
         }
       );
-  }
-
-  editPerson(person: Person, type: string) {
-    this.dialog.open(DialogPersonComponent, {
-      width: '50%',
-      data: {
-        person: person,
-        type: type,
-        albumid: this.album,
-        personName: person.FullName
-      },
-      autoFocus: false,
-    });
-  }
-
-  renderComposerOpt(opt) {
-    return this.personService.hightlightMatch(opt.FullName,
-      this.selectedComposer);
-  }
-
-  renderPerformerOpt(opt) {
-    return this.personService.hightlightMatch(opt.FullName,
-      this.selectedPerformer);
   }
 
   ngAfterViewInit() {

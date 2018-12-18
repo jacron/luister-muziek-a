@@ -75,7 +75,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
 
   addSome() {
     this.dialog.open(DialogAddComponent, {
-      width: '80%',
       data: {
         album: this.album
       }

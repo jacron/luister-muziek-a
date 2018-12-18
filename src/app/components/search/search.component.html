@@ -1,20 +1,20 @@
 <form>
   <mat-card>
     <!-- select composer (autocomplete) -->
-    <div class="row">
-      <div class="col person-image-col">
-        <div class="selected-image">
-          <img *ngIf="selectedComposer"
-               (click)="editPerson(selectedComposer, 'componist')"
-               src="{{ imgUrl }}{{ selectedComposer.ID }}/componist">
-        </div>
-      </div>
-      <div class="col" *ngIf="selectedComposer && selectedComposer.ID">
-        {{ selectedComposer.Birth }} - {{ selectedComposer.Death }}
-      </div>
-    </div>
+    <!--<div class="row">-->
+      <!--<div class="col person-image-col">-->
+        <!--<div class="selected-image">-->
+          <!--<img *ngIf="selectedComposer"-->
+               <!--(click)="editPerson(selectedComposer, 'componist')"-->
+               <!--src="{{ imgUrl }}{{ selectedComposer.ID }}/componist">-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col" *ngIf="selectedComposer && selectedComposer.ID">-->
+        <!--{{ selectedComposer.Birth }} - {{ selectedComposer.Death }}-->
+      <!--</div>-->
+    <!--</div>-->
     <mat-form-field>
-      <mat-select placeholder="Composer" [(value)]="selectedComposerID">
+      <mat-select placeholder="Composer" [(value)]="idcomp">
         <mat-option>None</mat-option>
         <mat-option *ngFor="let componist of composers" value="{{componist.ID}}">
           {{componist.ReversedName}}
@@ -22,7 +22,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Performer" [(value)]="selectedPerformerID">
+      <mat-select placeholder="Performer" [(value)]="idperf">
         <mat-option>None</mat-option>
         <mat-option *ngFor="let item of performers" value="{{item.ID}}">
           {{item.ReversedName}}
@@ -30,7 +30,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Collection" [(value)]="selectedCollection">
+      <mat-select placeholder="Collection" [(value)]="idcoll">
         <mat-option>None</mat-option>
         <mat-option *ngFor="let item of collections" value="{{item.ID}}">
           {{item.Title}}
@@ -38,7 +38,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Tag" [(value)]="selectedTag">
+      <mat-select placeholder="Tag" [(value)]="idtag">
         <mat-option>None</mat-option>
         <mat-option *ngFor="let item of tags" value="{{item.ID}}">
           {{item.Name}}
@@ -46,13 +46,15 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Instrument" [(value)]="selectedInstrument">
+      <mat-select placeholder="Instrument" [(value)]="idinstrument">
         <mat-option>None</mat-option>
         <mat-option *ngFor="let item of instruments" value="{{item.ID}}">
           {{item.Name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <button mat-button="" (click)="resetFilters()" style="float:right;">
+      reset</button>
     <button mat-raised-button
             class="get-albums"
             (click)="getAlbums(true)">get albums</button>

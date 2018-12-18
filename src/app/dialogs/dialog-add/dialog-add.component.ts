@@ -5,7 +5,6 @@ import {forkJoin} from 'rxjs/observable/forkJoin';
 import {MusicService} from '../../services/music.service';
 import {AlbumDetailsComponent} from '../../components/album-details/album-details.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'app-dialog-add',
@@ -14,90 +13,70 @@ import {PersonService} from '../../services/person.service';
 })
 export class DialogAddComponent implements OnInit {
 
-  selectedComposer: Person = null;
-  selectedPerformer: Person = null;
-  selectedTag: Tag = null;
   composers: Person[];
   performers: Person[];
   tags: Tag[];
+  idcomp = -1;
+  idperf = -1;
+  idtag = -1;
 
   constructor(private musicService: MusicService,
-              private personService: PersonService,
               public dialogRef: MatDialogRef<AlbumDetailsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any
               ) { }
 
-  select(e) {
-    e.target.select();
-  }
-
   close(e) {
-    console.log('result dialog person: ', e);
+    // console.log('result dialog person: ', e);
     if (e === 'leave') {
       this.dialogRef.close(e);
     }
   }
 
-  renderComposerOpt(opt) {
-    return this.personService.hightlightMatch(opt.FullName,
-      this.selectedComposer);
-  }
-
-  renderPerformerOpt(opt) {
-    return this.personService.hightlightMatch(opt.FullName,
-      this.selectedPerformer);
-  }
-
-  displayNameFn(person): string {
-    return person ? person.FullName : person;
-  }
-
   afterNewTag(response) {
-    console.log(response);
+    // console.log(response);
     this.data.album.album_tags.push(response);
   }
 
-  onKeyDownTag(e, selected) {
-    if (e.key === 'Enter' && selected && typeof selected === 'string') {
-      console.log(selected);
-      this.musicService.newTag(selected, this.data.album.ID).subscribe(
+  addTag() {
+    if (this.idtag !== -1) {
+      this.musicService.addTag(this.idtag, this.data.album.ID).subscribe(
         (response) => this.afterNewTag(response)
       );
     }
   }
 
   afterNewPerformer(response) {
-    console.log(response);
+    // console.log(response);
     this.data.album.album_performers.push(response);
   }
 
-  onKeyDownPerformer(e, selected) {
-    if (e.key === 'Enter' && selected && typeof selected === 'string') {
-      console.log(selected);
-      this.musicService.newPerformer(selected, this.data.album.ID).subscribe(
+  addPerformer() {
+    if (this.idperf !== -1) {
+      this.musicService.addPerformer(this.idperf, this.data.album.ID).subscribe(
         (response) => this.afterNewPerformer(response)
       );
     }
   }
 
   afterNewComposer(response) {
-    console.log(response);
+    // console.log(response);
     this.data.album.album_componisten.push(response);
   }
 
-  onKeyDownComposer(e, selected) {
-    if (e.key === 'Enter' && selected && typeof selected === 'string') {
-      console.log(selected);
-      this.musicService.newComposer(selected, this.data.album.ID).subscribe(
+  addComposer() {
+    console.log(this.idcomp);
+    if (this.idcomp !== -1) {
+      console.log(this.idcomp);
+      this.musicService.addComposer(this.idcomp, this.data.album.ID).subscribe(
         (response) => this.afterNewComposer(response),
         (error) => console.error(error)
       );
     }
   }
 
-  getTypeAheads() {
-    const qcomposers = this.musicService.getComposers();
-    const qperformers = this.musicService.getPerformers();
+  getItems() {
+    const qcomposers = this.musicService.getComposers('dropdown');
+    const qperformers = this.musicService.getPerformers('dropdown');
     const qtags = this.musicService.getTags();
     forkJoin(qcomposers, qperformers, qtags)
       .subscribe(
@@ -108,64 +87,13 @@ export class DialogAddComponent implements OnInit {
         },
         err => console.error(err),
         () => {
-          console.log('all three collections are fetched');
+          // console.log('all collections are fetched');
         }
       );
   }
 
-  // getFullName(person: Person) {
-  //   const parts = person.Name.split(', ');
-  //   if (parts.length > 1) {
-  //     return parts[1] + ' ' + parts[0];
-  //   }
-  //   return person.Name;
-  // }
-
-  onComposerAdded(response) {
-    console.log(response);
-    const composer = this.selectedComposer;
-    // composer.FullName = this.getFullName(composer);
-    this.data.album.album_componisten.push(composer);
-    this.selectedComposer = null;
-  }
-
-  onComposerChange() {
-    this.musicService.addComposer(this.selectedComposer.ID, this.data.album.ID)
-      .subscribe(
-        (response) => this.onComposerAdded(response)
-      );
-  }
-
-  onPerformerAdded(response) {
-    console.log(response);
-    const performer = this.selectedPerformer;
-    // performer.FullName = this.getFullName(performer);
-    this.data.album.album_performers.push(performer);
-    this.selectedPerformer = null;
-  }
-
-  onPerformerChange() {
-    this.musicService.addPerformer(this.selectedPerformer.ID, this.data.album.ID)
-      .subscribe(
-        (response) => this.onPerformerAdded(response)
-      );
-  }
-
-  onTagAdded(response) {
-    console.log(response);
-    this.data.album.album_tags.push(this.selectedTag);
-    this.selectedTag = null;
-  }
-
-  onTagChange() {
-    this.musicService.addTag(this.selectedTag.ID, this.data.album.ID)
-      .subscribe(
-        (response) => this.onTagAdded(response)
-      );
-  }
-
   ngOnInit() {
-    this.getTypeAheads();
+    this.getItems();
   }
 
 }
