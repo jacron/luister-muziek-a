@@ -11,7 +11,7 @@
         {{componist.ReversedName}}
       </mat-option>
     </mat-select>
-  </mat-form-field><button mat-button (click)="addComposer()">+</button>
+  </mat-form-field><button mat-button (click)="addComposer()">{{ labelAdd }}</button>
   <br>
   <mat-form-field>
     <mat-select placeholder="Performer" [(value)]="idperf">
@@ -19,7 +19,7 @@
         {{item.ReversedName}}
       </mat-option>
     </mat-select>
-  </mat-form-field><button mat-button (click)="addPerformer()">+</button>
+  </mat-form-field><button mat-button (click)="addPerformer()">{{ labelAdd }}</button>
   <br>
   <mat-form-field>
     <mat-select placeholder="Tag" [(value)]="idtag">
@@ -27,5 +27,5 @@
         {{item.Name}}
       </mat-option>
     </mat-select>
-  </mat-form-field><button mat-button (click)="addTag()">+</button>
+  </mat-form-field><button mat-button (click)="addTag()">{{ labelAdd }}</button>
 </div>

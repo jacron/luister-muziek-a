@@ -19,6 +19,7 @@ export class DialogAddComponent implements OnInit {
   idcomp = -1;
   idperf = -1;
   idtag = -1;
+  labelAdd = 'add';
 
   constructor(private musicService: MusicService,
               public dialogRef: MatDialogRef<AlbumDetailsComponent>,
@@ -33,7 +34,6 @@ export class DialogAddComponent implements OnInit {
   }
 
   afterNewTag(response) {
-    // console.log(response);
     this.data.album.album_tags.push(response);
   }
 
@@ -46,7 +46,6 @@ export class DialogAddComponent implements OnInit {
   }
 
   afterNewPerformer(response) {
-    // console.log(response);
     this.data.album.album_performers.push(response);
   }
 
@@ -87,7 +86,6 @@ export class DialogAddComponent implements OnInit {
         },
         err => console.error(err),
         () => {
-          // console.log('all collections are fetched');
         }
       );
   }

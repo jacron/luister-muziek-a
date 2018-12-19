@@ -1,0 +1,24 @@
+<div class="list">
+  <div *ngIf="albums && albums.length">
+    {{ albums.length }} albums
+    <div class="row" *ngFor="let album of albums" >
+      <div class="col img-container">
+        <a (click)="toAlbum(album.ID)">
+          <img
+            attr.data-src="{{ imgUrl }}{{ album.ID }}/album/-1/100/"
+            attr.albumid="{{ album.ID }}"
+            class="lazy thumb"
+          >
+        </a>
+      </div>
+      <div class="col">
+        <div>{{ album.Title }}</div>
+        <app-chip-lists [album]="album"
+                        [removable]="false"
+                        [editable]="false"
+                        [showimage]="false"
+        ></app-chip-lists>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,7 +13,7 @@ if (hostname === 'music-client.10.0.1.6.xip.io' ||
   // PyCharm must run music-api on 0.0.0.0:8020
   apiServer = 'http://10.0.1.6:8020/api';
 }
-console.log(apiServer);
+console.log('api server', apiServer);
 export const environment = {
   apiServer: apiServer,
   googleUrl: 'https://google.nl/search?q=',

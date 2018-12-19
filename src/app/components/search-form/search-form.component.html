@@ -1,0 +1,51 @@
+<form>
+  <mat-card>
+    <mat-form-field>
+      <mat-select placeholder="Composer" [(value)]="idcomp">
+        <mat-option>{{ emptychoice }}</mat-option>
+        <mat-option *ngFor="let item of composers" value="{{item.ID}}">
+          {{item.ReversedName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Performer" [(value)]="idperf">
+        <mat-option>{{ emptychoice }}</mat-option>
+        <mat-option *ngFor="let item of performers" value="{{item.ID}}">
+          {{item.ReversedName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Collection" [(value)]="idcoll">
+        <mat-option>{{ emptychoice }}</mat-option>
+        <mat-option *ngFor="let item of collections" value="{{item.ID}}">
+          {{item.Title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Tag" [(value)]="idtag">
+        <mat-option>{{ emptychoice }}</mat-option>
+        <mat-option *ngFor="let item of tags" value="{{item.ID}}">
+          {{item.Name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Instrument" [(value)]="idinstrument">
+        <mat-option>{{ emptychoice }}</mat-option>
+        <mat-option *ngFor="let item of instruments" value="{{item.ID}}">
+          {{item.Name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <button mat-button
+              class="get-albums"
+              (click)="getAlbums()">get albums</button>
+      <button mat-button="" (click)="resetFilters()">
+        reset</button>
+    </div>
+  </mat-card>
+</form>

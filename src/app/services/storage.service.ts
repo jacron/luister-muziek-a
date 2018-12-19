@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Album} from '../classes/Album';
 
+/*
+lijkt obsolete, is in search pagina in elk geval niet meer in gebruik
+ */
 @Injectable()
 export class StorageService {
 

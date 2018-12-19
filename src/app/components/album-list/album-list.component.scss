@@ -1,0 +1,17 @@
+img.thumb {
+  height: 100px;
+  margin-bottom: 12px;
+  vertical-align: text-top;
+}
+.thumb > div {
+  display: inline-block;
+}
+img.details {
+  //width: 300px;
+  margin-bottom: 20px;
+}
+.img-container {
+  width: 120px;
+  max-width: 120px;
+  overflow-x: hidden;
+}

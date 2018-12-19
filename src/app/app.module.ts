@@ -40,6 +40,8 @@ import { CuesheetMenuComponent } from './components/cuesheet-menu/cuesheet-menu.
 import { CodeComponent } from './components/code/code.component';
 import { CodeListComponent } from './components/code-list/code-list.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
+import { AlbumListComponent } from './components/album-list/album-list.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { SettingsComponent } from './components/settings/settings.component';
     CodeComponent,
     CodeListComponent,
     SettingsComponent,
+    SearchFormComponent,
+    AlbumListComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
