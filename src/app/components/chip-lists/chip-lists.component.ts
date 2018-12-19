@@ -83,7 +83,7 @@ export class ChipListsComponent implements OnInit {
 
   editPerson(person: Person, type: string) {
     const dialogRef = this.dialog.open(DialogPersonComponent, {
-      width: '50%',
+      width: 'min-content',
       data: {
         person: person,
         type: type,
@@ -104,15 +104,12 @@ export class ChipListsComponent implements OnInit {
 
   editTag(tag: Tag) {
     const dialogRef = this.dialog.open(DialogTagComponent, {
-      width: '50%',
+      width: 'min-content',
       data: {
         tag: tag
       },
       autoFocus: false
     });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.close.emit(result);
-    // });
   }
 
   toTag(tag: Tag) {

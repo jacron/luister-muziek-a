@@ -36,7 +36,7 @@ export class SearchComponent implements OnInit {
         this.albums = albums;
       },
       err => console.error(err),
-      () => console.log('searched albums fetched')
+      () => {}
     );
   }
 

@@ -1,8 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MusicService} from '../../services/music.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material';
 import {Router} from '@angular/router';
-import {ChipListsComponent} from '../../components/chip-lists/chip-lists.component';
 
 @Component({
   selector: 'app-dialog-tag',
@@ -17,7 +16,6 @@ export class DialogTagComponent implements OnInit {
 
   constructor(private musicService: MusicService,
               private router: Router,
-              public dialogRef: MatDialogRef<DialogTagComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
@@ -53,14 +51,8 @@ export class DialogTagComponent implements OnInit {
     ]).then();
   }
 
-  onNoClick(): void {
-    console.log('no click');
-    this.dialogRef.close('cancel');
-  }
-
   afterAlbumCount(response) {
-    console.log(response);
-    this.albumCount = response;
+    this.albumCount = response.count;
   }
 
   ngOnInit() {
