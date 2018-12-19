@@ -6,9 +6,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {forkJoin} from 'rxjs/observable/forkJoin';
 import {Tag} from '../../classes/Tag';
-import {StorageService} from '../../services/storage.service';
+// import {StorageService} from '../../services/storage.service';
 import {SearchParams} from '../../classes/SearchParams';
-import {MatDialog} from '@angular/material';
+// import {MatDialog} from '@angular/material';
 import {PersonService} from '../../services/person.service';
 
 @Component({
@@ -40,8 +40,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
               private personService: PersonService,
               private route: ActivatedRoute,
               private router: Router,
-              private dialog: MatDialog,
-              private storageService: StorageService
+              // private dialog: MatDialog,
+              // private storageService: StorageService
               ) {
     route.params.subscribe(params => this.handleParams(<SearchParams>params));
   }
@@ -58,7 +58,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     if (params) {
       console.log(params);
       // this.params = params;
-      this.storageService.storeSearchParameters(params);
+      // this.storageService.storeSearchParameters(params);
       this.fetchThings(params);
       this.toParams(params);
     }
@@ -69,7 +69,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.musicService.getSearchedAlbums(params).subscribe(
       (albums: Album[]) => {
         this.albums = albums;
-        this.storageService.storeAlbums(albums);
+        console.log(albums);
+        // this.storageService.storeAlbums(albums);
         setTimeout(() => {
           this.setLazy();
           this.lazyLoad();
@@ -95,13 +96,13 @@ export class SearchComponent implements OnInit, AfterViewInit {
   getAlbums(list: boolean) {
     this.list = list;
     const params: SearchParams = {
-      idcomp: this.idcomp,
-      idperf: this.idperf,
-      idcoll: this.idcoll,
-      idtag: this.idtag,
-      idinstrument: this.idinstrument
+      idcomp: this.idcomp || -1,
+      idperf: this.idperf || -1,
+      idcoll: this.idcoll || -1,
+      idtag: this.idtag || -1,
+      idinstrument: this.idinstrument || -1
     };
-    // console.log(this.params);
+    console.log(params);
     this.router.navigate(['/search', params])
       .then(() => {
     });

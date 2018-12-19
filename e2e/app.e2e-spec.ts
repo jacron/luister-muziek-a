@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('luister-muziek-a App', () => {
+describe('music-client App', () => {
   let page: AppPage;
 
   beforeEach(() => {

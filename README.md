@@ -9,7 +9,7 @@ http://localhost:5000/api, project music-api,
 of http://music-api/api
 
 vhost:
-music-client, pad luister-muziek-a/dist;
+music-client, pad music-client/dist;
 
 vergeet niet htaccess aan te passen(?) 
 https://github.com/mgechev/angular-seed/wiki/Deploying-prod-build-to-Apache-2;
