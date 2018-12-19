@@ -1,15 +1,8 @@
 <button mat-icon-button [matMenuTriggerFor]="menu">
   <mat-icon class="menu-trigger">more_vert</mat-icon>
 </button>
-<mat-menu #menu="matMenu">
+<mat-menu #menu="matMenu" [overlapTrigger]="false">
   <!-- Edit cuesheet -->
-  <button mat-menu-item
-          (click)="edit(cuesheet.ID)">
-    <mat-icon class="edit"
-              waves-light waves-effect mdbRippleRadius>
-      edit
-    </mat-icon><span>Edit text</span>
-  </button>
   <!-- Name cuesheet from filename -->
   <!--<button mat-menu-item-->
           <!--(click)="nameFromFilename(cuesheet)">-->
@@ -28,10 +21,53 @@
   <!--</button>-->
   <!-- Delete cuesheet -->
   <button mat-menu-item
+          (click)="edit(cuesheet.ID)">
+    <mat-icon class="edit"
+              waves-light waves-effect mdbRippleRadius>
+      edit
+    </mat-icon><span>Edit text</span>
+  </button>
+  <button mat-menu-item
+          (click)="showParts(cuesheet)">
+    <mat-icon class="edit"
+              waves-light waves-effect mdbRippleRadius>
+      list_alt
+    </mat-icon><span>View content</span>
+  </button>
+  <button mat-menu-item
           (click)="delete(cuesheet)">
     <mat-icon class="delete"
               waves-light waves-effect mdbRippleRadius>
       delete
     </mat-icon><span>Delete cuesheet file</span>
   </button>
+  <mat-divider></mat-divider>
+  <span *ngIf="cuesheet.discid">
+      <button mat-menu-item
+      (click)="openmusicbrainz(cuesheet.discid)">
+        <mat-icon
+          style="color: #8f407a"
+        >library_music</mat-icon><span>
+        musicbrainz
+      </span>
+      </button>
+      <button mat-menu-item
+      (click)="openfreedb(cuesheet.discid)">
+        <mat-icon
+          style="color: #395499"
+        >library_music</mat-icon><span>
+        freedb
+      </span>
+      </button>
+  </span>
+  <span *ngIf="cuesheet.asin">
+    <button mat-menu-item
+    (click)="openamazon(cuesheet.asin)">
+      <mat-icon
+        style="color: orange"
+      >music_video</mat-icon>
+    </button><span>
+    amazon
+  </span>
+  </span>
 </mat-menu>

@@ -42,6 +42,7 @@ import { CodeListComponent } from './components/code-list/code-list.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { AlbumListComponent } from './components/album-list/album-list.component';
+import { DialogCuesheetPartsComponent } from './dialogs/dialog-cuesheet-parts/dialog-cuesheet-parts.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { AlbumListComponent } from './components/album-list/album-list.component
     DialogPersonComponent,
     DialogTagComponent,
     DialogPiecesComponent,
+    DialogCuesheetPartsComponent,
     CuesheetMenuComponent,
     CodeComponent,
     CodeListComponent,
@@ -99,7 +101,8 @@ import { AlbumListComponent } from './components/album-list/album-list.component
     DialogAddComponent,
     DialogPersonComponent,
     DialogTagComponent,
-    DialogPiecesComponent
+    DialogCuesheetPartsComponent,
+    DialogPiecesComponent,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [

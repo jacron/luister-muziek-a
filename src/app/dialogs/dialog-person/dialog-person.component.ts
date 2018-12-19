@@ -19,11 +19,12 @@ export class DialogPersonComponent implements OnInit {
   albumCount: number;
   model;
 
-  constructor(private musicService: MusicService,
-              public dialogRef: MatDialogRef<DialogPersonComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private dialog: MatDialog,
-              private router: Router
+  constructor(
+    private musicService: MusicService,
+    public dialogRef: MatDialogRef<DialogPersonComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   openPicDialog(imgUrl, person: Person) {

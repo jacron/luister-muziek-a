@@ -12,11 +12,8 @@ import {Person} from '../../classes/Person';
 })
 export class AlbumCuesheetsComponent implements OnInit {
 
-  @Input('cuesheets') cuesheets: Cuesheet[];
-  @Input('album') album: Album;
-  freedbUrl = environment.freedbUrl;
-  musicbrainzUrl = environment.musicbrainz;
-  amazonUrl = environment.amazonUrl;
+  @Input() cuesheets: Cuesheet[];
+  @Input() album: Album;
 
   constructor(  private musicService: MusicService ) { }
 

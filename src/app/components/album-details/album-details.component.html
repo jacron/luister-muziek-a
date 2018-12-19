@@ -38,6 +38,7 @@
       <div class="opener">
         <div class="count">{{ album.pieces.length }}</div>
         <mat-icon (click)="openPieces()"
+                  title="view {{ album.pieces.length }} pieces"
                   [class.expanded]="album.expanded"
                   waves-light waves-effect mdbRippleRadius
         >{{ chevron }}

@@ -23,10 +23,11 @@ export class ToolbarComponent implements OnInit, OnChanges {
   navBackwards: boolean;
   musicAlbumUrl = 'http://localhost:8010/album/';
 
-  constructor(    private musicService: MusicService,
-                  private router: Router,
-                  private storageService: StorageService,
-                  private dialog: MatDialog,
+  constructor(
+    private musicService: MusicService,
+    private router: Router,
+    private storageService: StorageService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnChanges(changes) {

@@ -2,6 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Cuesheet} from '../../classes/Cuesheet';
 import {MusicService} from '../../services/music.service';
 import {Album} from '../../classes/Album';
+import {environment} from '../../../environments/environment';
+import {MatDialog} from '@angular/material';
+import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.component';
+import {DialogCuesheetPartsComponent} from '../../dialogs/dialog-cuesheet-parts/dialog-cuesheet-parts.component';
 
 @Component({
   selector: 'app-cuesheet-menu',
@@ -10,11 +14,15 @@ import {Album} from '../../classes/Album';
 })
 export class CuesheetMenuComponent implements OnInit {
 
-  @Input('cuesheet') cuesheet: Cuesheet;
-  @Input('album') album: Album;
+  @Input() cuesheet: Cuesheet;
+  @Input() album: Album;
+  freedbUrl = environment.freedbUrl;
+  musicbrainzUrl = environment.musicbrainz;
+  amazonUrl = environment.amazonUrl;
 
   constructor(
-    private musicService: MusicService
+    private musicService: MusicService,
+    private dialog: MatDialog,
   ) { }
 
   edit(id) {
@@ -22,6 +30,21 @@ export class CuesheetMenuComponent implements OnInit {
       () => {},
       (error) => console.error(error)
     );
+  }
+
+  showParts(cue) {
+    console.log(cue.cue);
+    const files = cue.cue.files,
+      performers = cue.cue.performers,
+      title = cue.cue.title
+    ;
+    this.dialog.open(DialogCuesheetPartsComponent, {
+      data: {
+        performers,
+        files,
+        title,
+      }
+    });
   }
 
   // nameToFilename(cuesheet: Cuesheet) {
@@ -36,6 +59,18 @@ export class CuesheetMenuComponent implements OnInit {
   //     (response) => cuesheet.Title = response
   //   );
   // }
+
+  openfreedb(id) {
+    window.open(this.freedbUrl + id);
+  }
+
+  openmusicbrainz(id) {
+    window.open(this.musicbrainzUrl + id);
+  }
+
+  openamazon(asin) {
+    window.open(this.amazonUrl + asin);
+  }
 
   afterDelete() {
     this.musicService.refetch(this.album.ID).subscribe(
