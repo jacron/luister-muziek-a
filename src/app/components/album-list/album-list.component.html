@@ -1,8 +1,9 @@
 <div class="list">
-  <div *ngIf="albums && albums.length">
-    {{ albums.length }} albums
-    <div class="row" *ngFor="let album of albums" >
-      <div class="col img-container">
+  <mat-list *ngIf="albums && albums.length">
+    <h3 mat-subheader>{{ albums.length }} albums</h3>
+    <mat-list-item *ngFor="let album of albums">
+    <div class="">
+      <div class="img-container">
         <a (click)="toAlbum(album.ID)">
           <img
             attr.data-src="{{ imgUrl }}{{ album.ID }}/album/-1/100/"
@@ -11,14 +12,16 @@
           >
         </a>
       </div>
-      <div class="col">
-        <div>{{ album.Title }}</div>
+      <div class="text-container">
+        <div mat-line="">{{ album.Title }}</div>
         <app-chip-lists [album]="album"
                         [removable]="false"
                         [editable]="false"
                         [showimage]="false"
+                        mat-line
         ></app-chip-lists>
       </div>
     </div>
-  </div>
+    </mat-list-item>
+  </mat-list>
 </div>

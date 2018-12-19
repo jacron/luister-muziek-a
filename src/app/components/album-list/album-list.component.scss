@@ -11,7 +11,16 @@ img.details {
   margin-bottom: 20px;
 }
 .img-container {
-  width: 120px;
+  width: 100px;
   max-width: 120px;
   overflow-x: hidden;
+  float: left;
+  margin-right: 8px;
+}
+.text-container {
+  float: left;
+  max-width: 520px
+}
+.mat-list-item {
+  height: inherit !important;
 }
