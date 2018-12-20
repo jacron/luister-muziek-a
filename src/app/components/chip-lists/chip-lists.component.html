@@ -32,6 +32,14 @@
     <a (click)="toTag(tag)">{{ tag.Name }}</a>
     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
   </mat-chip>
+  <mat-chip *ngIf="album.album_instrument"
+            class="instrument"
+            [class.elevate]="showimage"
+            [removable]="removable"
+            (remove)="removeInstrument(tag)">
+    <a (click)="toInstrument()">{{ album.album_instrument.Name }}</a>
+    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+  </mat-chip>
   <button
     *ngIf="editable"
     (click)="addSome()"

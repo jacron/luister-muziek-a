@@ -34,9 +34,9 @@ export class MusicService {
     return this.getJson('/instruments');
   }
 
-  getComposerById(id: number) {
-    return this.getJson('/composers/' + id);
-  }
+  // getComposerById(id: number) {
+  //   return this.getJson('/composers/' + id);
+  // }
 
   getPerformerById(id: number) {
     return this.getJson('/performers/' + id);
@@ -120,6 +120,16 @@ export class MusicService {
       {tagId: tagId, albumId: albumId});
   }
 
+  addInstrument(instrumentId: number, albumId: number) {
+    return this.postForm('/instrument/add',
+      {instrumentId: instrumentId, albumId: albumId});
+  }
+
+  newInstrument(name, albumId) {
+    return this.postForm('/instrument/new',
+      {name: name, albumId: albumId});
+  }
+
   newTag(name: string, albumId: number) {
     return this.postForm('/tag/new',
       {name: name, albumId: albumId});
@@ -152,9 +162,15 @@ export class MusicService {
   }
 
   removeTag(tagId: number, albumId: number) {
-      return this.postForm('/tag/remove', {
-        tagId: tagId, albumId: albumId
-      });
+    return this.postForm('/tag/remove', {
+      tagId: tagId, albumId: albumId
+    });
+  }
+
+  removeInstrument(instrumentId: number, albumId: number) {
+    return this.postForm('/instrument/remove', {
+      instrumentId: instrumentId, albumId: albumId
+    });
   }
 
   refetch(id) {
@@ -288,13 +304,6 @@ export class MusicService {
     // return this.http.post(
     //   this.requestUrl, params, { headers: headers}
     // );
-  }
-
-  newTag(name, albumId) {
-    return this.postForm('/tag/new', {
-      name: name,
-      albumId: albumId
-    });
   }
 
   openwebsite(albumId) {

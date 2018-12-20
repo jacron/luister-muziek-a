@@ -17,7 +17,6 @@ export class DialogInputComponent implements OnInit {
   ) { }
 
   submit() {
-    console.log(this.str);
     this.dialogRef.close(this.str);
   }
 

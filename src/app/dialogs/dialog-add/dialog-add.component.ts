@@ -6,6 +6,7 @@ import {MusicService} from '../../services/music.service';
 import {AlbumDetailsComponent} from '../../components/album-details/album-details.component';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DialogInputComponent} from '../dialog-input/dialog-input.component';
+import {Instrument} from '../../classes/Instrument';
 
 @Component({
   selector: 'app-dialog-add',
@@ -16,10 +17,12 @@ export class DialogAddComponent implements OnInit {
 
   composers: Person[];
   performers: Person[];
+  instruments: Instrument[];
   tags: Tag[];
   idcomp = -1;
   idperf = -1;
   idtag = -1;
+  idinstrument = -1;
   labelAdd = 'add';
   labelNew = 'new';
 
@@ -51,7 +54,7 @@ export class DialogAddComponent implements OnInit {
   newTag() {
     const dialogRef = this.dialog.open(DialogInputComponent, {
       data: {
-        prompt: 'Name of the new tag: '
+        prompt: 'Name of the new tag'
       }
     });
     dialogRef.afterClosed().subscribe(
@@ -60,6 +63,35 @@ export class DialogAddComponent implements OnInit {
             this.musicService.newTag(name, this.data.album.ID).subscribe(
               response => this.afterNewTag(response)
             );
+        }
+      }
+    );
+  }
+
+  afterNewInstrument(response: Instrument) {
+    this.data.album.album_instrument = response;
+  }
+
+  addInstrument() {
+    if (this.idinstrument !== -1) {
+      this.musicService.addInstrument(this.idinstrument, this.data.album.ID).subscribe(
+        response => this.afterNewInstrument(<Instrument>response)
+      );
+    }
+  }
+
+  newInstrument() {
+    const dialogRef = this.dialog.open(DialogInputComponent, {
+      data: {
+        prompt: 'Name of the new instrument'
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      name => {
+        if (name && name.length > 0) {
+          this.musicService.newInstrument(name, this.data.album.ID).subscribe(
+            response => this.afterNewInstrument(<Instrument>response)
+          );
         }
       }
     );
@@ -80,7 +112,7 @@ export class DialogAddComponent implements OnInit {
   newPerformer() {
     const dialogRef = this.dialog.open(DialogInputComponent, {
       data: {
-        prompt: 'Name of the new performer: '
+        prompt: 'Name of the new performer'
       }
     });
     dialogRef.afterClosed().subscribe(
@@ -100,7 +132,7 @@ export class DialogAddComponent implements OnInit {
 
   addComposer() {
     if (this.idcomp !== -1) {
-      console.log(this.idcomp);
+      // console.log(this.idcomp);
       this.musicService.addComposer(this.idcomp, this.data.album.ID).subscribe(
         (response) => this.afterNewComposer(response),
         (error) => console.error(error)
@@ -111,7 +143,7 @@ export class DialogAddComponent implements OnInit {
   newComposer() {
     const dialogRef = this.dialog.open(DialogInputComponent, {
       data: {
-        prompt: 'Name of the new composer: '
+        prompt: 'Name of the new composer'
       }
     });
     dialogRef.afterClosed().subscribe(
@@ -130,12 +162,14 @@ export class DialogAddComponent implements OnInit {
     const qcomposers = this.musicService.getComposers('dropdown');
     const qperformers = this.musicService.getPerformers('dropdown');
     const qtags = this.musicService.getTags();
-    forkJoin(qcomposers, qperformers, qtags)
+    const qinstruments = this.musicService.getInstruments();
+    forkJoin(qcomposers, qperformers, qtags, qinstruments)
       .subscribe(
         (results) => {
           this.composers = <Person[]>results[0];
           this.performers = <Person[]>results[1];
           this.tags = <Tag[]>results[2];
+          this.instruments = <Instrument[]>results[3];
         },
         err => console.error(err),
         () => {

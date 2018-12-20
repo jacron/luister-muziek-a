@@ -1,5 +1,6 @@
 import {Person} from './Person';
 import {Tag} from './Tag';
+import {Instrument} from './Instrument';
 
 export class Album {
   Title: string;
@@ -11,6 +12,7 @@ export class Album {
   album_componisten: Person[];
   album_metatags: any;
   album_tags: Tag[];
+  album_instrument: Instrument;
   pieces: any[];
   cuesheets: any[];
   expanded: boolean;

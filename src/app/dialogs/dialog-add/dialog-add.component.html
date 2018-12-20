@@ -34,4 +34,14 @@
   </mat-form-field>
   <button mat-button (click)="addTag()">{{ labelAdd }}</button>
   <button mat-button (click)="newTag()">{{ labelNew }}</button>
+  <br>
+  <mat-form-field>
+    <mat-select placeholder="Instrument" [(value)]="idinstrument">
+      <mat-option *ngFor="let item of instruments" value="{{item.ID}}">
+        {{item.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-button (click)="addInstrument()">{{ labelAdd }}</button>
+  <button mat-button (click)="newInstrument()">{{ labelNew }}</button>
 </div>

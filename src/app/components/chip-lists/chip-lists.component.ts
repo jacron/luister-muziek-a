@@ -64,6 +64,13 @@ export class ChipListsComponent implements OnInit {
     );
   }
 
+  removeInstrument() {
+    this.musicService.removeInstrument(this.album.album_instrument.ID,
+      this.album.ID).subscribe(
+      () => this.album.album_instrument = null
+    );
+  }
+
   openPicDialog(imgUrl, person: Person) {
     this.dialog.open(DialogPicComponent, {
       width: '80%',
