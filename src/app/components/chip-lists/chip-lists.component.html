@@ -32,4 +32,11 @@
     <a (click)="toTag(tag)">{{ tag.Name }}</a>
     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
   </mat-chip>
+  <button
+    *ngIf="editable"
+    (click)="addSome()"
+    style="margin-left: 8px"
+    mat-button>
+    <mat-icon style="color: lightgrey">edit</mat-icon>
+    </button>
 </mat-chip-list>

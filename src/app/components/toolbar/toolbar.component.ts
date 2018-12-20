@@ -4,7 +4,6 @@ import {MusicService} from '../../services/music.service';
 import {Router} from '@angular/router';
 import {StorageService} from '../../services/storage.service';
 import {MatDialog, MatMenuTrigger} from '@angular/material';
-import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
 import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.component';
 
 @Component({
@@ -14,7 +13,7 @@ import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.c
 })
 export class ToolbarComponent implements OnInit, OnChanges {
 
-  @Input('album') album: Album;
+  @Input() album: Album;
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   searchTitle: string;
   searchParams: any;
@@ -35,7 +34,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   albumTitleKeydown(e, id, title) {
-    // console.log(id, title);
     if (e.key === 'Enter') {
       e.preventDefault();
       this.updateAlbumTitle(id, title);
@@ -46,7 +44,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   albumDescriptionKeydown(e, id, title) {
-    // console.log(id, title);
     if (e.key === 'Enter') {
       e.preventDefault();
       this.updateAlbumDescription(id, title);
@@ -58,7 +55,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
 
   openFinder(id) {
     this.musicService.openFinder(id).subscribe(
-      response => {},
+      () => {},
       error => console.error(error)
     );
   }
@@ -69,14 +66,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
       data: {
         pieces: this.album.pieces,
         albumId: this.album.ID,
-        album: this.album
-      }
-    });
-  }
-
-  addSome() {
-    this.dialog.open(DialogAddComponent, {
-      data: {
         album: this.album
       }
     });
@@ -123,7 +112,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   toSearch() {
-    // console.log(this.searchParams);
     this.router.navigate(['/search',
       this.searchParams
     ]).then(() => {

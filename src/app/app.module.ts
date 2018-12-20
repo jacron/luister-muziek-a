@@ -45,6 +45,7 @@ import { AlbumListComponent } from './components/album-list/album-list.component
 import { DialogCuesheetPartsComponent } from './dialogs/dialog-cuesheet-parts/dialog-cuesheet-parts.component';
 import {UtilService} from './services/util.service';
 import {CuesheetService} from './services/cuesheet.service';
+import { DialogInputComponent } from './dialogs/dialog-input/dialog-input.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import {CuesheetService} from './services/cuesheet.service';
     SettingsComponent,
     SearchFormComponent,
     AlbumListComponent,
+    DialogInputComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -105,6 +107,7 @@ import {CuesheetService} from './services/cuesheet.service';
     DialogTagComponent,
     DialogCuesheetPartsComponent,
     DialogPiecesComponent,
+    DialogInputComponent,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [

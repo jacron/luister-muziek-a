@@ -4,7 +4,8 @@ import {Tag} from '../../classes/Tag';
 import {forkJoin} from 'rxjs/observable/forkJoin';
 import {MusicService} from '../../services/music.service';
 import {AlbumDetailsComponent} from '../../components/album-details/album-details.component';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {DialogInputComponent} from '../dialog-input/dialog-input.component';
 
 @Component({
   selector: 'app-dialog-add',
@@ -20,10 +21,12 @@ export class DialogAddComponent implements OnInit {
   idperf = -1;
   idtag = -1;
   labelAdd = 'add';
+  labelNew = 'new';
 
   constructor(private musicService: MusicService,
               public dialogRef: MatDialogRef<AlbumDetailsComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private dialog: MatDialog,
               ) { }
 
   close(e) {
@@ -45,6 +48,23 @@ export class DialogAddComponent implements OnInit {
     }
   }
 
+  newTag() {
+    const dialogRef = this.dialog.open(DialogInputComponent, {
+      data: {
+        prompt: 'Name of the new tag: '
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      name => {
+        if (name && name.length > 0) {
+            this.musicService.newTag(name, this.data.album.ID).subscribe(
+              response => this.afterNewTag(response)
+            );
+        }
+      }
+    );
+  }
+
   afterNewPerformer(response) {
     this.data.album.album_performers.push(response);
   }
@@ -57,13 +77,28 @@ export class DialogAddComponent implements OnInit {
     }
   }
 
+  newPerformer() {
+    const dialogRef = this.dialog.open(DialogInputComponent, {
+      data: {
+        prompt: 'Name of the new performer: '
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      name => {
+        if (name && name.length > 0) {
+          this.musicService.newPerformer(name, this.data.album.ID).subscribe(
+            response => this.afterNewPerformer(response)
+          );
+        }
+      }
+    );
+  }
+
   afterNewComposer(response) {
-    // console.log(response);
     this.data.album.album_componisten.push(response);
   }
 
   addComposer() {
-    console.log(this.idcomp);
     if (this.idcomp !== -1) {
       console.log(this.idcomp);
       this.musicService.addComposer(this.idcomp, this.data.album.ID).subscribe(
@@ -71,6 +106,24 @@ export class DialogAddComponent implements OnInit {
         (error) => console.error(error)
       );
     }
+  }
+
+  newComposer() {
+    const dialogRef = this.dialog.open(DialogInputComponent, {
+      data: {
+        prompt: 'Name of the new composer: '
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      name => {
+        if (name && name.length > 0) {
+          this.musicService.newComposer(name, this.data.album.ID).subscribe(
+            response => this.afterNewComposer(response)
+          );
+        }
+      }
+    );
+
   }
 
   getItems() {

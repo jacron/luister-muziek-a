@@ -1,6 +1,6 @@
 <app-chip-lists [album]="data.album"
                 [removable]="true"
-                [editable]="true"
+                [editable]="false"
                 [showimage]="true"
                 (close)="close($event)"
 ></app-chip-lists>
@@ -11,7 +11,9 @@
         {{componist.ReversedName}}
       </mat-option>
     </mat-select>
-  </mat-form-field><button mat-button (click)="addComposer()">{{ labelAdd }}</button>
+  </mat-form-field>
+  <button mat-button (click)="addComposer()">{{ labelAdd }}</button>
+  <button mat-button (click)="newComposer()">{{ labelNew }}</button>
   <br>
   <mat-form-field>
     <mat-select placeholder="Performer" [(value)]="idperf">
@@ -19,7 +21,9 @@
         {{item.ReversedName}}
       </mat-option>
     </mat-select>
-  </mat-form-field><button mat-button (click)="addPerformer()">{{ labelAdd }}</button>
+  </mat-form-field>
+  <button mat-button (click)="addPerformer()">{{ labelAdd }}</button>
+  <button mat-button (click)="newPerformer()">{{ labelNew }}</button>
   <br>
   <mat-form-field>
     <mat-select placeholder="Tag" [(value)]="idtag">
@@ -27,5 +31,7 @@
         {{item.Name}}
       </mat-option>
     </mat-select>
-  </mat-form-field><button mat-button (click)="addTag()">{{ labelAdd }}</button>
+  </mat-form-field>
+  <button mat-button (click)="addTag()">{{ labelAdd }}</button>
+  <button mat-button (click)="newTag()">{{ labelNew }}</button>
 </div>

@@ -1,14 +1,10 @@
-<mat-card *ngIf="album" class="album">
-  <div class="row">
-    <div class="col">
-      <app-toolbar [album]="album"></app-toolbar>
-    </div>
-  </div>
+<div *ngIf="album" class="album">
+    <app-toolbar [album]="album"></app-toolbar>
   <div class="row chips">
     <div class="col">
       <app-chip-lists [album]="album"
                       [removable]="false"
-                      [editable]="false"
+                      [editable]="true"
                       [showimage]="false"
       ></app-chip-lists>
     </div>
@@ -52,4 +48,4 @@
       ></app-album-pieces>
     </div>
   </div>
-</mat-card>
+</div>

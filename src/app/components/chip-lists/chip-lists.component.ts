@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material';
 import {MusicService} from '../../services/music.service';
 import {DialogPersonComponent} from '../../dialogs/dialog-person/dialog-person.component';
 import {DialogTagComponent} from '../../dialogs/dialog-tag/dialog-tag.component';
+import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
 
 @Component({
   selector: 'app-chip-lists',
@@ -114,6 +115,14 @@ export class ChipListsComponent implements OnInit {
 
   toTag(tag: Tag) {
     this.editTag(tag);
+  }
+
+  addSome() {
+    this.dialog.open(DialogAddComponent, {
+      data: {
+        album: this.album
+      }
+    });
   }
 
   ngOnInit() {
