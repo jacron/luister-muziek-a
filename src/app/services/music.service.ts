@@ -75,6 +75,14 @@ export class MusicService {
     return this.getJson('/performer/' + idPerformer + '/albums');
   }
 
+  getTagAlbums(id) {
+    return this.getJson('/tag/' + id + '/albums');
+  }
+
+  getCollectionAlbums(id) {
+    return this.getJson('/collection/' + id + '/albums');
+  }
+
   getSearchedAlbums(params) {
     const search = 'zoek'; // todo: get search (title)
     const url = this.requestUrl + '/cql/' + search + '/' +
