@@ -15,6 +15,7 @@ export class MusicService {
   }
 
   getComposers(mode) {
+    // mode = 'dropdown' || 'typeahead' || 'startletter'
     return this.getJson('/composers/mode/' + mode);
   }
 
@@ -64,6 +65,14 @@ export class MusicService {
 
   getAlbumCountForPerson(id, person_type) {
     return this.getJson('/person/albums/count/' + id + '/' + person_type);
+  }
+
+  getComposerAlbums(idComposer) {
+    return this.getJson('/composer/' + idComposer + '/albums');
+  }
+
+  getPerformerAlbums(idPerformer) {
+    return this.getJson('/performer/' + idPerformer + '/albums');
   }
 
   getSearchedAlbums(params) {

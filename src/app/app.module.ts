@@ -46,6 +46,13 @@ import { DialogCuesheetPartsComponent } from './dialogs/dialog-cuesheet-parts/di
 import {UtilService} from './services/util.service';
 import {CuesheetService} from './services/cuesheet.service';
 import { DialogInputComponent } from './dialogs/dialog-input/dialog-input.component';
+import { ComponistComponent } from './components/componist/componist.component';
+import { ComponistListComponent } from './components/componist-list/componist-list.component';
+import { PerformerListComponent } from './components/performer-list/performer-list.component';
+import { PerformerComponent } from './components/performer/performer.component';
+import { AlphabetComponent } from './components/alphabet/alphabet.component';
+import { PersonsComponent } from './components/persons/persons.component';
+import { StartletterPipe } from './pipes/startletter.pipe';
 
 @NgModule({
   declarations: [
@@ -77,6 +84,13 @@ import { DialogInputComponent } from './dialogs/dialog-input/dialog-input.compon
     SearchFormComponent,
     AlbumListComponent,
     DialogInputComponent,
+    ComponistComponent,
+    ComponistListComponent,
+    PerformerListComponent,
+    PerformerComponent,
+    AlphabetComponent,
+    PersonsComponent,
+    StartletterPipe,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

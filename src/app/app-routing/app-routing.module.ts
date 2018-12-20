@@ -9,8 +9,10 @@ import {AlbumDetailsComponent} from '../components/album-details/album-details.c
 import {CodeComponent} from '../components/code/code.component';
 import {CodeListComponent} from '../components/code-list/code-list.component';
 import {SettingsComponent} from '../components/settings/settings.component';
-// import {ComponistComponent} from '../componist/componist.component';
-// import {PerformerComponent} from '../performer/performer.component';
+import {ComponistListComponent} from '../components/componist-list/componist-list.component';
+import {PerformerListComponent} from '../components/performer-list/performer-list.component';
+import {ComponistComponent} from '../components/componist/componist.component';
+import {PerformerComponent} from '../components/performer/performer.component';
 
 const appRoutes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -19,10 +21,10 @@ const appRoutes: Routes = [
   {path: 'search/:idcomp/:idperf/:idcoll/:idtag', component: SearchComponent},
   {path: 'album/:idalbum', component: AlbumDetailsComponent},
   {path: 'tools', component: ToolsComponent},
-  // {path: 'componist', component: ComponistComponent},
-  // {path: 'componist/list/:id', component: ComponistListComponent},
-  // {path: 'performer', component: PerformerComponent},
-  // {path: 'performer/list/:id', component: PerformerListComponent},
+  {path: 'componist', component: ComponistComponent},
+  {path: 'componist/:id', component: ComponistListComponent},
+  {path: 'performer', component: PerformerComponent},
+  {path: 'performer/:id', component: PerformerListComponent},
   {path: 'code', component: CodeComponent},
   {path: 'code/:idcode', component: CodeComponent},
   {path: 'code/list/:code/:fav', component: CodeListComponent},

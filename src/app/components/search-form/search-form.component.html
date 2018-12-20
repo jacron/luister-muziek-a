@@ -1,7 +1,9 @@
 <form>
-  <div class="row">
+  <div class="row search-fields">
     <mat-form-field>
-      <mat-select placeholder="Composer" [(value)]="idcomp">
+      <mat-select placeholder="Composer"
+                  [panelClass]="'long-dd-list'"
+                  [(value)]="idcomp">
         <mat-option>{{ emptychoice }}</mat-option>
         <mat-option *ngFor="let item of composers" value="{{item.ID}}">
           {{item.ReversedName}}
@@ -9,7 +11,9 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Performer" [(value)]="idperf">
+      <mat-select placeholder="Performer"
+                  [panelClass]="'long-dd-list'"
+                  [(value)]="idperf">
         <mat-option>{{ emptychoice }}</mat-option>
         <mat-option *ngFor="let item of performers" value="{{item.ID}}">
           {{item.ReversedName}}
@@ -17,7 +21,9 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Collection" [(value)]="idcoll">
+      <mat-select placeholder="Collection"
+                  [panelClass]="'long-dd-list'"
+                  [(value)]="idcoll">
         <mat-option>{{ emptychoice }}</mat-option>
         <mat-option *ngFor="let item of collections" value="{{item.ID}}">
           {{item.Title}}
@@ -25,7 +31,9 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Tag" [(value)]="idtag">
+      <mat-select placeholder="Tag"
+                  [panelClass]="'long-dd-list'"
+                  [(value)]="idtag">
         <mat-option>{{ emptychoice }}</mat-option>
         <mat-option *ngFor="let item of tags" value="{{item.ID}}">
           {{item.Name}}

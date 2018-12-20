@@ -1,0 +1,9 @@
+<div class="letter"
+     [class.selected]="letter == selectedLetter"
+     (click)="selectLetter(letter)"
+     *ngFor="let letter of letters">
+  {{ letter }}
+</div>
+<button mat-button
+        (click)="selectLetter('')"
+>reset</button>
