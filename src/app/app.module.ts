@@ -43,6 +43,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { AlbumListComponent } from './components/album-list/album-list.component';
 import { DialogCuesheetPartsComponent } from './dialogs/dialog-cuesheet-parts/dialog-cuesheet-parts.component';
+import {UtilService} from './services/util.service';
+import {CuesheetService} from './services/cuesheet.service';
 
 @NgModule({
   declarations: [
@@ -112,6 +114,8 @@ import { DialogCuesheetPartsComponent } from './dialogs/dialog-cuesheet-parts/di
     TypedNamePipe,
     TypedTitlePipe,
     StorageService,
+    UtilService,
+    CuesheetService,
     MatDialogModule
   ],
   bootstrap: [AppComponent]

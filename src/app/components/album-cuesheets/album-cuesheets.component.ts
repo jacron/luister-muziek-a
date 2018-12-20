@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cuesheet} from '../../classes/Cuesheet';
 import {MusicService} from '../../services/music.service';
-import {environment} from '../../../environments/environment';
 import {Album} from '../../classes/Album';
 import {Person} from '../../classes/Person';
 
@@ -15,7 +14,9 @@ export class AlbumCuesheetsComponent implements OnInit {
   @Input() cuesheets: Cuesheet[];
   @Input() album: Album;
 
-  constructor(  private musicService: MusicService ) { }
+  constructor(
+    private musicService: MusicService
+  ) { }
 
   getCuesheetById(id) {
     for (let i = 0; i < this.cuesheets.length; i++) {
@@ -24,18 +25,6 @@ export class AlbumCuesheetsComponent implements OnInit {
       }
     }
     return null;
-  }
-
-  afterAddPerformer(response: Person) {
-    this.musicService.getPerformerById(response.ID).subscribe(
-      performer => this.album.album_performers.push(<Person>performer)
-    );
-  }
-
-  addPerformer(name) {
-    this.musicService.newPerformer(name.trim(), this.album.ID).subscribe(
-      response => this.afterAddPerformer(<Person>response)
-    );
   }
 
   onPlayed(response, id) {

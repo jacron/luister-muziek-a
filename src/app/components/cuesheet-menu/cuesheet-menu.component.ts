@@ -33,16 +33,10 @@ export class CuesheetMenuComponent implements OnInit {
   }
 
   showParts(cue) {
-    console.log(cue.cue);
-    const files = cue.cue.files,
-      performers = cue.cue.performers,
-      title = cue.cue.title
-    ;
     this.dialog.open(DialogCuesheetPartsComponent, {
       data: {
-        performers,
-        files,
-        title,
+        cuesheet: cue,
+        album: this.album,
       }
     });
   }

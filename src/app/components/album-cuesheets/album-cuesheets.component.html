@@ -7,7 +7,9 @@
     waves-light waves-effect mdbRippleRadius
     (click)="play(cuesheet.ID)">
     play_circle_filled</mat-icon>
-  <app-cuesheet-menu [cuesheet]="cuesheet" [album]="album"></app-cuesheet-menu>
+  <app-cuesheet-menu
+    [cuesheet]="cuesheet"
+    [album]="album"></app-cuesheet-menu>
   <div class="text-container">
     <div mat-line #topicTitle contenteditable="true"
           class="title"

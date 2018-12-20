@@ -1,21 +1,16 @@
-<span *ngIf="data.performers">
+<span *ngIf="performers">
     <span>performers: </span>
-      <a *ngFor="let p of data.performers; let i = index"
+      <a *ngFor="let p of performers; let i = index"
          title="add performer"
          (click)="addPerformer(p)">
-        {{ p }}<span *ngIf="i < data.performers.length - 1"
+        {{ p }}<span *ngIf="i < performers.length - 1"
       >,</span>
       </a>
     <mat-divider></mat-divider>
     </span>
 <mat-list>
-  <h3 mat-subheader>{{ data.title }}</h3>
-  <mat-list-item *ngFor="let f of data.files">
-    <span mat-line>{{ f.name }}</span>
-    <mat-list *ngIf="f.tracks.length > 1">
-      <mat-list-item *ngFor="let t of f.tracks">
-        <span mat-line>track: {{ t.title }}</span>
-      </mat-list-item>
-    </mat-list>
+  <h3 mat-subheader>{{ title }}</h3>
+  <mat-list-item *ngFor="let stuk of stukken">
+    <span mat-line>{{ stuk }}</span>
   </mat-list-item>
 </mat-list>
