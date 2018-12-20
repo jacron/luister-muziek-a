@@ -13,6 +13,10 @@ import {ComponistListComponent} from '../components/componist-list/componist-lis
 import {PerformerListComponent} from '../components/performer-list/performer-list.component';
 import {ComponistComponent} from '../components/componist/componist.component';
 import {PerformerComponent} from '../components/performer/performer.component';
+import {CollectieComponent} from '../components/collectie/collectie.component';
+import {CollectieListComponent} from '../components/collectie-list/collectie-list.component';
+import {TagComponent} from '../components/tag/tag.component';
+import {TagListComponent} from '../components/tag-list/tag-list.component';
 
 const appRoutes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -25,6 +29,10 @@ const appRoutes: Routes = [
   {path: 'componist/:id', component: ComponistListComponent},
   {path: 'performer', component: PerformerComponent},
   {path: 'performer/:id', component: PerformerListComponent},
+  {path: 'collectie', component: CollectieComponent},
+  {path: 'collectie/:id', component: CollectieListComponent},
+  {path: 'tag', component: TagComponent},
+  {path: 'tag/:id', component: TagListComponent},
   {path: 'code', component: CodeComponent},
   {path: 'code/:idcode', component: CodeComponent},
   {path: 'code/list/:code/:fav', component: CodeListComponent},

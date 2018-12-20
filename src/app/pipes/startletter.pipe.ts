@@ -6,7 +6,7 @@ import {Person} from '../classes/Person';
 })
 export class StartletterPipe implements PipeTransform {
 
-  transform(items: Person[], filterBy: string): any {
+  transform(items: Person[], filterBy: string, fieldName: string): any {
     if (!items) {
       return items;
     }
@@ -15,8 +15,9 @@ export class StartletterPipe implements PipeTransform {
     }
     filterBy = filterBy.toUpperCase();
     // console.log(items);
+    console.log(fieldName);
     return items.filter(
-      item => item.LastName.startsWith(filterBy)
+      item => item[fieldName].startsWith(filterBy)
     );
   }
 

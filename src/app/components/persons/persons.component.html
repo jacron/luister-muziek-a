@@ -1,4 +1,4 @@
-<mat-list *ngIf="(persons | startwith:startletter) as result">
+<mat-list *ngIf="(persons | startwith:startletter:'LastName') as result">
   <h3 mat-subheader>{{ result.length }} {{ label }}</h3>
   <mat-list-item *ngFor="let person of result">
     <a [routerLink]="[person.ID]">

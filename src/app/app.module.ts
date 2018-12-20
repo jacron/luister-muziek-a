@@ -53,6 +53,12 @@ import { PerformerComponent } from './components/performer/performer.component';
 import { AlphabetComponent } from './components/alphabet/alphabet.component';
 import { PersonsComponent } from './components/persons/persons.component';
 import { StartletterPipe } from './pipes/startletter.pipe';
+import { CollectieComponent } from './components/collectie/collectie.component';
+import { CollectieListComponent } from './components/collectie-list/collectie-list.component';
+import { TagListComponent } from './components/tag-list/tag-list.component';
+import { TagComponent } from './components/tag/tag.component';
+import { CollectiesComponent } from './components/collecties/collecties.component';
+import { TagsComponent } from './components/tags/tags.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +97,12 @@ import { StartletterPipe } from './pipes/startletter.pipe';
     AlphabetComponent,
     PersonsComponent,
     StartletterPipe,
+    CollectieComponent,
+    CollectieListComponent,
+    TagListComponent,
+    TagComponent,
+    CollectiesComponent,
+    TagsComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
