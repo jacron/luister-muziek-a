@@ -8,7 +8,7 @@ const choices: Choice[] = [
     visible: true,
     label: 'Componist',
     displayfield: 'FullName',
-    id: '',
+    id: -1,
     items: [],
   },
   {
@@ -16,7 +16,7 @@ const choices: Choice[] = [
     visible: true,
     label: 'Performer',
     displayfield: 'FullName',
-    id: '',
+    id: -1,
     items: [],
   },
   {
@@ -24,7 +24,7 @@ const choices: Choice[] = [
     visible: true,
     label: 'Collectie',
     displayfield: 'Title',
-    id: '',
+    id: -1,
     items: [],
   },
   {
@@ -32,7 +32,7 @@ const choices: Choice[] = [
     visible: true,
     label: 'Tag',
     displayfield: 'Name',
-    id: '',
+    id: -1,
     items: [],
   },
   {
@@ -40,7 +40,7 @@ const choices: Choice[] = [
     visible: true,
     label: 'Instrument',
     displayfield: 'Name',
-    id: '',
+    id: -1,
     items: [],
   },
 ];

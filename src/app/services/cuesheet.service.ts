@@ -14,7 +14,7 @@ export class CuesheetService {
     cuesheet.cue.files.forEach(file => {
       if (file.tracks.length > 1) {
         file.tracks.forEach(track => {
-          stukken.push(this.util.stripExtension(track.title));
+          stukken.push(track.title);
         });
       } else {
         stukken.push(this.util.stripExtension(file.name));
