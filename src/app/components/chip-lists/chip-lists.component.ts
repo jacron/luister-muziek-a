@@ -18,11 +18,11 @@ import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component'
 })
 export class ChipListsComponent implements OnInit {
 
-  @Input('album') album: Album;
-  @Input('removable') removable: boolean;
-  @Input('editable') editable: boolean;
-  @Input('showimage') showimage: boolean;
-  @Output('close') close = new EventEmitter();
+  @Input() album: Album;
+  @Input() removable: boolean;
+  @Input() editable: boolean;
+  @Input() showimage: boolean;
+  @Output() close = new EventEmitter();
   imgUrl = environment.apiServer + '/image/';
 
   constructor(
@@ -90,7 +90,7 @@ export class ChipListsComponent implements OnInit {
   }
 
   editPerson(person: Person, type: string) {
-    const dialogRef = this.dialog.open(DialogPersonComponent, {
+    this.dialog.open(DialogPersonComponent, {
       width: 'min-content',
       data: {
         person: person,
@@ -111,7 +111,7 @@ export class ChipListsComponent implements OnInit {
   }
 
   editTag(tag: Tag) {
-    const dialogRef = this.dialog.open(DialogTagComponent, {
+    this.dialog.open(DialogTagComponent, {
       width: 'min-content',
       data: {
         tag: tag

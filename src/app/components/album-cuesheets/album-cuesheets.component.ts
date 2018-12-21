@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Cuesheet} from '../../classes/Cuesheet';
 import {MusicService} from '../../services/music.service';
 import {Album} from '../../classes/Album';
-import {Person} from '../../classes/Person';
 
 @Component({
   selector: 'app-album-cuesheets',
@@ -28,7 +27,7 @@ export class AlbumCuesheetsComponent implements OnInit {
   }
 
   onPlayed(response, id) {
-    console.log(response);
+    // console.log('playing', response);
     const cuesheet = this.getCuesheetById(id);
     cuesheet.played = true;
   }

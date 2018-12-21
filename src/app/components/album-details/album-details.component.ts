@@ -14,7 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class AlbumDetailsComponent {
   imgUrl = environment.apiServer + '/image/';
   imgBackUrl = environment.apiServer + '/image/back/';
-  @Input('album') album: Album;
+  @Input() album: Album;
   chevron = 'keyboard_arrow_down';
 
   constructor(
@@ -31,6 +31,9 @@ export class AlbumDetailsComponent {
     if (album) {
       // console.log(album);
       document.title = album.Title;
+      if (album.cuesheets.length < 1) {
+        this.album.expanded = true;
+      }
     }
   }
 

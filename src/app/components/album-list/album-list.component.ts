@@ -42,6 +42,7 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
         a.album_tags = album.album_tags;
         a.pieces = album.pieces;
         a.cuesheets = album.cuesheets;
+        a.album_instrument = album.album_instrument;
         break;
       }
     }
