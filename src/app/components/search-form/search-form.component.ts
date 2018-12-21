@@ -3,8 +3,6 @@ import {Album} from '../../classes/Album';
 import {Tag} from '../../classes/Tag';
 import {Person} from '../../classes/Person';
 import {SearchParams} from '../../classes/SearchParams';
-import {forkJoin} from 'rxjs/observable/forkJoin';
-import {MusicService} from '../../services/music.service';
 
 @Component({
   selector: 'app-search-form',
@@ -13,6 +11,12 @@ import {MusicService} from '../../services/music.service';
 })
 export class SearchFormComponent implements OnChanges, OnInit {
   @Input() params: SearchParams;
+  @Input() composers: Person[];
+  @Input() performers: Person[];
+  @Input() collections: Album[];
+  @Input() tags: Tag[];
+  @Input() instruments;
+
   @Output() albums: EventEmitter<SearchParams> = new EventEmitter();
 
   emptychoice = '-- choose --';
@@ -21,14 +25,8 @@ export class SearchFormComponent implements OnChanges, OnInit {
   idcoll = -1;
   idtag = -1;
   idinstrument = -1;
-  composers: Person[];
-  performers: Person[];
-  collections: Album[];
-  tags: Tag[];
-  instruments;
 
   constructor(
-    private musicService: MusicService,
   ) { }
 
   resetFilters() {
@@ -48,38 +46,19 @@ export class SearchFormComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const params: SearchParams = <SearchParams>changes.params.currentValue;
-    // console.log(params);
-    this.idcomp = params.idcomp;
-    this.idperf = params.idperf;
-    this.idcoll = params.idcoll;
-    this.idtag = params.idtag;
-    this.idinstrument = params.idinstrument;
-  }
-
-  getItems() {
-    const qcomposers = this.musicService.getComposers('dropdown');
-    const qperformers = this.musicService.getPerformers('dropdown');
-    const qcollections = this.musicService.getCollections();
-    const qtags = this.musicService.getTags();
-    const qinstruments = this.musicService.getInstruments();
-    forkJoin(qcomposers, qperformers, qcollections, qtags, qinstruments)
-      .subscribe(
-        (results) => {
-          this.composers = <Person[]>results[0];
-          this.performers = <Person[]>results[1];
-          this.collections = <Album[]>results[2];
-          this.tags = <Tag[]>results[3];
-          this.instruments = results[4];
-        },
-        err => console.error(err),
-        () => {
-        }
-      );
+    // update search parameters after navigating
+    if (changes.params) {
+      const params: SearchParams = <SearchParams>changes.params.currentValue;
+      // console.log(params);
+      this.idcomp = params.idcomp;
+      this.idperf = params.idperf;
+      this.idcoll = params.idcoll;
+      this.idtag = params.idtag;
+      this.idinstrument = params.idinstrument;
+    }
   }
 
   ngOnInit() {
-    this.getItems();
   }
 
 }
