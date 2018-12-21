@@ -19,20 +19,37 @@
   <mat-toolbar-row class="sub">
     <!-- collection (navigated) -->
     <div>
-      <mat-icon (click)="back()"
-                class="navig"
-                [class.disabled]="!navBackwards"
-      >keyboard_arrow_left
-      </mat-icon>
-      <a (click)="toSearch()" style="position: relative; top: -7px;">
+      <button mat-button
+              (click)="back()"
+              class="navig"
+              [class.disabled]="!navBackwards"
+              [title]="navBackwardsCount + ' albums'">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        <div class="info">
+          {{ navBackwardsCount }}
+        </div>
+      </button>
+      <a (click)="toSearch()">
         <span>{{ searchTitle }}</span>
       </a>
-      <mat-icon (click)="forward()"
-                class="navig"
-                [class.disabled]="!navForwards"
-      >keyboard_arrow_right
-      </mat-icon>
+      <button mat-button
+              (click)="forward()"
+              class="navig"
+              [title]="navForwardsCount + ' albums'"
+              [class.disabled]="!navForwards">
+        <div class="info" style="left: 14px;">
+          {{ navForwardsCount }}
+        </div>
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
     </div>
+    <mat-form-field>
+      <mat-select [(value)]="album.ID">
+        <mat-option *ngFor="let a of albums" [value]="a.ID">
+          <a [routerLink]="['/album/', a.ID]">{{ a.Title }}</a>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <!-- collection (mother) -->
     <div *ngIf="album.mother && searchParams && searchParams.idcoll && album.mother.ID != searchParams.idcoll">
       <a (click)="toCollection()"

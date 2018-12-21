@@ -20,6 +20,8 @@ export class ToolbarComponent implements OnInit, OnChanges {
   albums: Album[];
   navForwards: boolean;
   navBackwards: boolean;
+  navForwardsCount: number;
+  navBackwardsCount: number;
   musicAlbumUrl = 'http://localhost:8010/album/';
 
   constructor(
@@ -156,12 +158,16 @@ export class ToolbarComponent implements OnInit, OnChanges {
     this.navBackwards = this.navForwards = true;
     for (let i = 0; i < this.albums.length; i++) {
       if (this.albums[i].ID === +this.album.ID) {
+        // current album found
         if (i === 0) {
           this.navBackwards = false;
         }
+        this.navBackwardsCount = i;
+        this.navForwardsCount = this.albums.length - i;
         if (i === this.albums.length - 1) {
           this.navForwards = false;
         }
+        break;
       }
     }
   }

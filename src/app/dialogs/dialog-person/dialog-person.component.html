@@ -32,26 +32,20 @@
 <mat-dialog-actions class="controls">
   <button mat-menu-item waves-light waves-effect mdbRippleRadius
     (click)="toSearch()">
-    <mat-icon
-      class="album-control">
-      assignment</mat-icon>
+    <mat-icon>assignment</mat-icon>
     <span>Albums</span>
     (<span>{{ albumCount }}</span>)
   </button>
   <a href="{{googleUrl + person.Name }}"
      target="'person">
     <button mat-menu-item waves-light waves-effect mdbRippleRadius>
-      <mat-icon
-        class="album-control">
-        search</mat-icon>
+      <mat-icon>search</mat-icon>
       <span>Google</span>
     </button>
   </a>
   <button mat-menu-item waves-light waves-effect mdbRippleRadius
     (click)="paste()">
-    <mat-icon
-      class="album-control">
-      content_paste</mat-icon>
+    <mat-icon>content_paste</mat-icon>
     <span>Paste image</span>
   </button>
 </mat-dialog-actions>
