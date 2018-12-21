@@ -1,59 +1,49 @@
 <form>
-  <div class="row search-fields">
-    <mat-form-field>
-      <mat-select placeholder="Composer"
-                  [panelClass]="'long-dd-list'"
-                  [(value)]="idcomp">
-        <mat-option>{{ emptychoice }}</mat-option>
-        <mat-option *ngFor="let item of composers" value="{{item.ID}}">
-          {{item.ReversedName}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Performer"
-                  [panelClass]="'long-dd-list'"
-                  [(value)]="idperf">
-        <mat-option>{{ emptychoice }}</mat-option>
-        <mat-option *ngFor="let item of performers" value="{{item.ID}}">
-          {{item.ReversedName}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Collection"
-                  [panelClass]="'long-dd-list'"
-                  [(value)]="idcoll">
-        <mat-option>{{ emptychoice }}</mat-option>
-        <mat-option *ngFor="let item of collections" value="{{item.ID}}">
-          {{item.Title}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Tag"
-                  [panelClass]="'long-dd-list'"
-                  [(value)]="idtag">
-        <mat-option>{{ emptychoice }}</mat-option>
-        <mat-option *ngFor="let item of tags" value="{{item.ID}}">
-          {{item.Name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Instrument" [(value)]="idinstrument">
-        <mat-option>{{ emptychoice }}</mat-option>
-        <mat-option *ngFor="let item of instruments" value="{{item.ID}}">
-          {{item.Name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+  <div class="search-fields">
+    <app-typeahead
+      *ngIf="choiceSelected('composer')"
+      placeholder="Componist"
+      [items]="composers"
+      displayfield="ReversedName"
+      [(id)]="idcomp"
+    ></app-typeahead>
+    <app-typeahead
+      *ngIf="choiceSelected('performer')"
+      placeholder="Performer"
+      [items]="performers"
+      displayfield="ReversedName"
+      [(id)]="idperf"
+    ></app-typeahead>
+    <app-typeahead
+      *ngIf="choiceSelected('collection')"
+      placeholder="Collectie"
+      [items]="collections"
+      displayfield="Title"
+      [(id)]="idcoll"
+    ></app-typeahead>
+    <app-typeahead
+      *ngIf="choiceSelected('tag')"
+      placeholder="Tag"
+      [items]="tags"
+      displayfield="Name"
+      [(id)]="idtag"
+    ></app-typeahead>
+    <app-typeahead
+      *ngIf="choiceSelected('instrument')"
+      placeholder="Instrument"
+      [items]="instruments"
+      displayfield="Name"
+      [(id)]="idinstrument"
+    ></app-typeahead>
     <div>
       <button mat-button
               class="get-albums"
               (click)="getAlbums()">get albums</button>
-      <button mat-button="" (click)="resetFilters()">
-        reset</button>
+      <!--<button mat-button (click)="resetFilters()">-->
+        <!--reset</button>-->
+      <button mat-button (click)="customize()">
+        ...
+      </button>
     </div>
   </div>
 </form>

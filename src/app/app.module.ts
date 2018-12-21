@@ -4,7 +4,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MusicService } from './services/music.service';
 
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SearchComponent } from './components/search/search.component';
@@ -59,6 +59,8 @@ import { TagListComponent } from './components/tag-list/tag-list.component';
 import { TagComponent } from './components/tag/tag.component';
 import { CollectiesComponent } from './components/collecties/collecties.component';
 import { TagsComponent } from './components/tags/tags.component';
+import { TypeaheadComponent } from './components/typeahead/typeahead.component';
+import { DialogCustomizeSearchComponent } from './dialogs/dialog-customize-search/dialog-customize-search.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +105,8 @@ import { TagsComponent } from './components/tags/tags.component';
     TagComponent,
     CollectiesComponent,
     TagsComponent,
+    TypeaheadComponent,
+    DialogCustomizeSearchComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -124,7 +128,8 @@ import { TagsComponent } from './components/tags/tags.component';
     MatCheckboxModule,
     MatListModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
   ],
   entryComponents: [
     DialogPicComponent,
@@ -134,6 +139,7 @@ import { TagsComponent } from './components/tags/tags.component';
     DialogCuesheetPartsComponent,
     DialogPiecesComponent,
     DialogInputComponent,
+    DialogCustomizeSearchComponent,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
@@ -145,7 +151,7 @@ import { TagsComponent } from './components/tags/tags.component';
     StorageService,
     UtilService,
     CuesheetService,
-    MatDialogModule
+    MatDialogModule,
   ],
   bootstrap: [AppComponent]
 })

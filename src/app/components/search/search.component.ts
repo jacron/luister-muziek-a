@@ -44,7 +44,11 @@ export class SearchComponent implements OnInit {
   }
 
   makeTitle(params: SearchParams) {
+    if (this.utilService.isEmpty(params)) {
+      return 'music-client';
+    }
     let title = '';
+    console.log(params);
     if (+params.idcomp !== -1) {
       const person = this.utilService.getById(
         this.composers,

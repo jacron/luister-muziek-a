@@ -3,6 +3,10 @@ import {Album} from '../../classes/Album';
 import {Tag} from '../../classes/Tag';
 import {Person} from '../../classes/Person';
 import {SearchParams} from '../../classes/SearchParams';
+import {MatDialog} from '@angular/material';
+import {DialogCustomizeSearchComponent} from '../../dialogs/dialog-customize-search/dialog-customize-search.component';
+import {MusicService} from '../../services/music.service';
+import {Choice} from '../../classes/Choice';
 
 @Component({
   selector: 'app-search-form',
@@ -19,19 +23,33 @@ export class SearchFormComponent implements OnChanges, OnInit {
 
   @Output() albums: EventEmitter<SearchParams> = new EventEmitter();
 
-  emptychoice = '-- choose --';
   idcomp = -1;
   idperf = -1;
   idcoll = -1;
   idtag = -1;
   idinstrument = -1;
+  choices: Choice[];
 
   constructor(
+    private dialog: MatDialog,
+    private musicService: MusicService,
   ) { }
+
+  choiceSelected(name) {
+    if (this.choices) {
+      for (let i = 0; i < this.choices.length; i++) {
+        if (this.choices[i].name === name) {
+          return this.choices[i].value;
+        }
+      }
+    }
+    return true;
+  }
 
   resetFilters() {
     this.idperf = this.idcoll = this.idcomp = this.idtag =
       this.idinstrument = -1;
+    this.getAlbums();
   }
 
   getAlbums() {
@@ -45,11 +63,31 @@ export class SearchFormComponent implements OnChanges, OnInit {
     this.albums.emit(params);
   }
 
+  onGetChoices(response) {
+    const dialogRef = this.dialog.open(DialogCustomizeSearchComponent, {
+      data: {
+        choices: response
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      choices => {
+        console.log(choices);
+        this.choices = choices;
+      }
+    );
+  }
+
+  customize() {
+    this.musicService.getChoices()
+      .subscribe(
+        response => this.onGetChoices(response)
+      );
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     // update search parameters after navigating
     if (changes.params) {
       const params: SearchParams = <SearchParams>changes.params.currentValue;
-      // console.log(params);
       this.idcomp = params.idcomp;
       this.idperf = params.idperf;
       this.idcoll = params.idcoll;

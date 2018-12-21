@@ -1,0 +1,20 @@
+<mat-form-field class="form-field">
+  <input type="text" title=""
+         [placeholder]="placeholder" matInput
+         [formControl]="myControl"
+         [matAutocomplete]="auto">
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="notify($event.option.value)"
+    [displayWith]="displayfield == 'Name' ? displayNameFn :
+      displayfield == 'ReversedName' ? displayReversedNameFn : displayTitleFn">
+    <mat-option *ngFor="let item of filteredItems | async" [value]="item">
+      {{ item[displayfield] }}
+    </mat-option>
+  </mat-autocomplete>
+  <button *ngIf="myControl.value"
+          aria-label="Clear" class="closer"
+          (click)="clear()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

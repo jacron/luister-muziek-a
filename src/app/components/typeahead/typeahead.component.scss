@@ -1,0 +1,16 @@
+:host {
+  margin-right: 30px;
+}
+.form-field {
+  width: 200px;
+}
+.closer {
+  position: absolute;
+  top: 10px;
+  left: 168px;
+  border: none;
+  opacity: 0.3;
+}
+.closer:hover {
+  background-color: #eeeeee;
+}

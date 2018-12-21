@@ -1,0 +1,21 @@
+<mat-dialog-title>Customize</mat-dialog-title>
+<mat-dialog-content>
+  <mat-selection-list #matselection>
+    <mat-list-option *ngFor="let choice of choices"
+                     [selected]="choice.value"
+                     [value]="choice.name"
+    >
+      {{ choice.name }}
+    </mat-list-option>
+  </mat-selection-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button class="mat-raised-button mat-primary"
+          (click)="submit(matselection)">
+    save
+  </button>
+  <button mat-button class="mat-raised-button"
+          (click)="cancel()">
+    cancel
+  </button>
+</mat-dialog-actions>

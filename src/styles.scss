@@ -24,3 +24,9 @@ ul {
 .long-dd-list {
   max-height: 500px !important;
 }
+.form-field .mat-form-field-infix {
+  padding-right: 30px;
+}
+.form-field .mat-form-field-underline {
+  height: 0;
+}

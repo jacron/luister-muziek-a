@@ -93,6 +93,12 @@ export class MusicService {
   }
 
   /* POST */
+  getChoices() {
+    return this.postForm('/choices', {
+      names: ['composer', 'performer', 'collection', 'tag', 'instrument']
+    });
+  }
+
   postForm(cmd, params) {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
