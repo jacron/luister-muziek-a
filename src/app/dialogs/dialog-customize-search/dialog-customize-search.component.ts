@@ -17,18 +17,18 @@ export class DialogCustomizeSearchComponent implements OnInit {
 
   submit(matselection) {
     for (const choice of this.choices) {
-      choice.value = false;
+      choice.visible = false;
     }
     for (const option of matselection.selectedOptions.selected) {
       // console.log(option.value);
       for (const choice of this.choices) {
         // console.log(choice);
         if (choice.name === option.value) {
-          choice.value = true;
+          choice.visible = true;
         }
       }
     }
-    console.log(this.choices);
+    // console.log(this.choices);
     this.dialogRef.close(this.choices);
   }
 
@@ -38,7 +38,7 @@ export class DialogCustomizeSearchComponent implements OnInit {
 
   ngOnInit() {
     this.choices = this.data.choices;
-    this.choices[0].value = true;
+    this.choices[0].visible = true;  // testing
   }
 
 }

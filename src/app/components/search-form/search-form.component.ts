@@ -7,6 +7,8 @@ import {MatDialog} from '@angular/material';
 import {DialogCustomizeSearchComponent} from '../../dialogs/dialog-customize-search/dialog-customize-search.component';
 import {MusicService} from '../../services/music.service';
 import {Choice} from '../../classes/Choice';
+import {StorageService} from '../../services/storage.service';
+import {ChoiceService} from '../../services/choice.service';
 
 @Component({
   selector: 'app-search-form',
@@ -29,70 +31,76 @@ export class SearchFormComponent implements OnChanges, OnInit {
   idtag = -1;
   idinstrument = -1;
   choices: Choice[];
+  filteredChoices: Choice[];
 
   constructor(
     private dialog: MatDialog,
     private musicService: MusicService,
+    private storageService: StorageService,
+    private choiceService: ChoiceService,
   ) { }
-
-  choiceSelected(name) {
-    if (this.choices) {
-      for (let i = 0; i < this.choices.length; i++) {
-        if (this.choices[i].name === name) {
-          return this.choices[i].value;
-        }
-      }
-    }
-    return true;
-  }
-
-  resetFilters() {
-    this.idperf = this.idcoll = this.idcomp = this.idtag =
-      this.idinstrument = -1;
-    this.getAlbums();
-  }
 
   getAlbums() {
     const params: SearchParams = {
-      idcomp: this.idcomp || -1,
-      idperf: this.idperf || -1,
-      idcoll: this.idcoll || -1,
-      idtag: this.idtag || -1,
-      idinstrument: this.idinstrument || -1
+      idcomp: this.choices[0].id || -1,
+      idperf: this.choices[1].id || -1,
+      idcoll: this.choices[2].id || -1,
+      idtag: this.choices[3].id || -1,
+      idinstrument: this.choices[4].id || -1
     };
     this.albums.emit(params);
   }
 
-  onGetChoices(response) {
+  onGetChoices(choices) {
     const dialogRef = this.dialog.open(DialogCustomizeSearchComponent, {
       data: {
-        choices: response
+        choices: choices
       }
     });
     dialogRef.afterClosed().subscribe(
-      choices => {
-        console.log(choices);
-        this.choices = choices;
+      result => {
+        if (result) {
+          this.choices = result;
+          this.storageService.storeChoiceVisibilities(this.choices);
+          this.filteredChoices = this.choices.filter(choice => choice.visible);
+        }
       }
     );
   }
 
   customize() {
-    this.musicService.getChoices()
-      .subscribe(
-        response => this.onGetChoices(response)
-      );
+    this.onGetChoices(this.choiceService.getChoices());
+  }
+
+  prepareChoices() {
+    this.choices = this.choiceService.getChoices();
+    this.storageService.retrieveChoiceVisiblities(this.choices);
+    this.choices[0].items = this.composers;
+    this.choices[1].items = this.performers;
+    this.choices[2].items = this.collections;
+    this.choices[3].items = this.tags;
+    this.choices[4].items = this.instruments;
+    this.choices[0].id = this.idcomp;
+    this.choices[1].id = this.idperf;
+    this.choices[2].id = this.idcoll;
+    this.choices[3].id = this.idtag;
+    this.choices[4].id = this.idinstrument;
+    this.filteredChoices = this.choices.filter(choice => choice.visible);
+    // console.log(this.choices);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // update search parameters after navigating
     if (changes.params) {
+      // update search parameters after navigating
       const params: SearchParams = <SearchParams>changes.params.currentValue;
       this.idcomp = params.idcomp;
       this.idperf = params.idperf;
       this.idcoll = params.idcoll;
       this.idtag = params.idtag;
       this.idinstrument = params.idinstrument;
+    }
+    if (changes.composers) {
+      this.prepareChoices();
     }
   }
 

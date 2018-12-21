@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit {
       return 'music-client';
     }
     let title = '';
-    console.log(params);
+    // console.log(params);
     if (+params.idcomp !== -1) {
       const person = this.utilService.getById(
         this.composers,
@@ -138,8 +138,8 @@ export class SearchComponent implements OnInit {
   }
 
   getItems() {
-    const qcomposers = this.musicService.getComposers('dropdown');
-    const qperformers = this.musicService.getPerformers('dropdown');
+    const qcomposers = this.musicService.getComposers('typeahead');
+    const qperformers = this.musicService.getPerformers('typeahead');
     const qcollections = this.musicService.getCollections();
     const qtags = this.musicService.getTags();
     const qinstruments = this.musicService.getInstruments();

@@ -61,6 +61,8 @@ import { CollectiesComponent } from './components/collecties/collecties.componen
 import { TagsComponent } from './components/tags/tags.component';
 import { TypeaheadComponent } from './components/typeahead/typeahead.component';
 import { DialogCustomizeSearchComponent } from './dialogs/dialog-customize-search/dialog-customize-search.component';
+import {ChoiceService} from './services/choice.service';
+import { VisiblePipe } from './pipes/visible.pipe';
 
 @NgModule({
   declarations: [
@@ -107,6 +109,7 @@ import { DialogCustomizeSearchComponent } from './dialogs/dialog-customize-searc
     TagsComponent,
     TypeaheadComponent,
     DialogCustomizeSearchComponent,
+    VisiblePipe,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -152,6 +155,7 @@ import { DialogCustomizeSearchComponent } from './dialogs/dialog-customize-searc
     UtilService,
     CuesheetService,
     MatDialogModule,
+    ChoiceService,
   ],
   bootstrap: [AppComponent]
 })

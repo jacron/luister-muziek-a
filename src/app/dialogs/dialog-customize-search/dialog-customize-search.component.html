@@ -1,8 +1,8 @@
-<mat-dialog-title>Customize</mat-dialog-title>
+<mat-dialog-title>Zoekvelden</mat-dialog-title>
 <mat-dialog-content>
   <mat-selection-list #matselection>
     <mat-list-option *ngFor="let choice of choices"
-                     [selected]="choice.value"
+                     [selected]="choice.visible"
                      [value]="choice.name"
     >
       {{ choice.name }}

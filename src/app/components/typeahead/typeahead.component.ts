@@ -25,8 +25,8 @@ export class TypeaheadComponent implements OnInit, OnChanges {
     return val ? val.Name : val;
   }
 
-  displayReversedNameFn(val) {
-    return val ? val.ReversedName : val;
+  displayFullNameFn(val) {
+    return val ? val.FullName : val;
   }
 
   displayTitleFn(val) {

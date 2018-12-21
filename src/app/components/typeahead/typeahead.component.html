@@ -7,7 +7,7 @@
     #auto="matAutocomplete"
     (optionSelected)="notify($event.option.value)"
     [displayWith]="displayfield == 'Name' ? displayNameFn :
-      displayfield == 'ReversedName' ? displayReversedNameFn : displayTitleFn">
+      displayfield == 'FullName' ? displayFullNameFn : displayTitleFn">
     <mat-option *ngFor="let item of filteredItems | async" [value]="item">
       {{ item[displayfield] }}
     </mat-option>

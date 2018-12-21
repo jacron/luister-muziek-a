@@ -1,46 +1,16 @@
 <form>
   <div class="search-fields">
     <app-typeahead
-      *ngIf="choiceSelected('composer')"
-      placeholder="Componist"
-      [items]="composers"
-      displayfield="ReversedName"
-      [(id)]="idcomp"
-    ></app-typeahead>
-    <app-typeahead
-      *ngIf="choiceSelected('performer')"
-      placeholder="Performer"
-      [items]="performers"
-      displayfield="ReversedName"
-      [(id)]="idperf"
-    ></app-typeahead>
-    <app-typeahead
-      *ngIf="choiceSelected('collection')"
-      placeholder="Collectie"
-      [items]="collections"
-      displayfield="Title"
-      [(id)]="idcoll"
-    ></app-typeahead>
-    <app-typeahead
-      *ngIf="choiceSelected('tag')"
-      placeholder="Tag"
-      [items]="tags"
-      displayfield="Name"
-      [(id)]="idtag"
-    ></app-typeahead>
-    <app-typeahead
-      *ngIf="choiceSelected('instrument')"
-      placeholder="Instrument"
-      [items]="instruments"
-      displayfield="Name"
-      [(id)]="idinstrument"
+      *ngFor="let choice of filteredChoices"
+      [placeholder]="choice.label"
+      [displayfield]="choice.displayfield"
+      [items]="choice.items"
+      [(id)]="choice.id"
     ></app-typeahead>
     <div>
       <button mat-button
               class="get-albums"
               (click)="getAlbums()">get albums</button>
-      <!--<button mat-button (click)="resetFilters()">-->
-        <!--reset</button>-->
       <button mat-button (click)="customize()">
         ...
       </button>

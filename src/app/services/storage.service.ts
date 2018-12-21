@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import {Album} from '../classes/Album';
+import {Choice} from '../classes/Choice';
 
-/*
-lijkt obsolete, is in search pagina in elk geval niet meer in gebruik
- */
 @Injectable()
 export class StorageService {
 
   keyAlbums = 'lmuzalbums';
   keySearchTitle = 'lmuztitle';
   keySearchParms = 'lmuzparms';
-  storage = sessionStorage;
+  keyChoiceVisiblities = 'lmuzchoice';
+  storage = localStorage;
 
   constructor() { }
 
@@ -26,6 +25,17 @@ export class StorageService {
     this.storage.setItem(this.keySearchParms, JSON.stringify(parms));
   }
 
+  storeChoiceVisibilities(choices: Choice[]) {
+    if (!choices) {
+      return;
+    }
+    const visibilities: boolean[] = [];
+    choices.forEach(choice => {
+      visibilities.push(choice.visible);
+    });
+    this.storage.setItem(this.keyChoiceVisiblities, JSON.stringify(visibilities));
+  }
+
   retrieveAlbums() {
     return JSON.parse(this.storage.getItem(this.keyAlbums));
   }
@@ -38,4 +48,13 @@ export class StorageService {
     return JSON.parse(this.storage.getItem(this.keySearchParms));
   }
 
+  retrieveChoiceVisiblities(choices: Choice[]) {
+    const visibilities = JSON.parse(this.storage.getItem(this.keyChoiceVisiblities));
+    if (!visibilities) {
+      return;
+    }
+    choices.forEach(choice => {
+      choice.visible = visibilities.shift();
+    });
+  }
 }
