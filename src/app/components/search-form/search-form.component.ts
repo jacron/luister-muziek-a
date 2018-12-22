@@ -72,11 +72,6 @@ export class SearchFormComponent implements OnChanges, OnInit {
     this.onGetChoices(this.choiceService.getChoices());
   }
 
-  displayFullNameFn(val) {
-    console.log(val);
-    return val ? val.FullName : val;
-  }
-
   prepareChoices() {
     this.choices = this.choiceService.getChoices();
     this.storageService.retrieveChoiceVisiblities(this.choices);
@@ -90,7 +85,25 @@ export class SearchFormComponent implements OnChanges, OnInit {
     this.choices[2].id = this.idcoll;
     this.choices[3].id = this.idtag;
     this.choices[4].id = this.idinstrument;
-    this.filteredChoices = this.choices.filter(choice => choice.visible);
+  }
+
+  revealActiveChoice(id, index) {
+    console.log(id, index);
+    if (id && +id !== -1) {
+      this.choices[index].visible = true;
+    }
+  }
+
+  revealActiveChoices() {
+    console.log(this.choices);
+    if (!this.choices) {
+      return;
+    }
+    this.revealActiveChoice(this.idcomp, 0);
+    this.revealActiveChoice(this.idperf, 1);
+    this.revealActiveChoice(this.idcoll, 2);
+    this.revealActiveChoice(this.idtag, 3);
+    this.revealActiveChoice(this.idinstrument, 4);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -102,9 +115,12 @@ export class SearchFormComponent implements OnChanges, OnInit {
       this.idcoll = params.idcoll;
       this.idtag = params.idtag;
       this.idinstrument = params.idinstrument;
+      this.revealActiveChoices(params);
     }
     if (changes.composers) {
       this.prepareChoices();
+      this.revealActiveChoices();
+      this.filteredChoices = this.choices.filter(choice => choice.visible);
     }
   }
 

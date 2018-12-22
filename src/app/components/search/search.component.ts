@@ -113,7 +113,6 @@ export class SearchComponent implements OnInit {
     this.collections = <Album[]>results[2];
     this.tags = <Tag[]>results[3];
     this.instruments = results[4];
-    // console.log(this.performers);
     this.storeTitle();
   }
 
