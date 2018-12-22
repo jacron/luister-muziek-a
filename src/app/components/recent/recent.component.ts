@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MusicService} from '../../services/music.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-recent',
@@ -8,15 +9,26 @@ import {MusicService} from '../../services/music.service';
 })
 export class RecentComponent implements OnInit {
   items;
+  imgUrl = environment.apiServer + '/image/';
 
   constructor(
     private musicService: MusicService,
   ) { }
 
+  getItemByPieceId(id) {
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i];
+      if (item.Piece.ID === id) {
+        return item;
+      }
+    }
+    return null;
+  }
+
   onPlayed(response, id) {
     // console.log('playing', response);
-    // const cuesheet = this.getCuesheetById(id);
-    // cuesheet.played = true;
+    const item = this.getItemByPieceId(id);
+    item.played = true;
   }
 
   play(id) {
@@ -26,7 +38,6 @@ export class RecentComponent implements OnInit {
   }
 
   afterGetPieces(response) {
-    console.log(response);
     this.items = response;
   }
 

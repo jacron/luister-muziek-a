@@ -1,18 +1,36 @@
 <mat-list>
   <h2>Recent afgespeeld</h2>
-  <div class="recently-played" *ngFor="let item of items">
-    <div>
-      <a [routerLink]="['/album', item.Album.ID]">
-        {{ item.Album.Title }}
-      </a>
+  <div class="recently-played row" *ngFor="let item of items">
+    <div class="col first-col">
+      <div class="piece-name" mat-line="">
+        <mat-icon
+          [class.played]="item.played"
+          [class.invalid]="item.Invalid"
+          class="play"
+          waves-light waves-effect mdbRippleRadius
+          (click)="play(item.Piece.ID)">
+          play_circle_filled</mat-icon>
+        <span>{{ item.Piece.Name }}</span>
+      </div>
+      <div>
+        {{ item.Piece.LastPlayed}}<br>
+        {{ item.Piece.NPlayed }} keer afgespeeld
+      </div>
     </div>
-    <div>
-      <mat-icon
-        class="play"
-        waves-light waves-effect mdbRippleRadius
-        (click)="play(item.Piece.ID)">
-        play_circle_filled</mat-icon>
-      {{ item.Piece.Name }} ({{ item.Piece.NPlayed }})
+    <div class="col">
+      <div>
+        <div class="img-container">
+          <a [routerLink]="['/album', item.Album.ID]">
+            <img
+              src="{{ imgUrl }}{{ item.Album.ID }}/album/-1/100/"
+              class="thumb"
+            >
+          </a>
+        </div>
+        <div>
+          {{ item.Album.Title }}
+        </div>
+      </div>
     </div>
   </div>
 </mat-list>

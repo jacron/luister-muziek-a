@@ -14,3 +14,12 @@
 .invalid {
   color: red;
 }
+.piece-name {
+  white-space: nowrap;
+  max-width: 400px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+.first-col {
+  max-width: 400px;
+}
