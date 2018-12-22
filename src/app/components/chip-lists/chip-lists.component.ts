@@ -135,12 +135,21 @@ export class ChipListsComponent implements OnInit {
     });
   }
 
+  afterClose(result) {
+    if (result === 'leave') {
+      console.log('leave?');
+    }
+  }
+
   addSome() {
-    this.dialog.open(DialogAddComponent, {
+    const dialogRef = this.dialog.open(DialogAddComponent, {
       data: {
         album: this.album
       }
     });
+    dialogRef.afterClosed().subscribe(
+      result => this.afterClose(result)
+    );
   }
 
   ngOnInit() {

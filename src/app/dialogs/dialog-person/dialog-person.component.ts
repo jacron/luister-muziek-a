@@ -93,8 +93,6 @@ export class DialogPersonComponent implements OnInit {
       {
         idcomp: idcomp,
         idperf: idperf,
-        idcoll: -1,
-        idtag: -1
       }
     ]).then(() => this.dialogRef.close('leave'));
   }

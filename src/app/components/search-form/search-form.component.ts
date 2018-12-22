@@ -88,14 +88,12 @@ export class SearchFormComponent implements OnChanges, OnInit {
   }
 
   revealActiveChoice(id, index) {
-    console.log(id, index);
     if (id && +id !== -1) {
       this.choices[index].visible = true;
     }
   }
 
   revealActiveChoices() {
-    console.log(this.choices);
     if (!this.choices) {
       return;
     }
@@ -121,6 +119,7 @@ export class SearchFormComponent implements OnChanges, OnInit {
       this.prepareChoices();
       this.revealActiveChoices();
       this.filteredChoices = this.choices.filter(choice => choice.visible);
+      // console.log(this.filteredChoices);
     }
   }
 

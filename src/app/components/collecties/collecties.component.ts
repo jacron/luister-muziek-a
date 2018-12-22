@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MusicService} from '../../services/music.service';
 import {Collection} from '../../classes/Collection';
 import {environment} from '../../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-collecties',
@@ -16,7 +17,16 @@ export class CollectiesComponent implements OnInit {
 
   constructor(
     private musicService: MusicService,
+    private router: Router
   ) { }
+
+  toSearch(id) {
+    this.router.navigate(['/search',
+      {
+        idcoll: id,
+      }
+    ]).then();
+  }
 
   afterGet(response) {
     this.collecties = <Collection[]>response;

@@ -50,9 +50,20 @@ export class SearchComponent implements OnInit {
     this.storageService.storeAlbums(albums);
   }
 
-  fetchThings(params) {
+  normParams(params: SearchParams): SearchParams {
+    // voorkom dat de back-end 'undefined' values krijgt
+    return {
+      idcomp: params.idcomp ? params.idcomp : -1,
+      idperf: params.idperf ? params.idperf : -1,
+      idcoll: params.idcoll ? params.idcoll : -1,
+      idtag: params.idtag ? params.idtag : -1,
+      idinstrument: params.idinstrument ? params.idinstrument : -1,
+    };
+  }
+
+  fetchThings(params: SearchParams) {
     this.albums = [];
-    this.musicService.getSearchedAlbums(params).subscribe(
+    this.musicService.getSearchedAlbums(this.normParams(params)).subscribe(
       (albums: Album[]) => this.afterFetch(albums),
       err => console.error(err),
       () => {}
@@ -98,6 +109,9 @@ export class SearchComponent implements OnInit {
       this.musicService.addSearchToHistory(title, this.params);
     }
     document.title = title;
+
+    // velden zichtbaar te maken?
+
   }
 
   getAlbums(params: SearchParams) {
