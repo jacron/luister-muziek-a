@@ -44,7 +44,7 @@ export class UtilService {
   }
 
   makeItemTitlepart(title: string, id: number, fieldname: string,
-                    items: any[]): void {
+                    items: any[]): string {
     if (id !== -1) {
       const item = this.getById(
         items,
@@ -60,7 +60,7 @@ export class UtilService {
   }
 
   makeTitle(items) {
-    const title = '';
+    let title = '';
     items.forEach(item => {
       title = this.concat(
         title, this.makeItemTitlepart(title, item.id,

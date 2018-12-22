@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {SearchParams} from '../classes/SearchParams';
 
 @Injectable()
 export class MusicService {
@@ -89,11 +90,14 @@ export class MusicService {
 
   getSearchedAlbums(params) {
     const search = 'zoek'; // todo: get search (title)
-    const url = this.requestUrl + '/cql/' + search + '/' +
+    const cmd = '/cql/' + search + '/' +
       params.idcomp + '/' + params.idperf + '/' + params.idcoll + '/' +
       params.idtag + '/' + params.idinstrument;
-    return this.http.get(url, {
-      responseType: 'json'});
+    return this.getJson(cmd);
+  }
+
+  getPiecesRecentlyPlayed(n = 20) {
+    return this.getJson('/pieces/recent/' + n);
   }
 
   /* POST */
@@ -109,6 +113,12 @@ export class MusicService {
     return this.http.post(
       this.requestUrl + cmd, params, { headers: headers},
     );
+  }
+
+  addSearchToHistory(title: string, params: SearchParams) {
+    return this.postForm('/search/history', {
+      title: title,
+      params: params });
   }
 
   getAlbumByPath(path) {

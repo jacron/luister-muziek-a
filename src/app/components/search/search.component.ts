@@ -90,15 +90,18 @@ export class SearchComponent implements OnInit {
   }
 
   storeTitle() {
-    const title =  this.makeTitle(this.params);
+    let title =  this.makeTitle(this.params);
     if (title.length === 0) {
       title = 'music-client';
+    } else {
+      this.storageService.storeSearchTitle(title);
+      this.musicService.addSearchToHistory(title, this.params);
     }
     document.title = title;
-    this.storageService.storeSearchTitle(title);
   }
 
   getAlbums(params: SearchParams) {
+    // after change of search params
     this.router.navigate(['/search', params])
       .then(() => this.storeTitle()
     );

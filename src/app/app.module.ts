@@ -64,6 +64,7 @@ import { DialogCustomizeSearchComponent } from './dialogs/dialog-customize-searc
 import {ChoiceService} from './services/choice.service';
 import { VisiblePipe } from './pipes/visible.pipe';
 import { DialogInstrumentComponent } from './dialogs/dialog-instrument/dialog-instrument.component';
+import { RecentComponent } from './components/recent/recent.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { DialogInstrumentComponent } from './dialogs/dialog-instrument/dialog-in
     DialogCustomizeSearchComponent,
     VisiblePipe,
     DialogInstrumentComponent,
+    RecentComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

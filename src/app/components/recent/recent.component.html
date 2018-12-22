@@ -1,0 +1,18 @@
+<mat-list>
+  <h2>Recent afgespeeld</h2>
+  <div class="recently-played" *ngFor="let item of items">
+    <div>
+      <a [routerLink]="['/album', item.Album.ID]">
+        {{ item.Album.Title }}
+      </a>
+    </div>
+    <div>
+      <mat-icon
+        class="play"
+        waves-light waves-effect mdbRippleRadius
+        (click)="play(item.Piece.ID)">
+        play_circle_filled</mat-icon>
+      {{ item.Piece.Name }} ({{ item.Piece.NPlayed }})
+    </div>
+  </div>
+</mat-list>

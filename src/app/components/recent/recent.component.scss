@@ -1,0 +1,16 @@
+.recently-played {
+  margin-bottom: 18px;
+}
+.play {
+  opacity: .6;
+  position: relative;
+  top: 7px;
+  color: orange;
+  cursor: pointer;
+}
+.played {
+  color: brown;
+}
+.invalid {
+  color: red;
+}
