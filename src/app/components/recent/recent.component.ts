@@ -39,7 +39,8 @@ export class RecentComponent implements OnInit {
 
   afterGetPieces(response) {
     this.items = response;
-  }
+    document.title = 'Recent'
+  };
 
   ngOnInit() {
     this.musicService.getPiecesRecentlyPlayed().subscribe(

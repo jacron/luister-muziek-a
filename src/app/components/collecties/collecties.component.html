@@ -1,10 +1,24 @@
-<div>startletter={{startletter}}</div>
 <mat-list *ngIf="(collecties | startwith:startletter:'Title') as result">
+  <h2>Collecties</h2>
   <h3 mat-subheader>{{ result.length }} {{ label }}</h3>
-  <mat-list-item *ngFor="let collectie of result">
-    <a [routerLink]="[collectie.ID]">
-      {{ collectie.Title }}
-    </a>
-  </mat-list-item>
+  <div class="" *ngFor="let collectie of result">
+    <div class="row collectie-row">
+      <div class="col-2">
+        <div class="img-container">
+          <a [routerLink]="[collectie.ID]">
+            <img
+              src="{{ imgUrl }}{{ collectie.ID }}/album/-1/100/"
+              class="thumb"
+            >
+          </a>
+        </div>
+      </div>
+      <div class="col-10">
+        <div>
+          {{ collectie.Title }}
+        </div>
+      </div>
+    </div>
+  </div>
 </mat-list>
 

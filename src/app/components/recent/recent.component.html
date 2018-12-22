@@ -1,7 +1,7 @@
 <mat-list>
   <h2>Recent afgespeeld</h2>
   <div class="recently-played row" *ngFor="let item of items">
-    <div class="col first-col">
+    <div class="col-6">
       <div class="piece-name" mat-line="">
         <mat-icon
           [class.played]="item.played"
@@ -17,7 +17,7 @@
         {{ item.Piece.NPlayed }} keer afgespeeld
       </div>
     </div>
-    <div class="col">
+    <div class="col-6">
       <div>
         <div class="img-container">
           <a [routerLink]="['/album', item.Album.ID]">

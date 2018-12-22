@@ -30,3 +30,10 @@ ul {
 .form-field .mat-form-field-underline {
   height: 0;
 }
+.img-container {
+  width: 100px;
+  max-width: 120px;
+  overflow-x: hidden;
+  float: left;
+  margin-right: 8px;
+}

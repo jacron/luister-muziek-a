@@ -72,6 +72,11 @@ export class SearchFormComponent implements OnChanges, OnInit {
     this.onGetChoices(this.choiceService.getChoices());
   }
 
+  displayFullNameFn(val) {
+    console.log(val);
+    return val ? val.FullName : val;
+  }
+
   prepareChoices() {
     this.choices = this.choiceService.getChoices();
     this.storageService.retrieveChoiceVisiblities(this.choices);
@@ -86,7 +91,6 @@ export class SearchFormComponent implements OnChanges, OnInit {
     this.choices[3].id = this.idtag;
     this.choices[4].id = this.idinstrument;
     this.filteredChoices = this.choices.filter(choice => choice.visible);
-    // console.log(this.choices);
   }
 
   ngOnChanges(changes: SimpleChanges) {
