@@ -1,3 +1,5 @@
+@import "../../app-variables";
+
 :host {
   margin-right: 30px;
 }
@@ -9,8 +11,15 @@
   top: 10px;
   left: 168px;
   border: none;
-  opacity: 0.3;
-}
-.closer:hover {
-  background-color: #eeeeee;
+  color: #aaa;
+  &:hover {
+    background-color: $mat-button-hover-background;
+    color: #333;
+  }
+  .mat-icon {
+    position: relative;
+    top: 5px;
+    font-size: 16px;
+    width: inherit;
+  }
 }

@@ -30,7 +30,7 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private storageService: StorageService,
-    private utilService: UtilService,
+    private util: UtilService,
   ) {
     route.params.subscribe(params => this.handleParams(<SearchParams>params));
   }
@@ -43,69 +43,10 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  makeTitle(params: SearchParams) {
-    if (this.utilService.isEmpty(params)) {
-      return 'music-client';
-    }
-    let title = '';
-    // console.log(params);
-    if (+params.idcomp !== -1) {
-      const person = this.utilService.getById(
-        this.composers,
-        params.idcomp,
-        'ID');
-      if (title.length > 0) {
-        title += ';';
-      }
-      title += person.ReversedName;
-    }
-    if (+params.idperf !== -1) {
-      const person = this.utilService.getById(
-        this.performers,
-        params.idperf,
-        'ID');
-      if (title.length > 0) {
-        title += ';';
-      }
-      title += person.ReversedName;
-    }
-    if (+params.idcoll !== -1) {
-      const album = this.utilService.getById(
-        this.collections,
-        params.idcoll,
-        'ID');
-      if (title.length > 0) {
-        title += ';';
-      }
-      title += album.Title;
-    }
-    if (+params.idtag !== -1) {
-      const item = this.utilService.getById(
-        this.tags,
-        params.idtag,
-        'ID');
-      if (title.length > 0) {
-        title += ';';
-      }
-      title += item.Name;
-    }
-    if (+params.idinstrument !== -1) {
-      const item = this.utilService.getById(
-        this.instruments,
-        params.idinstrument,
-        'ID');
-      if (item) {
-        if (title.length > 0) {
-          title += ';';
-        }
-        title += item.Name;
-      }
-    }
-    return title;
-  }
-
   afterFetch(albums) {
     this.albums = albums;
+
+    // voor blader-functie in details pagina
     this.storageService.storeAlbums(albums);
   }
 
@@ -118,9 +59,43 @@ export class SearchComponent implements OnInit {
     );
   }
 
+  makeTitle(params: SearchParams) {
+    return this.util.makeTitle([
+      {
+        items: this.composers,
+        id: +params.idcomp,
+        fieldname: 'FullName'
+      },
+      {
+        items: this.performers,
+        id: +params.idperf,
+        fieldname: 'FullName'
+      },
+      {
+        items: this.collections,
+        id: +params.idcoll,
+        fieldname: 'Title'
+      },
+      {
+        items: this.tags,
+        id: +params.idtag,
+        fieldname: 'Name'
+      },
+      {
+        items: this.instruments,
+        id: +params.idinstrument,
+        fieldname: 'Name'
+      }
+    ]);
+  }
+
   storeTitle() {
-    document.title = this.makeTitle(this.params);
-    this.storageService.storeSearchTitle(document.title);
+    const title =  this.makeTitle(this.params);
+    if (title.length === 0) {
+      title = 'music-client';
+    }
+    document.title = title;
+    this.storageService.storeSearchTitle(title);
   }
 
   getAlbums(params: SearchParams) {

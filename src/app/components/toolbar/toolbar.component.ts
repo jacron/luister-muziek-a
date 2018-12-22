@@ -163,7 +163,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
           this.navBackwards = false;
         }
         this.navBackwardsCount = i;
-        this.navForwardsCount = this.albums.length - i;
+        this.navForwardsCount = this.albums.length - i - 1;
         if (i === this.albums.length - 1) {
           this.navForwards = false;
         }
