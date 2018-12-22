@@ -14,9 +14,10 @@ export class DialogTagComponent implements OnInit {
   albumCount: number;
   model;
 
-  constructor(private musicService: MusicService,
-              private router: Router,
-              @Inject(MAT_DIALOG_DATA) public data: any
+  constructor(
+    private musicService: MusicService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   afterUpdate(response, name) {

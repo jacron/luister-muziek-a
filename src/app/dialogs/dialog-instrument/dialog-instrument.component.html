@@ -1,0 +1,20 @@
+<mat-dialog-content>
+  <span #topicTitle
+        class="title">
+    {{ title }}
+  </span>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class=""
+          waves-light waves-effect mdbRippleRadius
+          (click)="toSearch()"
+          mat-dialog-close
+  >
+    <mat-icon
+      class="album-control">
+      assignment</mat-icon>
+    <span>Albums</span>
+    (<span>{{albumCount}}</span>)
+  </button>
+
+</mat-dialog-actions>

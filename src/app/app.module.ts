@@ -63,6 +63,7 @@ import { TypeaheadComponent } from './components/typeahead/typeahead.component';
 import { DialogCustomizeSearchComponent } from './dialogs/dialog-customize-search/dialog-customize-search.component';
 import {ChoiceService} from './services/choice.service';
 import { VisiblePipe } from './pipes/visible.pipe';
+import { DialogInstrumentComponent } from './dialogs/dialog-instrument/dialog-instrument.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { VisiblePipe } from './pipes/visible.pipe';
     TypeaheadComponent,
     DialogCustomizeSearchComponent,
     VisiblePipe,
+    DialogInstrumentComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -143,6 +145,7 @@ import { VisiblePipe } from './pipes/visible.pipe';
     DialogPiecesComponent,
     DialogInputComponent,
     DialogCustomizeSearchComponent,
+    DialogInstrumentComponent,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [

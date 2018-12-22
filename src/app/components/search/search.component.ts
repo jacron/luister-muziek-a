@@ -94,10 +94,12 @@ export class SearchComponent implements OnInit {
         this.instruments,
         params.idinstrument,
         'ID');
-      if (title.length > 0) {
-        title += ';';
+      if (item) {
+        if (title.length > 0) {
+          title += ';';
+        }
+        title += item.Name;
       }
-      title += item.Name;
     }
     return title;
   }

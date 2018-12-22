@@ -63,6 +63,10 @@ export class MusicService {
     return this.getJson('/tag/albums/count/' + id);
   }
 
+  getAlbumCountForInstrument(id) {
+    return this.getJson('/instrument/albums/count/' + id);
+  }
+
   getAlbumCountForPerson(id, person_type) {
     return this.getJson('/person/albums/count/' + id + '/' + person_type);
   }
@@ -93,11 +97,11 @@ export class MusicService {
   }
 
   /* POST */
-  getChoices() {
-    return this.postForm('/choices', {
-      names: ['composer', 'performer', 'collection', 'tag', 'instrument']
-    });
-  }
+  // getChoices() {
+  //   return this.postForm('/choices', {
+  //     names: ['composer', 'performer', 'collection', 'tag', 'instrument']
+  //   });
+  // }
 
   postForm(cmd, params) {
     const headers = new HttpHeaders();

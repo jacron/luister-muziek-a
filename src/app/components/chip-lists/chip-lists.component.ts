@@ -10,6 +10,7 @@ import {MusicService} from '../../services/music.service';
 import {DialogPersonComponent} from '../../dialogs/dialog-person/dialog-person.component';
 import {DialogTagComponent} from '../../dialogs/dialog-tag/dialog-tag.component';
 import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
+import {DialogInstrumentComponent} from '../../dialogs/dialog-instrument/dialog-instrument.component';
 
 @Component({
   selector: 'app-chip-lists',
@@ -122,6 +123,16 @@ export class ChipListsComponent implements OnInit {
 
   toTag(tag: Tag) {
     this.editTag(tag);
+  }
+
+  toInstrument() {
+    this.dialog.open(DialogInstrumentComponent, {
+      width: 'min-content',
+      data: {
+        album: this.album
+      },
+      autoFocus: false
+    });
   }
 
   addSome() {
