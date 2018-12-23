@@ -81,6 +81,9 @@
   <!--<button mat-raised-button (click)="autoCreate()"-->
   <!--&gt;Auto</button>-->
   <!--<span class="horizontal-spacer"></span>-->
-  <!--<button mat-raised-button (click)="reload()"-->
-  <!--&gt;Opnieuw laden</button>-->
+  <span class="horizontal-spacer"></span>
+  <button mat-raised-button (click)="makeAllProposals()"
+          [disabled]="proposals.length < 1"
+          class="mat-primary"
+  >Make!</button>
 </mat-dialog-actions>

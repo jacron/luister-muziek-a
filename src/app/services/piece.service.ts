@@ -31,8 +31,10 @@ export class PieceService {
       parts.shift();
     }
     s = parts.join(' ');
+
     // rtrim extension
     const rpos = s.lastIndexOf('.');
+
     if (rpos !== -1) {
       // return extension also?
       s = s.substr(0, rpos);
@@ -115,7 +117,6 @@ export class PieceService {
     keys.sort((a, b) => {
       return a - b;
     });
-    // console.log(keys);
     for (let k = 1; k < keys.length; k++) {
       const current = keys[k - 1],
             previous = keys[k];
@@ -127,13 +128,30 @@ export class PieceService {
     }
   }
 
+  getCheckedIds(pieces: Piece[]) {
+    const ids = [];
+    pieces.forEach((piece: Piece) => {
+      if (piece.checked) {
+        ids.push(piece.ID.toString());
+        piece.created = true;
+      }
+    });
+    return ids;
+  }
+
+  checkOne(pieces) {
+    const ids = this.getCheckedIds(pieces);
+    if (!ids.length) {
+      pieces[0].checked = true;
+    }
+  }
+
   selectSiblingsInbetween(e, i: number, pieces: Piece[]) {
     /**
      * Als je een item aanklikt met de shit-toets ingedrukt,
      * wil je dat tussenliggende items eveneens geselecteerd worden.
      * @type {any[]}
      */
-    console.log(e);
     if (e.shiftKey) {
       const keys = this.getKeys(pieces);
       keys.push(i); // add currently clicked item
@@ -142,8 +160,8 @@ export class PieceService {
       }
     }
     if (e.altKey) {
+      this.checkOne(pieces);
       const data = this.lcs_pieces(pieces);
-      console.log(data);
       if (data.ids.length) {
         titles.push(data.cueName);
       }
@@ -167,6 +185,7 @@ export class PieceService {
         ids.push(piece.ID);
         titles.push(this.displayName(piece.Name));
         common = this.makeCuesheetName(titles);
+
         // evaluate similarity
         if (titles.length > 2 && common.length < old_common.length - 2) {
           titles.pop();
@@ -192,7 +211,6 @@ export class PieceService {
         ids.push(piece.ID.toString());
       }
     });
-    // console.log(titles, ids);
     if (titles.length === 1) {
       const data = this.similar(pieces);
       titles = data.titles;
@@ -206,11 +224,11 @@ export class PieceService {
   }
 
   autoTest(albumId, pieces) {
+    this.checkOne(pieces);
     let data;
     const proposals: Proposal[] = [];
     do {
       data = this.lcs_pieces(pieces);
-      // console.log(data);
       if (data.ids.length) {
         proposals.push({
           name: data.cueName,
@@ -221,22 +239,15 @@ export class PieceService {
     return proposals;
   }
 
-  autoCuesheets(albumId, pieces) {
-    return new Promise((resolve, reject) => {
-      let data;
+  autoCuesheets(albumId, proposals: Proposal[]) {
+    return new Promise((resolve) => {
       const q = [];
-      const titles = [];
-      do {
-        data = this.lcs_pieces(pieces);
-        // console.log(data);
-        if (data.ids.length) {
-          q.push(this.musicService.makeCuesheet(data.cueName, data.ids,
-            albumId));
-          titles.push(data.cueName);
-        }
-      } while (data.ids.length);
+      proposals.forEach(proposal => {
+        q.push(this.musicService.makeCuesheet(proposal.name, proposal.ids,
+          albumId));
+      });
       forkJoin(q).subscribe(
-        () => resolve(titles)
+        () => resolve('')
       );
     });
   }

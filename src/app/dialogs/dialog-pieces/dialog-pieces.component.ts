@@ -123,37 +123,20 @@ export class DialogPiecesComponent implements OnInit {
     }
   }
 
-  checkOne() {
-    const ids = this.getCheckedIds();
-    if (!ids.length) {
-      this.data.pieces[0].checked = true;
-    }
+  afterMakeAllProposals() {
+    this.reload();
+    this.dialogRef.close();
+  }
+
+  makeAllProposals() {
+    this.pieceService.autoCuesheets(this.data.albumId, this.proposals)
+      .then(() => this.afterMakeAllProposals());
   }
 
   autoTest() {
-    this.checkOne();
     this.proposals = this.pieceService.autoTest(
       this.data.albumId, this.data.pieces
     );
-  }
-
-  autoCreate() {
-    this.checkOne();
-    const that = this;
-    this.pieceService.autoCuesheets(this.data.albumId, this.data.pieces).then(
-      (titles: string[]) => that.created = titles
-    );
-  }
-
-  getCheckedIds() {
-    const ids = [];
-    this.data.pieces.forEach((piece: Piece) => {
-      if (piece.checked) {
-        ids.push(piece.ID.toString());
-        piece.created = true;
-      }
-    });
-    return ids;
   }
 
   afterMakeCuesheet(proposal: Proposal) {
@@ -168,12 +151,8 @@ export class DialogPiecesComponent implements OnInit {
   }
 
   createCue() {
-    const ids = this.getCheckedIds();
-          // that = this;
-    // this.musicService.makeCuesheet(this.cueName, ids,
-    //   this.data.albumId).subscribe(
-    //   () => that.created.push(that.cueName)
-    // );
+    const ids = this.pieceService.getCheckedIds(this.data.pieces);
+
     this.proposals.push({
       name: this.cueName,
       ids: ids
@@ -181,9 +160,8 @@ export class DialogPiecesComponent implements OnInit {
   }
 
   ngOnInit() {
+    // reset piece marking
     this.data.pieces.forEach(piece => piece.marked = false);
-    // testing
-    // this.created = ['aap', 'noot', 'mies'];
   }
 
 }
