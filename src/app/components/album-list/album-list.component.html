@@ -1,14 +1,26 @@
 <div class="list">
-  <mat-list *ngIf="albums && albums.length">
-    <h3 mat-subheader>{{ albums.length }} albums</h3>
-    <mat-list-item *ngFor="let album of albums">
+  <mat-input-container>
+    <input matInput placeholder="zoek"
+           (ngModelChange)="search($event)"
+           [(ngModel)]="query"
+    >
+    <button mat-button *ngIf="query"
+            class="closer"
+            matSuffix mat-icon-button aria-label="Clear"
+            (click)="resetQuery()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-input-container>
+  <mat-list *ngIf="filteredAlbums && filteredAlbums.length">
+    <h3 mat-subheader>{{ filteredAlbums.length }} albums</h3>
+    <mat-list-item *ngFor="let album of filteredAlbums">
     <div class="">
       <div class="img-container">
         <a (click)="toAlbum(album.ID)">
           <img
-            attr.data-src="{{ imgUrl }}{{ album.ID }}/album/-1/100/"
+            src="{{ imgUrl }}{{ album.ID }}/album/-1/100/"
             attr.albumid="{{ album.ID }}"
-            class="lazy thumb"
+            class="thumb"
           >
         </a>
       </div>

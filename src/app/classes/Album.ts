@@ -1,6 +1,8 @@
 import {Person} from './Person';
 import {Tag} from './Tag';
 import {Instrument} from './Instrument';
+import {Piece} from './Piece';
+import {Cuesheet} from './Cuesheet';
 
 export class Album {
   Title: string;
@@ -13,8 +15,8 @@ export class Album {
   album_metatags: any;
   album_tags: Tag[];
   album_instrument: Instrument;
-  pieces: any[];
-  cuesheets: any[];
+  pieces: Piece[];
+  cuesheets: Cuesheet[];
   expanded: boolean;
   album_back_image: boolean;
   mother: Album;

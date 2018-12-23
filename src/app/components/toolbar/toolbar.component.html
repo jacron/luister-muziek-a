@@ -41,14 +41,6 @@
         <mat-icon>keyboard_arrow_right</mat-icon>
       </button>
     </div>
-    <!--<mat-form-field *ngIf="albumIds.length">-->
-      <!--<mat-select [(value)]="album.ID">-->
-        <!--<mat-option *ngFor="let a of albumIds" [value]="a.ID">-->
-          <!--<a [routerLink]="['/album/', a.]">{{ a }}</a>-->
-        <!--</mat-option>-->
-      <!--</mat-select>-->
-    <!--</mat-form-field>-->
-    <!-- collection (mother) -->
     <div *ngIf="album.mother && list && list.params && list.params.idcoll &&
             album.mother.ID != list.params.idcoll">
       <a (click)="toCollection()"

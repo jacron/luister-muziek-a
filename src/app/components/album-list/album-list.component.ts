@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {Album} from '../../classes/Album';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
@@ -7,18 +7,60 @@ import {MusicService} from '../../services/music.service';
 @Component({
   selector: 'app-album-list',
   templateUrl: './album-list.component.html',
-  styleUrls: ['./album-list.component.scss']
+  styleUrls: ['./album-list.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() albums: Album[];
+
+  query: string;
   imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
+  filteredAlbums: Album[];
 
   constructor(
     private router: Router,
     private musicService: MusicService,
   ) { }
+
+  resetQuery() {
+    this.query = '';
+    this.search('');
+  }
+
+  testInAlbum(album: Album, q) {
+    const s = album.Title.toLowerCase();
+    if (s.indexOf(q) !== -1) { return true; }
+    if (album.pieces) {
+      for (let i = 0; i < album.pieces.length; i++) {
+        const piece = album.pieces[i];
+        if (piece.Name.toLowerCase().indexOf(q) !== -1) {
+          return true;
+        }
+      }
+    } else {
+      // console.log(album);
+    }
+    return false;
+  }
+
+  search(newValue: string) {
+    console.log(newValue);
+    if (!newValue.length) {
+      this.filteredAlbums = this.albums.slice();
+      return;
+    }
+    const q = newValue.toLowerCase();
+    this.filteredAlbums = this.albums.filter(
+      album => this.testInAlbum(album, q)
+    );
+    // setTimeout(() => {
+    //   this.setLazy();
+    //   this.lazyLoad();
+    // }, 100);
+
+  }
 
   toAlbum(id) {
     this.router.navigate(['/album', id]).then(() => {
@@ -96,8 +138,27 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     }, 200);
   }
 
+  piecesToAlbum(a: Album, album: Album) {
+    a.album_performers = album.album_performers;
+    a.album_componisten = album.album_componisten;
+    a.album_tags = album.album_tags;
+    a.pieces = album.pieces;
+    a.cuesheets = album.cuesheets;
+    a.album_instrument = album.album_instrument;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
-    // const albums = changes.albums.currentValue;
+    const albums = <Album[]>changes.albums.currentValue;
+    // albums[0].test = 'aap';
+    // const that = this;
+    albums.forEach(album => {
+      // console.log(album.ID);
+      this.musicService.getAlbumById(album.ID).subscribe(
+        (a: Album) => this.piecesToAlbum(album, a)
+      );
+    });
+    this.filteredAlbums = albums.slice();
+    console.log(albums);
     setTimeout(() => {
       this.setLazy();
       this.lazyLoad();

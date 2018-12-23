@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, DoCheck, Input, OnInit} from '@angular/core';
 import {Album} from '../../classes/Album';
 import {environment} from '../../../environments/environment';
 import {MusicService} from '../../services/music.service';
@@ -35,14 +35,6 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     route.params.subscribe(params => this.handleParams(params));
   }
 
-  toList() {
-    this.router.navigate([
-      this.list.url,
-      this.list.params
-    ]).then(() => {
-    });
-  }
-
   back() {
     const albumIds = this.list.albumIds;
     for (let i = 1; i < albumIds.length; i++) {
@@ -77,7 +69,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
 
   handleParams(params) {
     if (params) {
-      this.musicService.getAlbumById(params.idalbum).subscribe(
+      this.musicService.getAlbumById(params['idalbum']).subscribe(
         (album: Album) => this.openAlbum(album),
         err => console.error(err),
         () => {}
