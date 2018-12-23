@@ -32,6 +32,13 @@
                         [showimage]="false"
                         mat-line
         ></app-chip-lists>
+        <mat-list>
+          <mat-list-item *ngFor="let filteredPiece of album.filteredPieces">
+            {{ filteredPiece.Name }}
+          </mat-list-item>
+        </mat-list>
+        <div *ngIf="album.filteredPieces.length" style="height: 12px;"
+        ></div>
       </div>
     </div>
     </mat-list-item>

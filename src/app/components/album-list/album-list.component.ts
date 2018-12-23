@@ -3,6 +3,9 @@ import {Album} from '../../classes/Album';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {MusicService} from '../../services/music.service';
+import {StorageService} from '../../services/storage.service';
+import {List} from '../../classes/List';
+import {Piece} from '../../classes/Piece';
 
 @Component({
   selector: 'app-album-list',
@@ -22,6 +25,7 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(
     private router: Router,
     private musicService: MusicService,
+    private storage: StorageService,
   ) { }
 
   resetQuery() {
@@ -33,11 +37,16 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     const s = album.Title.toLowerCase();
     if (s.indexOf(q) !== -1) { return true; }
     if (album.pieces) {
+      const filteredPieces: Piece[] = [];
       for (let i = 0; i < album.pieces.length; i++) {
         const piece = album.pieces[i];
         if (piece.Name.toLowerCase().indexOf(q) !== -1) {
-          return true;
+          filteredPieces.push(piece);
         }
+      }
+      if (filteredPieces.length) {
+        album.filteredPieces = filteredPieces;
+        return true;
       }
     } else {
       // console.log(album);
@@ -45,8 +54,21 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     return false;
   }
 
+  getIds() {
+    const ids = [];
+    this.filteredAlbums.forEach(album => ids.push(album.ID));
+    return ids;
+  }
+
+  storeIds(newValue) {
+    const list: List = this.storage.retrieveList();
+    list.albumIds = this.getIds();
+    list.query = newValue;
+    this.storage.storeList(list);
+  }
+
   search(newValue: string) {
-    console.log(newValue);
+    // console.log(newValue);
     if (!newValue.length) {
       this.filteredAlbums = this.albums.slice();
       return;
@@ -55,11 +77,7 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     this.filteredAlbums = this.albums.filter(
       album => this.testInAlbum(album, q)
     );
-    // setTimeout(() => {
-    //   this.setLazy();
-    //   this.lazyLoad();
-    // }, 100);
-
+    this.storeIds(newValue);
   }
 
   toAlbum(id) {
@@ -158,7 +176,7 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
       );
     });
     this.filteredAlbums = albums.slice();
-    console.log(albums);
+    // console.log(albums);
     setTimeout(() => {
       this.setLazy();
       this.lazyLoad();

@@ -60,18 +60,22 @@ export class PieceService {
     return small;
   }
 
+  trimEnd(name: string, end: string[]) {
+    end.forEach(e => {
+      if (name.endsWith(e)) {
+        name = name.substr(0, name.length - 1);
+      }
+    });
+    return name;
+  }
+
   makeCuesheetName(lines) {
     let name = this.lcs(lines).trim();
     if (name.endsWith('I')) {
       name = name.substr(0, name.length - 1);
     }
     name = name.trim();
-    if (name.endsWith('-')) {
-      name = name.substr(0, name.length - 1);
-    }
-    if (name.endsWith(':')) {
-      name = name.substr(0, name.length - 1);
-    }
+    name = this.trimEnd(name, ['-', '_', ':', ';', ',', '.']);
     if (name.startsWith('-')) {
       name = name.substr(1);
     }

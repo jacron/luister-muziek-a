@@ -30,6 +30,7 @@
       </button>
       <a (click)="toList()">
         <span>{{ list.title }}</span>
+        <span *ngIf="list.query">({{ list.query }})</span>
       </a>
       <button mat-button
               (click)="forward()"
