@@ -4,6 +4,7 @@ import {MusicService} from '../../services/music.service';
 import {Piece} from '../../classes/Piece';
 import {PieceService} from '../../services/piece.service';
 import {Album} from '../../classes/Album';
+import {Proposal} from '../../classes/Proposal';
 
 @Component({
   selector: 'app-dialog-pieces',
@@ -13,6 +14,7 @@ import {Album} from '../../classes/Album';
 export class DialogPiecesComponent implements OnInit {
   cueName: string;
   created: string[] = [];
+  proposals: Proposal[] = [];
   @ViewChildren(MatCheckbox, { read: ElementRef }) checkBoxes: QueryList<MatCheckbox>;
 
   constructor(private musicService: MusicService,
@@ -27,16 +29,45 @@ export class DialogPiecesComponent implements OnInit {
     }
   }
 
-  onPieceClick(e, piece: Piece, i: number, matselection) {
+  onPieceClick(e, piece: Piece, i: number) {
     if (!piece.checked) {
       this.pieceService.selectSiblingsInbetween(e, i, this.data.pieces);
     }
   }
 
+  removeProposal(proposal: Proposal) {
+    this.proposals = this.proposals.filter(prop => prop !== proposal);
+  }
+
+  getPieceById(id) {
+    for (let i = 0; i < this.data.pieces.length; i++) {
+      const piece = this.data.pieces[i];
+      if (piece.ID === id) {
+        return piece;
+      }
+    }
+    return null;
+  }
+
+  resetMarks() {
+    this.data.pieces.forEach(piece => piece.marked = false);
+    this.proposals.forEach(proposal => proposal.marked = false);
+  }
+
+  markPieces(proposal: Proposal) {
+    console.log(proposal);
+    this.resetMarks();
+    proposal.ids.forEach(id => {
+      const piece = this.getPieceById(+id);
+      piece.marked = true;
+    });
+    proposal.marked = true;
+  }
+
   restorePieces(album: Album) {
     this.data.album.pieces = album.pieces;
     this.data.album.cuesheets = album.cuesheets;
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
   reload() {
@@ -93,10 +124,17 @@ export class DialogPiecesComponent implements OnInit {
   }
 
   checkOne() {
-    const ids = this.getIds();
+    const ids = this.getCheckedIds();
     if (!ids.length) {
       this.data.pieces[0].checked = true;
     }
+  }
+
+  autoTest() {
+    this.checkOne();
+    this.proposals = this.pieceService.autoTest(
+      this.data.albumId, this.data.pieces
+    );
   }
 
   autoCreate() {
@@ -107,7 +145,7 @@ export class DialogPiecesComponent implements OnInit {
     );
   }
 
-  getIds() {
+  getCheckedIds() {
     const ids = [];
     this.data.pieces.forEach((piece: Piece) => {
       if (piece.checked) {
@@ -118,16 +156,32 @@ export class DialogPiecesComponent implements OnInit {
     return ids;
   }
 
-  createCue() {
-    const ids = this.getIds(),
-          that = this;
-    this.musicService.makeCuesheet(this.cueName, ids,
-      this.data.albumId).subscribe(
-      () => that.created.push(that.cueName)
+  afterMakeCuesheet(proposal: Proposal) {
+    proposal.created = true;
+    this.reload();
+  }
+
+  makeCuesheet(proposal: Proposal) {
+    this.musicService.makeCuesheet(proposal.name, proposal.ids, this.data.albumId).subscribe(
+      () => this.afterMakeCuesheet(proposal)
     );
   }
 
+  createCue() {
+    const ids = this.getCheckedIds();
+          // that = this;
+    // this.musicService.makeCuesheet(this.cueName, ids,
+    //   this.data.albumId).subscribe(
+    //   () => that.created.push(that.cueName)
+    // );
+    this.proposals.push({
+      name: this.cueName,
+      ids: ids
+    });
+  }
+
   ngOnInit() {
+    this.data.pieces.forEach(piece => piece.marked = false);
     // testing
     // this.created = ['aap', 'noot', 'mies'];
   }

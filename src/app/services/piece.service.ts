@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Piece} from '../classes/Piece';
 import {MusicService} from './music.service';
 import {forkJoin} from 'rxjs/observable/forkJoin';
+import {Proposal} from '../classes/Proposal';
 
 @Injectable()
 export class PieceService {
@@ -132,12 +133,21 @@ export class PieceService {
      * wil je dat tussenliggende items eveneens geselecteerd worden.
      * @type {any[]}
      */
+    console.log(e);
     if (e.shiftKey) {
       const keys = this.getKeys(pieces);
       keys.push(i); // add currently clicked item
       if (keys.length > 1) {
         this.setChecked(keys, pieces);
       }
+    }
+    if (e.altKey) {
+      const data = this.lcs_pieces(pieces);
+      console.log(data);
+      if (data.ids.length) {
+        titles.push(data.cueName);
+      }
+
     }
   }
 
@@ -182,7 +192,7 @@ export class PieceService {
         ids.push(piece.ID.toString());
       }
     });
-    console.log(titles, ids);
+    // console.log(titles, ids);
     if (titles.length === 1) {
       const data = this.similar(pieces);
       titles = data.titles;
@@ -195,6 +205,22 @@ export class PieceService {
     };
   }
 
+  autoTest(albumId, pieces) {
+    let data;
+    const proposals: Proposal[] = [];
+    do {
+      data = this.lcs_pieces(pieces);
+      // console.log(data);
+      if (data.ids.length) {
+        proposals.push({
+          name: data.cueName,
+          ids: data.ids
+        });
+      }
+    } while (data.ids.length);
+    return proposals;
+  }
+
   autoCuesheets(albumId, pieces) {
     return new Promise((resolve, reject) => {
       let data;
@@ -202,7 +228,7 @@ export class PieceService {
       const titles = [];
       do {
         data = this.lcs_pieces(pieces);
-        console.log(data);
+        // console.log(data);
         if (data.ids.length) {
           q.push(this.musicService.makeCuesheet(data.cueName, data.ids,
             albumId));

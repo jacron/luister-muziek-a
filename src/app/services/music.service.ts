@@ -393,17 +393,6 @@ export class MusicService {
       name: cueName,
       albumId: albumId
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'makecuesheet')
-    //   .set('ids2', ids)
-    //   .set('name', cueName)
-    //   .set('albumid', albumid)
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
   }
 
   toggleFavoriteLibrarycode(code, favorite) {
@@ -411,16 +400,6 @@ export class MusicService {
       code: code,
       favorite: favorite
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'toggle_code_favorite')
-    //   .set('code', code)
-    //   .set('favorite', favorite)
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
   }
 
   encodeSemiColon(s) {
