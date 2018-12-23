@@ -9,6 +9,7 @@ import {Person} from '../../classes/Person';
 import {forkJoin} from 'rxjs/observable/forkJoin';
 import {UtilService} from '../../services/util.service';
 import {Instrument} from '../../classes/Instrument';
+import {List} from '../../classes/List';
 
 @Component({
   selector: 'app-search',
@@ -24,6 +25,7 @@ export class SearchComponent implements OnInit {
   collections: Album[];
   tags: Tag[];
   instruments: Instrument[];
+  list: List;
 
   constructor(
     private musicService: MusicService,
@@ -43,11 +45,12 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  afterFetch(albums) {
-    this.albums = albums;
-
-    // voor blader-functie in details pagina
-    this.storageService.storeAlbums(albums);
+  getAlbumIds(albums) {
+    const ids = [];
+    if (Array.isArray(albums)) {
+      albums.forEach(album => ids.push(album.ID));
+    }
+    return ids;
   }
 
   normParams(params: SearchParams): SearchParams {
@@ -59,6 +62,20 @@ export class SearchComponent implements OnInit {
       idtag: params.idtag ? params.idtag : -1,
       idinstrument: params.idinstrument ? params.idinstrument : -1,
     };
+  }
+
+  afterFetch(albums) {
+    this.albums = albums;
+
+    // voor blader-functie in details pagina
+    // this.storageService.storeAlbumIds(this.getAlbumIds(albums));
+    this.list = {
+      title: document.title,
+      albumIds: this.getAlbumIds(albums),
+      url: '/search',
+      params: this.params
+    };
+    this.storageService.storeList(this.list);
   }
 
   fetchThings(params: SearchParams) {
@@ -105,11 +122,12 @@ export class SearchComponent implements OnInit {
     if (title.length === 0) {
       title = 'music-client';
     } else {
-      this.storageService.storeSearchTitle(title);
+      // this.storageService.storeListTitle(title);
       this.musicService.addSearchToHistory(title, this.params);
     }
     document.title = title;
-
+    this.list.title = title;
+    this.storageService.storeList(this.list);
     // velden zichtbaar te maken?
 
   }

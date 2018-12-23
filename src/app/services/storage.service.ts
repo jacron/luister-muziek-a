@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Album} from '../classes/Album';
 import {Choice} from '../classes/Choice';
+import {List} from '../classes/List';
 
 @Injectable()
 export class StorageService {
@@ -9,16 +10,22 @@ export class StorageService {
   keySearchTitle = 'lmuztitle';
   keySearchParms = 'lmuzparms';
   keyChoiceVisiblities = 'lmuzchoice';
+  keyList = 'lmuzlist';
   storage = localStorage;
 
-  constructor() { }
+  constructor(
+  ) { }
 
-  storeAlbums(albums: Album[]) {
+  storeAlbumIds(albums: Album[]) {
     this.storage.setItem(this.keyAlbums, JSON.stringify(albums));
   }
 
-  storeSearchTitle(searchTitle: string) {
+  storeListTitle(searchTitle: string) {
     this.storage.setItem(this.keySearchTitle, JSON.stringify(searchTitle));
+  }
+
+  storeList(list: List) {
+    this.storage.setItem(this.keyList, JSON.stringify(list));
   }
 
   storeSearchParameters(parms) {
@@ -36,8 +43,14 @@ export class StorageService {
     this.storage.setItem(this.keyChoiceVisiblities, JSON.stringify(visibilities));
   }
 
-  retrieveAlbums() {
-    return JSON.parse(this.storage.getItem(this.keyAlbums));
+  retrieveList() {
+    const list = this.storage.getItem(this.keyList);
+    return JSON.parse(list);
+  }
+
+  retrieveAlbumIds() {
+    const albums = this.storage.getItem(this.keyAlbums);
+    return JSON.parse(albums);
   }
 
   retrieveSearchTitle() {

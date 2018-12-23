@@ -7,6 +7,7 @@ export class UtilService {
 
   // isEmpty(obj) {
   //   for (const key in obj) {
+  //     // console.log(key);
   //     if (obj.hasOwnProperty(key)) {
   //       return false;
   //     }
@@ -23,7 +24,6 @@ export class UtilService {
   }
 
   getById(arr, id, idFieldname) {
-    // console.log(arr, id, idFieldname);
     if (!arr) {
       return null;
     }
@@ -39,7 +39,6 @@ export class UtilService {
     if (s.length > 0 && t.length > 0) {
       s += ';';
     }
-    // console.log(s + t);
     return s + t;
   }
 
@@ -53,7 +52,7 @@ export class UtilService {
       if (item) {
         return item[fieldname];
       } else {
-        console.log('no item has ID: ' + id);
+        // console.log('no item has ID: ' + id);
       }
     }
     return '';

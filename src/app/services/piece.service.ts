@@ -66,16 +66,16 @@ export class PieceService {
       name = name.substr(0, name.length - 1);
     }
     name = name.trim();
-    if (name.endsWith(' -')) {
-      name = name.substr(0, name.length - 2);
+    if (name.endsWith('-')) {
+      name = name.substr(0, name.length - 1);
     }
     if (name.endsWith(':')) {
       name = name.substr(0, name.length - 1);
     }
-    if (name.startsWith('- ')) {
-      name = name.substr(2);
+    if (name.startsWith('-')) {
+      name = name.substr(1);
     }
-    return name;
+    return name.trim();
   }
 
   lcs(lines) {

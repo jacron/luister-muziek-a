@@ -63,7 +63,7 @@ export class ToolsComponent implements OnInit {
 
   toAlbum() {
     this.router.navigate(['/album', this.album.ID]).then(() => {
-      // this.storageService.storeSearchTitle(document.title);
+      // this.storageService.storeListTitle(document.title);
       // this.storageService.storeSearchParameters(this.params);
     });
   }

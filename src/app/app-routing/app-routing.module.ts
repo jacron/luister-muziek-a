@@ -20,7 +20,7 @@ import {TagListComponent} from '../components/tag-list/tag-list.component';
 import {RecentComponent} from '../components/recent/recent.component';
 
 const appRoutes: Routes = [
-  {path: '', component: WelcomeComponent},
+  {path: '', component: SearchComponent},
   {path: 'welcome', component: WelcomeComponent},
   {path: 'search', component: SearchComponent},
   {path: 'search/:idcomp/:idperf/:idcoll/:idtag', component: SearchComponent},
