@@ -1,28 +1,66 @@
-import {Component, Input} from '@angular/core';
+import {AfterViewInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Album} from '../../classes/Album';
 import {environment} from '../../../environments/environment';
 import {MusicService} from '../../services/music.service';
 import {MatDialog} from '@angular/material';
 import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {List} from '../../classes/List';
+import {StorageService} from '../../services/storage.service';
 
 @Component({
   selector: 'app-album-details',
   templateUrl: './album-details.component.html',
   styleUrls: ['./album-details.component.scss']
 })
-export class AlbumDetailsComponent {
+export class AlbumDetailsComponent implements OnInit, DoCheck {
+  @Input() album: Album;
+
   imgUrl = environment.apiServer + '/image/';
   imgBackUrl = environment.apiServer + '/image/back/';
-  @Input() album: Album;
+  navBackwards: boolean;
+  navForwards: boolean;
+  navBackwardsCount: number;
+  navForwardsCount: number;
+  list: List;
   chevron = 'keyboard_arrow_down';
 
   constructor(
     private musicService: MusicService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog
-  ) {     route.params.subscribe(params => this.handleParams(params));
+    private dialog: MatDialog,
+    private storageService: StorageService,
+  ) {
+    route.params.subscribe(params => this.handleParams(params));
+  }
+
+  toList() {
+    this.router.navigate([
+      this.list.url,
+      this.list.params
+    ]).then(() => {
+    });
+  }
+
+  back() {
+    const albumIds = this.list.albumIds;
+    for (let i = 1; i < albumIds.length; i++) {
+      if (albumIds[i] === +this.album.ID) {
+        this.router.navigate(['/album',
+          albumIds[i - 1]]).then();
+      }
+    }
+  }
+
+  forward() {
+    const albumIds = this.list.albumIds;
+    for (let i = 0; i < albumIds.length - 1; i++) {
+      if (albumIds[i] === +this.album.ID) {
+        this.router.navigate(['/album',
+          albumIds[i + 1]]).then();
+      }
+    }
   }
 
   openAlbum(album: Album): void {
@@ -64,5 +102,40 @@ export class AlbumDetailsComponent {
     this.chevron = this.album.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
   }
 
+  enableNavig(list: List) {
+    if (!list || !this.album) {
+      this.navBackwards = this.navForwards = false;
+      return;
+    }
+    const albumIds = list.albumIds;
+    if (!albumIds || !Array.isArray(albumIds) || albumIds.length === 0) {
+      this.navBackwards = this.navForwards = false;
+      return;
+    }
+    this.navBackwards = this.navForwards = true;
+
+    for (let i = 0; i < albumIds.length; i++) {
+      if (albumIds[i] === +this.album.ID) {
+        if (i === 0) {
+          this.navBackwards = false;
+        }
+        this.navBackwardsCount = i;
+        this.navForwardsCount = albumIds.length - i - 1;
+        if (i === albumIds.length - 1) {
+          this.navForwards = false;
+        }
+        break;
+      }
+    }
+  }
+
+  ngDoCheck() {
+    this.enableNavig(this.list);
+
+  }
+
+  ngOnInit() {
+    this.list = this.storageService.retrieveList();
+  }
 }
 

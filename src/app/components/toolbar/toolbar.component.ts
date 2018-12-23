@@ -34,7 +34,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes) {
-    this.enableNavig();
+    this.enableNavig(this.list);
   }
 
   albumTitleKeydown(e, id, title) {
@@ -115,22 +115,19 @@ export class ToolbarComponent implements OnInit, OnChanges {
     );
   }
 
-  toList() {
-    this.router.navigate([
-      this.list.url,
-      this.list.params
-    ]).then(() => {
-    });
-  }
-
   toCollection() {
     this.router.navigate(['/search',
       {
         idcoll: this.album.mother.ID,
-        idcomp: -1,
-        idperf: -1,
-        idtag: -1
       }
+    ]).then(() => {
+    });
+  }
+
+  toList() {
+    this.router.navigate([
+      this.list.url,
+      this.list.params
     ]).then(() => {
     });
   }
@@ -155,12 +152,12 @@ export class ToolbarComponent implements OnInit, OnChanges {
     }
   }
 
-  enableNavig() {
-    if (!this.list) {
+  enableNavig(list: List) {
+    if (!list) {
       this.navBackwards = this.navForwards = false;
       return;
     }
-    const albumIds = this.list.albumIds;
+    const albumIds = list.albumIds;
     if (!albumIds || !Array.isArray(albumIds) || albumIds.length === 0) {
       this.navBackwards = this.navForwards = false;
       return;
@@ -183,13 +180,9 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    // this.albumIds = this.storageService.retrieveAlbumIds();
-    // console.log(this.albumIds);
     this.list = this.storageService.retrieveList();
-    console.log(this.list);
-    this.enableNavig();
-    // this.searchTitle = this.storageService.retrieveSearchTitle();
-    // this.searchParams = this.storageService.retrieveSearchParameters();
+    // console.log(this.list);
+    this.enableNavig(this.list);
   }
 
 }

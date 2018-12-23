@@ -50,3 +50,19 @@ img.back-thumb {
 .album {
   //margin: 90px 0 20px 0;
 }
+.navig {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: 50px;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.15);
+  font-size: 50px;
+  padding: 5px 0 0 0;
+}
+.navig.left {
+  left: 10px;
+}
+.navig.right {
+  right: 10px;
+}

@@ -1,5 +1,21 @@
 <div *ngIf="album" class="album">
     <app-toolbar [album]="album"></app-toolbar>
+  <div>
+    <mat-icon
+      *ngIf="navBackwards"
+      (click)="back()"
+      class="navig left"
+    >
+      keyboard_arrow_left
+    </mat-icon>
+    <mat-icon
+      *ngIf="navForwards"
+      (click)="forward()"
+      class="navig right"
+    >
+      keyboard_arrow_right
+    </mat-icon>
+  </div>
   <div class="row chips">
     <div class="col">
       <app-chip-lists [album]="album"
