@@ -26,14 +26,6 @@
   </mat-list>
   <mat-divider *ngIf="proposals.length > 0"></mat-divider>
 
-  <!-- obsolete(?) list of created -->
-  <mat-list>
-    <mat-list-item *ngFor="let cue of created">
-      {{ cue }}
-    </mat-list-item>
-  </mat-list>
-  <mat-divider *ngIf="created.length > 0"></mat-divider>
-
   <!-- list of pieces -->
   <mat-list>
     <mat-list-item *ngFor="let piece of data.pieces; let i = index">
@@ -54,9 +46,13 @@
     </mat-list-item>
   </mat-list>
 </mat-dialog-content>
+
+<!-- acties -->
 <mat-dialog-actions>
   <mat-form-field class="example-full-width" style="width: 100%">
-    <input matInput placeholder="Cuesheet" [(ngModel)]="cueName">
+    <input matInput placeholder="Cuesheet"
+           (keyup.enter)="createCuesheet()"
+           [(ngModel)]="cueName">
     <button mat-button *ngIf="cueName"
             class="closer"
             matSuffix mat-icon-button aria-label="Clear"
@@ -68,22 +64,19 @@
           matTooltip="longest common subsequence"
           [disabled]="piecesSelected() < 2"
   >lcs</button>
-  <button mat-raised-button (click)="createCue()"
+  <button mat-raised-button (click)="createCuesheet()"
           [disabled]="piecesSelected() < 1"
-  >Cuesheet</button>
+  >Maak cuesheet</button>
   <button mat-raised-button (click)="selectAllPieces(false)"
           [disabled]="piecesSelected() < 1"
-  >Wis selectie</button>
+  >Selecteer niets</button>
   <button mat-raised-button (click)="selectAllPieces(true)">
     Selecteer alles</button>
   <button mat-raised-button (click)="autoTest()"
   >Auto</button>
-  <!--<button mat-raised-button (click)="autoCreate()"-->
-  <!--&gt;Auto</button>-->
-  <!--<span class="horizontal-spacer"></span>-->
   <span class="horizontal-spacer"></span>
   <button mat-raised-button (click)="makeAllProposals()"
           [disabled]="proposals.length < 1"
           class="mat-primary"
-  >Make!</button>
+  >Maak!</button>
 </mat-dialog-actions>

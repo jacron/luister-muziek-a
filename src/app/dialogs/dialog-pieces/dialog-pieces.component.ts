@@ -55,7 +55,6 @@ export class DialogPiecesComponent implements OnInit {
   }
 
   markPieces(proposal: Proposal) {
-    console.log(proposal);
     this.resetMarks();
     proposal.ids.forEach(id => {
       const piece = this.getPieceById(+id);
@@ -67,7 +66,6 @@ export class DialogPiecesComponent implements OnInit {
   restorePieces(album: Album) {
     this.data.album.pieces = album.pieces;
     this.data.album.cuesheets = album.cuesheets;
-    // this.dialogRef.close();
   }
 
   reload() {
@@ -150,12 +148,20 @@ export class DialogPiecesComponent implements OnInit {
     );
   }
 
-  createCue() {
+  createCuesheet() {
     const ids = this.pieceService.getCheckedIds(this.data.pieces);
 
     this.proposals.push({
       name: this.cueName,
       ids: ids
+    });
+    this.selectAllPieces(false);
+
+    // mark created
+    this.data.pieces.forEach(piece => {
+      if (ids.indexOf(piece.ID) !== -1) {
+        piece.created = true;
+      }
     });
   }
 

@@ -3,6 +3,7 @@ import {Piece} from '../classes/Piece';
 import {MusicService} from './music.service';
 import {forkJoin} from 'rxjs/observable/forkJoin';
 import {Proposal} from '../classes/Proposal';
+import {stringify} from 'querystring';
 
 @Injectable()
 export class PieceService {
@@ -132,7 +133,7 @@ export class PieceService {
     const ids = [];
     pieces.forEach((piece: Piece) => {
       if (piece.checked) {
-        ids.push(piece.ID.toString());
+        ids.push(piece.ID);
         piece.created = true;
       }
     });
@@ -159,14 +160,14 @@ export class PieceService {
         this.setChecked(keys, pieces);
       }
     }
-    if (e.altKey) {
-      this.checkOne(pieces);
-      const data = this.lcs_pieces(pieces);
-      if (data.ids.length) {
-        titles.push(data.cueName);
-      }
-
-    }
+    // if (e.altKey) {
+    //   const titles: string[];
+    //   this.checkOne(pieces);
+    //   const data = this.lcs_pieces(pieces);
+    //   if (data.ids.length) {
+    //     titles.push(data.cueName);
+    //   }
+    // }
   }
 
   similar(pieces) {
