@@ -38,7 +38,7 @@ export class DialogCustomizeSearchComponent implements OnInit {
 
   ngOnInit() {
     this.choices = this.data.choices;
-    this.choices[0].visible = true;  // testing
+    // this.choices[0].visible = true;  // testing
   }
 
 }

@@ -1,13 +1,10 @@
-.play {
-  opacity: .5;
-  position: relative;
-  top: 7px;
-  color: blue;
-  cursor: pointer;
-}
-.played {
-  color: green;
-}
 .created {
   font-style: italic;
+}
+.check {
+  margin: 4px 20px 0 0;
+}
+.closer {
+  position: absolute;
+  margin: -20px 0 0 -20px;
 }

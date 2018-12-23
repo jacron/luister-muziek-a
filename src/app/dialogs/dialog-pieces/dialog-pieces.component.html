@@ -1,31 +1,34 @@
-<div *ngFor="let cue of created">
-  {{ cue }}
-</div>
+<mat-dialog-title><h2>Cuesheets maker</h2></mat-dialog-title>
 <mat-dialog-content>
-  <!--(mousedown)="onMouseDown($event)"-->
-  <!--(mousemove)="onMouseMove($event)"-->
-  <!--(mouseup)="onMouseUp($event)"-->
-<!--&gt;-->
-  <div *ngFor="let piece of data.pieces; let i = index">
-    <mat-checkbox
-                  [(ngModel)]="piece.checked"
-                  (change)="onPieceCheck($event, piece)"
-                  (click)="onPieceClick($event, piece, i)"
-    >
-      <!--<span>{{ displayName(piece.Name) }}</span>-->
-    </mat-checkbox>
-    <span #topicTitle contenteditable="true"
-          [textContent]="displayName(piece.Name)"
-          (input)="model=topicTitle.innerText"
-          [class.created]="piece.created"
-          (keydown)="nameKeydown($event, piece, topicTitle.innerText)">
-  </span>
-  </div>
+  <mat-list>
+    <mat-list-item *ngFor="let cue of created">
+      {{ cue }}
+    </mat-list-item>
+  </mat-list>
+  <mat-divider *ngIf="created.length > 0"></mat-divider>
+  <mat-list>
+    <mat-list-item *ngFor="let piece of data.pieces; let i = index">
+      <mat-checkbox
+        class="check"
+        [(ngModel)]="piece.checked"
+        (change)="onPieceCheck($event, piece)"
+        (click)="onPieceClick($event, piece, i)"
+      >
+      </mat-checkbox>
+      <span #topicTitle contenteditable="true"
+            [textContent]="displayName(piece.Name)"
+            (input)="model=topicTitle.innerText"
+            [class.created]="piece.created"
+            (keydown)="nameKeydown($event, piece, topicTitle.innerText)">
+    </span>
+    </mat-list-item>
+  </mat-list>
 </mat-dialog-content>
 <mat-dialog-actions>
   <mat-form-field class="example-full-width" style="width: 100%">
     <input matInput placeholder="Cuesheet Name" [(ngModel)]="cueName">
     <button mat-button *ngIf="cueName"
+            class="closer"
             matSuffix mat-icon-button aria-label="Clear"
             (click)="cueName=''">
       <mat-icon>close</mat-icon>
@@ -35,10 +38,17 @@
           matTooltip="longest common subsequence"
           [disabled]="piecesSelected() < 2"
   >lcs</button>
-  <button mat-raised-button (click)="createCue()">Create</button>
-  <button mat-raised-button (click)="selectAllPieces(false)">select none</button>
+  <button mat-raised-button (click)="createCue()"
+          [disabled]="piecesSelected() < 1"
+  >Create</button>
+  <button mat-raised-button (click)="selectAllPieces(false)"
+          [disabled]="piecesSelected() < 1"
+  >select none</button>
   <button mat-raised-button (click)="selectAllPieces(true)">select all</button>
-  <button mat-raised-button (click)="autoCreate()">Auto</button>
+  <button mat-raised-button (click)="autoCreate()"
+          class="mat-primary"
+  >Auto</button>
   <span class="horizontal-spacer"></span>
-  <button mat-raised-button (click)="reload()">Reload</button>
+  <button mat-raised-button (click)="reload()"
+  >Reload</button>
 </mat-dialog-actions>

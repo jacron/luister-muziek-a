@@ -196,7 +196,7 @@ export class PieceService {
   }
 
   autoCuesheets(albumId, pieces) {
-    const promise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       let data;
       const q = [];
       const titles = [];
@@ -213,7 +213,6 @@ export class PieceService {
         () => resolve(titles)
       );
     });
-    return promise;
   }
 
 }

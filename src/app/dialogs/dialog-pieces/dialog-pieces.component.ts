@@ -27,7 +27,7 @@ export class DialogPiecesComponent implements OnInit {
     }
   }
 
-  onPieceClick(e, piece: Piece, i: number) {
+  onPieceClick(e, piece: Piece, i: number, matselection) {
     if (!piece.checked) {
       this.pieceService.selectSiblingsInbetween(e, i, this.data.pieces);
     }
@@ -128,6 +128,8 @@ export class DialogPiecesComponent implements OnInit {
   }
 
   ngOnInit() {
+    // testing
+    // this.created = ['aap', 'noot', 'mies'];
   }
 
 }
