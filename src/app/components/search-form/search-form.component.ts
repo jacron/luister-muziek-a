@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {Album} from '../../classes/Album';
 import {Tag} from '../../classes/Tag';
 import {Person} from '../../classes/Person';
@@ -25,6 +25,8 @@ export class SearchFormComponent implements OnChanges, OnInit {
   @Input() instruments;
 
   @Output() albums: EventEmitter<SearchParams> = new EventEmitter();
+
+  @ViewChild('query') qv;
 
   idcomp = -1;
   idperf = -1;
@@ -79,6 +81,7 @@ export class SearchFormComponent implements OnChanges, OnInit {
 
   clearQuery() {
     this.myControl.setValue('');
+    this.qv.nativeElement.focus();
   }
 
   prepareChoices() {
