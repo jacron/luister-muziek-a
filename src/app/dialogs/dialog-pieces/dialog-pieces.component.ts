@@ -72,7 +72,6 @@ export class DialogPiecesComponent implements OnInit {
     this.musicService.refetch(this.data.albumId).subscribe(
       (response: Album) => this.restorePieces(response)
     );
-
   }
 
   lcs() {
@@ -143,7 +142,8 @@ export class DialogPiecesComponent implements OnInit {
   }
 
   makeCuesheet(proposal: Proposal) {
-    this.musicService.makeCuesheet(proposal.name, proposal.ids, this.data.albumId).subscribe(
+    this.musicService.makeCuesheet(proposal.name, proposal.ids,
+      this.data.albumId).subscribe(
       () => this.afterMakeCuesheet(proposal)
     );
   }

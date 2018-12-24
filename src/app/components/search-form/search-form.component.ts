@@ -125,7 +125,7 @@ export class SearchFormComponent implements OnChanges, OnInit {
       this.idcoll = params.idcoll;
       this.idtag = params.idtag;
       this.idinstrument = params.idinstrument;
-      this.myControl.setValue(params.search);
+      this.myControl.setValue(params.search || '');
       // this.revealActiveChoices();
     }
     if (changes.composers) {

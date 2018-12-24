@@ -54,7 +54,6 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
       return false;
     }
     const albumPieces = this.album.pieces;
-    console.log(idpiece, albumPieces);
     for (let i = 0; i < albumPieces.length; i++) {
       if (+albumPieces[i].ID === idpiece) {
         return true;
