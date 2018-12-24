@@ -11,7 +11,7 @@ import {Piece} from '../../classes/Piece';
   selector: 'app-album-list',
   templateUrl: './album-list.component.html',
   styleUrls: ['./album-list.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated,
+  // encapsulation: ViewEncapsulation.Emulated,
 })
 export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() albums: Album[];

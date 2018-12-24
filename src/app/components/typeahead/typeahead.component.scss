@@ -7,10 +7,6 @@
   width: 200px;
 }
 .closer {
-  position: absolute;
-  top: 10px;
-  left: 168px;
-  border: none;
   color: #aaa;
   &:hover {
     background-color: $mat-button-hover-background;
@@ -18,7 +14,6 @@
   }
   .mat-icon {
     position: relative;
-    top: 5px;
     font-size: 16px;
     width: inherit;
   }

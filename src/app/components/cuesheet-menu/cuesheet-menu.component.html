@@ -22,25 +22,25 @@
   <button mat-menu-item
           (click)="showParts(cuesheet)">
     <mat-icon class="edit"
-              waves-light waves-effect mdbRippleRadius>
+              waves-light waves-effect>
       list_alt
-    </mat-icon><span>View content</span>
+    </mat-icon><span>Inhoud</span>
   </button>
   <!-- Edit cuesheet -->
   <button mat-menu-item
           (click)="edit(cuesheet.ID)">
     <mat-icon class="edit"
-              waves-light waves-effect mdbRippleRadius>
+              waves-light waves-effect>
       edit
-    </mat-icon><span>Edit text</span>
+    </mat-icon><span>Bewerk</span>
   </button>
   <!-- Delete cuesheet -->
   <button mat-menu-item
           (click)="delete(cuesheet)">
     <mat-icon class="delete"
-              waves-light waves-effect mdbRippleRadius>
+              waves-light waves-effect>
       delete
-    </mat-icon><span>Delete cuesheet file</span>
+    </mat-icon><span>Verwijder</span>
   </button>
   <mat-divider></mat-divider>
   <span *ngIf="cuesheet.discid">
