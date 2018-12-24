@@ -1,6 +1,6 @@
-<div class="list">
+<div>
   <mat-list *ngIf="filteredAlbums && filteredAlbums.length">
-    <h3 mat-subheader>{{ filteredAlbums.length }} albums</h3>
+    <h3 mat-subheader class="list-header">{{ filteredAlbums.length }} albums</h3>
     <mat-list-item *ngFor="let album of filteredAlbums">
     <div class="">
       <div class="img-container">

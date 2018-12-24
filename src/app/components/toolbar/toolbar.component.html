@@ -27,7 +27,7 @@
       </button>
       <a (click)="toList()" class="link">
         <span>{{ list.title }}</span>
-        <span *ngIf="list.query"> ({{ list.query }})</span>
+        <!--<span *ngIf="list.params.query"> ({{ list.params.query }})</span>-->
       </a>
       <button mat-button
               (click)="forward()"

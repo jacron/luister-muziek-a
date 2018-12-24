@@ -15,7 +15,7 @@ img.details {
   max-width: 520px
 }
 .mat-list-item {
-  height: 118px !important;
+  min-height: 150px !important;
 }
 .closer {
   position: absolute;
@@ -34,4 +34,7 @@ img.details {
 }
 .img-container {
   margin-right: 20px;
+}
+.list-header {
+  margin-bottom: 15px !important;
 }
