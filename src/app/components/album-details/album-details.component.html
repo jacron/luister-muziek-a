@@ -40,6 +40,7 @@
   <div class="row cuesheets">
     <div class="col">
       <app-album-cuesheets [cuesheets]="album.cuesheets"
+                           [idpiece]="idpiece"
                            [album]="album"></app-album-cuesheets>
     </div>
   </div>
@@ -50,7 +51,7 @@
         <mat-icon (click)="openPieces()"
                   title="view {{ album.pieces.length }} pieces"
                   [class.expanded]="album.expanded"
-                  waves-light waves-effect mdbRippleRadius
+                  waves-light waves-effect
         >{{ chevron }}
         </mat-icon>
       </div>
@@ -58,7 +59,9 @@
   </div>
   <div class="row">
     <div class="col pieces" [class.visible]="album.expanded">
-      <app-album-pieces [pieces]="album.pieces" [album]="album"
+      <app-album-pieces [pieces]="album.pieces"
+                        [idpiece]="idpiece"
+                        [album]="album"
       ></app-album-pieces>
     </div>
   </div>

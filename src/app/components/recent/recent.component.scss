@@ -3,10 +3,12 @@
 }
 .play {
   opacity: .6;
-  position: relative;
-  top: 7px;
+  padding: 8px;
   color: orange;
   cursor: pointer;
+}
+.play:hover {
+  color: #dd8888;
 }
 .played {
   color: brown;

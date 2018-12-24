@@ -4,15 +4,18 @@
     [class.played]="cuesheet.played"
     [class.invalid]="cuesheet.Invalid"
     class="play"
-    waves-light waves-effect mdbRippleRadius
+    waves-light waves-effect
     (click)="play(cuesheet.ID)">
     play_circle_filled</mat-icon>
+
   <app-cuesheet-menu
     [cuesheet]="cuesheet"
     [album]="album"></app-cuesheet-menu>
+
   <div class="text-container">
     <div mat-line #topicTitle contenteditable="true"
           class="title"
+          [class.selected]="cuesheet.ID == idpiece"
           [textContent]="cuesheet.Title"
           (input)="model=topicTitle.innerText"
           (keydown)="titleKeydown($event, cuesheet.ID, topicTitle.innerText)">

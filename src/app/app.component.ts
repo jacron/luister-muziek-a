@@ -18,7 +18,7 @@ export class AppComponent {
     },
     {
       href: 'recent',
-      label: 'Recent'
+      label: 'Actueel'
     },
     {
       href: 'componist',

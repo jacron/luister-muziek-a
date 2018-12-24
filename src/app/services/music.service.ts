@@ -89,7 +89,7 @@ export class MusicService {
   }
 
   getSearchedAlbums(params) {
-    const search = 'zoek'; // todo: get search (title)
+    const search = params.search && params.search.length ? params.search : '@@';
     const cmd = '/cql/' + search + '/' +
       params.idcomp + '/' + params.idperf + '/' + params.idcoll + '/' +
       params.idtag + '/' + params.idinstrument;

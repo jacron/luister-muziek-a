@@ -12,6 +12,7 @@ export class AlbumCuesheetsComponent implements OnInit {
 
   @Input() cuesheets: Cuesheet[];
   @Input() album: Album;
+  @Input() idpiece: number;
 
   constructor(
     private musicService: MusicService

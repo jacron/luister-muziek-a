@@ -24,6 +24,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   navForwardsCount: number;
   list: List;
   chevron = 'keyboard_arrow_down';
+  idpiece: number;
 
   constructor(
     private musicService: MusicService,
@@ -33,6 +34,33 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     private storageService: StorageService,
   ) {
     route.params.subscribe(params => this.handleParams(params));
+  }
+
+  handleParams(params) {
+    if (params['idalbum']) {
+      this.musicService.getAlbumById(params['idalbum']).subscribe(
+        (album: Album) => this.openAlbum(album),
+        err => console.error(err),
+        () => {}
+      );
+    }
+    if (params['idpiece']) {
+      this.idpiece = +params['idpiece'];
+    }
+  }
+
+  albumPiecesContainSelection(idpiece: number) {
+    if (!this.album) {
+      return false;
+    }
+    const albumPieces = this.album.pieces;
+    console.log(idpiece, albumPieces);
+    for (let i = 0; i < albumPieces.length; i++) {
+      if (+albumPieces[i].ID === idpiece) {
+        return true;
+      }
+    }
+    return false;
   }
 
   back() {
@@ -64,16 +92,10 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
       if (album.cuesheets.length < 1) {
         this.album.expanded = true;
       }
-    }
-  }
-
-  handleParams(params) {
-    if (params) {
-      this.musicService.getAlbumById(params['idalbum']).subscribe(
-        (album: Album) => this.openAlbum(album),
-        err => console.error(err),
-        () => {}
-      );
+      // console.log(this.idpiece);
+      if (this.albumPiecesContainSelection(this.idpiece)) {
+        this.album.expanded = true;
+      }
     }
   }
 

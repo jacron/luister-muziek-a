@@ -1,11 +1,18 @@
-<div *ngFor="let piece of pieces">
+<div *ngFor="let piece of pieces" class="pieces-list">
+
   <mat-icon class="play"
+            waves-light waves-effect
             [class.played]="piece.played"
             (click)="play(piece.ID)">
     play_circle_filled</mat-icon>
-  <span #topicTitle contenteditable="true"
-        [textContent]="displayName(piece.Name)"
-        (input)="model=topicTitle.innerText"
-        (keydown)="nameKeydown($event, piece, topicTitle.innerText)">
-  </span>
+
+  <div class="text-container">
+    <div mat-line #topicTitle contenteditable="true"
+         class="title"
+          [class.selected]="piece.ID == idpiece"
+          [textContent]="displayName(piece.Name)"
+          (input)="model=topicTitle.innerText"
+          (keydown)="nameKeydown($event, piece, topicTitle.innerText)">
+    </div>
+  </div>
 </div>

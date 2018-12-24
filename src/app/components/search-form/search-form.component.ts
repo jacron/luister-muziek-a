@@ -9,6 +9,7 @@ import {MusicService} from '../../services/music.service';
 import {Choice} from '../../classes/Choice';
 import {StorageService} from '../../services/storage.service';
 import {ChoiceService} from '../../services/choice.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-search-form',
@@ -32,6 +33,7 @@ export class SearchFormComponent implements OnChanges, OnInit {
   idinstrument = -1;
   choices: Choice[];
   filteredChoices: Choice[];
+  myControl = new FormControl();
 
   constructor(
     private dialog: MatDialog,
@@ -41,12 +43,15 @@ export class SearchFormComponent implements OnChanges, OnInit {
   ) { }
 
   getAlbums() {
+    // send a request to get albums
+    // console.log(this.myControl.value);
     const params: SearchParams = {
       idcomp: this.choices[0].id || -1,
       idperf: this.choices[1].id || -1,
       idcoll: this.choices[2].id || -1,
       idtag: this.choices[3].id || -1,
-      idinstrument: this.choices[4].id || -1
+      idinstrument: this.choices[4].id || -1,
+      search: this.myControl.value,
     };
     this.albums.emit(params);
   }
@@ -70,6 +75,10 @@ export class SearchFormComponent implements OnChanges, OnInit {
 
   customize() {
     this.onGetChoices(this.choiceService.getChoices());
+  }
+
+  clearQuery() {
+    this.myControl.setValue('');
   }
 
   prepareChoices() {
@@ -113,6 +122,7 @@ export class SearchFormComponent implements OnChanges, OnInit {
       this.idcoll = params.idcoll;
       this.idtag = params.idtag;
       this.idinstrument = params.idinstrument;
+      this.myControl.setValue(params.search);
       // this.revealActiveChoices();
     }
     if (changes.composers) {

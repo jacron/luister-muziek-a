@@ -25,6 +25,7 @@ const appRoutes: Routes = [
   {path: 'search', component: SearchComponent},
   {path: 'search/:idcomp/:idperf/:idcoll/:idtag', component: SearchComponent},
   {path: 'album/:idalbum', component: AlbumDetailsComponent},
+  {path: 'album/:idalbum/:idpiece', component: AlbumDetailsComponent},
   {path: 'tools', component: ToolsComponent},
   {path: 'componist', component: ComponistComponent},
   {path: 'componist/:id', component: ComponistListComponent},

@@ -17,7 +17,7 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() albums: Album[];
   @Input() q: string;
 
-  query: string;
+  // query: string;
   imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
@@ -28,11 +28,6 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     private musicService: MusicService,
     private storage: StorageService,
   ) { }
-
-  resetQuery() {
-    this.query = '';
-    this.search('');
-  }
 
   testInAlbum(album: Album, q) {
     const s = album.Title.toLowerCase();
@@ -49,8 +44,6 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
         album.filteredPieces = filteredPieces;
         return true;
       }
-    } else {
-      // console.log(album);
     }
     return false;
   }
@@ -69,7 +62,6 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   search(newValue: string) {
-    // console.log(newValue);
     if (!newValue.length) {
       this.filteredAlbums = this.albums.slice();
       return;
@@ -157,22 +149,8 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     }, 200);
   }
 
-  piecesToAlbum(a: Album, album: Album) {
-    a.album_performers = album.album_performers;
-    a.album_componisten = album.album_componisten;
-    a.album_tags = album.album_tags;
-    a.pieces = album.pieces;
-    a.cuesheets = album.cuesheets;
-    a.album_instrument = album.album_instrument;
-  }
-
   onChangedAlbums(albums: Album[]) {
     if (Array.isArray(albums)) {
-      albums.forEach(album => {
-        this.musicService.getAlbumById(album.ID).subscribe(
-          (a: Album) => this.piecesToAlbum(album, a)
-        );
-      });
       this.filteredAlbums = albums.slice();
       setTimeout(() => {
         this.setLazy();
@@ -184,10 +162,6 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.albums) {
       this.onChangedAlbums(changes.albums.currentValue);
-    }
-    if (changes.q) {
-      this.query = changes.q.currentValue === 'undefined' ? null :
-        changes.q.currentValue;
     }
   }
 

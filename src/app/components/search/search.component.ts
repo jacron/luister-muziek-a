@@ -35,16 +35,13 @@ export class SearchComponent implements OnInit {
     private storageService: StorageService,
     private util: UtilService,
   ) {
-    route.params.subscribe(params => this.handleParams(<SearchParams>params));
-  }
-
-  handleParams(params: SearchParams) {
-    if (params) {
-      this.fetchThings(params);
-      this.search = params.search;
-      this.params = params;
-      this.storageService.storeSearchParameters(params);
-    }
+    route.params.subscribe((params: SearchParams) => {
+      if (params) {
+        this.fetchThings(params);
+        this.params = params;
+        this.storageService.storeSearchParameters(params);
+      }
+    });
   }
 
   getAlbumIds(albums) {
@@ -63,11 +60,13 @@ export class SearchComponent implements OnInit {
       idcoll: params.idcoll ? params.idcoll : -1,
       idtag: params.idtag ? params.idtag : -1,
       idinstrument: params.idinstrument ? params.idinstrument : -1,
+      search: params.search ? params.search : '',
     };
   }
 
   afterFetch(albums) {
     this.albums = albums;
+    // console.log(albums[0]);
 
     // voor blader-functie in details pagina
     // this.storageService.storeAlbumIds(this.getAlbumIds(albums));
@@ -127,11 +126,11 @@ export class SearchComponent implements OnInit {
       // this.storageService.storeListTitle(title);
       this.musicService.addSearchToHistory(title, this.params);
     }
-    document.title = title;
-    this.list.title = title;
-    this.storageService.storeList(this.list);
-    // velden zichtbaar te maken?
-
+    if (this.list) {
+      document.title = title;
+      this.list.title = title;
+      this.storageService.storeList(this.list);
+    }
   }
 
   getAlbums(params: SearchParams) {

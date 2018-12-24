@@ -7,6 +7,18 @@
       [items]="choice.items"
       [(id)]="choice.id"
     ></app-typeahead>
+    <mat-form-field>
+      <input matInput #query
+             placeholder="zoek"
+             title=""
+             [formControl]="myControl"
+      >
+    </mat-form-field>
+    <button mat-button *ngIf="query.value"
+            matSuffix mat-icon-button aria-label="Clear"
+            (click)="clearQuery()">
+      <mat-icon>close</mat-icon>
+    </button>
     <div>
       <button mat-button
               class="get-albums"

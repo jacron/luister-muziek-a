@@ -21,3 +21,7 @@ img.details {
   position: absolute;
   margin: -20px 0 0 -20px;
 }
+.pieces-list {
+  max-height: 100px;
+  overflow-y: auto;
+}

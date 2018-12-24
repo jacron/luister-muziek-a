@@ -10,8 +10,9 @@ import {Album} from '../../classes/Album';
   styleUrls: ['./album-pieces.component.scss']
 })
 export class AlbumPiecesComponent implements OnInit {
-  @Input('pieces') pieces: Piece[];
-  @Input('album') album: Album;
+  @Input() pieces: Piece[];
+  @Input() album: Album;
+  @Input() idpiece: number;
 
   constructor(
     private musicService: MusicService,
@@ -28,7 +29,7 @@ export class AlbumPiecesComponent implements OnInit {
   }
 
   onPlayed(response, id) {
-    console.log(response);
+    // console.log(response);
     const piece = this.getPieceById(id);
     piece.played = true;
   }
