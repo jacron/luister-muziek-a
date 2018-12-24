@@ -1,16 +1,15 @@
 <div class="list">
-  <mat-input-container>
+  <mat-form-field>
     <input matInput placeholder="zoek"
            (ngModelChange)="search($event)"
            [(ngModel)]="query"
     >
+  </mat-form-field>
     <button mat-button *ngIf="query"
-            class="closer"
             matSuffix mat-icon-button aria-label="Clear"
             (click)="resetQuery()">
       <mat-icon>close</mat-icon>
     </button>
-  </mat-input-container>
   <mat-list *ngIf="filteredAlbums && filteredAlbums.length">
     <h3 mat-subheader>{{ filteredAlbums.length }} albums</h3>
     <mat-list-item *ngFor="let album of filteredAlbums">
@@ -32,12 +31,12 @@
                         [showimage]="false"
                         mat-line
         ></app-chip-lists>
-        <mat-list>
+        <mat-list *ngIf="album.filteredPieces">
           <mat-list-item *ngFor="let filteredPiece of album.filteredPieces">
             {{ filteredPiece.Name }}
           </mat-list-item>
         </mat-list>
-        <div *ngIf="album.filteredPieces.length" style="height: 12px;"
+        <div *ngIf="album.filteredPieces && album.filteredPieces.length" style="height: 12px;"
         ></div>
       </div>
     </div>

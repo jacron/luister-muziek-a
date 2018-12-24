@@ -1,7 +1,10 @@
 {
   "compileOnSave": false,
-  "include": ["node_modules/angular-bootstrap-md/**/*.ts",  "src/**/*.ts"],
+  "include": [
+    "src/**/*.ts"
+  ],
   "compilerOptions": {
+    "importHelpers": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

@@ -2,6 +2,10 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "app/app-variables";
 
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 li {
   list-style: none;
 }
@@ -36,4 +40,16 @@ ul {
   overflow-x: hidden;
   float: left;
   margin-right: 8px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.col {
+  flex-basis: 0;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+}
+.link {
+  cursor: pointer;
 }

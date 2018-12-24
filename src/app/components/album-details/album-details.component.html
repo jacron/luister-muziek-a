@@ -16,14 +16,12 @@
       keyboard_arrow_right
     </mat-icon>
   </div>
-  <div class="row chips">
-    <div class="col">
+  <div class="chips">
       <app-chip-lists [album]="album"
                       [removable]="false"
                       [editable]="true"
                       [showimage]="false"
       ></app-chip-lists>
-    </div>
   </div>
   <div class="row">
     <div class="col first">
@@ -32,11 +30,11 @@
              class="thumb">
     </div>
     <div class="col">
-      <app-album-metatags [album]="album"></app-album-metatags>
       <img *ngIf="album.album_back_image"
            src="{{ imgBackUrl }}{{ album.ID }}/album/100/-1"
            (click)="openPic('back')"
            class="back-thumb">
+      <app-album-metatags [album]="album"></app-album-metatags>
     </div>
   </div>
   <div class="row cuesheets">

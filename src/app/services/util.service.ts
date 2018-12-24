@@ -15,6 +15,10 @@ export class UtilService {
   //   return true;
   // }
 
+  cloneObject(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
   stripExtension(s) {
     const pos = s.lastIndexOf('.');
     if (pos === -1) {

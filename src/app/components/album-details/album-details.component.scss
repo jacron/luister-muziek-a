@@ -5,7 +5,7 @@ img.thumb {
 img.back-thumb {
   width: 100px;
   position: absolute;
-  bottom: 0;
+  margin-top: 325px;
   border: 1px solid #bfbfbf;
 }
 .first {
@@ -42,7 +42,7 @@ img.back-thumb {
   overflow-y: auto;
 }
 .chips {
-  margin: 14px 0 14px -14px;
+  margin: 14px 0 14px 14px;
 }
 .cuesheets {
   margin-top: 20px;

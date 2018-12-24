@@ -1,7 +1,7 @@
 import {Component, Inject, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Person} from '../../classes/Person';
 import {Tag} from '../../classes/Tag';
-import {forkJoin} from 'rxjs/observable/forkJoin';
+import {forkJoin} from 'rxjs';
 import {MusicService} from '../../services/music.service';
 import {AlbumDetailsComponent} from '../../components/album-details/album-details.component';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';

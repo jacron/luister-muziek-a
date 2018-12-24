@@ -4,4 +4,5 @@ export class SearchParams {
   idcoll = -1;
   idtag = -1;
   idinstrument = -1;
+  search?: string;
 }

@@ -6,7 +6,7 @@ import {SearchParams} from '../../classes/SearchParams';
 import {StorageService} from '../../services/storage.service';
 import {Tag} from '../../classes/Tag';
 import {Person} from '../../classes/Person';
-import {forkJoin} from 'rxjs/observable/forkJoin';
+import {forkJoin} from 'rxjs';
 import {UtilService} from '../../services/util.service';
 import {Instrument} from '../../classes/Instrument';
 import {List} from '../../classes/List';
@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit {
   tags: Tag[];
   instruments: Instrument[];
   list: List;
+  search: string;
 
   constructor(
     private musicService: MusicService,
@@ -40,6 +41,7 @@ export class SearchComponent implements OnInit {
   handleParams(params: SearchParams) {
     if (params) {
       this.fetchThings(params);
+      this.search = params.search;
       this.params = params;
       this.storageService.storeSearchParameters(params);
     }

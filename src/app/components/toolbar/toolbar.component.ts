@@ -6,6 +6,8 @@ import {StorageService} from '../../services/storage.service';
 import {MatDialog, MatMenuTrigger} from '@angular/material';
 import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.component';
 import {List} from '../../classes/List';
+import {stringify} from 'querystring';
+import {UtilService} from '../../services/util.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -31,6 +33,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
     private router: Router,
     private storageService: StorageService,
     private dialog: MatDialog,
+    private util: UtilService,
   ) { }
 
   ngOnChanges(changes) {
@@ -125,9 +128,11 @@ export class ToolbarComponent implements OnInit, OnChanges {
   }
 
   toList() {
+    const sParams = this.util.cloneObject(this.list.params);
+    sParams.search = this.list.query;
     this.router.navigate([
       this.list.url,
-      this.list.params
+      sParams
     ]).then(() => {
     });
   }

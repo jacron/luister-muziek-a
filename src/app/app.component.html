@@ -1,75 +1,16 @@
-<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark
-bg-grey scrolling-navbar" [containerInside]="false">
-  <logo>
-    <a class="nav-link" routerLink="/search" style="color:white">
-    <mat-icon>library_music</mat-icon>
+<nav>
+    <a routerLinkActive="selected" [routerLink]="link.href"
+       *ngFor="let link of links">
+      {{ link.label }}
     </a>
-  </logo>
-  <links>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item waves-light" mdbRippleRadius
-          [class.active]="prouter.url.indexOf('/search') === 0">
-        <a class="nav-link" routerLink="search">Home</a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius
-          [class.active]="prouter.url.indexOf('/recent') === 0">
-        <a class="nav-link" routerLink="recent">Recent</a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius
-          [class.active]="prouter.url.indexOf('/componist') === 0">
-        <a class="nav-link" routerLink="componist">Componist</a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius
-          [class.active]="prouter.url.indexOf('/performer') === 0">
-        <a class="nav-link" routerLink="performer">Performer</a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius
-          [class.active]="prouter.url.indexOf('/collectie') === 0">
-        <a class="nav-link" routerLink="collectie">Collectie</a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius
-          [class.active]="prouter.url.indexOf('/tag') === 0">
-        <a class="nav-link" routerLink="tag">Tag</a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius
-          [class.active]="prouter.url.indexOf('/code') === 0">
-        <a class="nav-link" href="code">Code</a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius
-          [class.active]="prouter.url.indexOf('/tools') === 0">
-        <a class="nav-link" routerLink="tools">Tools</a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius
-          [class.active]="prouter.url.indexOf('/settings') === 0">
-        <a class="nav-link" routerLink="settings">Settings</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav nav-flex-icons">
-      <li class="nav-item waves-light" mdbRippleRadius>
-        <a class="nav-link"><i class="fa fa-backward"
-                               (click)="play('previous')"
-        ></i></a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius>
-        <a class="nav-link"><i class="fa fa-forward"
-                               (click)="play('next')"
-        ></i></a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius>
-        <a class="nav-link"><i class="fa fa-pause"
-                               (click)="play('pause')"
-        ></i></a>
-      </li>
-      <li class="nav-item waves-light" mdbRippleRadius>
-        <a class="nav-link"><i class="fa fa-stop"
-                               (click)="play('stop')"
-        ></i></a>
-      </li>
-    </ul>
-  </links>
-</mdb-navbar>
+  <span class="horizontal-spacer"></span>
+  <a>
+    <mat-icon  (click)="play('pause')" class="control">
+      pause_circle_outline</mat-icon>
+  </a>
+</nav>
 <main>
-  <div class="container" style="margin-top: 80px;">
+  <div class="container">
     <router-outlet></router-outlet>
     <!-- Routed views go here -->
   </div>

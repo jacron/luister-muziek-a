@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MusicService } from './services/music.service';
 
 import { AppComponent } from './app.component';
@@ -116,7 +115,6 @@ import { RecentComponent } from './components/recent/recent.component';
     RecentComponent,
   ],
   imports: [
-    MDBBootstrapModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,  // needed for ngModel

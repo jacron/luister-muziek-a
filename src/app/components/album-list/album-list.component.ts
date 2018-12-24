@@ -15,6 +15,7 @@ import {Piece} from '../../classes/Piece';
 })
 export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() albums: Album[];
+  @Input() q: string;
 
   query: string;
   imgUrl = environment.apiServer + '/image/';
@@ -165,23 +166,29 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     a.album_instrument = album.album_instrument;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    const albums = <Album[]>changes.albums.currentValue;
-    // albums[0].test = 'aap';
-    // const that = this;
-    albums.forEach(album => {
-      // console.log(album.ID);
-      this.musicService.getAlbumById(album.ID).subscribe(
-        (a: Album) => this.piecesToAlbum(album, a)
-      );
-    });
-    this.filteredAlbums = albums.slice();
-    // console.log(albums);
-    setTimeout(() => {
-      this.setLazy();
-      this.lazyLoad();
-    }, 100);
+  onChangedAlbums(albums: Album[]) {
+    if (Array.isArray(albums)) {
+      albums.forEach(album => {
+        this.musicService.getAlbumById(album.ID).subscribe(
+          (a: Album) => this.piecesToAlbum(album, a)
+        );
+      });
+      this.filteredAlbums = albums.slice();
+      setTimeout(() => {
+        this.setLazy();
+        this.lazyLoad();
+      }, 100);
+    }
+  }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.albums) {
+      this.onChangedAlbums(changes.albums.currentValue);
+    }
+    if (changes.q) {
+      this.query = changes.q.currentValue === 'undefined' ? null :
+        changes.q.currentValue;
+    }
   }
 
   ngOnInit() {
