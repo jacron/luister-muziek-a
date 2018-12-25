@@ -1,24 +1,26 @@
 <div *ngIf="album" class="album"
      (keydown)="test($event)"
      tabindex="0"
+     (swipeleft)="forward()"
+     (swiperight)="back()"
 >
     <app-toolbar [album]="album"></app-toolbar>
-  <div>
-    <mat-icon
-      *ngIf="navBackwards"
-      (click)="back()"
-      class="navig left"
-    >
-      keyboard_arrow_left
-    </mat-icon>
-    <mat-icon
-      *ngIf="navForwards"
-      (click)="forward()"
-      class="navig right"
-    >
-      keyboard_arrow_right
-    </mat-icon>
-  </div>
+  <!--<div>-->
+    <!--<mat-icon-->
+      <!--*ngIf="navBackwards"-->
+      <!--(click)="back()"-->
+      <!--class="navig left"-->
+    <!--&gt;-->
+      <!--keyboard_arrow_left-->
+    <!--</mat-icon>-->
+    <!--<mat-icon-->
+      <!--*ngIf="navForwards"-->
+      <!--(click)="forward()"-->
+      <!--class="navig right"-->
+    <!--&gt;-->
+      <!--keyboard_arrow_right-->
+    <!--</mat-icon>-->
+  <!--</div>-->
   <div class="chips">
       <app-chip-lists [album]="album"
                       [removable]="false"
@@ -28,7 +30,7 @@
   </div>
   <div class="row">
     <div class="col first">
-        <img src="{{ imgUrl }}{{ album.ID }}/album/400/-1"
+        <img src="{{ imgUrl }}{{ album.ID }}/album/300/-1"
              (click)="openPic('front')"
              class="thumb">
     </div>

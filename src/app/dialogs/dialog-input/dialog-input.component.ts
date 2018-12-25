@@ -26,7 +26,7 @@ export class DialogInputComponent implements OnInit {
 
   ngOnInit() {
     this.prompt = this.data.prompt;
-    this.str = '';
+    this.str = this.data.default || '';
   }
 
 }

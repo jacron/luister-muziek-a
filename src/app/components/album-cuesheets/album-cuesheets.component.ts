@@ -18,7 +18,13 @@ export class AlbumCuesheetsComponent implements OnInit {
     private musicService: MusicService
   ) { }
 
-  getCuesheetById(id) {
+  titleChange(data) {
+    const {id, title} = data;
+    const cuesheet = this.getCuesheetById(id);
+    cuesheet.Title = title;
+  }
+
+  getCuesheetById(id): Cuesheet | null {
     for (let i = 0; i < this.cuesheets.length; i++) {
       if (this.cuesheets[i].ID === id) {
         return this.cuesheets[i];
@@ -28,7 +34,6 @@ export class AlbumCuesheetsComponent implements OnInit {
   }
 
   onPlayed(response, id) {
-    // console.log('playing', response);
     const cuesheet = this.getCuesheetById(id);
     cuesheet.played = true;
   }
@@ -39,24 +44,7 @@ export class AlbumCuesheetsComponent implements OnInit {
     );
   }
 
-  update(id, title) {
-    this.musicService.updateCuesheetTitle(id, this.album.ID, title).subscribe(
-      () => {}
-    );
-  }
-
-  titleKeydown(e, id, title) {
-    if (e.key === 'Enter') {
-      this.update(id, title);
-      e.preventDefault();
-    }
-    if (e.key === 'Tab') {
-      this.update(id, title);
-    }
-  }
-
   ngOnInit() {
-    // console.log(this.cuesheets);
   }
 
 }

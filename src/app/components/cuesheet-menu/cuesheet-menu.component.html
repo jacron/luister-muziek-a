@@ -34,6 +34,16 @@
       edit
     </mat-icon><span>Bewerk</span>
   </button>
+  <!-- Rename cuesheet -->
+  <button mat-menu-item
+          (click)="rename(cuesheet)">
+    <mat-icon class="rename"
+              style="color: orange"
+              waves-light waves-effect>
+      edit
+    </mat-icon>
+    <span>Hernoem</span>
+  </button>
   <!-- Delete cuesheet -->
   <button mat-menu-item
           (click)="delete(cuesheet)">

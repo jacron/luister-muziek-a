@@ -9,16 +9,14 @@
     play_circle_filled</mat-icon>
 
   <app-cuesheet-menu
-    [cuesheet]="cuesheet"
+    [cuesheet]="cuesheet" (titleChange)="titleChange($event)"
     [album]="album"></app-cuesheet-menu>
 
   <div class="text-container">
-    <div mat-line #topicTitle contenteditable="true"
+    <span mat-line
           class="title"
-          [class.selected]="cuesheet.ID == idpiece"
-          [textContent]="cuesheet.Title"
-          (input)="model=topicTitle.innerText"
-          (keydown)="titleKeydown($event, cuesheet.ID, topicTitle.innerText)">
-    </div>
+          [class.selected]="cuesheet.ID == idpiece">
+      {{ cuesheet.Title }}
+    </span>
   </div>
 </div>
