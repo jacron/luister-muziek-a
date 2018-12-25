@@ -140,6 +140,7 @@
           <span>freedb</span>
         </button>
       </span>
+      <!-- use asin if provided -->
       <span *ngIf="album.asin">
         <button mat-menu-item
               (click)="openamazon(album.asin)">

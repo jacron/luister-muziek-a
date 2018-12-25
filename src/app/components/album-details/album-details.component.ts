@@ -50,6 +50,18 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     }
   }
 
+  test(e) {
+    console.log(e.key);
+    switch (e.key) {
+      case 'ArrowRight':
+        this.forward();
+        break;
+      case 'ArrowLeft':
+        this.back();
+        break;
+    }
+  }
+
   albumPiecesContainSelection(idpiece: number) {
     if (!this.album) {
       return false;

@@ -1,4 +1,7 @@
-<div *ngIf="album" class="album">
+<div *ngIf="album" class="album"
+     (keydown)="test($event)"
+     tabindex="0"
+>
     <app-toolbar [album]="album"></app-toolbar>
   <div>
     <mat-icon
