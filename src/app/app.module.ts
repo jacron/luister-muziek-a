@@ -59,6 +59,7 @@ import { VisiblePipe } from './pipes/visible.pipe';
 import { DialogInstrumentComponent } from './dialogs/dialog-instrument/dialog-instrument.component';
 import { RecentComponent } from './components/recent/recent.component';
 import {MatModule} from './mat/mat.module';
+import { AlbumMenuComponent } from './components/album-menu/album-menu.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import {MatModule} from './mat/mat.module';
     VisiblePipe,
     DialogInstrumentComponent,
     RecentComponent,
+    AlbumMenuComponent,
   ],
   imports: [
     BrowserModule,

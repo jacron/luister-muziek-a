@@ -1,0 +1,16 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item
+          (click)="action(menu.action)"
+          *ngFor="let menu of menus"
+  >
+    <mat-icon class="album-control"
+              [style.color]="menu.color"
+              waves-light waves-effect
+    >{{ menu.icon }}
+    </mat-icon>
+    <span>{{ menu.label }}</span>
+  </button>
+</mat-menu>

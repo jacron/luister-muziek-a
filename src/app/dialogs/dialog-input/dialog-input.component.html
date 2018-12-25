@@ -1,13 +1,15 @@
 <mat-dialog-content>
   <mat-form-field style="width: 100%">
     <input matInput
+           (keyup.enter)="submit()"
            placeholder="{{ prompt }}"
            [(ngModel)]="str">
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button class="mat-raised-button" [disabled]="str.length < 1"
-          (click)="submit()">submit</button>
+  <button mat-button class="mat-raised-button"
+          (click)="cancel()">Annuleren</button>
   <button mat-button class="mat-raised-button mat-primary"
-          (click)="cancel()">cancel</button>
+          [disabled]="str.length < 1"
+          (click)="submit()">Opslaan</button>
 </mat-dialog-actions>

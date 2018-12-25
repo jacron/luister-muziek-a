@@ -3,12 +3,9 @@ import {Album} from '../../classes/Album';
 import {MusicService} from '../../services/music.service';
 import {Router} from '@angular/router';
 import {StorageService} from '../../services/storage.service';
-import {MatDialog, MatMenuTrigger} from '@angular/material';
-import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.component';
+import {MatMenuTrigger} from '@angular/material';
 import {List} from '../../classes/List';
-import {stringify} from 'querystring';
 import {UtilService} from '../../services/util.service';
-import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-toolbar',
@@ -19,41 +16,21 @@ export class ToolbarComponent implements OnInit, OnChanges {
 
   @Input() album: Album;
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
-  // searchTitle: string;
-  // searchParams: any;
+
   list: List;
-  // albumIds: number[];
   navForwards: boolean;
   navBackwards: boolean;
   navForwardsCount: number;
   navBackwardsCount: number;
-  musicAlbumUrl = 'http://localhost:8010/album/';
-  freedbUrl = environment.freedbUrl;
-  musicbrainzUrl = environment.musicbrainz;
-  amazonUrl = environment.amazonUrl;
-
   constructor(
     private musicService: MusicService,
     private router: Router,
     private storageService: StorageService,
-    private dialog: MatDialog,
     private util: UtilService,
   ) { }
 
   ngOnChanges(changes) {
     this.enableNavig(this.list);
-  }
-
-  openfreedb(id) {
-    window.open(this.freedbUrl + id);
-  }
-
-  openmusicbrainz(id) {
-    window.open(this.musicbrainzUrl + id);
-  }
-
-  openamazon(asin) {
-    window.open(this.amazonUrl + asin);
   }
 
   albumTitleKeydown(e, id, title) {
@@ -74,52 +51,6 @@ export class ToolbarComponent implements OnInit, OnChanges {
     if (e.key === 'Tab') {
       this.updateAlbumDescription(id, title);
     }
-  }
-
-  openFinder(id) {
-    this.musicService.openFinder(id).subscribe(
-      () => {},
-      error => console.error(error)
-    );
-  }
-
-  editPieces() {
-    this.dialog.open(DialogPiecesComponent, {
-      // width: '99%',
-      data: {
-        pieces: this.album.pieces,
-        albumId: this.album.ID,
-        album: this.album
-      }
-    });
-  }
-
-  openMusic(id) {
-    window.open(this.musicAlbumUrl + id, 'music');
-  }
-
-  restorePieces(album: Album) {
-    this.album.pieces = album.pieces;
-    this.album.cuesheets = album.cuesheets;
-  }
-
-  tagedit() {
-    this.musicService.tagEditor(this.album.Path).subscribe();
-  }
-
-  refetch(albumId) {
-    this.musicService.refetch(albumId).subscribe(
-      (response: Album) => this.restorePieces(response)
-    );
-  }
-
-  website() {
-    this.musicService.openwebsite(this.album.ID)
-      .subscribe();
-  }
-
-  pasteAlbumImage() {
-    this.musicService.pasteAlbumImage(this.album.ID).subscribe();
   }
 
   updateAlbumTitle(id, title) {

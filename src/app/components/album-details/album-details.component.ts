@@ -26,6 +26,9 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   list: List;
   chevron = 'keyboard_arrow_down';
   idpiece: number;
+  selectedCuesheet: Cuesheet;
+  invalidCuesheets: Cuesheet[];
+  validCuesheets: Cuesheet[];
 
   constructor(
     private musicService: MusicService,
@@ -115,6 +118,18 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     }
   }
 
+  getCuesheets(album: Album) {
+    this.invalidCuesheets = [];
+    this.validCuesheets = [];
+    album.cuesheets.forEach(cuesheet => {
+      if (cuesheet.Invalid) {
+        this.invalidCuesheets.push(cuesheet);
+      } else {
+        this.validCuesheets.push(cuesheet);
+      }
+    });
+  }
+
   openAlbum(album: Album): void {
     this.album = album;
     this.chevron = 'keyboard_arrow_down';
@@ -130,6 +145,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
       }
       this.getDiscid(album);
       this.getAsin(album);
+      this.getCuesheets(album);
     }
   }
 

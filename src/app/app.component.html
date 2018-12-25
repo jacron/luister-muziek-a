@@ -11,6 +11,7 @@
          (click)="sidenav.close()"
          [routerLink]="link.href"
          *ngFor="let link of links">
+        <mat-icon>{{ link.icon }}</mat-icon>
         {{ link.label }}
       </a>
       <span class="vertical-spacer"></span>

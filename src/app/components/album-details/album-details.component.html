@@ -5,22 +5,22 @@
      (swiperight)="back()"
 >
     <app-toolbar [album]="album"></app-toolbar>
-  <!--<div>-->
-    <!--<mat-icon-->
-      <!--*ngIf="navBackwards"-->
-      <!--(click)="back()"-->
-      <!--class="navig left"-->
-    <!--&gt;-->
-      <!--keyboard_arrow_left-->
-    <!--</mat-icon>-->
-    <!--<mat-icon-->
-      <!--*ngIf="navForwards"-->
-      <!--(click)="forward()"-->
-      <!--class="navig right"-->
-    <!--&gt;-->
-      <!--keyboard_arrow_right-->
-    <!--</mat-icon>-->
-  <!--</div>-->
+  <div>
+    <mat-icon
+      *ngIf="navBackwards"
+      (click)="back()"
+      class="navig left"
+    >
+      keyboard_arrow_left
+    </mat-icon>
+    <mat-icon
+      *ngIf="navForwards"
+      (click)="forward()"
+      class="navig right"
+    >
+      keyboard_arrow_right
+    </mat-icon>
+  </div>
   <div class="chips">
       <app-chip-lists [album]="album"
                       [removable]="false"
@@ -29,27 +29,68 @@
       ></app-chip-lists>
   </div>
   <div class="row">
-    <div class="col first">
+    <div>
         <img src="{{ imgUrl }}{{ album.ID }}/album/300/-1"
              (click)="openPic('front')"
              class="thumb">
-    </div>
-    <div class="col">
       <img *ngIf="album.album_back_image"
            src="{{ imgBackUrl }}{{ album.ID }}/album/100/-1"
            (click)="openPic('back')"
            class="back-thumb">
       <app-album-metatags [album]="album"></app-album-metatags>
     </div>
-  </div>
-  <div class="row cuesheets">
-    <div class="col">
-      <app-album-cuesheets [cuesheets]="album.cuesheets"
+    <div class="col-cue">
+      <!--<div *ngFor="let cuesheet of validCuesheets">-->
+        <!--<div mat-line-->
+              <!--class="title"-->
+              <!--(click)="selectedCuesheet=cuesheet"-->
+              <!--[class.selected]="cuesheet.ID == idpiece">-->
+          <!--{{ cuesheet.Title }}-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div *ngFor="let cuesheet of invalidCuesheets">-->
+        <!--<div mat-line-->
+              <!--class="title invalid"-->
+              <!--(click)="selectedCuesheet=cuesheet"-->
+              <!--[class.selected]="cuesheet.ID == idpiece">-->
+          <!--{{ cuesheet.Title }}-->
+        <!--</div>-->
+      <!--</div>-->
+      <app-album-cuesheets [cuesheets]="validCuesheets"
+                           [playable]="true"
+                           [idpiece]="idpiece"
+                           [album]="album"></app-album-cuesheets>
+      <app-album-cuesheets [cuesheets]="invalidCuesheets"
+                           [playable]="false"
                            [idpiece]="idpiece"
                            [album]="album"></app-album-cuesheets>
     </div>
   </div>
-  <div class="row">
+  <!--<div class="row cuesheets" *ngIf="selectedCuesheet">-->
+    <!--<div class="col">-->
+      <!--<mat-icon-->
+        <!--[class.played]="selectedCuesheet.played"-->
+        <!--[class.invalid]="selectedCuesheet.Invalid"-->
+        <!--class="play"-->
+        <!--waves-light waves-effect-->
+        <!--(click)="play(selectedCuesheet.ID)">-->
+        <!--play_circle_filled</mat-icon>-->
+
+      <!--<app-cuesheet-menu-->
+        <!--[cuesheet]="selectedCuesheet" (titleChange)="titleChange($event)"-->
+        <!--[album]="album"></app-cuesheet-menu>-->
+
+      <!--<div class="text-container">-->
+        <!--<span mat-line-->
+          <!--class="title"-->
+          <!--[class.selected]="selectedCuesheet.ID == idpiece">-->
+          <!--{{ selectedCuesheet.Title }}-->
+        <!--</span>-->
+      <!--</div>-->
+
+    <!--</div>-->
+  <!--</div>-->
+  <div class="row selected-cuesheet">
     <div class="col">
       <div class="opener">
         <div class="count">{{ album.pieces.length }}</div>

@@ -15,31 +15,38 @@ export class AppComponent {
   links = [
     {
       href: 'search',
-      label: 'Zoek'
+      label: 'Zoek',
+      icon: 'search'
     },
     {
       href: 'recent',
-      label: 'Actueel'
+      label: 'Actueel',
+      icon: 'access_time'
     },
     {
       href: 'componist',
-      label: 'Componist'
+      label: 'Componist',
+      icon: 'person'
     },
     {
       href: 'performer',
-      label: 'Artiest'
+      label: 'Artiest',
+      icon: 'person'
     },
     {
       href: 'collectie',
-      label: 'Collectie'
+      label: 'Collectie',
+      icon: 'all_inbox'
     },
     {
       href: 'tag',
-      label: 'Tag'
+      label: 'Tag',
+      icon: 'bookmark'
     },
     {
       href: 'code',
-      label: 'Code'
+      label: 'Code',
+      icon: 'code'
     },
   ];
 
