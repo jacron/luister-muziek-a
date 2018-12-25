@@ -7,6 +7,7 @@ import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component'
 import {ActivatedRoute, Router} from '@angular/router';
 import {List} from '../../classes/List';
 import {StorageService} from '../../services/storage.service';
+import {Cuesheet} from '../../classes/Cuesheet';
 
 @Component({
   selector: 'app-album-details',
@@ -82,6 +83,26 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     }
   }
 
+  getDiscid(album: Album) {
+    for (let i = 0; i < album.cuesheets.length; i++) {
+      const cuesheet: Cuesheet = album.cuesheets[i];
+      if (cuesheet.discid) {
+        album.discid = cuesheet.discid;
+        return;
+      }
+    }
+  }
+
+  getAsin(album: Album) {
+    for (let i = 0; i < album.cuesheets.length; i++) {
+      const cuesheet: Cuesheet = album.cuesheets[i];
+      if (cuesheet.asin) {
+        album.asin = cuesheet.asin;
+        return;
+      }
+    }
+  }
+
   openAlbum(album: Album): void {
     this.album = album;
     this.chevron = 'keyboard_arrow_down';
@@ -95,6 +116,8 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
       if (this.albumPiecesContainSelection(this.idpiece)) {
         this.album.expanded = true;
       }
+      this.getDiscid(album);
+      this.getAsin(album);
     }
   }
 

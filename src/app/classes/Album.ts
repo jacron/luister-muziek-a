@@ -22,6 +22,8 @@ export class Album {
   mother: Album;
   website: string;
   filteredPieces?: Piece[];
+  discid?: string;
+  asin?: string;
   // album_folder_image: boolean;
 
   // constructor() { this.expanded = true; }

@@ -9,12 +9,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SearchComponent } from './components/search/search.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
-import {
-  MatAutocompleteModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDialogModule, MatExpansionModule,
-  MatIconModule, MatInputModule, MatListModule,
-  MatMenuModule,
-  MatSelectModule, MatToolbarModule, MatTooltipModule
-} from '@angular/material';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AlbumThumbComponent } from './components/album-thumb/album-thumb.component';
 import { AppRoutingModule} from './app-routing/app-routing.module';
@@ -64,6 +58,7 @@ import {ChoiceService} from './services/choice.service';
 import { VisiblePipe } from './pipes/visible.pipe';
 import { DialogInstrumentComponent } from './dialogs/dialog-instrument/dialog-instrument.component';
 import { RecentComponent } from './components/recent/recent.component';
+import {MatModule} from './mat/mat.module';
 
 @NgModule({
   declarations: [
@@ -118,22 +113,9 @@ import { RecentComponent } from './components/recent/recent.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,  // needed for ngModel
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatAutocompleteModule,
-    MatIconModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatChipsModule,
-    MatToolbarModule,
-    MatDialogModule,
-    MatMenuModule,
-    MatTooltipModule,
-    MatCheckboxModule,
-    MatListModule,
     HttpClientModule,
     AppRoutingModule,
+    MatModule,
     ReactiveFormsModule,
   ],
   entryComponents: [
@@ -146,6 +128,7 @@ import { RecentComponent } from './components/recent/recent.component';
     DialogInputComponent,
     DialogCustomizeSearchComponent,
     DialogInstrumentComponent,
+    AppComponent,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
@@ -157,7 +140,6 @@ import { RecentComponent } from './components/recent/recent.component';
     StorageService,
     UtilService,
     CuesheetService,
-    MatDialogModule,
     ChoiceService,
   ],
   bootstrap: [AppComponent]

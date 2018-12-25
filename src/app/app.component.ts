@@ -10,11 +10,12 @@ import {MusicService} from './services/music.service';
 export class AppComponent {
 
   title = 'Luister Muziek A';
-  prouter;
+  opened: boolean;
+
   links = [
     {
       href: 'search',
-      label: 'Home'
+      label: 'Zoek'
     },
     {
       href: 'recent',
@@ -44,9 +45,7 @@ export class AppComponent {
 
   constructor(
     private musicService: MusicService,
-    private router: Router
   ) {
-    this.prouter = router;
   }
 
   play(cmd) {

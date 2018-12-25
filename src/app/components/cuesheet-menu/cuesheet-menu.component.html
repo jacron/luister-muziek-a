@@ -42,33 +42,4 @@
       delete
     </mat-icon><span>Verwijder</span>
   </button>
-  <mat-divider></mat-divider>
-  <span *ngIf="cuesheet.discid">
-      <button mat-menu-item
-      (click)="openmusicbrainz(cuesheet.discid)">
-        <mat-icon
-          style="color: #8f407a"
-        >library_music</mat-icon><span>
-        musicbrainz
-      </span>
-      </button>
-      <button mat-menu-item
-      (click)="openfreedb(cuesheet.discid)">
-        <mat-icon
-          style="color: #395499"
-        >library_music</mat-icon><span>
-        freedb
-      </span>
-      </button>
-  </span>
-  <span *ngIf="cuesheet.asin">
-    <button mat-menu-item
-    (click)="openamazon(cuesheet.asin)">
-      <mat-icon
-        style="color: orange"
-      >music_video</mat-icon>
-    </button><span>
-    amazon
-  </span>
-  </span>
 </mat-menu>

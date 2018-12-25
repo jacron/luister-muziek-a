@@ -1,17 +1,36 @@
-<nav>
-    <a routerLinkActive="selected" [routerLink]="link.href"
-       *ngFor="let link of links">
-      {{ link.label }}
-    </a>
-  <span class="horizontal-spacer"></span>
-  <a>
-    <mat-icon  (click)="play('pause')" class="control">
-      pause_circle_outline</mat-icon>
-  </a>
-</nav>
-<main>
-  <div class="container">
-    <router-outlet></router-outlet>
-    <!-- Routed views go here -->
-  </div>
-</main>
+<mat-sidenav-container class="container-main">
+  <mat-sidenav #sidenav mode="over">
+    <nav>
+      <h2>
+        music-client
+        <button mat-button (click)="sidenav.close()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </h2>
+      <a routerLinkActive="selected"
+         (click)="sidenav.close()"
+         [routerLink]="link.href"
+         *ngFor="let link of links">
+        {{ link.label }}
+      </a>
+      <span class="vertical-spacer"></span>
+        <button mat-button>
+          <mat-icon  (click)="play('pause')"
+                     class="control">
+            pause_circle_outline</mat-icon>&nbsp;
+          <span>pause</span>
+        </button>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main>
+      <mat-toolbar>
+        <mat-icon (click)="sidenav.toggle()">dehaze</mat-icon>
+      </mat-toolbar>
+      <div class="container2">
+        <router-outlet></router-outlet>
+        <!-- Routed views go here -->
+      </div>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

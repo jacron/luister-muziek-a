@@ -15,6 +15,9 @@ ul {
 .horizontal-spacer {
   flex: 1 1 auto;
 }
+.vertical-spacer {
+  flex-grow: 1;
+}
 .album-control {
   cursor: pointer;
   padding: 2px 4px;
@@ -52,4 +55,7 @@ ul {
 }
 .link {
   cursor: pointer;
+}
+.container-main .mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparent;
 }

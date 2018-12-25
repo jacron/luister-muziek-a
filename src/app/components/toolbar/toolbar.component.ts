@@ -8,6 +8,7 @@ import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.c
 import {List} from '../../classes/List';
 import {stringify} from 'querystring';
 import {UtilService} from '../../services/util.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-toolbar',
@@ -27,6 +28,9 @@ export class ToolbarComponent implements OnInit, OnChanges {
   navForwardsCount: number;
   navBackwardsCount: number;
   musicAlbumUrl = 'http://localhost:8010/album/';
+  freedbUrl = environment.freedbUrl;
+  musicbrainzUrl = environment.musicbrainz;
+  amazonUrl = environment.amazonUrl;
 
   constructor(
     private musicService: MusicService,
@@ -38,6 +42,18 @@ export class ToolbarComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes) {
     this.enableNavig(this.list);
+  }
+
+  openfreedb(id) {
+    window.open(this.freedbUrl + id);
+  }
+
+  openmusicbrainz(id) {
+    window.open(this.musicbrainzUrl + id);
+  }
+
+  openamazon(asin) {
+    window.open(this.amazonUrl + asin);
   }
 
   albumTitleKeydown(e, id, title) {
@@ -129,7 +145,7 @@ export class ToolbarComponent implements OnInit, OnChanges {
 
   toList() {
     const sParams = this.util.cloneObject(this.list.params);
-    sParams.search = this.list.query;
+    sParams.search = this.list.query || '';
     this.router.navigate([
       this.list.url,
       sParams

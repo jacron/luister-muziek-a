@@ -2,9 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Cuesheet} from '../../classes/Cuesheet';
 import {MusicService} from '../../services/music.service';
 import {Album} from '../../classes/Album';
-import {environment} from '../../../environments/environment';
 import {MatDialog} from '@angular/material';
-import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.component';
 import {DialogCuesheetPartsComponent} from '../../dialogs/dialog-cuesheet-parts/dialog-cuesheet-parts.component';
 
 @Component({
@@ -16,9 +14,6 @@ export class CuesheetMenuComponent implements OnInit {
 
   @Input() cuesheet: Cuesheet;
   @Input() album: Album;
-  freedbUrl = environment.freedbUrl;
-  musicbrainzUrl = environment.musicbrainz;
-  amazonUrl = environment.amazonUrl;
 
   constructor(
     private musicService: MusicService,
@@ -54,18 +49,6 @@ export class CuesheetMenuComponent implements OnInit {
   //   );
   // }
 
-  openfreedb(id) {
-    window.open(this.freedbUrl + id);
-  }
-
-  openmusicbrainz(id) {
-    window.open(this.musicbrainzUrl + id);
-  }
-
-  openamazon(asin) {
-    window.open(this.amazonUrl + asin);
-  }
-
   afterDelete() {
     this.musicService.refetch(this.album.ID).subscribe(
       (album: Album) => this.album.cuesheets = album.cuesheets
@@ -75,7 +58,7 @@ export class CuesheetMenuComponent implements OnInit {
   delete(cuesheet: Cuesheet) {
     if (confirm('delete "' + cuesheet.Title + '"?')) {
       this.musicService.deleteCue(cuesheet.ID, this.album.ID)
-        .subscribe((response) => this.afterDelete()
+        .subscribe(() => this.afterDelete()
         );
     }
   }

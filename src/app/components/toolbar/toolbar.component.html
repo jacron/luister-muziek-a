@@ -122,6 +122,33 @@
         </mat-icon>
         <span>Paste image (folder.jpg)</span>
       </button>
+      <!-- use discid if provided -->
+      <span *ngIf="album.discid">
+        <mat-divider></mat-divider>
+        <button mat-menu-item
+                (click)="openmusicbrainz(album.discid)">
+          <mat-icon
+            style="color: #8f407a"
+          >library_music</mat-icon>
+          <span>musicbrainz</span>
+        </button>
+        <button mat-menu-item
+                (click)="openfreedb(album.discid)">
+            <mat-icon
+              style="color: #395499"
+            >library_music</mat-icon>
+          <span>freedb</span>
+        </button>
+      </span>
+      <span *ngIf="album.asin">
+        <button mat-menu-item
+              (click)="openamazon(album.asin)">
+          <mat-icon
+            style="color: orange"
+          >music_video</mat-icon>
+          <span>amazon</span>
+        </button>
+      </span>
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
