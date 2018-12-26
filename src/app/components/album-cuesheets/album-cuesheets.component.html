@@ -12,17 +12,11 @@
           (click)="play(cuesheet.ID)">
           play_circle_filled</mat-icon>
 
-        <app-cuesheet-menu
-          [cuesheet]="cuesheet" (titleChange)="titleChange($event)"
-          [album]="album"></app-cuesheet-menu>
-
-        <div class="text-container">
           <span mat-line
                 class="title"
                 [class.selected]="cuesheet.ID == idpiece">
             {{ cuesheet.Title }}
           </span>
-        </div>
 
       </mat-expansion-panel-header>
       <app-cuesheet-parts

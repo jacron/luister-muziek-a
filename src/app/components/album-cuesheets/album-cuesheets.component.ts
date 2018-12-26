@@ -19,11 +19,11 @@ export class AlbumCuesheetsComponent implements OnInit {
     private musicService: MusicService
   ) { }
 
-  titleChange(data) {
-    const {id, title} = data;
-    const cuesheet = this.getCuesheetById(id, this.cuesheets);
-    cuesheet.Title = title;
-  }
+  // titleChange(data) {
+  //   const {id, title} = data;
+  //   const cuesheet = this.getCuesheetById(id, this.cuesheets);
+  //   cuesheet.Title = title;
+  // }
 
   getCuesheetById(id: number, cuesheets: Cuesheet[]): Cuesheet | null {
     for (let i = 0; i < cuesheets.length; i++) {

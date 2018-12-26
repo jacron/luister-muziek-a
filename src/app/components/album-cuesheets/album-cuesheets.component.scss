@@ -2,8 +2,6 @@
 
 .play {
   opacity: .6;
-  position: relative;
-  top: 7px;
   color: orange;
   cursor: pointer;
 }
@@ -35,11 +33,13 @@
 }
 .text-container {
   display: inline-block;
-  padding-top: 12px;
 }
 .title {
   max-width: 500px;
   white-space: nowrap;
+  position: relative;
+  top: 3px;
+  left: 12px;
 }
 .selected {
   font-weight: bold;
