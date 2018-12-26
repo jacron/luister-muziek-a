@@ -40,22 +40,6 @@
       <app-album-metatags [album]="album"></app-album-metatags>
     </div>
     <div class="col-cue">
-      <!--<div *ngFor="let cuesheet of validCuesheets">-->
-        <!--<div mat-line-->
-              <!--class="title"-->
-              <!--(click)="selectedCuesheet=cuesheet"-->
-              <!--[class.selected]="cuesheet.ID == idpiece">-->
-          <!--{{ cuesheet.Title }}-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div *ngFor="let cuesheet of invalidCuesheets">-->
-        <!--<div mat-line-->
-              <!--class="title invalid"-->
-              <!--(click)="selectedCuesheet=cuesheet"-->
-              <!--[class.selected]="cuesheet.ID == idpiece">-->
-          <!--{{ cuesheet.Title }}-->
-        <!--</div>-->
-      <!--</div>-->
       <app-album-cuesheets [cuesheets]="validCuesheets"
                            [playable]="true"
                            [idpiece]="idpiece"
@@ -66,30 +50,6 @@
                            [album]="album"></app-album-cuesheets>
     </div>
   </div>
-  <!--<div class="row cuesheets" *ngIf="selectedCuesheet">-->
-    <!--<div class="col">-->
-      <!--<mat-icon-->
-        <!--[class.played]="selectedCuesheet.played"-->
-        <!--[class.invalid]="selectedCuesheet.Invalid"-->
-        <!--class="play"-->
-        <!--waves-light waves-effect-->
-        <!--(click)="play(selectedCuesheet.ID)">-->
-        <!--play_circle_filled</mat-icon>-->
-
-      <!--<app-cuesheet-menu-->
-        <!--[cuesheet]="selectedCuesheet" (titleChange)="titleChange($event)"-->
-        <!--[album]="album"></app-cuesheet-menu>-->
-
-      <!--<div class="text-container">-->
-        <!--<span mat-line-->
-          <!--class="title"-->
-          <!--[class.selected]="selectedCuesheet.ID == idpiece">-->
-          <!--{{ selectedCuesheet.Title }}-->
-        <!--</span>-->
-      <!--</div>-->
-
-    <!--</div>-->
-  <!--</div>-->
   <div class="row selected-cuesheet">
     <div class="col">
       <div class="opener">

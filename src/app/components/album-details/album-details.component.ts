@@ -26,7 +26,6 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   list: List;
   chevron = 'keyboard_arrow_down';
   idpiece: number;
-  selectedCuesheet: Cuesheet;
   invalidCuesheets: Cuesheet[];
   validCuesheets: Cuesheet[];
 
@@ -54,7 +53,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   }
 
   test(e) {
-    console.log(e.key);
+    // console.log(e.key);
     switch (e.key) {
       case 'ArrowRight':
         this.forward();

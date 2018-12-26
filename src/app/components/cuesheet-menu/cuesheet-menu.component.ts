@@ -14,8 +14,8 @@ import {DialogInputComponent} from '../../dialogs/dialog-input/dialog-input.comp
 export class CuesheetMenuComponent implements OnInit {
 
   @Input() cuesheet: Cuesheet;
-  @Output() titleChange: EventEmitter<any> = new EventEmitter<any>();
   @Input() album: Album;
+  @Output() titleChange: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private musicService: MusicService,

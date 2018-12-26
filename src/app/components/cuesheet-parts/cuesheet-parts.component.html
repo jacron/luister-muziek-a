@@ -1,0 +1,21 @@
+<span *ngIf="performers">
+    <span>performers: </span>
+      <a *ngFor="let p of performers; let i = index"
+         title="add performer"
+         (click)="addPerformer(p)">
+        {{ p }}<span *ngIf="i < performers.length - 1"
+      >,</span>
+      </a>
+    <mat-divider></mat-divider>
+    </span>
+<mat-list>
+  <mat-list-item *ngFor="let stuk of stukken">
+    <span mat-line>{{ stuk }}</span>
+  </mat-list-item>
+</mat-list>
+<mat-action-row>
+  <app-cuesheet-actions [cuesheet]="cuesheet"
+                        [album]="album"
+                        (titleChange)="changeTitle($event)"
+  ></app-cuesheet-actions>
+</mat-action-row>

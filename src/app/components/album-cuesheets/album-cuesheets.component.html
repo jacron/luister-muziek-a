@@ -1,22 +1,35 @@
 <div *ngFor="let cuesheet of cuesheets"
 >
-  <mat-icon
-    [class.played]="cuesheet.played"
-    [class.invalid]="cuesheet.Invalid"
-    class="play"
-    waves-light waves-effect
-    (click)="play(cuesheet.ID)">
-    play_circle_filled</mat-icon>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
 
-  <app-cuesheet-menu
-    [cuesheet]="cuesheet" (titleChange)="titleChange($event)"
-    [album]="album"></app-cuesheet-menu>
+        <mat-icon
+          [class.played]="cuesheet.played"
+          [class.invalid]="cuesheet.Invalid"
+          class="play"
+          waves-light waves-effect
+          (click)="play(cuesheet.ID)">
+          play_circle_filled</mat-icon>
 
-  <div class="text-container">
-    <span mat-line
-          class="title"
-          [class.selected]="cuesheet.ID == idpiece">
-      {{ cuesheet.Title }}
-    </span>
-  </div>
+        <app-cuesheet-menu
+          [cuesheet]="cuesheet" (titleChange)="titleChange($event)"
+          [album]="album"></app-cuesheet-menu>
+
+        <div class="text-container">
+          <span mat-line
+                class="title"
+                [class.selected]="cuesheet.ID == idpiece">
+            {{ cuesheet.Title }}
+          </span>
+        </div>
+
+      </mat-expansion-panel-header>
+      <app-cuesheet-parts
+        [album]="album"
+        [cuesheet]="cuesheet"
+        (titleChange)="cuesheet.Title = $event.title"
+      ></app-cuesheet-parts>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

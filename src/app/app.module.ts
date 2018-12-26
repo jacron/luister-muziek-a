@@ -60,6 +60,8 @@ import { DialogInstrumentComponent } from './dialogs/dialog-instrument/dialog-in
 import { RecentComponent } from './components/recent/recent.component';
 import {MatModule} from './mat/mat.module';
 import { AlbumMenuComponent } from './components/album-menu/album-menu.component';
+import { CuesheetPartsComponent } from './components/cuesheet-parts/cuesheet-parts.component';
+import { CuesheetActionsComponent } from './components/cuesheet-actions/cuesheet-actions.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +112,8 @@ import { AlbumMenuComponent } from './components/album-menu/album-menu.component
     DialogInstrumentComponent,
     RecentComponent,
     AlbumMenuComponent,
+    CuesheetPartsComponent,
+    CuesheetActionsComponent,
   ],
   imports: [
     BrowserModule,
