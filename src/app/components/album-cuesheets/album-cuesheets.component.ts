@@ -39,7 +39,9 @@ export class AlbumCuesheetsComponent implements OnInit {
     cuesheet.played = true;
   }
 
-  play(id) {
+  play(e, id) {
+    // console.log(e);
+    e.stopPropagation();
     if (this.playable) {
       this.musicService.play(id).subscribe(
         response => this.onPlayed(response, id)

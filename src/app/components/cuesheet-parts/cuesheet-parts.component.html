@@ -8,11 +8,26 @@
       </a>
     <mat-divider></mat-divider>
     </span>
+
 <mat-list>
-  <mat-list-item *ngFor="let stuk of stukken">
-    <span mat-line>{{ stuk }}</span>
+  <mat-list-item *ngFor="let trackname of tracknames">
+    <span mat-line>{{ trackname }}</span>
   </mat-list-item>
 </mat-list>
+
+<mat-list>
+  <mat-list-item *ngFor="let file of files">
+    <mat-icon class="file-play"
+              waves-light waves-effect
+              [class.file-played]="file.played"
+              (click)="play(file)">
+      play_circle_filled</mat-icon>
+    <div class="text-container">
+      <span>{{ stripExtension(file.name) }}</span>
+    </div>
+  </mat-list-item>
+</mat-list>
+
 <mat-action-row>
   <app-cuesheet-actions [cuesheet]="cuesheet"
                         [album]="album"

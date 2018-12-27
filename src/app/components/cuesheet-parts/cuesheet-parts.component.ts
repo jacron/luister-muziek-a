@@ -4,6 +4,8 @@ import {CuesheetService} from '../../services/cuesheet.service';
 import {Cuesheet} from '../../classes/Cuesheet';
 import {Person} from '../../classes/Person';
 import {MusicService} from '../../services/music.service';
+import {CFile} from '../../classes/CFile';
+import {UtilService} from '../../services/util.service';
 
 @Component({
   selector: 'app-cuesheet-parts',
@@ -15,13 +17,15 @@ export class CuesheetPartsComponent implements OnInit {
   @Input() cuesheet: Cuesheet;
   @Output() titleChange: EventEmitter<any> = new EventEmitter<any>();
 
-  stukken: string[];
+  tracknames: string[];
+  files: CFile[];
   performers: string[];
   title: string;
 
   constructor(
     private cuesheetService: CuesheetService,
-    private musicService: MusicService
+    private musicService: MusicService,
+    private util: UtilService,
   ) { }
 
   afterAddPerformer(response: Person) {
@@ -40,8 +44,24 @@ export class CuesheetPartsComponent implements OnInit {
     this.titleChange.emit(data);
   }
 
+  stripExtension(s) {
+    return this.util.stripExtension(s);
+  }
+
+  onPlayed(file: CFile) {
+    file.played = true;
+  }
+
+  play(file: CFile) {
+    this.musicService.playByName(this.album.ID, file.name).subscribe(
+      (response) => this.onPlayed(file)
+    );
+  }
+
   ngOnInit() {
-    this.stukken = this.cuesheetService.makeStukken(this.cuesheet);
+    const stukken = this.cuesheetService.makeStukken(this.cuesheet);
+    this.tracknames = stukken.tracknames;
+    this.files = stukken.files;
     this.performers = this.cuesheet.cue.performers;
   }
 

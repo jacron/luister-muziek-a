@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {UtilService} from './util.service';
 import {Cuesheet} from '../classes/Cuesheet';
+import {CFile} from '../classes/CFile';
 
 @Injectable()
 export class CuesheetService {
@@ -10,16 +11,21 @@ export class CuesheetService {
   ) { }
 
   makeStukken(cuesheet: Cuesheet) {
-    const stukken: string[] = [];
+    const tracknames: string[] = [];
+    const files: CFile[] = [];
+
     cuesheet.cue.files.forEach(file => {
       if (file.tracks.length > 1) {
         file.tracks.forEach(track => {
-          stukken.push(track.title);
+          tracknames.push(track.title);
         });
       } else {
-        stukken.push(this.util.stripExtension(file.name));
+        files.push(file);
       }
     });
-    return stukken;
+    return {
+      tracknames: tracknames,
+      files: files
+    };
   }
 }

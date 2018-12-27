@@ -29,13 +29,11 @@ import { DialogTagComponent } from './dialogs/dialog-tag/dialog-tag.component';
 import { DialogPiecesComponent } from './dialogs/dialog-pieces/dialog-pieces.component';
 import {PieceService} from './services/piece.service';
 import {PersonService} from './services/person.service';
-import { CuesheetMenuComponent } from './components/cuesheet-menu/cuesheet-menu.component';
 import { CodeComponent } from './components/code/code.component';
 import { CodeListComponent } from './components/code-list/code-list.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { AlbumListComponent } from './components/album-list/album-list.component';
-import { DialogCuesheetPartsComponent } from './dialogs/dialog-cuesheet-parts/dialog-cuesheet-parts.component';
 import {UtilService} from './services/util.service';
 import {CuesheetService} from './services/cuesheet.service';
 import { DialogInputComponent } from './dialogs/dialog-input/dialog-input.component';
@@ -86,8 +84,6 @@ import { ChipComponent } from './components/chip/chip.component';
     DialogPersonComponent,
     DialogTagComponent,
     DialogPiecesComponent,
-    DialogCuesheetPartsComponent,
-    CuesheetMenuComponent,
     CodeComponent,
     CodeListComponent,
     SettingsComponent,
@@ -131,7 +127,6 @@ import { ChipComponent } from './components/chip/chip.component';
     DialogAddComponent,
     DialogPersonComponent,
     DialogTagComponent,
-    DialogCuesheetPartsComponent,
     DialogPiecesComponent,
     DialogInputComponent,
     DialogCustomizeSearchComponent,

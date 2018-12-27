@@ -9,7 +9,7 @@
           [class.invalid]="cuesheet.Invalid"
           class="play"
           waves-light waves-effect
-          (click)="play(cuesheet.ID)">
+          (click)="play($event, cuesheet.ID)">
           play_circle_filled</mat-icon>
 
           <span mat-line
