@@ -28,6 +28,10 @@ export class AlbumPiecesComponent implements OnInit {
     return null;
   }
 
+  toCode(code) {
+    console.log(code);
+  }
+
   onPlayed(response, id) {
     // console.log(response);
     const piece = this.getPieceById(id);

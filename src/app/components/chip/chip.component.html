@@ -1,0 +1,12 @@
+<mat-chip [removable]="removable"
+          (remove)="remove()"
+          [style.backgroundColor]="color"
+>
+  <img
+    *ngIf="showimage"
+    src="{{ imageUrl"
+    (click)="openPic()"
+    class="avatar">
+  <a (click)="toItem()">{{ label }}</a>
+  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+</mat-chip>

@@ -1,8 +1,6 @@
 <div *ngIf="album" class="album"
      (keydown)="test($event)"
      tabindex="0"
-     (swipeleft)="forward()"
-     (swiperight)="back()"
 >
     <app-toolbar [album]="album"></app-toolbar>
   <div>

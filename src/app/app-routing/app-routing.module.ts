@@ -37,7 +37,7 @@ const appRoutes: Routes = [
   {path: 'tag/:id', component: TagListComponent},
   {path: 'code', component: CodeComponent},
   {path: 'code/:idcode', component: CodeComponent},
-  {path: 'code/list/:code/:fav', component: CodeListComponent},
+  {path: 'code/list/:code/:id', component: CodeListComponent},
   {path: 'code/list/:code', component: CodeListComponent},
   {path: 'settings', component: SettingsComponent},
   {path: 'recent', component: RecentComponent},

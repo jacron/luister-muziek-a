@@ -62,6 +62,7 @@ import {MatModule} from './mat/mat.module';
 import { AlbumMenuComponent } from './components/album-menu/album-menu.component';
 import { CuesheetPartsComponent } from './components/cuesheet-parts/cuesheet-parts.component';
 import { CuesheetActionsComponent } from './components/cuesheet-actions/cuesheet-actions.component';
+import { ChipComponent } from './components/chip/chip.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { CuesheetActionsComponent } from './components/cuesheet-actions/cuesheet
     AlbumMenuComponent,
     CuesheetPartsComponent,
     CuesheetActionsComponent,
+    ChipComponent,
   ],
   imports: [
     BrowserModule,

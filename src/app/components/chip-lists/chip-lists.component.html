@@ -1,5 +1,13 @@
 <mat-chip-list *ngIf="album">
-  <mat-chip *ngFor="let composer of album.album_componisten "
+  <app-chip *ngFor="let composer of album.album_componisten"
+            color="#ffeeee"
+            [removable]="removable"
+            [type]="composer"
+            [showimage]="showimage"
+            [imageUrl]="imgUrl + composer.ID + '/componist/-1/20'"
+            [label]="composer.FullName"
+  ></app-chip>
+  <mat-chip *ngFor="let composer of album.album_componisten"
             class="composers"
             [removable]="removable"
             (remove)="removeComposer(composer)">

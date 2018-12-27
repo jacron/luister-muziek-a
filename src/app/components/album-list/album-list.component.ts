@@ -106,6 +106,7 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
       height = (window.innerHeight || document.documentElement.clientHeight),
       width = (window.innerWidth || document.documentElement.clientWidth),
       diff = 10;
+    // console.log(rect);
     return (
       rect.bottom >= 0 &&
       rect.right >= 0 &&
@@ -114,10 +115,11 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     );
   }
 
-  lazyLoad() {
+  lazyLoad(mode = 'desktop') {
     const that = this;
+    // console.log('in lazyload');
     this.lazyImages.forEach((image) => {
-      if (that.elementInViewport(image)) {
+      if (mode === 'touch' || that.elementInViewport(image)) {
         const dataSrc = image.getAttribute(that.lazyAttribute);
         if (dataSrc) {
           that.musicService.getAlbumById(image.getAttribute('albumid')).subscribe(
@@ -138,15 +140,17 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
   lazy() {
     this.setLazy();
     this.lazyLoad();
-    const that = this;
-    window.onscroll = function() { that.lazyLoad(); };
-    window.onresize = function() { that.lazyLoad(); };
+
+    window.addEventListener('touchmove', () => this.lazyLoad('touch'));
+    window.addEventListener('resize', () => this.lazyLoad());
+    const container = document.querySelector('.mat-sidenav-content');
+    container.addEventListener('scroll', () => this.lazyLoad());
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
       this.lazy();
-    }, 200);
+    }, 0);
   }
 
   onChangedAlbums(albums: Album[]) {

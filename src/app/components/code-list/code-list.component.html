@@ -25,13 +25,16 @@
           (input)="model=topicAlias.innerText"
           (keydown)="aliasKeydown($event, item.k_code, topicAlias.innerText)">
     </div>
+        <a [routerLink]="item.k_code">
+          <span>{{ item.Tempo }}</span> - <span>{{ item.Key }}</span>
+        </a>
         <img src="{{ imageUrl }}{{ item.k_code }}/librarycode/">
         <ul>
           <li *ngFor="let piece of item.pieces">
             <mat-icon
               [class.played]="piece.played"
               class="play"
-              waves-light waves-effect mdbRippleRadius
+              waves-light waves-effect
               (click)="play(piece)">
               play_circle_filled</mat-icon>
             <a href="album/{{ piece.Album.ID }}">

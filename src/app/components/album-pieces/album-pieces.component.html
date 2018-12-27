@@ -15,4 +15,13 @@
           (keydown)="nameKeydown($event, piece, topicTitle.innerText)">
     </div>
   </div>
+
+  <mat-chip *ngIf="piece.LibraryCode"
+            class="composers"
+            [removable]="removable"
+            (remove)="removeComposer(composer)">
+    <a (click)="toCode(piece.LibraryCode)">{{ piece.LibraryCode }}</a>
+    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+  </mat-chip>
+
 </div>
