@@ -69,7 +69,7 @@ export class ToolsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // test path
+    // browse path
     // this.path = '/Volumes/Media/Audio/Klassiek/Componisten/Bach/Mattheus Passion/Frans Bruggen';
   }
 

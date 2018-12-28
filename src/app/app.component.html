@@ -2,7 +2,7 @@
   <mat-sidenav #sidenav mode="over">
     <nav>
       <h2>
-        music-client
+        {{ appTitle }}
         <button mat-button (click)="sidenav.close()">
           <mat-icon>close</mat-icon>
         </button>
@@ -14,19 +14,19 @@
         <mat-icon>{{ link.icon }}</mat-icon>
         {{ link.label }}
       </a>
-      <span class="vertical-spacer"></span>
-        <button mat-button>
-          <mat-icon  (click)="play('pause')"
-                     class="control">
-            pause_circle_outline</mat-icon>&nbsp;
-          <span>pause</span>
-        </button>
     </nav>
   </mat-sidenav>
   <mat-sidenav-content>
     <main>
       <mat-toolbar>
         <mat-icon (click)="sidenav.toggle()">dehaze</mat-icon>
+        <h2>{{ title }}</h2>
+        <span class="horizontal-spacer"></span>
+        <button mat-button>
+          <mat-icon  (click)="play('pause')"
+                     class="control">
+            pause_circle</mat-icon>&nbsp;
+        </button>
       </mat-toolbar>
       <div class="container2">
         <router-outlet></router-outlet>

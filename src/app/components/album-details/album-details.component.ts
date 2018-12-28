@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {List} from '../../classes/List';
 import {StorageService} from '../../services/storage.service';
 import {Cuesheet} from '../../classes/Cuesheet';
+import {StateService} from '../../services/state.service';
 
 @Component({
   selector: 'app-album-details',
@@ -35,6 +36,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private storageService: StorageService,
+    private stateService: StateService,
   ) {
     route.params.subscribe(params => this.handleParams(params));
   }
@@ -52,8 +54,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     }
   }
 
-  test(e) {
-    // console.log(e.key);
+  browse(e) {
     switch (e.key) {
       case 'ArrowRight':
         this.forward();
@@ -134,7 +135,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     this.chevron = 'keyboard_arrow_down';
     if (album) {
       // console.log(album);
-      document.title = album.Title;
+      this.stateService.setTitle(album.Title);
       if (album.cuesheets.length < 1) {
         this.album.expanded = true;
       }

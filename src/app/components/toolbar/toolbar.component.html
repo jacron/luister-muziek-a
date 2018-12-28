@@ -1,21 +1,21 @@
 <mat-toolbar style="margin: -14px 0 0;" *ngIf="album">
-  <mat-toolbar-row>
-    <div #topicTitle
-         contenteditable="true"
-         class="title"
-         [textContent]="album.Title"
-         (input)="model=topicTitle.innerText"
-         (keydown)="albumTitleKeydown($event, album.ID, topicTitle.innerText)">
-    </div>
-  </mat-toolbar-row>
-  <mat-toolbar-row class="sub">
-    <div #topicDescription
-         contenteditable="true"
-         [textContent]="album.Description"
-         (input)="model=topicDescription.innerText"
-         (keydown)="albumDescriptionKeydown($event, album.ID, topicDescription.innerText)">
-    </div>
-  </mat-toolbar-row>
+  <!--<mat-toolbar-row>-->
+    <!--<div #topicTitle-->
+         <!--contenteditable="true"-->
+         <!--class="title"-->
+         <!--[textContent]="album.Title"-->
+         <!--(input)="model=topicTitle.innerText"-->
+         <!--(keydown)="albumTitleKeydown($event, album.ID, topicTitle.innerText)">-->
+    <!--</div>-->
+  <!--</mat-toolbar-row>-->
+  <!--<mat-toolbar-row class="sub">-->
+    <!--<div #topicDescription-->
+         <!--contenteditable="true"-->
+         <!--[textContent]="album.Description"-->
+         <!--(input)="model=topicDescription.innerText"-->
+         <!--(keydown)="albumDescriptionKeydown($event, album.ID, topicDescription.innerText)">-->
+    <!--</div>-->
+  <!--</mat-toolbar-row>-->
   <mat-toolbar-row class="sub">
     <!-- collection (navigated) -->
     <div>

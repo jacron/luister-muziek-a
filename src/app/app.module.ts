@@ -61,6 +61,7 @@ import { AlbumMenuComponent } from './components/album-menu/album-menu.component
 import { CuesheetPartsComponent } from './components/cuesheet-parts/cuesheet-parts.component';
 import { CuesheetActionsComponent } from './components/cuesheet-actions/cuesheet-actions.component';
 import { ChipComponent } from './components/chip/chip.component';
+import {StateService} from './services/state.service';
 
 @NgModule({
   declarations: [
@@ -144,6 +145,7 @@ import { ChipComponent } from './components/chip/chip.component';
     UtilService,
     CuesheetService,
     ChoiceService,
+    StateService
   ],
   bootstrap: [AppComponent]
 })

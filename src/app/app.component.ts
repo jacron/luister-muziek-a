@@ -1,15 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MusicService} from './services/music.service';
+import {StateService} from './services/state.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  title = 'Luister Muziek A';
+  appTitle = 'music-client';
+  title: string;
   opened: boolean;
 
   links = [
@@ -52,6 +54,7 @@ export class AppComponent {
 
   constructor(
     private musicService: MusicService,
+    private stateService: StateService,
   ) {
   }
 
@@ -61,5 +64,13 @@ export class AppComponent {
 
   search() {
     console.log('search');
+  }
+
+  setTitle(title) {
+    this.title = title;
+  }
+
+  ngOnInit() {
+    this.stateService.currentTitle.subscribe(title => this.setTitle(title));
   }
 }

@@ -66,6 +66,8 @@ export class DialogPiecesComponent implements OnInit {
   restorePieces(album: Album) {
     this.data.album.pieces = album.pieces;
     this.data.album.cuesheets = album.cuesheets;
+    // todo: restore further (callback?)
+    // this.data.pieces.forEach(piece => piece.marked = false);
   }
 
   reload() {
