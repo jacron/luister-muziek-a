@@ -1,0 +1,19 @@
+<mat-dialog-content>
+  <mat-form-field style="width: 100%">
+    <input matInput="" placeholder="Titel"
+           (keyup.enter)="submit()"
+           [(ngModel)]="title">
+  </mat-form-field>
+  <br>
+  <mat-form-field style="width: 100%">
+    <input matInput="" placeholder="Beschrijving"
+           (keyup.enter)="submit()"
+           [(ngModel)]="description">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button class="mat-raised-button"
+          (click)="cancel()">Annuleren</button>
+  <button mat-button class="mat-raised-button mat-primary"
+          (click)="submit()">Opslaan</button>
+</mat-dialog-actions>

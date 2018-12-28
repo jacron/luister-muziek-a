@@ -42,6 +42,7 @@ export class ChipListsComponent implements OnInit {
   }
 
   removeComposer(composer: Person) {
+    console.log(composer);
     const items = this.album.album_componisten;
     const index = this.getItemIndex(items, composer.ID);
     this.musicService.removeComposer(composer.ID, this.album.ID).subscribe(

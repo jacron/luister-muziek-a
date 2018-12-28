@@ -4,6 +4,8 @@ import {environment} from '../../../environments/environment';
 import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.component';
 import {MusicService} from '../../services/music.service';
 import {MatDialog} from '@angular/material';
+import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
+import {DialogAlbumComponent} from '../../dialogs/dialog-album/dialog-album.component';
 
 @Component({
   selector: 'app-album-menu',
@@ -19,13 +21,25 @@ export class AlbumMenuComponent implements OnInit {
   amazonUrl = environment.amazonUrl;
   menus = [
     {
+      label: 'Hernoem album',
+      action: 'edit_album',
+      icon: 'edit',
+      color: '',
+    },
+    {
+      label: 'Bewerk album chips',
+      action: 'edit_chips',
+      icon: 'edit',
+      color: 'orange',
+    },
+    {
       label: 'Cuesheets maker',
       action: 'edit_pieces',
       icon: 'edit',
       color: 'blue',
     },
     {
-      label: 'Bewerk met tag-editor',
+      label: 'Tag-editor',
       action: 'tag_edit',
       icon: 'edit',
       color: 'brown',
@@ -97,6 +111,12 @@ export class AlbumMenuComponent implements OnInit {
 
   action(name) {
     switch (name) {
+      case 'edit_album':
+        this.editAlbum();
+        break;
+      case 'edit_chips':
+        this.editChips();
+        break;
       case 'edit_pieces':
         this.editPieces();
         break;
@@ -149,9 +169,35 @@ export class AlbumMenuComponent implements OnInit {
     );
   }
 
+  afterEditAlbum(result) {
+    if (result) {
+      this.album.Title = result.title;
+      this.album.Description = result.description;
+    }
+  }
+
+  editAlbum() {
+    const dialogRef = this.dialog.open(DialogAlbumComponent, {
+      width: '600px',
+      data: {
+        album: this.album
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      result => this.afterEditAlbum(result)
+    );
+  }
+
+  editChips() {
+    this.dialog.open(DialogAddComponent, {
+      data: {
+        album: this.album
+      }
+    });
+  }
+
   editPieces() {
     this.dialog.open(DialogPiecesComponent, {
-      // width: '99%',
       data: {
         pieces: this.album.pieces,
         albumId: this.album.ID,

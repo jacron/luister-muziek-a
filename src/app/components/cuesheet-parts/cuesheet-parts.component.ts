@@ -40,10 +40,6 @@ export class CuesheetPartsComponent implements OnInit {
     );
   }
 
-  changeTitle(data) {
-    this.titleChange.emit(data);
-  }
-
   stripExtension(s) {
     return this.util.stripExtension(s);
   }
@@ -56,6 +52,10 @@ export class CuesheetPartsComponent implements OnInit {
     this.musicService.playByName(this.album.ID, file.name).subscribe(
       (response) => this.onPlayed(file)
     );
+  }
+
+  changeTitle(data) {
+    this.titleChange.emit(data);  // title en id
   }
 
   ngOnInit() {

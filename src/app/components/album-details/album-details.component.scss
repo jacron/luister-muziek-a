@@ -45,6 +45,8 @@ img.back-thumb {
 }
 .chips {
   margin: 14px 0 14px 14px;
+  display: flex;
+  align-items: baseline;
 }
 .cuesheets {
   margin-top: 20px;
@@ -104,4 +106,15 @@ img.back-thumb {
 }
 .title.invalid {
   color: #666666;
+}
+.thumb-container {
+  margin: 0 0 18px 18px;
+}
+mat-card:focus {
+  outline: 0 solid transparent;
+}
+.album-title {
+  font-size: 20px;
+  padding-top: 8px;
+  font-weight: bold;
 }

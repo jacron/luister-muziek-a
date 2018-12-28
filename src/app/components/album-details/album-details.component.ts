@@ -58,9 +58,11 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     switch (e.key) {
       case 'ArrowRight':
         this.forward();
+        e.preventDefault();
         break;
       case 'ArrowLeft':
         this.back();
+        e.preventDefault();
         break;
     }
   }
@@ -90,8 +92,9 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
 
   forward() {
     const albumIds = this.list.albumIds;
+    // console.log(albumIds, this.album.ID);
     for (let i = 0; i < albumIds.length - 1; i++) {
-      if (albumIds[i] === +this.album.ID) {
+      if (+albumIds[i] === +this.album.ID) {
         this.router.navigate(['/album',
           albumIds[i + 1]]).then();
       }
@@ -135,7 +138,8 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     this.chevron = 'keyboard_arrow_down';
     if (album) {
       // console.log(album);
-      this.stateService.setTitle(album.Title);
+      // this.stateService.setTitle(album.Title);
+      document.title = album.Title;
       if (album.cuesheets.length < 1) {
         this.album.expanded = true;
       }
@@ -191,6 +195,14 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
         break;
       }
     }
+  }
+
+  toList() {
+    this.router.navigate([
+      this.list.url,
+      this.list.params
+    ]).then(() => {
+    });
   }
 
   ngDoCheck() {

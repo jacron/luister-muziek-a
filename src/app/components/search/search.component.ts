@@ -43,13 +43,24 @@ export class SearchComponent implements OnInit {
       }
     });
   }
-
   getAlbumIds(albums) {
     const ids = [];
     if (Array.isArray(albums)) {
       albums.forEach(album => ids.push(album.ID));
     }
     return ids;
+  }
+
+
+  getAlbumsForList(albums) {
+    const listAlbums = [];
+    if (Array.isArray(albums)) {
+      albums.forEach((album: Album) => listAlbums.push({
+        Title: album.Title,
+        ID: album.ID,
+      }));
+    }
+    return listAlbums;
   }
 
   normParams(params: SearchParams): SearchParams {
@@ -73,6 +84,7 @@ export class SearchComponent implements OnInit {
     this.list = {
       title: document.title,
       albumIds: this.getAlbumIds(albums),
+      albums: this.getAlbumsForList(albums),
       url: '/search',
       params: this.params
     };

@@ -3,5 +3,6 @@ export class List {
   params: any;
   title: string;
   albumIds: number[];
+  albums: any[];
   query?: string;
 }

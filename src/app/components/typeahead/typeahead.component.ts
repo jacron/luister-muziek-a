@@ -14,7 +14,9 @@ export class TypeaheadComponent implements OnInit, OnChanges {
   @Input() items: any[];
   @Input() displayfield: string;
   @Input() id: string;
+  @Input() text: string;
   @Output() idChange = new EventEmitter();
+  @Output() textChange = new EventEmitter();
 
   filteredItems: Observable<any[]>;
   myControl = new FormControl();
@@ -33,8 +35,12 @@ export class TypeaheadComponent implements OnInit, OnChanges {
     return val ? val.Title : val;
   }
 
-  notify(val) {
+  notifyId(val) {
     this.idChange.emit(val.ID);
+  }
+
+  notifyText() {
+    this.textChange.emit(this.myControl.value);
   }
 
   private _filter(value: any): any[] {
@@ -68,11 +74,11 @@ export class TypeaheadComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // console.log(this.placeholder, this.displayfield, this.items);
-    // console.log(changes);
     if (changes.items) {
-      // console.log(changes.items);
       this.myControl.setValue(this.getItem());
+    }
+    if (changes.text) {
+      this.myControl.setValue(changes.text.currentValue);
     }
   }
 
