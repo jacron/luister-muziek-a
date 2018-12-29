@@ -19,23 +19,13 @@ export class AlbumPiecesComponent implements OnInit {
     private pieceService: PieceService
   ) { }
 
-  getPieceById(id) {
-    for (let i = 0; i < this.pieces.length; i++) {
-      if (this.pieces[i].ID === id) {
-        return this.pieces[i];
-      }
-    }
-    return null;
-  }
-
   toCode(code) {
     console.log(code);
   }
 
   onPlayed(response, id) {
-    // console.log(response);
-    const piece = this.getPieceById(id);
-    piece.played = true;
+    const pieces = this.pieces.filter(piece => piece.ID == id);
+    pieces[0].played = true;
   }
 
   play(id) {

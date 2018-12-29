@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material';
 import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
 import {DialogAlbumComponent} from '../../dialogs/dialog-album/dialog-album.component';
 import {DialogSettingsComponent} from '../../dialogs/dialog-settings/dialog-settings.component';
+import {OverlayContainer} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-album-menu',
@@ -78,7 +79,10 @@ export class AlbumMenuComponent implements OnInit {
   constructor(
     private musicService: MusicService,
     private dialog: MatDialog,
-  ) { }
+    private overlayContainer: OverlayContainer,
+  ) {
+    // this.overlayContainer.getContainerElement().classList.add('alternate-theme');
+  }
 
   addToMenus(album: Album) {
     if (album.website) {

@@ -99,13 +99,26 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     return false;
   }
 
+  navigateIf(id, idTarg) {
+    if ((id === +id || id.indexOf('/') === -1)
+      && id == this.album.ID) {
+      this.router.navigate(['/album', idTarg]).then();
+    } else {
+      const parts = id.split('/');
+      const partsTarg = idTarg.split('/');
+      const idAlbum = parts[0];
+      const idPiece = parts[1];
+      if (idAlbum == this.album.ID && idPiece == this.idpiece) {
+        this.router.navigate(['/album',
+          partsTarg[0], partsTarg[1]]).then();
+      }
+    }
+  }
+
   back() {
     const albumIds = this.list.albumIds;
     for (let i = 1; i < albumIds.length; i++) {
-      if (albumIds[i] === +this.album.ID) {
-        this.router.navigate(['/album',
-          albumIds[i - 1]]).then();
-      }
+      this.navigateIf(albumIds[i], albumIds[i - 1]);
     }
   }
 
@@ -113,10 +126,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     const albumIds = this.list.albumIds;
     // console.log(albumIds, this.album.ID);
     for (let i = 0; i < albumIds.length - 1; i++) {
-      if (+albumIds[i] === +this.album.ID) {
-        this.router.navigate(['/album',
-          albumIds[i + 1]]).then();
-      }
+      this.navigateIf(albumIds[i], albumIds[i + 1]);
     }
   }
 
@@ -189,6 +199,36 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     this.chevron = this.album.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
   }
 
+  /*
+    navigateIf(id, idTarg) {
+    if (id.indexOf('/') === -1 && id == this.album.ID) {
+      this.router.navigate(['/album', idTarg]).then();
+    } else {
+      const parts = id.split('/');
+      const partsTarg = idTarg.split('/');
+      const idAlbum = parts[0];
+      const idPiece = parts[1];
+      if (idAlbum == this.album.ID && idPiece == this.idpiece) {
+        this.router.navigate(['/album',
+          partsTarg[0], partsTarg[1]]).then();
+      }
+    }
+  }
+
+
+   */
+
+  isNavigated(id) {
+    if (id === +id || id.indexOf('/') === -1) {
+      return id == this.album.ID;
+    } else {
+      const parts = id.split('/');
+      const idAlbum = parts[0];
+      const idPiece = parts[1];
+      return idAlbum == this.album.ID && idPiece == this.idpiece;
+    }
+  }
+
   enableNavig(list: List) {
     if (!list || !this.album) {
       this.navBackwards = this.navForwards = false;
@@ -202,7 +242,8 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     this.navBackwards = this.navForwards = true;
 
     for (let i = 0; i < albumIds.length; i++) {
-      if (albumIds[i] === +this.album.ID) {
+      if (this.isNavigated(albumIds[i])) {
+      // if (albumIds[i] == this.album.ID) {
         if (i === 0) {
           this.navBackwards = false;
         }
@@ -217,9 +258,10 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   }
 
   toList() {
+    const params = this.list.params || [];
     this.router.navigate([
       this.list.url,
-      this.list.params
+      params
     ]).then(() => {
     });
   }

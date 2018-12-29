@@ -5,6 +5,7 @@ import {environment} from '../../../environments/environment';
 import {StorageService} from '../../services/storage.service';
 import {ListService} from '../../services/list.service';
 import {SearchParams} from '../../classes/SearchParams';
+import {StateService} from '../../services/state.service';
 
 @Component({
   selector: 'app-recent',
@@ -17,7 +18,8 @@ export class RecentComponent implements OnInit {
 
   constructor(
     private musicService: MusicService,
-    private storage: StorageService,
+    private storageService: StorageService,
+    private stateService: StateService,
     private listService: ListService,
   ) { }
 
@@ -32,7 +34,6 @@ export class RecentComponent implements OnInit {
   }
 
   onPlayed(response, id) {
-    // console.log('playing', response);
     const item = this.getItemByPieceId(id);
     item.played = true;
   }
@@ -43,25 +44,14 @@ export class RecentComponent implements OnInit {
     );
   }
 
-  getAlbumIds(items) {
-    const ids = [];
-    items.forEach(item => ids.push(item.Album.ID));
-    return ids;
-  }
+  afterGetPieces(items) {
+    this.items = items;
+    const title = 'Recent';
+    document.title = title;
+    this.stateService.setTitle(title);
 
-  afterGetPieces(response) {
-    this.items = response;
-    document.title = 'Recent';
-    const params: SearchParams = null;
-    this.listService.initialize(response, params);
-    // this.storage.storeList({
-    //   title: document.title,
-    //   url: '/recent',
-    //   params: [],
-    //   albumIds: this.getAlbumIds(response),
-    //   albums: this.
-    // });
-    // this.storage.storeAlbumIds(this.getAlbumIds(response));
+    const list = this.listService.initializeRecent(items);
+    this.storageService.storeList(list);
   }
 
   ngOnInit() {

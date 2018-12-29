@@ -64,7 +64,8 @@ export class SearchComponent implements OnInit {
     // console.log(albums[0]);
 
     // voor blader-functie in details pagina
-    this.list = this.listService.initialize(albums, this.params);
+    this.list = this.listService.initialize(
+      albums, this.params, '/search');
     this.storageService.storeList(this.list);
   }
 
