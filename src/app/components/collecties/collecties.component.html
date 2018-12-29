@@ -5,7 +5,7 @@
     <div class="row collectie-row">
       <div class="col-2">
         <div class="img-container">
-          <a (click)="toSearch(collectie.ID)">
+          <a [routerLink]="['/search', {idcoll: collectie.ID}]">
             <img
               src="{{ imgUrl }}{{ collectie.ID }}/album/-1/100/"
               class="thumb"

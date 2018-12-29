@@ -10,6 +10,8 @@ import {forkJoin} from 'rxjs';
 import {UtilService} from '../../services/util.service';
 import {Instrument} from '../../classes/Instrument';
 import {List} from '../../classes/List';
+import {ListService} from '../../services/list.service';
+import {StateService} from '../../services/state.service';
 
 @Component({
   selector: 'app-search',
@@ -33,7 +35,9 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private storageService: StorageService,
+    private stateService: StateService,
     private util: UtilService,
+    private listService: ListService,
   ) {
     route.params.subscribe((params: SearchParams) => {
       if (params) {
@@ -43,26 +47,6 @@ export class SearchComponent implements OnInit {
       }
     });
   }
-  getAlbumIds(albums) {
-    const ids = [];
-    if (Array.isArray(albums)) {
-      albums.forEach(album => ids.push(album.ID));
-    }
-    return ids;
-  }
-
-
-  getAlbumsForList(albums) {
-    const listAlbums = [];
-    if (Array.isArray(albums)) {
-      albums.forEach((album: Album) => listAlbums.push({
-        Title: album.Title,
-        ID: album.ID,
-      }));
-    }
-    return listAlbums;
-  }
-
   normParams(params: SearchParams): SearchParams {
     // voorkom dat de back-end 'undefined' values krijgt
     return {
@@ -80,14 +64,7 @@ export class SearchComponent implements OnInit {
     // console.log(albums[0]);
 
     // voor blader-functie in details pagina
-    // this.storageService.storeAlbumIds(this.getAlbumIds(albums));
-    this.list = {
-      title: document.title,
-      albumIds: this.getAlbumIds(albums),
-      albums: this.getAlbumsForList(albums),
-      url: '/search',
-      params: this.params
-    };
+    this.list = this.listService.initialize(albums, this.params);
     this.storageService.storeList(this.list);
   }
 
@@ -142,6 +119,7 @@ export class SearchComponent implements OnInit {
       document.title = title;
       this.list.title = title;
       this.storageService.storeList(this.list);
+      this.stateService.setTitle(title);
     }
   }
 

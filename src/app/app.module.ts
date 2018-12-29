@@ -63,6 +63,7 @@ import { CuesheetActionsComponent } from './components/cuesheet-actions/cuesheet
 import { ChipComponent } from './components/chip/chip.component';
 import {StateService} from './services/state.service';
 import { DialogAlbumComponent } from './dialogs/dialog-album/dialog-album.component';
+import { ListLinksComponent } from './components/list-links/list-links.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { DialogAlbumComponent } from './dialogs/dialog-album/dialog-album.compon
     CuesheetActionsComponent,
     ChipComponent,
     DialogAlbumComponent,
+    ListLinksComponent,
   ],
   imports: [
     BrowserModule,

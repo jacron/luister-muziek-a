@@ -3,7 +3,10 @@
      tabindex="0"
 >
   <mat-card-header>
-    <button mat-icon-button (click)="toList()">
+    <button mat-icon-button (click)="toList()"
+            *ngIf="list"
+            matTooltip="{{ list.title }} ({{ list.count }})"
+    >
       <mat-icon>arrow_back</mat-icon>
     </button>
     <button mat-icon-button
@@ -11,7 +14,8 @@
             *ngIf="navBackwards">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <span mat-line class="album-title">{{ album.Title }}</span>
+    <span mat-line class="album-title" (click)="editAlbum()">
+      {{ album.Title }}</span>
     <span class="horizontal-spacer"></span>
     <button mat-icon-button
             *ngIf="navForwards"
@@ -21,7 +25,7 @@
     <app-album-menu [album]="album"></app-album-menu>
   </mat-card-header>
   <mat-card-header>
-    <span mat-line class="album-description">
+    <span mat-line class="album-description" (click)="editAlbum()">
       {{ album.Description }}</span>
   </mat-card-header>
     <!--<app-toolbar [album]="album"></app-toolbar>-->
@@ -29,16 +33,13 @@
   <mat-card-content style="margin-top: 12px">
     <mat-drawer-container>
       <mat-drawer #lijstje mode="side" opened="false">
-        <mat-list>
-          <mat-list-item *ngFor="let album of list.albums">
-            <a [routerLink]="['/album', album.ID]" class="link">
-              {{ album.Title }}</a>
-          </mat-list-item>
-        </mat-list>
+        <app-list-links [list]="list" (close)="lijstje.close()"></app-list-links>
       </mat-drawer>
       <mat-drawer-content>
         <div class="chips">
-          <button mat-icon-button (click)="lijstje.toggle()">
+          <button mat-icon-button
+                  *ngIf="list"
+                  (click)="lijstje.toggle()">
             <mat-icon>dehaze</mat-icon>
           </button>
           <app-chip-lists [album]="album"

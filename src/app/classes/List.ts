@@ -5,4 +5,5 @@ export class List {
   albumIds: number[];
   albums: any[];
   query?: string;
+  count: number;
 }

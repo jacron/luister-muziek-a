@@ -20,18 +20,18 @@ export class AlbumMenuComponent implements OnInit {
   musicbrainzUrl = environment.musicbrainz;
   amazonUrl = environment.amazonUrl;
   menus = [
-    {
-      label: 'Hernoem album',
-      action: 'edit_album',
-      icon: 'edit',
-      color: '',
-    },
-    {
-      label: 'Bewerk album chips',
-      action: 'edit_chips',
-      icon: 'edit',
-      color: 'orange',
-    },
+    // {
+    //   label: 'Hernoem album',
+    //   action: 'edit_album',
+    //   icon: 'edit',
+    //   color: '',
+    // },
+    // {
+    //   label: 'Bewerk album chips',
+    //   action: 'edit_chips',
+    //   icon: 'edit',
+    //   color: 'orange',
+    // },
     {
       label: 'Cuesheets maker',
       action: 'edit_pieces',
@@ -45,10 +45,7 @@ export class AlbumMenuComponent implements OnInit {
       color: 'brown',
     },
     {
-      label: 'Open in \'music\'',
-      action: 'open_music',
-      icon: 'queue_music',
-      color: '',
+      label: 'divider'
     },
     {
       label: 'Toon in Finder',
@@ -56,16 +53,22 @@ export class AlbumMenuComponent implements OnInit {
       icon: 'open_in_browser',
       color: '',
     },
-    {
-      label: 'Herlaad muziekstukken',
-      action: 'refetch',
-      icon: 'replay',
-      color: '',
-    },
+    // {
+    //   label: 'Herlaad muziekstukken',
+    //   action: 'refetch',
+    //   icon: 'replay',
+    //   color: '',
+    // },
     {
       label: 'Afbeelding inplakken',
       action: 'paste_image',
       icon: 'image',
+      color: '',
+    },
+    {
+      label: 'Open in \'music\'',
+      action: 'open_music',
+      icon: 'queue_music',
       color: '',
     },
   ];
@@ -83,6 +86,11 @@ export class AlbumMenuComponent implements OnInit {
         action: 'website',
         icon: 'web',
         color: '',
+      });
+    }
+    if (album.discid || album.asin) {
+      this.menus.push({
+        label: 'divider'
       });
     }
     if (album.discid) {

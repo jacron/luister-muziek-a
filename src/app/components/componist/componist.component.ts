@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Componist} from '../../classes/Componist';
 import {MusicService} from '../../services/music.service';
+import {StateService} from '../../services/state.service';
 
 @Component({
   selector: 'app-componist',
@@ -14,6 +15,7 @@ export class ComponistComponent implements OnInit {
 
   constructor(
     private musicService: MusicService,
+    private stateService: StateService,
   ) { }
 
   selectLetter(e) {
@@ -22,6 +24,8 @@ export class ComponistComponent implements OnInit {
 
   afterGetComponisten(response) {
     this.componisten = <Componist[]>response;
+    const title = 'Componisten (' + this.componisten.length + ')';
+    this.stateService.setTitle(title);
   }
 
   ngOnInit() {

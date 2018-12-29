@@ -17,16 +17,7 @@ export class CollectiesComponent implements OnInit {
 
   constructor(
     private musicService: MusicService,
-    private router: Router
   ) { }
-
-  toSearch(id) {
-    this.router.navigate(['/search',
-      {
-        idcoll: id,
-      }
-    ]).then();
-  }
 
   afterGet(response) {
     this.collecties = <Collection[]>response;

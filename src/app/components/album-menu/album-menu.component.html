@@ -2,9 +2,13 @@
   <mat-icon>more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
+  <div
+    *ngFor="let menu of menus"
+  >
+    <mat-divider *ngIf="menu.label == 'divider'"></mat-divider>
   <button mat-menu-item
+          *ngIf="menu.label != 'divider'"
           (click)="action(menu.action)"
-          *ngFor="let menu of menus"
   >
     <mat-icon class="album-control"
               [style.color]="menu.color"
@@ -13,4 +17,5 @@
     </mat-icon>
     <span>{{ menu.label }}</span>
   </button>
+  </div>
 </mat-menu>

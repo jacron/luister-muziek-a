@@ -9,6 +9,8 @@ import {List} from '../../classes/List';
 import {StorageService} from '../../services/storage.service';
 import {Cuesheet} from '../../classes/Cuesheet';
 import {StateService} from '../../services/state.service';
+import {DialogAlbumComponent} from '../../dialogs/dialog-album/dialog-album.component';
+import {AlbumService} from '../../services/album.service';
 
 @Component({
   selector: 'app-album-details',
@@ -37,6 +39,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     private dialog: MatDialog,
     private storageService: StorageService,
     private stateService: StateService,
+    private albumService: AlbumService,
   ) {
     route.params.subscribe(params => this.handleParams(params));
   }
@@ -52,6 +55,19 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     if (params['idpiece']) {
       this.idpiece = +params['idpiece'];
     }
+  }
+
+  afterEditAlbum(result) {
+    if (result) {
+      this.album.Title = result.title;
+      this.album.Description = result.description;
+    }
+  }
+
+  editAlbum() {
+    this.albumService.rename(this.album).subscribe(
+      result => this.afterEditAlbum(result)
+    );
   }
 
   browse(e) {

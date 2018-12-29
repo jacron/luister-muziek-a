@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Album} from '../classes/Album';
 import {Choice} from '../classes/Choice';
 import {List} from '../classes/List';
+import {StoreService} from './store.service';
 
 @Injectable()
 export class StorageService {
@@ -11,10 +12,12 @@ export class StorageService {
   keySearchParms = 'lmuzparms';
   keyChoiceVisiblities = 'lmuzchoice';
   keyList = 'lmuzlist';
-  storage = localStorage;
+  // storage = localStorage;
 
   constructor(
-  ) { }
+    private storage: StoreService,
+  ) {
+  }
 
   storeAlbumIds(albums: Album[]) {
     this.storage.setItem(this.keyAlbums, JSON.stringify(albums));
@@ -45,29 +48,44 @@ export class StorageService {
 
   retrieveList() {
     const list = this.storage.getItem(this.keyList);
+    if (!list) {
+      return null;
+    }
     return JSON.parse(list);
   }
 
   retrieveAlbumIds() {
     const albums = this.storage.getItem(this.keyAlbums);
+    if (!albums) {
+      return null;
+    }
     return JSON.parse(albums);
   }
 
   retrieveSearchTitle() {
-    return JSON.parse(this.storage.getItem(this.keySearchTitle));
+    const searchTitle = this.storage.getItem(this.keySearchTitle);
+    if (!searchTitle) {
+      return null;
+    }
+    return JSON.parse(searchTitle);
   }
 
   retrieveSearchParameters() {
-    return JSON.parse(this.storage.getItem(this.keySearchParms));
+    const searchParams = this.storage.getItem(this.keySearchParms);
+    if (!searchParams) {
+      return null;
+    }
+    return JSON.parse(searchParams);
   }
 
-  retrieveChoiceVisiblities(choices: Choice[]) {
-    const visibilities = JSON.parse(this.storage.getItem(this.keyChoiceVisiblities));
+  retrieveChoiceVisiblities(choices: Choice[]): void {
+    const visibilities = this.storage.getItem(this.keyChoiceVisiblities);
     if (!visibilities) {
       return;
     }
+    const pvisibilities = JSON.parse(visibilities);
     choices.forEach(choice => {
-      choice.visible = visibilities.shift();
+      choice.visible = pvisibilities.shift();
     });
   }
 }

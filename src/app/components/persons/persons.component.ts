@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Person} from '../../classes/Person';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-persons',
@@ -9,9 +10,17 @@ import {Person} from '../../classes/Person';
 export class PersonsComponent implements OnInit {
   @Input() persons: Person[];
   @Input() startletter: string;
-  @Input() label: string;
+  @Input() idname: string;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
+
+  toSearch(id) {
+    const params = {};
+    params[this.idname] = id;
+    this.router.navigate(['/search', params]).then();
+  }
 
   ngOnInit() {
   }
