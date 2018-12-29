@@ -64,6 +64,7 @@ import { ChipComponent } from './components/chip/chip.component';
 import {StateService} from './services/state.service';
 import { DialogAlbumComponent } from './dialogs/dialog-album/dialog-album.component';
 import { ListLinksComponent } from './components/list-links/list-links.component';
+import { DialogSettingsComponent } from './dialogs/dialog-settings/dialog-settings.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { ListLinksComponent } from './components/list-links/list-links.component
     ChipComponent,
     DialogAlbumComponent,
     ListLinksComponent,
+    DialogSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,6 +139,7 @@ import { ListLinksComponent } from './components/list-links/list-links.component
     DialogCustomizeSearchComponent,
     DialogInstrumentComponent,
     DialogAlbumComponent,
+    DialogSettingsComponent,
     AppComponent,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],

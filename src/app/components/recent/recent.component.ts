@@ -3,6 +3,8 @@ import {MusicService} from '../../services/music.service';
 import {environment} from '../../../environments/environment';
 // import {ServeTaskOptions} from '@angular/cli/commands/serve';
 import {StorageService} from '../../services/storage.service';
+import {ListService} from '../../services/list.service';
+import {SearchParams} from '../../classes/SearchParams';
 
 @Component({
   selector: 'app-recent',
@@ -16,6 +18,7 @@ export class RecentComponent implements OnInit {
   constructor(
     private musicService: MusicService,
     private storage: StorageService,
+    private listService: ListService,
   ) { }
 
   getItemByPieceId(id) {
@@ -49,12 +52,15 @@ export class RecentComponent implements OnInit {
   afterGetPieces(response) {
     this.items = response;
     document.title = 'Recent';
-    this.storage.storeList({
-      title: document.title,
-      url: '/recent',
-      params: [],
-      albumIds: this.getAlbumIds(response)
-    });
+    const params: SearchParams = null;
+    this.listService.initialize(response, params);
+    // this.storage.storeList({
+    //   title: document.title,
+    //   url: '/recent',
+    //   params: [],
+    //   albumIds: this.getAlbumIds(response),
+    //   albums: this.
+    // });
     // this.storage.storeAlbumIds(this.getAlbumIds(response));
   }
 

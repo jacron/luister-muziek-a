@@ -11,6 +11,7 @@ import {Cuesheet} from '../../classes/Cuesheet';
 import {StateService} from '../../services/state.service';
 import {DialogAlbumComponent} from '../../dialogs/dialog-album/dialog-album.component';
 import {AlbumService} from '../../services/album.service';
+import {SettingsService} from '../../services/settings.service';
 
 @Component({
   selector: 'app-album-details',
@@ -31,6 +32,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   idpiece: number;
   invalidCuesheets: Cuesheet[];
   validCuesheets: Cuesheet[];
+  coverSize: number;
 
   constructor(
     private musicService: MusicService,
@@ -40,6 +42,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     private storageService: StorageService,
     private stateService: StateService,
     private albumService: AlbumService,
+    private settingsService: SettingsService,
   ) {
     route.params.subscribe(params => this.handleParams(params));
   }
@@ -226,8 +229,14 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
 
   }
 
+  afterGetSizeFromSetting(size) {
+    this.coverSize = size || 300;
+  }
+
   ngOnInit() {
     this.list = this.storageService.retrieveList();
+    this.coverSize = +this.settingsService.getCoverSize(300);
+    this.settingsService.currentCoverSize.subscribe(size => this.afterGetSizeFromSetting(size));
   }
 }
 

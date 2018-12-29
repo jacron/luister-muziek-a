@@ -6,6 +6,7 @@ import {MusicService} from '../../services/music.service';
 import {MatDialog} from '@angular/material';
 import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
 import {DialogAlbumComponent} from '../../dialogs/dialog-album/dialog-album.component';
+import {DialogSettingsComponent} from '../../dialogs/dialog-settings/dialog-settings.component';
 
 @Component({
   selector: 'app-album-menu',
@@ -90,7 +91,10 @@ export class AlbumMenuComponent implements OnInit {
     }
     if (album.discid || album.asin) {
       this.menus.push({
-        label: 'divider'
+        label: 'divider',
+        action: '',
+        icon: '',
+        color: '',
       });
     }
     if (album.discid) {
@@ -115,6 +119,18 @@ export class AlbumMenuComponent implements OnInit {
         color: 'orange'
       });
     }
+    this.menus.push({
+      label: 'divider',
+      action: '',
+      icon: '',
+      color: '',
+    });
+    this.menus.push({
+      label: 'Opties',
+      action: 'options',
+      icon: 'settings',
+      color: '',
+    });
   }
 
   action(name) {
@@ -155,7 +171,14 @@ export class AlbumMenuComponent implements OnInit {
       case 'openamazon':
         this.openamazon();
         break;
+      case 'options':
+        this.options();
+        break;
     }
+  }
+
+  options() {
+    this.dialog.open(DialogSettingsComponent);
   }
 
   openfreedb() {

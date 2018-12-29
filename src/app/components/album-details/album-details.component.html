@@ -51,7 +51,7 @@
         <div class="row">
           <div>
             <div class="thumb-container">
-              <img src="{{ imgUrl }}{{ album.ID }}/album/300/-1"
+              <img src="{{ imgUrl }}{{ album.ID }}/album/{{ coverSize }}/-1"
                    (click)="openPic('front')"
                    class="thumb">
               <img *ngIf="album.album_back_image"
