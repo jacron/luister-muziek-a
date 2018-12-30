@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MusicService} from './services/music.service';
 import {StateService} from './services/state.service';
-import {OverlayContainer} from '@angular/cdk/overlay';
+// import {OverlayContainer} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import {OverlayContainer} from '@angular/cdk/overlay';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('maindiv') maindiv: ElementRef;
+  // @ViewChild('maindiv') maindiv: ElementRef;
 
   appTitle = 'music-client';
   title = '';
@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
   constructor(
     private musicService: MusicService,
     private stateService: StateService,
-    private overlayContainer: OverlayContainer
+    // private overlayContainer: OverlayContainer
   ) {
   }
 
@@ -69,11 +69,11 @@ export class AppComponent implements OnInit {
     this.musicService.controlPlayer(cmd).subscribe();
   }
 
-  toggleTheme() {
-    const altTheme = 'alternate-theme';
-    // this.overlayContainer.getContainerElement().classList.add(altTheme);
-    this.maindiv.nativeElement.className = altTheme;
-  }
+  // toggleTheme() {
+  //   const altTheme = 'alternate-theme';
+  //   // this.overlayContainer.getContainerElement().classList.add(altTheme);
+  //   this.maindiv.nativeElement.className = altTheme;
+  // }
 
   ngOnInit() {
     this.stateService.currentTitle.subscribe(title => this.title = title);

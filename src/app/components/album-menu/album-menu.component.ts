@@ -62,7 +62,7 @@ export class AlbumMenuComponent implements OnInit {
     //   color: '',
     // },
     {
-      label: 'Afbeelding inplakken',
+      label: 'Plak cover in',
       action: 'paste_image',
       icon: 'image',
       color: '',
