@@ -1,4 +1,6 @@
-<mat-list *ngIf="(collecties | startwith:startletter:'Title') as result">
+<mat-list
+  class="app-collecties"
+  *ngIf="(collecties | startwith:startletter:'Title') as result">
   <h2>Collecties</h2>
   <h3 mat-subheader>{{ result.length }} {{ label }}</h3>
   <div class="" *ngFor="let collectie of result">

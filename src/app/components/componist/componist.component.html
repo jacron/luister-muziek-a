@@ -1,7 +1,10 @@
-<app-alphabet
-  (select)="selectLetter($event)"></app-alphabet>
-<app-persons
-  [persons]="componisten"
-  idname="idcomp"
-  [startletter]="startletter">
-</app-persons>
+<div class="app-componist">
+  <app-alphabet
+    class="app-alphabet"
+    (select)="selectLetter($event)"></app-alphabet>
+  <app-persons
+    [persons]="componisten"
+    idname="idcomp"
+    [startletter]="startletter">
+  </app-persons>
+</div>
