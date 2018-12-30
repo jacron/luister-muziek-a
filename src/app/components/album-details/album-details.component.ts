@@ -100,12 +100,15 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   }
 
   navigateIf(id, idTarg) {
+    if (!id || !idTarg) {
+      return;
+    }
     if ((id === +id || id.indexOf('/') === -1)
       && id == this.album.ID) {
       this.router.navigate(['/album', idTarg]).then();
     } else {
-      const parts = id.split('/');
-      const partsTarg = idTarg.split('/');
+      const parts = id.toString().split('/');
+      const partsTarg = idTarg.toString().split('/');
       const idAlbum = parts[0];
       const idPiece = parts[1];
       if (idAlbum == this.album.ID && idPiece == this.idpiece) {
@@ -198,25 +201,6 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     this.album.expanded = !this.album.expanded;
     this.chevron = this.album.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
   }
-
-  /*
-    navigateIf(id, idTarg) {
-    if (id.indexOf('/') === -1 && id == this.album.ID) {
-      this.router.navigate(['/album', idTarg]).then();
-    } else {
-      const parts = id.split('/');
-      const partsTarg = idTarg.split('/');
-      const idAlbum = parts[0];
-      const idPiece = parts[1];
-      if (idAlbum == this.album.ID && idPiece == this.idpiece) {
-        this.router.navigate(['/album',
-          partsTarg[0], partsTarg[1]]).then();
-      }
-    }
-  }
-
-
-   */
 
   isNavigated(id) {
     if (id === +id || id.indexOf('/') === -1) {
