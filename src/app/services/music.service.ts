@@ -24,6 +24,10 @@ export class MusicService {
     return this.getJson('/performers/mode/' + mode);
   }
 
+  getPerformersGenre(genre) {
+    return this.getJson('/performers/genre/' + genre);
+  }
+
   getCollections() {
     return this.getJson('/collections');
   }
@@ -129,8 +133,8 @@ export class MusicService {
     return this.postForm('/cuesheet/edit', {id: id, albumid: albumid});
   }
 
-  tagEditor(path) {
-    return this.postForm('/tag/editor', { path: path});
+  tagEditor(albumId) {
+    return this.postForm('/tag/editor', { albumid: albumId});
   }
 
   deleteCue(id, albumid) {

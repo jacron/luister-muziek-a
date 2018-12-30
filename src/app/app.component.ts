@@ -1,21 +1,19 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MusicService} from './services/music.service';
 import {StateService} from './services/state.service';
-import {MediaMatcher} from '@angular/cdk/layout';
+import {OverlayContainer} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
-  mobileQuery: MediaQueryList;
+  @ViewChild('maindiv') maindiv: ElementRef;
+
   appTitle = 'music-client';
-  title: string;
-
-  // private _mobileQueryListener: () => void;
+  title = '';
 
   links = [
     {
@@ -27,6 +25,11 @@ export class AppComponent implements OnInit, OnDestroy {
       href: 'recent',
       label: 'Recent',
       icon: 'access_time'
+    },
+    {
+      href: 'pop',
+      label: 'Pop',
+      icon: 'person'
     },
     {
       href: 'componist',
@@ -56,33 +59,23 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    // changeDetectorRef: ChangeDetectorRef,
-    // media: MediaMatcher,
     private musicService: MusicService,
     private stateService: StateService,
+    private overlayContainer: OverlayContainer
   ) {
-    // this.mobileQuery = media.matchMedia('(max-width: 600px');
-    // this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    // this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   play(cmd) {
     this.musicService.controlPlayer(cmd).subscribe();
   }
 
-  search() {
-    console.log('search');
-  }
-
-  setTitle(title) {
-    this.title = title;
-  }
-
-  ngOnDestroy() {
-    // this.mobileQuery.removeListener(this._mobileQueryListener);
+  toggleTheme() {
+    const altTheme = 'alternate-theme';
+    // this.overlayContainer.getContainerElement().classList.add(altTheme);
+    this.maindiv.nativeElement.className = altTheme;
   }
 
   ngOnInit() {
-    this.stateService.currentTitle.subscribe(title => this.setTitle(title));
+    this.stateService.currentTitle.subscribe(title => this.title = title);
   }
 }

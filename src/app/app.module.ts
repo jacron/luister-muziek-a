@@ -61,6 +61,8 @@ import {StateService} from './services/state.service';
 import { DialogAlbumComponent } from './dialogs/dialog-album/dialog-album.component';
 import { ListLinksComponent } from './components/list-links/list-links.component';
 import { DialogSettingsComponent } from './dialogs/dialog-settings/dialog-settings.component';
+import { PopComponent } from './components/pop/pop.component';
+import { PopListComponent } from './components/pop-list/pop-list.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +113,8 @@ import { DialogSettingsComponent } from './dialogs/dialog-settings/dialog-settin
     DialogAlbumComponent,
     ListLinksComponent,
     DialogSettingsComponent,
+    PopComponent,
+    PopListComponent,
   ],
   imports: [
     BrowserModule,

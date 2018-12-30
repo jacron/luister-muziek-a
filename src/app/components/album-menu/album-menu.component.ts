@@ -251,7 +251,7 @@ export class AlbumMenuComponent implements OnInit {
   }
 
   tagedit() {
-    this.musicService.tagEditor(this.album.Path).subscribe();
+    this.musicService.tagEditor(this.album.ID).subscribe();
   }
 
   refetch() {

@@ -15,6 +15,8 @@ import {CollectieComponent} from '../components/collectie/collectie.component';
 import {TagComponent} from '../components/tag/tag.component';
 import {TagListComponent} from '../components/tag-list/tag-list.component';
 import {RecentComponent} from '../components/recent/recent.component';
+import {PopComponent} from '../components/pop/pop.component';
+import {PopListComponent} from '../components/pop-list/pop-list.component';
 
 const appRoutes: Routes = [
   {path: '', component: SearchComponent},
@@ -35,6 +37,8 @@ const appRoutes: Routes = [
   {path: 'code/list/:code', component: CodeListComponent},
   {path: 'settings', component: SettingsComponent},
   {path: 'recent', component: RecentComponent},
+  {path: 'pop', component: PopComponent},
+  {path: 'pop/:id', component: PopListComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

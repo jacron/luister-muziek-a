@@ -1,0 +1,8 @@
+<div class="app-pop">
+  <mat-list>
+    <mat-list-item *ngFor="let performer of performers">
+      <a [routerLink]="performer.ID" class="link">
+      {{ performer.FullName }}</a>
+    </mat-list-item>
+  </mat-list>
+</div>

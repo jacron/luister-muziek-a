@@ -11,20 +11,26 @@ export class ListService {
   constructor() { }
 
   getAlbumIds(albums): string[] {
-    return albums.map(album => album.ID);
+    if (Array.isArray(albums)) {
+      return albums.map(album => album.ID);
+    }
   }
 
   getAlbumsForList(albums): any[] {
-    return albums.map(album => {
-      return {
-        Title: album.Title,
-        ID: album.ID,
-      };
-    });
+    if (Array.isArray(albums)) {
+      return albums.map(album => {
+        return {
+          Title: album.Title,
+          ID: album.ID,
+        };
+      });
+    }
   }
 
   getItemIds(items): string[] {
-    return items.map(item => item.Album.ID + '/' + item.Piece.ID);
+    if (Array.isArray(items)) {
+      return items.map(item => item.Album.ID + '/' + item.Piece.ID);
+    }
   }
 
   initializeRecent(items): List {

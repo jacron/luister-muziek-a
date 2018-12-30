@@ -118,6 +118,14 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     }
   }
 
+  // swipeLeft() {
+  //   this.back();
+  // }
+  //
+  // swipeRight() {
+  //   this.forward();
+  // }
+
   back() {
     const albumIds = this.list.albumIds;
     for (let i = 1; i < albumIds.length; i++) {
@@ -127,7 +135,6 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
 
   forward() {
     const albumIds = this.list.albumIds;
-    // console.log(albumIds, this.album.ID);
     for (let i = 0; i < albumIds.length - 1; i++) {
       this.navigateIf(albumIds[i], albumIds[i + 1]);
     }
