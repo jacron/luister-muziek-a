@@ -1,7 +1,6 @@
 <mat-list *ngIf="(tags | startwith:startletter:'Name') as result">
-  <h3 mat-subheader>{{ result.length }} {{ label }}</h3>
   <mat-list-item *ngFor="let tag of result">
-    <a [routerLink]="[tag.ID]">
+    <a [routerLink]="[tag.ID]" class="link">
       {{ tag.Name }}
     </a>
   </mat-list-item>

@@ -23,7 +23,7 @@ export class PerformerComponent implements OnInit {
 
   afterGetPerformers(response) {
     this.performers = <Performer[]>response;
-    const title = 'Artiesten (' + this.performers.length + ')';
+    const title = 'Performers (' + this.performers.length + ')';
     this.stateService.setTitle(title);
   }
 

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MusicService} from '../../services/music.service';
 import {Code} from '../../classes/Code';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SearchParams} from '../../classes/SearchParams';
+import {StateService} from '../../services/state.service';
 
 @Component({
   selector: 'app-codes',
@@ -15,11 +14,14 @@ export class CodeComponent implements OnInit {
 
   constructor(
     private musicService: MusicService,
+    private stateServie: StateService,
   ) {
   }
 
   afterGet(response) {
     this.codes = response;
+    const title = 'Codes (' + this.codes.length + ')';
+    this.stateServie.setTitle(title);
   }
 
   ngOnInit() {

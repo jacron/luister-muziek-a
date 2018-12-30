@@ -156,6 +156,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.stateService.setTitle('Zoek');
     this.getItems();
   }
 

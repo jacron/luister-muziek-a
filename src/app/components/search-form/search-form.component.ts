@@ -132,7 +132,6 @@ export class SearchFormComponent implements OnChanges, OnInit {
       this.prepareChoices();
       this.revealActiveChoices();
       this.filteredChoices = this.choices.filter(choice => choice.visible);
-      // console.log(this.filteredChoices);
     }
   }
 

@@ -30,27 +30,27 @@ export class AppComponent implements OnInit, OnDestroy {
     },
     {
       href: 'componist',
-      label: 'Componist',
+      label: 'Componisten',
       icon: 'person'
     },
     {
       href: 'performer',
-      label: 'Performer',
+      label: 'Performers',
       icon: 'person'
     },
     {
       href: 'collectie',
-      label: 'Collectie',
+      label: 'Collecties',
       icon: 'all_inbox'
     },
     {
       href: 'tag',
-      label: 'Tag',
+      label: 'Tags',
       icon: 'bookmark'
     },
     {
       href: 'code',
-      label: 'Code',
+      label: 'Codes',
       icon: 'code'
     },
   ];

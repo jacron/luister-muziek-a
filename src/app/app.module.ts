@@ -37,14 +37,11 @@ import {UtilService} from './services/util.service';
 import {CuesheetService} from './services/cuesheet.service';
 import { DialogInputComponent } from './dialogs/dialog-input/dialog-input.component';
 import { ComponistComponent } from './components/componist/componist.component';
-import { ComponistListComponent } from './components/componist-list/componist-list.component';
-import { PerformerListComponent } from './components/performer-list/performer-list.component';
 import { PerformerComponent } from './components/performer/performer.component';
 import { AlphabetComponent } from './components/alphabet/alphabet.component';
 import { PersonsComponent } from './components/persons/persons.component';
 import { StartletterPipe } from './pipes/startletter.pipe';
 import { CollectieComponent } from './components/collectie/collectie.component';
-import { CollectieListComponent } from './components/collectie-list/collectie-list.component';
 import { TagListComponent } from './components/tag-list/tag-list.component';
 import { TagComponent } from './components/tag/tag.component';
 import { CollectiesComponent } from './components/collecties/collecties.component';
@@ -93,14 +90,11 @@ import { DialogSettingsComponent } from './dialogs/dialog-settings/dialog-settin
     AlbumListComponent,
     DialogInputComponent,
     ComponistComponent,
-    ComponistListComponent,
-    PerformerListComponent,
     PerformerComponent,
     AlphabetComponent,
     PersonsComponent,
     StartletterPipe,
     CollectieComponent,
-    CollectieListComponent,
     TagListComponent,
     TagComponent,
     CollectiesComponent,

@@ -10,23 +10,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./collecties.component.scss']
 })
 export class CollectiesComponent implements OnInit {
-  @Input() label: string;
+  @Input() collections: Collection[];
   @Input() startletter: string;
-  collecties: Collection[];
   imgUrl = environment.apiServer + '/image/';
 
   constructor(
-    private musicService: MusicService,
   ) { }
 
-  afterGet(response) {
-    this.collecties = <Collection[]>response;
-  }
-
   ngOnInit() {
-    this.musicService.getCollections().subscribe(
-      response => this.afterGet(response)
-    );
   }
 
 }

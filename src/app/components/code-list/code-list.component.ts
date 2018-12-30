@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {MusicService} from '../../services/music.service';
 import {LibraryCode} from '../../classes/LibraryCode';
 import {environment} from '../../../environments/environment';
+import {StateService} from '../../services/state.service';
 
 @Component({
   selector: 'app-code-list',
@@ -19,6 +20,7 @@ export class CodeListComponent implements OnInit {
   constructor(
     private musicService: MusicService,
     private route: ActivatedRoute,
+    private stateService: StateService
   ) {
     route.params.subscribe(params => this.handleParams(params));
   }
@@ -26,7 +28,8 @@ export class CodeListComponent implements OnInit {
   afterGet(response) {
     console.log(response);
     this.libraryCodes = response.items;
-    document.title = response.page_title;
+    // document.title = response.page_title;
+    this.stateService.setTitle(response.page_title);
   }
 
   handleParams(params) {
