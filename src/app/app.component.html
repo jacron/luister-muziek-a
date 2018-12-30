@@ -1,4 +1,15 @@
-<mat-sidenav-container class="container-main alternate-theme">
+<div class="app-container">
+  <mat-toolbar class="app-toolbar">
+    <mat-icon (click)="sidenav.toggle()">dehaze</mat-icon>
+    <h2>{{ title }}</h2>
+    <span class="horizontal-spacer"></span>
+    <button mat-button>
+      <mat-icon  (click)="play('pause')"
+                 class="control">
+        pause_circle</mat-icon>&nbsp;
+    </button>
+  </mat-toolbar>
+<mat-sidenav-container class="app-sidenav-container">
   <mat-sidenav #sidenav mode="over">
     <nav>
       <h2>
@@ -18,16 +29,6 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <main>
-      <mat-toolbar>
-        <mat-icon (click)="sidenav.toggle()">dehaze</mat-icon>
-        <h2>{{ title }}</h2>
-        <span class="horizontal-spacer"></span>
-        <button mat-button>
-          <mat-icon  (click)="play('pause')"
-                     class="control">
-            pause_circle</mat-icon>&nbsp;
-        </button>
-      </mat-toolbar>
       <div class="container2">
         <router-outlet></router-outlet>
         <!-- Routed views go here -->
@@ -35,3 +36,4 @@
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
+</div>

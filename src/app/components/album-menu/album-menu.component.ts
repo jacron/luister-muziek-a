@@ -104,7 +104,7 @@ export class AlbumMenuComponent implements OnInit {
     if (album.discid) {
       this.menus.push({
         label: 'MusicBrainz',
-        action: 'openmusicbranz',
+        action: 'openmusicbrainz',
         icon: 'library_music',
         color: '#8f407a'
       });

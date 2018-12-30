@@ -20,7 +20,6 @@ import { AlbumPiecesComponent } from './components/album-pieces/album-pieces.com
 import { AlbumCuesheetsComponent } from './components/album-cuesheets/album-cuesheets.component';
 import { DialogPicComponent } from './dialogs/dialog-pic/dialog-pic.component';
 import { ChipListsComponent } from './components/chip-lists/chip-lists.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { StorageService} from './services/storage.service';
 import { AlbumMetatagsComponent } from './components/album-metatags/album-metatags.component';
 import { DialogAddComponent } from './dialogs/dialog-add/dialog-add.component';
@@ -81,7 +80,6 @@ import { DialogSettingsComponent } from './dialogs/dialog-settings/dialog-settin
     AlbumPiecesComponent,
     AlbumCuesheetsComponent,
     ChipListsComponent,
-    ToolbarComponent,
     AlbumMetatagsComponent,
     DialogPicComponent,
     DialogAddComponent,

@@ -1,18 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MusicService} from './services/music.service';
 import {StateService} from './services/state.service';
+import {MediaMatcher} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
+  mobileQuery: MediaQueryList;
   appTitle = 'music-client';
   title: string;
-  opened: boolean;
+
+  // private _mobileQueryListener: () => void;
 
   links = [
     {
@@ -22,7 +25,7 @@ export class AppComponent implements OnInit {
     },
     {
       href: 'recent',
-      label: 'Actueel',
+      label: 'Recent',
       icon: 'access_time'
     },
     {
@@ -32,7 +35,7 @@ export class AppComponent implements OnInit {
     },
     {
       href: 'performer',
-      label: 'Artiest',
+      label: 'Performer',
       icon: 'person'
     },
     {
@@ -53,9 +56,14 @@ export class AppComponent implements OnInit {
   ];
 
   constructor(
+    // changeDetectorRef: ChangeDetectorRef,
+    // media: MediaMatcher,
     private musicService: MusicService,
     private stateService: StateService,
   ) {
+    // this.mobileQuery = media.matchMedia('(max-width: 600px');
+    // this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    // this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   play(cmd) {
@@ -68,6 +76,10 @@ export class AppComponent implements OnInit {
 
   setTitle(title) {
     this.title = title;
+  }
+
+  ngOnDestroy() {
+    // this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
   ngOnInit() {

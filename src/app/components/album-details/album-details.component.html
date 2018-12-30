@@ -31,11 +31,11 @@
     <!--<app-toolbar [album]="album"></app-toolbar>-->
 
   <mat-card-content style="margin-top: 12px">
-    <mat-drawer-container>
-      <mat-drawer #lijstje mode="side" opened="false">
-        <app-list-links [list]="list" (close)="lijstje.close()"></app-list-links>
-      </mat-drawer>
-      <mat-drawer-content>
+    <!--<mat-drawer-container>-->
+      <!--<mat-drawer #lijstje mode="side" opened="false">-->
+        <!--<app-list-links [list]="list" (close)="lijstje.close()"></app-list-links>-->
+      <!--</mat-drawer>-->
+      <!--<mat-drawer-content>-->
         <div class="chips">
           <button mat-icon-button
                   *ngIf="list"
@@ -94,8 +94,8 @@
           </div>
         </div>
 
-      </mat-drawer-content>
-    </mat-drawer-container>
+      <!--</mat-drawer-content>-->
+    <!--</mat-drawer-container>-->
 
   </mat-card-content>
 </mat-card>

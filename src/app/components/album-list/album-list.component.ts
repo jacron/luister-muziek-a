@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Album} from '../../classes/Album';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
@@ -6,6 +6,7 @@ import {MusicService} from '../../services/music.service';
 import {StorageService} from '../../services/storage.service';
 import {List} from '../../classes/List';
 import {Piece} from '../../classes/Piece';
+// import {MatSidenavContainer} from '@angular/material';
 
 @Component({
   selector: 'app-album-list',
@@ -16,8 +17,8 @@ import {Piece} from '../../classes/Piece';
 export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() albums: Album[];
   @Input() q: string;
+  // @ViewChild(MatSidenavContainer) sideNavContainer: MatSidenavContainer;
 
-  // query: string;
   imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
@@ -141,13 +142,18 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     this.setLazy();
     this.lazyLoad();
 
-    window.addEventListener('touchmove', () => this.lazyLoad('touch'));
+    window.addEventListener('touchmove', () => this.lazyLoad('xtouch'));
     window.addEventListener('resize', () => this.lazyLoad());
-    const container = document.querySelector('.mat-sidenav-content');
-    container.addEventListener('scroll', () => this.lazyLoad());
+    window.addEventListener('scroll', () => this.lazyLoad());
+    const selector = 'body';  // '.app-sidenav-container'
+    const container = document.querySelector(selector);
+    // container.addEventListener('scroll', () => this.lazyLoad());
   }
 
   ngAfterViewInit() {
+    // this.sideNavContainer.scrollable.elementScrolled().subscribe(
+    //   (e) => console.log(e)
+    // );
     setTimeout(() => {
       this.lazy();
     }, 0);
