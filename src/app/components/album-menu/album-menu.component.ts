@@ -7,7 +7,7 @@ import {MatDialog} from '@angular/material';
 import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
 import {DialogAlbumComponent} from '../../dialogs/dialog-album/dialog-album.component';
 import {DialogSettingsComponent} from '../../dialogs/dialog-settings/dialog-settings.component';
-import {OverlayContainer} from '@angular/cdk/overlay';
+// import {OverlayContainer} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-album-menu',
@@ -22,18 +22,6 @@ export class AlbumMenuComponent implements OnInit {
   musicbrainzUrl = environment.musicbrainz;
   amazonUrl = environment.amazonUrl;
   menus = [
-    // {
-    //   label: 'Hernoem album',
-    //   action: 'edit_album',
-    //   icon: 'edit',
-    //   color: '',
-    // },
-    // {
-    //   label: 'Bewerk album chips',
-    //   action: 'edit_chips',
-    //   icon: 'edit',
-    //   color: 'orange',
-    // },
     {
       label: 'Cuesheets maker',
       action: 'edit_pieces',
@@ -73,13 +61,19 @@ export class AlbumMenuComponent implements OnInit {
       icon: 'queue_music',
       color: '',
     },
+    {
+      label: 'Verwijder',
+      action: 'delete',
+      icon: 'close',
+      color: 'red',
+    }
   ];
 
 
   constructor(
     private musicService: MusicService,
     private dialog: MatDialog,
-    private overlayContainer: OverlayContainer,
+    // private overlayContainer: OverlayContainer,
   ) {
     // this.overlayContainer.getContainerElement().classList.add('alternate-theme');
   }
@@ -178,6 +172,20 @@ export class AlbumMenuComponent implements OnInit {
       case 'options':
         this.options();
         break;
+      case 'delete':
+        this.delete();
+        break;
+    }
+  }
+
+  afterDelete() {
+    alert(this.album.Title + ' is verwijderd');
+  }
+
+  delete() {
+    if (confirm(this.album.Title + ' verwijderen?')) {
+      this.musicService.removeAlbum(this.album.ID).subscribe(
+        () => this.afterDelete())
     }
   }
 

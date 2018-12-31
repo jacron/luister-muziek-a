@@ -1,10 +1,10 @@
 <div class="home">
   <div class="action-buttons">
-    <button mat-button *ngFor="let facet of facets" (click)="add(facet)">
-      <mat-icon [style.color]="facet.color">
-        {{ facet.icon }}
-      </mat-icon>
-      {{ facet.name }}
+    <button mat-button *ngFor="let facet of facets | keyvalue: rankOrder"
+            (click)="add(facet.value)"
+            [style.backgroundColor]="facet.value.color">
+      <mat-icon>{{ facet.value.icon }}</mat-icon>
+      {{ facet.value.name }}
     </button>
   </div>
 

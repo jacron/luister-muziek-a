@@ -92,7 +92,7 @@ export class MusicService {
     return this.getJson('/collection/' + id + '/albums');
   }
 
-  getSearchedAlbums(params) {
+  getSearchedAlbums(params: SearchParams) {
     const search = params.search && params.search.length ? params.search : '@@';
     const cmd = '/cql/' + search + '/' +
       params.idcomp + '/' + params.idperf + '/' + params.idcoll + '/' +
@@ -100,17 +100,17 @@ export class MusicService {
     return this.getJson(cmd);
   }
 
+  // getNewSearchedAlbums(chips) {
+  //   return this.postForm('/search/chips', {
+  //     chips
+  //   });
+  // }
+
   getPiecesRecentlyPlayed(n = 20) {
     return this.getJson('/pieces/recent/' + n);
   }
 
   /* POST */
-  // getChoices() {
-  //   return this.postForm('/choices', {
-  //     names: ['composer', 'performer', 'collection', 'tag', 'instrument']
-  //   });
-  // }
-
   postForm(cmd, params) {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -121,8 +121,9 @@ export class MusicService {
 
   addSearchToHistory(title: string, params: SearchParams) {
     return this.postForm('/search/history', {
-      title: title,
-      params: params });
+      title,
+      params
+    });
   }
 
   getAlbumByPath(path) {
@@ -187,6 +188,12 @@ export class MusicService {
     return this.postForm('/composer/new', {
       albumid: albumId,
       name: name
+    });
+  }
+
+  removeAlbum(albumId: number) {
+    return this.postForm('/album/delete', {
+      albumId
     });
   }
 

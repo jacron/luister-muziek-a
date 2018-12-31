@@ -7,12 +7,7 @@ import {Album} from '../../classes/Album';
 import {SearchParams} from '../../classes/SearchParams';
 import {ListService} from '../../services/list.service';
 import {StorageService} from '../../services/storage.service';
-
-const color = {
-  composer: '#eedddd',
-  performer: '#ddeedd',
-
-};
+import {KeyValue} from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -25,51 +20,86 @@ export class HomeComponent implements OnInit {
   chips: any[] = [];
   albums: Album[];
   params: SearchParams;
-  facets = [
-    {
+  facets = {
+    composer: {
+      rank: 1,
       name: 'Componist',
       icon: 'person',
       value: 'composer',
-      color: color.composer,
+      color: '#eedddd',
+      displayField: 'FullName',
+      idfield: 'idcomp',
     },
-    {
+    performer: {
+      rank: 2,
       name: 'Performer',
       icon: 'person',
       value: 'performer',
-      color: color.performer,
+      color: '#ddeedd',
+      displayField: 'FullName',
+      idfield: 'idperf',
     },
-    {
+    pop: {
+      rank: 3,
       name: 'Pop',
       icon: 'music_video',
       value: 'pop',
+      color: '#ffdddd',
+      displayField: 'FullName',
+      idfield: 'idperf',
+
     },
-    {
+    instrument: {
+      rank: 4,
       name: 'Instrument',
       icon: 'mic_none',
       value: 'instrument',
+      color: '#eeeeff',
+      displayField: 'Name',
+      idfield: 'idinstrument',
+
     },
-    {
+    tag: {
+      rank: 5,
       name: 'Tag',
       icon: 'person',
       value: 'tag',
+      color: '#efefef',
+      displayField: 'Name',
+      idfield: 'idtag',
+
     },
-    {
+    code: {
+      rank: 6,
       name: 'Cataloguscode',
       icon: 'library_music',
       value: 'code',
+      color: '',
+      displayField: 'FullName',
+      idfield: 'idcode',
+
     },
-    {
+    collectie: {
+      rank: 7,
       name: 'Collectie',
       icon: 'library_books',
       value: 'collection',
+      color: '',
+      displayField: 'Title',
+      idfield: 'idperf',
+
     },
-    {
+    title: {
+      rank: 8,
       name: 'Titel',
       icon: 'search',
       value: 'title',
-    },
+      color: '',
+      displayField: 'FullName',
+      idfield: 'idperf',
 
-  ];
+    },
+  };
 
   constructor(
     private facetService: FacetService,
@@ -90,8 +120,39 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  afterGetIems(results, type) {
+    const facet = this.facets[type];
+    const filteredItems = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(results, value, facet.displayField))
+      );
+    this.model = {
+      placeholder: facet.name,
+      filteredItems,
+      displayField: facet.displayField,
+      color: facet.color,
+      type,
+    };
+
+  }
+
   add(facet) {
-    this.afterChoice(facet.value);
+    const type = facet.value;
+    switch (type) {
+      case 'composer':
+        this.musicService.getComposers('typeahead').subscribe(
+            results => this.afterGetIems(results, type));
+        break;
+      case 'performer':
+        this.musicService.getPerformers('typeahead').subscribe(
+            results => this.afterGetIems(results, type));
+        break;
+      case 'pop':
+        this.musicService.getPerformersGenre('pop').subscribe(
+          results => this.afterGetIems(results, type));
+        break;
+    }
   }
 
   displayFn(val) {
@@ -118,7 +179,6 @@ export class HomeComponent implements OnInit {
   }
 
   normParams(): SearchParams {
-    // voorkom dat de back-end 'undefined' values krijgt
     const params = {
       idcomp: -1,
       idperf: -1,
@@ -128,23 +188,15 @@ export class HomeComponent implements OnInit {
       search: '',
     };
     this.chips.forEach(chip => {
-      switch(chip.type) {
-        case 'composer':
-          params.idcomp = chip.id;
-          break;
-        case 'performer':
-          params.idperf = chip.id;
-          break;
-      }
+      const facet = this.facets[chip.type];
+      params[facet.idfield] = chip.id;
     });
-    // console.log(params);
     this.params = params;
     return params;
   }
 
   afterFetch(albums) {
     this.albums = albums;
-    // console.log(albums);
 
     // voor blader-functie in details pagina
     const list = this.listService.initialize(
@@ -162,7 +214,6 @@ export class HomeComponent implements OnInit {
   }
 
   makeChip(val) {
-    // console.log('selected', val);
     this.chips = this.chips.filter(chip => chip.type != this.model.type);
     this.chips.push({
       name: val[this.model.displayField],
@@ -174,41 +225,8 @@ export class HomeComponent implements OnInit {
     this.model = null;
   }
 
-  afterGetIems(results, displayField, placeholder, color, type) {
-    // console.log(results, displayField, placeholder);
-    const filteredItems = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(results, value, displayField))
-      );
-    this.model = {
-      placeholder,
-      filteredItems,
-      displayField,
-      color,
-      type,
-    };
-
-  }
-
-  afterChoice(response) {
-    switch (response) {
-      case 'composer':
-        this.musicService.getComposers('typeahead')
-          .subscribe(
-            results => this.afterGetIems(results, 'FullName',
-              'Componist', color.composer, response)
-          );
-        break;
-      case 'performer':
-        this.musicService.getPerformers('typeahead')
-          .subscribe(
-            results => this.afterGetIems(results, 'FullName',
-              'Performer', color.performer, response)
-          );
-        break;
-    }
-  }
+  rankOrder = (a: KeyValue, b: KeyValue): number =>
+    a.value.rank - b.value.rank;
 
   ngOnInit() {
   }
