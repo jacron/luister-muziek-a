@@ -130,7 +130,7 @@ export class SearchFormComponent implements OnChanges, OnInit {
       return;
     }
     if (this.idcomp && this.idcomp != -1) {
-      console.log(this.idcomp);
+      // console.log(this.idcomp);
       const person: Person = this.composers.filter(
         composer => composer.ID == this.idcomp)[0];
       this.facets.push({

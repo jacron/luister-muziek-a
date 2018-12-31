@@ -2,7 +2,7 @@
   <div class="action-buttons">
     <button mat-button *ngFor="let facet of facets | keyvalue: rankOrder"
             (click)="add(facet.value)"
-            [style.backgroundColor]="facet.value.color">
+    >
       <mat-icon>{{ facet.value.icon }}</mat-icon>
       {{ facet.value.name }}
     </button>
@@ -27,6 +27,8 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
+
+  <div class="divider"></div>
 
   <mat-chip-list class="chips">
     <mat-chip *ngFor="let chip of chips"

@@ -8,6 +8,11 @@ import {SearchParams} from '../../classes/SearchParams';
 import {ListService} from '../../services/list.service';
 import {StorageService} from '../../services/storage.service';
 import {KeyValue} from '@angular/common';
+import {ChoiceService} from '../../services/choice.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ChipsService} from '../../services/chips-service';
+import {List} from '../../classes/List';
+import {StateService} from '../../services/state.service';
 
 @Component({
   selector: 'app-home',
@@ -20,93 +25,29 @@ export class HomeComponent implements OnInit {
   chips: any[] = [];
   albums: Album[];
   params: SearchParams;
-  facets = {
-    composer: {
-      rank: 1,
-      name: 'Componist',
-      icon: 'person',
-      value: 'composer',
-      color: '#eedddd',
-      displayField: 'FullName',
-      idfield: 'idcomp',
-    },
-    performer: {
-      rank: 2,
-      name: 'Performer',
-      icon: 'person',
-      value: 'performer',
-      color: '#ddeedd',
-      displayField: 'FullName',
-      idfield: 'idperf',
-    },
-    pop: {
-      rank: 3,
-      name: 'Pop',
-      icon: 'music_video',
-      value: 'pop',
-      color: '#ffdddd',
-      displayField: 'FullName',
-      idfield: 'idperf',
-
-    },
-    instrument: {
-      rank: 4,
-      name: 'Instrument',
-      icon: 'mic_none',
-      value: 'instrument',
-      color: '#eeeeff',
-      displayField: 'Name',
-      idfield: 'idinstrument',
-
-    },
-    tag: {
-      rank: 5,
-      name: 'Tag',
-      icon: 'person',
-      value: 'tag',
-      color: '#efefef',
-      displayField: 'Name',
-      idfield: 'idtag',
-
-    },
-    code: {
-      rank: 6,
-      name: 'Cataloguscode',
-      icon: 'library_music',
-      value: 'code',
-      color: '',
-      displayField: 'FullName',
-      idfield: 'idcode',
-
-    },
-    collectie: {
-      rank: 7,
-      name: 'Collectie',
-      icon: 'library_books',
-      value: 'collection',
-      color: '',
-      displayField: 'Title',
-      idfield: 'idperf',
-
-    },
-    title: {
-      rank: 8,
-      name: 'Titel',
-      icon: 'search',
-      value: 'title',
-      color: '',
-      displayField: 'FullName',
-      idfield: 'idperf',
-
-    },
-  };
+  facets: any[];
+  list: List;
 
   constructor(
     private facetService: FacetService,
     private musicService: MusicService,
     private listService: ListService,
     private storageService: StorageService,
-  ) { }
+    private stateService: StateService,
+    private choiceService: ChoiceService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private chipsService: ChipsService,
+  ) {
+    route.params.subscribe((params: SearchParams) => {
+      if (params) {
+        this.fetchThings(params);
+        this.params = params;
+        this.storageService.storeSearchParameters(params);
+        this.makeChips(params);
+      }
+    });
+  }
 
   private _filter(items: any[], value: any, displayField: string): any[] {
     if (!value || typeof value !== 'string' || value.length === 0 ||
@@ -171,10 +112,13 @@ export class HomeComponent implements OnInit {
     this.albums = [];
   }
 
-  remove(facet) {
-    console.log('remove', facet);
-    this.chips = this.chips.filter(chip =>
-      chip.type != facet.type && chip.id != facet.id);
+  remove(chip) {
+    // console.log('remove', chip);
+    // console.log(chip, this.chips);
+    // console.log(this.chips);
+    // return;
+    this.chips = this.chips.filter(chippie =>
+      chippie.type != chip.type && chippie.id != chip.id);
     this.getAlbums();
   }
 
@@ -204,13 +148,70 @@ export class HomeComponent implements OnInit {
     this.storageService.storeList(list);
   }
 
-  getAlbums() {
+  normSearchParams(params) {
+    // voorkom dat de back-end 'undefined' values krijgt
+    return {
+      idcomp: params.idcomp ? params.idcomp : -1,
+      idperf: params.idperf ? params.idperf : -1,
+      idcoll: params.idcoll ? params.idcoll : -1,
+      idtag: params.idtag ? params.idtag : -1,
+      idinstrument: params.idinstrument ? params.idinstrument : -1,
+      search: params.search ? params.search : '',
+    };
+  }
+
+  fetchThings(params: SearchParams) {
     this.albums = [];
-    this.musicService.getSearchedAlbums(this.normParams()).subscribe(
+    this.musicService.getSearchedAlbums(this.normSearchParams(params)).subscribe(
       (albums: Album[]) => this.afterFetch(albums),
       err => console.error(err),
       () => {}
     );
+  }
+
+  makeTitle(params: SearchParams) {
+    let title = '';
+    this.chips.forEach(chip => {
+      if (title.length) {
+        title += ';';
+      }
+      title += chip.name;
+    });
+    return title;
+  }
+
+  storeTitle() {
+    let title =  this.makeTitle(this.params);
+    if (title.length === 0) {
+      title = 'music-client';
+    } else {
+      // this.storageService.storeListTitle(title);
+      // this.musicService.addSearchToHistory(title, this.params);
+    }
+    if (this.list) {
+      document.title = title;
+      this.list.title = title;
+      this.storageService.storeList(this.list);
+      this.stateService.setTitle(title);
+    }
+  }
+
+  getAlbums() {
+    const params: SearchParams = this.normParams();
+    this.router.navigate(['/home', params])
+      .then(() => this.storeTitle()
+      );
+  }
+
+  makeChips(params: SearchParams) {
+    // console.log('make chips');
+    if (this.chips.length) {
+      return;
+    }
+    if (!this.facets) {
+      this.facets = this.choiceService.getFacets();
+    }
+    this.chips = this.chipsService.makeChips(params, this.facets);
   }
 
   makeChip(val) {
@@ -225,10 +226,13 @@ export class HomeComponent implements OnInit {
     this.model = null;
   }
 
-  rankOrder = (a: KeyValue, b: KeyValue): number =>
+  rankOrder = (a: KeyValue<string, any>, b: KeyValue<string, any>): number =>
     a.value.rank - b.value.rank;
 
   ngOnInit() {
+    if (!this.facets) {
+      this.facets = this.choiceService.getFacets();
+    }
   }
 
 }

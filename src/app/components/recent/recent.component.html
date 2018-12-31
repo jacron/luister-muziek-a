@@ -1,5 +1,20 @@
 <mat-list class="app-recent">
   <div class="recently-played row" *ngFor="let item of items">
+    <div class="col">
+      <div>
+        <div class="img-container">
+          <a [routerLink]="['/album', item.Album.ID, item.Piece.ID]">
+            <img
+              src="{{ imgUrl }}{{ item.Album.ID }}/album/-1/100/"
+              class="thumb"
+            >
+          </a>
+        </div>
+        <div>
+          {{ item.Album.Title }}
+        </div>
+      </div>
+    </div>
     <div class="col first-col">
       <div class="piece-name" mat-line="">
         <mat-icon
@@ -14,21 +29,6 @@
       <div>
         {{ item.Piece.LastPlayed}}<br>
         {{ item.Piece.NPlayed }} keer afgespeeld
-      </div>
-    </div>
-    <div class="col">
-      <div>
-        <div class="img-container">
-          <a [routerLink]="['/album', item.Album.ID, item.Piece.ID]">
-            <img
-              src="{{ imgUrl }}{{ item.Album.ID }}/album/-1/100/"
-              class="thumb"
-            >
-          </a>
-        </div>
-        <div>
-          {{ item.Album.Title }}
-        </div>
       </div>
     </div>
   </div>

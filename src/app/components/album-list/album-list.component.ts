@@ -1,4 +1,12 @@
-import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit, Renderer2,
+  SimpleChanges,
+} from '@angular/core';
 import {Album} from '../../classes/Album';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
@@ -6,28 +14,29 @@ import {MusicService} from '../../services/music.service';
 import {StorageService} from '../../services/storage.service';
 import {List} from '../../classes/List';
 import {Piece} from '../../classes/Piece';
-// import {MatSidenavContainer} from '@angular/material';
 
 @Component({
   selector: 'app-album-list',
   templateUrl: './album-list.component.html',
   styleUrls: ['./album-list.component.scss'],
-  // encapsulation: ViewEncapsulation.Emulated,
 })
-export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
+export class AlbumListComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   @Input() albums: Album[];
   @Input() q: string;
-  // @ViewChild(MatSidenavContainer) sideNavContainer: MatSidenavContainer;
 
   imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
   filteredAlbums: Album[];
+  globalListenScrollFunc: Function;
+  globalListenTouchmoveFunc: Function;
+  globalListenResizeFunc: Function;
 
   constructor(
     private router: Router,
     private musicService: MusicService,
     private storage: StorageService,
+    private renderer: Renderer2,
   ) { }
 
   testInAlbum(album: Album, q) {
@@ -116,11 +125,14 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     );
   }
 
-  lazyLoad(mode = 'desktop') {
+  lazyLoad() {
     const that = this;
     // console.log('in lazyload');
+    if (!this.lazyImages) {
+      return;
+    }
     this.lazyImages.forEach((image) => {
-      if (mode === 'touch' || that.elementInViewport(image)) {
+      if (that.elementInViewport(image)) {
         const dataSrc = image.getAttribute(that.lazyAttribute);
         if (dataSrc) {
           that.musicService.getAlbumById(image.getAttribute('albumid')).subscribe(
@@ -141,22 +153,12 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
   lazy() {
     this.setLazy();
     this.lazyLoad();
-
-    window.addEventListener('touchmove', () => this.lazyLoad('xtouch'));
-    window.addEventListener('resize', () => this.lazyLoad());
-    window.addEventListener('scroll', () => this.lazyLoad());
-    const selector = 'body';  // '.app-sidenav-container'
-    const container = document.querySelector(selector);
-    // container.addEventListener('scroll', () => this.lazyLoad());
   }
 
   ngAfterViewInit() {
-    // this.sideNavContainer.scrollable.elementScrolled().subscribe(
-    //   (e) => console.log(e)
-    // );
-    setTimeout(() => {
-      this.lazy();
-    }, 0);
+    // setTimeout(() => {
+    //   this.lazy();
+    // }, 0);
   }
 
   onChangedAlbums(albums: Album[]) {
@@ -175,7 +177,26 @@ export class AlbumListComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
+  ngOnDestroy() {
+    console.log('on destroy');
+    this.globalListenScrollFunc();
+    this.globalListenTouchmoveFunc();
+    this.globalListenResizeFunc();
+  }
+
   ngOnInit() {
+    this.globalListenScrollFunc = this.renderer.listen(
+      'document', 'scroll', () =>
+        this.lazyLoad()
+      );
+    this.globalListenTouchmoveFunc = this.renderer.listen(
+      'document', 'touchmove', () =>
+        this.lazyLoad()
+    );
+    this.globalListenResizeFunc = this.renderer.listen(
+      'window', 'resize', () =>
+        this.lazyLoad()
+    );
   }
 
 }

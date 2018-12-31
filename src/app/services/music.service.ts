@@ -40,9 +40,9 @@ export class MusicService {
     return this.getJson('/instruments');
   }
 
-  // getComposerById(id: number) {
-  //   return this.getJson('/composers/' + id);
-  // }
+  getComposerById(id: number) {
+    return this.getJson('/composers/' + id);
+  }
 
   getPerformerById(id: number) {
     return this.getJson('/performers/' + id);
