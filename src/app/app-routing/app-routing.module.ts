@@ -17,6 +17,7 @@ import {TagListComponent} from '../components/tag-list/tag-list.component';
 import {RecentComponent} from '../components/recent/recent.component';
 import {PopComponent} from '../components/pop/pop.component';
 import {PopListComponent} from '../components/pop-list/pop-list.component';
+import {HomeComponent} from '../components/home/home.component';
 
 const appRoutes: Routes = [
   {path: '', component: SearchComponent},
@@ -26,9 +27,10 @@ const appRoutes: Routes = [
   {path: 'album/:idalbum', component: AlbumDetailsComponent},
   {path: 'album/:idalbum/:idpiece', component: AlbumDetailsComponent},
   {path: 'tools', component: ToolsComponent},
-  {path: 'componist', component: ComponistComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'composer', component: ComponistComponent},
   {path: 'performer', component: PerformerComponent},
-  {path: 'collectie', component: CollectieComponent},
+  {path: 'collection', component: CollectieComponent},
   {path: 'tag', component: TagComponent},
   {path: 'tag/:id', component: TagListComponent},
   {path: 'code', component: CodeComponent},

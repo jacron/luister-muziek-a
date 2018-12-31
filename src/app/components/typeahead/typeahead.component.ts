@@ -80,6 +80,11 @@ export class TypeaheadComponent implements OnInit, OnChanges {
     if (changes.text) {
       this.myControl.setValue(changes.text.currentValue);
     }
+    if (changes.id) {
+      if (changes.id.currentValue == -1) {
+        this.myControl.setValue(null);
+      }
+    }
   }
 
   ngOnInit() {

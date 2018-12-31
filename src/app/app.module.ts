@@ -63,6 +63,8 @@ import { ListLinksComponent } from './components/list-links/list-links.component
 import { DialogSettingsComponent } from './dialogs/dialog-settings/dialog-settings.component';
 import { PopComponent } from './components/pop/pop.component';
 import { PopListComponent } from './components/pop-list/pop-list.component';
+import { HomeComponent } from './components/home/home.component';
+import { DialogCategoryComponent } from './dialogs/dialog-category/dialog-category.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +117,8 @@ import { PopListComponent } from './components/pop-list/pop-list.component';
     DialogSettingsComponent,
     PopComponent,
     PopListComponent,
+    HomeComponent,
+    DialogCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -136,6 +140,7 @@ import { PopListComponent } from './components/pop-list/pop-list.component';
     DialogInstrumentComponent,
     DialogAlbumComponent,
     DialogSettingsComponent,
+    DialogCategoryComponent,
     AppComponent,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],

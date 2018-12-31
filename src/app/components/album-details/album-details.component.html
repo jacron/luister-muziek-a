@@ -28,20 +28,9 @@
     <span mat-line class="album-description" (click)="editAlbum()">
       {{ album.Description }}</span>
   </mat-card-header>
-    <!--<app-toolbar [album]="album"></app-toolbar>-->
 
   <mat-card-content style="margin-top: 12px">
-    <!--<mat-drawer-container>-->
-      <!--<mat-drawer #lijstje mode="side" opened="false">-->
-        <!--<app-list-links [list]="list" (close)="lijstje.close()"></app-list-links>-->
-      <!--</mat-drawer>-->
-      <!--<mat-drawer-content>-->
         <div class="chips">
-          <button mat-icon-button
-                  *ngIf="list"
-                  (click)="lijstje.toggle()">
-            <mat-icon>dehaze</mat-icon>
-          </button>
           <app-chip-lists [album]="album"
                           [removable]="false"
                           [editable]="true"
@@ -93,9 +82,6 @@
             ></app-album-pieces>
           </div>
         </div>
-
-      <!--</mat-drawer-content>-->
-    <!--</mat-drawer-container>-->
 
   </mat-card-content>
 </mat-card>

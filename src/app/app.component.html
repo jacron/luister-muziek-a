@@ -11,7 +11,7 @@
     <!--</button>-->
     <button mat-button>
       <mat-icon  (click)="play('pause')"
-                 class="control">
+                 class="play-control">
         pause_circle</mat-icon>&nbsp;
     </button>
   </mat-toolbar>
@@ -29,7 +29,8 @@
            (click)="sidenav.close()"
            [routerLink]="link.href"
            *ngFor="let link of links">
-          <mat-icon>{{ link.icon }}</mat-icon>
+          <mat-icon [style.color]="link.color">
+            {{ link.icon }}</mat-icon>
           {{ link.label }}
         </a>
       </nav>
@@ -37,7 +38,7 @@
 
     <mat-sidenav-content>
       <main>
-        <div class="container2">
+        <div class="container-outlet">
           <router-outlet></router-outlet>
           <!-- Routed views go here -->
         </div>

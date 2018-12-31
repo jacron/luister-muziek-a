@@ -36,6 +36,7 @@ export class SearchFormComponent implements OnChanges, OnInit {
   choices: Choice[];
   filteredChoices: Choice[];
   myControl = new FormControl();
+  facets: any[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -114,23 +115,51 @@ export class SearchFormComponent implements OnChanges, OnInit {
     this.revealActiveChoice(this.idcoll, 2);
     this.revealActiveChoice(this.idtag, 3);
     this.revealActiveChoice(this.idinstrument, 4);
+
+  }
+
+  remove(facet) {
+    console.log('remove', facet);
+    this.choices[0].id = -1;
+    this.idcomp = -1;
+    this.facets.splice(facet);
+  }
+
+  makeFacets() {
+    if (!this.composers) {
+      return;
+    }
+    if (this.idcomp && this.idcomp != -1) {
+      console.log(this.idcomp);
+      const person: Person = this.composers.filter(
+        composer => composer.ID == this.idcomp)[0];
+      this.facets.push({
+        name: person.FullName,
+        color: '#ffeeee'
+      });
+    }
+
+  }
+
+  getParamChanges(params: SearchParams) {
+    // update search parameters after navigating
+    this.idcomp = params.idcomp;
+    this.idperf = params.idperf;
+    this.idcoll = params.idcoll;
+    this.idtag = params.idtag;
+    this.idinstrument = params.idinstrument;
+    this.myControl.setValue(params.search || '');
+    // this.revealActiveChoices();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.params) {
-      // update search parameters after navigating
-      const params: SearchParams = <SearchParams>changes.params.currentValue;
-      this.idcomp = params.idcomp;
-      this.idperf = params.idperf;
-      this.idcoll = params.idcoll;
-      this.idtag = params.idtag;
-      this.idinstrument = params.idinstrument;
-      this.myControl.setValue(params.search || '');
-      // this.revealActiveChoices();
+      this.getParamChanges(changes.params.currentValue);
     }
     if (changes.composers) {
       this.prepareChoices();
       this.revealActiveChoices();
+      this.makeFacets();
       this.filteredChoices = this.choices.filter(choice => choice.visible);
     }
   }

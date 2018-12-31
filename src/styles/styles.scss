@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 //@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
-@import "app/app-variables";
+@import "../app/app-variables";
 
 body {
   margin: 0;
@@ -32,12 +32,6 @@ ul {
 .long-dd-list {
   max-height: 500px !important;
 }
-.form-field .mat-form-field-infix {
-  padding-right: 30px;
-}
-.form-field .mat-form-field-underline {
-  height: 0;
-}
 .img-container {
   width: 100px;
   max-width: 120px;
@@ -61,9 +55,13 @@ ul {
   cursor: pointer;
   text-decoration: none;
 }
-.container-main .mat-drawer-backdrop.mat-drawer-shown {
-  background-color: transparent;
-}
 div:focus {
   outline: 0 solid transparent;
 }
+.search-form .mat-list-base {
+  padding-top: 38px;
+}
+.chip-composer {
+  background-color: #dd8888;
+}
+

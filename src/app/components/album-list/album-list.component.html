@@ -21,14 +21,14 @@
                         [showimage]="false"
                         mat-line
         ></app-chip-lists>
-        <mat-list *ngIf="album.filteredPieces" class="pieces-list">
-          <mat-list-item *ngFor="let filteredPiece of album.filteredPieces">
-            <a [routerLink]="['/album', album.ID, filteredPiece.ID]" class="link">
-              {{ filteredPiece.Name }}</a>
-          </mat-list-item>
-        </mat-list>
-        <div *ngIf="album.filteredPieces && album.filteredPieces.length" style="height: 12px;"
-        ></div>
+        <!--<mat-list *ngIf="album.filteredPieces" class="pieces-list">-->
+          <!--<mat-list-item *ngFor="let filteredPiece of album.filteredPieces">-->
+            <!--<a [routerLink]="['/album', album.ID, filteredPiece.ID]" class="link">-->
+              <!--{{ filteredPiece.Name }}</a>-->
+          <!--</mat-list-item>-->
+        <!--</mat-list>-->
+        <!--<div *ngIf="album.filteredPieces && album.filteredPieces.length" style="height: 12px;"-->
+        <!--&gt;</div>-->
       </div>
     </div>
     </mat-list-item>

@@ -1,5 +1,12 @@
-<form>
+<form class="search-form">
   <div class="search-fields">
+    <mat-accordion class="accordion">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Zoek</mat-panel-title>
+          <mat-panel-description>op kenmerken</mat-panel-description>
+        </mat-expansion-panel-header>
+
     <app-typeahead
       *ngFor="let choice of filteredChoices"
       [placeholder]="choice.label"
@@ -28,5 +35,16 @@
         ...
       </button>
     </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-chip-list class="chips">
+      <mat-chip *ngFor="let facet of facets"
+                [removable]="true"
+                (removed)="remove(facet)"
+                [style.backgroundColor]="facet.color">
+        {{ facet.name}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
   </div>
 </form>

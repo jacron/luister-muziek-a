@@ -17,6 +17,12 @@ export class AppComponent implements OnInit {
 
   links = [
     {
+      href: 'home',
+      label: 'Home',
+      icon: 'search',
+      color: 'orange',
+    },
+    {
       href: 'search',
       label: 'Zoek',
       icon: 'search'
@@ -32,7 +38,7 @@ export class AppComponent implements OnInit {
       icon: 'person'
     },
     {
-      href: 'componist',
+      href: 'composer',
       label: 'Componisten',
       icon: 'person'
     },
@@ -42,7 +48,7 @@ export class AppComponent implements OnInit {
       icon: 'person'
     },
     {
-      href: 'collectie',
+      href: 'collection',
       label: 'Collecties',
       icon: 'all_inbox'
     },
