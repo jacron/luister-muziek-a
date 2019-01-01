@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {MusicService} from '../../services/music.service';
-import {Album} from '../../classes/Album';
+import {MusicService} from '../../../services/music.service';
+import {Album} from '../../../classes/Album';
 
 @Component({
   selector: 'app-album-metatags',

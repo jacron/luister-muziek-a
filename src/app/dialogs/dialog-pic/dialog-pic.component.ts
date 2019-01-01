@@ -1,6 +1,6 @@
 import {Component, ElementRef, Inject, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {AlbumDetailsComponent} from '../../components/album-details/album-details.component';
+import {AlbumDetailsComponent} from '../../album/components/album-details/album-details.component';
 
 @Component({
   selector: 'app-dialog-pic',

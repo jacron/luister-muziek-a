@@ -38,7 +38,7 @@
       {{ chip.name}}
       <mat-icon matChipRemove>cancel</mat-icon>
     </mat-chip>
-    <button mat-icon-button (click)="clearChips()" *ngIf="chips.length">
+    <button mat-icon-button (click)="clearChips()" *ngIf="chips && chips.length">
       <mat-icon>clear</mat-icon>
     </button>
   </mat-chip-list>

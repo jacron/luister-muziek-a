@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {SearchParams} from '../classes/SearchParams';
 import {MusicService} from './music.service';
+import {UtilService} from './util.service';
 // import {Facet} from '../classes/Facet';
 
 @Injectable({
@@ -12,6 +13,7 @@ export class ChipsService {
 
   constructor(
     private musicService: MusicService,
+    private utilService: UtilService,
   ) { }
 
   makeChippie(type, item, id) {
@@ -28,6 +30,10 @@ export class ChipsService {
   makeChips(params: SearchParams, facets: any) {
     this.chips = [];
     this.facets = facets;
+    // console.log(params);
+    if (this.utilService.isEmpty(params)) {
+      return null;
+    }
     if (params.idcomp != -1) {
       const id = params.idcomp;
       this.musicService.getComposerById(id).subscribe( item => {

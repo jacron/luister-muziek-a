@@ -64,15 +64,6 @@ const facets: any = {
     displayField: 'FullName',
     idfield: 'idperf',
   },
-  pop: {
-    rank: 3,
-    name: 'Pop',
-    icon: 'music_video',
-    value: 'pop',
-    color: '#ffdddd',
-    displayField: 'FullName',
-    idfield: 'idperf',
-  },
   instrument: {
     rank: 4,
     name: 'Instrument',
@@ -90,15 +81,6 @@ const facets: any = {
     color: '#efefef',
     displayField: 'Name',
     idfield: 'idtag',
-  },
-  code: {
-    rank: 6,
-    name: 'Cataloguscode',
-    icon: 'library_music',
-    value: 'code',
-    color: '',
-    displayField: 'FullName',
-    idfield: 'idcode',
   },
   collectie: {
     rank: 7,

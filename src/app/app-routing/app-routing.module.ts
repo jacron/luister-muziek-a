@@ -5,7 +5,7 @@ import {PageNotFoundComponent} from '../page-not-found/page-not-found.component'
 import {RouterModule, Routes} from '@angular/router';
 import {WelcomeComponent} from '../welcome/welcome.component';
 import {SearchComponent} from '../components/search/search.component';
-import {AlbumDetailsComponent} from '../components/album-details/album-details.component';
+import {AlbumDetailsComponent} from '../album/components/album-details/album-details.component';
 import {CodeComponent} from '../components/code/code.component';
 import {CodeListComponent} from '../components/code-list/code-list.component';
 import {SettingsComponent} from '../components/settings/settings.component';

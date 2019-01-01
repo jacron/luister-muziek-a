@@ -1,17 +1,17 @@
 import {Component, DoCheck, Input, OnInit} from '@angular/core';
-import {Album} from '../../classes/Album';
-import {environment} from '../../../environments/environment';
-import {MusicService} from '../../services/music.service';
+import {Album} from '../../../classes/Album';
+import {environment} from '../../../../environments/environment';
+import {MusicService} from '../../../services/music.service';
 import {MatDialog} from '@angular/material';
-import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component';
+import {DialogPicComponent} from '../../../dialogs/dialog-pic/dialog-pic.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {List} from '../../classes/List';
-import {StorageService} from '../../services/storage.service';
-import {Cuesheet} from '../../classes/Cuesheet';
-import {StateService} from '../../services/state.service';
-import {DialogAlbumComponent} from '../../dialogs/dialog-album/dialog-album.component';
-import {AlbumService} from '../../services/album.service';
-import {SettingsService} from '../../services/settings.service';
+import {List} from '../../../classes/List';
+import {StorageService} from '../../../services/storage.service';
+import {Cuesheet} from '../../../classes/Cuesheet';
+import {StateService} from '../../../services/state.service';
+// import {DialogAlbumComponent} from '../../../dialogs/dialog-album/dialog-album.component';
+import {AlbumService} from '../../../services/album.service';
+import {SettingsService} from '../../../services/settings.service';
 
 @Component({
   selector: 'app-album-details',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from '@angular/material';
-import {AlbumMenuComponent} from '../../components/album-menu/album-menu.component';
+import {AlbumMenuComponent} from '../../album/components/album-menu/album-menu.component';
 import {SettingsService} from '../../services/settings.service';
 
 const keyCoverSize = 'mzkCoversize';

@@ -10,18 +10,17 @@ import { SearchComponent } from './components/search/search.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { AlbumThumbComponent } from './components/album-thumb/album-thumb.component';
 import { AppRoutingModule} from './app-routing/app-routing.module';
 import { TypedNamePipe } from './pipes/typed-name.pipe';
 import { TypedTitlePipe } from './pipes/typed-title.pipe';
-import { AlbumDetailsComponent } from './components/album-details/album-details.component';
-import { AlbumPersonsComponent } from './components/album-persons/album-persons.component';
-import { AlbumPiecesComponent } from './components/album-pieces/album-pieces.component';
-import { AlbumCuesheetsComponent } from './components/album-cuesheets/album-cuesheets.component';
+// import { AlbumDetailsComponent } from './album/components/album-details/album-details.component';
+// import { AlbumPersonsComponent } from './album/components/album-persons/album-persons.component';
+// import { AlbumPiecesComponent } from './album/components/album-pieces/album-pieces.component';
+// import { AlbumCuesheetsComponent } from './album/components/album-cuesheets/album-cuesheets.component';
 import { DialogPicComponent } from './dialogs/dialog-pic/dialog-pic.component';
-import { ChipListsComponent } from './components/chip-lists/chip-lists.component';
+// import { ChipListsComponent } from './album/components/chip-lists/chip-lists.component';
 import { StorageService} from './services/storage.service';
-import { AlbumMetatagsComponent } from './components/album-metatags/album-metatags.component';
+// import { AlbumMetatagsComponent } from './album/components/album-metatags/album-metatags.component';
 import { DialogAddComponent } from './dialogs/dialog-add/dialog-add.component';
 import { DialogPersonComponent } from './dialogs/dialog-person/dialog-person.component';
 import { DialogTagComponent } from './dialogs/dialog-tag/dialog-tag.component';
@@ -53,9 +52,9 @@ import { VisiblePipe } from './pipes/visible.pipe';
 import { DialogInstrumentComponent } from './dialogs/dialog-instrument/dialog-instrument.component';
 import { RecentComponent } from './components/recent/recent.component';
 import {MatModule} from './mat/mat.module';
-import { AlbumMenuComponent } from './components/album-menu/album-menu.component';
-import { CuesheetPartsComponent } from './components/cuesheet-parts/cuesheet-parts.component';
-import { CuesheetActionsComponent } from './components/cuesheet-actions/cuesheet-actions.component';
+// import { AlbumMenuComponent } from './album/components/album-menu/album-menu.component';
+// import { CuesheetPartsComponent } from './album/components/cuesheet-parts/cuesheet-parts.component';
+// import { CuesheetActionsComponent } from './album/components/cuesheet-actions/cuesheet-actions.component';
 import { ChipComponent } from './components/chip/chip.component';
 import {StateService} from './services/state.service';
 import { DialogAlbumComponent } from './dialogs/dialog-album/dialog-album.component';
@@ -65,6 +64,7 @@ import { PopComponent } from './components/pop/pop.component';
 import { PopListComponent } from './components/pop-list/pop-list.component';
 import { HomeComponent } from './components/home/home.component';
 import { DialogCategoryComponent } from './dialogs/dialog-category/dialog-category.component';
+import {AlbumModule} from './album/album.module';
 
 @NgModule({
   declarations: [
@@ -73,15 +73,14 @@ import { DialogCategoryComponent } from './dialogs/dialog-category/dialog-catego
     SearchComponent,
     WelcomeComponent,
     ToolsComponent,
-    AlbumThumbComponent,
     TypedNamePipe,
     TypedTitlePipe,
-    AlbumDetailsComponent,
-    AlbumPersonsComponent,
-    AlbumPiecesComponent,
-    AlbumCuesheetsComponent,
-    ChipListsComponent,
-    AlbumMetatagsComponent,
+    // AlbumDetailsComponent,
+    // AlbumPersonsComponent,
+    // AlbumPiecesComponent,
+    // AlbumCuesheetsComponent,
+    // ChipListsComponent,
+    // AlbumMetatagsComponent,
     DialogPicComponent,
     DialogAddComponent,
     DialogPersonComponent,
@@ -108,9 +107,9 @@ import { DialogCategoryComponent } from './dialogs/dialog-category/dialog-catego
     VisiblePipe,
     DialogInstrumentComponent,
     RecentComponent,
-    AlbumMenuComponent,
-    CuesheetPartsComponent,
-    CuesheetActionsComponent,
+    // AlbumMenuComponent,
+    // CuesheetPartsComponent,
+    // CuesheetActionsComponent,
     ChipComponent,
     DialogAlbumComponent,
     ListLinksComponent,
@@ -128,6 +127,7 @@ import { DialogCategoryComponent } from './dialogs/dialog-category/dialog-catego
     AppRoutingModule,
     MatModule,
     ReactiveFormsModule,
+    AlbumModule,
   ],
   entryComponents: [
     DialogPicComponent,

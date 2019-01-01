@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Album} from '../../classes/Album';
-import {CuesheetService} from '../../services/cuesheet.service';
-import {Cuesheet} from '../../classes/Cuesheet';
-import {Person} from '../../classes/Person';
-import {MusicService} from '../../services/music.service';
-import {CFile} from '../../classes/CFile';
-import {UtilService} from '../../services/util.service';
+import {Album} from '../../../classes/Album';
+import {CuesheetService} from '../../../services/cuesheet.service';
+import {Cuesheet} from '../../../classes/Cuesheet';
+import {Person} from '../../../classes/Person';
+import {MusicService} from '../../../services/music.service';
+import {CFile} from '../../../classes/CFile';
+import {UtilService} from '../../../services/util.service';
 
 @Component({
   selector: 'app-cuesheet-parts',

@@ -113,10 +113,6 @@ export class HomeComponent implements OnInit {
   }
 
   remove(chip) {
-    // console.log('remove', chip);
-    // console.log(chip, this.chips);
-    // console.log(this.chips);
-    // return;
     this.chips = this.chips.filter(chippie =>
       chippie.type != chip.type && chippie.id != chip.id);
     this.getAlbums();
@@ -211,7 +207,10 @@ export class HomeComponent implements OnInit {
     if (!this.facets) {
       this.facets = this.choiceService.getFacets();
     }
-    this.chips = this.chipsService.makeChips(params, this.facets);
+    const newChips = this.chipsService.makeChips(params, this.facets);
+    if (newChips) {
+      this.chips = newChips;
+    }
   }
 
   makeChip(val) {
