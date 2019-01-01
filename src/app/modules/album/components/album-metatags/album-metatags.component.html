@@ -1,7 +1,7 @@
-<table class="tags" *ngIf="tags">
+<table class="tags" *ngIf="tags" style="margin-bottom: 20px;">
   <tr *ngFor="let key of objectKeys(tags)">
     <td class="key">{{ key }}</td>
-    <td>
+    <td class="value">
       <!--{{ tags[key].join(', ') }}-->
       <span #topicTitle contenteditable="true"
             class="title"

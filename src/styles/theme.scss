@@ -7,22 +7,79 @@ $my-app-warn:    mat-palette($mat-deep-orange);
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 @include angular-material-theme($my-app-theme);
 
-.alternate-theme {
-  $alternate-primary: mat-palette($mat-light-blue);
-  $alternate-accent:  mat-palette($mat-yellow, 400);
-  $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
-  @include angular-material-theme($alternate-theme);
-}
+//.alternate-theme {
+//  $alternate-primary: mat-palette($mat-light-blue);
+//  $alternate-accent:  mat-palette($mat-yellow, 400);
+//  $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
+//  @include angular-material-theme($alternate-theme);
+//}
 
-$darkbackground: #dd8888;
-$darkcolor: #fff;
+$darkbackground: #888888;
+$darkerbackground: #888888;
+$cardbackground: #666666;
+$darkcolor: #eeeeee;
+
 
 .alternate-theme {
-  background-color: $darkbackground;
+  // background-color werkt het beste tot op niveau van html background
+  // maar maakt alsnog home view na focus op invoerveld onleesbaar
+  //background-color: $darkbackground;
+  
+  body {
+    background-color: $darkbackground;
+  }
+  //.cdk-overlay-container {
+  //  background-color: inherit;
+  //}
   .mat-toolbar,
-  .mat-card,
-  .mat-drawer-container {
+  .mat-drawer-container,
+  .mat-dialog-container {
     background-color: $darkbackground;
     color: $darkcolor;
   }
+  .mat-expansion-panel,
+  .mat-list-item {
+    background-color: $darkerbackground;
+    color: $darkcolor;
+  }
+  .mat-icon {
+    color: $darkcolor;
+  }
+  .mat-form-field-infix input {
+    background-color: rgba(215,215,215,.8);
+    color: #333;
+  }
+  .tags {
+    .key {
+      color: #eeffdd;
+    }
+    .value {
+      color: #eeeeee;
+    }
+  }
+  .mat-card,
+  .home {
+    background-color: $cardbackground;
+  }
+  .home,
+  nav
+  {
+    background-color: $darkerbackground;
+    color: $darkcolor;
+  }
+  main {
+    background-color: $darkerbackground;
+  }
+  .album {
+    .opener {
+      color: #ddd;
+    }
+    .opener:hover {
+      color: #3366dd;
+    }
+    .album-title {
+      color: #bfbfbf;
+    }
+  }
+
 }

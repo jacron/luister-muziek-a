@@ -64,4 +64,19 @@ div:focus {
 .chip-composer {
   background-color: #dd8888;
 }
-
+.tags {
+  .key {
+    color: brown;
+  }
+  .value {
+    color: #333;
+  }
+}
+.album {
+  .opener {
+    color: #999;
+  }
+  .opener:hover {
+    color: #0033bb;
+  }
+}

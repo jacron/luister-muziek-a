@@ -13,27 +13,6 @@ img.back-thumb {
 .first {
   max-width: 320px;
 }
-.opener {
-  position: absolute;
-  right: 20px;
-  bottom: -6px;
-  font-size: 30px;
-  color: #999;
-  text-align: center;
-  transition: color .35s;
-  padding: 3px;
-}
-.opener mat-icon {
-  cursor: pointer;
-}
-.opener:hover {
-  color: #0033bb;
-}
-.count {
-  font-size: 12px;
-  margin-bottom: -6px;
-  cursor: default;
-}
 .pieces {
   max-height: 0;
   transition: max-height .25s ease-in;
@@ -117,4 +96,23 @@ mat-card:focus {
   font-size: 20px;
   padding-top: 8px;
   font-weight: bold;
+}
+.album {
+  .opener {
+    position: absolute;
+    right: 20px;
+    bottom: -6px;
+    font-size: 16px;
+    line-height: 2;
+    text-align: center;
+    transition: color .35s;
+    padding: 3px;
+  }
+  .opener mat-icon {
+    cursor: pointer;
+  }
+  .count {
+    margin-bottom: -6px;
+    cursor: default;
+  }
 }
