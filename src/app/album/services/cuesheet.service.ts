@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {UtilService} from './util.service';
-import {Cuesheet} from '../classes/Cuesheet';
-import {CFile} from '../classes/CFile';
+import {UtilService} from '../../services/util.service';
+import {Cuesheet} from '../../classes/Cuesheet';
+import {CFile} from '../../classes/CFile';
 
 @Injectable()
 export class CuesheetService {

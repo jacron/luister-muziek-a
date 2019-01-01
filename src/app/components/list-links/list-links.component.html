@@ -1,8 +1,8 @@
 <mat-list *ngIf="list && list.albums">
-  <mat-dialog-title
+  <h3
     (click)="doClose()"
     class="title">{{ list.title }} ({{ list.count }})
-  </mat-dialog-title>
+  </h3>
   <mat-list-item *ngFor="let album of list.albums">
     <a [routerLink]="['/album', album.ID]" class="link">
       {{ album.Title }}</a>

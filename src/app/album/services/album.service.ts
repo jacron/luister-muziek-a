@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {DialogAlbumComponent} from '../../dialogs/dialog-album/dialog-album.component';
+import {DialogAlbumComponent} from '../dialogs/dialog-album/dialog-album.component';
 import {MatDialog} from '@angular/material';
-import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component';
+import {DialogPicComponent} from '../dialogs/dialog-pic/dialog-pic.component';
 
 @Injectable({
   providedIn: 'root'

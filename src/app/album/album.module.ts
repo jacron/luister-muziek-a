@@ -14,6 +14,13 @@ import {DialogPiecesComponent} from './dialogs/dialog-pieces/dialog-pieces.compo
 import {FormsModule} from '@angular/forms';
 import {DialogAddComponent} from './dialogs/dialog-add/dialog-add.component';
 import {SharedModule} from '../shared/shared.module';
+import {DialogInputComponent} from './dialogs/dialog-input/dialog-input.component';
+import {DialogTagComponent} from './dialogs/dialog-tag/dialog-tag.component';
+import {DialogPicComponent} from './dialogs/dialog-pic/dialog-pic.component';
+import {DialogPersonComponent} from './dialogs/dialog-person/dialog-person.component';
+import {DialogInstrumentComponent} from './dialogs/dialog-instrument/dialog-instrument.component';
+import {DialogSettingsComponent} from './dialogs/dialog-settings/dialog-settings.component';
+import {DialogAlbumComponent} from './dialogs/dialog-album/dialog-album.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +35,19 @@ import {SharedModule} from '../shared/shared.module';
     CuesheetActionsComponent,
     DialogPiecesComponent,
     DialogAddComponent,
+    DialogPicComponent,
+    DialogPersonComponent,
+    DialogTagComponent,
+    DialogInputComponent,
+    DialogInstrumentComponent,
+    DialogAlbumComponent,
+    DialogSettingsComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
-    FormsModule,  // needed for ngModel
     MatModule,
+    FormsModule,  // needed for ngModel
   ],
   exports: [
     AlbumDetailsComponent
@@ -41,6 +55,13 @@ import {SharedModule} from '../shared/shared.module';
   entryComponents: [
     DialogPiecesComponent,
     DialogAddComponent,
+    DialogPicComponent,
+    DialogPersonComponent,
+    DialogTagComponent,
+    DialogInputComponent,
+    DialogInstrumentComponent,
+    DialogAlbumComponent,
+    DialogSettingsComponent,
   ]
 })
 export class AlbumModule { }

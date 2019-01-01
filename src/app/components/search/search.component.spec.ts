@@ -5,7 +5,7 @@ import {MatAutocompleteModule, MatDialogModule, MatIconModule} from '@angular/ma
 import {TypedNamePipe} from '../../pipes/typed-name.pipe';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {TypedTitlePipe} from '../../pipes/typed-title.pipe';
-import {MusicService} from '../../services/music.service';
+import {MusicService} from '../../shared/services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
 import {StorageService} from '../../services/storage.service';

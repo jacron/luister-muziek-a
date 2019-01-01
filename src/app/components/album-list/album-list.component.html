@@ -14,13 +14,10 @@
       </div>
       <div class="text-container">
         <div mat-line="">{{ album.Title }}</div>
-        <app-chip-lists [album]="album"
+        <app-simple-chip-lists [album]="album"
                         class="chips-list"
-                        [removable]="false"
-                        [editable]="false"
-                        [showimage]="false"
                         mat-line
-        ></app-chip-lists>
+        ></app-simple-chip-lists>
         <!--<mat-list *ngIf="album.filteredPieces" class="pieces-list">-->
           <!--<mat-list-item *ngFor="let filteredPiece of album.filteredPieces">-->
             <!--<a [routerLink]="['/album', album.ID, filteredPiece.ID]" class="link">-->

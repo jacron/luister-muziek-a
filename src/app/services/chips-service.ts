@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {SearchParams} from '../classes/SearchParams';
-import {MusicService} from './music.service';
+import {MusicService} from '../shared/services/music.service';
 import {UtilService} from './util.service';
 // import {Facet} from '../classes/Facet';
 

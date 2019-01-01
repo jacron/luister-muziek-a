@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { PieceService } from './piece.service';
-import {MusicService} from '../../services/music.service';
+import {MusicService} from '../../shared/services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 
 describe('PieceService', () => {

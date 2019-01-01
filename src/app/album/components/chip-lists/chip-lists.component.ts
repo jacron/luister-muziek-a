@@ -4,13 +4,13 @@ import {Person} from '../../../classes/Person';
 import {Tag} from '../../../classes/Tag';
 import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
-import {DialogPicComponent} from '../../../dialogs/dialog-pic/dialog-pic.component';
+import {DialogPicComponent} from '../../dialogs/dialog-pic/dialog-pic.component';
 import {MatDialog} from '@angular/material';
-import {MusicService} from '../../../services/music.service';
-import {DialogPersonComponent} from '../../../dialogs/dialog-person/dialog-person.component';
-import {DialogTagComponent} from '../../../dialogs/dialog-tag/dialog-tag.component';
+import {MusicService} from '../../../shared/services/music.service';
+import {DialogPersonComponent} from '../../dialogs/dialog-person/dialog-person.component';
+import {DialogTagComponent} from '../../dialogs/dialog-tag/dialog-tag.component';
 import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
-import {DialogInstrumentComponent} from '../../../dialogs/dialog-instrument/dialog-instrument.component';
+import {DialogInstrumentComponent} from '../../dialogs/dialog-instrument/dialog-instrument.component';
 
 @Component({
   selector: 'app-chip-lists',

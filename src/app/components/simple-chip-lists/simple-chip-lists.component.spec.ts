@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogCategoryComponent } from './dialog-category.component';
+import { SimpleChipListsComponent } from './simple-chip-lists.component';
 
-describe('DialogCategoryComponent', () => {
-  let component: DialogCategoryComponent;
-  let fixture: ComponentFixture<DialogCategoryComponent>;
+describe('SimpleChipListsComponent', () => {
+  let component: SimpleChipListsComponent;
+  let fixture: ComponentFixture<SimpleChipListsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogCategoryComponent ]
+      declarations: [ SimpleChipListsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogCategoryComponent);
+    fixture = TestBed.createComponent(SimpleChipListsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

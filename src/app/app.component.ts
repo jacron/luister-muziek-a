@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MusicService} from './services/music.service';
+import {MusicService} from './shared/services/music.service';
 import {StateService} from './services/state.service';
 // import {OverlayContainer} from '@angular/cdk/overlay';
 

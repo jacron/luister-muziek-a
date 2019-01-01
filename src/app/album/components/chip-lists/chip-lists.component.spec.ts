@@ -5,7 +5,7 @@ import {MatChipsModule, MatIconModule} from '@angular/material';
 import { MatDialogModule} from '@angular/material/dialog';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
-import {MusicService} from '../../../services/music.service';
+import {MusicService} from '../../../shared/services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {Album} from '../../../classes/Album';
 import any = jasmine.any;

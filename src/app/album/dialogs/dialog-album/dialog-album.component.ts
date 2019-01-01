@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Album} from '../../classes/Album';
+import {Album} from '../../../classes/Album';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {AlbumMenuComponent} from '../../album/components/album-menu/album-menu.component';
-import {MusicService} from '../../services/music.service';
+import {AlbumMenuComponent} from '../../components/album-menu/album-menu.component';
+import {MusicService} from '../../../shared/services/music.service';
 import {forkJoin} from 'rxjs/internal/observable/forkJoin';
 
 @Component({
