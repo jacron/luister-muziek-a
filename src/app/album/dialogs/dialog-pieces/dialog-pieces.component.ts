@@ -1,10 +1,10 @@
 import {Component, ElementRef, Inject, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {MAT_DIALOG_DATA, MatCheckbox, MatDialogRef} from '@angular/material';
-import {MusicService} from '../../services/music.service';
-import {Piece} from '../../classes/Piece';
+import {MusicService} from '../../../services/music.service';
+import {Piece} from '../../../classes/Piece';
 import {PieceService} from '../../services/piece.service';
-import {Album} from '../../classes/Album';
-import {Proposal} from '../../classes/Proposal';
+import {Album} from '../../../classes/Album';
+import {Proposal} from '../../../classes/Proposal';
 
 @Component({
   selector: 'app-dialog-pieces',

@@ -4,7 +4,7 @@ import { AlbumPiecesComponent } from './album-pieces.component';
 import {MatIconModule} from '@angular/material';
 import {MusicService} from '../../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
-import {PieceService} from '../../../services/piece.service';
+import {PieceService} from '../../services/piece.service';
 
 describe('AlbumPiecesComponent', () => {
   let component: AlbumPiecesComponent;

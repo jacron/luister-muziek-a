@@ -2,16 +2,14 @@ import {Component, DoCheck, Input, OnInit} from '@angular/core';
 import {Album} from '../../../classes/Album';
 import {environment} from '../../../../environments/environment';
 import {MusicService} from '../../../services/music.service';
-import {MatDialog} from '@angular/material';
-import {DialogPicComponent} from '../../../dialogs/dialog-pic/dialog-pic.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {List} from '../../../classes/List';
 import {StorageService} from '../../../services/storage.service';
 import {Cuesheet} from '../../../classes/Cuesheet';
 import {StateService} from '../../../services/state.service';
-// import {DialogAlbumComponent} from '../../../dialogs/dialog-album/dialog-album.component';
-import {AlbumService} from '../../../services/album.service';
+import {AlbumService} from '../../services/album.service';
 import {SettingsService} from '../../../services/settings.service';
+import {UtilService} from '../../../services/util.service';
 
 @Component({
   selector: 'app-album-details',
@@ -23,26 +21,26 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
 
   imgUrl = environment.apiServer + '/image/';
   imgBackUrl = environment.apiServer + '/image/back/';
-  navBackwards: boolean;
-  navForwards: boolean;
-  navBackwardsCount: number;
-  navForwardsCount: number;
+  navBackwards = false;
+  navForwards = false;
+  navBackwardsCount= 0;
+  navForwardsCount = 0;
   list: List;
   chevron = 'keyboard_arrow_down';
-  idpiece: number;
+  idpiece = -1;
   invalidCuesheets: Cuesheet[];
   validCuesheets: Cuesheet[];
-  coverSize: number;
+  coverSize= -1;
 
   constructor(
     private musicService: MusicService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
     private storageService: StorageService,
     private stateService: StateService,
     private albumService: AlbumService,
     private settingsService: SettingsService,
+    private utilServce: UtilService,
   ) {
     route.params.subscribe(params => this.handleParams(params));
   }
@@ -86,7 +84,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     }
   }
 
-  albumPiecesContainSelection(idpiece: number) {
+  albumPiecesContainSelection(idpiece) {
     if (!this.album) {
       return false;
     }
@@ -195,13 +193,14 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   openPic(mode): void {
     const imgUrl = this.imgUrl + this.album.ID + '/album';
     const backUrl = this.album.album_back_image ? this.imgBackUrl + this.album.ID + '/album' : null;
-    this.dialog.open(DialogPicComponent, {
+    this.albumService.openPic({
       data: {
         imgUrl: imgUrl,
         backUrl: backUrl,
         mode: mode
       }
-    });
+    }
+  );
   }
 
   openPieces() {
@@ -226,7 +225,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
       return;
     }
     const albumIds = list.albumIds;
-    if (!albumIds || !Array.isArray(albumIds) || albumIds.length === 0) {
+    if (!this.utilServce.isArray(albumIds) || albumIds.length === 0) {
       this.navBackwards = this.navForwards = false;
       return;
     }

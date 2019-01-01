@@ -5,6 +5,10 @@ export class UtilService {
 
   constructor() { }
 
+  isArray(a) {
+    return Array.isArray(a);
+  }
+
   isEmpty(obj) {
     for (const key in obj) {
       // console.log(key);

@@ -10,6 +10,10 @@ import {AlbumPersonsComponent} from './components/album-persons/album-persons.co
 import {AlbumPiecesComponent} from './components/album-pieces/album-pieces.component';
 import {CuesheetPartsComponent} from './components/cuesheet-parts/cuesheet-parts.component';
 import {CuesheetActionsComponent} from './components/cuesheet-actions/cuesheet-actions.component';
+import {DialogPiecesComponent} from './dialogs/dialog-pieces/dialog-pieces.component';
+import {FormsModule} from '@angular/forms';
+import {DialogAddComponent} from './dialogs/dialog-add/dialog-add.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,21 @@ import {CuesheetActionsComponent} from './components/cuesheet-actions/cuesheet-a
     AlbumPiecesComponent,
     CuesheetPartsComponent,
     CuesheetActionsComponent,
+    DialogPiecesComponent,
+    DialogAddComponent,
   ],
   imports: [
     CommonModule,
+    SharedModule,
+    FormsModule,  // needed for ngModel
     MatModule,
   ],
   exports: [
     AlbumDetailsComponent
+  ],
+  entryComponents: [
+    DialogPiecesComponent,
+    DialogAddComponent,
   ]
 })
 export class AlbumModule { }
