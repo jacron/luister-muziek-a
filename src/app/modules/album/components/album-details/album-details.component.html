@@ -63,10 +63,9 @@
         </div>
         <div class="row selected-cuesheet">
           <div class="col">
-            <div class="opener">
+            <div class="opener" (click)="openPieces()">
               <div class="count">{{ album.pieces.length }}</div>
-              <mat-icon (click)="openPieces()"
-                        title="view {{ album.pieces.length }} pieces"
+              <mat-icon title="view {{ album.pieces.length }} pieces"
                         [class.expanded]="album.expanded"
                         waves-light waves-effect
               >{{ chevron }}

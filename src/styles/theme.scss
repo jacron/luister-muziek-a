@@ -24,7 +24,7 @@ $darkcolor: #eeeeee;
   // background-color werkt het beste tot op niveau van html background
   // maar maakt alsnog home view na focus op invoerveld onleesbaar
   //background-color: $darkbackground;
-  
+
   body {
     background-color: $darkbackground;
   }
@@ -40,6 +40,9 @@ $darkcolor: #eeeeee;
   .mat-expansion-panel,
   .mat-list-item {
     background-color: $darkerbackground;
+    color: $darkcolor;
+  }
+  .pieces {
     color: $darkcolor;
   }
   .mat-icon {
