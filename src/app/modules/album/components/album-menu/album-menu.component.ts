@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Album} from '../../../../classes/Album';
 import {environment} from '../../../../../environments/environment';
 import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.component';
-import {MusicService} from '../../../../shared/services/music.service';
+import {MusicService} from '../../../../services/music.service';
 import {MatDialog} from '@angular/material';
 import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
 import {DialogAlbumComponent} from '../../dialogs/dialog-album/dialog-album.component';

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {DialogTagComponent} from './dialogs/dialog-tag/dialog-tag.component';
 import {DialogPersonComponent} from './dialogs/dialog-person/dialog-person.component';
 import {DialogInstrumentComponent} from './dialogs/dialog-instrument/dialog-instrument.component';
-import {MatModule} from '../../mat/mat.module';
+import {MatModule} from '../mat/mat.module';
 
 @NgModule({
   declarations: [

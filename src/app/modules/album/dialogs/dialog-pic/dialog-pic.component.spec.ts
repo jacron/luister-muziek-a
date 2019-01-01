@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogPicComponent } from './dialog-pic.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MusicService} from '../../../../shared/services/music.service';
+import {MusicService} from '../../../../services/music.service';
 
 describe('DialogPicComponent', () => {
   let component: DialogPicComponent;

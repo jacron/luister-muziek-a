@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogPiecesComponent } from './dialog-pieces.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {MusicService} from '../../../../shared/services/music.service';
+import {MusicService} from '../../../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {PieceService} from '../../services/piece.service';
 import {MatDialogModule, MatDialogRef} from '@angular/material';

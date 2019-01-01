@@ -5,7 +5,7 @@ import {Person} from '../../classes/Person';
 import {SearchParams} from '../../classes/SearchParams';
 import {MatDialog} from '@angular/material';
 import {DialogCustomizeSearchComponent} from '../../dialogs/dialog-customize-search/dialog-customize-search.component';
-import {MusicService} from '../../shared/services/music.service';
+import {MusicService} from '../../services/music.service';
 import {Choice} from '../../classes/Choice';
 import {StorageService} from '../../services/storage.service';
 import {ChoiceService} from '../../services/choice.service';

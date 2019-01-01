@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogTagComponent } from './dialog-tag.component';
 import {MatDialogModule, MatDialogRef, MatIconModule} from '@angular/material';
-import {MusicService} from '../../../../shared/services/music.service';
+import {MusicService} from '../../../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Tag} from '../../../../classes/Tag';

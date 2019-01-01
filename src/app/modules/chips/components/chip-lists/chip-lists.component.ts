@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
 import {DialogPicComponent} from '../../../album/dialogs/dialog-pic/dialog-pic.component';
 import {MatDialog} from '@angular/material';
-import {MusicService} from '../../../../shared/services/music.service';
+import {MusicService} from '../../../../services/music.service';
 import {DialogPersonComponent} from '../../dialogs/dialog-person/dialog-person.component';
 import {DialogTagComponent} from '../../dialogs/dialog-tag/dialog-tag.component';
 import {DialogAddComponent} from '../../../album/dialogs/dialog-add/dialog-add.component';

@@ -10,7 +10,7 @@ import {
 import {Album} from '../../classes/Album';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import {MusicService} from '../../shared/services/music.service';
+import {MusicService} from '../../services/music.service';
 import {StorageService} from '../../services/storage.service';
 import {List} from '../../classes/List';
 import {Piece} from '../../classes/Piece';

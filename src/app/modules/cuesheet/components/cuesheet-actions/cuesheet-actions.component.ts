@@ -3,7 +3,7 @@ import {Cuesheet} from '../../../../classes/Cuesheet';
 import {DialogInputComponent} from '../../../album/dialogs/dialog-input/dialog-input.component';
 import {Album} from '../../../../classes/Album';
 import {MatDialog} from '@angular/material';
-import {MusicService} from '../../../../shared/services/music.service';
+import {MusicService} from '../../../../services/music.service';
 
 @Component({
   selector: 'app-cuesheet-actions',

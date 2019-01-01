@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MusicService} from '../../shared/services/music.service';
+import {MusicService} from '../../services/music.service';
 import {Collection} from '../../classes/Collection';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';

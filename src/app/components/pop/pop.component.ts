@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {StateService} from '../../services/state.service';
 import {Person} from '../../classes/Person';
-import {MusicService} from '../../shared/services/music.service';
+import {MusicService} from '../../services/music.service';
 
 @Component({
   selector: 'app-pop',

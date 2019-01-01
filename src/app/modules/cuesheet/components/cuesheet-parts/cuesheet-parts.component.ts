@@ -3,7 +3,7 @@ import {Album} from '../../../../classes/Album';
 import {CuesheetService} from '../../services/cuesheet.service';
 import {Cuesheet} from '../../../../classes/Cuesheet';
 import {Person} from '../../../../classes/Person';
-import {MusicService} from '../../../../shared/services/music.service';
+import {MusicService} from '../../../../services/music.service';
 import {CFile} from '../../../../classes/CFile';
 import {UtilService} from '../../../../services/util.service';
 

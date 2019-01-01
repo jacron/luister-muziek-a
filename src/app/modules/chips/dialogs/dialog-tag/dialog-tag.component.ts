@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MusicService} from '../../../../shared/services/music.service';
+import {MusicService} from '../../../../services/music.service';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Router} from '@angular/router';
 

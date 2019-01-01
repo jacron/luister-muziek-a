@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import {ToolsComponent} from '../../tools/tools.component';
 import {PageNotFoundComponent} from '../../page-not-found/page-not-found.component';
 import {RouterModule, Routes} from '@angular/router';
-import {WelcomeComponent} from '../../welcome/welcome.component';
 import {SearchComponent} from '../../components/search/search.component';
 import {AlbumDetailsComponent} from '../album/components/album-details/album-details.component';
 import {CodeComponent} from '../../components/code/code.component';
@@ -21,7 +20,6 @@ import {HomeComponent} from '../../components/home/home.component';
 
 const appRoutes: Routes = [
   {path: '', component: SearchComponent},
-  {path: 'welcome', component: WelcomeComponent},
   {path: 'search', component: SearchComponent},
   {path: 'search/:idcomp/:idperf/:idcoll/:idtag', component: SearchComponent},
   {path: 'album/:idalbum', component: AlbumDetailsComponent},

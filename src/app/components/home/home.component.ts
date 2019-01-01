@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
-import {MusicService} from '../../shared/services/music.service';
+import {MusicService} from '../../services/music.service';
 import {Album} from '../../classes/Album';
 import {SearchParams} from '../../classes/SearchParams';
 import {ListService} from '../../services/list.service';

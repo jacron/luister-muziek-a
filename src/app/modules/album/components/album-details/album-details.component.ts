@@ -1,7 +1,7 @@
 import {Component, DoCheck, Input, OnInit} from '@angular/core';
 import {Album} from '../../../../classes/Album';
 import {environment} from '../../../../../environments/environment';
-import {MusicService} from '../../../../shared/services/music.service';
+import {MusicService} from '../../../../services/music.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {List} from '../../../../classes/List';
 import {StorageService} from '../../../../services/storage.service';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Piece} from '../../../classes/Piece';
-import {MusicService} from '../../../shared/services/music.service';
+import {MusicService} from '../../../services/music.service';
 import {forkJoin} from 'rxjs';
 import {Proposal} from '../../../classes/Proposal';
 import {stringify} from 'querystring';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MusicService} from '../../shared/services/music.service';
+import {MusicService} from '../../services/music.service';
 import {environment} from '../../../environments/environment';
 // import {ServeTaskOptions} from '@angular/cli/commands/serve';
 import {StorageService} from '../../services/storage.service';

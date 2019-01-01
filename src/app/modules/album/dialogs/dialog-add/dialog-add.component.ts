@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Person} from '../../../../classes/Person';
 import {Tag} from '../../../../classes/Tag';
 import {forkJoin} from 'rxjs';
-import {MusicService} from '../../../../shared/services/music.service';
+import {MusicService} from '../../../../services/music.service';
 import {AlbumDetailsComponent} from '../../components/album-details/album-details.component';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DialogInputComponent} from '../dialog-input/dialog-input.component';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {MusicService} from '../../shared/services/music.service';
+import {MusicService} from '../../services/music.service';
 import {LibraryCode} from '../../classes/LibraryCode';
 import {environment} from '../../../environments/environment';
 import {StateService} from '../../services/state.service';

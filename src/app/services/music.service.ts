@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {SearchParams} from '../../classes/SearchParams';
+import {environment} from '../../environments/environment';
+import {SearchParams} from '../classes/SearchParams';
 
 @Injectable()
 export class MusicService {
