@@ -10,11 +10,11 @@ import { SearchComponent } from './components/search/search.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ToolsComponent } from './tools/tools.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { AppRoutingModule} from './app-routing/app-routing.module';
+import { AppRoutingModule} from './modules/app-routing/app-routing.module';
 import { TypedNamePipe } from './pipes/typed-name.pipe';
 import { TypedTitlePipe } from './pipes/typed-title.pipe';
 import { StorageService} from './services/storage.service';
-import {PieceService} from './album/services/piece.service';
+// import {PieceService} from './album/services/piece.service';
 import {PersonService} from './services/person.service';
 import { CodeComponent } from './components/code/code.component';
 import { CodeListComponent } from './components/code-list/code-list.component';
@@ -22,7 +22,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { AlbumListComponent } from './components/album-list/album-list.component';
 import {UtilService} from './services/util.service';
-import {CuesheetService} from './album/services/cuesheet.service';
+// import {CuesheetService} from './album/services/cuesheet.service';
 import { ComponistComponent } from './components/componist/componist.component';
 import { PerformerComponent } from './components/performer/performer.component';
 import { AlphabetComponent } from './components/alphabet/alphabet.component';
@@ -44,9 +44,12 @@ import { ListLinksComponent } from './components/list-links/list-links.component
 import { PopComponent } from './components/pop/pop.component';
 import { PopListComponent } from './components/pop-list/pop-list.component';
 import { HomeComponent } from './components/home/home.component';
-import {AlbumModule} from './album/album.module';
+// import {AlbumModule} from './album/album.module';
 import {SharedModule} from './shared/shared.module';
 import { SimpleChipListsComponent } from './components/simple-chip-lists/simple-chip-lists.component';
+import {AlbumModule} from './modules/album/album.module';
+import {PieceService} from './modules/album/services/piece.service';
+import {CuesheetService} from './modules/cuesheet/services/cuesheet.service';
 
 @NgModule({
   declarations: [
