@@ -48,6 +48,18 @@ export class MusicService {
     return this.getJson('/performers/' + id);
   }
 
+  getInstrumentById(id) {
+    return this.getJson('/instruments/' + id);
+  }
+
+  getCollectionById(id) {
+    return this.getJson('collections/' + id);
+  }
+
+  getTagById(id) {
+    return this.getJson('tag/' + id);
+  }
+
   getAlbumById(id) {
     return this.getJson('/albums/' + id);
   }

@@ -7,6 +7,7 @@ import {MatModule} from '../mat/mat.module';
 import {DialogAddComponent} from './dialogs/dialog-add/dialog-add.component';
 import {ChipListsComponent} from './components/chip-lists/chip-lists.component';
 import {SharedModule} from '../shared/shared.module';
+import { HomeChipsComponent } from './components/home-chips/home-chips.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {SharedModule} from '../shared/shared.module';
     DialogTagComponent,
     DialogInstrumentComponent,
     DialogAddComponent,
-    ChipListsComponent
+    ChipListsComponent,
+    HomeChipsComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,7 @@ import {SharedModule} from '../shared/shared.module';
   ],
   exports: [
     ChipListsComponent,
+    HomeChipsComponent,
   ],
   entryComponents: [
     DialogPersonComponent,

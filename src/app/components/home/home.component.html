@@ -1,4 +1,4 @@
-<div class="home">
+<div class="home chip-lists">
   <div class="action-buttons">
     <button mat-button *ngFor="let facet of facets | keyvalue: rankOrder"
             (click)="add(facet.value)"
@@ -27,21 +27,27 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
+  <mat-form-field class="form-field" *ngIf="q">
+    <input matInput #query
+           placeholder="Titel"
+           title=""
+           [formControl]="queryControl"
+           (keyup.enter)="submitQuery()"
+    >
+    <button mat-button *ngIf="query.value"
+            class="closer" aria-label="Clear"
+            matSuffix mat-icon-button aria-label="Clear"
+            (click)="clearQuery()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
 
   <div class="divider"></div>
 
-  <mat-chip-list class="chips">
-    <mat-chip *ngFor="let chip of chips"
-              [removable]="true"
-              (removed)="remove(chip)"
-              [style.backgroundColor]="chip.color">
-      {{ chip.name}}
-      <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip>
-    <button mat-icon-button (click)="clearChips()" *ngIf="chips && chips.length">
-      <mat-icon>clear</mat-icon>
-    </button>
-  </mat-chip-list>
+  <app-home-chips
+    (remove)="remove($event)"
+    (clearChips)="clearChips()"
+    [chips]="chips"></app-home-chips>
 
   <app-album-list
     [albums]="albums"

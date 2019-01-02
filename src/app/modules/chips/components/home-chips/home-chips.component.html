@@ -1,0 +1,62 @@
+<mat-chip-list class="chips chip-lists">
+    <span *ngFor="let chip of chips">
+      <span *ngIf="chip.cls=='chip-composer'">
+        <mat-chip
+          [removable]="true"
+          (removed)="emitRemove(chip)"
+          class="chip-composer">
+          {{ chip.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </span>
+      <span *ngIf="chip.cls=='chip-performer'">
+        <mat-chip
+          [removable]="true"
+          (removed)="emitRemove(chip)"
+          class="chip-performer">
+          {{ chip.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </span>
+      <span *ngIf="chip.cls=='chip-instrument'">
+        <mat-chip
+          [removable]="true"
+          (removed)="emitRemove(chip)"
+          class="chip-instrument">
+          {{ chip.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </span>
+      <span *ngIf="chip.cls=='chip-tag'">
+        <mat-chip
+          [removable]="true"
+          (removed)="emitRemove(chip)"
+          class="chip-tag">
+          {{ chip.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </span>
+      <span *ngIf="chip.cls=='chip-collection'">
+        <mat-chip
+          [removable]="true"
+          (removed)="emitRemove(chip)"
+          class="chip-collection">
+          {{ chip.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </span>
+      <span *ngIf="chip.cls=='chip-title'">
+        <mat-chip
+          [removable]="true"
+          (removed)="emitRemove(chip)"
+          class="chip-title">
+          {{ chip.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </span>
+    </span>
+  <button mat-icon-button (click)="emitClearChips()"
+          *ngIf="chips && chips.length">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-chip-list>

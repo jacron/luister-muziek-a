@@ -43,6 +43,7 @@ import { SimpleChipListsComponent } from './components/simple-chip-lists/simple-
 import {AlbumModule} from './modules/album/album.module';
 import {PieceService} from './modules/album/services/piece.service';
 import {CuesheetService} from './modules/cuesheet/services/cuesheet.service';
+import {ChipsModule} from './modules/chips/chips.module';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {CuesheetService} from './modules/cuesheet/services/cuesheet.service';
     MatModule,
     ReactiveFormsModule,
     AlbumModule,
+    ChipsModule,
     SharedModule
   ],
   exports: [

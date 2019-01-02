@@ -4,7 +4,7 @@ export class Facet {
     name: string;
     icon: string;
     value: string;
-    color: string;
+    cls: string;
     displayField: string;
     idfield: string;
   }

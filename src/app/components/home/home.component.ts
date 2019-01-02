@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {MusicService} from '../../services/music.service';
@@ -9,7 +9,7 @@ import {StorageService} from '../../services/storage.service';
 import {KeyValue} from '@angular/common';
 import {ChoiceService} from '../../services/choice.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ChipsService} from '../../services/chips-service';
+import {ChipsService} from '../../modules/chips/services/chips-service';
 import {List} from '../../classes/List';
 import {StateService} from '../../services/state.service';
 
@@ -20,12 +20,16 @@ import {StateService} from '../../services/state.service';
 })
 export class HomeComponent implements OnInit {
   model = null;
+  q = null;
   myControl = new FormControl();
+  queryControl = new FormControl();
   chips: any[] = [];
   albums: Album[];
   params: SearchParams;
   facets: any[];
   list: List;
+
+  @ViewChild('query') qv;
 
   constructor(
     private musicService: MusicService,
@@ -70,10 +74,14 @@ export class HomeComponent implements OnInit {
       placeholder: facet.name,
       filteredItems,
       displayField: facet.displayField,
-      color: facet.color,
+      cls: facet.cls,
       type,
     };
+  }
 
+  clearQuery() {
+    this.queryControl.setValue('');
+    this.qv.nativeElement.focus();
   }
 
   add(facet) {
@@ -90,6 +98,21 @@ export class HomeComponent implements OnInit {
       case 'pop':
         this.musicService.getPerformersGenre('pop').subscribe(
           results => this.afterGetIems(results, type));
+        break;
+      case 'collection':
+        this.musicService.getCollections().subscribe(
+          results => this.afterGetIems(results, type));
+        break;
+      case 'tag':
+        this.musicService.getTags().subscribe(
+          results => this.afterGetIems(results, type));
+        break;
+      case 'instrument':
+        this.musicService.getInstruments().subscribe(
+          results => this.afterGetIems(results, type));
+        break;
+      case 'title':
+        this.q = true;
         break;
     }
   }
@@ -192,6 +215,7 @@ export class HomeComponent implements OnInit {
 
   getAlbums() {
     const params: SearchParams = this.normParams();
+    console.log(params);
     this.router.navigate(['/home', params])
       .then(() => this.storeTitle()
       );
@@ -211,11 +235,26 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  submitQuery() {
+    const type = 'title';
+    const value = this.queryControl.value;
+    const facet = this.facets[type];
+    this.chips = this.chips.filter(chip => chip.type != type);
+    this.chips.push({
+      name: value,
+      cls: facet.cls,
+      id: value,
+      type: type,
+    });
+    this.getAlbums();
+    this.q = null;
+  }
+
   makeChip(val) {
     this.chips = this.chips.filter(chip => chip.type != this.model.type);
     this.chips.push({
       name: val[this.model.displayField],
-      color: this.model.color,
+      cls: this.model.cls,
       id: val.ID,
       type: this.model.type,
     });

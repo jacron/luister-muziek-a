@@ -95,5 +95,26 @@ $darkcolor: #eeeeee;
       color: #bfbfbf;
     }
   }
-
+  .chip-lists {
+    .chip-composer {
+      background-color: #887777;
+      color: $darkcolor;
+    }
+    .chip-performer {
+      background-color: #778877;
+      color: $darkcolor;
+    }
+    .chip-instrument {
+      background-color: #777788;
+      color: $darkcolor;
+    }
+    .chip-tag {
+      background-color: #787878;
+      color: $darkcolor;
+    }
+    .chip-title {
+      background-color: #987878;
+      color: $darkcolor;
+    }
+  }
 }

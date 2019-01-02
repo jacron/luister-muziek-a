@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   Input,
   OnChanges,
@@ -20,9 +19,9 @@ import {Piece} from '../../classes/Piece';
   templateUrl: './album-list.component.html',
   styleUrls: ['./album-list.component.scss'],
 })
-export class AlbumListComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() albums: Album[];
-  @Input() q: string;
+  @Input() q = '';
 
   imgUrl = environment.apiServer + '/image/';
   lazyImages: any;
@@ -155,12 +154,6 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy, AfterVi
     this.lazyLoad();
   }
 
-  ngAfterViewInit() {
-    // setTimeout(() => {
-    //   this.lazy();
-    // }, 0);
-  }
-
   onChangedAlbums(albums: Album[]) {
     if (Array.isArray(albums)) {
       this.filteredAlbums = albums.slice();
@@ -178,7 +171,6 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy, AfterVi
   }
 
   ngOnDestroy() {
-    console.log('on destroy');
     this.globalListenScrollFunc();
     this.globalListenTouchmoveFunc();
     this.globalListenResizeFunc();
