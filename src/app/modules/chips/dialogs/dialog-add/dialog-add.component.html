@@ -1,0 +1,28 @@
+<div class="dialog-add">
+  <div appDialogHeader paddingBottom="20">Album items</div>
+  <mat-dialog-content>
+    <app-chip-lists [album]="album"
+                    [removable]="true"
+                    [editable]="false"
+                    [showimage]="true"
+                    (close)="close($event)"
+    ></app-chip-lists>
+    <div class="divider"></div>
+    <div class="dialog-additionals">
+      <div *ngFor="let choice of choices">
+        <app-typeahead
+          [placeholder]="choice.placeholder"
+          [displayfield]="choice.displayfield"
+          [items]="choice.items"
+          [(id)]="choice.id"
+          [(text)]="choice.text"
+        ></app-typeahead>
+        <button mat-button (click)="addItem(choice)" [disabled]="choice.id == -1">
+          {{ labelAdd }}
+        </button>
+        <button mat-button (click)="newItem(choice)">{{ labelNew }}</button>
+        <br>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

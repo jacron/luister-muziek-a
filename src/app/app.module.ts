@@ -38,7 +38,6 @@ import {StateService} from './services/state.service';
 import { PopComponent } from './components/pop/pop.component';
 import { PopListComponent } from './components/pop-list/pop-list.component';
 import { HomeComponent } from './components/home/home.component';
-// import {AlbumModule} from './album/album.module';
 import {SharedModule} from './modules/shared/shared.module';
 import { SimpleChipListsComponent } from './components/simple-chip-lists/simple-chip-lists.component';
 import {AlbumModule} from './modules/album/album.module';

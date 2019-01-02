@@ -80,3 +80,7 @@ div:focus {
     color: #0033bb;
   }
 }
+nav a:not(.selected):hover {
+  background-color: $mat-button-hover-background;
+  cursor: pointer;
+}

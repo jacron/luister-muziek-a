@@ -12,3 +12,8 @@
     height: 0;
   }
 }
+.dialog-customize {
+  .mat-selection-list:focus {
+    outline: 0 solid transparent;
+  }
+}

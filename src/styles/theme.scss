@@ -42,7 +42,12 @@ $darkcolor: #eeeeee;
     background-color: $darkerbackground;
     color: $darkcolor;
   }
-  .pieces {
+  .mat-drawer-container {
+    position: inherit;
+  }
+  .pieces,
+  .mat-expansion-panel-header-title,
+  .mat-expansion-panel-header-description {
     color: $darkcolor;
   }
   .mat-icon {
@@ -69,6 +74,12 @@ $darkcolor: #eeeeee;
   {
     background-color: $darkerbackground;
     color: $darkcolor;
+  }
+  nav a {
+    color: $darkcolor;
+  }
+  nav a:not(.selected):hover {
+    background-color: $cardbackground;
   }
   main {
     background-color: $darkerbackground;

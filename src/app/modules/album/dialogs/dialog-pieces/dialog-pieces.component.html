@@ -1,84 +1,85 @@
-<h2>Cuesheets maker</h2>
+<div class="dialog-pieces">
+  <div appDialogHeader paddingBottom="10">Cuesheets maker</div>
+  <mat-dialog-content>
 
-<mat-dialog-content>
-
-  <!-- list of proposals -->
-  <mat-list>
-    <mat-list-item *ngFor="let proposal of proposals">
-      <button mat-raised-button
-              (click)="makeCuesheet(proposal)"
-              [disabled]="proposal.created"
-              style="margin-right: 8px;"
-      >
-        Maak
-      </button>
-      <span (click)="markPieces(proposal)"
-            [class.marked]="proposal.marked"
-      >
+    <!-- list of proposals -->
+    <mat-list>
+      <mat-list-item *ngFor="let proposal of proposals">
+        <button mat-raised-button
+                (click)="makeCuesheet(proposal)"
+                [disabled]="proposal.created"
+                style="margin-right: 8px;"
+        >
+          Maak
+        </button>
+        <span (click)="markPieces(proposal)"
+              [class.marked]="proposal.marked"
+        >
         {{ proposal.name }}
       </span>
-      <span class="horizontal-spacer"></span>
-      <button mat-button
-              class="remove-proposal"
+        <span class="horizontal-spacer"></span>
+        <button mat-button
+                class="remove-proposal"
+                matSuffix mat-icon-button aria-label="Clear"
+                (click)="removeProposal(proposal)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+    <mat-divider *ngIf="proposals.length > 0"></mat-divider>
+
+    <!-- list of pieces -->
+    <mat-list>
+      <mat-list-item *ngFor="let piece of data.pieces; let i = index">
+        <mat-checkbox
+          class="check"
+          [(ngModel)]="piece.checked"
+          (change)="onPieceCheck($event, piece)"
+          (click)="onPieceClick($event, piece, i)"
+        >
+        </mat-checkbox>
+        <span #topicTitle contenteditable="true"
+              [textContent]="displayName(piece.Name)"
+              (input)="model=topicTitle.innerText"
+              [class.created]="piece.created"
+              [class.marked]="piece.marked"
+              (keydown)="nameKeydown($event, piece, topicTitle.innerText)">
+    </span>
+      </mat-list-item>
+    </mat-list>
+  </mat-dialog-content>
+
+  <!-- acties -->
+  <mat-dialog-actions>
+    <mat-form-field class="example-full-width" style="width: 100%">
+      <input matInput placeholder="Cuesheet"
+             (keyup.enter)="createCuesheet()"
+             [(ngModel)]="cueName">
+      <button mat-button *ngIf="cueName"
+              class="closer"
               matSuffix mat-icon-button aria-label="Clear"
-              (click)="removeProposal(proposal)">
+              (click)="cueName=''">
         <mat-icon>close</mat-icon>
       </button>
-    </mat-list-item>
-  </mat-list>
-  <mat-divider *ngIf="proposals.length > 0"></mat-divider>
-
-  <!-- list of pieces -->
-  <mat-list>
-    <mat-list-item *ngFor="let piece of data.pieces; let i = index">
-      <mat-checkbox
-        class="check"
-        [(ngModel)]="piece.checked"
-        (change)="onPieceCheck($event, piece)"
-        (click)="onPieceClick($event, piece, i)"
-      >
-      </mat-checkbox>
-      <span #topicTitle contenteditable="true"
-            [textContent]="displayName(piece.Name)"
-            (input)="model=topicTitle.innerText"
-            [class.created]="piece.created"
-            [class.marked]="piece.marked"
-            (keydown)="nameKeydown($event, piece, topicTitle.innerText)">
-    </span>
-    </mat-list-item>
-  </mat-list>
-</mat-dialog-content>
-
-<!-- acties -->
-<mat-dialog-actions>
-  <mat-form-field class="example-full-width" style="width: 100%">
-    <input matInput placeholder="Cuesheet"
-           (keyup.enter)="createCuesheet()"
-           [(ngModel)]="cueName">
-    <button mat-button *ngIf="cueName"
-            class="closer"
-            matSuffix mat-icon-button aria-label="Clear"
-            (click)="cueName=''">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
-  <button mat-raised-button (click)="lcs()"
-          matTooltip="longest common subsequence"
-          [disabled]="piecesSelected() < 2"
-  >lcs</button>
-  <button mat-raised-button (click)="createCuesheet()"
-          [disabled]="piecesSelected() < 1"
-  >Maak cuesheet</button>
-  <button mat-raised-button (click)="selectAllPieces(false)"
-          [disabled]="piecesSelected() < 1"
-  >Selecteer niets</button>
-  <button mat-raised-button (click)="selectAllPieces(true)">
-    Selecteer alles</button>
-  <button mat-raised-button (click)="autoTest()"
-  >Auto</button>
-  <span class="horizontal-spacer"></span>
-  <button mat-raised-button (click)="makeAllProposals()"
-          [disabled]="proposals.length < 1"
-          class="mat-primary"
-  >Maak!</button>
-</mat-dialog-actions>
+    </mat-form-field>
+    <button mat-raised-button (click)="lcs()"
+            matTooltip="longest common subsequence"
+            [disabled]="piecesSelected() < 2"
+    >Naam</button>
+    <button mat-raised-button (click)="createCuesheet()"
+            [disabled]="piecesSelected() < 1"
+    >Voorstel</button>
+    <button mat-raised-button (click)="selectAllPieces(false)"
+            [disabled]="piecesSelected() < 1"
+    >Selecteer niets</button>
+    <button mat-raised-button (click)="selectAllPieces(true)">
+      Selecteer alles</button>
+    <button mat-raised-button (click)="autoTest()"
+    >Auto</button>
+    <span class="horizontal-spacer"></span>
+    <button mat-raised-button (click)="makeAllProposals()"
+            [disabled]="proposals.length < 1"
+            class="mat-primary"
+    >Maak!</button>
+  </mat-dialog-actions>
+</div>

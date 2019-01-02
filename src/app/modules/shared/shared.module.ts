@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import {TypeaheadComponent} from './components/typeahead/typeahead.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatModule} from '../mat/mat.module';
+import {DialogHeaderDirective} from './directives/dialog-header.directive';
 
 @NgModule({
   declarations: [
-    TypeaheadComponent
+    TypeaheadComponent,
+    DialogHeaderDirective,
   ],
   imports: [
     CommonModule,
@@ -16,6 +18,7 @@ import {MatModule} from '../mat/mat.module';
   ],
   exports: [
     TypeaheadComponent,
+    DialogHeaderDirective
   ]
 })
 export class SharedModule { }

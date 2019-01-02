@@ -1,21 +1,24 @@
-<h2>Zoekvelden</h2>
-<mat-dialog-content>
-  <mat-selection-list #matselection>
-    <mat-list-option *ngFor="let choice of choices"
-                     [selected]="choice.visible"
-                     [value]="choice.name"
-    >
-      {{ choice.name }}
-    </mat-list-option>
-  </mat-selection-list>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button class="mat-raised-button mat-primary"
-          (click)="submit(matselection)">
-    save
-  </button>
-  <button mat-button class="mat-raised-button"
-          (click)="cancel()">
-    cancel
-  </button>
-</mat-dialog-actions>
+<div class="dialog-customize">
+  <div appDialogHeader spaceBottom="6">Zoekvelden</div>
+  <!--<div app-dialog-header spaceBottom="6">Zoekvelden</div>-->
+  <mat-dialog-content>
+    <mat-selection-list #matselection>
+      <mat-list-option *ngFor="let choice of choices"
+                       [selected]="choice.visible"
+                       [value]="choice.name"
+      >
+        {{ choice.name }}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button class="mat-raised-button mat-primary"
+            (click)="submit(matselection)">
+      save
+    </button>
+    <button mat-button class="mat-raised-button"
+            (click)="cancel()">
+      cancel
+    </button>
+  </mat-dialog-actions>
+</div>

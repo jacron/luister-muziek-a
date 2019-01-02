@@ -83,12 +83,12 @@ export class AppComponent implements OnInit {
       this.alternated = false;
       this.overlayContainer.getContainerElement().classList.remove(altTheme);
       this.maindiv.nativeElement.className = '';
-      // document.querySelector('body').className = '';
+      document.querySelector('html').className = '';
     } else {
       this.alternated = true;
       this.overlayContainer.getContainerElement().classList.add(altTheme);
       this.maindiv.nativeElement.className = altTheme;
-      // document.querySelector('body').className = altTheme;
+      document.querySelector('html').className = altTheme;
     }
   }
 

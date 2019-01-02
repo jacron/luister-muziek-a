@@ -18,10 +18,6 @@ h2 mat-icon {
   position: relative;
   top: -3px;
 }
-nav a:not(.selected):hover {
-  background-color: $mat-button-hover-background;
-  cursor: pointer;
-}
 nav a.selected {
   //box-shadow: inset 0 -8px 0 0 #588;
   color: #333;

@@ -9,7 +9,7 @@ import {MatDialog} from '@angular/material';
 import {MusicService} from '../../../../services/music.service';
 import {DialogPersonComponent} from '../../dialogs/dialog-person/dialog-person.component';
 import {DialogTagComponent} from '../../dialogs/dialog-tag/dialog-tag.component';
-import {DialogAddComponent} from '../../../album/dialogs/dialog-add/dialog-add.component';
+import {DialogAddComponent} from '../../dialogs/dialog-add/dialog-add.component';
 import {DialogInstrumentComponent} from '../../dialogs/dialog-instrument/dialog-instrument.component';
 
 @Component({
