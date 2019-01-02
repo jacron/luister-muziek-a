@@ -52,9 +52,6 @@ img.back-thumb {
 .navig.right {
   right: 0;
 }
-.col-cue {
-  padding-left: 20px;
-}
 .selected {
   font-weight: bold;
 }
@@ -114,5 +111,13 @@ mat-card:focus {
   .count {
     margin-bottom: -6px;
     cursor: default;
+  }
+  .col-cover {
+    max-width: 300px;
+  }
+  .col-cue {
+    padding-left: 20px;
+    max-height: 400px;
+    overflow-y: auto;
   }
 }

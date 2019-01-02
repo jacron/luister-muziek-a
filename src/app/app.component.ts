@@ -52,6 +52,9 @@ const links = [
   },
 ];
 
+const darkKey = 'mzkDarkKey';
+const altTheme = 'alternate-theme';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -77,23 +80,39 @@ export class AppComponent implements OnInit {
     this.musicService.controlPlayer(cmd).subscribe();
   }
 
+  setTheme(mode) {
+    switch(mode) {
+      case 'on':
+        this.overlayContainer.getContainerElement().classList.add(altTheme);
+        this.maindiv.nativeElement.className = altTheme;
+        document.querySelector('html').className = altTheme;
+        break;
+      case 'off':
+        this.overlayContainer.getContainerElement().classList.remove(altTheme);
+        this.maindiv.nativeElement.className = '';
+        document.querySelector('html').className = '';
+        break;
+    }
+  }
+
   toggleTheme() {
-    const altTheme = 'alternate-theme';
     if (this.alternated) {
+      this.setTheme('off');
       this.alternated = false;
-      this.overlayContainer.getContainerElement().classList.remove(altTheme);
-      this.maindiv.nativeElement.className = '';
-      document.querySelector('html').className = '';
+      localStorage.setItem(darkKey, 'off');
     } else {
+      this.setTheme('on');
       this.alternated = true;
-      this.overlayContainer.getContainerElement().classList.add(altTheme);
-      this.maindiv.nativeElement.className = altTheme;
-      document.querySelector('html').className = altTheme;
+      localStorage.setItem(darkKey, 'on');
     }
   }
 
   ngOnInit() {
     this.links = links;
     this.stateService.currentTitle.subscribe(title => this.title = title);
+    if (localStorage.getItem(darkKey) == 'on') {
+      this.alternated = true;
+      this.setTheme('on');
+    }
   }
 }
