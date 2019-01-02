@@ -104,4 +104,8 @@ mat-card:focus {
 }
 .col-right {
   //position: fixed;
+  flex: 1;
+}
+.row-album {
+  display: flex;
 }
