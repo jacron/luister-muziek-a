@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {StateService} from '../../services/state.service';
 import {Person} from '../../classes/Person';
 import {MusicService} from '../../services/music.service';
+import {Album} from '../../classes/Album';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-pop',
@@ -15,8 +17,32 @@ export class PopComponent implements OnInit {
   constructor(
     private stateService: StateService,
     private musicService: MusicService,
+    private router: Router,
   ) { }
 
+  afterFetch(albums, id) {
+    console.log(albums);
+    if(albums.length === 1) {
+      this.router.navigate(['/album', albums[0].ID]).then();
+    } else {
+      this.router.navigate(['/pop', id]).then();
+    }
+  }
+
+  fetchThings(id) {
+    console.log(id);
+    this.musicService.getPerformerAlbums(id).subscribe(
+      (albums: Album[]) => this.afterFetch(albums, id),
+      err => console.error(err),
+      () => {}
+    );
+  }
+
+  toPerformer(id) {
+    this.fetchThings(id);
+    //[routerLink]="performer.ID"
+
+  }
   afterGet(response) {
     this.performers = response;
   }

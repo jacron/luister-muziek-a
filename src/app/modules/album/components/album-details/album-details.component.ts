@@ -175,7 +175,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     this.chevron = 'keyboard_arrow_down';
     if (album) {
       // console.log(album);
-      // this.stateService.setTitle(album.Title);
+      this.stateService.setTitle(album.Title);
       document.title = album.Title;
       if (album.cuesheets.length < 1) {
         this.album.expanded = true;
