@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Cuesheet} from '../../../../classes/Cuesheet';
 import {Album} from '../../../../classes/Album';
 
@@ -7,7 +7,7 @@ import {Album} from '../../../../classes/Album';
   templateUrl: './album-all-cuesheets.component.html',
   styleUrls: ['./album-all-cuesheets.component.scss']
 })
-export class AlbumAllCuesheetsComponent implements OnInit {
+export class AlbumAllCuesheetsComponent implements OnInit, OnChanges {
 
   @Input() album: Album;
   @Input() idpiece;
@@ -27,6 +27,12 @@ export class AlbumAllCuesheetsComponent implements OnInit {
         this.validCuesheets.push(cuesheet);
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.album) {
+      this.getCuesheets();
+    }
   }
 
   ngOnInit() {
