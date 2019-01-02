@@ -4,19 +4,22 @@ import {AlbumCuesheetsComponent} from './components/album-cuesheets/album-cueshe
 import {CuesheetActionsComponent} from './components/cuesheet-actions/cuesheet-actions.component';
 import {CuesheetPartsComponent} from './components/cuesheet-parts/cuesheet-parts.component';
 import {MatModule} from '../mat/mat.module';
+import { AlbumAllCuesheetsComponent } from './components/album-all-cuesheets/album-all-cuesheets.component';
 
 @NgModule({
   declarations: [
     AlbumCuesheetsComponent,
     CuesheetPartsComponent,
     CuesheetActionsComponent,
+    AlbumAllCuesheetsComponent,
   ],
   imports: [
     CommonModule,
     MatModule,
   ],
   exports: [
-    AlbumCuesheetsComponent,
+    // AlbumCuesheetsComponent,
+    AlbumAllCuesheetsComponent,
   ],
 })
 export class CuesheetModule { }

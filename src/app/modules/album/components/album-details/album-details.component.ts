@@ -26,10 +26,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   navBackwardsCount= 0;
   navForwardsCount = 0;
   list: List;
-  chevron = 'keyboard_arrow_down';
   idpiece = -1;
-  invalidCuesheets: Cuesheet[];
-  validCuesheets: Cuesheet[];
   coverSize= -1;
 
   constructor(
@@ -158,21 +155,8 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     }
   }
 
-  getCuesheets(album: Album) {
-    this.invalidCuesheets = [];
-    this.validCuesheets = [];
-    album.cuesheets.forEach(cuesheet => {
-      if (cuesheet.Invalid) {
-        this.invalidCuesheets.push(cuesheet);
-      } else {
-        this.validCuesheets.push(cuesheet);
-      }
-    });
-  }
-
   openAlbum(album: Album): void {
     this.album = album;
-    this.chevron = 'keyboard_arrow_down';
     if (album) {
       // console.log(album);
       this.stateService.setTitle(album.Title);
@@ -186,7 +170,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
       }
       this.getDiscid(album);
       this.getAsin(album);
-      this.getCuesheets(album);
+      // this.getCuesheets(album);
     }
   }
 
@@ -201,11 +185,6 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
       }
     }
   );
-  }
-
-  openPieces() {
-    this.album.expanded = !this.album.expanded;
-    this.chevron = this.album.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
   }
 
   isNavigated(id) {

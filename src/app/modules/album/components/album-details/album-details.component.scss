@@ -1,26 +1,6 @@
-img.thumb {
-  //width: 300px;
-  border: 1px solid #bfbfbf;
-}
-img.back-thumb {
-  width: 100px;
-  //position: absolute;
-  //margin-top: 225px;
-  //left: 250px;
-  margin-left: -100px;
-  border: 1px solid #bfbfbf;
-}
+
 .first {
   max-width: 320px;
-}
-.pieces {
-  max-height: 0;
-  transition: max-height .25s ease-in;
-  overflow-y: hidden;
-}
-.pieces.visible {
-  max-height: 2000px;
-  overflow-y: auto;
 }
 .chips {
   margin: 14px 0 14px 14px;
@@ -94,23 +74,17 @@ mat-card:focus {
   padding-top: 8px;
   font-weight: bold;
 }
-.album {
-  .opener {
-    position: absolute;
-    right: 20px;
-    bottom: -6px;
-    font-size: 16px;
-    line-height: 2;
-    text-align: center;
-    transition: color .35s;
-    padding: 3px;
+  img.thumb {
+    //width: 300px;
+    border: 1px solid #bfbfbf;
   }
-  .opener mat-icon {
-    cursor: pointer;
-  }
-  .count {
-    margin-bottom: -6px;
-    cursor: default;
+  img.back-thumb {
+    width: 100px;
+    //position: absolute;
+    //margin-top: 225px;
+    //left: 250px;
+    margin-left: -100px;
+    border: 1px solid #bfbfbf;
   }
   .col-cover {
     max-width: 300px;
@@ -120,4 +94,14 @@ mat-card:focus {
     max-height: 400px;
     overflow-y: auto;
   }
+  .sticky {
+    position: sticky;
+    top: 0;
+  }
+.col-left {
+  //position: fixed;
+  width: 400px;
+}
+.col-right {
+  //position: fixed;
 }

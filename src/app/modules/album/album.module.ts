@@ -15,6 +15,7 @@ import {DialogAlbumComponent} from './dialogs/dialog-album/dialog-album.componen
 import {CuesheetModule} from '../cuesheet/cuesheet.module';
 import {ChipsModule} from '../chips/chips.module';
 import {ChipListsComponent} from '../chips/components/chip-lists/chip-lists.component';
+import { AlbumHeaderComponent } from './components/album-header/album-header.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {ChipListsComponent} from '../chips/components/chip-lists/chip-lists.comp
     DialogInputComponent,
     DialogAlbumComponent,
     DialogSettingsComponent,
+    AlbumHeaderComponent,
   ],
   imports: [
     CommonModule,

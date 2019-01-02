@@ -1,86 +1,42 @@
-<mat-card *ngIf="album" class="album"
-     (keydown)="browse($event)"
-     tabindex="0"
->
-  <mat-card-header>
-    <button mat-icon-button (click)="toList()"
-            *ngIf="list"
-            matTooltip="{{ list.title }} ({{ list.count }})"
-    >
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <button mat-icon-button
-            (click)="back()"
-            *ngIf="navBackwards">
-      <mat-icon>keyboard_arrow_left</mat-icon>
-    </button>
-    <span mat-line class="album-title" (click)="editAlbum()">
-      {{ album.Title }}</span>
-    <span class="horizontal-spacer"></span>
-    <button mat-icon-button
-            *ngIf="navForwards"
-            (click)="forward()">
-      <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
-    <app-album-menu [album]="album"></app-album-menu>
-  </mat-card-header>
-  <mat-card-header>
-    <span mat-line class="album-description" (click)="editAlbum()">
-      {{ album.Description }}</span>
-  </mat-card-header>
+<div *ngIf="album" class="album row"
+            (keydown)="browse($event)"
+            tabindex="0">
+  <div class="col-left">
+    <mat-card>
+      <app-album-header (back)="back()" (forward)="forward()" (toList)="toList()"
+                        [album]="album" [list]="list"
+                        [navBackwards]="navBackwards" [navForwards]="navForwards">
+      </app-album-header>
+      <div class="chips">
+        <app-chip-lists [album]="album"
+                        [removable]="false"
+                        [editable]="true"
+                        [showimage]="false"
+        ></app-chip-lists>
+      </div>
+      <div class="thumb-container">
+        <img src="{{ imgUrl }}{{ album.ID }}/album/{{ coverSize }}/-1"
+             (click)="openPic('front')"
+             class="thumb">
+        <img *ngIf="album.album_back_image"
+             src="{{ imgBackUrl }}{{ album.ID }}/album/100/-1"
+             (click)="openPic('back')"
+             class="back-thumb">
+      </div>
+      <app-album-metatags [album]="album"></app-album-metatags>
 
-  <mat-card-content style="margin-top: 12px">
-        <div class="chips">
-          <app-chip-lists [album]="album"
-                          [removable]="false"
-                          [editable]="true"
-                          [showimage]="false"
-          ></app-chip-lists>
-        </div>
-        <div class="row">
-          <div class="col-cover">
-            <div class="thumb-container">
-              <img src="{{ imgUrl }}{{ album.ID }}/album/{{ coverSize }}/-1"
-                   (click)="openPic('front')"
-                   class="thumb">
-              <img *ngIf="album.album_back_image"
-                   src="{{ imgBackUrl }}{{ album.ID }}/album/100/-1"
-                   (click)="openPic('back')"
-                   class="back-thumb">
-            </div>
-            <app-album-metatags [album]="album"></app-album-metatags>
-          </div>
-          <div class="col-cue">
-            <app-album-cuesheets [cuesheets]="validCuesheets"
-                                 [playable]="true"
-                                 [idpiece]="idpiece"
-                                 [album]="album"></app-album-cuesheets>
-            <app-album-cuesheets [cuesheets]="invalidCuesheets"
-                                 [playable]="false"
-                                 [idpiece]="idpiece"
-                                 [album]="album"></app-album-cuesheets>
-          </div>
-        </div>
-        <div class="row selected-cuesheet">
-          <div class="col">
-            <div class="opener" (click)="openPieces()">
-              <div class="count">{{ album.pieces.length }}</div>
-              <mat-icon title="view {{ album.pieces.length }} pieces"
-                        [class.expanded]="album.expanded"
-                        waves-light waves-effect
-              >{{ chevron }}
-              </mat-icon>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col pieces" [class.visible]="album.expanded">
-            <app-album-pieces [pieces]="album.pieces"
-                              [idpiece]="idpiece"
-                              [album]="album"
-            ></app-album-pieces>
-          </div>
-        </div>
+    </mat-card>
 
-  </mat-card-content>
-</mat-card>
+  </div>
+  <div class="col-right">
+    <app-album-all-cuesheets [album]="album"
+                             [idpiece]="idpiece"
+    ></app-album-all-cuesheets>
+    <app-album-pieces [pieces]="album.pieces"
+                      [idpiece]="idpiece"
+                      [album]="album"
+    ></app-album-pieces>
+
+  </div>
+
+</div>

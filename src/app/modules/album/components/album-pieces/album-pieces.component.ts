@@ -13,6 +13,7 @@ export class AlbumPiecesComponent implements OnInit {
   @Input() pieces: Piece[];
   @Input() album: Album;
   @Input() idpiece: number;
+  chevron = 'keyboard_arrow_down';
 
   constructor(
     private musicService: MusicService,
@@ -34,18 +35,13 @@ export class AlbumPiecesComponent implements OnInit {
     );
   }
 
-  displayName(s) {
-    return this.pieceService.displayName(s);
+  openPieces() {
+    this.album.expanded = !this.album.expanded;
+    this.chevron = this.album.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
   }
 
-  nameKeydown(e, piece: Piece, name) {
-    if (e.key === 'Enter') {
-      this.pieceService.updatePieceName(piece.ID, piece.Name, name, this.album.ID);
-      e.preventDefault();
-    }
-    if (e.key === 'Tab') {
-      this.pieceService.updatePieceName(piece.ID, piece.Name, name, this.album.ID);
-    }
+  displayName(s) {
+    return this.pieceService.displayName(s);
   }
 
   ngOnInit() {

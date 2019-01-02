@@ -1,27 +1,36 @@
-<div *ngFor="let piece of pieces" class="pieces-list">
-
-  <mat-icon class="play"
+<div class="opener" (click)="openPieces()">
+  <div class="count">{{ album.pieces.length }} bestanden</div>
+  <mat-icon
+            [class.expanded]="album.expanded"
             waves-light waves-effect
-            [class.played]="piece.played"
-            (click)="play(piece.ID)">
-    play_circle_filled</mat-icon>
+  >{{ chevron }}
+  </mat-icon>
+  <div class="pieces" [class.visible]="album.expanded">
+    <div *ngFor="let piece of pieces" class="pieces-list">
 
-  <div class="text-container">
-    <div mat-line #topicTitle contenteditable="true"
-         class="title"
-          [class.selected]="piece.ID == idpiece"
-          [textContent]="displayName(piece.Name)"
-          (input)="model=topicTitle.innerText"
-          (keydown)="nameKeydown($event, piece, topicTitle.innerText)">
+      <mat-icon class="play"
+                waves-light waves-effect
+                [class.played]="piece.played"
+                (click)="play(piece.ID)">
+        play_circle_filled</mat-icon>
+
+      <div class="text-container">
+        <div mat-line
+             class="title"
+             [class.selected]="piece.ID == idpiece">
+          {{ displayName(piece.Name) }}
+        </div>
+      </div>
+
+      <mat-chip *ngIf="piece.LibraryCode"
+                class="composers"
+                [removable]="removable"
+                (remove)="removeComposer(composer)">
+        <a (click)="toCode(piece.LibraryCode)">{{ piece.LibraryCode }}</a>
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+
     </div>
   </div>
-
-  <mat-chip *ngIf="piece.LibraryCode"
-            class="composers"
-            [removable]="removable"
-            (remove)="removeComposer(composer)">
-    <a (click)="toCode(piece.LibraryCode)">{{ piece.LibraryCode }}</a>
-    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-  </mat-chip>
-
 </div>
+

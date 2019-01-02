@@ -22,3 +22,25 @@
 .pieces-list {
   margin-top: 8px;
 }
+.opener {
+  font-size: 16px;
+  line-height: 2;
+  transition: color .35s;
+  padding: 3px;
+}
+.opener mat-icon {
+  cursor: pointer;
+}
+.count {
+  margin-bottom: -6px;
+  cursor: default;
+}
+.pieces {
+  max-height: 0;
+  transition: max-height .25s ease-in;
+  overflow-y: hidden;
+}
+.pieces.visible {
+  max-height: 2000px;
+  overflow-y: auto;
+}

@@ -54,6 +54,7 @@ const links = [
 
 const darkKey = 'mzkDarkKey';
 const altTheme = 'alternate-theme';
+const localStorage = window.localStorage;
 
 @Component({
   selector: 'app-root',
@@ -68,6 +69,7 @@ export class AppComponent implements OnInit {
   title = '';
   links;
   alternated = false;
+  debugMessage = '';
 
   constructor(
     private musicService: MusicService,
@@ -108,6 +110,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.debugMessage = 'debug message comes here';
+    // if (!localStorage) {
+    //   this.debugMessage = 'no localstorage';
+    // }
+    // if (!window.localStorage) {
+    //   this.debugMessage = 'no window.localstorage';
+    // }
     this.links = links;
     this.stateService.currentTitle.subscribe(title => this.title = title);
     if (localStorage.getItem(darkKey) == 'on') {

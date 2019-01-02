@@ -15,7 +15,6 @@
         pause_circle</mat-icon>&nbsp;
     </button>
   </mat-toolbar>
-
   <mat-sidenav-container class="app-sidenav-container">
     <mat-sidenav #sidenav mode="over">
       <nav>
@@ -39,6 +38,9 @@
     <mat-sidenav-content>
       <main>
         <div class="container-outlet">
+          <!--<div class="debug-message">-->
+            <!--{{ debugMessage }}-->
+          <!--</div>-->
           <router-outlet></router-outlet>
           <!-- Routed views go here -->
         </div>
