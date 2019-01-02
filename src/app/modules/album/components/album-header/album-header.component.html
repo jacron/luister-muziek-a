@@ -18,7 +18,10 @@
           (click)="emitForward()">
     <mat-icon>keyboard_arrow_right</mat-icon>
   </button>
-  <app-album-menu [album]="album"></app-album-menu>
+  <app-album-menu
+    [album]="album"
+    (reload)="emitReload($event)"
+  ></app-album-menu>
 </mat-card-header>
 <mat-card-header>
     <span mat-line class="album-description" (click)="editAlbum()">

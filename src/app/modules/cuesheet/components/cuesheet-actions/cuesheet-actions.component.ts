@@ -14,6 +14,7 @@ export class CuesheetActionsComponent implements OnInit {
   @Input() cuesheet: Cuesheet;
   @Input() album: Album;
   @Output() titleChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() removed = new EventEmitter();
 
   constructor(
     private musicService: MusicService,
@@ -55,9 +56,7 @@ export class CuesheetActionsComponent implements OnInit {
   }
 
   afterDelete() {
-    this.musicService.refetch(this.album.ID).subscribe(
-      (album: Album) => this.album.cuesheets = album.cuesheets
-    );
+    this.removed.emit();
   }
 
   remove() {

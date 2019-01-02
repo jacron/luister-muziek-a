@@ -235,6 +235,22 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     });
   }
 
+  restorePieces(album: Album) {
+    console.log(album);
+    this.album = album;
+    // this.album.pieces = album.pieces;
+    // this.album.cuesheets = album.cuesheets;
+  }
+
+  reload(result) {
+    console.log(result + ': in details');
+    if (result == 'reload') {
+      this.musicService.refetch(this.album.ID).subscribe(
+        (response: Album) => this.restorePieces(response)
+      );
+    }
+  }
+
   ngDoCheck() {
     this.enableNavig(this.list);
 

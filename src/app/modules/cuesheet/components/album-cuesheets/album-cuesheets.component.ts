@@ -19,12 +19,6 @@ export class AlbumCuesheetsComponent implements OnInit {
     private musicService: MusicService
   ) { }
 
-  // titleChange(data) {
-  //   const {id, title} = data;
-  //   const cuesheet = this.getCuesheetById(id, this.cuesheets);
-  //   cuesheet.Title = title;
-  // }
-
   getCuesheetById(id: number, cuesheets: Cuesheet[]): Cuesheet | null {
     for (let i = 0; i < cuesheets.length; i++) {
       if (cuesheets[i].ID === id) {
@@ -34,13 +28,18 @@ export class AlbumCuesheetsComponent implements OnInit {
     return null;
   }
 
+  removed() {
+    this.musicService.refetch(this.album.ID).subscribe(
+      (album: Album) => this.album.cuesheets = this.cuesheets =  album.cuesheets
+    );
+  }
+
   onPlayed(response, id) {
     const cuesheet = this.getCuesheetById(id, this.cuesheets);
     cuesheet.played = true;
   }
 
   play(e, id) {
-    // console.log(e);
     e.stopPropagation();
     if (this.playable) {
       this.musicService.play(id).subscribe(

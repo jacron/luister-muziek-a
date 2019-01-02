@@ -3,9 +3,11 @@
             tabindex="0">
   <div class="col-left">
     <mat-card>
-      <app-album-header (back)="back()" (forward)="forward()" (toList)="toList()"
-                        [album]="album" [list]="list"
-                        [navBackwards]="navBackwards" [navForwards]="navForwards">
+      <app-album-header
+        (reload)="reload($event)"
+        (back)="back()" (forward)="forward()" (toList)="toList()"
+        [album]="album" [list]="list"
+        [navBackwards]="navBackwards" [navForwards]="navForwards">
       </app-album-header>
       <div class="chips">
         <app-chip-lists [album]="album"

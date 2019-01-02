@@ -16,6 +16,7 @@ export class CuesheetPartsComponent implements OnInit {
   @Input() album: Album;
   @Input() cuesheet: Cuesheet;
   @Output() titleChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() removed = new EventEmitter();
 
   tracknames: string[];
   files: CFile[];
@@ -56,6 +57,10 @@ export class CuesheetPartsComponent implements OnInit {
 
   changeTitle(data) {
     this.titleChange.emit(data);  // title en id
+  }
+
+  emitRemoved() {
+    this.removed.emit();
   }
 
   ngOnInit() {

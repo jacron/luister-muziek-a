@@ -31,5 +31,6 @@
   <app-cuesheet-actions [cuesheet]="cuesheet"
                         [album]="album"
                         (titleChange)="changeTitle($event)"
+                        (removed)="emitRemoved()"
   ></app-cuesheet-actions>
 </mat-action-row>

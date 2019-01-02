@@ -63,18 +63,18 @@ export class DialogPiecesComponent implements OnInit {
     proposal.marked = true;
   }
 
-  restorePieces(album: Album) {
-    this.data.album.pieces = album.pieces;
-    this.data.album.cuesheets = album.cuesheets;
-    // todo: restore further (callback?)
-    // this.data.pieces.forEach(piece => piece.marked = false);
-  }
-
-  reload() {
-    this.musicService.refetch(this.data.albumId).subscribe(
-      (response: Album) => this.restorePieces(response)
-    );
-  }
+  // restorePieces(album: Album) {
+  //   this.data.album.pieces = album.pieces;
+  //   this.data.album.cuesheets = album.cuesheets;
+  //   // todo: restore further (callback?)
+  //   // this.data.pieces.forEach(piece => piece.marked = false);
+  // }
+  //
+  // reload() {
+  //   this.musicService.refetch(this.data.albumId).subscribe(
+  //     (response: Album) => this.restorePieces(response)
+  //   );
+  // }
 
   lcs() {
     const lines = [];
@@ -123,8 +123,8 @@ export class DialogPiecesComponent implements OnInit {
   }
 
   afterMakeAllProposals() {
-    this.reload();
-    this.dialogRef.close();
+    // this.reload();
+    this.dialogRef.close('reload');
   }
 
   makeAllProposals() {
@@ -140,7 +140,7 @@ export class DialogPiecesComponent implements OnInit {
 
   afterMakeCuesheet(proposal: Proposal) {
     proposal.created = true;
-    this.reload();
+    // this.reload();
   }
 
   makeCuesheet(proposal: Proposal) {

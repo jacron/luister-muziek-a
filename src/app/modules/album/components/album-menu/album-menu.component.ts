@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Album} from '../../../../classes/Album';
 import {environment} from '../../../../../environments/environment';
 import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.component';
@@ -17,6 +17,8 @@ import {DialogSettingsComponent} from '../../dialogs/dialog-settings/dialog-sett
 export class AlbumMenuComponent implements OnInit {
 
   @Input() album: Album;
+  @Output() reload = new EventEmitter();
+
   musicAlbumUrl = 'http://localhost:8010/album/';
   freedbUrl = environment.freedbUrl;
   musicbrainzUrl = environment.musicbrainz;
@@ -239,14 +241,28 @@ export class AlbumMenuComponent implements OnInit {
     });
   }
 
+  reload() {
+    this.musicService.refetch(this.album.ID).subscribe(
+      (response: Album) => this.restorePieces(response)
+    );
+  }
+
   editPieces() {
-    this.dialog.open(DialogPiecesComponent, {
+    const dialogRef = this.dialog.open(DialogPiecesComponent, {
       data: {
         pieces: this.album.pieces,
         albumId: this.album.ID,
         album: this.album
       }
     });
+    dialogRef.afterClosed().subscribe(
+      result => {
+        console.log(result);
+        if (result == 'reload') {
+          this.reload.emit(result);
+        }
+      }
+    )
   }
 
   openMusic() {
