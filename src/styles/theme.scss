@@ -117,4 +117,19 @@ $darkcolor: #eeeeee;
       color: $darkcolor;
     }
   }
+  .play-cuesheet {
+    color: #ffaaaa;
+  }
+  .play-cuesheet-invalid {
+    color: #ff3333;
+  }
+  .play-cuesheet-played {
+    color: #987898;
+  }
+  .play-piece {
+    color: #66aaff;
+  }
+  .play-piece-played {
+    color: #66aaaa;
+  }
 }

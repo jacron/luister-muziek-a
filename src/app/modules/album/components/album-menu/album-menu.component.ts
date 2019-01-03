@@ -241,11 +241,11 @@ export class AlbumMenuComponent implements OnInit {
     });
   }
 
-  reload() {
-    this.musicService.refetch(this.album.ID).subscribe(
-      (response: Album) => this.restorePieces(response)
-    );
-  }
+  // reload() {
+  //   this.musicService.refetch(this.album.ID).subscribe(
+  //     (response: Album) => this.restorePieces(response)
+  //   );
+  // }
 
   editPieces() {
     const dialogRef = this.dialog.open(DialogPiecesComponent, {

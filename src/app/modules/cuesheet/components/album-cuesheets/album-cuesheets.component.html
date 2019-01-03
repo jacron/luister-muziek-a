@@ -5,9 +5,9 @@
       <mat-expansion-panel-header>
 
         <mat-icon
-          [class.played]="cuesheet.played"
-          [class.invalid]="cuesheet.Invalid"
-          class="play"
+          [class.play-cuesheet-played]="cuesheet.played"
+          [class.play-cuesheet-invalid]="cuesheet.Invalid"
+          class="play play-cuesheet"
           waves-light waves-effect
           (click)="play($event, cuesheet.ID)">
           play_circle_filled</mat-icon>

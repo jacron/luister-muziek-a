@@ -1,16 +1,18 @@
 <div class="opener album-pieces" (click)="openPieces()">
+
   <div class="count">{{ album.pieces.length }} bestanden</div>
   <mat-icon
             [class.expanded]="album.expanded"
             waves-light waves-effect
   >{{ chevron }}
   </mat-icon>
+
   <div class="pieces" [class.visible]="album.expanded">
     <div *ngFor="let piece of pieces" class="pieces-list">
 
-      <mat-icon class="play"
+      <mat-icon class="play play-piece"
                 waves-light waves-effect
-                [class.played]="piece.played"
+                [class.play-piece-played]="piece.played"
                 (click)="play(piece.ID)">
         play_circle_filled</mat-icon>
 
@@ -25,7 +27,7 @@
       <mat-chip *ngIf="piece.LibraryCode"
                 class="composers"
                 [removable]="removable"
-                (remove)="removeComposer(composer)">
+                (remove)="removeCode(piece)">
         <a (click)="toCode(piece.LibraryCode)">{{ piece.LibraryCode }}</a>
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>

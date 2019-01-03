@@ -92,3 +92,18 @@ nav a:not(.selected):hover {
     background-color: #eeeeee;
   }
 }
+.play-piece {
+  color: blue;
+}
+.play-cuesheet {
+  color: orange;
+}
+.play-cuesheet-invalid {
+  color: red;
+}
+.play-piece-played {
+  color: green;
+}
+.play-cuesheet-played {
+  color: brown;
+}
