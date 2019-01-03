@@ -1,0 +1,9 @@
+<div class="movies-list" *ngIf="movies">
+  <mat-list>
+    <mat-list-item *ngFor="let movie of movies">
+      <a [routerLink]="movie.ID" class="link">
+        {{ movie.DisplayTitle }} ({{ movie.Jaar }})
+      </a>
+    </mat-list-item>
+  </mat-list>
+</div>

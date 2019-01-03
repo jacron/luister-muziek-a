@@ -26,14 +26,14 @@ export class CodeListComponent implements OnInit {
   }
 
   afterGet(response) {
-    console.log(response);
+    // console.log(response);
     this.libraryCodes = response.items;
     // document.title = response.page_title;
     this.stateService.setTitle(response.page_title);
   }
 
   handleParams(params) {
-    console.log(params);
+    // console.log(params);
     if (params) {
       if (params.code) {
         this.musicService.getCode(params.code).subscribe(

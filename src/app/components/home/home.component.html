@@ -15,7 +15,7 @@
            [matAutocomplete]="auto">
     <mat-autocomplete
       #auto="matAutocomplete"
-      (optionSelected)="makeChip($event.option.value)"
+      (optionSelected)="toDirector($event.option.value)"
       [displayWith]="displayFn">
       <mat-option *ngFor="let item of model.filteredItems | async" [value]="item">
         {{ item[model.displayField] }}
@@ -27,6 +27,7 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
+
   <mat-form-field class="form-field" *ngIf="q">
     <input matInput #query
            placeholder="Titel"

@@ -4,18 +4,24 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 const hostname = document.location.hostname;
-let apiServer = 'http://music-api/api';  // vhost
-// apiServer = 'http://localhost:5000/api',  // music-api
-apiServer = 'http://127.0.0.1:8020/api';  // served for iPad
-if (hostname === 'music-client.10.0.1.6.xip.io' ||
-  hostname === 'music-client.vhx.cloud'
-) { // client on iPad
-  // PyCharm must run music-api on 0.0.0.0:8020
-  apiServer = 'http://10.0.1.6:8020/api';
+let apiServer;  // music-api
+let moviesServer; // movies18
+let host;
+const lanHostname = 'music-client.10.0.1.6.xip.io';
+const localVirtualHostname = 'music-client.vhx.cloud';
+
+if (hostname === lanHostname || hostname === localVirtualHostname) { // client on iPad
+  // PyCharm runs music-api on 0.0.0.0:8020
+  host = '10.0.1.6';
+} else {
+  host = '127.0.0.1';
 }
+apiServer = 'http://' + host + ':8020/api';
+moviesServer = 'http://' + host + ':5080';
 console.log('api server', apiServer);
 export const environment = {
-  apiServer: apiServer,
+  apiServer,
+  moviesServer,
   googleUrl: 'https://google.nl/search?q=',
   freedbUrl: 'http://www.freedb.org/freedb_discid_check.php?discid=',
   amazonUrl: 'https://www.amazon.com/dp/',

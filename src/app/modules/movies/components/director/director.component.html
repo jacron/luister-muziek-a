@@ -1,0 +1,8 @@
+<div *ngIf="director">
+  {{ director.Voornaam}} {{ director.Achternaam }}
+</div>
+<div *ngIf="movies">
+  <app-movies-list
+    [movies]="movies"
+  ></app-movies-list>
+</div>

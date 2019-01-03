@@ -50,6 +50,11 @@ const links = [
     label: 'Codes',
     icon: 'code'
   },
+  {
+    href: 'movies',
+    label: 'Movies',
+    icon: 'movie'
+  },
 ];
 
 const darkKey = 'mzkDarkKey';

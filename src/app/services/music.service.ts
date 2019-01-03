@@ -5,9 +5,11 @@ import {SearchParams} from '../classes/SearchParams';
 
 @Injectable()
 export class MusicService {
-
   requestUrl = environment.apiServer;
-  constructor(private http: HttpClient) { }
+
+  constructor(
+    private http: HttpClient
+  ) { }
 
   /* GET */
   getJson(cmd) {

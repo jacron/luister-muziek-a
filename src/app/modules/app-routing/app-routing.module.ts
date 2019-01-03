@@ -17,6 +17,9 @@ import {RecentComponent} from '../../components/recent/recent.component';
 import {PopComponent} from '../../components/pop/pop.component';
 import {PopListComponent} from '../../components/pop-list/pop-list.component';
 import {HomeComponent} from '../../components/home/home.component';
+import {MoviesStartComponent} from '../movies/components/movies-start/movies-start.component';
+import {MovieComponent} from '../movies/components/movie/movie.component';
+import {DirectorComponent} from '../movies/components/director/director.component';
 
 const appRoutes: Routes = [
   {path: '', component: SearchComponent},
@@ -39,6 +42,9 @@ const appRoutes: Routes = [
   {path: 'recent', component: RecentComponent},
   {path: 'pop', component: PopComponent},
   {path: 'pop/:id', component: PopListComponent},
+  {path: 'movies', component: MoviesStartComponent},
+  {path: 'movies/:idmovie', component: MovieComponent},
+  {path: 'director/:iddirector', component: DirectorComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

@@ -15,8 +15,8 @@ export class TypeaheadComponent implements OnInit, OnChanges {
   @Input() displayfield: string;
   @Input() id: string;
   @Input() text: string;
-  @Output() idChange = new EventEmitter();
-  @Output() textChange = new EventEmitter();
+  @Output() idChange = new EventEmitter(); // user selected an option
+  @Output() textChange = new EventEmitter(); // user has typed some
 
   filteredItems: Observable<any[]>;
   myControl = new FormControl();
