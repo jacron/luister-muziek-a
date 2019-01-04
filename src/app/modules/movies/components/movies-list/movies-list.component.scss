@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.movie-card {
+  width: 180px;
+  height: 400px;
+  margin: 20px auto;
+}
+.movie-image {
+}
+.movie-header {
+  height: 92px;
+  overflow: hidden;
+}
+.image-container {
+  height: 316px;
+  overflow: hidden;
+  margin: 0 -16px;
+}

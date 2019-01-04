@@ -7,13 +7,15 @@ import { MoviesListComponent } from './components/movies-list/movies-list.compon
 import { MovieComponent } from './components/movie/movie.component';
 import {RouterModule} from '@angular/router';
 import { DirectorComponent } from './components/director/director.component';
+import { DirectorCardComponent } from './components/director-card/director-card.component';
 
 @NgModule({
   declarations: [
     MoviesStartComponent,
     MoviesListComponent,
     MovieComponent,
-    DirectorComponent
+    DirectorComponent,
+    DirectorCardComponent
   ],
   imports: [
     CommonModule,

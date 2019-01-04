@@ -9,13 +9,6 @@
         [album]="album" [list]="list"
         [navBackwards]="navBackwards" [navForwards]="navForwards">
       </app-album-header>
-      <div class="chips">
-        <app-chip-lists [album]="album"
-                        [removable]="false"
-                        [editable]="true"
-                        [showimage]="false"
-        ></app-chip-lists>
-      </div>
       <div class="thumb-container">
         <img src="{{ imgUrl }}{{ album.ID }}/album/{{ coverSize }}/-1"
              (click)="openPic('front')"
@@ -26,7 +19,6 @@
              class="back-thumb">
       </div>
       <app-album-metatags [album]="album"></app-album-metatags>
-
     </mat-card>
 
   </div>

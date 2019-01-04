@@ -69,6 +69,9 @@ $darkcolor: #eeeeee;
   .home {
     background-color: $cardbackground;
   }
+  .mat-card-title {
+    color: $darkcolor;
+  }
   .home,
   nav
   {

@@ -25,6 +25,18 @@ export class AlbumMenuComponent implements OnInit {
   amazonUrl = environment.amazonUrl;
   menus = [
     {
+      label: 'Hernoem album',
+      action: 'edit_album',
+      icon: 'edit',
+      color: '',
+    },
+    {
+      label: 'Bewerk album chips',
+      action: 'edit_chips',
+      icon: 'edit',
+      color: 'orange',
+    },
+    {
       label: 'Cuesheets maker',
       action: 'edit_pieces',
       icon: 'edit',
@@ -45,12 +57,6 @@ export class AlbumMenuComponent implements OnInit {
       icon: 'open_in_browser',
       color: '',
     },
-    // {
-    //   label: 'Herlaad muziekstukken',
-    //   action: 'refetch',
-    //   icon: 'replay',
-    //   color: '',
-    // },
     {
       label: 'Plak cover in',
       action: 'paste_image',
@@ -240,12 +246,6 @@ export class AlbumMenuComponent implements OnInit {
       }
     });
   }
-
-  // reload() {
-  //   this.musicService.refetch(this.album.ID).subscribe(
-  //     (response: Album) => this.restorePieces(response)
-  //   );
-  // }
 
   editPieces() {
     const dialogRef = this.dialog.open(DialogPiecesComponent, {

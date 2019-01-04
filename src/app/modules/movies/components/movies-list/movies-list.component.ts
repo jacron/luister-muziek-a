@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Movie} from '../../../../classes/Movie';
+import {Router} from '@angular/router';
+import {MoviesService} from '../../services/movies.service';
 
 @Component({
   selector: 'app-movies-list',
@@ -9,8 +11,15 @@ import {Movie} from '../../../../classes/Movie';
 export class MoviesListComponent implements OnInit {
   @Input() movies: Movie[];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private moviesService: MoviesService,
+  ) { }
 
+  toMovie(id) {
+    // this.router.navigate(['/movie', id]);
+    this.moviesService.play(id).subscribe();
+  }
   ngOnInit() {
     // console.log(this.movies);
   }

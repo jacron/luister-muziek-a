@@ -157,6 +157,7 @@ export class HomeComponent implements OnInit {
   }
 
   afterFetch(albums) {
+    console.log(albums);
     this.albums = albums;
 
     // voor blader-functie in details pagina
@@ -215,7 +216,7 @@ export class HomeComponent implements OnInit {
 
   getAlbums() {
     const params: SearchParams = this.normParams();
-    console.log(params);
+    // console.log(params);
     this.router.navigate(['/home', params])
       .then(() => this.storeTitle()
       );

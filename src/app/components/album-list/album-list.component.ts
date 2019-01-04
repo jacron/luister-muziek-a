@@ -134,9 +134,9 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
       if (that.elementInViewport(image)) {
         const dataSrc = image.getAttribute(that.lazyAttribute);
         if (dataSrc) {
-          that.musicService.getAlbumById(image.getAttribute('albumid')).subscribe(
-            (album: Album) => that.augment_album(album)
-          );
+          // that.musicService.getAlbumById(image.getAttribute('albumid')).subscribe(
+          //   (album: Album) => that.augment_album(album)
+          // );
           image.src = dataSrc;
           image.removeAttribute(that.lazyAttribute);
         }
@@ -171,24 +171,25 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.globalListenScrollFunc();
-    this.globalListenTouchmoveFunc();
-    this.globalListenResizeFunc();
+    // this.globalListenScrollFunc();
+    // this.globalListenTouchmoveFunc();
+    // this.globalListenResizeFunc();
   }
 
   ngOnInit() {
-    this.globalListenScrollFunc = this.renderer.listen(
-      'document', 'scroll', () =>
-        this.lazyLoad()
-      );
-    this.globalListenTouchmoveFunc = this.renderer.listen(
-      'document', 'touchmove', () =>
-        this.lazyLoad()
-    );
-    this.globalListenResizeFunc = this.renderer.listen(
-      'window', 'resize', () =>
-        this.lazyLoad()
-    );
+    console.log(this.albums);
+    // this.globalListenScrollFunc = this.renderer.listen(
+    //   'document', 'scroll', () =>
+    //     this.lazyLoad()
+    //   );
+    // this.globalListenTouchmoveFunc = this.renderer.listen(
+    //   'document', 'touchmove', () =>
+    //     this.lazyLoad()
+    // );
+    // this.globalListenResizeFunc = this.renderer.listen(
+    //   'window', 'resize', () =>
+    //     this.lazyLoad()
+    // );
   }
 
 }

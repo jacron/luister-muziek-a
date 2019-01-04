@@ -1,9 +1,20 @@
 <div class="movies-list" *ngIf="movies">
-  <mat-list>
-    <mat-list-item *ngFor="let movie of movies">
-      <a [routerLink]="movie.ID" class="link">
-        {{ movie.DisplayTitle }} ({{ movie.Jaar }})
+  <div class="wrapper">
+    <div *ngFor="let movie of movies">
+      <a (click)="toMovie(movie.ID)" >
+        <mat-card
+          class="movie-card">
+          <mat-card-header class="movie-header">
+            <mat-card-title>
+              {{ movie.DisplayTitle }}
+            </mat-card-title>
+          </mat-card-header>
+          <div class="image-container">
+            <img mat-card-image [src]="movie.ImageUrl"
+                 class="movie-image">
+          </div>
+        </mat-card>
       </a>
-    </mat-list-item>
-  </mat-list>
+    </div>
+  </div>
 </div>
