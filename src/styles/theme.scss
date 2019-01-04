@@ -31,6 +31,13 @@ $darkcolor: #eeeeee;
   //.cdk-overlay-container {
   //  background-color: inherit;
   //}
+  .cdk-overlay-pane {
+    background-color: $darkbackground;
+    .mat-menu-panel {
+      background-color: $darkbackground;
+
+    }
+  }
   .mat-toolbar,
   .mat-drawer-container,
   .mat-dialog-container {
@@ -80,8 +87,7 @@ $darkcolor: #eeeeee;
     background-color: $darkerbackground;
     color: $darkcolor;
   }
-  nav a,
-  span {
+  nav a {
     color: $darkcolor;
   }
   nav a:not(.selected):hover {

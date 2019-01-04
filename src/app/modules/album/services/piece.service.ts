@@ -4,12 +4,14 @@ import {MusicService} from '../../../services/music.service';
 import {forkJoin} from 'rxjs';
 import {Proposal} from '../../../classes/Proposal';
 import {stringify} from 'querystring';
+import {LcsService} from '../../../services/lcs.service';
 
 @Injectable()
 export class PieceService {
 
   constructor(
-    private musicService: MusicService
+    private musicService: MusicService,
+    private lcsService: LcsService,
   ) { }
 
   isNumeric(n) {
@@ -50,16 +52,6 @@ export class PieceService {
     return s;
   }
 
-  getSmallest(lines) {
-    let small = '';
-    lines.forEach(function(line) {
-      if (small.length < line.length) {
-        small = line;
-      }
-    });
-    return small;
-  }
-
   trimEnd(name: string, end: string[]) {
     end.forEach(e => {
       if (name.endsWith(e)) {
@@ -70,7 +62,7 @@ export class PieceService {
   }
 
   makeCuesheetName(lines) {
-    let name = this.lcs(lines).trim();
+    let name = this.lcsService.lcs(lines).trim();
     if (name.endsWith('I')) {
       name = name.substr(0, name.length - 1);
     }
@@ -80,34 +72,6 @@ export class PieceService {
       name = name.substr(1);
     }
     return name.trim();
-  }
-
-  lcs(lines) {
-    const small = this.getSmallest(lines);
-    let common = '';
-    let temp_common = '';
-    for (let i = 0; i < small.length; i++) {
-      const c = small[i];
-      temp_common += c;
-      for (let j = 0; j < lines.length; j++) {
-        const line = lines[j];
-        if (line.indexOf(temp_common) === -1) {
-          temp_common = c;
-          for (let k = 0; k < lines.length; k++) {
-            const line2 = lines[k];
-            if (line2.indexOf(temp_common) === -1) {
-              temp_common = '';
-              break;
-            }
-          }
-          break;
-        }
-      }
-      if (temp_common !== '' && temp_common.length > common.length) {
-        common = temp_common;
-      }
-    }
-    return common;
   }
 
   getKeys(pieces: Piece[]): number[] {

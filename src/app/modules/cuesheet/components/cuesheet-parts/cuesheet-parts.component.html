@@ -23,21 +23,8 @@
         (click)="play(file)"
         [class.file-played]="file.played"
       >
-        <!--<mat-icon class="file-play"-->
-        <!--waves-light waves-effect-->
-        <!--[class.file-played]="file.played"-->
-        <!--(click)="play(file)">-->
-        <!--play_circle_filled</mat-icon>-->
-        <span mat-line>{{ stripExtension(file.name) }}</span>
+        <span mat-line>{{ stripExtension(file.shortname) }}</span>
       </div>
   </div>
 
 </div>
-
-<!--<mat-action-row>-->
-  <!--<app-cuesheet-actions [cuesheet]="cuesheet"-->
-                        <!--[album]="album"-->
-                        <!--(titleChange)="changeTitle($event)"-->
-                        <!--(removed)="emitRemoved()"-->
-  <!--&gt;</app-cuesheet-actions>-->
-<!--</mat-action-row>-->

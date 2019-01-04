@@ -19,6 +19,10 @@ export class UtilService {
     return true;
   }
 
+  // endswith(s, t) {
+  //
+  // }
+
   // cloneObject(obj) {
   //   return JSON.parse(JSON.stringify(obj));
   // }

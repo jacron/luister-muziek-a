@@ -15,8 +15,6 @@ import {UtilService} from '../../../../services/util.service';
 export class CuesheetPartsComponent implements OnInit {
   @Input() album: Album;
   @Input() cuesheet: Cuesheet;
-  @Output() titleChange: EventEmitter<any> = new EventEmitter<any>();
-  @Output() removed = new EventEmitter();
 
   tracknames: string[];
   files: CFile[];
@@ -53,14 +51,6 @@ export class CuesheetPartsComponent implements OnInit {
     this.musicService.playByName(this.album.ID, file.name).subscribe(
       (response) => this.onPlayed(file)
     );
-  }
-
-  changeTitle(data) {
-    this.titleChange.emit(data);  // title en id
-  }
-
-  emitRemoved() {
-    this.removed.emit();
   }
 
   ngOnInit() {
