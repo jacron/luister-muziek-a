@@ -1,10 +1,13 @@
 <mat-card-header>
-  <button mat-icon-button (click)="emitToList()"
+  <button mat-icon-button
+          class="to-list"
+          (click)="emitToList()"
           *ngIf="list"
           matTooltip="{{ list.title }} ({{ list.count }})"
   >
     <mat-icon>arrow_back</mat-icon>
   </button>
+  <span class="horizontal-spacer"></span>
   <button mat-icon-button
           (click)="emitBack()"
           *ngIf="navBackwards">

@@ -5,6 +5,7 @@ import {CuesheetActionsComponent} from './components/cuesheet-actions/cuesheet-a
 import {CuesheetPartsComponent} from './components/cuesheet-parts/cuesheet-parts.component';
 import {MatModule} from '../mat/mat.module';
 import { AlbumAllCuesheetsComponent } from './components/album-all-cuesheets/album-all-cuesheets.component';
+import { CuesheetMenuComponent } from './components/cuesheet-menu/cuesheet-menu.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { AlbumAllCuesheetsComponent } from './components/album-all-cuesheets/alb
     CuesheetPartsComponent,
     CuesheetActionsComponent,
     AlbumAllCuesheetsComponent,
+    CuesheetMenuComponent,
   ],
   imports: [
     CommonModule,

@@ -12,3 +12,20 @@
   display: inline-block;
   padding: 12px 0 0 12px;
 }
+.parts-lists {
+  height: 240px;
+  overflow-y: auto;
+  line-height: 2;
+  flex-basis: 0;
+  flex-grow: 1;
+  width: 100%;
+  & > div {
+
+  }
+}
+.part-line {
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

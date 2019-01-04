@@ -1,4 +1,6 @@
-<span *ngIf="performers">
+<div class="cuesheet-parts">
+
+  <span *ngIf="performers">
     <span>performers: </span>
       <a *ngFor="let p of performers; let i = index"
          title="add performer"
@@ -6,31 +8,36 @@
         {{ p }}<span *ngIf="i < performers.length - 1"
       >,</span>
       </a>
-    </span>
+  </span>
 
-<mat-list>
-  <mat-list-item *ngFor="let trackname of tracknames">
-    <span mat-line>{{ trackname }}</span>
-  </mat-list-item>
-</mat-list>
+  <div class="parts-lists">
+      <div
+        class="part-line"
+        *ngFor="let trackname of tracknames">
+        <span>{{ trackname }}</span>
+      </div>
 
-<mat-list>
-  <mat-list-item *ngFor="let file of files">
-    <mat-icon class="file-play"
-              waves-light waves-effect
-              [class.file-played]="file.played"
-              (click)="play(file)">
-      play_circle_filled</mat-icon>
-    <div class="text-container">
-      <span>{{ stripExtension(file.name) }}</span>
-    </div>
-  </mat-list-item>
-</mat-list>
+      <div
+        class="part-line link"
+        *ngFor="let file of files"
+        (click)="play(file)"
+        [class.file-played]="file.played"
+      >
+        <!--<mat-icon class="file-play"-->
+        <!--waves-light waves-effect-->
+        <!--[class.file-played]="file.played"-->
+        <!--(click)="play(file)">-->
+        <!--play_circle_filled</mat-icon>-->
+        <span mat-line>{{ stripExtension(file.name) }}</span>
+      </div>
+  </div>
 
-<mat-action-row>
-  <app-cuesheet-actions [cuesheet]="cuesheet"
-                        [album]="album"
-                        (titleChange)="changeTitle($event)"
-                        (removed)="emitRemoved()"
-  ></app-cuesheet-actions>
-</mat-action-row>
+</div>
+
+<!--<mat-action-row>-->
+  <!--<app-cuesheet-actions [cuesheet]="cuesheet"-->
+                        <!--[album]="album"-->
+                        <!--(titleChange)="changeTitle($event)"-->
+                        <!--(removed)="emitRemoved()"-->
+  <!--&gt;</app-cuesheet-actions>-->
+<!--</mat-action-row>-->

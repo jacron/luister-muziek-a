@@ -64,7 +64,7 @@
   color: #666666;
 }
 .thumb-container {
-  margin: 0 0 18px 18px;
+  margin: -56px 0 0 28px;
 }
 mat-card:focus {
   outline: 0 solid transparent;
@@ -74,30 +74,30 @@ mat-card:focus {
   padding-top: 8px;
   font-weight: bold;
 }
-  img.thumb {
-    //width: 300px;
-    border: 1px solid #bfbfbf;
-  }
-  img.back-thumb {
-    width: 100px;
-    //position: absolute;
-    //margin-top: 225px;
-    //left: 250px;
-    margin-left: -100px;
-    border: 1px solid #bfbfbf;
-  }
-  .col-cover {
-    max-width: 300px;
-  }
-  .col-cue {
-    padding-left: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  .sticky {
-    position: sticky;
-    top: 0;
-  }
+img.thumb {
+  //width: 300px;
+  border: 1px solid #bfbfbf;
+}
+img.back-thumb {
+  width: 100px;
+  //position: absolute;
+  //margin-top: 225px;
+  //left: 250px;
+  margin-left: -100px;
+  border: 1px solid #bfbfbf;
+}
+.col-cover {
+  max-width: 300px;
+}
+.col-cue {
+  padding-left: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.sticky {
+  position: sticky;
+  top: 0;
+}
 .col-left {
   //position: fixed;
   width: 400px;
@@ -108,4 +108,15 @@ mat-card:focus {
 }
 .row-album {
   display: flex;
+}
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.album-metatags {
+  margin-left: 12px;
+}
+.album-card {
+  height: 208px;
 }

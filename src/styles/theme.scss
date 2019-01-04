@@ -69,7 +69,9 @@ $darkcolor: #eeeeee;
   .home {
     background-color: $cardbackground;
   }
-  .mat-card-title {
+  .mat-card-title,
+  .cuesheet-header,
+  .part-line {
     color: $darkcolor;
   }
   .home,
@@ -78,7 +80,8 @@ $darkcolor: #eeeeee;
     background-color: $darkerbackground;
     color: $darkcolor;
   }
-  nav a {
+  nav a,
+  span {
     color: $darkcolor;
   }
   nav a:not(.selected):hover {
