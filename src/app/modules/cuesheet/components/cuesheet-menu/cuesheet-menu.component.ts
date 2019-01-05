@@ -4,6 +4,7 @@ import {DialogInputComponent} from '../../../album/dialogs/dialog-input/dialog-i
 import {MusicService} from '../../../../services/music.service';
 import {Cuesheet} from '../../../../classes/Cuesheet';
 import {MatDialog} from '@angular/material';
+import {DialogAliassingPartsComponent} from '../../../album/dialogs/dialog-aliassing-parts/dialog-aliassing-parts.component';
 
 @Component({
   selector: 'app-cuesheet-menu',
@@ -28,7 +29,7 @@ export class CuesheetMenuComponent implements OnInit {
     });
   }
 
-  rename() {
+  renameTitle() {
     const dialogRef = this.dialog.open(DialogInputComponent, {
       width: '75%',
       data: {
@@ -45,6 +46,18 @@ export class CuesheetMenuComponent implements OnInit {
             );
         }
       }
+    );
+  }
+
+  aliasParts() {
+    const dialogRef = this.dialog.open(DialogAliassingPartsComponent, {
+      width: '75%',
+      data: {
+        cuesheet: this.cuesheet,
+        album: this.album,
+      }
+    });
+    dialogRef.afterClosed().subscribe(
     );
   }
 

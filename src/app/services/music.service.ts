@@ -133,6 +133,13 @@ export class MusicService {
     );
   }
 
+  saveAliasPiece(id, displayname) {
+    return this.postForm('/piece/alias', {
+      id: id,
+      displayname: displayname
+    });
+  }
+
   addSearchToHistory(title: string, params: SearchParams) {
     return this.postForm('/search/history', {
       title,
@@ -145,7 +152,9 @@ export class MusicService {
   }
 
   editCue(id, albumid) {
-    return this.postForm('/cuesheet/edit', {id: id, albumid: albumid});
+    return this.postForm('/cuesheet/edit', {
+      id: id, albumid: albumid
+    });
   }
 
   tagEditor(albumId) {
@@ -417,6 +426,13 @@ export class MusicService {
   //   //   this.requestUrl, params, { headers: headers}
   //   // );
   // }
+
+  makeCuesheet2(proposal, albumId) {
+    return this.postForm('/cuesheet/create', {
+      proposal: proposal,
+      albumId: albumId
+    });
+  }
 
   makeCuesheet(cueName, ids, albumId) {
     return this.postForm('/cuesheet/make', {

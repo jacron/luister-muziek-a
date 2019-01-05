@@ -38,12 +38,13 @@
           (click)="onPieceClick($event, piece, i)"
         >
         </mat-checkbox>
-        <span #topicTitle contenteditable="true"
-              [textContent]="displayName(piece.Name)"
+        <span #topicTitle
+              contenteditable="true"
+              [textContent]="displayName(piece.DisplayName)"
               (input)="model=topicTitle.innerText"
               [class.created]="piece.created"
               [class.marked]="piece.marked"
-              (keydown)="nameKeydown($event, piece, topicTitle.innerText)">
+              (keydown)="saveDisplayName($event, piece, topicTitle.innerText, model)">
     </span>
       </mat-list-item>
     </mat-list>
@@ -62,22 +63,40 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-    <button mat-raised-button (click)="lcs()"
+
+    <button mat-raised-button
+            (click)="lcs()"
             matTooltip="longest common subsequence"
             [disabled]="piecesSelected() < 2"
     >Naam</button>
-    <button mat-raised-button (click)="createCuesheet()"
+
+    <button mat-raised-button
+            (click)="createCuesheet()"
             [disabled]="piecesSelected() < 1"
     >Voorstel</button>
-    <button mat-raised-button (click)="selectAllPieces(false)"
-            [disabled]="piecesSelected() < 1"
-    >Selecteer niets</button>
-    <button mat-raised-button (click)="selectAllPieces(true)">
-      Selecteer alles</button>
+
+    <button mat-raised-button
+            [style.marginRight.px]="8"
+            [matMenuTriggerFor]="selectMenu"
+    >Selecteer</button>
+    <mat-menu #selectMenu>
+      <button mat-menu-item (click)="selectAllPieces(false)"
+              [disabled]="piecesSelected() < 1"
+      >Selecteer niets</button>
+      <button mat-menu-item n (click)="selectAllPieces(true)">
+        Selecteer alles</button>
+    </mat-menu>
+
     <button mat-raised-button (click)="autoTest()"
     >Auto</button>
+    <button mat-raised-button
+            [disabled]="piecesMarked() < 1"
+            (click)="tidy()"
+    >Tidy</button>
+
     <span class="horizontal-spacer"></span>
-    <button mat-raised-button (click)="makeAllProposals()"
+    <button mat-raised-button
+            (click)="makeAllProposals()"
             [disabled]="proposals.length < 1"
             class="mat-primary"
     >Maak!</button>

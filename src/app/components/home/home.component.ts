@@ -157,7 +157,7 @@ export class HomeComponent implements OnInit {
   }
 
   afterFetch(albums) {
-    console.log(albums);
+    // console.log(albums);
     this.albums = albums;
 
     // voor blader-functie in details pagina

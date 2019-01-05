@@ -58,6 +58,12 @@ export class AlbumMenuComponent implements OnInit {
       color: '',
     },
     {
+      label: 'Herlaad muziekstukken',
+      action: 'refetch',
+      icon: 'replay',
+      color: '',
+    },
+    {
       label: 'Plak cover in',
       action: 'paste_image',
       icon: 'image',
@@ -257,7 +263,8 @@ export class AlbumMenuComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(
       result => {
-        console.log(result);
+        // console.log(result);
+        // todo: remove reload - also in parent - as it messes up aliasses
         if (result == 'reload') {
           this.reload.emit(result);
         }
@@ -279,9 +286,11 @@ export class AlbumMenuComponent implements OnInit {
   }
 
   refetch() {
-    this.musicService.refetch(this.album.ID).subscribe(
-      (response: Album) => this.restorePieces(response)
-    );
+    if (window.confirm('Stukken herladen? Aliassen gaan verloren!')) {
+      this.musicService.refetch(this.album.ID).subscribe(
+        (response: Album) => this.restorePieces(response)
+      );
+    }
   }
 
   website() {

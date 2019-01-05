@@ -3,8 +3,10 @@ import {MAT_DIALOG_DATA, MatCheckbox, MatDialogRef} from '@angular/material';
 import {MusicService} from '../../../../services/music.service';
 import {Piece} from '../../../../classes/Piece';
 import {PieceService} from '../../services/piece.service';
-import {Album} from '../../../../classes/Album';
 import {Proposal} from '../../../../classes/Proposal';
+import {LcsService} from '../../../../services/lcs.service';
+import {UtilService} from '../../../../services/util.service';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-dialog-pieces',
@@ -12,15 +14,18 @@ import {Proposal} from '../../../../classes/Proposal';
   styleUrls: ['./dialog-pieces.component.scss']
 })
 export class DialogPiecesComponent implements OnInit {
-  cueName: string;
-  created: string[] = [];
+  cueName = '';
+  created = [];
   proposals: Proposal[] = [];
   @ViewChildren(MatCheckbox, { read: ElementRef }) checkBoxes: QueryList<MatCheckbox>;
 
   constructor(private musicService: MusicService,
               private pieceService: PieceService,
               public dialogRef: MatDialogRef<DialogPiecesComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any
+              @Inject(MAT_DIALOG_DATA)
+              public data: any,
+              private lcsService: LcsService,
+              private util: UtilService,
   ) { }
 
   onPieceCheck(e, piece: Piece) {
@@ -56,8 +61,8 @@ export class DialogPiecesComponent implements OnInit {
 
   markPieces(proposal: Proposal) {
     this.resetMarks();
-    proposal.ids.forEach(id => {
-      const piece = this.getPieceById(+id);
+    proposal.pieces.forEach(piece => {
+      // const piece: Piece = this.getPieceById(+id);
       piece.marked = true;
     });
     proposal.marked = true;
@@ -91,16 +96,29 @@ export class DialogPiecesComponent implements OnInit {
     return this.pieceService.displayName(s);
   }
 
-  nameKeydown(e, piece: Piece, name) {
+  updatePieceName(piece: Piece, name) {
+    piece.DisplayName = name;
+  }
+
+  saveDisplayName(e, piece: Piece, name, model) {
+    // console.log(model);
     if (e.key === 'Enter') {
-      this.pieceService.updatePieceName(piece.ID, piece.Name, name,
-        this.data.albumId);
+      this.updatePieceName(piece, model);
       e.preventDefault();
     }
     if (e.key === 'Tab') {
-      this.pieceService.updatePieceName(piece.ID, piece.Name, name,
-        this.data.albumId);
+      this.updatePieceName(piece, model);
     }
+  }
+
+  piecesMarked() {
+    let n = 0;
+    for (let i = 0; i < this.data.pieces.length; i++) {
+      if (this.data.pieces[i].marked) {
+        n++;
+      }
+    }
+    return n;
   }
 
   piecesSelected() {
@@ -122,19 +140,15 @@ export class DialogPiecesComponent implements OnInit {
     }
   }
 
-  afterMakeAllProposals() {
-    // this.reload();
-    this.dialogRef.close('reload');
-  }
-
   makeAllProposals() {
-    this.pieceService.autoCuesheets(this.data.albumId, this.proposals)
-      .then(() => this.afterMakeAllProposals());
-  }
-
-  autoTest() {
-    this.proposals = this.pieceService.autoTest(
-      this.data.albumId, this.data.pieces
+    const q = [];
+    this.proposals.forEach((proposal: Proposal) => {
+      q.push(this.musicService.makeCuesheet2(
+        proposal,
+        this.data.albumId));
+    });
+    forkJoin(q).subscribe(
+      () => this.dialogRef.close('success')
     );
   }
 
@@ -144,32 +158,54 @@ export class DialogPiecesComponent implements OnInit {
   }
 
   makeCuesheet(proposal: Proposal) {
-    this.musicService.makeCuesheet(proposal.name, proposal.ids,
+    this.musicService.makeCuesheet2(
+      proposal,
       this.data.albumId).subscribe(
       () => this.afterMakeCuesheet(proposal)
     );
   }
 
-  createCuesheet() {
-    const ids = this.pieceService.getCheckedIds(this.data.pieces);
+  tidy() {
+    const markedPieces = this.data.pieces.filter(
+      (piece: Piece) => piece.marked
+    );
+    const len = this.lcsService.lcs2(markedPieces.map(
+      (piece: Piece) => piece.Name
+    ));
+    this.data.pieces.forEach((piece: Piece) => {
+        if (piece.marked) {
+          piece.DisplayName = piece.DisplayName.substr(len);
+        }
+      }
+    );
+  }
 
+  autoTest() {
+    this.selectAllPieces(false);
+    this.proposals = this.pieceService.autoTest(
+      this.data.albumId, this.data.pieces
+    );
+  }
+
+  createCuesheet() {
+    const pieces = this.data.pieces.filter(piece => piece.checked);
+    this.selectAllPieces(false);
     this.proposals.push({
       name: this.cueName,
-      ids: ids
+      pieces: pieces,
     });
-    this.selectAllPieces(false);
-
-    // mark created
-    this.data.pieces.forEach(piece => {
-      if (ids.indexOf(piece.ID) !== -1) {
-        piece.created = true;
-      }
-    });
+    this.resetMarks();
+    pieces.forEach(piece => piece.marked = true);
   }
 
   ngOnInit() {
     // reset piece marking
-    this.data.pieces.forEach(piece => piece.marked = false);
+    this.data.pieces.forEach((piece: Piece) => {
+      piece.marked = false;
+      if (!piece.DisplayName || piece.DisplayName.length == 0) {
+        piece.DisplayName = this.util.stripExtension(piece.Name);
+      }
+    });
   }
 
 }

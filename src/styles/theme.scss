@@ -35,7 +35,10 @@ $darkcolor: #eeeeee;
     background-color: $darkbackground;
     .mat-menu-panel {
       background-color: $darkbackground;
-
+      span {
+        color: $darkcolor;
+        font-size: 16px;
+      }
     }
   }
   .mat-toolbar,
@@ -78,16 +81,15 @@ $darkcolor: #eeeeee;
   }
   .mat-card-title,
   .cuesheet-header,
-  .part-line {
+  .part-line,
+  nav a,
+  .mat-menu-panel button:not([disabled]) {
     color: $darkcolor;
   }
   .home,
   nav
   {
     background-color: $darkerbackground;
-    color: $darkcolor;
-  }
-  nav a {
     color: $darkcolor;
   }
   nav a:not(.selected):hover {
@@ -138,10 +140,26 @@ $darkcolor: #eeeeee;
   .play-cuesheet-played {
     color: #987898;
   }
-  .play-piece {
+  .play-piece,
+  .file-play {
     color: #66aaff;
   }
-  .play-piece-played {
-    color: #66aaaa;
+  .play-piece-played,
+  .file-played {
+    color: lightgreen;
+  }
+  .mat-icon.cuesheet-control {
+    &.sublime {
+      color: lightblue;
+    }
+    &.rename-parts {
+      color: lightgreen;
+    }
+    &.delete {
+      color: red;
+    }
+    &.rename-cuesheet {
+      color: orange;
+    }
   }
 }

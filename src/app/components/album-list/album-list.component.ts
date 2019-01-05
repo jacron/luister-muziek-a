@@ -177,7 +177,7 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    console.log(this.albums);
+    // console.log(this.albums);
     // this.globalListenScrollFunc = this.renderer.listen(
     //   'document', 'scroll', () =>
     //     this.lazyLoad()

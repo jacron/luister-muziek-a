@@ -1,0 +1,29 @@
+<div class="dialog-aliassing-parts"
+     (keyup)="onKeyup($event)"
+>
+  <div appDialogHeader paddingBottom="24">{{ this.cuesheet.Title }}</div>
+  <mat-dialog-content>
+    <div *ngFor="let file of files">
+      {{ file.name }}
+      <mat-form-field [style.width]="'100%'">
+        <input matInput [(ngModel)]="file.proposedname">
+      </mat-form-field>
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      *ngIf="files.length > 1"
+      matTooltip="Alt-A"
+      mat-button (click)="makeAliasses()">Auto</button>
+    <span class="horizontal-spacer"></span>
+    <button
+      mat-button
+      matTooltip="Esc"
+      (click)="cancel()">Annuleren</button>
+    <button
+      mat-button
+      matTooltip="Alt-O"
+      (click)="submit()">Opslaan</button>
+  </mat-dialog-actions>
+</div>

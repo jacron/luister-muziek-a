@@ -92,7 +92,8 @@ nav a:not(.selected):hover {
     background-color: #eeeeee;
   }
 }
-.play-piece {
+.play-piece,
+.file-play {
   color: blue;
 }
 .play-cuesheet {
@@ -101,9 +102,24 @@ nav a:not(.selected):hover {
 .play-cuesheet-invalid {
   color: red;
 }
-.play-piece-played {
+.play-piece-played,
+.file-played {
   color: green;
 }
 .play-cuesheet-played {
   color: brown;
+}
+.mat-icon.cuesheet-control {
+  &.sublime {
+    color: brown;
+  }
+  &.rename-parts {
+    color: green;
+  }
+  &.delete {
+    color: red;
+  }
+  &.rename-cuesheet {
+    color: orange;
+  }
 }

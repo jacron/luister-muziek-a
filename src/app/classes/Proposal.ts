@@ -1,6 +1,9 @@
+import {Piece} from './Piece';
+
 export class Proposal {
   name: string;
-  ids: number[];
+  ids?: number[];
+  pieces?: Piece[];
   created?;
   marked?;
 }

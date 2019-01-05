@@ -24,23 +24,21 @@ export class CuesheetService {
         files.push(file);
       }
     });
-    const lcsTracknamesLength = this.lcsService.lcs2(tracknames.map(
-      trackname => trackname.name));
     // let shortFiles = files;
-    if (files.length > 1) {
-      const lcsFilesLength = this.lcsService.lcs2(files.map(
-        file => file.name));
-      files.forEach(file =>
-        file.shortname = file.name.substr(lcsFilesLength));
-    } else {
-      files.forEach(file =>
-        file.shortname = file.name);
-    }
-    if (tracknames.length > 1) {
-      const lcsTracknamesLength = this.lcsService.lcs2(tracknames);
-      tracknames.forEach(trackname =>
-        trackname.substr(lcsTracknamesLength));
-    }
+    // if (files.length > 1) {
+    //   const lcsFilesLength = this.lcsService.lcs2(files.map(
+    //     file => file.name));
+    //   files.forEach(file =>
+    //     file.shortname = file.name.substr(lcsFilesLength));
+    // } else {
+    //   files.forEach(file =>
+    //     file.shortname = file.name);
+    // }
+    // if (tracknames.length > 1) {
+    //   const lcsTracknamesLength = this.lcsService.lcs2(tracknames);
+    //   tracknames.forEach(trackname =>
+    //     trackname.substr(lcsTracknamesLength));
+    // }
     return {
       tracknames: tracknames,
       files: files,

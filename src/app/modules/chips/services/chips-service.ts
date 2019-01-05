@@ -26,7 +26,6 @@ export class ChipsService {
   }
 
   makeChips(params: SearchParams, facets: any) {
-    console.log(params);
     this.chips = [];
     this.facets = facets;
     if (this.utilService.isEmpty(params)) {

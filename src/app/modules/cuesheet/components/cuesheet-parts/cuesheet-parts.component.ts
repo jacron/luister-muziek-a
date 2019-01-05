@@ -39,8 +39,13 @@ export class CuesheetPartsComponent implements OnInit {
     );
   }
 
-  stripExtension(s) {
-    return this.util.stripExtension(s);
+  display(file: CFile) {
+    // console.log(file);
+    if (file.displayname && file.displayname.length > 0) {
+      return file.displayname;
+    } else {
+      return this.util.stripExtension(file.name);
+    }
   }
 
   onPlayed(file: CFile) {

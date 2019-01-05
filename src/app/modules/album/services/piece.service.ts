@@ -97,24 +97,6 @@ export class PieceService {
     }
   }
 
-  getCheckedIds(pieces: Piece[]) {
-    const ids = [];
-    pieces.forEach((piece: Piece) => {
-      if (piece.checked) {
-        ids.push(piece.ID);
-        piece.created = true;
-      }
-    });
-    return ids;
-  }
-
-  checkOne(pieces) {
-    const ids = this.getCheckedIds(pieces);
-    if (!ids.length) {
-      pieces[0].checked = true;
-    }
-  }
-
   selectSiblingsInbetween(e, i: number, pieces: Piece[]) {
     /**
      * Als je een item aanklikt met de shit-toets ingedrukt,
@@ -140,7 +122,8 @@ export class PieceService {
 
   similar(pieces) {
     const titles = [],
-      ids = [];
+      npieces = [];
+      // ids = [];
     let active = false,
       common = '',
       old_common = '';
@@ -151,14 +134,16 @@ export class PieceService {
       }
       if (active) {
         piece.checked = false;
-        ids.push(piece.ID);
+        // ids.push(piece.ID);
+        npieces.push(piece);
         titles.push(this.displayName(piece.Name));
         common = this.makeCuesheetName(titles);
 
         // evaluate similarity
         if (titles.length > 2 && common.length < old_common.length - 2) {
           titles.pop();
-          ids.pop();
+          // ids.pop();
+          npieces.pop();
           piece.checked = true;
           break;
         }
@@ -167,58 +152,73 @@ export class PieceService {
     }
     return {
       titles: titles,
-      ids: ids
+      pieces: npieces,
+      // ids: ids
     };
   }
 
   lcs_pieces(pieces) {
     let titles = [],
-      ids = [];
+      npieces = [];
+      // ids = [];
     pieces.forEach((piece: Piece) => {
       if (piece.checked) {
         titles.push(this.displayName(piece.Name));
-        ids.push(piece.ID.toString());
+        npieces.push(piece);
+        // ids.push(piece.ID.toString());
       }
     });
     if (titles.length === 1) {
       const data = this.similar(pieces);
       titles = data.titles;
-      ids = data.ids;
+      npieces = data.pieces;
+      // ids = data.ids;
     }
     const cueName = this.makeCuesheetName(titles);
     return {
-      ids: ids,
+      // ids: ids,
+      pieces: npieces,
       cueName: cueName
     };
   }
 
+  // getCheckedIds(pieces: Piece[]) {
+  //   const ids = [];
+  //   pieces.forEach((piece: Piece) => {
+  //     if (piece.checked) {
+  //       ids.push(piece.ID);
+  //       piece.created = true;
+  //     }
+  //   });
+  //   return ids;
+  // }
+  //
+  // checkOne(pieces) {
+  //   const ids = this.getCheckedIds(pieces);
+  //   if (!ids.length) {
+  //     pieces[0].checked = true;
+  //   }
+  // }
+
   autoTest(albumId, pieces) {
-    this.checkOne(pieces);
+    pieces.forEach(piece => piece.checked = false);
+    pieces[0].checked = true;
+
+    // this.checkOne(pieces);
     let data;
     const proposals: Proposal[] = [];
     do {
       data = this.lcs_pieces(pieces);
-      if (data.ids.length) {
+      if (data.pieces.length) {
         proposals.push({
           name: data.cueName,
-          ids: data.ids
+          pieces: data.pieces,
+          // ids: data.ids
         });
       }
-    } while (data.ids.length);
+    } while (data.pieces.length);
     return proposals;
   }
 
-  autoCuesheets(albumId, proposals: Proposal[]) {
-    return new Promise((resolve) => {
-      const q = [];
-      proposals.forEach(proposal => {
-        q.push(this.musicService.makeCuesheet(proposal.name, proposal.ids,
-          albumId));
-      });
-      forkJoin(q).subscribe(
-        () => resolve('')
-      );
-    });
-  }
 
 }

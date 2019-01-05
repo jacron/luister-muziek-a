@@ -23,7 +23,7 @@
         (click)="play(file)"
         [class.file-played]="file.played"
       >
-        <span mat-line>{{ stripExtension(file.shortname) }}</span>
+        <span mat-line>{{ display(file) }}</span>
       </div>
   </div>
 

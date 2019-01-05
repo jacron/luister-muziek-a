@@ -14,8 +14,8 @@ import {DialogSettingsComponent} from './dialogs/dialog-settings/dialog-settings
 import {DialogAlbumComponent} from './dialogs/dialog-album/dialog-album.component';
 import {CuesheetModule} from '../cuesheet/cuesheet.module';
 import {ChipsModule} from '../chips/chips.module';
-import {ChipListsComponent} from '../chips/components/chip-lists/chip-lists.component';
 import { AlbumHeaderComponent } from './components/album-header/album-header.component';
+import { DialogAliassingPartsComponent } from './dialogs/dialog-aliassing-parts/dialog-aliassing-parts.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +29,7 @@ import { AlbumHeaderComponent } from './components/album-header/album-header.com
     DialogAlbumComponent,
     DialogSettingsComponent,
     AlbumHeaderComponent,
+    DialogAliassingPartsComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +52,7 @@ import { AlbumHeaderComponent } from './components/album-header/album-header.com
     DialogInputComponent,
     DialogAlbumComponent,
     DialogSettingsComponent,
+    DialogAliassingPartsComponent,
   ]
 })
 export class AlbumModule { }

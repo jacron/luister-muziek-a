@@ -2,11 +2,7 @@
   opacity: .5;
   position: relative;
   top: 7px;
-  color: blue;
   cursor: pointer;
-}
-.file-played {
-  color: green;
 }
 .text-container {
   display: inline-block;
@@ -28,4 +24,7 @@
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.cuesheet-parts {
+  margin-top: 20px;
 }
