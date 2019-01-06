@@ -1,15 +1,23 @@
 <div class="movie-component" *ngIf="movie">
-  <mat-card
-    class="movie-card">
-    <mat-card-header class="movie-header">
-      <mat-card-title>
-        {{ movie.DisplayTitle }}
-      </mat-card-title>
-    </mat-card-header>
-    <div class="image-container">
-      <img mat-card-image [src]="movie.ImageUrl"
-           class="movie-image">
-    </div>
-  </mat-card>
+  <a class="link"(click)="play()">
+    <mat-card
+      class="movie-card">
+      <mat-card-header class="movie-header">
+        <mat-card-title>
+          {{ movie.DisplayTitle }}
+        </mat-card-title>
+      </mat-card-header>
+      <div class="image-container">
+        <img mat-card-image [src]="movie.ImageUrl"
+             class="movie-image">
+      </div>
+      <mat-card-content class="movie-card-content">
+        <a class="link"
+           [routerLink]="['/director', movie.idRegisseur]">
+          {{ movie.naamRegisseur }}
+        </a>
+      </mat-card-content>
+    </mat-card>
+  </a>
 </div>
 

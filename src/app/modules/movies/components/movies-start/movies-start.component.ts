@@ -78,8 +78,13 @@ export class MoviesStartComponent implements OnInit {
     return suggestion ? suggestion.Titel : undefined;
   }
 
+  initSearch() {
+    this.router.navigate(['movies', this.searchControl.value.ID]);
+  }
+
   onSelectionChange() {
     console.log(this.searchControl.value);
+    this.initSearch();
   }
 
   // private _tfilter(name): Observable<Suggestion[]> {

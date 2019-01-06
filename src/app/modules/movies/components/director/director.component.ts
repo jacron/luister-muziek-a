@@ -29,12 +29,12 @@ export class DirectorComponent implements OnInit {
   filterTitle(query) {
     if (!query || !query.length) {
       this.filteredMovies = this.movies.slice();
-      return;
+    } else {
+      const q = query.toLowerCase();
+      this.filteredMovies = this.movies.filter(
+        (movie: Movie) => movie.Titel.toLowerCase().indexOf(q) != -1
+      );
     }
-    const q = query.toLowerCase();
-    this.filteredMovies = this.movies.filter(
-      (movie: Movie) => movie.Titel.toLowerCase().indexOf(q) != -1
-    );
   }
 
   handleParams(params) {

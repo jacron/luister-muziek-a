@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
-import {SearchParams} from '../../../classes/SearchParams';
 import {Suggestion} from '../../../classes/movies/Suggestion';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -52,12 +51,5 @@ export class MoviesService {
       this.requestUrl + cmd, params, { headers: headers},
     );
   }
-
-  // addSearchToHistory(title: string, params: SearchParams) {
-  //   return this.postForm('/search/history', {
-  //     title,
-  //     params
-  //   });
-  // }
 
 }
