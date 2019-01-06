@@ -135,9 +135,9 @@ export class DialogPiecesComponent implements OnInit {
     this.data.pieces.forEach((piece) => {
       piece.checked = mode;
     });
-    if (!mode) {
-      this.cueName = '';
-    }
+    // if (!mode) {
+    //   this.cueName = '';
+    // }
   }
 
   makeAllProposals() {
@@ -190,6 +190,7 @@ export class DialogPiecesComponent implements OnInit {
   createCuesheet() {
     const pieces = this.data.pieces.filter(piece => piece.checked);
     this.selectAllPieces(false);
+    // console.log(this.cueName);
     this.proposals.push({
       name: this.cueName,
       pieces: pieces,

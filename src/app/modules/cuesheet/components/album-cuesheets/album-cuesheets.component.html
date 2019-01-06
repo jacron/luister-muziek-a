@@ -6,7 +6,7 @@
             [album]="album"
             [cuesheet]="cuesheet"
             (titleChange)="cuesheet.Title = $event.title"
-            (removed)="removed()"
+            (removed)="removed($event)"
           ></app-cuesheet-menu>
         </div>
         <a (click)="play($event, cuesheet.ID)" class="link">

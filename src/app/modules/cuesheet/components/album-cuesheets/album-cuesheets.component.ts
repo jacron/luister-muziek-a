@@ -28,10 +28,13 @@ export class AlbumCuesheetsComponent implements OnInit {
     return null;
   }
 
-  removed() {
-    this.musicService.refetch(this.album.ID).subscribe(
-      (album: Album) => this.album.cuesheets = this.cuesheets =  album.cuesheets
-    );
+  removed(id) {
+    // console.log(id);
+    // this.musicService.refetch(this.album.ID).subscribe(
+    //   (album: Album) => this.album.cuesheets = this.cuesheets =  album.cuesheets
+    // );
+    this.album.cuesheets = this.cuesheets = this.cuesheets.filter(
+      cuesheet => cuesheet.ID != id);
   }
 
   onPlayed(response, id) {

@@ -68,14 +68,14 @@ export class CuesheetMenuComponent implements OnInit {
     );
   }
 
-  afterDelete() {
-    this.removed.emit();
+  afterDelete(id) {
+    this.removed.emit(id);
   }
 
   remove() {
     if (confirm('delete "' + this.cuesheet.Title + '"?')) {
       this.musicService.deleteCue(this.cuesheet.ID, this.album.ID)
-        .subscribe(() => this.afterDelete()
+        .subscribe(() => this.afterDelete(this.cuesheet.ID)
         );
     }
   }
