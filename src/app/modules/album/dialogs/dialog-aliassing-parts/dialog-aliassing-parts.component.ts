@@ -34,6 +34,12 @@ export class DialogAliassingPartsComponent implements OnInit {
     return name.trim();
   }
 
+  leftTrim() {
+    this.files.forEach(
+      (file: CFile) => file.proposedname = file.proposedname.substr(1)
+    )
+  }
+
   makeAliasses() {
     const lcsFilesLength = this.lcsService.lcs2(this.files.map(
       file => file.name

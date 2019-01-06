@@ -81,6 +81,14 @@ export class DialogPiecesComponent implements OnInit {
   //   );
   // }
 
+  leftTrim() {
+    this.data.pieces.forEach((piece: Piece) => {
+      if (piece.marked) {
+        piece.DisplayName = piece.DisplayName.substr(1)
+      }
+    });
+  }
+
   lcs() {
     const lines = [];
     this.data.pieces.forEach((piece: Piece) => {
@@ -100,8 +108,22 @@ export class DialogPiecesComponent implements OnInit {
     piece.DisplayName = name;
   }
 
+  updateProposalName(proposal: Proposal, name) {
+    proposal.name = name;
+  }
+
+  saveProposalName(e, proposal: Proposal, model) {
+    if (e.key === 'Enter') {
+      this.updateProposalName(proposal, model);
+      e.preventDefault();
+    }
+    if (e.key === 'Tab') {
+      this.updateProposalName(proposal, model);
+    }
+
+  }
+
   saveDisplayName(e, piece: Piece, name, model) {
-    // console.log(model);
     if (e.key === 'Enter') {
       this.updatePieceName(piece, model);
       e.preventDefault();

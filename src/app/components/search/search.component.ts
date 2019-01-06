@@ -141,13 +141,13 @@ export class SearchComponent implements OnInit {
   }
 
   getItems() {
-    const qcomposers = this.musicService.getComposers('typeahead');
-    const qperformers = this.musicService.getPerformers('typeahead');
-    const qcollections = this.musicService.getCollections();
-    const qtags = this.musicService.getTags();
-    const qinstruments = this.musicService.getInstruments();
-    forkJoin(qcomposers, qperformers, qcollections, qtags, qinstruments)
-      .subscribe(
+    const q = [];
+    q.push(this.musicService.getComposers('typeahead'));
+    q.push(this.musicService.getPerformers('typeahead'));
+    q.push(this.musicService.getCollections());
+    q.push(this.musicService.getTags());
+    q.push(this.musicService.getInstruments());
+    forkJoin(q).subscribe(
         results => this.afterGetItems(results),
         err => console.error(err),
         () => {

@@ -12,10 +12,15 @@
         >
           Maak
         </button>
-        <span (click)="markPieces(proposal)"
-              [class.marked]="proposal.marked"
-        >
-        {{ proposal.name }}
+        <span
+          (click)="markPieces(proposal)"
+          #proposalTitle
+          contenteditable="true"
+          [textContent]="proposal.name"
+          (input)="modelProposal=proposalTitle.innerText"
+          [class.created]="proposal.created"
+          [class.marked]="proposal.marked"
+          (keydown)="saveProposalName($event, proposal, modelProposal)">
       </span>
         <span class="horizontal-spacer"></span>
         <button mat-button
@@ -80,11 +85,11 @@
             [matMenuTriggerFor]="selectMenu"
     >Selecteer</button>
     <mat-menu #selectMenu>
+      <button mat-menu-item n (click)="selectAllPieces(true)">
+        Selecteer alles</button>
       <button mat-menu-item (click)="selectAllPieces(false)"
               [disabled]="piecesSelected() < 1"
       >Selecteer niets</button>
-      <button mat-menu-item n (click)="selectAllPieces(true)">
-        Selecteer alles</button>
     </mat-menu>
 
     <button mat-raised-button (click)="autoTest()"
@@ -94,7 +99,13 @@
             (click)="tidy()"
     >Tidy</button>
 
+    <button mat-raised-button
+            (click)="leftTrim()"
+            matTooltip="eerste letter verwijderen"
+    >Ltrim</button>
+
     <span class="horizontal-spacer"></span>
+
     <button mat-raised-button
             (click)="makeAllProposals()"
             [disabled]="proposals.length < 1"
