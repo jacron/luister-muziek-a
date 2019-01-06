@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {SearchParams} from '../../../classes/SearchParams';
+import {Suggestion} from '../../../classes/movies/Suggestion';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +20,12 @@ export class MoviesService {
   getJson(cmd) {
     return this.http.get(this.requestUrl + cmd, {
       responseType: 'json'});
+  }
+
+  searchMovies(query): Observable<Suggestion[]> {
+    return this.getJson('/api/search/movie/' + query)
+      .pipe(map(
+        response => response['options']));
   }
 
   getMovie(id) {

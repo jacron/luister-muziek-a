@@ -1,5 +1,9 @@
 <div class="director">
-  <app-director-card [director]="director"></app-director-card>
+  <app-director-card
+    [movies]="movies"
+    (filterTitle)="filterTitle($event)"
+    [director]="director"></app-director-card>
   <div class="vertical-spacer-director"></div>
-  <app-movies-list [movies]="movies"></app-movies-list>
+  <app-movies-list
+    [movies]="filteredMovies"></app-movies-list>
 </div>

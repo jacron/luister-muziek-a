@@ -6,6 +6,8 @@ import {LcsService} from '../../../../services/lcs.service';
 import {MusicService} from '../../../../services/music.service';
 import {Album} from '../../../../classes/Album';
 import {UtilService} from '../../../../services/util.service';
+import {forkJoin} from 'rxjs';
+import {Piece} from '../../../../classes/Piece';
 
 @Component({
   selector: 'app-dialog-aliassing-parts',
@@ -16,6 +18,7 @@ export class DialogAliassingPartsComponent implements OnInit {
   cuesheet: Cuesheet;
   album: Album;
   files: CFile[];
+  pieces: Piece[];
 
   constructor(
     public dialogRef: MatDialogRef<DialogAliassingPartsComponent>,
@@ -48,11 +51,6 @@ export class DialogAliassingPartsComponent implements OnInit {
       file => file.proposedname = this.tidyName(file.name.substr(lcsFilesLength)));
   }
 
-  afterSuccess() {
-    this.files.forEach((file: CFile) => file.displayname = file.proposedname)
-    this.dialogRef.close();
-  }
-
   onKeyup(e) {
     // console.log(e);
     if (e.altKey) {
@@ -71,15 +69,22 @@ export class DialogAliassingPartsComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  afterSuccess() {
+    this.files.forEach((file: CFile) => file.displayname = file.proposedname)
+    this.dialogRef.close();
+  }
+
   submit() {
+    const q = [];
+    console.log(this.files);
+    console.log(this.pieces);
     this.files.forEach((file: CFile) => {
-      const found = this.album.pieces.find(piece => piece.Name == file.name);
-      if (found) {
-        this.musicServce.saveAliasPiece(found.ID, file.proposedname).subscribe(
-          () => this.afterSuccess()
-        );
-      }
+      const foundPiece = this.pieces.find(piece => piece.Name === file.name);
+      console.log(foundPiece);
+      // console.log(file.proposedname);
+      // q.push(this.musicServce.saveAliasPiece(found.ID, file.proposedname));
     });
+    forkJoin(q).subscribe(() => this.afterSuccess());
   }
 
   initProposal(file: CFile) {
@@ -95,6 +100,7 @@ export class DialogAliassingPartsComponent implements OnInit {
     this.album = this.data.album;
     // console.log(this.album);
     this.files = this.data.cuesheet.cue.files;
+    this.pieces = this.data.album.pieces;
     this.files.forEach((file: CFile) =>
       file.proposedname = this.initProposal(file))
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Movie} from '../../../../classes/Movie';
+import {Movie} from '../../../../classes/movies/Movie';
 import {MoviesService} from '../../services/movies.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class MovieComponent implements OnInit {
     if (params) {
       if (params.idmovie) {
         console.log(params.idmovie);
-        this.moviesService.getDirectorMovies(params.idmovie).subscribe(
+        this.moviesService.getMovie(params.idmovie).subscribe(
           response => this.afterGet(response)
         );
       }

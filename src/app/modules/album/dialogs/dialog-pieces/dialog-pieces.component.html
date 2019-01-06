@@ -45,7 +45,7 @@
         </mat-checkbox>
         <span #topicTitle
               contenteditable="true"
-              [textContent]="displayName(piece.DisplayName)"
+              [textContent]="piece.DisplayName"
               (input)="model=topicTitle.innerText"
               [class.created]="piece.created"
               [class.marked]="piece.marked"

@@ -3,5 +3,5 @@ export class Director {
   Achternaam: string;
   Voornaam: string;
   ImageUrl: string;
-  imdb_id: string;
+  imdb_id?: string;
 }

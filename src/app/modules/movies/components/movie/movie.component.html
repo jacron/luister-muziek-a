@@ -1,7 +1,15 @@
-<p>
-  movie works!
-</p>
-<div *ngIf="movie">
-  {{ movie.Titel }}
-
+<div class="movie-component" *ngIf="movie">
+  <mat-card
+    class="movie-card">
+    <mat-card-header class="movie-header">
+      <mat-card-title>
+        {{ movie.DisplayTitle }}
+      </mat-card-title>
+    </mat-card-header>
+    <div class="image-container">
+      <img mat-card-image [src]="movie.ImageUrl"
+           class="movie-image">
+    </div>
+  </mat-card>
 </div>
+

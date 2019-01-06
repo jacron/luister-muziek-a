@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {StateService} from '../../../../services/state.service';
 import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
 import {MoviesService} from '../../services/movies.service';
-import {Movie} from '../../../../classes/Movie';
+import {Movie} from '../../../../classes/movies/Movie';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {Suggestion} from '../../../../classes/movies/Suggestion';
 
 @Component({
   selector: 'app-movies-start',
@@ -14,6 +16,8 @@ import {Router} from '@angular/router';
 export class MoviesStartComponent implements OnInit {
   model = null;
   myControl = new FormControl();
+  searchControl = new FormControl();
+  filteredOptions;
 
   constructor(
     private stateService: StateService,
@@ -60,15 +64,46 @@ export class MoviesStartComponent implements OnInit {
     };
   }
 
+  clear() {
+    this.myControl.setValue(null);
+  }
+
   getItems() {
     this.moviesService.getDirectors().subscribe(
       items => this.afterGetItems(items)
     )
   }
 
+  displayFn(suggestion?: Suggestion): string | undefined {
+    return suggestion ? suggestion.Titel : undefined;
+  }
+
+  onSelectionChange() {
+    console.log(this.searchControl.value);
+  }
+
+  // private _tfilter(name): Observable<Suggestion[]> {
+  //   let filterValue = name;
+  //   if (typeof name === 'string') {
+  //     filterValue = name.toLowerCase();
+  //   }
+  //   return this.moviesService.searchMovies(filterValue)
+  //     .pipe(
+  //       map(options => options.filter(option =>
+  //         option.Titel.toLowerCase().indexOf(filterValue) !== -1
+  //       ))
+  //     );
+  // }
+
   ngOnInit() {
     this.stateService.setTitle('Movies');
     this.getItems();
+    this.filteredOptions = this.searchControl.valueChanges
+      .pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        switchMap(name => this.moviesService.searchMovies(name || '') )
+      );
   }
 
 }

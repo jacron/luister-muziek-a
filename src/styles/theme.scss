@@ -83,8 +83,14 @@ $darkcolor: #eeeeee;
   .cuesheet-header,
   .part-line,
   nav a,
-  .mat-menu-panel button:not([disabled]) {
+  .mat-menu-panel button:not([disabled])
+  //.mat-card-content,
+  //.mat-form-field-label
+  {
     color: $darkcolor;
+  }
+  .mat-form-field-label.mat-focused {
+    color: lightblue;
   }
   .home,
   nav

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MoviesService} from '../../services/movies.service';
-import {Director} from '../../../../classes/Director';
-import {Movie} from '../../../../classes/Movie';
+import {Director} from '../../../../classes/movies/Director';
+import {Movie} from '../../../../classes/movies/Movie';
 
 @Component({
   selector: 'app-director',
@@ -12,6 +12,7 @@ import {Movie} from '../../../../classes/Movie';
 export class DirectorComponent implements OnInit {
   director: Director;
   movies: Movie[];
+  filteredMovies: Movie[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -21,9 +22,19 @@ export class DirectorComponent implements OnInit {
   }
 
   afterGet(results) {
-    // console.log(response);
     this.director = results.director;
-    this.movies = results.films;
+    this.movies = this.filteredMovies = results.films;
+  }
+
+  filterTitle(query) {
+    if (!query || !query.length) {
+      this.filteredMovies = this.movies.slice();
+      return;
+    }
+    const q = query.toLowerCase();
+    this.filteredMovies = this.movies.filter(
+      (movie: Movie) => movie.Titel.toLowerCase().indexOf(q) != -1
+    );
   }
 
   handleParams(params) {
@@ -35,6 +46,7 @@ export class DirectorComponent implements OnInit {
       }
     }
   }
+
   ngOnInit() {
   }
 
