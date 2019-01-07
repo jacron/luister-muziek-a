@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlbumMetatagsComponent } from './album-metatags.component';
-import {MusicService} from '../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatIconModule} from '@angular/material';
-import {Album} from '../../classes/Album';
+import {MusicService} from '../../../../services/music.service';
+import {Album} from '../../../../classes/Album';
 
 describe('AlbumMetatagsComponent', () => {
   let component: AlbumMetatagsComponent;

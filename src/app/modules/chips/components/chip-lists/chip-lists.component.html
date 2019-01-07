@@ -34,7 +34,7 @@
   album.album_instrument.Name.length > 0"
             class="chip-instrument"
             [removable]="removable"
-            (removed)="removeInstrument(tag)">
+            (removed)="removeInstrument()">
     <a (click)="toInstrument()">{{ album.album_instrument.Name }}</a>
     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
   </mat-chip>

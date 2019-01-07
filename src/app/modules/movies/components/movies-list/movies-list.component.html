@@ -8,11 +8,21 @@
             <mat-card-title>
               {{ movie.DisplayTitle }}
             </mat-card-title>
+            <span class="horizontal-spacer"></span>
           </mat-card-header>
           <div class="image-container">
             <img mat-card-image [src]="movie.ImageUrl"
+                 alt="missing cover"
+                 (click)="getImage($event, movie)"
                  class="movie-image">
           </div>
+          <mat-card-content *ngIf="!hideDirector"
+            class="movie-card-content">
+            <a class="link"
+               [routerLink]="['/director', movie.idRegisseur]">
+              {{ movie.naamRegisseur }}
+            </a>
+          </mat-card-content>
         </mat-card>
       </a>
     </div>

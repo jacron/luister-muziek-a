@@ -17,6 +17,8 @@ export class DialogPiecesComponent implements OnInit {
   cueName = '';
   created = [];
   proposals: Proposal[] = [];
+  model;
+  modelProposal;
   @ViewChildren(MatCheckbox, { read: ElementRef }) checkBoxes: QueryList<MatCheckbox>;
 
   constructor(private musicService: MusicService,

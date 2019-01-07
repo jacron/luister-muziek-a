@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {StateService} from '../../../../services/state.service';
-import {MoviesService} from '../../services/movies.service';
+import {StateService} from '../../../../../services/state.service';
+import {MoviesService} from '../../../services/movies.service';
 import {Router} from '@angular/router';
 import {debounceTime, map, startWith} from 'rxjs/operators';
-import {Suggestion} from '../../../../classes/movies/Suggestion';
+import {Suggestion} from '../../../../../classes/movies/Suggestion';
 import {FormControl} from '@angular/forms';
 
 @Component({

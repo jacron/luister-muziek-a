@@ -1,5 +1,4 @@
 <mat-list *ngIf="(persons | startwith:startletter:'LastName') as result">
-  <h3 mat-subheader>{{ result.length }} {{ label }}</h3>
   <mat-list-item *ngFor="let person of result">
     <a (click)="toSearch(person.ID)">
       {{ person.FirstName }} {{ person.LastName }}

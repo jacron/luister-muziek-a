@@ -84,8 +84,8 @@ $darkcolor: #eeeeee;
   .part-line,
   nav a,
   .movie-card-content a,
-  .mat-menu-panel button:not([disabled])
-  //.mat-card-content,
+  .mat-menu-panel button:not([disabled]),
+  .mat-card-content
   //.mat-form-field-label
   {
     color: $darkcolor;

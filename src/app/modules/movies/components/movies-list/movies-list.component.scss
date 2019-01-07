@@ -6,7 +6,7 @@
 }
 .movie-card {
   width: 180px;
-  height: 400px;
+  height: 460px;
   margin: 20px auto;
 }
 .movie-image {
@@ -19,4 +19,15 @@
   height: 316px;
   overflow: hidden;
   margin: 0 -16px;
+  img {
+    min-width: 200px;
+    min-height: 100px;
+    text-align: center;
+    font-size: 30px;
+    padding: 12px;
+  }
+}
+.movie-card-content {
+  padding: 20px;
+  font-size: 18px;
 }
