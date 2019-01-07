@@ -3,10 +3,9 @@ import {StateService} from '../../../../services/state.service';
 import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
 import {MoviesService} from '../../services/movies.service';
-import {Movie} from '../../../../classes/movies/Movie';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
 import {Suggestion} from '../../../../classes/movies/Suggestion';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-movies-start',
@@ -47,6 +46,7 @@ export class MoviesStartComponent implements OnInit {
     const filteredItems = this.myControl.valueChanges
       .pipe(
         startWith(''),
+        debounceTime(400),
         map(value => this._filter(results, value, facet.displayField))
       );
     const facet = {
@@ -79,26 +79,13 @@ export class MoviesStartComponent implements OnInit {
   }
 
   initSearch() {
-    this.router.navigate(['movies', this.searchControl.value.ID]);
+    this.router.navigate(['movies', this.searchControl.value.ID]).then();
   }
 
   onSelectionChange() {
     console.log(this.searchControl.value);
     this.initSearch();
   }
-
-  // private _tfilter(name): Observable<Suggestion[]> {
-  //   let filterValue = name;
-  //   if (typeof name === 'string') {
-  //     filterValue = name.toLowerCase();
-  //   }
-  //   return this.moviesService.searchMovies(filterValue)
-  //     .pipe(
-  //       map(options => options.filter(option =>
-  //         option.Titel.toLowerCase().indexOf(filterValue) !== -1
-  //       ))
-  //     );
-  // }
 
   ngOnInit() {
     this.stateService.setTitle('Movies');
@@ -107,7 +94,12 @@ export class MoviesStartComponent implements OnInit {
       .pipe(
         debounceTime(200),
         distinctUntilChanged(),
-        switchMap(name => this.moviesService.searchMovies(name || '') )
+        switchMap(name => {
+          if (name.length < 2) {
+            return of([]);
+          }
+          return this.moviesService.searchMovies(name || '');
+        })
       );
   }
 

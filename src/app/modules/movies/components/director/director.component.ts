@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {MoviesService} from '../../services/movies.service';
 import {Director} from '../../../../classes/movies/Director';
 import {Movie} from '../../../../classes/movies/Movie';
+import {StateService} from '../../../../services/state.service';
 
 @Component({
   selector: 'app-director',
@@ -17,6 +18,7 @@ export class DirectorComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private moviesService: MoviesService,
+    private stateService: StateService,
   ) {
     activatedRoute.params.subscribe(params => this.handleParams(params));
   }
@@ -24,6 +26,8 @@ export class DirectorComponent implements OnInit {
   afterGet(results) {
     this.director = results.director;
     this.movies = this.filteredMovies = results.films;
+    this.stateService.setTitle(this.director.Voornaam + ' ' +
+      this.director.Achternaam);
   }
 
   filterTitle(query) {

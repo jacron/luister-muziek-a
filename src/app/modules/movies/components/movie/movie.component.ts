@@ -25,6 +25,8 @@ export class MovieComponent implements OnInit {
 
   afterGet(response) {
     this.movie = response.film;
+    this.stateService.setTitle(this.movie.Titel);
+    document.title = this.movie.Titel;
   }
 
   handleParams(params) {
@@ -42,10 +44,6 @@ export class MovieComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.movie) {
-      this.stateService.setTitle(this.movie.Titel);
-      document.title = this.movie.Titel;
-    }
   }
 
 }
