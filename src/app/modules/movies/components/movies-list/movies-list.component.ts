@@ -21,7 +21,6 @@ export class MoviesListComponent implements OnInit {
     this.moviesService.play(id).subscribe();
   }
   ngOnInit() {
-    // console.log(this.movies);
   }
 
 }

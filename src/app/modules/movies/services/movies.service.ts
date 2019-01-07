@@ -39,6 +39,11 @@ export class MoviesService {
     return this.getJson('/api/director/' + id);
   }
 
+  getRecentlyPlayedMovies() {
+    return this.getJson('/api/films/filter/LaatstAfgespeeld/1')
+      .pipe(map(response => response['films']));
+  }
+
   play(id) {
     return this.getJson('/api/film/play/' + id);
   }
