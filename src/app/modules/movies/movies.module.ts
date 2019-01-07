@@ -8,6 +8,8 @@ import { MovieComponent } from './components/movie/movie.component';
 import {RouterModule} from '@angular/router';
 import { DirectorComponent } from './components/director/director.component';
 import { DirectorCardComponent } from './components/director-card/director-card.component';
+import { DirectorAutocompleteComponent } from './components/director-autocomplete/director-autocomplete.component';
+import { TitleAutocompleteComponent } from './components/title-autocomplete/title-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { DirectorCardComponent } from './components/director-card/director-card.
     MoviesListComponent,
     MovieComponent,
     DirectorComponent,
-    DirectorCardComponent
+    DirectorCardComponent,
+    DirectorAutocompleteComponent,
+    TitleAutocompleteComponent
   ],
   imports: [
     CommonModule,

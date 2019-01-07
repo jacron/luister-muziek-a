@@ -1,57 +1,6 @@
 <div class="movies-start">
 
-  <mat-form-field class="form-field" *ngIf="model">
-    <input
-      type="text" title=""
-      [placeholder]="model.placeholder" matInput
-      [formControl]="myControl"
-      [matAutocomplete]="auto">
-    <mat-autocomplete
-      #auto="matAutocomplete"
-      (optionSelected)="toDirector($event.option.value)"
-      [displayWith]="displayFn">
-      <mat-option *ngFor="let item of model.filteredItems | async"
-                  [value]="item">
-        {{ item[model.displayField] }}
-      </mat-option>
-    </mat-autocomplete>
-    <button
-      *ngIf="myControl.value" mat-button=""
-      aria-label="Clear" class="closer" matSuffix mat-icon-button
-      (click)="clear()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
-
-  <mat-form-field class="search-form">
-    <input
-      type="text"
-      #query
-      matInput
-      placeholder="zoek op" aria-label="zoek op"
-      [formControl]="searchControl"
-      [matAutocomplete]="auto1"
-      id="query_t"
-      (click)="$event.target.select()"
-      class="query"
-    >
-    <mat-autocomplete
-      #auto1="matAutocomplete"
-      [displayWith]="displayFn"
-      (optionSelected)="onSelectionChange()"
-    >
-      <mat-option *ngFor="let option of filteredOptions|async"
-                  [value]="option"
-                  [innerHTML]="option.Titel">
-      </mat-option>
-    </mat-autocomplete>
-    <button
-      mat-button *ngIf="query.value" matSuffix
-      mat-icon-button aria-label="Clear"
-      class="closer"
-      (click)="query.value = ''">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+  <app-director-autocomplete></app-director-autocomplete>
+  <app-title-autocomplete></app-title-autocomplete>
 
 </div>
