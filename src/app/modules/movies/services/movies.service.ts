@@ -31,6 +31,14 @@ export class MoviesService {
     return this.getJson('/api/film/' + id);
   }
 
+  getSpelers() {
+    return this.getJson('/api/speler');
+  }
+
+  getSpelerMovies(id) {
+    return this.getJson('/api/speler/' + id);
+  }
+
   getDirectors() {
     return this.getJson('/api/director');
   }

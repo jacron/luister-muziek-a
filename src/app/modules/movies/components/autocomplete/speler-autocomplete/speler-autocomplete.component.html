@@ -1,0 +1,22 @@
+<mat-form-field class="form-field">
+  <input
+    type="text" title=""
+    placeholder="Speler" matInput
+    [formControl]="myControl"
+    [matAutocomplete]="auto">
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="toSpeler($event.option.value)"
+    [displayWith]="displayFn">
+    <mat-option *ngFor="let item of filteredItems | async"
+                [value]="item">
+      {{ item.naam }}
+    </mat-option>
+  </mat-autocomplete>
+  <button
+    *ngIf="myControl.value" mat-button=""
+    aria-label="Clear" class="closer" matSuffix mat-icon-button
+    (click)="clear()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

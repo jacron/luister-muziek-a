@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {StateService} from '../../../../../services/state.service';
 import {MoviesService} from '../../../services/movies.service';
 import {Router} from '@angular/router';
 import {debounceTime, map, startWith} from 'rxjs/operators';
@@ -7,11 +6,11 @@ import {Suggestion} from '../../../../../classes/movies/Suggestion';
 import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-director-autocomplete',
-  templateUrl: './director-autocomplete.component.html',
-  styleUrls: ['./director-autocomplete.component.scss']
+  selector: 'app-speler-autocomplete',
+  templateUrl: './speler-autocomplete.component.html',
+  styleUrls: ['./speler-autocomplete.component.scss']
 })
-export class DirectorAutocompleteComponent implements OnInit {
+export class SpelerAutocompleteComponent implements OnInit {
   myControl = new FormControl();
   filteredItems;
 
@@ -32,8 +31,8 @@ export class DirectorAutocompleteComponent implements OnInit {
     });
   }
 
-  toDirector(val) {
-    this.router.navigate(['director', val.id])
+  toSpeler(val) {
+    this.router.navigate(['speler', val.id])
       .then();
   }
 
@@ -42,7 +41,7 @@ export class DirectorAutocompleteComponent implements OnInit {
       .pipe(
         startWith(''),
         debounceTime(400),
-        map(value => this._filter(results, value, 'name'))
+        map(value => this._filter(results, value, 'naam'))
       );
   }
 
@@ -50,18 +49,18 @@ export class DirectorAutocompleteComponent implements OnInit {
     this.myControl.setValue(null);
   }
 
-  getDirectors() {
-    this.moviesService.getDirectors().subscribe(
+  getSpelers() {
+    this.moviesService.getSpelers().subscribe(
       items => this.afterGetItems(items)
     )
   }
 
-  displayFn(suggestion?: Suggestion): string | undefined {
-    return suggestion ? suggestion.Titel : undefined;
+  displayFn(suggestion?): string | undefined {
+    return suggestion ? suggestion.naam : undefined;
   }
 
   ngOnInit() {
-    this.getDirectors();
+    this.getSpelers();
   }
 
 }

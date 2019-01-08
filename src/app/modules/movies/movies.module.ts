@@ -14,6 +14,9 @@ import { MoviesRecentlyPlayedComponent } from './components/movies-recently-play
 import { MoviesRecentlyAddedComponent } from './components/movies-recently-added/movies-recently-added.component';
 import { MoviesRecentlySeenComponent } from './components/movies-recently-seen/movies-recently-seen.component';
 import { MovieMenuComponent } from './components/movie-menu/movie-menu.component';
+import { SpelerAutocompleteComponent } from './components/autocomplete/speler-autocomplete/speler-autocomplete.component';
+import { SpelerComponent } from './components/speler/speler.component';
+import { SpelerCardComponent } from './components/speler-card/speler-card.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { MovieMenuComponent } from './components/movie-menu/movie-menu.component
     MoviesRecentlyAddedComponent,
     MoviesRecentlySeenComponent,
     MovieMenuComponent,
+    SpelerAutocompleteComponent,
+    SpelerComponent,
+    SpelerCardComponent,
   ],
   imports: [
     CommonModule,

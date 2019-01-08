@@ -1,0 +1,9 @@
+<div class="director">
+  <app-speler-card
+    [movies]="movies"
+    (filterTitle)="filterTitle($event)"
+    [speler]="speler"></app-speler-card>
+  <div class="vertical-spacer-speler"></div>
+  <app-movies-list
+    [movies]="filteredMovies"></app-movies-list>
+</div>

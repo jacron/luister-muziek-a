@@ -20,6 +20,7 @@ import {HomeComponent} from '../../components/home/home.component';
 import {MoviesStartComponent} from '../movies/components/movies-start/movies-start.component';
 import {MovieComponent} from '../movies/components/movie/movie.component';
 import {DirectorComponent} from '../movies/components/director/director.component';
+import {SpelerComponent} from '../movies/components/speler/speler.component';
 
 const appRoutes: Routes = [
   {path: '', component: SearchComponent},
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
   {path: 'movies', component: MoviesStartComponent},
   {path: 'movies/:idmovie', component: MovieComponent},
   {path: 'director/:iddirector', component: DirectorComponent},
+  {path: 'speler/:idspeler', component: SpelerComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

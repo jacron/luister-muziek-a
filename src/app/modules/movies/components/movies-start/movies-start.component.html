@@ -1,10 +1,13 @@
 <div class="movies-start">
 
-  <div class="row">
+  <div class="selection-row">
     <app-director-autocomplete></app-director-autocomplete>
-    <span class="horizontal-spacer"></span>
+    <div class="selection-middle">
+      <app-speler-autocomplete></app-speler-autocomplete>
+    </div>
     <app-title-autocomplete></app-title-autocomplete>
   </div>
+
   <app-movies-recently-played></app-movies-recently-played>
   <app-movies-recently-added></app-movies-recently-added>
   <app-movies-recently-seen></app-movies-recently-seen>
