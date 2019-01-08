@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {StateService} from '../../../../../services/state.service';
 import {MoviesService} from '../../../services/movies.service';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
@@ -16,18 +15,12 @@ export class TitleAutocompleteComponent implements OnInit {
   filteredOptions;
 
   constructor(
-    private stateService: StateService,
     private moviesService: MoviesService,
     private router: Router,
-
   ) { }
 
-  initSearch() {
-    this.router.navigate(['movies', this.searchControl.value.ID]).then();
-  }
-
   onSelectionChange() {
-    this.initSearch();
+    this.router.navigate(['movies', this.searchControl.value.ID]).then();
   }
 
   ngOnInit() {

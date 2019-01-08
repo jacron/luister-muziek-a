@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {StateService} from '../../../../../services/state.service';
 import {MoviesService} from '../../../services/movies.service';
 import {Router} from '@angular/router';
-import {debounceTime, map, startWith} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {Suggestion} from '../../../../../classes/movies/Suggestion';
 import {FormControl} from '@angular/forms';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-director-autocomplete',
@@ -20,40 +20,13 @@ export class DirectorAutocompleteComponent implements OnInit {
     private router: Router,
   ) { }
 
-  private _filter(items: any[], value: any, displayField: string): any[] {
-    if (!value || typeof value !== 'string' || value.length === 0 ||
-      !items) {
-      return [];
-    }
-    const filterValue = value.toLowerCase();
-    return items.filter((option: any) => {
-      const str: string = <string>option[displayField];
-      return str.toLowerCase().includes(filterValue);
-    });
-  }
-
   toDirector(val) {
     this.router.navigate(['director', val.id])
       .then();
   }
 
-  afterGetItems(results) {
-    this.filteredItems = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        debounceTime(400),
-        map(value => this._filter(results, value, 'name'))
-      );
-  }
-
   clear() {
     this.myControl.setValue(null);
-  }
-
-  getDirectors() {
-    this.moviesService.getDirectors().subscribe(
-      items => this.afterGetItems(items)
-    )
   }
 
   displayFn(suggestion?: Suggestion): string | undefined {
@@ -61,7 +34,18 @@ export class DirectorAutocompleteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getDirectors();
+    this.filteredItems = this.myControl.valueChanges
+      .pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        switchMap( name => {
+          if (!name || name.length < 2) {
+            return of([]);
+          } else {
+            return this.moviesService.searchDirectors(name || '');
+          }
+        })
+      );
   }
 
 }

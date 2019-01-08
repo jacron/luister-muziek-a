@@ -31,17 +31,26 @@ export class MoviesService {
     return this.getJson('/api/film/' + id);
   }
 
-  getSpelers() {
-    return this.getJson('/api/speler');
+  // getSpelers() {
+  //   return this.getJson('/api/speler');
+  // }
+
+  searchSpelers(query) {
+    return this.getJson('/api/search/speler/' + query);
+  }
+
+  searchDirectors(query) {
+    return this.getJson('/api/search/director/' + query)
+      .pipe(map(response => response['options']));
   }
 
   getSpelerMovies(id) {
     return this.getJson('/api/speler/' + id);
   }
 
-  getDirectors() {
-    return this.getJson('/api/director');
-  }
+  // getDirectors() {
+  //   return this.getJson('/api/director');
+  // }
 
   getDirectorMovies(id) {
     return this.getJson('/api/director/' + id);
