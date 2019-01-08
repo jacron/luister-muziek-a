@@ -3,11 +3,11 @@ import {Movie} from '../../../../classes/movies/Movie';
 import {MoviesService} from '../../services/movies.service';
 
 @Component({
-  selector: 'app-movies-recently-played',
-  templateUrl: './movies-recently-played.component.html',
-  styleUrls: ['./movies-recently-played.component.scss']
+  selector: 'app-movies-recently-seen',
+  templateUrl: './movies-recently-seen.component.html',
+  styleUrls: ['./movies-recently-seen.component.scss']
 })
-export class MoviesRecentlyPlayedComponent implements OnInit {
+export class MoviesRecentlySeenComponent implements OnInit {
   movies: Movie[];
 
   constructor(
@@ -15,12 +15,11 @@ export class MoviesRecentlyPlayedComponent implements OnInit {
   ) { }
 
   getMovies() {
-    this.moviesService.getRecentlyPlayedMovies(20).subscribe(
+    this.moviesService.getRecentlySeenMovies(10).subscribe(
       (films: Movie[]) => this.movies = films
     )
   }
   ngOnInit() {
     this.getMovies();
   }
-
 }

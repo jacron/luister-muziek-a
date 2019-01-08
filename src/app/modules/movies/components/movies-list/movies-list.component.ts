@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Movie} from '../../../../classes/movies/Movie';
 import {Router} from '@angular/router';
 import {MoviesService} from '../../services/movies.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-movies-list',
@@ -11,6 +12,7 @@ import {MoviesService} from '../../services/movies.service';
 export class MoviesListComponent implements OnInit {
   @Input() movies: Movie[];
   @Input() hideDirector: boolean;
+  @Input() wrap: string;
 
   constructor(
     private router: Router,

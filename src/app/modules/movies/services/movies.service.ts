@@ -39,20 +39,20 @@ export class MoviesService {
     return this.getJson('/api/director/' + id);
   }
 
-  getRecentlyPlayedMovies() {
-    return this.getJson('/api/films/filter/recentlyplayed/1')
+  getRecentlyPlayedMovies(n) {
+    return this.getJson('/api/films/filter/recentlyplayed/1/' + n)
       .pipe(map(response => response['films']));
   }
 
-  // getRecentlySeenMovies() {
-  //   return this.getJson('/api/films/filter/recentlyseen/1')
-  //     .pipe(map(response => response['films']));
-  // }
-  //
-  // getRecentlyAcquiredMovies() {
-  //   return this.getJson('/api/films/filter/recentlymade/1')
-  //     .pipe(map(response => response['films']));
-  // }
+  getRecentlySeenMovies(n) {
+    return this.getJson('/api/films/filter/recentlyseen/1/' + n)
+      .pipe(map(response => response['films']));
+  }
+
+  getRecentlyAcquiredMovies(n) {
+    return this.getJson('/api/films/filter/recentlymade/1/' + n)
+      .pipe(map(response => response['films']));
+  }
 
   play(id) {
     return this.getJson('/api/film/play/' + id);

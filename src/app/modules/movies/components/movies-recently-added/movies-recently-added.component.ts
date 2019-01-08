@@ -3,11 +3,11 @@ import {Movie} from '../../../../classes/movies/Movie';
 import {MoviesService} from '../../services/movies.service';
 
 @Component({
-  selector: 'app-movies-recently-played',
-  templateUrl: './movies-recently-played.component.html',
-  styleUrls: ['./movies-recently-played.component.scss']
+  selector: 'app-movies-recently-added',
+  templateUrl: './movies-recently-added.component.html',
+  styleUrls: ['./movies-recently-added.component.scss']
 })
-export class MoviesRecentlyPlayedComponent implements OnInit {
+export class MoviesRecentlyAddedComponent implements OnInit {
   movies: Movie[];
 
   constructor(
@@ -15,7 +15,7 @@ export class MoviesRecentlyPlayedComponent implements OnInit {
   ) { }
 
   getMovies() {
-    this.moviesService.getRecentlyPlayedMovies(20).subscribe(
+    this.moviesService.getRecentlyAcquiredMovies(10).subscribe(
       (films: Movie[]) => this.movies = films
     )
   }

@@ -1,14 +1,17 @@
 <div class="movies-list" *ngIf="movies">
-  <div class="wrapper">
+  <div [class.wrapper]="wrap != 'nowrap'"
+       [class.nowrapper]="wrap == 'nowrap'">
     <div *ngFor="let movie of movies">
       <a (click)="toMovie(movie.ID)" >
         <mat-card
           class="movie-card">
           <mat-card-header class="movie-header">
-            <mat-card-title>
+            <mat-card-title
+            class="link">
               {{ movie.DisplayTitle }}
             </mat-card-title>
             <span class="horizontal-spacer"></span>
+            <app-movie-menu [movie]="movie"></app-movie-menu>
           </mat-card-header>
           <div class="image-container">
             <img mat-card-image [src]="movie.ImageUrl"

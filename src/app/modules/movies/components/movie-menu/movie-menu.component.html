@@ -1,0 +1,31 @@
+<div class="movie-menu">
+  <button mat-icon-button
+          class="movie-menu-trigger"
+          (click)="$event.stopPropagation()"
+          [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+
+    <button mat-menu-item
+            (click)="toImdb()"
+    >
+      <mat-icon class="movie-control imdb"
+                waves-light waves-effect
+      >movie
+      </mat-icon>
+      <span>IMDb</span>
+    </button>
+
+    <button mat-menu-item
+            (click)="toDetails()"
+    >
+      <mat-icon class="movie-control details"
+                waves-light waves-effect
+      >movie
+      </mat-icon>
+      <span>Details</span>
+    </button>
+
+  </mat-menu>
+</div>

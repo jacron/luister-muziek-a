@@ -4,12 +4,17 @@
   flex-direction: row;
   justify-content: space-around;
 }
+.nowrapper {
+  overflow-x: auto;
+  display: flex;
+  .movie-card {
+    margin: 20px;
+  }
+}
 .movie-card {
   width: 180px;
   height: 460px;
   margin: 20px auto;
-}
-.movie-image {
 }
 .movie-header {
   height: 92px;
