@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Movie} from '../../../../classes/movies/Movie';
 import {Router} from '@angular/router';
 import {MoviesService} from '../../services/movies.service';
-import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-movies-list',
@@ -12,6 +11,7 @@ import {environment} from '../../../../../environments/environment';
 export class MoviesListComponent implements OnInit {
   @Input() movies: Movie[];
   @Input() hideDirector: boolean;
+  @Input() unwatch: boolean;
   @Input() wrap: string;
 
   constructor(
@@ -19,8 +19,7 @@ export class MoviesListComponent implements OnInit {
     private moviesService: MoviesService,
   ) { }
 
-  toMovie(id) {
-    // this.router.navigate(['/movie', id]);
+  play(id) {
     this.moviesService.play(id).subscribe();
   }
 
@@ -30,6 +29,19 @@ export class MoviesListComponent implements OnInit {
     } else {
       console.log(result);
     }
+  }
+
+  afterUnwatch(result, id) {
+    if (result.status && result.status == 200) {
+      const movie = this.movies.find(movie => movie.ID == id);
+      this.movies.splice(this.movies.indexOf(movie), 1);
+    }
+  }
+
+  unwatchChange(id) {
+    // console.log(id);
+    this.moviesService.unwatch(id).subscribe(result =>
+      this.afterUnwatch(result, id))
   }
 
   getImage(e, movie: Movie) {

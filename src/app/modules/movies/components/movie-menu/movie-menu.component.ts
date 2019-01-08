@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Movie} from '../../../../classes/movies/Movie';
 import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
@@ -10,7 +10,8 @@ import {Router} from '@angular/router';
 })
 export class MovieMenuComponent implements OnInit {
   @Input() movie: Movie;
-  @ViewChild('menu') menu;
+  @Input() unwatch: boolean;
+  @Output() unwatchChange = new EventEmitter();
 
   constructor(
     private router: Router,
@@ -25,9 +26,8 @@ export class MovieMenuComponent implements OnInit {
     this.router.navigate(['/movies', this.movie.ID]).then();
   }
 
-  cancelBubble(e) {
-    console.log(e);
-    // e.stopPropagation();
+  setUnwatch() {
+    this.unwatchChange.emit(this.movie.ID);
   }
 
   ngOnInit() {

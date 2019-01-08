@@ -88,4 +88,8 @@ export class MoviesService {
     return this.postForm('/api/image/add', { imdb_id });
   }
 
+  unwatch(id) {
+    return this.postForm('/api/film/unwatch', {id});
+  }
+
 }

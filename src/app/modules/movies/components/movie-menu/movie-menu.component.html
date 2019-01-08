@@ -27,5 +27,16 @@
       <span>Details</span>
     </button>
 
+    <button mat-menu-item
+            *ngIf="unwatch"
+            (click)="setUnwatch()"
+    >
+      <mat-icon class="movie-control unwatch"
+                waves-light waves-effect
+      >movie
+      </mat-icon>
+      <span>Bekeken</span>
+    </button>
+
   </mat-menu>
 </div>
