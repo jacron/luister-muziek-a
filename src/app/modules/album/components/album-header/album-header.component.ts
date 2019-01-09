@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {List} from '../../../../classes/List';
-import {Album} from '../../../../classes/Album';
+import {List} from '../../../../classes/music/List';
+import {Album} from '../../../../classes/music/Album';
 
 @Component({
   selector: 'app-album-header',

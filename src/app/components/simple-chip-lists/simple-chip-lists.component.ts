@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Album} from '../../classes/Album';
+import {Album} from '../../classes/music/Album';
 
 @Component({
   selector: 'app-simple-chip-lists',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Album} from '../classes/Album';
-import {Choice} from '../classes/Choice';
-import {List} from '../classes/List';
+import {Album} from '../classes/music/Album';
+import {Choice} from '../classes/music/Choice';
+import {List} from '../classes/music/List';
 import {StoreService} from './store.service';
 
 @Injectable()

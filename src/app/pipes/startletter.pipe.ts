@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Person} from '../classes/Person';
+import {Person} from '../classes/music/Person';
 
 @Pipe({
   name: 'startwith'

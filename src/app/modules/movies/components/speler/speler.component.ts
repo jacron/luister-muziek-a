@@ -23,7 +23,7 @@ export class SpelerComponent implements OnInit {
     activatedRoute.params.subscribe(params => this.handleParams(params));
   }
 
-  afterGet(results) {
+  afterGetSpeler(results) {
     this.speler = results.speler;
     this.movies = this.filteredMovies = results.films;
     this.stateService.setTitle(this.speler.naam);
@@ -44,8 +44,13 @@ export class SpelerComponent implements OnInit {
     if (params) {
       if (params.idspeler) {
         this.moviesService.getSpelerMovies(params.idspeler).subscribe(
-          results => this.afterGet(results)
+          results => this.afterGetSpeler(results)
         );
+      }
+      if (params.naamspeler) {
+        this.moviesService.getSpelerNaamMovies(params.naamspeler).subscribe(
+          results => this.afterGetSpeler(results)
+        )
       }
     }
   }

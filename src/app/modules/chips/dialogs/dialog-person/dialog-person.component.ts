@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {MusicService} from '../../../../services/music.service';
 import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
-import {Person} from '../../../../classes/Person';
+import {Person} from '../../../../classes/music/Person';
 import {DialogPicComponent} from '../../../album/dialogs/dialog-pic/dialog-pic.component';
 
 @Component({

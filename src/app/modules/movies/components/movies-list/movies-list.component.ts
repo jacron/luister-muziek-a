@@ -19,18 +19,6 @@ export class MoviesListComponent implements OnInit {
     private moviesService: MoviesService,
   ) { }
 
-  play(id) {
-    this.moviesService.play(id).subscribe();
-  }
-
-  updateImageUrl(movie: Movie, result) {
-    if (result.status == 200) {
-      movie.ImageUrl = result.ImageUrl;
-    } else {
-      console.log(result);
-    }
-  }
-
   afterUnwatch(result, id) {
     if (result.status && result.status == 200) {
       const movie = this.movies.find(movie => movie.ID == id);
@@ -42,15 +30,6 @@ export class MoviesListComponent implements OnInit {
     // console.log(id);
     this.moviesService.unwatch(id).subscribe(result =>
       this.afterUnwatch(result, id))
-  }
-
-  getImage(e, movie: Movie) {
-    e.stopPropagation();
-    if (confirm('Afbeelding vervangen voor ' + movie.DisplayTitle + '?')) {
-      this.moviesService.addImage(movie.imdb_id).subscribe(
-        result => this.updateImageUrl(movie, result)
-      );
-    }
   }
 
   ngOnInit() {

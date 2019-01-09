@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Choice} from '../classes/Choice';
+import {Choice} from '../classes/music/Choice';
 // import {Facet} from '../classes/Facet';
 
 const choices: Choice[] = [

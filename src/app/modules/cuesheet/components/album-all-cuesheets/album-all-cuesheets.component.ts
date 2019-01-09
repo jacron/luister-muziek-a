@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Cuesheet} from '../../../../classes/Cuesheet';
-import {Album} from '../../../../classes/Album';
+import {Cuesheet} from '../../../../classes/music/Cuesheet';
+import {Album} from '../../../../classes/music/Album';
 
 @Component({
   selector: 'app-album-all-cuesheets',

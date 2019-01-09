@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Tag} from '../../classes/Tag';
+import {Tag} from '../../classes/music/Tag';
 
 @Component({
   selector: 'app-tags',

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Cuesheet} from '../../../../classes/Cuesheet';
+import {Cuesheet} from '../../../../classes/music/Cuesheet';
 import {MusicService} from '../../../../services/music.service';
-import {Album} from '../../../../classes/Album';
+import {Album} from '../../../../classes/music/Album';
 
 @Component({
   selector: 'app-album-cuesheets',

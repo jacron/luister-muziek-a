@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {Album} from '../../classes/Album';
-import {Tag} from '../../classes/Tag';
-import {Person} from '../../classes/Person';
-import {SearchParams} from '../../classes/SearchParams';
+import {Album} from '../../classes/music/Album';
+import {Tag} from '../../classes/music/Tag';
+import {Person} from '../../classes/music/Person';
+import {SearchParams} from '../../classes/music/SearchParams';
 import {MatDialog} from '@angular/material';
 import {DialogCustomizeSearchComponent} from '../../dialogs/dialog-customize-search/dialog-customize-search.component';
 import {MusicService} from '../../services/music.service';
-import {Choice} from '../../classes/Choice';
+import {Choice} from '../../classes/music/Choice';
 import {StorageService} from '../../services/storage.service';
 import {ChoiceService} from '../../services/choice.service';
 import {FormControl} from '@angular/forms';

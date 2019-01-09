@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Componist} from '../../classes/Componist';
+import {Componist} from '../../classes/music/Componist';
 import {MusicService} from '../../services/music.service';
 import {StateService} from '../../services/state.service';
 

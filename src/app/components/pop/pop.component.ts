@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {StateService} from '../../services/state.service';
-import {Person} from '../../classes/Person';
+import {Person} from '../../classes/music/Person';
 import {MusicService} from '../../services/music.service';
-import {Album} from '../../classes/Album';
+import {Album} from '../../classes/music/Album';
 import {Router} from '@angular/router';
 
 @Component({

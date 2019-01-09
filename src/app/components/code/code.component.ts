@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MusicService} from '../../services/music.service';
-import {Code} from '../../classes/Code';
+import {Code} from '../../classes/music/Code';
 import {StateService} from '../../services/state.service';
 
 @Component({

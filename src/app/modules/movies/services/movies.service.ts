@@ -48,6 +48,10 @@ export class MoviesService {
     return this.getJson('/api/speler/' + id);
   }
 
+  getSpelerNaamMovies(naam) {
+    return this.getJson('/api/speler/naam/' + naam);
+  }
+
   // getDirectors() {
   //   return this.getJson('/api/director');
   // }

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MusicService} from '../../services/music.service';
-import {Collection} from '../../classes/Collection';
+import {Collection} from '../../classes/music/Collection';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
 

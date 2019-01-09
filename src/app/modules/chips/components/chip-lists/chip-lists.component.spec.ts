@@ -7,9 +7,9 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MusicService} from '../../../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
-import {Album} from '../../../../classes/Album';
+import {Album} from '../../../../classes/music/Album';
 import any = jasmine.any;
-import {Person} from '../../../../classes/Person';
+import {Person} from '../../../../classes/music/Person';
 
 describe('ChipListsComponent', () => {
   let component: ChipListsComponent;

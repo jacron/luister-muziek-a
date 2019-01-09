@@ -1,12 +1,13 @@
 import {Component, ElementRef, Inject, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {MAT_DIALOG_DATA, MatCheckbox, MatDialogRef} from '@angular/material';
 import {MusicService} from '../../../../services/music.service';
-import {Piece} from '../../../../classes/Piece';
+import {Piece} from '../../../../classes/music/Piece';
 import {PieceService} from '../../services/piece.service';
-import {Proposal} from '../../../../classes/Proposal';
+import {Proposal} from '../../../../classes/music/Proposal';
 import {LcsService} from '../../../../services/lcs.service';
 import {UtilService} from '../../../../services/util.service';
 import {forkJoin} from 'rxjs';
+import {Album} from '../../../../classes/music/Album';
 
 @Component({
   selector: 'app-dialog-pieces',
@@ -159,9 +160,10 @@ export class DialogPiecesComponent implements OnInit {
     this.data.pieces.forEach((piece) => {
       piece.checked = mode;
     });
-    // if (!mode) {
-    //   this.cueName = '';
-    // }
+    if (mode) {
+      const album: Album = this.data.album;
+      this.cueName = album.Title;
+    }
   }
 
   makeAllProposals() {

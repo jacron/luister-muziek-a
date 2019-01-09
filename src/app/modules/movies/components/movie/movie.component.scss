@@ -1,7 +1,7 @@
 .movie-card {
   width: 180px;
   height: 450px;
-  margin: 20px auto;
+  //margin: 20px auto;
 }
 .movie-card-content {
   padding: 20px;
@@ -17,4 +17,7 @@
   height: 316px;
   overflow: hidden;
   margin: 0 -16px;
+}
+.details {
+  padding: 12px;
 }

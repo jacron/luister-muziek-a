@@ -8,6 +8,16 @@
   <mat-menu #menu="matMenu">
 
     <button mat-menu-item
+            (click)="play()"
+    >
+      <mat-icon class="movie-control play"
+                waves-light waves-effect
+      >play_arrow
+      </mat-icon>
+      <span>Play</span>
+    </button>
+
+    <button mat-menu-item
             (click)="toImdb()"
     >
       <mat-icon class="movie-control imdb"
@@ -28,14 +38,24 @@
     </button>
 
     <button mat-menu-item
+            (click)="getImage()"
+    >
+      <mat-icon class="movie-control"
+                waves-light waves-effect
+      >image
+      </mat-icon>
+      <span>Afbeelding ophalen</span>
+    </button>
+
+    <button mat-menu-item
             *ngIf="unwatch"
             (click)="setUnwatch()"
     >
       <mat-icon class="movie-control unwatch"
                 waves-light waves-effect
-      >movie
+      >clear
       </mat-icon>
-      <span>Bekeken</span>
+      <span>Uit kijklijst</span>
     </button>
 
   </mat-menu>

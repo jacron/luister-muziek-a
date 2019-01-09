@@ -46,6 +46,7 @@ const appRoutes: Routes = [
   {path: 'movies', component: MoviesStartComponent},
   {path: 'movies/:idmovie', component: MovieComponent},
   {path: 'director/:iddirector', component: DirectorComponent},
+  {path: 'speler/naam/:naamspeler', component: SpelerComponent},
   {path: 'speler/:idspeler', component: SpelerComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Person} from '../../classes/Person';
+import {Person} from '../../classes/music/Person';
 import {Router} from '@angular/router';
 
 @Component({

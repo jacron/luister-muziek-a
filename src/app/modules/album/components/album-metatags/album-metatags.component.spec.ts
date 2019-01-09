@@ -5,7 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatIconModule} from '@angular/material';
 import {MusicService} from '../../../../services/music.service';
-import {Album} from '../../../../classes/Album';
+import {Album} from '../../../../classes/music/Album';
 
 describe('AlbumMetatagsComponent', () => {
   let component: AlbumMetatagsComponent;

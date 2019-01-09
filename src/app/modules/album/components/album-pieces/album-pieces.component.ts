@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Piece} from '../../../../classes/Piece';
+import {Piece} from '../../../../classes/music/Piece';
 import {MusicService} from '../../../../services/music.service';
 import {PieceService} from '../../services/piece.service';
-import {Album} from '../../../../classes/Album';
+import {Album} from '../../../../classes/music/Album';
 
 @Component({
   selector: 'app-album-pieces',

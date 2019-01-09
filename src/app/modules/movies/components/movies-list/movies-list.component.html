@@ -2,35 +2,32 @@
   <div [class.wrapper]="wrap != 'nowrap'"
        [class.nowrapper]="wrap == 'nowrap'">
     <div *ngFor="let movie of movies">
-      <a (click)="play(movie.ID)" >
-        <mat-card
-          class="movie-card">
-          <mat-card-header class="movie-header">
-            <mat-card-title
-            class="link">
-              {{ movie.DisplayTitle }}
-            </mat-card-title>
-            <span class="horizontal-spacer"></span>
-            <app-movie-menu
-              [unwatch]="unwatch"
-              (unwatchChange)="unwatchChange($event)"
-              [movie]="movie"></app-movie-menu>
-          </mat-card-header>
-          <div class="image-container">
-            <img mat-card-image [src]="movie.ImageUrl"
-                 alt="missing cover"
-                 (click)="getImage($event, movie)"
-                 class="movie-image">
-          </div>
-          <mat-card-content *ngIf="!hideDirector"
-            class="movie-card-content">
-            <a class="link"
-               [routerLink]="['/director', movie.idRegisseur]">
-              {{ movie.naamRegisseur }}
-            </a>
-          </mat-card-content>
-        </mat-card>
-      </a>
+      <mat-card
+        class="movie-card">
+        <mat-card-header class="movie-header">
+          <mat-card-title
+          class="link">
+            {{ movie.DisplayTitle }}
+          </mat-card-title>
+          <span class="horizontal-spacer"></span>
+          <app-movie-menu
+            [unwatch]="unwatch"
+            (unwatchChange)="unwatchChange($event)"
+            [movie]="movie"></app-movie-menu>
+        </mat-card-header>
+        <div class="image-container">
+          <img mat-card-image [src]="movie.ImageUrl"
+               alt="missing cover"
+               class="movie-image">
+        </div>
+        <mat-card-content *ngIf="!hideDirector"
+          class="movie-card-content">
+          <a class="link"
+             [routerLink]="['/director', movie.idRegisseur]">
+            {{ movie.naamRegisseur }}
+          </a>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>

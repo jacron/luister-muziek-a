@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Album} from '../../../../classes/Album';
+import {Album} from '../../../../classes/music/Album';
 import {CuesheetService} from '../../services/cuesheet.service';
-import {Cuesheet} from '../../../../classes/Cuesheet';
-import {Person} from '../../../../classes/Person';
+import {Cuesheet} from '../../../../classes/music/Cuesheet';
+import {Person} from '../../../../classes/music/Person';
 import {MusicService} from '../../../../services/music.service';
-import {CFile} from '../../../../classes/CFile';
+import {CFile} from '../../../../classes/music/CFile';
 import {UtilService} from '../../../../services/util.service';
 
 @Component({

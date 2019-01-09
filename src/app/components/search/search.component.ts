@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {MusicService} from '../../services/music.service';
-import {Album} from '../../classes/Album';
+import {Album} from '../../classes/music/Album';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SearchParams} from '../../classes/SearchParams';
+import {SearchParams} from '../../classes/music/SearchParams';
 import {StorageService} from '../../services/storage.service';
-import {Tag} from '../../classes/Tag';
-import {Person} from '../../classes/Person';
+import {Tag} from '../../classes/music/Tag';
+import {Person} from '../../classes/music/Person';
 import {forkJoin} from 'rxjs';
 import {UtilService} from '../../services/util.service';
-import {Instrument} from '../../classes/Instrument';
-import {List} from '../../classes/List';
+import {Instrument} from '../../classes/music/Instrument';
+import {List} from '../../classes/music/List';
 import {ListService} from '../../services/list.service';
 import {StateService} from '../../services/state.service';
 

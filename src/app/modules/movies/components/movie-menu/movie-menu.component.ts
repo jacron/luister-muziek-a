@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Movie} from '../../../../classes/movies/Movie';
 import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
+import {MoviesService} from '../../services/movies.service';
 
 @Component({
   selector: 'app-movie-menu',
@@ -15,7 +16,28 @@ export class MovieMenuComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private moviesService: MoviesService,
   ) {
+  }
+
+  updateImageUrl(result) {
+    if (result.status == 200) {
+      this.movie.ImageUrl = result.ImageUrl;
+    } else {
+      console.log(result);
+    }
+  }
+
+  getImage() {
+    if (confirm('Afbeelding vervangen voor ' + this.movie.DisplayTitle + '?')) {
+      this.moviesService.addImage(this.movie.imdb_id).subscribe(
+        result => this.updateImageUrl(result)
+      );
+    }
+  }
+
+  play() {
+    this.moviesService.play(this.movie.ID).subscribe();
   }
 
   toImdb() {

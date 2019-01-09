@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Album} from '../classes/Album';
-import {SearchParams} from '../classes/SearchParams';
-import {List} from '../classes/List';
+import {Album} from '../classes/music/Album';
+import {SearchParams} from '../classes/music/SearchParams';
+import {List} from '../classes/music/List';
 
 @Injectable({
   providedIn: 'root'

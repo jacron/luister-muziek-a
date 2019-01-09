@@ -1,11 +1,11 @@
 import {Component, DoCheck, Input, OnInit} from '@angular/core';
-import {Album} from '../../../../classes/Album';
+import {Album} from '../../../../classes/music/Album';
 import {environment} from '../../../../../environments/environment';
 import {MusicService} from '../../../../services/music.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {List} from '../../../../classes/List';
+import {List} from '../../../../classes/music/List';
 import {StorageService} from '../../../../services/storage.service';
-import {Cuesheet} from '../../../../classes/Cuesheet';
+import {Cuesheet} from '../../../../classes/music/Cuesheet';
 import {StateService} from '../../../../services/state.service';
 import {AlbumService} from '../../services/album.service';
 import {SettingsService} from '../../../../services/settings.service';

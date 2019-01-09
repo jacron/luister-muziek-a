@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {SearchParams} from '../../../classes/SearchParams';
+import {SearchParams} from '../../../classes/music/SearchParams';
 import {MusicService} from '../../../services/music.service';
 import {UtilService} from '../../../services/util.service';
 

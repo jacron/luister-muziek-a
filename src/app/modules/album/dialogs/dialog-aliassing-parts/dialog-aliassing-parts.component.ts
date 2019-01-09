@@ -1,13 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Cuesheet} from '../../../../classes/Cuesheet';
-import {CFile} from '../../../../classes/CFile';
+import {Cuesheet} from '../../../../classes/music/Cuesheet';
+import {CFile} from '../../../../classes/music/CFile';
 import {LcsService} from '../../../../services/lcs.service';
 import {MusicService} from '../../../../services/music.service';
-import {Album} from '../../../../classes/Album';
+import {Album} from '../../../../classes/music/Album';
 import {UtilService} from '../../../../services/util.service';
 import {forkJoin} from 'rxjs';
-import {Piece} from '../../../../classes/Piece';
+import {Piece} from '../../../../classes/music/Piece';
 
 @Component({
   selector: 'app-dialog-aliassing-parts',
@@ -76,13 +76,13 @@ export class DialogAliassingPartsComponent implements OnInit {
 
   submit() {
     const q = [];
-    console.log(this.files);
-    console.log(this.pieces);
+    // console.log(this.files);
+    // console.log(this.pieces);
     this.files.forEach((file: CFile) => {
       const foundPiece = this.pieces.find(piece => piece.Name === file.name);
       console.log(foundPiece);
       // console.log(file.proposedname);
-      // q.push(this.musicServce.saveAliasPiece(found.ID, file.proposedname));
+      q.push(this.musicServce.saveAliasPiece(foundPiece.ID, file.proposedname));
     });
     forkJoin(q).subscribe(() => this.afterSuccess());
   }

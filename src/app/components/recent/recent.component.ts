@@ -4,7 +4,7 @@ import {environment} from '../../../environments/environment';
 // import {ServeTaskOptions} from '@angular/cli/commands/serve';
 import {StorageService} from '../../services/storage.service';
 import {ListService} from '../../services/list.service';
-import {SearchParams} from '../../classes/SearchParams';
+import {SearchParams} from '../../classes/music/SearchParams';
 import {StateService} from '../../services/state.service';
 
 @Component({

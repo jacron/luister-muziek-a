@@ -6,13 +6,13 @@ import {
   OnInit, Renderer2,
   SimpleChanges,
 } from '@angular/core';
-import {Album} from '../../classes/Album';
+import {Album} from '../../classes/music/Album';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {MusicService} from '../../services/music.service';
 import {StorageService} from '../../services/storage.service';
-import {List} from '../../classes/List';
-import {Piece} from '../../classes/Piece';
+import {List} from '../../classes/music/List';
+import {Piece} from '../../classes/music/Piece';
 
 @Component({
   selector: 'app-album-list',

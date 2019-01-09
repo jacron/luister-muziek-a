@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {UtilService} from '../../../services/util.service';
-import {Cuesheet} from '../../../classes/Cuesheet';
-import {CFile} from '../../../classes/CFile';
+import {Cuesheet} from '../../../classes/music/Cuesheet';
+import {CFile} from '../../../classes/music/CFile';
 import {LcsService} from '../../../services/lcs.service';
 
 @Injectable()

@@ -1,5 +1,5 @@
-<div class="movie-component" *ngIf="movie">
-  <a class="link"(click)="play()">
+<div class="movie-component row" *ngIf="movie">
+  <div>
     <mat-card
       class="movie-card">
       <mat-card-header class="movie-header">
@@ -8,7 +8,7 @@
         </mat-card-title>
       </mat-card-header>
       <div class="image-container">
-        <img mat-card-image [src]="movie.ImageUrl"
+        <img mat-card-image [src]="movie.ImageUrl" alt="cover missing"
              class="movie-image">
       </div>
       <mat-card-content class="movie-card-content">
@@ -18,6 +18,28 @@
         </a>
       </mat-card-content>
     </mat-card>
-  </a>
+  </div>
+  <div class="details">
+    <div>
+    <button mat-icon-button class="link" (click)="play()">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+    </div>
+    <div>
+      {{ movie.Gemaakt }}
+    </div>
+    <div>{{ movie.Jaar }}</div>
+    <div>
+      <a class="link" (click)="toImdb()">{{ movie.Rating }}</a>
+    </div>
+    <div>
+      <span *ngFor="let speler of spelers; let i = index">
+        <a [routerLink]="['/speler/naam', speler.naam]" class="link">
+        {{ speler.naam }}</a>
+      <span *ngIf="i < spelers.length - 1">, </span>
+      </span>
+    </div>
+    <div>{{ movie.genres }}</div>
+  </div>
 </div>
 

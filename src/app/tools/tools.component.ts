@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicService } from '../services/music.service';
-import {Album} from '../classes/Album';
+import {Album} from '../classes/music/Album';
 import {Router} from '@angular/router';
 
 @Component({

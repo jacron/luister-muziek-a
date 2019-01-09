@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Tag} from '../../classes/Tag';
+import {Tag} from '../../classes/music/Tag';
 import {MusicService} from '../../services/music.service';
 import {StateService} from '../../services/state.service';
 

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Album} from '../../../../classes/Album';
+import {Album} from '../../../../classes/music/Album';
 import {DialogInputComponent} from '../../../album/dialogs/dialog-input/dialog-input.component';
 import {MusicService} from '../../../../services/music.service';
-import {Cuesheet} from '../../../../classes/Cuesheet';
+import {Cuesheet} from '../../../../classes/music/Cuesheet';
 import {MatDialog} from '@angular/material';
 import {DialogAliassingPartsComponent} from '../../../album/dialogs/dialog-aliassing-parts/dialog-aliassing-parts.component';
 

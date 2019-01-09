@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Album} from '../../../../classes/Album';
+import {Album} from '../../../../classes/music/Album';
 import {environment} from '../../../../../environments/environment';
 import {DialogPiecesComponent} from '../../dialogs/dialog-pieces/dialog-pieces.component';
 import {MusicService} from '../../../../services/music.service';

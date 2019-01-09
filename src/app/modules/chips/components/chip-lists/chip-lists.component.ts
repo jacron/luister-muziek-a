@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Album} from '../../../../classes/Album';
-import {Person} from '../../../../classes/Person';
-import {Tag} from '../../../../classes/Tag';
+import {Album} from '../../../../classes/music/Album';
+import {Person} from '../../../../classes/music/Person';
+import {Tag} from '../../../../classes/music/Tag';
 import {Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
 import {DialogPicComponent} from '../../../album/dialogs/dialog-pic/dialog-pic.component';

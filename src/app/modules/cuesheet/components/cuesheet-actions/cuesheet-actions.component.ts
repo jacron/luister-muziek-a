@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Cuesheet} from '../../../../classes/Cuesheet';
+import {Cuesheet} from '../../../../classes/music/Cuesheet';
 import {DialogInputComponent} from '../../../album/dialogs/dialog-input/dialog-input.component';
-import {Album} from '../../../../classes/Album';
+import {Album} from '../../../../classes/music/Album';
 import {MatDialog} from '@angular/material';
 import {MusicService} from '../../../../services/music.service';
 

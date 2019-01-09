@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Choice} from '../../classes/Choice';
+import {Choice} from '../../classes/music/Choice';
 
 @Component({
   selector: 'app-dialog-customize-search',

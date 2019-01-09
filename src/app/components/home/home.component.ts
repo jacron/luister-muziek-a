@@ -2,15 +2,15 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {MusicService} from '../../services/music.service';
-import {Album} from '../../classes/Album';
-import {SearchParams} from '../../classes/SearchParams';
+import {Album} from '../../classes/music/Album';
+import {SearchParams} from '../../classes/music/SearchParams';
 import {ListService} from '../../services/list.service';
 import {StorageService} from '../../services/storage.service';
 import {KeyValue} from '@angular/common';
 import {ChoiceService} from '../../services/choice.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ChipsService} from '../../modules/chips/services/chips-service';
-import {List} from '../../classes/List';
+import {List} from '../../classes/music/List';
 import {StateService} from '../../services/state.service';
 
 @Component({

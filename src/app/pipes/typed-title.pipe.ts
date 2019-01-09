@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Album} from '../classes/Album';
+import {Album} from '../classes/music/Album';
 
 @Pipe({
   name: 'typedTitle'

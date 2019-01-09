@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Movie} from '../../../../classes/movies/Movie';
 import {MoviesService} from '../../services/movies.service';
-import {StoreService} from '../../../../services/store.service';
-import {StorageService} from '../../../../services/storage.service';
 import {StateService} from '../../../../services/state.service';
+import {environment} from '../../../../../environments/environment';
+import {Speler} from '../../../../classes/movies/Speler';
 
 @Component({
   selector: 'app-movie',
@@ -14,6 +14,7 @@ import {StateService} from '../../../../services/state.service';
 export class MovieComponent implements OnInit {
 
   movie: Movie;
+  spelers: Speler[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -23,17 +24,23 @@ export class MovieComponent implements OnInit {
     activatedRoute.params.subscribe(params => this.handleParams(params));
   }
 
-  afterGet(response) {
+  toImdb() {
+    window.open(environment.imdbTitle + this.movie.imdb_id);
+  }
+
+  afterGetMovie(response) {
     this.movie = response.film;
     this.stateService.setTitle(this.movie.Titel);
     document.title = this.movie.Titel;
+    const spelers = this.movie.Spelers.split(',');
+    spelers.forEach(speler => this.spelers.push({naam: speler, ID: -1}));
   }
 
   handleParams(params) {
     if (params) {
       if (params.idmovie) {
         this.moviesService.getMovie(params.idmovie).subscribe(
-          response => this.afterGet(response)
+          response => this.afterGetMovie(response)
         );
       }
     }
