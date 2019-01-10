@@ -28,7 +28,10 @@
     <div>
       {{ movie.Gemaakt }}
     </div>
-    <div>{{ movie.Jaar }}</div>
+    <div>
+      <a [routerLink]="['/movies/jaar', movie.Jaar]" class="link">
+         {{ movie.Jaar }}</a>
+    </div>
     <div>
       <a class="link" (click)="toImdb()">{{ movie.Rating }}</a>
     </div>

@@ -17,6 +17,7 @@ import { MovieMenuComponent } from './components/movie-menu/movie-menu.component
 import { SpelerAutocompleteComponent } from './components/autocomplete/speler-autocomplete/speler-autocomplete.component';
 import { SpelerComponent } from './components/speler/speler.component';
 import { SpelerCardComponent } from './components/speler-card/speler-card.component';
+import { MovieJaarComponent } from './components/movie-jaar/movie-jaar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SpelerCardComponent } from './components/speler-card/speler-card.compon
     SpelerAutocompleteComponent,
     SpelerComponent,
     SpelerCardComponent,
+    MovieJaarComponent,
   ],
   imports: [
     CommonModule,

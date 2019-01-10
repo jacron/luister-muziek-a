@@ -21,6 +21,7 @@ import {MoviesStartComponent} from '../movies/components/movies-start/movies-sta
 import {MovieComponent} from '../movies/components/movie/movie.component';
 import {DirectorComponent} from '../movies/components/director/director.component';
 import {SpelerComponent} from '../movies/components/speler/speler.component';
+import {MovieJaarComponent} from '../movies/components/movie-jaar/movie-jaar.component';
 
 const appRoutes: Routes = [
   {path: '', component: SearchComponent},
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
   {path: 'pop', component: PopComponent},
   {path: 'pop/:id', component: PopListComponent},
   {path: 'movies', component: MoviesStartComponent},
+  {path: 'movies/jaar/:jaar', component: MovieJaarComponent},
   {path: 'movies/:idmovie', component: MovieComponent},
   {path: 'director/:iddirector', component: DirectorComponent},
   {path: 'speler/naam/:naamspeler', component: SpelerComponent},

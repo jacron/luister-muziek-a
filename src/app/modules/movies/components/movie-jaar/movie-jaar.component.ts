@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {Movie} from '../../../../classes/movies/Movie';
 import {ActivatedRoute} from '@angular/router';
 import {MoviesService} from '../../services/movies.service';
 import {StateService} from '../../../../services/state.service';
-import {Speler} from '../../../../classes/movies/Speler';
+import {Movie} from '../../../../classes/movies/Movie';
 
 @Component({
-  selector: 'app-speler',
-  templateUrl: './speler.component.html',
-  styleUrls: ['./speler.component.scss']
+  selector: 'app-movie-jaar',
+  templateUrl: './movie-jaar.component.html',
+  styleUrls: ['./movie-jaar.component.scss']
 })
-export class SpelerComponent implements OnInit {
-  speler: Speler;
+export class MovieJaarComponent implements OnInit {
   movies: Movie[];
   filteredMovies: Movie[];
 
@@ -21,16 +19,6 @@ export class SpelerComponent implements OnInit {
     private stateService: StateService,
   ) {
     activatedRoute.params.subscribe(params => this.handleParams(params));
-  }
-
-  afterGetSpeler(results, naam = '') {
-    this.speler = results.speler;
-    this.movies = this.filteredMovies = results.films;
-    if (this.speler) {
-      this.stateService.setTitle(this.speler.naam);
-    } else {
-      this.stateService.setTitle(naam);
-    }
   }
 
   filterTitle(query) {
@@ -44,17 +32,17 @@ export class SpelerComponent implements OnInit {
     }
   }
 
+  afterGetJaar(results, jaar) {
+    this.stateService.setTitle(jaar);
+    this.movies = this.filteredMovies = results;
+  }
+
   handleParams(params) {
     if (params) {
-      if (params.idspeler) {
-        this.moviesService.getSpelerMovies(params.idspeler).subscribe(
-          results => this.afterGetSpeler(results)
+      if (params.jaar) {
+        this.moviesService.getJaarMovies(params.jaar).subscribe(
+          results => this.afterGetJaar(results, params.jaar)
         );
-      }
-      if (params.naamspeler) {
-        this.moviesService.getSpelerNaamMovies(params.naamspeler).subscribe(
-          results => this.afterGetSpeler(results, params.naamspeler)
-        )
       }
     }
   }

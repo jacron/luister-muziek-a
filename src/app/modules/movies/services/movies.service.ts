@@ -52,6 +52,10 @@ export class MoviesService {
     return this.getJson('/api/speler/naam/' + naam);
   }
 
+  getJaarMovies(jaar) {
+    return this.getJson('/api/films/jaar/' + jaar + '/1');
+  }
+
   // getDirectors() {
   //   return this.getJson('/api/director');
   // }
