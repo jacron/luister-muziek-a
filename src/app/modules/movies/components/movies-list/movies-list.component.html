@@ -15,7 +15,7 @@
             (unwatchChange)="unwatchChange($event)"
             [movie]="movie"></app-movie-menu>
         </mat-card-header>
-        <div class="image-container">
+        <div class="image-container link" (click)="toDetails(movie.ID)">
           <img mat-card-image [src]="movie.ImageUrl"
                alt="missing cover"
                class="movie-image">

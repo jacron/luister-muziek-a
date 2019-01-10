@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Movie} from '../../../../classes/movies/Movie';
 import {Director} from '../../../../classes/movies/Director';
+import {MoviesService} from '../../services/movies.service';
 
 @Component({
   selector: 'app-director-card',
@@ -16,9 +17,10 @@ export class DirectorCardComponent implements OnInit {
 
   constructor(
     private domSanatizer: DomSanitizer,
+    private moviesService: MoviesService,
   ) { }
 
-  getBackgroundImageUrl() {
+  getImageUrl() {
     const imageUrl = this.director.ImageUrl;
     return this.domSanatizer.bypassSecurityTrustResourceUrl(imageUrl);
   }
@@ -30,6 +32,18 @@ export class DirectorCardComponent implements OnInit {
   resetSearch() {
     this.query = null;
     this.filterTitle.emit(null);
+  }
+
+  afterGetImage(results) {
+    this.director.ImageUrl = results;
+  }
+
+  getImage() {
+    if (confirm('Afbeelding ophalen?')) {
+      this.moviesService.addDirectorImage(this.director.imdb_id).subscribe(
+        results => this.afterGetImage(results)
+      )
+    }
   }
 
   ngOnInit() {

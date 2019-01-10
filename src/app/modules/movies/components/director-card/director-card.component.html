@@ -1,8 +1,10 @@
 <div class="director-card">
   <mat-card *ngIf="director" class="director-mat-card">
     <mat-card-header>
-      <div mat-card-avatar class="director-card-avatar">
-        <img [src]="getBackgroundImageUrl()">
+      <div mat-card-avatar
+           (click)="getImage()"
+           class="director-card-avatar">
+        <img [src]="getImageUrl()">
       </div>
       <mat-card-title>
         {{ director.Voornaam}} {{ director.Achternaam }}

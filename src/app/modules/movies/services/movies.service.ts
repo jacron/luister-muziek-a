@@ -92,12 +92,16 @@ export class MoviesService {
     );
   }
 
+  addDirectorImage(imdb_id) {
+    return this.postForm('/api/director/image/add', { imdb_id });
+  }
+
   addImage(imdb_id) {
     return this.postForm('/api/image/add', { imdb_id });
   }
 
   unwatch(id) {
-    return this.postForm('/api/film/unwatch', {id});
+    return this.postForm('/api/film/unwatch', { id });
   }
 
 }

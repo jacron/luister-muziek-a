@@ -44,10 +44,6 @@ export class MovieMenuComponent implements OnInit {
     window.open(environment.imdbTitle + this.movie.imdb_id);
   }
 
-  toDetails() {
-    this.router.navigate(['/movies', this.movie.ID]).then();
-  }
-
   setUnwatch() {
     this.unwatchChange.emit(this.movie.ID);
   }

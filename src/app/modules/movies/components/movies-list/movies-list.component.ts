@@ -26,6 +26,10 @@ export class MoviesListComponent implements OnInit {
     }
   }
 
+  toDetails(id) {
+    this.router.navigate(['/movies', id]).then();
+  }
+
   unwatchChange(id) {
     // console.log(id);
     this.moviesService.unwatch(id).subscribe(result =>
