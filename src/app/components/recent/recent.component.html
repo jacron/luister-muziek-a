@@ -1,30 +1,32 @@
 <mat-list class="app-recent">
   <div class="recently-played row" *ngFor="let item of items">
-    <div class="col">
+    <div class="col first-col">
       <div>
         <div class="img-container">
-          <a [routerLink]="['/album', item.Album.ID, item.Piece.ID]">
             <img
-              src="{{ imgUrl }}{{ item.Album.ID }}/album/-1/100/"
+              [src]="imgUrl + item.Album.ID + '/album/-1/100/'"
               class="thumb"
+              alt="no cover"
             >
-          </a>
         </div>
         <div>
           {{ item.Album.Title }}
         </div>
       </div>
     </div>
-    <div class="col first-col">
+    <div class="col">
       <div class="piece-name" mat-line="">
         <mat-icon
           [class.played]="item.played"
           [class.invalid]="item.Invalid"
           class="play"
-          waves-light waves-effect mdbRippleRadius
+          waves-light waves-effect
           (click)="play(item.Piece.ID)">
           play_circle_filled</mat-icon>
-        <span>{{ item.Piece.Name }}</span>
+        <a class="link"
+          [routerLink]="['/album', item.Album.ID, item.Piece.ID]">
+          <span>{{ item.Piece.Name }}</span>
+        </a>
       </div>
       <div>
         {{ item.Piece.LastPlayed}}<br>

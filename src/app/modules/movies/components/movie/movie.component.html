@@ -20,6 +20,15 @@
     </mat-card>
   </div>
   <div class="details">
+    <button mat-menu-item
+            (click)="toImdb()"
+    >
+      <mat-icon class="movie-control imdb"
+                waves-light waves-effect
+      >movie
+      </mat-icon>
+      <span>IMDb</span>
+    </button>
     <div>
     <button mat-icon-button class="link" (click)="play()">
       <mat-icon>play_arrow</mat-icon>
@@ -34,6 +43,19 @@
     </div>
     <div>
       <a class="link" (click)="toImdb()">{{ movie.Rating }}</a>
+    </div>
+    <div><button mat-button (click)="refetch()">
+      spelers ophalen
+    </button></div>
+    <div>
+      <span *ngFor="let actor of actors">
+        <a [routerLink]="['/speler/naam', actor.name]" class="link">
+          <div class="avatar">
+            <img [src]="getImageUrl(actor.imageurl)" alt="no cover">
+          </div>
+          {{ actor.name }}
+        </a>
+      </span>
     </div>
     <div>
       <span *ngFor="let speler of spelers; let i = index">

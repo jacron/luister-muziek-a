@@ -191,6 +191,15 @@ export class DialogPiecesComponent implements OnInit {
     );
   }
 
+  untidy() {
+    this.data.pieces.forEach((piece: Piece) => {
+        if (piece.marked) {
+          piece.DisplayName = piece.Name;
+        }
+      }
+    );
+  }
+
   tidy() {
     const markedPieces = this.data.pieces.filter(
       (piece: Piece) => piece.marked

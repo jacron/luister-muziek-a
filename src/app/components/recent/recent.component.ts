@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MusicService} from '../../services/music.service';
 import {environment} from '../../../environments/environment';
-// import {ServeTaskOptions} from '@angular/cli/commands/serve';
 import {StorageService} from '../../services/storage.service';
 import {ListService} from '../../services/list.service';
-import {SearchParams} from '../../classes/music/SearchParams';
 import {StateService} from '../../services/state.service';
+import {RecentItem} from '../../classes/music/RecentItem';
 
 @Component({
   selector: 'app-recent',
@@ -13,7 +12,7 @@ import {StateService} from '../../services/state.service';
   styleUrls: ['./recent.component.scss']
 })
 export class RecentComponent implements OnInit {
-  items;
+  items: RecentItem[];
   imgUrl = environment.apiServer + '/image/';
 
   constructor(
@@ -23,7 +22,7 @@ export class RecentComponent implements OnInit {
     private listService: ListService,
   ) { }
 
-  getItemByPieceId(id) {
+  getItemByPieceId(id): RecentItem {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
       if (item.Piece.ID === id) {

@@ -3,7 +3,7 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  OnInit, Renderer2,
+  OnInit, // Renderer2,
   SimpleChanges,
 } from '@angular/core';
 import {Album} from '../../classes/music/Album';
@@ -27,15 +27,15 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   lazyImages: any;
   lazyAttribute = 'data-src';
   filteredAlbums: Album[];
-  globalListenScrollFunc: Function;
-  globalListenTouchmoveFunc: Function;
-  globalListenResizeFunc: Function;
+  // globalListenScrollFunc: Function;
+  // globalListenTouchmoveFunc: Function;
+  // globalListenResizeFunc: Function;
 
   constructor(
     private router: Router,
     private musicService: MusicService,
     private storage: StorageService,
-    private renderer: Renderer2,
+    // private renderer: Renderer2,
   ) { }
 
   testInAlbum(album: Album, q) {
@@ -94,21 +94,21 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  augment_album(album: Album) {
-    album.ID = +album.ID;
-    for (let i = 0; i < this.albums.length; i++) {
-      const a = this.albums[i];
-      if (this.albums[i].ID === album.ID) {
-        a.album_performers = album.album_performers;
-        a.album_componisten = album.album_componisten;
-        a.album_tags = album.album_tags;
-        a.pieces = album.pieces;
-        a.cuesheets = album.cuesheets;
-        a.album_instrument = album.album_instrument;
-        break;
-      }
-    }
-  }
+  // augment_album(album: Album) {
+  //   album.ID = +album.ID;
+  //   for (let i = 0; i < this.albums.length; i++) {
+  //     const a = this.albums[i];
+  //     if (this.albums[i].ID === album.ID) {
+  //       a.album_performers = album.album_performers;
+  //       a.album_componisten = album.album_componisten;
+  //       a.album_tags = album.album_tags;
+  //       a.pieces = album.pieces;
+  //       a.cuesheets = album.cuesheets;
+  //       a.album_instrument = album.album_instrument;
+  //       break;
+  //     }
+  //   }
+  // }
 
   elementInViewport(el) {
     const rect = el.getBoundingClientRect(),

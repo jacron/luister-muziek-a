@@ -98,6 +98,10 @@
             [disabled]="piecesMarked() < 1"
             (click)="tidy()"
     >Tidy</button>
+    <button mat-raised-button
+            [disabled]="piecesMarked() < 1"
+            (click)="untidy()"
+    >Untidy</button>
 
     <button mat-raised-button
             (click)="leftTrim()"

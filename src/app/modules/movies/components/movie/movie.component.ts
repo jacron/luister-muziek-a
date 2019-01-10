@@ -5,6 +5,7 @@ import {MoviesService} from '../../services/movies.service';
 import {StateService} from '../../../../services/state.service';
 import {environment} from '../../../../../environments/environment';
 import {Speler} from '../../../../classes/movies/Speler';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-movie',
@@ -15,11 +16,13 @@ export class MovieComponent implements OnInit {
 
   movie: Movie;
   spelers: Speler[] = [];
+  actors;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private moviesService: MoviesService,
     private stateService: StateService,
+    private domSanatizer: DomSanitizer,
   ) {
     activatedRoute.params.subscribe(params => this.handleParams(params));
   }
@@ -44,6 +47,22 @@ export class MovieComponent implements OnInit {
         );
       }
     }
+  }
+
+  getImageUrl(imageUrl) {
+    return this.domSanatizer.bypassSecurityTrustResourceUrl(imageUrl);
+  }
+
+  afterRefetch(results) {
+    if (results.movie) {
+      this.actors = results.movie.actor_array;
+    }
+  }
+
+  refetch() {
+    this.moviesService.refetchMovie(this.movie.imdb_id).subscribe(
+      response => this.afterRefetch(response)
+    )
   }
 
   play() {

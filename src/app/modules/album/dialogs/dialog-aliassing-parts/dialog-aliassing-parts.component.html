@@ -14,8 +14,11 @@
   <mat-dialog-actions>
     <button
       *ngIf="files.length > 1"
-      matTooltip="Alt-A"
-      mat-button (click)="makeAliasses()">Auto</button>
+      matTooltip="Alt-T"
+      mat-button (click)="makeAliasses()">Tidy</button>
+    <button
+      *ngIf="files.length > 1"
+      mat-button (click)="unmakeAliasses()">Untidy</button>
     <button
       mat-button
       (click)="leftTrim()">Ltrim</button>

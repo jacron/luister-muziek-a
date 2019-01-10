@@ -31,9 +31,9 @@ export class MoviesService {
     return this.getJson('/api/film/' + id);
   }
 
-  // getSpelers() {
-  //   return this.getJson('/api/speler');
-  // }
+  refetchMovie(imdb_id) {
+    return this.getJson('/api/film/new/' + imdb_id);
+  }
 
   searchSpelers(query) {
     return this.getJson('/api/search/speler/' + query);
@@ -56,10 +56,6 @@ export class MoviesService {
     return this.getJson('/api/films/jaar/' + jaar + '/1');
   }
 
-  // getDirectors() {
-  //   return this.getJson('/api/director');
-  // }
-
   getDirectorMovies(id) {
     return this.getJson('/api/director/' + id);
   }
@@ -74,8 +70,8 @@ export class MoviesService {
       .pipe(map(response => response['films']));
   }
 
-  getRecentlyAcquiredMovies(n) {
-    return this.getJson('/api/films/filter/recentlymade/1/' + n)
+  getRecentlyAcquiredMovies(pageNr, n) {
+    return this.getJson('/api/films/filter/recentlymade/' + pageNr + '/' + n)
       .pipe(map(response => response['films']));
   }
 

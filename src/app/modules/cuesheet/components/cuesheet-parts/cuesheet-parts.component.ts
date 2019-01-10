@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Album} from '../../../../classes/music/Album';
 import {CuesheetService} from '../../services/cuesheet.service';
 import {Cuesheet} from '../../../../classes/music/Cuesheet';
@@ -15,6 +15,7 @@ import {UtilService} from '../../../../services/util.service';
 export class CuesheetPartsComponent implements OnInit {
   @Input() album: Album;
   @Input() cuesheet: Cuesheet;
+  @Input() idpiece: number;
 
   tracknames: string[];
   files: CFile[];
@@ -54,7 +55,7 @@ export class CuesheetPartsComponent implements OnInit {
 
   play(file: CFile) {
     this.musicService.playByName(this.album.ID, file.name).subscribe(
-      (response) => this.onPlayed(file)
+      () => this.onPlayed(file)
     );
   }
 

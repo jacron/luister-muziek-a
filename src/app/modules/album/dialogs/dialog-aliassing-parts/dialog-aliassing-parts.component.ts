@@ -48,13 +48,19 @@ export class DialogAliassingPartsComponent implements OnInit {
       file => file.name
     ));
     this.files.forEach(
-      file => file.proposedname = this.tidyName(file.name.substr(lcsFilesLength)));
+      file => file.proposedname =
+        this.tidyName(file.name.substr(lcsFilesLength)));
+  }
+
+  unmakeAliasses() {
+    this.files.forEach(
+      file => file.proposedname = file.name);
   }
 
   onKeyup(e) {
     // console.log(e);
     if (e.altKey) {
-      if (e.code == 'KeyA') {
+      if (e.code == 'KeyT') {
         this.makeAliasses();
         e.stopPropagation();
       }

@@ -22,6 +22,7 @@
         *ngFor="let file of files"
         (click)="play(file)"
         [class.file-played]="file.played"
+        [class.selected]="file.ID == idpiece"
       >
         <span mat-line>{{ display(file) }}</span>
       </div>
