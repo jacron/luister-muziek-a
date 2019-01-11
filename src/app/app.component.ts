@@ -3,7 +3,7 @@ import {MusicService} from './services/music.service';
 import {StateService} from './services/state.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
 
-const links = [
+const musiclinks = [
   {
     href: 'home',
     label: 'Home',
@@ -50,11 +50,14 @@ const links = [
     label: 'Codes',
     icon: 'code'
   },
+];
+const movielinks = [
   {
     href: 'movies',
     label: 'Movies',
     icon: 'movie'
   },
+
 ];
 
 const darkKey = 'mzkDarkKey';
@@ -70,17 +73,32 @@ export class AppComponent implements OnInit {
 
   @ViewChild('maindiv') maindiv: ElementRef;
 
-  appTitle = 'music-client';
+  appTitle = 'media-client';
   title = '';
-  links;
+  musiclinks;
+  movielinks;
   alternated = false;
-  debugMessage = '';
 
   constructor(
     private musicService: MusicService,
     private stateService: StateService,
     private overlayContainer: OverlayContainer
-  ) {
+  ) {}
+
+  toggleMusicMenu() {
+    if (this.musiclinks.length) {
+      this.musiclinks = [];
+    } else {
+      this.musiclinks = musiclinks;
+    }
+  }
+
+  toggleMovieMenu() {
+    if (this.movielinks.length) {
+      this.movielinks = [];
+    } else {
+      this.movielinks = movielinks;
+    }
   }
 
   play(cmd) {
@@ -122,7 +140,8 @@ export class AppComponent implements OnInit {
     // if (!window.localStorage) {
     //   this.debugMessage = 'no window.localstorage';
     // }
-    this.links = links;
+    this.musiclinks = musiclinks;
+    this.movielinks = movielinks;
     this.stateService.currentTitle.subscribe(title => this.title = title);
     if (localStorage.getItem(darkKey) == 'on') {
       this.alternated = true;
