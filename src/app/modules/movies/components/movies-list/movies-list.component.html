@@ -29,5 +29,8 @@
         </mat-card-content>
       </mat-card>
     </div>
+    <mat-card class="movie-card" *ngIf="more">
+      <span class="link" (click)="toMore()">more . . .</span>
+    </mat-card>
   </div>
 </div>

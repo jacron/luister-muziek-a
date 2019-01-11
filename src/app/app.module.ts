@@ -45,6 +45,7 @@ import {PieceService} from './modules/album/services/piece.service';
 import {CuesheetService} from './modules/cuesheet/services/cuesheet.service';
 import {ChipsModule} from './modules/chips/chips.module';
 import {MoviesModule} from './modules/movies/movies.module';
+import {MovieRoutingModule} from './modules/movie-routing/movie-routing.module';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {MoviesModule} from './modules/movies/movies.module';
     FormsModule,  // needed for ngModel
     HttpClientModule,
     AppRoutingModule,
+    MovieRoutingModule,
     MatModule,
     ReactiveFormsModule,
     AlbumModule,

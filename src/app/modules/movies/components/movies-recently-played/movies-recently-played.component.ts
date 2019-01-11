@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Movie} from '../../../../classes/movies/Movie';
 import {MoviesService} from '../../services/movies.service';
 
@@ -8,6 +8,10 @@ import {MoviesService} from '../../services/movies.service';
   styleUrls: ['./movies-recently-played.component.scss']
 })
 export class MoviesRecentlyPlayedComponent implements OnInit {
+  @Input() wrap: boolean;
+  @Input() more: boolean;
+  @Input() count: number;
+
   movies: Movie[];
 
   constructor(
@@ -15,11 +19,14 @@ export class MoviesRecentlyPlayedComponent implements OnInit {
   ) { }
 
   getMovies() {
-    this.moviesService.getRecentlyPlayedMovies(20).subscribe(
+    this.moviesService.getRecentlyPlayedMovies(this.count).subscribe(
       (films: Movie[]) => this.movies = films
     )
   }
   ngOnInit() {
+    if (!this.count) {
+      this.count = 20;
+    }
     this.getMovies();
   }
 

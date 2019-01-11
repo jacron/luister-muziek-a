@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Movie} from '../../../../classes/movies/Movie';
 import {MoviesService} from '../../services/movies.service';
 
@@ -8,6 +8,10 @@ import {MoviesService} from '../../services/movies.service';
   styleUrls: ['./movies-recently-seen.component.scss']
 })
 export class MoviesRecentlySeenComponent implements OnInit {
+  @Input() wrap: boolean;
+  @Input() more: boolean;
+  @Input() count: number;
+
   movies: Movie[];
 
   constructor(
@@ -15,7 +19,7 @@ export class MoviesRecentlySeenComponent implements OnInit {
   ) { }
 
   getMovies() {
-    this.moviesService.getRecentlySeenMovies(10).subscribe(
+    this.moviesService.getRecentlySeenMovies(this.count).subscribe(
       (films: Movie[]) => this.movies = films
     )
   }

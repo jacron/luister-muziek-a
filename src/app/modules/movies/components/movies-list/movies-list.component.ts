@@ -15,6 +15,7 @@ export class MoviesListComponent implements OnInit {
   @Input() hideDirector: boolean;
   @Input() unwatch: boolean;
   @Input() wrap: string;
+  @Input() more: string;
   globalListenScrollFunc: Function;
   globalListenTouchmoveFunc: Function;
   globalListenResizeFunc: Function;
@@ -37,6 +38,10 @@ export class MoviesListComponent implements OnInit {
 
   toDetails(id) {
     this.router.navigate(['/movies', id]).then();
+  }
+
+  toMore() {
+    this.router.navigateByUrl(this.more).then();
   }
 
   unwatchChange(id) {

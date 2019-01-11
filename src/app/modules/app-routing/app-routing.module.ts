@@ -44,13 +44,7 @@ const appRoutes: Routes = [
   {path: 'recent', component: RecentComponent},
   {path: 'pop', component: PopComponent},
   {path: 'pop/:id', component: PopListComponent},
-  {path: 'movies', component: MoviesStartComponent},
-  {path: 'movies/jaar/:jaar', component: MovieJaarComponent},
-  {path: 'movies/:idmovie', component: MovieComponent},
-  {path: 'director/:iddirector', component: DirectorComponent},
-  {path: 'speler/naam/:naamspeler', component: SpelerComponent},
-  {path: 'speler/:idspeler', component: SpelerComponent},
-  {path: '**', component: PageNotFoundComponent}
+  // {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
