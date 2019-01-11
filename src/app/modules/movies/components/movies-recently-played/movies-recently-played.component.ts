@@ -16,6 +16,7 @@ export class MoviesRecentlyPlayedComponent implements OnInit, OnDestroy {
   movies: Movie[];
   globalListenScrollFunc: Function;
   pageNr = 1;
+  delta = 1860;  // inductief berekend
 
   constructor(
     private moviesService: MoviesService,
@@ -39,7 +40,7 @@ export class MoviesRecentlyPlayedComponent implements OnInit, OnDestroy {
 
   handleScrollable(e) {
     const el = e.srcElement.scrollingElement;
-    if (el.scrollTop > el.scrollHeight - 860) {
+    if (el.scrollTop > el.scrollHeight - this.delta) {
       this.nextPage();
     }
   }
