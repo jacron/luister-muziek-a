@@ -17,6 +17,7 @@
         </mat-card-header>
         <div class="image-container link" (click)="toDetails(movie.ID)">
           <img mat-card-image [src]="movie.ImageUrl"
+               (error)="movie.ImageUrl='assets/not-found.png'"
                alt="missing cover"
                class="movie-image">
         </div>

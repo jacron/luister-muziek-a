@@ -60,13 +60,13 @@ export class MoviesService {
     return this.getJson('/api/director/' + id);
   }
 
-  getRecentlyPlayedMovies(n) {
-    return this.getJson('/api/films/filter/recentlyplayed/1/' + n)
+  getRecentlyPlayedMovies(pageNr, n) {
+    return this.getJson('/api/films/filter/recentlyplayed/' + pageNr + '/' + n)
       .pipe(map(response => response['films']));
   }
 
-  getRecentlySeenMovies(n) {
-    return this.getJson('/api/films/filter/recentlyseen/1/' + n)
+  getRecentlySeenMovies(pageNr, n) {
+    return this.getJson('/api/films/filter/recentlyseen/' + pageNr + '/' + n)
       .pipe(map(response => response['films']));
   }
 

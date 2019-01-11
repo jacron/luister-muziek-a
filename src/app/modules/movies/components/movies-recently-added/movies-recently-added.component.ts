@@ -14,8 +14,8 @@ export class MoviesRecentlyAddedComponent implements OnInit, OnDestroy {
 
   movies: Movie[];
   globalListenScrollFunc: Function;
-  globalListenTouchmoveFunc: Function;
-  globalListenResizeFunc: Function;
+  // globalListenTouchmoveFunc: Function;
+  // globalListenResizeFunc: Function;
   pageNr = 1;
 
   constructor(
@@ -30,7 +30,7 @@ export class MoviesRecentlyAddedComponent implements OnInit, OnDestroy {
   }
 
   nextPage() {
-    console.log('in next page!');
+    // console.log('in next page!');
     this.pageNr++;
     this.moviesService.getRecentlyAcquiredMovies(this.pageNr, this.count).subscribe(
       (films: Movie[]) => this.movies = this.movies.concat(films)
@@ -47,8 +47,8 @@ export class MoviesRecentlyAddedComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (!this.more) {
       this.globalListenScrollFunc();
-      this.globalListenTouchmoveFunc();
-      this.globalListenResizeFunc();
+      // this.globalListenTouchmoveFunc();
+      // this.globalListenResizeFunc();
     }
   }
 
@@ -62,14 +62,14 @@ export class MoviesRecentlyAddedComponent implements OnInit, OnDestroy {
         'document', 'scroll', (event) =>
           this.handleScrollable(event)
       );
-      this.globalListenTouchmoveFunc = this.renderer.listen(
-        'document', 'touchmove', (event) =>
-          this.handleScrollable(event)
-      );
-      this.globalListenResizeFunc = this.renderer.listen(
-        'window', 'resize', (event) =>
-          this.handleScrollable(event)
-      );
+      // this.globalListenTouchmoveFunc = this.renderer.listen(
+      //   'document', 'touchmove', (event) =>
+      //     this.handleScrollable(event)
+      // );
+      // this.globalListenResizeFunc = this.renderer.listen(
+      //   'window', 'resize', (event) =>
+      //     this.handleScrollable(event)
+      // );
     }
   }
 

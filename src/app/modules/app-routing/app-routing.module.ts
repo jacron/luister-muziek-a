@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ToolsComponent} from '../../tools/tools.component';
-import {PageNotFoundComponent} from '../../page-not-found/page-not-found.component';
 import {RouterModule, Routes} from '@angular/router';
 import {SearchComponent} from '../../components/search/search.component';
 import {AlbumDetailsComponent} from '../album/components/album-details/album-details.component';
@@ -17,11 +16,6 @@ import {RecentComponent} from '../../components/recent/recent.component';
 import {PopComponent} from '../../components/pop/pop.component';
 import {PopListComponent} from '../../components/pop-list/pop-list.component';
 import {HomeComponent} from '../../components/home/home.component';
-import {MoviesStartComponent} from '../movies/components/movies-start/movies-start.component';
-import {MovieComponent} from '../movies/components/movie/movie.component';
-import {DirectorComponent} from '../movies/components/director/director.component';
-import {SpelerComponent} from '../movies/components/speler/speler.component';
-import {MovieJaarComponent} from '../movies/components/movie-jaar/movie-jaar.component';
 
 const appRoutes: Routes = [
   {path: '', component: SearchComponent},
