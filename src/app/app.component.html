@@ -25,26 +25,11 @@
             <mat-icon>close</mat-icon>
           </button>
         </h2>
-        <button mat-button
-          (click)="toggleMusicMenu()">Music</button>
-        <a routerLinkActive="selected"
-           (click)="sidenav.close()"
-           [routerLink]="link.href"
-           *ngFor="let link of musiclinks">
-          <mat-icon [style.color]="link.color">
-            {{ link.icon }}</mat-icon>
-          {{ link.label }}
-        </a>
-        <button mat-button
-                (click)="toggleMovieMenu()">Movie</button>
-        <a routerLinkActive="selected"
-           (click)="sidenav.close()"
-           [routerLink]="link.href"
-           *ngFor="let link of movielinks">
-          <mat-icon [style.color]="link.color">
-            {{ link.icon }}</mat-icon>
-          {{ link.label }}
-        </a>
+
+        <app-menu-music [sidenav]="sidenav"></app-menu-music>
+        <app-menu-videos [sidenav]="sidenav"></app-menu-videos>
+        <app-menu-movies [sidenav]="sidenav"></app-menu-movies>
+
       </nav>
     </mat-sidenav>
 

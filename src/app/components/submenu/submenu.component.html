@@ -1,0 +1,15 @@
+<button mat-button
+        (click)="toggleMenu()">
+  <span class="header">{{ header }}</span>
+  <mat-icon>{{ expandMode }}</mat-icon>
+</button>
+<div *ngIf="menuExpanded" class="menu">
+  <a routerLinkActive="selected"
+     (click)="sidenav.close()"
+     [routerLink]="link.href"
+     *ngFor="let link of links">
+    <mat-icon [style.color]="link.color">
+      {{ link.icon }}</mat-icon>
+    {{ link.label }}
+  </a>
+</div>

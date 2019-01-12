@@ -17,6 +17,10 @@ export class MusicService {
       responseType: 'json'});
   }
 
+  getVideoAlbums(genre) {
+    return this.getJson('/videos/' + genre);
+  }
+
   getComposers(mode) {
     // mode = 'dropdown' || 'typeahead' || 'startletter'
     return this.getJson('/composers/mode/' + mode);

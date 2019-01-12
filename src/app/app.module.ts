@@ -46,6 +46,12 @@ import {CuesheetService} from './modules/cuesheet/services/cuesheet.service';
 import {ChipsModule} from './modules/chips/chips.module';
 import {MoviesModule} from './modules/movies/movies.module';
 import {MovieRoutingModule} from './modules/movie-routing/movie-routing.module';
+import { MenuMusicComponent } from './components/menu-music/menu-music.component';
+import { MenuMoviesComponent } from './components/menu-movies/menu-movies.component';
+import { MenuVideosComponent } from './components/menu-videos/menu-videos.component';
+import { VideosKlassiekComponent } from './components/videos-klassiek/videos-klassiek.component';
+import { VideosPopComponent } from './components/videos-pop/videos-pop.component';
+import { SubmenuComponent } from './components/submenu/submenu.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +83,12 @@ import {MovieRoutingModule} from './modules/movie-routing/movie-routing.module';
     PopListComponent,
     HomeComponent,
     SimpleChipListsComponent,
+    MenuMusicComponent,
+    MenuMoviesComponent,
+    MenuVideosComponent,
+    VideosKlassiekComponent,
+    VideosPopComponent,
+    SubmenuComponent,
   ],
   imports: [
     BrowserModule,
