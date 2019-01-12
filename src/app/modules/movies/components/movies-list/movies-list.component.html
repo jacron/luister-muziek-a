@@ -1,3 +1,5 @@
+<mat-spinner *ngIf="!movies">
+</mat-spinner>
 <div class="movies-list" *ngIf="movies">
   <div [class.wrapper]="wrap != 'nowrap'"
        [class.nowrapper]="wrap == 'nowrap'">

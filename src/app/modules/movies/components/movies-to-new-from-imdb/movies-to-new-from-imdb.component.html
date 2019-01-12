@@ -1,0 +1,12 @@
+<div class="input-container">
+  <mat-form-field class="input-field">
+    <input matInput #q
+           (keyup.enter)="onEnter()"
+           [(ngModel)]="query"
+           (ngModelChange)="onChange($event)"
+           placeholder="Nieuwe film"
+           (click)="q.select()"
+           (paste)="onPaste($event)">
+  </mat-form-field>
+  <a class="link" (click)="toNew()">{{ tt }}</a>
+</div>

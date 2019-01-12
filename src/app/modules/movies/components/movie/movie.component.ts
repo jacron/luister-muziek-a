@@ -17,6 +17,7 @@ export class MovieComponent implements OnInit {
   movie: Movie;
   spelers: Speler[] = [];
   actors;
+  finderOpened = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -37,6 +38,12 @@ export class MovieComponent implements OnInit {
     document.title = this.movie.Titel;
     const spelers = this.movie.Spelers.split(',');
     spelers.forEach(speler => this.spelers.push({naam: speler, ID: -1}));
+  }
+
+  toFinder() {
+    this.moviesService.openFinder(this.movie.ID).subscribe(
+      () => this.finderOpened = true
+    )
   }
 
   handleParams(params) {
@@ -60,7 +67,7 @@ export class MovieComponent implements OnInit {
   }
 
   refetch() {
-    this.moviesService.refetchMovie(this.movie.imdb_id).subscribe(
+    this.moviesService.getNewMovie(this.movie.imdb_id).subscribe(
       response => this.afterRefetch(response)
     )
   }

@@ -31,7 +31,11 @@ export class MoviesService {
     return this.getJson('/api/film/' + id);
   }
 
-  refetchMovie(imdb_id) {
+  getMovieByImdbId(id) {
+    return this.getJson('/api/imdb/movie/' + id);
+  }
+
+  getNewMovie(imdb_id) {
     return this.getJson('/api/film/new/' + imdb_id);
   }
 
@@ -79,6 +83,10 @@ export class MoviesService {
     return this.getJson('/api/film/play/' + id);
   }
 
+  openFinder(id) {
+    return this.getJson('/api/film/folder/' + id);
+  }
+
   /* POST */
   postForm(cmd, params) {
     const headers = new HttpHeaders();
@@ -99,5 +107,11 @@ export class MoviesService {
   unwatch(id) {
     return this.postForm('/api/film/unwatch', { id });
   }
+
+  saveNew(imdb_id) {
+    return this.postForm('/api/film/save/imdb', { imdb_id} );
+  }
+
+
 
 }

@@ -27,5 +27,6 @@ export const environment = {
   amazonUrl: 'https://www.amazon.com/dp/',
   musicbrainz: 'https://musicbrainz.org/otherlookup/freedbid?other-lookup.freedbid=',
   imdbTitle: 'https://www.imdb.com/title/',
+  imdbTitleFind: 'https://www.imdb.com/find?s=tt&q=',
   production: false
 };

@@ -22,9 +22,9 @@ h2 mat-icon {
   top: -3px;
 }
 nav a.selected {
-  //box-shadow: inset 0 -8px 0 0 #588;
-  color: #333;
-  font-weight: bold;
+  box-shadow: inset 0 -8px 0 0 #588;
+  //color: #333;
+  //font-weight: bold;
 }
 mat-sidenav {
   min-width: 200px;

@@ -19,13 +19,16 @@ export class UtilService {
     return true;
   }
 
-  // endswith(s, t) {
-  //
-  // }
+  isValidImdbTitleId(tt) {
+    //e.g. tt0052520
+    return tt.startsWith('tt') && tt.length == 9;
+  }
 
-  // cloneObject(obj) {
-  //   return JSON.parse(JSON.stringify(obj));
-  // }
+  parseTitleUrl(url) {
+    if (!url) return url;
+    const parts = url.split('/');
+    return parts.find(part => part.startsWith('tt'));
+  }
 
   stripExtension(s) {
     const pos = s.lastIndexOf('.');

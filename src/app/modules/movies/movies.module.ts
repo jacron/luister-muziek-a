@@ -18,6 +18,8 @@ import { SpelerAutocompleteComponent } from './components/autocomplete/speler-au
 import { SpelerComponent } from './components/speler/speler.component';
 import { SpelerCardComponent } from './components/speler-card/speler-card.component';
 import { MovieJaarComponent } from './components/movie-jaar/movie-jaar.component';
+import { MoviesToNewFromImdbComponent } from './components/movies-to-new-from-imdb/movies-to-new-from-imdb.component';
+import { MoviesNewFromImdbComponent } from './components/movies-new-from-imdb/movies-new-from-imdb.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { MovieJaarComponent } from './components/movie-jaar/movie-jaar.component
     SpelerComponent,
     SpelerCardComponent,
     MovieJaarComponent,
+    MoviesToNewFromImdbComponent,
+    MoviesNewFromImdbComponent,
   ],
   imports: [
     CommonModule,

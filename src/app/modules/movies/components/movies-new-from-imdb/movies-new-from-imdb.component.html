@@ -1,0 +1,15 @@
+<mat-spinner *ngIf="!film">
+</mat-spinner>
+<div *ngIf="film">
+  <img [src]="film?.ImageUrl" alt="cover">
+  <h3>{{ title }}</h3>
+  <div>{{ naamRegisseur }}</div>
+  <div>
+    <a class="link" (click)="toImdb()">IMDb ({{ rating }})</a>
+  </div>
+  <button mat-button (click)="submit()" *ngIf="!exists">
+    Opslaan
+  </button>
+  <a [routerLink]="['/movies', film.ID]" *ngIf="exists">
+    {{ film.ID }}</a>
+</div>

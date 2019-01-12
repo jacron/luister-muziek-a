@@ -9,6 +9,7 @@ import {SpelerComponent} from '../movies/components/speler/speler.component';
 import {MoviesRecentlyPlayedComponent} from '../movies/components/movies-recently-played/movies-recently-played.component';
 import {MoviesRecentlyAddedComponent} from '../movies/components/movies-recently-added/movies-recently-added.component';
 import {MoviesRecentlySeenComponent} from '../movies/components/movies-recently-seen/movies-recently-seen.component';
+import {MoviesNewFromImdbComponent} from '../movies/components/movies-new-from-imdb/movies-new-from-imdb.component';
 
 const routes: Routes = [
   {path: 'movies', component: MoviesStartComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'recentlyplayed', component: MoviesRecentlyPlayedComponent},
   {path: 'recentlyadded', component: MoviesRecentlyAddedComponent},
   {path: 'recentlyseen', component: MoviesRecentlySeenComponent},
+  {path: 'movies/new/:tt', component: MoviesNewFromImdbComponent},
 
 ];
 
