@@ -11,7 +11,9 @@
             </mat-card-title>
           </mat-card-header>
           <div class="image-container">
-            <img [src]="imgUrl + album.ID + '/album/212/-1/'"
+            <img [src]="albumImage(album.ID)"
+                 default="assets/not-found.png"
+                 alt="cover"
                  class="album-image">
           </div>
         </mat-card>

@@ -10,12 +10,15 @@
       </app-album-header>
       <div class="wrapper">
         <div class="thumb-container">
-          <img src="{{ imgUrl }}{{ album.ID }}/album/-1/{{ coverSize }}"
+          <img [src]="albumImage(album.ID)"
                (click)="openPic('front')"
+               alt="cover"
+               default="assets/not-found.png"
                class="thumb">
           <img *ngIf="album.album_back_image"
-               src="{{ imgBackUrl }}{{ album.ID }}/album/100/-1"
+               [src]="albumBackImage(album.ID)"
                (click)="openPic('back')"
+               alt="back-cover"
                class="back-thumb">
         </div>
         <app-album-metatags

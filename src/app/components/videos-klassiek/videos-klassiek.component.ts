@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MusicService} from '../../services/music.service';
+import {StateService} from '../../services/state.service';
 
 @Component({
   selector: 'app-videos-klassiek',
@@ -11,11 +12,13 @@ export class VideosKlassiekComponent implements OnInit {
 
   constructor(
     private musicService: MusicService,
+    private stateService: StateService,
   ) { }
 
   afterGetAlbums(results) {
     console.log(results);
     this.videoalbums = results;
+    this.stateService.setTitle('Muziekvideo\'s Klassiek');
   }
 
   getAlbums() {

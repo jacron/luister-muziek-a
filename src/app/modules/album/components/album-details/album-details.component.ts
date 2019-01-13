@@ -62,6 +62,16 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     }
   }
 
+  albumImage(id) {
+    // {{ imgUrl }}{{ album.ID }}/album/-1/{{ coverSize }}
+    return `${this.imgUrl}${id}/album/-1/${this.coverSize}`;
+  }
+
+  albumBackImage(id) {
+  //  {{ imgBackUrl }}{{ album.ID }}/album/100/-1
+    return `${this.imgBackUrl}${id}/album/100/-1`;
+  }
+
   editAlbum() {
     this.albumService.rename(this.album).subscribe(
       result => this.afterEditAlbum(result)

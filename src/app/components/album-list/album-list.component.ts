@@ -70,6 +70,11 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
     this.storage.storeList(list);
   }
 
+  albumImage(id) {
+  //  imgUrl + album.ID + '/album/212/-1/'
+    return `${this.imgUrl}${id}/album/212/-1/`;
+  }
+
   search(newValue: string) {
     if (!newValue.length) {
       this.filteredAlbums = this.albums.slice();
