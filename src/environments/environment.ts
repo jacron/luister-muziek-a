@@ -7,11 +7,7 @@ const hostname = document.location.hostname;
 let apiServer;  // music-api
 let moviesServer; // movies18
 let host;
-// const lanHostname = 'music-client.10.0.1.6.xip.io';
-// const localVirtualHostname = 'music-client.vhx.cloud';
 if (hostname.includes('xip.io') || hostname.includes('vhx.cloud')) {
-// if (hostname === lanHostname || hostname === localVirtualHostname) { // client on iPad
-  // PyCharm runs music-api on 0.0.0.0:8020
   host = '10.0.1.3';
 } else {
   host = '127.0.0.1';

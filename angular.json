@@ -22,7 +22,7 @@
               "src/.htaccess"
             ],
             "styles": [
-              "src/styles/styles.scss",
+              "src/styles.scss",
               "src/styles/theme.scss",
               "src/styles/mymaterial.scss",
             ],

@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ComponistComponent } from './componist.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {MusicService} from '../../services/music.service';
+import {MockData} from '../../../test-helpers/mock-data';
 
 describe('ComponistComponent', () => {
   let component: ComponistComponent;
@@ -8,7 +11,14 @@ describe('ComponistComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComponistComponent ]
+      declarations: [ ComponistComponent ],
+      providers: [
+        {
+          provide: MusicService,
+          useClass: MockData
+        }
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   }));

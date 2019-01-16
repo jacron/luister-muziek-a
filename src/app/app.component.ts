@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   @ViewChild('maindiv') maindiv: ElementRef;
 
   appTitle = 'media-client';
-  title = '';
+  title = 'media-client';
   alternated = false;
 
   constructor(
@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // this.debugMessage = 'debug message comes here';
+    this.title = 'media-client';
     this.stateService.currentTitle.subscribe(title => this.title = title);
     if (localStorage.getItem(darkKey) == 'on') {
       this.alternated = true;

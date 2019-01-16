@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CodeListComponent } from './code-list.component';
+import {MatModule} from '../../modules/mat/mat.module';
+import {RouterTestingModule} from '@angular/router/testing';
+import {FormsModule} from '@angular/forms';
+import {MockData} from '../../../test-helpers/mock-data';
+import {MusicService} from '../../services/music.service';
 
 describe('CodeListComponent', () => {
   let component: CodeListComponent;
@@ -8,9 +13,20 @@ describe('CodeListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        MatModule,
+        FormsModule,  // needed for ngModel
+        RouterTestingModule.withRoutes([]),
+      ],
+      providers: [
+        {
+          provide: MusicService,
+          useClass: MockData
+        }
+      ],
       declarations: [ CodeListComponent ]
     })
-    .compileComponents();
+      .compileComponents().then();
   }));
 
   beforeEach(() => {

@@ -17,6 +17,7 @@ export class TypeaheadComponent implements OnInit, OnChanges {
   @Input() text: string;
   @Output() idChange = new EventEmitter(); // user selected an option
   @Output() textChange = new EventEmitter(); // user has typed some
+  @Output() add = new EventEmitter();  // user wants to add this tag right away
 
   filteredItems: Observable<any[]>;
   myControl = new FormControl();
@@ -41,6 +42,12 @@ export class TypeaheadComponent implements OnInit, OnChanges {
 
   notifyText() {
     this.textChange.emit(this.myControl.value);
+  }
+
+  onEnter() {
+    if (this.add) {
+      this.add.emit();
+    }
   }
 
   private _filter(value: any): any[] {

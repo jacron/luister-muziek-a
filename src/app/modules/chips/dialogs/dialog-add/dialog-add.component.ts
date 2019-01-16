@@ -176,6 +176,7 @@ export class DialogAddComponent implements OnInit {
         this.addInstrument(choice);
         break;
     }
+    choice.id = -1;
   }
 
   newItem(choice) {

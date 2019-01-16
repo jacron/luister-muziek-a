@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CollectiesComponent } from './collecties.component';
+import {StartletterPipe} from '../../pipes/startletter.pipe';
 
 describe('CollectiesComponent', () => {
   let component: CollectiesComponent;
@@ -8,7 +9,12 @@ describe('CollectiesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CollectiesComponent ]
+      declarations: [
+        CollectiesComponent,
+      ],
+      providers: [
+        // StartletterPipe,
+      ]
     })
     .compileComponents();
   }));

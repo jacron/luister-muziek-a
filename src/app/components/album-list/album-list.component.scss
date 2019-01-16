@@ -1,43 +1,3 @@
-//img.thumb {
-//  height: 100px;
-//  margin-bottom: 12px;
-//  vertical-align: text-top;
-//}
-//.thumb > div {
-//  display: inline-block;
-//}
-//img.details {
-//  //width: 300px;
-//  margin-bottom: 20px;
-//}
-//.text-container {
-//  float: left;
-//  max-width: 520px
-//}
-//.mat-list-item {
-//  min-height: 150px !important;
-//}
-//.closer {
-//  position: absolute;
-//  margin: -20px 0 0 -20px;
-//}
-//.pieces-list {
-//  max-height: 100px;
-//  overflow-y: auto;
-//}
-//.link {
-//  text-decoration: none;
-//  color: #333;
-//}
-//.chips-list {
-//  margin-top: 6px;
-//}
-//.img-container {
-//  margin: 0 20px 20px 0;
-//}
-//.list-header {
-//  margin-bottom: 45px !important;
-//}
 .wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -48,6 +8,7 @@
   width: 180px;
   height: 400px;
   margin: 20px auto;
+  overflow-y: hidden;
 }
 .album-image {
 }

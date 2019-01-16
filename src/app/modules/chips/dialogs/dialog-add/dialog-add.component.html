@@ -16,8 +16,10 @@
           [items]="choice.items"
           [(id)]="choice.id"
           [(text)]="choice.text"
+          (add)="addItem(choice)"
         ></app-typeahead>
-        <button mat-button (click)="addItem(choice)" [disabled]="choice.id == -1">
+        <button mat-button (click)="addItem(choice)"
+                [disabled]="choice.id == -1">
           {{ labelAdd }}
         </button>
         <button mat-button (click)="newItem(choice)">{{ labelNew }}</button>

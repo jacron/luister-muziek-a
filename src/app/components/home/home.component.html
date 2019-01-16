@@ -9,8 +9,10 @@
   </div>
 
   <mat-form-field class="form-field" *ngIf="model">
-    <input type="text" title=""
-           [placeholder]="model.placeholder" matInput
+    <input type="text"
+           title=""
+           [placeholder]="model.placeholder"
+           matInput
            [formControl]="myControl"
            [matAutocomplete]="auto">
     <mat-autocomplete
@@ -35,9 +37,10 @@
            [formControl]="queryControl"
            (keyup.enter)="submitQuery()"
     >
-    <button mat-button *ngIf="query.value"
-            class="closer" aria-label="Clear"
-            matSuffix mat-icon-button aria-label="Clear"
+    <button *ngIf="query.value"
+            mat-button matSuffix mat-icon-button
+            aria-label="Clear"
+            class="closer"
             (click)="clearQuery()">
       <mat-icon>close</mat-icon>
     </button>

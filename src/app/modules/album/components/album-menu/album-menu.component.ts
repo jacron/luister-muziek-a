@@ -55,13 +55,13 @@ export class AlbumMenuComponent implements OnInit {
       label: 'Toon in Finder',
       action: 'open_finder',
       icon: 'open_in_browser',
-      color: '',
+      color: '#aa77ff',
     },
     {
       label: 'Herlaad muziekstukken',
       action: 'refetch',
       icon: 'replay',
-      color: '',
+      color: '#ff7733',
     },
     {
       label: 'Plak cover in',

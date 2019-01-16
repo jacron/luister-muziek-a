@@ -27,15 +27,10 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   lazyImages: any;
   lazyAttribute = 'data-src';
   filteredAlbums: Album[];
-  // globalListenScrollFunc: Function;
-  // globalListenTouchmoveFunc: Function;
-  // globalListenResizeFunc: Function;
 
   constructor(
     private router: Router,
-    private musicService: MusicService,
     private storage: StorageService,
-    // private renderer: Renderer2,
   ) { }
 
   testInAlbum(album: Album, q) {
@@ -71,7 +66,6 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   albumImage(id) {
-  //  imgUrl + album.ID + '/album/212/-1/'
     return `${this.imgUrl}${id}/album/212/-1/`;
   }
 
@@ -88,8 +82,7 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   toAlbum(id) {
-    this.router.navigate(['/album', id]).then(() => {
-    });
+    window.open('/album/' + id, 'mc-details');
   }
 
   cleanLazy() {
@@ -99,28 +92,11 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  // augment_album(album: Album) {
-  //   album.ID = +album.ID;
-  //   for (let i = 0; i < this.albums.length; i++) {
-  //     const a = this.albums[i];
-  //     if (this.albums[i].ID === album.ID) {
-  //       a.album_performers = album.album_performers;
-  //       a.album_componisten = album.album_componisten;
-  //       a.album_tags = album.album_tags;
-  //       a.pieces = album.pieces;
-  //       a.cuesheets = album.cuesheets;
-  //       a.album_instrument = album.album_instrument;
-  //       break;
-  //     }
-  //   }
-  // }
-
   elementInViewport(el) {
     const rect = el.getBoundingClientRect(),
       height = (window.innerHeight || document.documentElement.clientHeight),
       width = (window.innerWidth || document.documentElement.clientWidth),
       diff = 10;
-    // console.log(rect);
     return (
       rect.bottom >= 0 &&
       rect.right >= 0 &&
@@ -139,9 +115,6 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
       if (that.elementInViewport(image)) {
         const dataSrc = image.getAttribute(that.lazyAttribute);
         if (dataSrc) {
-          // that.musicService.getAlbumById(image.getAttribute('albumid')).subscribe(
-          //   (album: Album) => that.augment_album(album)
-          // );
           image.src = dataSrc;
           image.removeAttribute(that.lazyAttribute);
         }
@@ -176,25 +149,9 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.globalListenScrollFunc();
-    // this.globalListenTouchmoveFunc();
-    // this.globalListenResizeFunc();
   }
 
   ngOnInit() {
-    // console.log(this.albums);
-    // this.globalListenScrollFunc = this.renderer.listen(
-    //   'document', 'scroll', () =>
-    //     this.lazyLoad()
-    //   );
-    // this.globalListenTouchmoveFunc = this.renderer.listen(
-    //   'document', 'touchmove', () =>
-    //     this.lazyLoad()
-    // );
-    // this.globalListenResizeFunc = this.renderer.listen(
-    //   'window', 'resize', () =>
-    //     this.lazyLoad()
-    // );
   }
 
 }
