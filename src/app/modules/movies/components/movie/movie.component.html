@@ -30,9 +30,15 @@
       <span>IMDb</span>
     </button>
     <div>
-    <button mat-icon-button class="link" (click)="play()">
-      <mat-icon>play_arrow</mat-icon>
+    <button mat-icon-button class="link vlc"
+            (click)="play('vlc')">
+      <mat-icon>play_arrow</mat-icon>vlc
     </button>
+    </div><div>
+      <button mat-icon-button class="link"
+              (click)="play('media center')">
+        <mat-icon>play_arrow</mat-icon>media player
+      </button>
     </div>
     <div>
       <a class="link" (click)="toFinder()" [class.finderopened]="finderOpened">

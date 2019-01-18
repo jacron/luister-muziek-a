@@ -79,8 +79,8 @@ export class MoviesService {
       .pipe(map(response => response['films']));
   }
 
-  play(id) {
-    return this.getJson('/api/film/play/' + id);
+  play(id, player) {
+    return this.getJson('/api/film/play/' + id + '/' + player);
   }
 
   openFinder(id) {

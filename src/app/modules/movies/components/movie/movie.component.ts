@@ -72,8 +72,8 @@ export class MovieComponent implements OnInit {
     )
   }
 
-  play() {
-    this.moviesService.play(this.movie.ID).subscribe();
+  play(player) {
+    this.moviesService.play(this.movie.ID, player).subscribe();
   }
 
   ngOnInit() {

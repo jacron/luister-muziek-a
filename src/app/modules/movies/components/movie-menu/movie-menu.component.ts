@@ -37,7 +37,7 @@ export class MovieMenuComponent implements OnInit {
   }
 
   play() {
-    this.moviesService.play(this.movie.ID).subscribe();
+    this.moviesService.play(this.movie.ID, 'vlc').subscribe();
   }
 
   toImdb() {
