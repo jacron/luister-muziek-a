@@ -1,6 +1,11 @@
-.collectie-row {
-  margin-bottom: 12px;
+.collectie-card {
+  width: 100px;
+  height: 200px;
+  margin: 20px auto;
 }
 .app-collecties {
-  margin-top: 10px;
+  display: flex;
+  flex-display: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }

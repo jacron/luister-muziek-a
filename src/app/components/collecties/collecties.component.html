@@ -1,9 +1,7 @@
-<mat-list
-  class="app-collecties"
+<div class="app-collecties"
   *ngIf="(collections | startwith:startletter:'Title') as result">
   <div class="" *ngFor="let collectie of result">
-    <div class="row collectie-row">
-      <div class="col-2">
+    <mat-card class="collectie-card">
         <div class="img-container">
           <a [routerLink]="['/search', {idcoll: collectie.ID}]">
             <img alt="thumb"
@@ -12,13 +10,12 @@
             >
           </a>
         </div>
-      </div>
-      <div class="col-10">
+      <mat-card-content>
         <div>
           {{ collectie.Title }}
         </div>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
   </div>
-</mat-list>
+</div>
 
