@@ -90,6 +90,7 @@ export class HomeComponent implements OnInit {
 
   add(facet) {
     const type = facet.value;
+    this.q = false;
     switch (type) {
       case 'composer':
         this.musicService.getComposers('typeahead').subscribe(
@@ -116,7 +117,11 @@ export class HomeComponent implements OnInit {
           results => this.afterGetIems(results, type));
         break;
       case 'title':
+        this.model = false;
         this.q = true;
+        setTimeout(() => {
+          this.qv.nativeElement.focus();
+        });
         break;
     }
   }
