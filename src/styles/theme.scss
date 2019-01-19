@@ -61,6 +61,12 @@ $darkcolor: #eeeeee;
   .mat-card {
     color: $darkcolor;
   }
+  .mat-form-field-label {
+    color: #ceffff;
+  }
+  .mat-form-field.mat-focused .mat-form-field-label {
+    color: #aeffff;
+  }
   .mat-icon {
     color: $darkcolor;
   }

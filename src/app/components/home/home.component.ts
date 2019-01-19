@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   list: List;
 
   @ViewChild('query') qv;
+  @ViewChild('typeahead') th;
 
   constructor(
     private musicService: MusicService,
@@ -77,6 +78,9 @@ export class HomeComponent implements OnInit {
       cls: facet.cls,
       type,
     };
+    setTimeout(() => {
+      this.th.nativeElement.focus();
+    });
   }
 
   clearQuery() {

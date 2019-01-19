@@ -1,0 +1,16 @@
+<mat-toolbar class="app-toolbar">
+  <mat-icon (click)="sidenav.toggle()" class="link">
+    dehaze</mat-icon>
+  <div class="title">{{ title }}</div>
+  <span class="horizontal-spacer"></span>
+  <button mat-button>
+    <mat-icon  (click)="toggleTheme()"
+               class="control">
+      invert_colors</mat-icon>&nbsp;
+  </button>
+  <button mat-button>
+    <mat-icon  (click)="play('pause')"
+               class="play-control">
+      pause_circle</mat-icon>&nbsp;
+  </button>
+</mat-toolbar>

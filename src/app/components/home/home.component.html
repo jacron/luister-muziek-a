@@ -9,12 +9,13 @@
   </div>
 
   <mat-form-field class="form-field" *ngIf="model">
-    <input type="text"
-           title=""
-           [placeholder]="model.placeholder"
-           matInput
-           [formControl]="myControl"
-           [matAutocomplete]="auto">
+    <input
+      matInput #typeahead
+      type="text"
+      title=""
+      [placeholder]="model.placeholder"
+      [formControl]="myControl"
+      [matAutocomplete]="auto">
     <mat-autocomplete
       #auto="matAutocomplete"
       (optionSelected)="makeChip($event.option.value)"

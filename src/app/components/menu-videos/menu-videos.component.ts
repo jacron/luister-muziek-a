@@ -4,12 +4,14 @@ const videolinks = [
   {
     href: 'videos/klassiek',
     label: 'Video Klassiek',
-    icon: 'music',
+    icon: 'movie',
+    color: '#ff6666',
   },
   {
     href: 'videos/pop',
     label: 'Video Pop',
-    icon: 'music'
+    icon: 'movie',
+    color: '#66ffdd'
   }
 ];
 

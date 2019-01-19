@@ -1,8 +1,9 @@
+<mat-spinner *ngIf="!collecties"></mat-spinner>
 <div class="app-collectie">
-<app-alphabet
-  (select)="selectLetter($event)"></app-alphabet>
-<app-collecties
-  [collections]="collecties"
-  [startletter]="startletter">
-</app-collecties>
+  <app-alphabet
+    (select)="selectLetter($event)"></app-alphabet>
+  <app-collecties
+    [collections]="collecties"
+    [startletter]="startletter">
+  </app-collecties>
 </div>

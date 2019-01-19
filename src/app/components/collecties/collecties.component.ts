@@ -12,6 +12,10 @@ export class CollectiesComponent implements OnInit {
   @Input() startletter: string;
   imgUrl = environment.apiServer + '/image/';
 
+  imageUrl(id) {
+    return `${this.imgUrl}${id}/album/-1/100/`;
+  }
+
   constructor(
   ) { }
 

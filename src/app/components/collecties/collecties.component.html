@@ -6,8 +6,8 @@
       <div class="col-2">
         <div class="img-container">
           <a [routerLink]="['/search', {idcoll: collectie.ID}]">
-            <img
-              src="{{ imgUrl }}{{ collectie.ID }}/album/-1/100/"
+            <img alt="thumb"
+              [src]="imageUrl(collectie.ID)"
               class="thumb"
             >
           </a>

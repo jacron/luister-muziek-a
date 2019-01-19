@@ -1,21 +1,8 @@
-<div #maindiv class="app-container">
+<div class="app-container" [class.alternate-theme]="darkOn">
 
-  <mat-toolbar class="app-toolbar">
-    <mat-icon (click)="sidenav.toggle()" class="link">
-      dehaze</mat-icon>
-    <div class="title">{{ title }}</div>
-    <span class="horizontal-spacer"></span>
-    <button mat-button>
-      <mat-icon  (click)="toggleTheme()"
-                 class="control">
-        stop</mat-icon>&nbsp;
-    </button>
-    <button mat-button>
-      <mat-icon  (click)="play('pause')"
-                 class="play-control">
-        pause_circle</mat-icon>&nbsp;
-    </button>
-  </mat-toolbar>
+  <app-toolbar
+    (darkOn)="setDarkOn($event)"
+    [sidenav]="sidenav"></app-toolbar>
   <mat-sidenav-container class="app-sidenav-container">
     <mat-sidenav #sidenav mode="over">
       <nav>
@@ -26,9 +13,11 @@
           </button>
         </h2>
 
-        <app-menu-music [sidenav]="sidenav"></app-menu-music>
-        <app-menu-videos [sidenav]="sidenav"></app-menu-videos>
-        <app-menu-movies [sidenav]="sidenav"></app-menu-movies>
+        <div class="menus-container">
+          <app-menu-music [sidenav]="sidenav"></app-menu-music>
+          <app-menu-videos [sidenav]="sidenav"></app-menu-videos>
+          <app-menu-movies [sidenav]="sidenav"></app-menu-movies>
+        </div>
 
       </nav>
     </mat-sidenav>

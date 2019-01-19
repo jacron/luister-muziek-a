@@ -20,12 +20,14 @@ const musiclinks = [
   {
     href: 'pop',
     label: 'Pop',
-    icon: 'person'
+    icon: 'person',
+    color: '#66ffdd',
   },
   {
     href: 'composer',
     label: 'Componisten',
-    icon: 'person'
+    icon: 'person',
+    color: '#ff6688',
   },
   {
     href: 'performer',
