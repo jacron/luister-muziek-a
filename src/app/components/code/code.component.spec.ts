@@ -11,13 +11,13 @@ import {MatModule} from '../../modules/mat/mat.module';
 describe('CodeComponent', () => {
   let component: CodeComponent;
   let fixture: ComponentFixture<CodeComponent>;
-  // let mockMusicService;
-  // let codes = [
-  //   {
-  //     Code: '123',
-  //     Description: 'eentweedrie',
-  //   },
-  // ];
+  let mockMusicService;
+  let codes = [
+    {
+      Code: '123',
+      Description: 'eentweedrie',
+    },
+  ];
 
   beforeEach(async(() => {
     // mockMusicService = jasmine.createSpyObj(['getCodes']);
@@ -29,7 +29,7 @@ describe('CodeComponent', () => {
       providers: [
         {
           provide: MusicService,
-          useValue: MockData
+          useClass: MockData
         },
         {
           provide: StateService,

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlbumHeaderComponent } from './album-header.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('AlbumHeaderComponent', () => {
   let component: AlbumHeaderComponent;
@@ -8,7 +9,9 @@ describe('AlbumHeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlbumHeaderComponent ]
+      declarations: [ AlbumHeaderComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
+
     })
     .compileComponents();
   }));

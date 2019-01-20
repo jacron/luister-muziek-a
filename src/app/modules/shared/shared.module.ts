@@ -5,12 +5,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatModule} from '../mat/mat.module';
 import {DialogHeaderDirective} from './directives/dialog-header.directive';
 import {DefaultImageDirective} from './directives/default-image.directive';
+import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
 
 @NgModule({
   declarations: [
     TypeaheadComponent,
     DialogHeaderDirective,
     DefaultImageDirective,
+    OptionsMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import {DefaultImageDirective} from './directives/default-image.directive';
     TypeaheadComponent,
     DialogHeaderDirective,
     DefaultImageDirective,
+    OptionsMenuComponent,
   ]
 })
 export class SharedModule { }

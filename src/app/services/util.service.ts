@@ -30,6 +30,14 @@ export class UtilService {
     return parts.find(part => part.startsWith('tt'));
   }
 
+  getExtension(s) {
+    const pos = s.lastIndexOf('.');
+    if (pos === -1) {
+      return '';
+    }
+    return s.substr(pos);
+  }
+
   stripExtension(s) {
     const pos = s.lastIndexOf('.');
     if (pos === -1) {

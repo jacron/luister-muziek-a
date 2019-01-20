@@ -10,6 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
 import {StorageService} from '../../services/storage.service';
 import {PersonService} from '../../services/person.service';
+import {UtilService} from '../../services/util.service';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -18,10 +19,12 @@ describe('SearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SearchComponent, TypedNamePipe, TypedTitlePipe],
-      imports: [MatAutocompleteModule, MatIconModule, HttpClientModule,
-        RouterTestingModule.withRoutes([]), MatDialogModule],
+      imports: [MatAutocompleteModule, MatIconModule,
+        HttpClientModule,
+        RouterTestingModule.withRoutes([]),
+        MatDialogModule],
       providers: [TypedNamePipe, TypedTitlePipe, MusicService, StorageService,
-        PersonService],
+        PersonService, UtilService],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();

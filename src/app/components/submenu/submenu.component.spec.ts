@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubmenuComponent } from './submenu.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('SubmenuComponent', () => {
   let component: SubmenuComponent;
@@ -8,7 +9,8 @@ describe('SubmenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubmenuComponent ]
+      declarations: [ SubmenuComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   }));

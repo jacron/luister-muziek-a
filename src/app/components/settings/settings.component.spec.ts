@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SettingsComponent } from './settings.component';
+import {MusicService} from '../../services/music.service';
+import {MockData} from '../../../test-helpers/mock-data';
+import {StorageService} from '../../services/storage.service';
+import {ChoiceService} from '../../services/choice.service';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
@@ -8,7 +12,21 @@ describe('SettingsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SettingsComponent ]
+      declarations: [ SettingsComponent ],
+      providers: [
+        {
+          provide: MusicService,
+          useClass: MockData,
+        },
+        {
+          provide: StorageService,
+          useClass: MockData
+        },
+        {
+          provide: ChoiceService,
+          useClass: MockData
+        }
+      ],
     })
     .compileComponents();
   }));

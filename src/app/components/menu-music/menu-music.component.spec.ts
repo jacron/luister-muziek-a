@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MenuMusicComponent } from './menu-music.component';
 import {MatModule} from '../../modules/mat/mat.module';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('MenuMusicComponent', () => {
   let component: MenuMusicComponent;
@@ -12,7 +13,8 @@ describe('MenuMusicComponent', () => {
       imports: [
         MatModule
       ],
-      declarations: [ MenuMusicComponent ]
+      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [ MenuMusicComponent ],
     })
     .compileComponents();
   }));

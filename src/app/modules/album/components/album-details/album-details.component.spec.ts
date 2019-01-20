@@ -7,6 +7,9 @@ import {MusicService} from '../../../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MatDialogModule} from '@angular/material';
+import {StorageService} from '../../../../services/storage.service';
+import {MockData} from '../../../../../test-helpers/mock-data';
+import {UtilService} from '../../../../services/util.service';
 
 describe('AlbumDetailsComponent', () => {
   let component: AlbumDetailsComponent;
@@ -16,9 +19,22 @@ describe('AlbumDetailsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AlbumDetailsComponent ],
       schemas: [ NO_ERRORS_SCHEMA ],
-      imports: [RouterTestingModule.withRoutes([]), HttpClientModule,
-      MatDialogModule],
-      providers: [MusicService]
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        HttpClientModule,
+        MatDialogModule
+      ],
+      providers: [
+        MusicService,
+        {
+          provide: StorageService,
+          useClass: MockData
+        },
+        {
+          provide: UtilService,
+          useClass: MockData
+        }
+      ],
     })
     .compileComponents();
   }));

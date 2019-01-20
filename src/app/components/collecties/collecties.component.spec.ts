@@ -2,6 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CollectiesComponent } from './collecties.component';
 import {StartletterPipe} from '../../pipes/startletter.pipe';
+import {MockPipe} from '../../../test-helpers/mock-pipe';
+import {RouterTestingModule} from '@angular/router/testing';
+import {MatModule} from '../../modules/mat/mat.module';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 describe('CollectiesComponent', () => {
   let component: CollectiesComponent;
@@ -9,9 +14,16 @@ describe('CollectiesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        MatModule,
+        RouterTestingModule.withRoutes([]),
+        FormsModule,
+      ],
       declarations: [
         CollectiesComponent,
+        MockPipe,
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         // StartletterPipe,
       ]

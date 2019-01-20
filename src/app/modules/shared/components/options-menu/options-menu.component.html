@@ -1,0 +1,23 @@
+<div class="movie-menu">
+  <button mat-icon-button
+          [style]="getTriggerstyle()"
+          (click)="$event.stopPropagation()"
+          [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <div *ngFor="let option of options">
+      <mat-divider *ngIf="option.label == 'divider'"></mat-divider>
+      <button mat-menu-item
+              *ngIf="option.label != 'divider'"
+              (click)="call(option.action)">
+        <mat-icon [style.color]="option.color"
+                  waves-light waves-effect
+        >{{ option.icon }}
+        </mat-icon>
+        <span>{{ option.label }}</span>
+      </button>
+    </div>
+
+  </mat-menu>
+</div>

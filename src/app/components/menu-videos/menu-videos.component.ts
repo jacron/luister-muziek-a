@@ -12,6 +12,12 @@ const videolinks = [
     label: 'Video Pop',
     icon: 'movie',
     color: '#66ffdd'
+  },
+  {
+    href: 'videos/documentaire',
+    label: 'Documentaire',
+    icon: 'movie',
+    color: '#66ddff',
   }
 ];
 

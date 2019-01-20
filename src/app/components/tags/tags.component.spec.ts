@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TagsComponent } from './tags.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {MockPipe} from '../../../test-helpers/mock-pipe';
 
 describe('TagsComponent', () => {
   let component: TagsComponent;
@@ -8,7 +10,11 @@ describe('TagsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TagsComponent ]
+      declarations: [
+        TagsComponent,
+        MockPipe,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   }));

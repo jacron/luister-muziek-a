@@ -3,6 +3,9 @@ import {Piece} from '../../../../classes/music/Piece';
 import {MusicService} from '../../../../services/music.service';
 import {PieceService} from '../../services/piece.service';
 import {Album} from '../../../../classes/music/Album';
+import {DialogInputComponent} from '../../dialogs/dialog-input/dialog-input.component';
+import {MatDialog} from '@angular/material';
+import {UtilService} from '../../../../services/util.service';
 
 @Component({
   selector: 'app-album-pieces',
@@ -18,7 +21,9 @@ export class AlbumPiecesComponent implements OnInit {
 
   constructor(
     private musicService: MusicService,
-    private pieceService: PieceService
+    private pieceService: PieceService,
+    private dialog: MatDialog,
+    private utilService: UtilService,
   ) { }
 
   toCode(code) {
@@ -30,7 +35,15 @@ export class AlbumPiecesComponent implements OnInit {
     pieces[0].played = true;
   }
 
-  play(id) {
+  play2(e, id) {
+    e.stopPropagation();
+    this.musicService.play2(id).subscribe(
+      (response) => this.onPlayed(response, id)
+    );
+  }
+
+  play(e, id) {
+    e.stopPropagation();
     this.musicService.play(id).subscribe(
       (response) => this.onPlayed(response, id)
     );
@@ -47,6 +60,35 @@ export class AlbumPiecesComponent implements OnInit {
 
   displayName(s) {
     return this.pieceService.displayName(s);
+  }
+
+  afterRenameTitle(title: string, piece: Piece) {
+    // const extension = this.utilService.getExtension(piece.Name)
+    // piece.Name = title + extension;
+    piece.Name = title;
+  }
+
+  editPieceName(e, piece: Piece) {
+    e.stopPropagation();
+    const dialogRef = this.dialog.open(DialogInputComponent, {
+      width: '75%',
+      data: {
+        prompt: '',
+        default: this.utilService.stripExtension(piece.Name)
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      title => {
+        if (title && title.length > 0) {
+          const extension = this.utilService.getExtension(piece.Name);
+          // console.log(title + extension);
+          this.musicService.updatePieceName(piece.ID, this.album.ID, title + extension)
+            .subscribe(
+              () => this.afterRenameTitle(title, piece)
+            );
+        }
+      }
+    );
   }
 
   ngOnInit() {

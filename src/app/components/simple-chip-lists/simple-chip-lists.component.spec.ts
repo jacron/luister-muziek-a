@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SimpleChipListsComponent } from './simple-chip-lists.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('SimpleChipListsComponent', () => {
   let component: SimpleChipListsComponent;
@@ -8,7 +9,8 @@ describe('SimpleChipListsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SimpleChipListsComponent ]
+      declarations: [ SimpleChipListsComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   }));

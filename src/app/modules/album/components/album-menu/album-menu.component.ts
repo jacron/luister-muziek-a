@@ -7,7 +7,7 @@ import {MatDialog} from '@angular/material';
 import {DialogAddComponent} from '../../../chips/dialogs/dialog-add/dialog-add.component';
 import {DialogAlbumComponent} from '../../dialogs/dialog-album/dialog-album.component';
 import {DialogSettingsComponent} from '../../dialogs/dialog-settings/dialog-settings.component';
-// import {OverlayContainer} from '@angular/cdk/overlay';
+import {MenuOption} from '../../../../classes/shared/MenuOption';
 
 @Component({
   selector: 'app-album-menu',
@@ -23,61 +23,62 @@ export class AlbumMenuComponent implements OnInit {
   freedbUrl = environment.freedbUrl;
   musicbrainzUrl = environment.musicbrainz;
   amazonUrl = environment.amazonUrl;
-  menus = [
+  menus: MenuOption[] = [
     {
       label: 'Hernoem album',
-      action: 'edit_album',
+      action: this.editAlbum.bind(this),
       icon: 'edit',
       color: '',
     },
     {
       label: 'Bewerk album chips',
-      action: 'edit_chips',
+      action: this.editChips.bind(this),
       icon: 'edit',
       color: 'orange',
     },
     {
       label: 'Cuesheets maker',
-      action: 'edit_pieces',
+      action: this.editPieces.bind(this),
       icon: 'edit',
       color: 'blue',
     },
     {
       label: 'Tag-editor',
-      action: 'tag_edit',
+      action: this.tagedit.bind(this),
       icon: 'edit',
       color: 'brown',
     },
     {
-      label: 'divider'
+      label: 'divider',
+      icon: '',
     },
     {
       label: 'Toon in Finder',
-      action: 'open_finder',
+      action: this.openFinder.bind(this),
       icon: 'open_in_browser',
       color: '#aa77ff',
     },
     {
       label: 'Herlaad muziekstukken',
-      action: 'refetch',
+      action: this.refetch.bind(this),
       icon: 'replay',
       color: '#ff7733',
     },
     {
       label: 'Plak cover in',
-      action: 'paste_image',
+      action: this.pasteAlbumImage.bind(this),
       icon: 'image',
       color: '',
     },
     {
       label: 'Open in \'music\'',
-      action: 'open_music',
+      action: this.openMusic.bind(this),
       icon: 'queue_music',
       color: '',
     },
     {
       label: 'Verwijder',
-      action: 'delete',
+      action: this.delete.bind(this),
       icon: 'close',
       color: 'red',
     }
@@ -96,7 +97,7 @@ export class AlbumMenuComponent implements OnInit {
     if (album.website) {
       this.menus.push({
         label: 'Naar website',
-        action: 'website',
+        action: this.website.bind(this),
         icon: 'web',
         color: '',
       });
@@ -104,21 +105,19 @@ export class AlbumMenuComponent implements OnInit {
     if (album.discid || album.asin) {
       this.menus.push({
         label: 'divider',
-        action: '',
         icon: '',
-        color: '',
       });
     }
     if (album.discid) {
       this.menus.push({
         label: 'MusicBrainz',
-        action: 'openmusicbrainz',
+        action: this.openmusicbrainz.bind(this),
         icon: 'library_music',
         color: '#8f407a'
       });
       this.menus.push({
         label: 'freeDB',
-        action: 'openfreedb',
+        action: this.openfreedb.bind(this),
         icon: 'library_music',
         color: '#395499'
       });
@@ -126,70 +125,25 @@ export class AlbumMenuComponent implements OnInit {
     if (album.asin) {
       this.menus.push({
         label: 'Amazon',
-        action: 'openamazon',
+        action: this.openamazon.bind(this),
         icon: 'music_video',
         color: 'orange'
       });
     }
     this.menus.push({
       label: 'divider',
-      action: '',
       icon: '',
-      color: '',
     });
     this.menus.push({
       label: 'Opties',
-      action: 'options',
+      action: this.options.bind(this),
       icon: 'settings',
       color: '',
     });
   }
 
-  action(name) {
-    switch (name) {
-      case 'edit_album':
-        this.editAlbum();
-        break;
-      case 'edit_chips':
-        this.editChips();
-        break;
-      case 'edit_pieces':
-        this.editPieces();
-        break;
-      case 'tag_edit':
-        this.tagedit();
-        break;
-      case 'open_music':
-        this.openMusic();
-        break;
-      case 'open_finder':
-        this.openFinder();
-        break;
-      case 'refetch':
-        this.refetch();
-        break;
-      case 'website':
-        this.website();
-        break;
-      case 'paste_image':
-        this.pasteAlbumImage();
-        break;
-      case 'openmusicbrainz':
-        this.openmusicbrainz();
-        break;
-      case 'openfreedb':
-        this.openfreedb();
-        break;
-      case 'openamazon':
-        this.openamazon();
-        break;
-      case 'options':
-        this.options();
-        break;
-      case 'delete':
-        this.delete();
-        break;
-    }
+  action(f: Function) {
+    f();
   }
 
   afterDelete() {

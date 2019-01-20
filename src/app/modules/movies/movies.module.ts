@@ -20,6 +20,7 @@ import { SpelerCardComponent } from './components/speler-card/speler-card.compon
 import { MovieJaarComponent } from './components/movie-jaar/movie-jaar.component';
 import { MoviesToNewFromImdbComponent } from './components/movies-to-new-from-imdb/movies-to-new-from-imdb.component';
 import { MoviesNewFromImdbComponent } from './components/movies-new-from-imdb/movies-new-from-imdb.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MoviesNewFromImdbComponent } from './components/movies-new-from-imdb/mo
   ],
   imports: [
     CommonModule,
+    SharedModule,
     MatModule,
     RouterModule,
     FormsModule,  // needed for input

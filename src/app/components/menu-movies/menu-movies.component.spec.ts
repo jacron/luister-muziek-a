@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MenuMoviesComponent } from './menu-movies.component';
 import {MatModule} from '../../modules/mat/mat.module';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('MenuMoviesComponent', () => {
   let component: MenuMoviesComponent;
@@ -12,7 +13,8 @@ describe('MenuMoviesComponent', () => {
       imports: [
         MatModule
       ],
-      declarations: [ MenuMoviesComponent ]
+      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [ MenuMoviesComponent ],
     })
     .compileComponents();
   }));

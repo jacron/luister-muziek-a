@@ -18,9 +18,10 @@ import {PopListComponent} from '../../components/pop-list/pop-list.component';
 import {HomeComponent} from '../../components/home/home.component';
 import {VideosKlassiekComponent} from '../../components/videos-klassiek/videos-klassiek.component';
 import {VideosPopComponent} from '../../components/videos-pop/videos-pop.component';
+import {VideoDocumentaireComponent} from '../../components/video-documentaire/video-documentaire.component';
 
 const appRoutes: Routes = [
-  {path: '', component: SearchComponent},
+  {path: '', component: HomeComponent},
   {path: 'search', component: SearchComponent},
   {path: 'search/:idcomp/:idperf/:idcoll/:idtag', component: SearchComponent},
   {path: 'album/:idalbum', component: AlbumDetailsComponent},
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
   {path: 'pop/:id', component: PopListComponent},
   {path: 'videos/klassiek', component: VideosKlassiekComponent},
   {path: 'videos/pop', component: VideosPopComponent},
+  {path: 'videos/documentaire', component: VideoDocumentaireComponent}
   // {path: '**', component: PageNotFoundComponent}
 ];
 

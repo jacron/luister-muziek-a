@@ -53,6 +53,7 @@ import { VideosKlassiekComponent } from './components/videos-klassiek/videos-kla
 import { VideosPopComponent } from './components/videos-pop/videos-pop.component';
 import { SubmenuComponent } from './components/submenu/submenu.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { VideoDocumentaireComponent } from './components/video-documentaire/video-documentaire.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     VideosPopComponent,
     SubmenuComponent,
     ToolbarComponent,
+    VideoDocumentaireComponent,
   ],
   imports: [
     BrowserModule,

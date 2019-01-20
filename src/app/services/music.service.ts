@@ -300,6 +300,12 @@ export class MusicService {
     });
   }
 
+  play2(id) {
+    return this.postForm('/play2', {
+      pieceId: id,
+    });
+  }
+
   playByName(albumId, name) {
     return this.postForm('/play/name', {
       albumId: albumId,

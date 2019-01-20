@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MenuOption} from '../../classes/shared/MenuOption';
 
-const movielinks = [
+const movielinks: MenuOption[] = [
   {
     href: 'movies',
     label: 'Movies',

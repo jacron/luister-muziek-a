@@ -1,10 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlbumPiecesComponent } from './album-pieces.component';
-import {MatIconModule} from '@angular/material';
 import {MusicService} from '../../../../services/music.service';
 import {HttpClientModule} from '@angular/common/http';
 import {PieceService} from '../../services/piece.service';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {MatModule} from '../../../mat/mat.module';
+import {UtilService} from '../../../../services/util.service';
 
 describe('AlbumPiecesComponent', () => {
   let component: AlbumPiecesComponent;
@@ -13,8 +15,9 @@ describe('AlbumPiecesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AlbumPiecesComponent ],
-      imports: [MatIconModule, HttpClientModule],
-      providers: [MusicService, PieceService]
+      imports: [MatModule, HttpClientModule],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [MusicService, PieceService, UtilService]
     })
     .compileComponents();
   }));

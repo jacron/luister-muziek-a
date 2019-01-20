@@ -3,6 +3,7 @@ import {Movie} from '../../../../classes/movies/Movie';
 import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
 import {MoviesService} from '../../services/movies.service';
+import {MenuOption} from '../../../../classes/shared/MenuOption';
 
 @Component({
   selector: 'app-movie-menu',
@@ -13,14 +14,55 @@ export class MovieMenuComponent implements OnInit {
   @Input() movie: Movie;
   @Input() unwatch: boolean;
   @Output() unwatchChange = new EventEmitter();
-
+  options: MenuOption[] = [
+    {
+      label: 'Play (vlc)',
+      icon: 'play_arrow',
+      action: this.play.bind(this)
+    },
+    {
+      label: 'IMDb',
+      icon: 'movie',
+      color: 'rgb(245, 197, 24)',
+      action: this.toImdb.bind(this)
+    },
+    {
+      label: 'Afbeelding van IMDb',
+      icon: 'image',
+      action: this.getImage.bind(this)
+    },
+    {
+      label: 'Plak url afbeelding',
+      icon: 'image',
+      color: '#55ee33',
+      action: this.pasteImage.bind(this)
+    },
+    {
+      label: 'Finder',
+      icon: 'search',
+      action: this.openFinder.bind(this),
+    },
+    {
+      label: 'Uit kijklijst',
+      icon: 'clear',
+      action: this.setUnwatch.bind(this)
+    },
+  ];
   constructor(
     private router: Router,
     private moviesService: MoviesService,
   ) {
   }
 
-  updateImageUrl(result) {
+  act(f: Function) {
+    f();
+  }
+
+  openFinder() {
+    this.moviesService.openFinder(this.movie.ID).subscribe();
+  }
+
+  private updateImageUrl(result) {
     if (result.status == 200) {
       this.movie.ImageUrl = result.ImageUrl;
     } else {
@@ -34,6 +76,12 @@ export class MovieMenuComponent implements OnInit {
         result => this.updateImageUrl(result)
       );
     }
+  }
+
+  pasteImage() {
+    this.moviesService.pasteImage(this.movie.imdb_id).subscribe(
+      result => this.updateImageUrl(result)
+    );
   }
 
   play() {

@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PerformerComponent } from './performer.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {MusicService} from '../../services/music.service';
+import {MockData} from '../../../test-helpers/mock-data';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('PerformerComponent', () => {
   let component: PerformerComponent;
@@ -8,7 +12,17 @@ describe('PerformerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PerformerComponent ]
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        RouterTestingModule.withRoutes([]),
+      ],
+      declarations: [ PerformerComponent ],
+      providers: [
+        {
+          provide: MusicService,
+          useClass: MockData,
+        }
+      ],
     })
     .compileComponents();
   }));

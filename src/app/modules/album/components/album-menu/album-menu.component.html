@@ -1,21 +1,4 @@
-<button mat-icon-button [matMenuTriggerFor]="menu">
-  <mat-icon>more_vert</mat-icon>
-</button>
-<mat-menu #menu="matMenu">
-  <div
-    *ngFor="let menu of menus"
-  >
-    <mat-divider *ngIf="menu.label == 'divider'"></mat-divider>
-  <button mat-menu-item
-          *ngIf="menu.label != 'divider'"
-          (click)="action(menu.action)"
-  >
-    <mat-icon class="album-control"
-              [style.color]="menu.color"
-              waves-light waves-effect
-    >{{ menu.icon }}
-    </mat-icon>
-    <span>{{ menu.label }}</span>
-  </button>
-  </div>
-</mat-menu>
+<app-options-menu
+  [options]="menus"
+  (act)="action($event)">
+</app-options-menu>

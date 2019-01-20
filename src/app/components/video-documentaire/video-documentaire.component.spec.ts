@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToolbarComponent } from './toolbar.component';
+import { VideoDocumentaireComponent } from './video-documentaire.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {MusicService} from '../../services/music.service';
 import {MockData} from '../../../test-helpers/mock-data';
 import {StorageService} from '../../services/storage.service';
 import {ChoiceService} from '../../services/choice.service';
 
-describe('ToolbarComponent', () => {
-  let component: ToolbarComponent;
-  let fixture: ComponentFixture<ToolbarComponent>;
+describe('VideoDocumentaireComponent', () => {
+  let component: VideoDocumentaireComponent;
+  let fixture: ComponentFixture<VideoDocumentaireComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToolbarComponent ],
+      declarations: [ VideoDocumentaireComponent ],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         {
@@ -34,7 +34,7 @@ describe('ToolbarComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ToolbarComponent);
+    fixture = TestBed.createComponent(VideoDocumentaireComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
