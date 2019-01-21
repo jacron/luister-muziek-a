@@ -7,8 +7,12 @@ const hostname = document.location.hostname;
 let apiServer;  // music-api
 let moviesServer; // movies18
 let host;
-if (hostname.includes('xip.io') || hostname.includes('vhx.cloud')) {
-  host = '10.0.1.3';
+console.log(document.location);
+const myhost = '10.0.1.3';
+if (hostname.includes('xip.io')
+  || hostname.includes('vhx.cloud')
+  || hostname.includes(myhost)) {
+  host = myhost;
 } else {
   host = '127.0.0.1';
 }

@@ -21,6 +21,8 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
 
   imgUrl = environment.apiServer + '/image/';
   imgBackUrl = environment.apiServer + '/image/back/';
+  imgTime = new Date();
+  imgSrc;
   navBackwards = false;
   navForwards = false;
   navBackwardsCount= 0;
@@ -55,16 +57,9 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     }
   }
 
-  afterEditAlbum(result) {
-    if (result) {
-      this.album.Title = result.title;
-      this.album.Description = result.description;
-    }
-  }
-
-  albumImage(id) {
+  albumImage() {
     // {{ imgUrl }}{{ album.ID }}/album/-1/{{ coverSize }}
-    return `${this.imgUrl}${id}/album/-1/${this.coverSize}`;
+    return `${this.imgUrl}${this.album.ID}/album/-1/${this.coverSize}?stamp=${this.imgTime}`;
   }
 
   albumBackImage(id) {
@@ -72,11 +67,24 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     return `${this.imgBackUrl}${id}/album/100/-1`;
   }
 
-  editAlbum() {
-    this.albumService.rename(this.album).subscribe(
-      result => this.afterEditAlbum(result)
-    );
+  updateImage(url) {
+    // console.log(url);
+    // this.imgTime = new Date();
+    // this.imgUrl = this.albumImage();
   }
+
+  // afterEditAlbum(result) {
+  //   if (result) {
+  //     this.album.Title = result.title;
+  //     this.album.Description = result.description;
+  //   }
+  // }
+
+  // editAlbum() {
+  //   this.albumService.rename(this.album).subscribe(
+  //     result => this.afterEditAlbum(result)
+  //   );
+  // }
 
   browse(e) {
     switch (e.key) {
@@ -168,6 +176,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   openAlbum(album: Album): void {
     this.album = album;
     if (album) {
+      this.imgSrc = this.albumImage();
       // console.log(album);
       this.stateService.setTitle(album.Title);
       document.title = album.Title;

@@ -18,12 +18,31 @@ export class AlbumMenuComponent implements OnInit {
 
   @Input() album: Album;
   @Output() reload = new EventEmitter();
+  @Output() updateimage = new EventEmitter();
 
   musicAlbumUrl = 'http://localhost:8010/album/';
   freedbUrl = environment.freedbUrl;
   musicbrainzUrl = environment.musicbrainz;
   amazonUrl = environment.amazonUrl;
+  googleUrl = environment.googleUrl;
+
   menus: MenuOption[] = [
+    {
+      label: 'Google',
+      action: this.searchGoogle.bind(this),
+      icon: 'search',
+      color: '#66bbee',
+    },
+    {
+      label: 'Plak cover in',
+      action: this.pasteAlbumImage.bind(this),
+      icon: 'image',
+      color: '#4477cc',
+    },
+    {
+      label: 'divider',
+      icon: '',
+    },
     {
       label: 'Hernoem album',
       action: this.editAlbum.bind(this),
@@ -55,20 +74,14 @@ export class AlbumMenuComponent implements OnInit {
     {
       label: 'Toon in Finder',
       action: this.openFinder.bind(this),
-      icon: 'open_in_browser',
-      color: '#aa77ff',
+      icon: 'search',
+      color: '#44bbee',
     },
     {
       label: 'Herlaad muziekstukken',
       action: this.refetch.bind(this),
       icon: 'replay',
       color: '#ff7733',
-    },
-    {
-      label: 'Plak cover in',
-      action: this.pasteAlbumImage.bind(this),
-      icon: 'image',
-      color: '',
     },
     {
       label: 'Open in \'music\'',
@@ -173,6 +186,9 @@ export class AlbumMenuComponent implements OnInit {
     window.open(this.amazonUrl + this.album.asin);
   }
 
+  searchGoogle() {
+    window.open(this.googleUrl + this.album.Title);
+  }
   openFinder() {
     this.musicService.openFinder(this.album.ID).subscribe(
       () => {},
@@ -252,8 +268,17 @@ export class AlbumMenuComponent implements OnInit {
       .subscribe();
   }
 
+  private afterPasteImage(result) {
+    // console.log(result);
+    if (result.status == 200) {
+      this.updateimage.emit(result.imagePath);
+    }
+  }
+
   pasteAlbumImage() {
-    this.musicService.pasteAlbumImage(this.album.ID).subscribe();
+    this.musicService.pasteAlbumImage(this.album.ID).subscribe(
+      result => this.afterPasteImage(result)
+    );
   }
 
   ngOnInit() {

@@ -338,16 +338,6 @@ export class MusicService {
       code: code,
       text: text
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'update_librarycode_alias')
-    //   .set('code', code)
-    //   .set('text', text)
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
   }
 
   updateLibraryCodeTitle(code, text) {
@@ -363,14 +353,6 @@ export class MusicService {
     return this.postForm('/album/upload', {
       path: this.encodeSemiColon(path),
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'upload')
-    //   .set('path', this.encodeSemiColon(path));
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
   }
 
   updateAlbumMetatag(albumId, key, text) {
@@ -380,17 +362,6 @@ export class MusicService {
       text: text,
       albumId: albumId
     });
-    // const params = new HttpParams()
-    //   .set('cmd', 'update_metatag')
-    //   .set('tag', key)
-    //   .set('value', text)
-    //   .set('albumid', albumId)
-    // ;
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // return this.http.post(
-    //   this.requestUrl, params, { headers: headers}
-    // );
   }
 
   openwebsite(albumId) {

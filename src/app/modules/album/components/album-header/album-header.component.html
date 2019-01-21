@@ -23,6 +23,7 @@
   </button>
   <app-album-menu
     [album]="album"
+    (updateimage)="emitUpdateImage($event)"
     (reload)="emitReload($event)"
   ></app-album-menu>
 </mat-card-header>

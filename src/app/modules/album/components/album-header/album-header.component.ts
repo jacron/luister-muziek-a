@@ -18,6 +18,7 @@ export class AlbumHeaderComponent implements OnInit {
   @Output() back = new EventEmitter();
   @Output() forward = new EventEmitter();
   @Output() reload = new EventEmitter();
+  @Output() updateimage = new EventEmitter();
 
   emitToList() {
     this.toList.emit();
@@ -33,6 +34,11 @@ export class AlbumHeaderComponent implements OnInit {
 
   emitReload(result) {
     this.reload.emit(result);
+  }
+
+  emitUpdateImage(url) {
+    // console.log(url);
+    this.updateimage.emit(url);
   }
 
   constructor() { }
