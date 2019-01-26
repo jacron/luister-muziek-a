@@ -196,7 +196,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  makeTitle(params: SearchParams) {
+  makeTitle() {
     let title = '';
     this.chips.forEach(chip => {
       if (title.length) {
@@ -208,7 +208,7 @@ export class HomeComponent implements OnInit {
   }
 
   storeTitle() {
-    let title =  this.makeTitle(this.params);
+    let title =  this.makeTitle();
     if (title.length === 0) {
       title = 'music-client';
     } else {
