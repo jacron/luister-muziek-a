@@ -10,6 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class PopListComponent implements OnInit {
   albums: Album[];
+  filteredAlbums: Album[];
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +26,7 @@ export class PopListComponent implements OnInit {
   }
 
   afterGet(albums) {
-    this.albums = albums;
+    this.filteredAlbums = this.albums = albums;
   }
 
   fetchThings(params) {

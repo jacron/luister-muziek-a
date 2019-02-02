@@ -42,7 +42,7 @@ export class DirectorCardComponent implements OnInit {
     if (confirm('Afbeelding ophalen?')) {
       this.moviesService.addDirectorImage(this.director.imdb_id).subscribe(
         results => this.afterGetImage(results)
-      )
+      );
     }
   }
 

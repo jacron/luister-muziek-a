@@ -25,11 +25,11 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
   imgSrc;
   navBackwards = false;
   navForwards = false;
-  navBackwardsCount= 0;
+  navBackwardsCount = 0;
   navForwardsCount = 0;
   list: List;
   idpiece = -1;
-  coverSize= -1;
+  coverSize = -1;
 
   constructor(
     private musicService: MusicService,
@@ -67,7 +67,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
     return `${this.imgBackUrl}${id}/album/100/-1`;
   }
 
-  updateImage(url) {
+  updateImage() {
     // console.log(url);
     // this.imgTime = new Date();
     // this.imgUrl = this.albumImage();

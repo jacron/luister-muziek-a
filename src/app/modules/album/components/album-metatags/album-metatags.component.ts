@@ -9,7 +9,7 @@ import {Album} from '../../../../classes/music/Album';
 })
 export class AlbumMetatagsComponent implements OnInit, OnChanges {
 
-  @Input('album') album: Album;
+  @Input() album: Album;
   tags: any[];
   objectKeys = Object.keys;
 

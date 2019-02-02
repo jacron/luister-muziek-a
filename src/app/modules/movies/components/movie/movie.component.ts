@@ -43,7 +43,7 @@ export class MovieComponent implements OnInit {
   toFinder() {
     this.moviesService.openFinder(this.movie.ID).subscribe(
       () => this.finderOpened = true
-    )
+    );
   }
 
   handleParams(params) {
@@ -69,11 +69,20 @@ export class MovieComponent implements OnInit {
   refetch() {
     this.moviesService.getNewMovie(this.movie.imdb_id).subscribe(
       response => this.afterRefetch(response)
-    )
+    );
+  }
+
+  afterPlay(response) {
+    console.log(response);
+    if (response.status !== 200) {
+      alert(response.message);
+    }
   }
 
   play(player) {
-    this.moviesService.play(this.movie.ID, player).subscribe();
+    this.moviesService.play(this.movie.ID, player).subscribe(
+      response => this.afterPlay(response)
+    );
   }
 
   ngOnInit() {

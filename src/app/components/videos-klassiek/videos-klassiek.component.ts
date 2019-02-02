@@ -24,7 +24,7 @@ export class VideosKlassiekComponent implements OnInit {
   getAlbums() {
     this.musicService.getVideoAlbums('classical').subscribe(
       results => this.afterGetAlbums(results)
-    )
+    );
   }
 
   ngOnInit() {

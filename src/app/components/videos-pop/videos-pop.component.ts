@@ -24,7 +24,7 @@ export class VideosPopComponent implements OnInit {
   getAlbums() {
     this.musicService.getVideoAlbums('pop').subscribe(
       results => this.afterGetAlbums(results)
-    )
+    );
   }
 
   ngOnInit() {

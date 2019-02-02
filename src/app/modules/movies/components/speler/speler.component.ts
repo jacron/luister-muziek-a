@@ -39,7 +39,7 @@ export class SpelerComponent implements OnInit {
     } else {
       const q = query.toLowerCase();
       this.filteredMovies = this.movies.filter(
-        (movie: Movie) => movie.Titel.toLowerCase().indexOf(q) != -1
+        (movie: Movie) => movie.Titel.toLowerCase().indexOf(q) !== -1
       );
     }
   }
@@ -54,7 +54,7 @@ export class SpelerComponent implements OnInit {
       if (params.naamspeler) {
         this.moviesService.getSpelerNaamMovies(params.naamspeler).subscribe(
           results => this.afterGetSpeler(results, params.naamspeler)
-        )
+        );
       }
     }
   }

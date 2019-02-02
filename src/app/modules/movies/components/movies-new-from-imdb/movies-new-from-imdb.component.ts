@@ -37,7 +37,7 @@ export class MoviesNewFromImdbComponent implements OnInit {
   submit() {
     this.moviesService.saveNew(this.tt).subscribe(
       results => this.afterSaveNew(results)
-    )
+    );
   }
 
   afterGetMovie(results) {

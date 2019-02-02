@@ -29,7 +29,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   setTheme(mode) {
-    switch(mode) {
+    switch (mode) {
       case 'on':
         this.overlayContainer.getContainerElement().classList.add(altTheme);
         this.darkOn.emit(true);

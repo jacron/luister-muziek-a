@@ -37,7 +37,7 @@ export class MoviesToNewFromImdbComponent implements OnInit {
   }
 
   onChange(e) {
-    if (!e.length) this.tt = null;
+    if (!e.length) { this.tt = null; }
   }
 
   toNew() {

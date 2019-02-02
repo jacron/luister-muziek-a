@@ -22,7 +22,7 @@ export class ChipsService {
       cls: facet.cls,
       id: id,
       type: type,
-    })
+    });
   }
 
   makeChips(params: SearchParams, facets: any) {
@@ -47,18 +47,18 @@ export class ChipsService {
       const id = params.idinstrument;
       this.musicService.getInstrumentById(id).subscribe( item =>
           this.makeChippie('instrument', item, id)
-      )
+      );
     }
     if (params.idcoll != -1) {
       const id = params.idcoll;
       this.musicService.getCollectionById(id).subscribe(item =>
         this.makeChippie('collection', item, id)
-      )
+      );
     }
     if (params.idtag != -1) {
       const id = params.idtag;
       this.musicService.getTagById(id).subscribe(item =>
-      this.makeChippie('tag', item, id))
+        this.makeChippie('tag', item, id));
     }
     if (params.search != '') {
       const type = 'title';
@@ -69,7 +69,7 @@ export class ChipsService {
         name: name,
         id: name,
         type: type,
-      })
+      });
     }
     return this.chips;
   }

@@ -61,7 +61,7 @@ export class CodeListComponent implements OnInit {
   }
 
   openGoogle(item: LibraryCode) {
-    window.open(this.googleUrl + document.title + ' ' + item.k_code)
+    window.open(this.googleUrl + document.title + ' ' + item.k_code);
   }
 
   updateTitle(code, title) {

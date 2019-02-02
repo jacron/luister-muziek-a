@@ -24,7 +24,7 @@ export class VideoDocumentaireComponent implements OnInit {
   getAlbums() {
     this.musicService.getVideoAlbums('documentary').subscribe(
       results => this.afterGetAlbums(results)
-    )
+    );
   }
 
   ngOnInit() {

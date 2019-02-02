@@ -40,7 +40,7 @@ export class DialogAliassingPartsComponent implements OnInit {
   leftTrim() {
     this.files.forEach(
       (file: CFile) => file.proposedname = file.proposedname.substr(1)
-    )
+    );
   }
 
   makeAliasses() {
@@ -60,11 +60,11 @@ export class DialogAliassingPartsComponent implements OnInit {
   onKeyup(e) {
     // console.log(e);
     if (e.altKey) {
-      if (e.code == 'KeyT') {
+      if (e.code === 'KeyT') {
         this.makeAliasses();
         e.stopPropagation();
       }
-      if (e.code == 'KeyO') {
+      if (e.code === 'KeyO') {
         e.stopPropagation();
         this.submit();
       }
@@ -76,7 +76,7 @@ export class DialogAliassingPartsComponent implements OnInit {
   }
 
   afterSuccess() {
-    this.files.forEach((file: CFile) => file.displayname = file.proposedname)
+    this.files.forEach((file: CFile) => file.displayname = file.proposedname);
     this.dialogRef.close();
   }
 
@@ -108,7 +108,7 @@ export class DialogAliassingPartsComponent implements OnInit {
     this.files = this.data.cuesheet.cue.files;
     this.pieces = this.data.album.pieces;
     this.files.forEach((file: CFile) =>
-      file.proposedname = this.initProposal(file))
+      file.proposedname = this.initProposal(file));
   }
 
 }

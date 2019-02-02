@@ -27,7 +27,7 @@ export class MoviesRecentlyAddedComponent implements OnInit, OnDestroy {
   getMovies() {
     this.moviesService.getRecentlyAcquiredMovies(this.pageNr, this.count).subscribe(
       (films: Movie[]) => this.movies = films
-    )
+    );
   }
 
   nextPage() {
@@ -35,7 +35,7 @@ export class MoviesRecentlyAddedComponent implements OnInit, OnDestroy {
     this.pageNr++;
     this.moviesService.getRecentlyAcquiredMovies(this.pageNr, this.count).subscribe(
       (films: Movie[]) => this.movies = this.movies.concat(films)
-    )
+    );
   }
 
   handleScrollable(e) {

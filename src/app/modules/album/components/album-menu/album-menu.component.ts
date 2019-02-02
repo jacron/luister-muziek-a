@@ -166,7 +166,7 @@ export class AlbumMenuComponent implements OnInit {
   delete() {
     if (confirm(this.album.Title + ' verwijderen?')) {
       this.musicService.removeAlbum(this.album.ID).subscribe(
-        () => this.afterDelete())
+        () => this.afterDelete());
     }
   }
 
@@ -239,7 +239,7 @@ export class AlbumMenuComponent implements OnInit {
           this.reload.emit(result);
         }
       }
-    )
+    );
   }
 
   openMusic() {

@@ -15,7 +15,7 @@ describe('AlbumMetatagsComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, MatIconModule],
       schemas: [ NO_ERRORS_SCHEMA ],
-      declarations: [ AlbumMetatagsComponent,],
+      declarations: [ AlbumMetatagsComponent, ],
       providers: [MusicService,
         {
           provide: Album,

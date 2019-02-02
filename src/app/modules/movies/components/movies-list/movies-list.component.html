@@ -1,13 +1,26 @@
 <mat-spinner *ngIf="!movies"></mat-spinner>
+<mat-form-field>
+  <input #input matInput placeholder="zoek"
+         (ngModelChange)="filterTitle($event)"
+         [(ngModel)]="query"
+         (click)="input.select()"
+  >
+  <button mat-button *ngIf="query"
+          matSuffix mat-icon-button aria-label="Clear"
+          (click)="resetSearch()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
 <div class="movies-list" *ngIf="movies">
   <div [class.wrapper]="wrap != 'nowrap'"
        [class.nowrapper]="wrap == 'nowrap'">
-    <div *ngFor="let movie of movies">
+    <div *ngFor="let movie of filteredMovies">
       <mat-card
         class="movie-card">
         <mat-card-header class="movie-header">
           <mat-card-title
-          class="link">
+          class="link movie-title">
             {{ movie.DisplayTitle }}
           </mat-card-title>
           <span class="horizontal-spacer"></span>
@@ -22,12 +35,17 @@
                alt="missing cover"
                class="movie-image">
         </div>
-        <mat-card-content *ngIf="!hideDirector"
+        <mat-card-content
           class="movie-card-content">
-          <a class="link"
-             [routerLink]="['/director', movie.idRegisseur]">
-            {{ movie.naamRegisseur }}
-          </a>
+          <div *ngIf="!hideDirector">
+            <a class="link"
+               [routerLink]="['/director', movie.idRegisseur]">
+              {{ movie.naamRegisseur }}
+            </a>
+          </div>
+          <div>
+            {{ movie.Jaar }} - {{ movie.Rating }}
+          </div>
         </mat-card-content>
       </mat-card>
     </div>

@@ -88,7 +88,7 @@ export class TypeaheadComponent implements OnInit, OnChanges {
       this.myControl.setValue(changes.text.currentValue);
     }
     if (changes.id) {
-      if (changes.id.currentValue == -1) {
+      if (changes.id.currentValue === -1) {
         this.myControl.setValue(null);
       }
     }

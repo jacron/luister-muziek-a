@@ -24,15 +24,15 @@ export class MockData {
 
   play(id) {}
 
-  getCodes() { return of([])}
+  getCodes() { return of([]); }
 
-  getCollections() { return of([])}
+  getCollections() { return of([]); }
 
-  getComposers() { return of([])}
+  getComposers() { return of([]); }
 
-  getPerformers() { return of([])}
+  getPerformers() { return of([]); }
 
-  getInstruments() { return of([])}
+  getInstruments() { return of([]); }
 
   toggleFavoriteLibrarycode(k_code, checked) {}
 
@@ -40,17 +40,17 @@ export class MockData {
 
   updateLibraryCodeAlias(code, title) {}
 
-  getPerformerAlbums() { return of([])}
+  getPerformerAlbums() { return of([]); }
 
-  getPerformersGenre() { return of([])}
+  getPerformersGenre() { return of([]); }
 
-  getPiecesRecentlyPlayed() { return of([])}
+  getPiecesRecentlyPlayed() { return of([]); }
 
-  getInfos() {return of([])}
+  getInfos() {return of([]); }
 
-  getTags() { return of([])}
+  getTags() { return of([]); }
 
-  getVideoAlbums() { return of ([])}
+  getVideoAlbums() { return of ([]); }
 
 
   // ListService mock

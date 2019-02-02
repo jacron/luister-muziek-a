@@ -21,6 +21,15 @@ export class MovieMenuComponent implements OnInit {
       action: this.play.bind(this)
     },
     {
+      label: 'Finder',
+      icon: 'search',
+      action: this.openFinder.bind(this),
+    },
+    {
+      label: 'divider',
+      icon: '',
+    },
+    {
       label: 'IMDb',
       icon: 'movie',
       color: 'rgb(245, 197, 24)',
@@ -36,11 +45,6 @@ export class MovieMenuComponent implements OnInit {
       icon: 'image',
       color: '#55ee33',
       action: this.pasteImage.bind(this)
-    },
-    {
-      label: 'Finder',
-      icon: 'search',
-      action: this.openFinder.bind(this),
     },
     {
       label: 'Uit kijklijst',
@@ -63,7 +67,7 @@ export class MovieMenuComponent implements OnInit {
   }
 
   private updateImageUrl(result) {
-    if (result.status == 200) {
+    if (result.status === 200) {
       this.movie.ImageUrl = result.ImageUrl;
     } else {
       console.log(result);
@@ -84,8 +88,17 @@ export class MovieMenuComponent implements OnInit {
     );
   }
 
+  afterPlay(response) {
+    console.log(response);
+    if (response.status !== 200) {
+      alert(response.message);
+    }
+  }
+
   play() {
-    this.moviesService.play(this.movie.ID, 'vlc').subscribe();
+    this.moviesService.play(this.movie.ID, 'vlc').subscribe(
+      response => this.afterPlay(response)
+    );
   }
 
   toImdb() {

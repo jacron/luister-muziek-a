@@ -27,6 +27,7 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   lazyImages: any;
   lazyAttribute = 'data-src';
   filteredAlbums: Album[];
+  query;
 
   constructor(
     private router: Router,
@@ -69,14 +70,20 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
     return `${this.imgUrl}${id}/album/212/-1/`;
   }
 
+  resetSearch() {
+    this.query = null;
+    this.search(null);
+  }
+
   search(newValue: string) {
-    if (!newValue.length) {
+    if (!newValue || !newValue.length) {
       this.filteredAlbums = this.albums.slice();
       return;
     }
     const q = newValue.toLowerCase();
     this.filteredAlbums = this.albums.filter(
-      album => this.testInAlbum(album, q)
+      // album => this.testInAlbum(album, q)
+      (album: Album) => album.Title.toLowerCase().indexOf(q) !== -1
     );
     this.storeIds(newValue);
   }

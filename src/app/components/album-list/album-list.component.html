@@ -1,6 +1,19 @@
 <div class="album-list chip-lists"
      *ngIf="filteredAlbums && filteredAlbums.length">
   <h3 mat-subheader class="list-header">{{ filteredAlbums.length }} albums</h3>
+  <mat-form-field>
+    <input #input matInput placeholder="zoek"
+           (ngModelChange)="search($event)"
+           [(ngModel)]="query"
+           (click)="input.select()"
+    >
+    <button mat-button *ngIf="query"
+            matSuffix mat-icon-button aria-label="Clear"
+            (click)="resetSearch()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
   <div class="wrapper">
     <div *ngFor="let album of filteredAlbums">
       <a (click)="toAlbum(album.ID)">
@@ -22,28 +35,3 @@
   </div>
 </div>
 
-<!--<div>-->
-  <!--<mat-list *ngIf="filteredAlbums && filteredAlbums.length">-->
-    <!--<h3 mat-subheader class="list-header">{{ filteredAlbums.length }} albums</h3>-->
-    <!--<mat-list-item *ngFor="let album of filteredAlbums">-->
-    <!--<div class="">-->
-      <!--<div class="img-container">-->
-        <!--<a (click)="toAlbum(album.ID)">-->
-          <!--<img-->
-            <!--attr.data-src="{{ imgUrl }}{{ album.ID }}/album/-1/100/"-->
-            <!--attr.albumid="{{ album.ID }}"-->
-            <!--class="lazy thumb"-->
-          <!--&gt;-->
-        <!--</a>-->
-      <!--</div>-->
-      <!--<div class="text-container">-->
-        <!--<div mat-line="">{{ album.Title }}</div>-->
-        <!--<app-simple-chip-lists [album]="album"-->
-                        <!--class="chips-list"-->
-                        <!--mat-line-->
-        <!--&gt;</app-simple-chip-lists>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--</mat-list-item>-->
-  <!--</mat-list>-->
-<!--</div>-->

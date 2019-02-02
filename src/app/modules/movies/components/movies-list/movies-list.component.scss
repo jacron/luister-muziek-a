@@ -18,7 +18,7 @@
 }
 .movie-header {
   height: 92px;
-  overflow: hidden;
+  overflow: auto;
 }
 .image-container {
   height: 316px;
@@ -33,6 +33,9 @@
   }
 }
 .movie-card-content {
-  padding: 20px;
-  font-size: 18px;
+  padding: 10px 0 0 0;
+  font-size: 16px;
+}
+.movie-title {
+  width: 120px;
 }

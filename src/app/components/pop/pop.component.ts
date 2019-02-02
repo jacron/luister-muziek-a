@@ -4,6 +4,7 @@ import {Person} from '../../classes/music/Person';
 import {MusicService} from '../../services/music.service';
 import {Album} from '../../classes/music/Album';
 import {Router} from '@angular/router';
+import {Movie} from '../../classes/movies/Movie';
 
 @Component({
   selector: 'app-pop',
@@ -11,8 +12,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./pop.component.scss']
 })
 export class PopComponent implements OnInit {
-
+  filteredPerformers: Person[];
   performers: Person[];
+  query;
 
   constructor(
     private stateService: StateService,
@@ -22,7 +24,7 @@ export class PopComponent implements OnInit {
 
   afterFetch(albums, id) {
     console.log(albums);
-    if(albums.length === 1) {
+    if (albums.length === 1) {
       this.router.navigate(['/album', albums[0].ID]).then();
     } else {
       this.router.navigate(['/pop', id]).then();
@@ -40,11 +42,28 @@ export class PopComponent implements OnInit {
 
   toPerformer(id) {
     this.fetchThings(id);
-    //[routerLink]="performer.ID"
+    // [routerLink]="performer.ID"
 
   }
   afterGet(response) {
-    this.performers = response;
+    // console.log(response);
+    this.filteredPerformers = this.performers = response;
+  }
+
+  resetSearch() {
+    this.query = null;
+    this.filterTitle(null);
+  }
+
+  filterTitle(query) {
+    if (!query || !query.length) {
+      this.filteredPerformers = this.performers.slice();
+    } else {
+      const q = query.toLowerCase();
+      this.filteredPerformers = this.performers.filter(
+        (person: Person) => person.FullName.toLowerCase().indexOf(q) !== -1
+      );
+    }
   }
 
   ngOnInit() {

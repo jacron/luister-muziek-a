@@ -273,7 +273,7 @@ export class HomeComponent implements OnInit {
   }
 
   rankOrder = (a: KeyValue<string, any>, b: KeyValue<string, any>): number =>
-    a.value.rank - b.value.rank;
+    a.value.rank - b.value.rank
 
   ngOnInit() {
     if (!this.facets) {

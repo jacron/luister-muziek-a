@@ -55,7 +55,7 @@ export class AlbumPiecesComponent implements OnInit {
   }
 
   removeCode(piece: Piece) {
-    console.log('not implemented: remove', piece)
+    console.log('not implemented: remove', piece);
   }
 
   displayName(s) {

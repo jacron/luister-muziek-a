@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MoviesService} from '../../../services/movies.service';
 import {Router} from '@angular/router';
-import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
-import {Suggestion} from '../../../../../classes/movies/Suggestion';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
 import {of} from 'rxjs';
 
@@ -43,7 +42,7 @@ export class SpelerAutocompleteComponent implements OnInit {
           }
           return this.moviesService.searchSpelers(name || '');
         })
-      )
+      );
   }
 
 }

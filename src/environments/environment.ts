@@ -13,12 +13,15 @@ if (hostname.includes('xip.io')
   || hostname.includes('vhx.cloud')
   || hostname.includes(myhost)) {
   host = myhost;
+  apiServer = 'http://' + host + ':8020/api';
+  moviesServer = 'http://' + host + ':5080';
 } else {
   host = '127.0.0.1';
+  apiServer = 'http://' + host + ':8020/api';
+  moviesServer = 'http://' + host + ':5090';
 }
-apiServer = 'http://' + host + ':8020/api';
-moviesServer = 'http://' + host + ':5080';
 console.log('api server', apiServer);
+console.log('movie server', moviesServer);
 export const environment = {
   apiServer,
   moviesServer,

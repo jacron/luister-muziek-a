@@ -87,7 +87,7 @@ export class DialogPiecesComponent implements OnInit {
   leftTrim() {
     this.data.pieces.forEach((piece: Piece) => {
       if (piece.marked) {
-        piece.DisplayName = piece.DisplayName.substr(1)
+        piece.DisplayName = piece.DisplayName.substr(1);
       }
     });
   }
@@ -238,7 +238,7 @@ export class DialogPiecesComponent implements OnInit {
     // reset piece marking
     this.data.pieces.forEach((piece: Piece) => {
       piece.marked = false;
-      if (!piece.DisplayName || piece.DisplayName.length == 0) {
+      if (!piece.DisplayName || piece.DisplayName.length === 0) {
         piece.DisplayName = this.util.stripExtension(piece.Name);
       }
     });

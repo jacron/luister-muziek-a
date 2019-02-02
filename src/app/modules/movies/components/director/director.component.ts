@@ -6,7 +6,7 @@ import {Movie} from '../../../../classes/movies/Movie';
 import {StateService} from '../../../../services/state.service';
 
 @Component({
-  selector: 'app-director',
+  // selector: 'app-director',
   templateUrl: './director.component.html',
   styleUrls: ['./director.component.scss']
 })
@@ -24,6 +24,7 @@ export class DirectorComponent implements OnInit {
   }
 
   afterGet(results) {
+    // console.log(results);
     this.director = results.director;
     this.movies = this.filteredMovies = results.films;
     this.stateService.setTitle(this.director.Voornaam + ' ' +
@@ -36,7 +37,7 @@ export class DirectorComponent implements OnInit {
     } else {
       const q = query.toLowerCase();
       this.filteredMovies = this.movies.filter(
-        (movie: Movie) => movie.Titel.toLowerCase().indexOf(q) != -1
+        (movie: Movie) => movie.Titel.toLowerCase().indexOf(q) !== -1
       );
     }
   }

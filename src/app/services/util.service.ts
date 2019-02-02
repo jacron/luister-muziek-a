@@ -20,12 +20,12 @@ export class UtilService {
   }
 
   isValidImdbTitleId(tt) {
-    //e.g. tt0052520
-    return tt.startsWith('tt') && tt.length == 9;
+    // e.g. tt0052520
+    return tt.startsWith('tt') && tt.length === 9;
   }
 
   parseTitleUrl(url) {
-    if (!url) return url;
+    if (!url) { return url; }
     const parts = url.split('/');
     return parts.find(part => part.startsWith('tt'));
   }

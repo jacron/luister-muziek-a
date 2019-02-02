@@ -12,9 +12,10 @@
       <mat-card-content>
         {{ movies?.length }} films
         <mat-form-field>
-          <input matInput placeholder="zoek"
+          <input #input matInput placeholder="zoek"
                  (ngModelChange)="search($event)"
                  [(ngModel)]="query"
+                 (click)="input.select()"
           >
           <button mat-button *ngIf="query"
                   matSuffix mat-icon-button aria-label="Clear"
