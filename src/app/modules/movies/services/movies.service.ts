@@ -87,6 +87,10 @@ export class MoviesService {
     return this.getJson('/api/film/folder/' + id);
   }
 
+  addToday(id) {
+    return this.getJson('/api/film/add/today/' + id);
+  }
+
   /* POST */
   postForm(cmd, params) {
     const headers = new HttpHeaders();
@@ -115,7 +119,6 @@ export class MoviesService {
   saveNew(imdb_id) {
     return this.postForm('/api/film/save/imdb', { imdb_id} );
   }
-
 
 
 }

@@ -62,12 +62,14 @@
       <span *ngFor="let actor of actors">
         <a [routerLink]="['/speler/naam', actor.name]" class="link">
           <div class="avatar">
-            <img [src]="getImageUrl(actor.imageurl)" alt="no cover">
+            <img [src]="getImageUrl(actor.imageurl)"
+            >
           </div>
           {{ actor.name || actor.naam }}
         </a>
       </span>
     </div>
+    <!--<img src="assets/not-found.png">-->
     <div *ngIf="actors.length == 0">
       <span *ngFor="let speler of spelers; let i = index">
         <a [routerLink]="['/speler/naam', speler.naam]" class="link">
@@ -77,6 +79,11 @@
     </div>
     <br>
     <div>{{ movie.genres }}</div>
+    <br>
+    <div *ngFor="let gez of gezien">
+      {{ gez.datum }}
+    </div>
+    <div><a (click)="addToday()" class="link">+</a> </div>
   </div>
 </div>
 

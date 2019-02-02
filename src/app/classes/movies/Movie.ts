@@ -1,3 +1,7 @@
+export class Gezien {
+  id: number;
+  datum: string;
+}
 export class Movie {
   ID: number;
   Titel: string;
@@ -16,4 +20,5 @@ export class Movie {
   CriterionUrl: string;
   genres: string;
   Speelduur: string;
+  gezien: Gezien[];
 }

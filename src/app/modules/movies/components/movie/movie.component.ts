@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Movie} from '../../../../classes/movies/Movie';
+import {Gezien, Movie} from '../../../../classes/movies/Movie';
 import {MoviesService} from '../../services/movies.service';
 import {StateService} from '../../../../services/state.service';
 import {environment} from '../../../../../environments/environment';
@@ -16,6 +16,7 @@ export class MovieComponent implements OnInit {
   movie: Movie;
   spelers: Speler[] = [];
   actors;
+  gezien: Gezien;
   finderOpened = false;
 
   constructor(
@@ -33,7 +34,8 @@ export class MovieComponent implements OnInit {
 
   afterGetMovie(response) {
     this.movie = response.film;
-    // console.log(response.spelers);
+    // console.log(response);
+    this.gezien = response.gezien;
     this.actors = response.spelers;
     this.stateService.setTitle(this.movie.Titel);
     document.title = this.movie.Titel;
@@ -58,7 +60,22 @@ export class MovieComponent implements OnInit {
   }
 
   getImageUrl(imageUrl) {
-    return this.domSanatizer.bypassSecurityTrustResourceUrl(imageUrl);
+    if (imageUrl) {
+      return this.domSanatizer.bypassSecurityTrustResourceUrl(imageUrl);
+    } else {
+      return 'assets/not-found.png';
+    }
+  }
+
+  afterAddToday(response) {
+    console.log(response);
+    this.gezien = response.datums;
+  }
+
+  addToday() {
+    this.moviesService.addToday(this.movie.ID).subscribe(
+      response => this.afterAddToday(response)
+    )
   }
 
   afterRefetch(results) {
