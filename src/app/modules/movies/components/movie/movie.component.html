@@ -64,17 +64,18 @@
           <div class="avatar">
             <img [src]="getImageUrl(actor.imageurl)" alt="no cover">
           </div>
-          {{ actor.name }}
+          {{ actor.name || actor.naam }}
         </a>
       </span>
     </div>
-    <div>
+    <div *ngIf="actors.length == 0">
       <span *ngFor="let speler of spelers; let i = index">
         <a [routerLink]="['/speler/naam', speler.naam]" class="link">
         {{ speler.naam }}</a>
       <span *ngIf="i < spelers.length - 1">, </span>
       </span>
     </div>
+    <br>
     <div>{{ movie.genres }}</div>
   </div>
 </div>

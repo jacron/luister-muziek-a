@@ -13,7 +13,6 @@ import {DomSanitizer} from '@angular/platform-browser';
   styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit {
-
   movie: Movie;
   spelers: Speler[] = [];
   actors;
@@ -34,6 +33,8 @@ export class MovieComponent implements OnInit {
 
   afterGetMovie(response) {
     this.movie = response.film;
+    // console.log(response.spelers);
+    this.actors = response.spelers;
     this.stateService.setTitle(this.movie.Titel);
     document.title = this.movie.Titel;
     const spelers = this.movie.Spelers.split(',');
@@ -62,6 +63,7 @@ export class MovieComponent implements OnInit {
 
   afterRefetch(results) {
     if (results.movie) {
+      // console.log(results.movie);
       this.actors = results.movie.actor_array;
     }
   }
