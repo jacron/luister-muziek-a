@@ -21,6 +21,7 @@ import { MovieJaarComponent } from './components/movie-jaar/movie-jaar.component
 import { MoviesToNewFromImdbComponent } from './components/movies-to-new-from-imdb/movies-to-new-from-imdb.component';
 import { MoviesNewFromImdbComponent } from './components/movies-new-from-imdb/movies-new-from-imdb.component';
 import {SharedModule} from '../shared/shared.module';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {SharedModule} from '../shared/shared.module';
     MovieJaarComponent,
     MoviesToNewFromImdbComponent,
     MoviesNewFromImdbComponent,
+    MovieDetailsComponent,
   ],
   imports: [
     CommonModule,

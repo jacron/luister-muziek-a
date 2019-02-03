@@ -294,13 +294,13 @@ export class MusicService {
     });
   }
 
-  play(id) {
+  play(id) {  // media center 24
     return this.postForm('/play', {
       pieceId: id,
     });
   }
 
-  play2(id) {
+  play2(id) {  // vlc
     return this.postForm('/play2', {
       pieceId: id,
     });

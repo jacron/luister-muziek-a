@@ -1,6 +1,5 @@
-<div class="album-list chip-lists"
-     *ngIf="filteredAlbums && filteredAlbums.length">
-  <h3 mat-subheader class="list-header">{{ filteredAlbums.length }} albums</h3>
+<div class="album-list chip-lists">
+  <h3 mat-subheader class="list-header">{{ filteredAlbums?.length }} albums</h3>
   <mat-form-field>
     <input #input matInput placeholder="zoek"
            (ngModelChange)="search($event)"
@@ -15,6 +14,7 @@
   </mat-form-field>
 
   <div class="wrapper">
+    <div *ngIf="filteredAlbums.length == 0" class="filler"></div>
     <div *ngFor="let album of filteredAlbums">
       <a (click)="toAlbum(album.ID)">
         <mat-card class="album-card">

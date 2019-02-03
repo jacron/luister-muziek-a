@@ -20,70 +20,8 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div class="details">
-    <button mat-menu-item
-            (click)="toImdb()"
-    >
-      <mat-icon class="movie-control imdb"
-                waves-light waves-effect
-      >movie
-      </mat-icon>
-      <span>IMDb</span>
-    </button>
-    <div>
-    <button mat-icon-button class="link vlc"
-            (click)="play('vlc')">
-      <mat-icon>play_arrow</mat-icon>vlc
-    </button>
-    </div><div>
-      <button mat-icon-button class="link"
-              (click)="play('media center')">
-        <mat-icon>play_arrow</mat-icon>media player
-      </button>
-    </div>
-    <div>
-      <a class="link" (click)="toFinder()" [class.finderopened]="finderOpened">
-        open Finder</a>
-    </div>
-    <div>
-      {{ movie.Gemaakt }}
-    </div>
-    <div>
-      <a [routerLink]="['/movies/jaar', movie.Jaar]" class="link">
-         {{ movie.Jaar }}</a>
-    </div>
-    <div>
-      <a class="link" (click)="toImdb()">{{ movie.Rating }}</a>
-    </div>
-    <div><button mat-button (click)="refetch()">
-      spelers ophalen
-    </button></div>
-    <div>
-      <span *ngFor="let actor of actors">
-        <a [routerLink]="['/speler/naam', actor.name]" class="link">
-          <div class="avatar">
-            <img [src]="getImageUrl(actor.imageurl)"
-            >
-          </div>
-          {{ actor.name || actor.naam }}
-        </a>
-      </span>
-    </div>
-    <!--<img src="assets/not-found.png">-->
-    <div *ngIf="actors.length == 0">
-      <span *ngFor="let speler of spelers; let i = index">
-        <a [routerLink]="['/speler/naam', speler.naam]" class="link">
-        {{ speler.naam }}</a>
-      <span *ngIf="i < spelers.length - 1">, </span>
-      </span>
-    </div>
-    <br>
-    <div>{{ movie.genres }}</div>
-    <br>
-    <div *ngFor="let gez of gezien">
-      {{ gez.datum }}
-    </div>
-    <div><a (click)="addToday()" class="link">+</a> </div>
+  <div class="details" *ngIf="details">
+    <app-movie-details [details]="details"></app-movie-details>
   </div>
 </div>
 

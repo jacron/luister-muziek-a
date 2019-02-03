@@ -1,7 +1,5 @@
-export class Gezien {
-  id: number;
-  datum: string;
-}
+import {Gezien} from './Gezien';
+
 export class Movie {
   ID: number;
   Titel: string;

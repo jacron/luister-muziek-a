@@ -15,6 +15,7 @@
 <div class="movies-list" *ngIf="movies">
   <div [class.wrapper]="wrap != 'nowrap'"
        [class.nowrapper]="wrap == 'nowrap'">
+    <div class="filler" *ngIf="filteredMovies.length == 0"></div>
     <div *ngFor="let movie of filteredMovies">
       <mat-card
         class="movie-card">
