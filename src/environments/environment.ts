@@ -16,8 +16,9 @@ if (hostname.includes('xip.io')
   apiServer = 'http://' + host + ':8020/api';
   moviesServer = 'http://' + host + ':5080';
 } else {
+  // use dev
   host = '127.0.0.1';
-  apiServer = 'http://' + host + ':8020/api';
+  apiServer = 'http://' + host + ':8030/api';
   moviesServer = 'http://' + host + ':5090';
 }
 console.log('api server', apiServer);

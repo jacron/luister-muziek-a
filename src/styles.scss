@@ -37,6 +37,9 @@ li {
   display: flex;
   flex-wrap: wrap;
 }
+.app-recent .row:nth-child(odd) {
+  background-color: #efefef;
+}
 .col {
   flex-basis: 0;
   -webkit-box-flex: 1;

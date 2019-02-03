@@ -279,6 +279,7 @@ export class HomeComponent implements OnInit {
     if (!this.facets) {
       this.facets = this.choiceService.getFacets();
     }
+    this.stateService.setTitle('Home');
   }
 
 }

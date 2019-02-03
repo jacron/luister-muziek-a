@@ -162,6 +162,9 @@ $darkcolor: #eeeeee;
   .file-played {
     color: lightgreen;
   }
+  .app-recent .row:nth-child(odd) {
+    background-color: #7f7f7f;
+  }
   .mat-icon.cuesheet-control {
     &.sublime {
       color: lightblue;
