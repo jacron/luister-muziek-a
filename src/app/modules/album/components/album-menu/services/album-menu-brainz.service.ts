@@ -13,12 +13,11 @@ export class AlbumMenuBrainzService {
     color: '#8f407a'
   };
   private discid;
-  private musicbrainzUrl = environment.musicbrainz;
 
   constructor() { }
 
   private openmusicbrainz() {
-    window.open(this.musicbrainzUrl + this.discid);
+    window.open(environment.musicbrainz + this.discid);
   }
 
   menu2(album: Album) {

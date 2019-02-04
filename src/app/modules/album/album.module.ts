@@ -16,7 +16,6 @@ import {CuesheetModule} from '../cuesheet/cuesheet.module';
 import {ChipsModule} from '../chips/chips.module';
 import { AlbumHeaderComponent } from './components/album-header/album-header.component';
 import { DialogAliassingPartsComponent } from './dialogs/dialog-aliassing-parts/dialog-aliassing-parts.component';
-import { AlbumMenuOptionsComponent } from './components/album-menu/album-menu-options/album-menu-options.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,6 @@ import { AlbumMenuOptionsComponent } from './components/album-menu/album-menu-op
     DialogSettingsComponent,
     AlbumHeaderComponent,
     DialogAliassingPartsComponent,
-    AlbumMenuOptionsComponent,
   ],
   imports: [
     CommonModule,

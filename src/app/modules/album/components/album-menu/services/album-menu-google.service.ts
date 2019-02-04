@@ -13,12 +13,11 @@ export class AlbumMenuGoogleService {
     color: '#66bbee',
   };
   private title;
-  private googleUrl = environment.googleUrl;
 
   constructor() { }
 
   private searchGoogle() {
-    window.open(this.googleUrl + this.title);
+    window.open(environment.googleUrl + this.title);
   }
 
   menu(album: Album) {

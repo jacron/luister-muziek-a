@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Movie} from '../../../../classes/movies/Movie';
 import {environment} from '../../../../../environments/environment';
-import {Router} from '@angular/router';
 import {MoviesService} from '../../services/movies.service';
 import {MenuOption} from '../../../../classes/shared/MenuOption';
 
@@ -53,7 +52,6 @@ export class MovieMenuComponent implements OnInit {
     },
   ];
   constructor(
-    private router: Router,
     private moviesService: MoviesService,
   ) {
   }

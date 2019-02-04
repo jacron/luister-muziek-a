@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Piece} from '../../../classes/music/Piece';
 import {MusicService} from '../../../services/music.service';
-import {forkJoin} from 'rxjs';
 import {Proposal} from '../../../classes/music/Proposal';
-import {stringify} from 'querystring';
 import {LcsService} from '../../../services/lcs.service';
 
 @Injectable()
@@ -18,14 +16,14 @@ export class PieceService {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
-  updatePieceName(pieceId, pieceName, name, albumId) {
-    const oldDisplayName = this.displayName(pieceName),
-      newName = pieceName.replace(oldDisplayName, name);
-    this.musicService.updatePieceName(pieceId, albumId, newName)
-      .subscribe(
-        (response) => console.log(response)
-      );
-  }
+  // updatePieceName(pieceId, pieceName, name, albumId) {
+  //   const oldDisplayName = this.displayName(pieceName),
+  //     newName = pieceName.replace(oldDisplayName, name);
+  //   this.musicService.updatePieceName(pieceId, albumId, newName)
+  //     .subscribe(
+  //       (response) => console.log(response)
+  //     );
+  // }
 
   displayName(s) {
     // ltrim numeric
@@ -110,20 +108,11 @@ export class PieceService {
         this.setChecked(keys, pieces);
       }
     }
-    // if (e.altKey) {
-    //   const titles: string[];
-    //   this.checkOne(pieces);
-    //   const data = this.lcs_pieces(pieces);
-    //   if (data.ids.length) {
-    //     titles.push(data.cueName);
-    //   }
-    // }
   }
 
   similar(pieces) {
     const titles = [],
       npieces = [];
-      // ids = [];
     let active = false,
       common = '',
       old_common = '';
@@ -134,7 +123,6 @@ export class PieceService {
       }
       if (active) {
         piece.checked = false;
-        // ids.push(piece.ID);
         npieces.push(piece);
         titles.push(this.displayName(piece.Name));
         common = this.makeCuesheetName(titles);
@@ -142,7 +130,6 @@ export class PieceService {
         // evaluate similarity
         if (titles.length > 2 && common.length < old_common.length - 2) {
           titles.pop();
-          // ids.pop();
           npieces.pop();
           piece.checked = true;
           break;
@@ -153,58 +140,34 @@ export class PieceService {
     return {
       titles: titles,
       pieces: npieces,
-      // ids: ids
     };
   }
 
   lcs_pieces(pieces) {
     let titles = [],
       npieces = [];
-      // ids = [];
     pieces.forEach((piece: Piece) => {
       if (piece.checked) {
         titles.push(this.displayName(piece.Name));
         npieces.push(piece);
-        // ids.push(piece.ID.toString());
       }
     });
     if (titles.length === 1) {
       const data = this.similar(pieces);
       titles = data.titles;
       npieces = data.pieces;
-      // ids = data.ids;
     }
     const cueName = this.makeCuesheetName(titles);
     return {
-      // ids: ids,
       pieces: npieces,
       cueName: cueName
     };
   }
 
-  // getCheckedIds(pieces: Piece[]) {
-  //   const ids = [];
-  //   pieces.forEach((piece: Piece) => {
-  //     if (piece.checked) {
-  //       ids.push(piece.ID);
-  //       piece.created = true;
-  //     }
-  //   });
-  //   return ids;
-  // }
-  //
-  // checkOne(pieces) {
-  //   const ids = this.getCheckedIds(pieces);
-  //   if (!ids.length) {
-  //     pieces[0].checked = true;
-  //   }
-  // }
-
   autoTest(albumId, pieces) {
     pieces.forEach(piece => piece.checked = false);
     pieces[0].checked = true;
 
-    // this.checkOne(pieces);
     let data;
     const proposals: Proposal[] = [];
     do {

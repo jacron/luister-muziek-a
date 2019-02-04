@@ -12,7 +12,6 @@ import { AppRoutingModule} from './modules/app-routing/app-routing.module';
 import { TypedNamePipe } from './pipes/typed-name.pipe';
 import { TypedTitlePipe } from './pipes/typed-title.pipe';
 import { StorageService} from './services/storage.service';
-import {PersonService} from './services/person.service';
 import { CodeComponent } from './components/code/code.component';
 import { CodeListComponent } from './components/code-list/code-list.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -118,7 +117,6 @@ import { VideoDocumentaireComponent } from './components/video-documentaire/vide
   providers: [
     MusicService,
     PieceService,
-    PersonService,
     TypedNamePipe,
     TypedTitlePipe,
     StorageService,

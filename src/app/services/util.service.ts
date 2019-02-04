@@ -5,6 +5,19 @@ export class UtilService {
 
   constructor() { }
 
+  // http://pietschsoft.com/post/2008/01/14/JavaScript-intTryParse-Equivalent
+  tryParseInt(str,defaultValue) {
+    let retValue = defaultValue;
+    if(str !== null) {
+      if(str.length > 0) {
+        if (!isNaN(str)) {
+          retValue = parseInt(str);
+        }
+      }
+    }
+    return retValue;
+  }
+
   isArray(a) {
     return Array.isArray(a);
   }

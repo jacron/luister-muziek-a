@@ -7,7 +7,7 @@ import {UtilService} from './util.service';
 export class LcsService {
 
   constructor(
-    // private util: UtilService,
+    private util: UtilService,
   ) { }
 
   private getSmallest(lines) {
@@ -48,14 +48,14 @@ export class LcsService {
     return common;
   }
 
-  private stripNumStart(line) {
+  private stripNumStart(line: string) {
     // console.log(line);
     if (!line) {
       return line;
     }
     const parts = line.split(' ');
     let part0 = '';
-    if (+parts[0] == parts[0] || parts[0].endsWith(':')) {
+    if (this.util.tryParseInt(parts[0], null) || parts[0].endsWith(':')) {
       part0 = parts[0];
       parts.shift();
     }

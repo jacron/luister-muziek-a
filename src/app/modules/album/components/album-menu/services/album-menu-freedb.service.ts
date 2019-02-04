@@ -12,13 +12,12 @@ export class AlbumMenuFreedbService {
     icon: 'library_music',
     color: '#395499'
   };
-  private freedbUrl = environment.freedbUrl;
   private discid;
 
   constructor() { }
 
   private openfreedb() {
-    window.open(this.freedbUrl + this.discid);
+    window.open(environment.freedbUrl + this.discid);
   }
 
   menu(album: Album) {
