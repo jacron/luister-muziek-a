@@ -10,6 +10,12 @@
            (keyup.enter)="submit()"
            [(ngModel)]="description">
   </mat-form-field>
+  <br>
+  <mat-form-field style="width: 100%">
+    <input matInput="" placeholder="ASIN"
+           (keyup.enter)="submit()"
+           [(ngModel)]="ASIN">
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button class="mat-raised-button"

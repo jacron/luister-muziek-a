@@ -94,9 +94,9 @@ export class MusicService {
     return this.getJson('/person/albums/count/' + id + '/' + person_type);
   }
 
-  getComposerAlbums(idComposer) {
-    return this.getJson('/composer/' + idComposer + '/albums');
-  }
+  // getComposerAlbums(idComposer) {
+  //   return this.getJson('/composer/' + idComposer + '/albums');
+  // }
 
   getPerformerAlbums(idPerformer) {
     return this.getJson('/performer/' + idPerformer + '/albums');
@@ -106,9 +106,9 @@ export class MusicService {
     return this.getJson('/tag/' + id + '/albums');
   }
 
-  getCollectionAlbums(id) {
-    return this.getJson('/collection/' + id + '/albums');
-  }
+  // getCollectionAlbums(id) {
+  //   return this.getJson('/collection/' + id + '/albums');
+  // }
 
   getSearchedAlbums(params: SearchParams) {
     const search = params.search && params.search.length ? params.search : '@@';
@@ -262,19 +262,28 @@ export class MusicService {
     });
   }
 
-  updateAlbumTitle(albumid, title) {
-    return this.postForm('/album/update/title', {
+  updateAlbum(albumid, title, description, asin) {
+    return this.postForm('/album/update', {
       albumId: albumid,
-      title: title
+      title: title,
+      description: description,
+      asin: asin,
     });
   }
 
-  updateAlbumDescription(albumid, text) {
-    return this.postForm('/album/update/description', {
-      albumId: albumid,
-      description: text
-    });
-  }
+  // updateAlbumTitle(albumid, title) {
+  //   return this.postForm('/album/update/title', {
+  //     albumId: albumid,
+  //     title: title
+  //   });
+  // }
+  //
+  // updateAlbumDescription(albumid, text) {
+  //   return this.postForm('/album/update/description', {
+  //     albumId: albumid,
+  //     description: text
+  //   });
+  // }
 
   updatePerson(options) {
     return this.postForm('/person/update', {
@@ -415,13 +424,13 @@ export class MusicService {
     });
   }
 
-  makeCuesheet(cueName, ids, albumId) {
-    return this.postForm('/cuesheet/make', {
-      ids: ids,
-      name: cueName,
-      albumId: albumId
-    });
-  }
+  // makeCuesheet(cueName, ids, albumId) {
+  //   return this.postForm('/cuesheet/make', {
+  //     ids: ids,
+  //     name: cueName,
+  //     albumId: albumId
+  //   });
+  // }
 
   toggleFavoriteLibrarycode(code, favorite) {
     return this.postForm('/code/favorite/toggle', {

@@ -10,6 +10,7 @@ export class Album {
   ID: number;
   Path: string;
   Description: string;
+  ASIN: string;
   album_performers: Person[];
   album_componisten: Person[];
   album_metatags: any;
