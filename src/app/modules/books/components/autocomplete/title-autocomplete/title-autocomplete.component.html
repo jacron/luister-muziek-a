@@ -1,0 +1,29 @@
+<mat-form-field class="search-form">
+  <input
+    type="text"
+    #query
+    matInput
+    placeholder="Titel"
+    aria-label="zoek op"
+    [formControl]="searchControl"
+    [matAutocomplete]="auto1"
+    (click)="$event.target.select()"
+    class="query"
+  >
+  <mat-autocomplete
+    #auto1="matAutocomplete"
+    (optionSelected)="onSelectionChange()"
+  >
+    <mat-option *ngFor="let option of filteredOptions|async"
+                [value]="option"
+                [innerHTML]="option.title">
+    </mat-option>
+  </mat-autocomplete>
+  <button
+    *ngIf="query.value" matSuffix
+    mat-button mat-icon-button aria-label="Clear"
+    class="closer"
+    (click)="query.value = ''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

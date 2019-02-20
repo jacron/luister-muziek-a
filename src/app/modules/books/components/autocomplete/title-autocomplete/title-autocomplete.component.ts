@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MoviesService} from '../../../../movies/services/movies.service';
+import {Router} from '@angular/router';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {MoviesService} from '../../../services/movies.service';
-import {Router} from '@angular/router';
-import {FormControl} from '@angular/forms';
+import {BooksService} from '../../../services/books.service';
 
 @Component({
   selector: 'app-title-autocomplete',
@@ -15,12 +16,12 @@ export class TitleAutocompleteComponent implements OnInit {
   filteredOptions;
 
   constructor(
-    private moviesService: MoviesService,
+    private booksService: BooksService,
     private router: Router,
   ) { }
 
   onSelectionChange() {
-    this.router.navigate(['movies', this.searchControl.value.ID]).then();
+    this.router.navigate(['books', this.searchControl.value.ID]).then();
   }
 
   ngOnInit() {
@@ -32,7 +33,7 @@ export class TitleAutocompleteComponent implements OnInit {
           if (!name || name.length < 2) {
             return of([]);
           }
-          return this.moviesService.searchMovies(name || '');
+          return this.booksService.searchTitles(name || '');
         })
       );
   }

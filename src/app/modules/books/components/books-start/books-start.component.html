@@ -1,4 +1,13 @@
-<div class="books-list">
+<div class="books-start">
+  <mat-icon>search</mat-icon>
+  <div class="selection-row">
+    <div>
+      <app-author-autocomplete></app-author-autocomplete>
+    </div>
+    <div>
+      <app-title-autocomplete></app-title-autocomplete>
+    </div>
+  </div>
   <div *ngFor="let book of books">
     <span>{{book.title}}</span>
   </div>

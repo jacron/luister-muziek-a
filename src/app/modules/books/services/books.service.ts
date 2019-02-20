@@ -22,4 +22,12 @@ export class BooksService {
     return this.getJson('/api/books');
   }
 
+  searchAuthors(query) {
+    return this.getJson('/api/search/authors/' + query);
+  }
+
+  searchTitles(query) {
+    return this.getJson('/api/search/books/' + query);
+  }
+
 }
