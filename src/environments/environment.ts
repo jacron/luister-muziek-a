@@ -6,26 +6,40 @@
 const hostname = document.location.hostname;
 let apiServer;  // music-api
 let moviesServer; // movies18
+let booksServer;
 let host;
+
 console.log(document.location);
 const myhost = '10.0.1.3';
+
 if (hostname.includes('xip.io')
   || hostname.includes('vhx.cloud')
   || hostname.includes(myhost)) {
-  host = myhost;
-  apiServer = 'http://' + host + ':8020/api';
-  moviesServer = 'http://' + host + ':5080';
-} else {
+  host = 'http://' + myhost;
+  apiServer = host + ':8020/api';
+  moviesServer = host + ':5080';
+  booksServer = host + '';
+} else if (hostname.includes('127.0.0.1') ||
+      hostname.includes('localhost')) {
   // use dev
-  host = '127.0.0.1';
-  apiServer = 'http://' + host + ':8030/api';
-  moviesServer = 'http://' + host + ':5090';
+  host = 'http://127.0.0.1';
+  apiServer = host + ':8030/api';
+  moviesServer = host + ':5090';
+  booksServer = host + ':5050';
+} else {
+  // use 'prod'
+  host = 'http://127.0.0.1';
+  apiServer = 'http://music-api/api';
+  moviesServer = 'http://movies18';
+  booksServer = 'http://booklibrary';
+
 }
 console.log('api server', apiServer);
 console.log('movie server', moviesServer);
 export const environment = {
   apiServer,
   moviesServer,
+  booksServer,
   googleUrl: 'https://google.nl/search?q=',
   freedbUrl: 'http://www.freedb.org/freedb_discid_check.php?discid=',
   amazonUrl: 'https://www.amazon.com/dp/',

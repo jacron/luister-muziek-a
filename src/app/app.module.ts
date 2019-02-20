@@ -53,6 +53,11 @@ import { VideosPopComponent } from './components/videos-pop/videos-pop.component
 import { SubmenuComponent } from './components/submenu/submenu.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { VideoDocumentaireComponent } from './components/video-documentaire/video-documentaire.component';
+import { MenuBooksComponent } from './components/menu-books/menu-books.component';
+import {BooksModule} from './modules/books/books.module';
+import {BookRoutingModule} from './modules/book-routing/book-routing.module';
+// import {BookRoutingModule} from './modules/book-routing/book-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -92,6 +97,7 @@ import { VideoDocumentaireComponent } from './components/video-documentaire/vide
     SubmenuComponent,
     ToolbarComponent,
     VideoDocumentaireComponent,
+    MenuBooksComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,11 +106,13 @@ import { VideoDocumentaireComponent } from './components/video-documentaire/vide
     HttpClientModule,
     AppRoutingModule,
     MovieRoutingModule,
+    BookRoutingModule,
     MatModule,
     ReactiveFormsModule,
     AlbumModule,
     ChipsModule,
     MoviesModule,
+    BooksModule,
     SharedModule
   ],
   exports: [
