@@ -30,4 +30,12 @@ export class BooksService {
     return this.getJson('/api/search/books/' + query);
   }
 
+  getAuthorBooks(authorId) {
+    return this.getJson('/api/author/books/' + authorId);
+  }
+
+  getBook(bookId) {
+    return this.getJson('/api/book/' + bookId);
+  }
+
 }

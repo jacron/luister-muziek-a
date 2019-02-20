@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MoviesService} from '../../../../movies/services/movies.service';
 import {Router} from '@angular/router';
-import {Suggestion} from '../../../../../classes/movies/Suggestion';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {BooksService} from '../../../services/books.service';
@@ -22,7 +20,7 @@ export class AuthorAutocompleteComponent implements OnInit {
   ) { }
 
   toAuthor(val) {
-    this.router.navigate(['books/author', val.id])
+    this.router.navigate(['author', val.id])
       .then();
   }
 

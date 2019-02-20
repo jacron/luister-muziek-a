@@ -12,7 +12,7 @@
   >
   <mat-autocomplete
     #auto1="matAutocomplete"
-    (optionSelected)="onSelectionChange()"
+    (optionSelected)="toBook()"
   >
     <mat-option *ngFor="let option of filteredOptions|async"
                 [value]="option"

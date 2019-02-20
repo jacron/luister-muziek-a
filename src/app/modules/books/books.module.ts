@@ -7,12 +7,16 @@ import {MatModule} from '../mat/mat.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthorAutocompleteComponent } from './components/autocomplete/author-autocomplete/author-autocomplete.component';
 import { TitleAutocompleteComponent } from './components/autocomplete/title-autocomplete/title-autocomplete.component';
+import { AuthorComponent } from './components/author/author.component';
+import { BookComponent } from './components/book/book.component';
 
 @NgModule({
   declarations: [
     BooksStartComponent,
     AuthorAutocompleteComponent,
     TitleAutocompleteComponent,
+    AuthorComponent,
+    BookComponent,
   ],
   imports: [
     CommonModule,

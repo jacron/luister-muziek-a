@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MoviesService} from '../../../../movies/services/movies.service';
 import {Router} from '@angular/router';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
@@ -20,8 +19,8 @@ export class TitleAutocompleteComponent implements OnInit {
     private router: Router,
   ) { }
 
-  onSelectionChange() {
-    this.router.navigate(['books', this.searchControl.value.ID]).then();
+  toBook() {
+    this.router.navigate(['book', this.searchControl.value.id]).then();
   }
 
   ngOnInit() {
