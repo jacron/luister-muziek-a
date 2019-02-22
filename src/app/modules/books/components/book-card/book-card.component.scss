@@ -1,6 +1,7 @@
 .book-card {
   width: 240px;
   height: 650px;
+  margin: 30px;
   //margin: 20px auto;
 }
 .book-card-content {
@@ -19,4 +20,8 @@
 }
 .image-container {
   overflow: hidden;
+  height: 365px;
+}
+.translator {
+  font-style: italic;
 }

@@ -10,6 +10,7 @@ import { TitleAutocompleteComponent } from './components/autocomplete/title-auto
 import { AuthorComponent } from './components/author/author.component';
 import { BookComponent } from './components/book/book.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
+import { BookEditComponent } from './components/book-edit/book-edit.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BookCardComponent } from './components/book-card/book-card.component';
     AuthorComponent,
     BookComponent,
     BookCardComponent,
+    BookEditComponent,
   ],
   imports: [
     CommonModule,

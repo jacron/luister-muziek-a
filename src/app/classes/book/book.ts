@@ -1,5 +1,6 @@
 export class Book {
   id: number;
+  isbn: string;
   title: string;
   subtitle: string;
   imgurl: string;
@@ -7,5 +8,10 @@ export class Book {
   pubinfo: string;
   author: string;
   author_id: number;
-  nbooks: number;
+  nbooks?: number;
+  tags: string;
+  genre: string;
+  date: string;
+  translator: string;
+  original_title: string;
 }

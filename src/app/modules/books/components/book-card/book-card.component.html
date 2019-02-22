@@ -12,7 +12,7 @@
         </mat-card-title>
       </mat-card-header>
       <div class="image-container">
-        <img mat-card-image [src]="book.imgurl" alt="cover missing"
+        <img mat-card-image [src]="getImageSource()" alt="cover missing"
              class="book-image">
       </div>
       <mat-card-content class="book-card-content">
@@ -20,7 +20,11 @@
            [routerLink]="['/author', book.author_id]">
           {{ book.author }}
         </a>
+        <div class="translator">{{ book.translator }}</div>
         <div class="pubinfo">{{ book.pubinfo }}</div>
+        <button (click)="scanCover($event)">scan</button> |
+        <button (click)="finishCover($event)">finish</button> |
+        <button (click)="getCover($event)" [disabled]="!book.imgurl">get</button>
       </mat-card-content>
     </mat-card>
     </a>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Book} from '../../../classes/book/book';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +48,23 @@ export class BooksService {
     );
   }
 
-  scanCover(bookId) {
-    return this.postForm('/api/book/scan/' + bookId, {});
+  scanCover() {
+    return this.postForm('/api/book/scan', {});
   }
 
+  finishCover(bookId) {
+    return this.postForm('/api/book/scanfinish/' + bookId, {});
+  }
+
+  getCover(bookId) {
+    return this.postForm('/api/book/getcover/' + bookId, {});
+  }
+
+  remove(bookId) {
+    return this.postForm('/api/book/remove/' + bookId, {});
+  }
+
+  saveBook(book: Book) {
+    return this.postForm('/api/book/save', {book});
+  }
 }

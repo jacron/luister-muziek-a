@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BooksService} from '../../services/books.service';
+import {Book} from '../../../../classes/book/book';
 
 @Component({
   selector: 'app-book',
@@ -8,7 +9,8 @@ import {BooksService} from '../../services/books.service';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit {
-  book;
+  book: Book;
+  showEdit = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -36,9 +38,53 @@ export class BookComponent implements OnInit {
   }
 
   scanCover() {
-    this.booksService.scanCover(this.book.id).subscribe(
+    this.booksService.scanCover().subscribe(
       response => console.log(response)
     )
+  }
+
+  finishCover() {
+    this.booksService.finishCover(this.book.id).subscribe(
+      response => console.log(response)
+    )
+  }
+
+  getCover() {
+    this.booksService.getCover(this.book.id).subscribe(
+      response => console.log(response)
+    )
+  }
+
+  add() {
+    this.book = {
+      id: -1,
+      isbn: '',
+      title: '',
+      subtitle: '',
+      imgurl: '',
+      notes: '',
+      pubinfo: '',
+      author_id: this.book.author_id,
+      author: this.book.author,
+      genre: '',
+      date: '',
+      tags: '',
+      translator: '',
+      original_title: '',
+    };
+    this.showEdit = true;
+  }
+
+  remove() {
+    if (confirm('Remove this book?')) {
+      this.booksService.remove(this.book.id).subscribe(
+        response => console.log(response)
+      )
+    }
+  }
+
+  edit() {
+    this.showEdit = !this.showEdit;
   }
 
   ngOnInit() {

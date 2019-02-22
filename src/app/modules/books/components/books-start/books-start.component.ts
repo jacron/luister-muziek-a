@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BooksService} from '../../services/books.service';
 import {FormControl} from '@angular/forms';
+import {StateService} from '../../../../services/state.service';
 
 @Component({
   selector: 'app-books-start',
@@ -13,6 +14,7 @@ export class BooksStartComponent implements OnInit {
 
   constructor(
     private booksService: BooksService,
+    private stateServce: StateService,
   ) { }
 
   onIsbnChange() {
@@ -20,6 +22,7 @@ export class BooksStartComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.stateServce.setTitle('Books');
   }
 
 }

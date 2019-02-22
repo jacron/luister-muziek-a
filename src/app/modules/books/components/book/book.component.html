@@ -1,7 +1,16 @@
 <div class="book-details" *ngIf="book">
   <div class="book-row">
     <app-book-card [book]="book"></app-book-card>
-    <div class="notes">{{ book.notes }}</div>
-    <a (click)="scanCover()">scan</a>
+    <div class="second">
+      <div class="notes">{{ book.notes }}</div>
+      <button (click)="scanCover()">scan</button> |
+      <button (click)="finishCover()">finish</button> |
+      <button (click)="getCover()">get</button> |
+      <button (click)="edit()">edit</button> |
+      <button (click)="add()">+</button> |
+      <button (click)="remove()">-</button>
+      <app-book-edit *ngIf="showEdit" [book]="book"></app-book-edit>
+    </div>
   </div>
+
 </div>

@@ -2,10 +2,15 @@
   font-size: 18px;
   font-style: italic;
 }
+.second {
+  padding-left: 64px;
+}
 .notes {
   width: 300px;
-  padding-left: 64px;
 }
 .book-row {
   display: flex;
+}
+button {
+  font-size: 18px;
 }
