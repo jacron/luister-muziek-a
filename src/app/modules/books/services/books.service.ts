@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,9 @@ export class BooksService {
       responseType: 'json'});
   }
 
-  getBooks() {
-    return this.getJson('/api/books');
-  }
+  // getBooks() {
+  //   return this.getJson('/api/books');
+  // }
 
   searchAuthors(query) {
     return this.getJson('/api/search/authors/' + query);
@@ -36,6 +36,19 @@ export class BooksService {
 
   getBook(bookId) {
     return this.getJson('/api/book/' + bookId);
+  }
+
+  /* POST */
+  postForm(cmd, params) {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      this.requestUrl + cmd, params, { headers: headers},
+    );
+  }
+
+  scanCover(bookId) {
+    return this.postForm('/api/book/scan/' + bookId, {});
   }
 
 }

@@ -20,7 +20,7 @@ export class TitleAutocompleteComponent implements OnInit {
   ) { }
 
   toBook() {
-    this.router.navigate(['book', this.searchControl.value.id]).then();
+    this.router.navigate(['books', this.searchControl.value.id]).then();
   }
 
   ngOnInit() {

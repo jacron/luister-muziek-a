@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BooksService} from '../../services/books.service';
+import {Book} from '../../../../classes/book/book';
+import {Author} from '../../../../classes/book/author';
+import {StateService} from '../../../../services/state.service';
 
 @Component({
   selector: 'app-author',
@@ -8,13 +11,13 @@ import {BooksService} from '../../services/books.service';
   styleUrls: ['./author.component.scss']
 })
 export class AuthorComponent implements OnInit {
-  books;
-  author;
+  books: Book[];
+  author: Author;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private booksService: BooksService,
-    // private stateService: StateService,
+    private stateService: StateService,
   ) {
     activatedRoute.params.subscribe(params => this.handleParams(params));
   }
@@ -23,8 +26,8 @@ export class AuthorComponent implements OnInit {
     console.log(response);
     this.books = response.books;
     this.author = response.author;
-    // this.stateService.setTitle(this.movie.Titel);
     document.title = this.author.first + ' ' + this.author.last;
+    this.stateService.setTitle(document.title);
   }
 
   handleParams(params) {

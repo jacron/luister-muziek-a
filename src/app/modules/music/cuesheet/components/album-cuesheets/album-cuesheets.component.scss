@@ -1,0 +1,70 @@
+//@import "../../../../app-variables";
+
+//.play {
+//  opacity: .6;
+//  cursor: pointer;
+//}
+//.edit,
+//.rename,
+//.delete {
+//  opacity: .6;
+//  position: relative;
+//  top: 4px;
+//  color: brown;
+//  cursor: pointer;
+//  font-size: 14px;
+//  transition: color $control-hover-transition-time;
+//  &:hover {
+//    color: $control-hover-color;
+//  }
+//}
+//.rename {
+//  color: green;
+//}
+//.delete {
+//  color: red;
+//}
+//.text-container {
+//  display: inline-block;
+//}
+//.title {
+//  max-width: 500px;
+//  white-space: nowrap;
+//  position: relative;
+//  top: 3px;
+//  left: 12px;
+//  font-size: 20px;
+//  font-weight: 500;
+//}
+.selected {
+  font-weight: bold;
+}
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.cuesheet-card {
+  width: 200px;
+  height: 400px;
+  margin: 20px auto;
+}
+.cuesheet-header {
+  height: 140px;
+  overflow: hidden;
+}
+.image-container {
+  height: 316px;
+  overflow: hidden;
+  margin: 0 -16px;
+}
+.cuesheet-card-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+.menu-container {
+  float: right;
+  margin-right: -12px;
+  margin-top: -8px;
+}

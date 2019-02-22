@@ -2,10 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToolbarComponent } from './toolbar.component';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {MusicService} from '../../services/music.service';
+import {MusicService} from '../../modules/music/services/music.service';
 import {MockData} from '../../../test-helpers/mock-data';
 import {StorageService} from '../../services/storage.service';
-import {ChoiceService} from '../../services/choice.service';
+import {ChoiceService} from '../../modules/music/services/choice.service';
 
 describe('ToolbarComponent', () => {
   let component: ToolbarComponent;

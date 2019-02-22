@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BooksService} from '../../services/books.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-books-start',
@@ -8,20 +9,17 @@ import {BooksService} from '../../services/books.service';
 })
 export class BooksStartComponent implements OnInit {
   books;
+  myControl = new FormControl();
 
   constructor(
     private booksService: BooksService,
   ) { }
 
-  afterGetBooks(result) {
-    console.log(result);
-    this.books = result.books;
+  onIsbnChange() {
+    console.log(this.myControl.value);
   }
 
   ngOnInit() {
-    this.booksService.getBooks().subscribe(data =>
-      this.afterGetBooks(data)
-    )
   }
 
 }

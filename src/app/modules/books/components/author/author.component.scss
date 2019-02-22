@@ -1,0 +1,13 @@
+.book-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  //flex-direction: column;
+  justify-content: space-around;
+}
+.book-card {
+
+}
+.author {
+  font-size: 20px;
+  margin: 0 0 20px 0;
+}

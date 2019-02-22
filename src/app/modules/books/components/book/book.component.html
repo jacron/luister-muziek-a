@@ -1,3 +1,7 @@
-<p>
-  book works!
-</p>
+<div class="book-details" *ngIf="book">
+  <div class="book-row">
+    <app-book-card [book]="book"></app-book-card>
+    <div class="notes">{{ book.notes }}</div>
+    <a (click)="scanCover()">scan</a>
+  </div>
+</div>

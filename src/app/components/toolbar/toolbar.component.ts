@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MusicService} from '../../services/music.service';
+import {MusicService} from '../../modules/music/services/music.service';
 import {StateService} from '../../services/state.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
 

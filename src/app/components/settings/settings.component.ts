@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MusicService} from '../../services/music.service';
+import {MusicService} from '../../modules/music/services/music.service';
 
 @Component({
   selector: 'app-settings',

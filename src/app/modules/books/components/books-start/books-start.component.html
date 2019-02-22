@@ -8,7 +8,10 @@
       <app-title-autocomplete></app-title-autocomplete>
     </div>
   </div>
-  <div *ngFor="let book of books">
-    <span>{{book.title}}</span>
-  </div>
+  <mat-form-field>
+    <input matInput placeholder="isbn" name="isbn"
+           [formControl]="myControl"
+           (change)="onIsbnChange()"
+    >
+  </mat-form-field>
 </div>

@@ -35,6 +35,12 @@ export class BookComponent implements OnInit {
     }
   }
 
+  scanCover() {
+    this.booksService.scanCover(this.book.id).subscribe(
+      response => console.log(response)
+    )
+  }
+
   ngOnInit() {
   }
 

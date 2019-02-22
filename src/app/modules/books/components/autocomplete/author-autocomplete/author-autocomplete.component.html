@@ -8,8 +8,9 @@
     #auto="matAutocomplete"
     (optionSelected)="toAuthor($event.option.value)">
     <mat-option *ngFor="let item of filteredItems | async"
+                [title]="'author/' + item.id"
                 [value]="item">
-      {{ item.first }} {{ item.last }}
+      {{ item.first }} {{ item.last }} ({{ item.nbooks }})
     </mat-option>
   </mat-autocomplete>
   <button

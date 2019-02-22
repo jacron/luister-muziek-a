@@ -1,0 +1,28 @@
+<mat-progress-spinner *ngIf="!book"></mat-progress-spinner>
+<div class="book-card" *ngIf="book">
+    <a class="link" [routerLink]="['/books', book.id]">
+    <mat-card class="book-card">
+      <mat-card-header class="book-header">
+        <mat-card-title>
+          {{ book.title }}
+          <span *ngIf="book.date"> ({{ book.date }})</span>
+        </mat-card-title>
+        <mat-card-title>
+          {{ book.subtitle }}
+        </mat-card-title>
+      </mat-card-header>
+      <div class="image-container">
+        <img mat-card-image [src]="book.imgurl" alt="cover missing"
+             class="book-image">
+      </div>
+      <mat-card-content class="book-card-content">
+        <a class="link"
+           [routerLink]="['/author', book.author_id]">
+          {{ book.author }}
+        </a>
+        <div class="pubinfo">{{ book.pubinfo }}</div>
+      </mat-card-content>
+    </mat-card>
+    </a>
+</div>
+
