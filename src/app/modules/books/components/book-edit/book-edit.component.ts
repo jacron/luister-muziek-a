@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Book} from '../../../../classes/book/book';
 import {BooksService} from '../../services/books.service';
@@ -10,6 +10,8 @@ import {BooksService} from '../../services/books.service';
 })
 export class BookEditComponent implements OnInit, OnChanges {
   @Input() book: Book;
+  @Output() bookChange = new EventEmitter();
+
   formGroup: FormGroup;
 
   constructor(
@@ -26,9 +28,13 @@ export class BookEditComponent implements OnInit, OnChanges {
     }
   }
 
+  afterSave(id, book: Book) {
+    this.book = book;
+    this.bookChange.emit(book);
+  }
+
   save() {
     const b: Book = this.formGroup.value;
-    console.log(b);
 
     const book: Book = {
       id: this.book.id,
@@ -40,6 +46,7 @@ export class BookEditComponent implements OnInit, OnChanges {
       author: b.author,
       author_id: b.author_id,
       isbn: b.isbn,
+      isbn13: b.isbn13,
       tags: b.tags,
       genre: b.genre,
       date: b.date,
@@ -47,7 +54,7 @@ export class BookEditComponent implements OnInit, OnChanges {
       original_title: b.original_title,
     };
     this.booksService.saveBook(book).subscribe(
-      response => console.log(response)
+      response => this.afterSave(response, book)
     )
   }
 
@@ -63,6 +70,7 @@ export class BookEditComponent implements OnInit, OnChanges {
       author: new FormControl(this.book.author),
       author_id: new FormControl(this.book.author_id),
       isbn: new FormControl(this.book.isbn),
+      isbn13: new FormControl(this.book.isbn13),
       tags: new FormControl(this.book.tags),
       genre: new FormControl(this.book.genre),
       date: new FormControl(this.book.date),

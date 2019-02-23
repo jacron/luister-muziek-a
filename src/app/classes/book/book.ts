@@ -1,6 +1,7 @@
 export class Book {
   id: number;
   isbn: string;
+  isbn13: string;
   title: string;
   subtitle: string;
   imgurl: string;

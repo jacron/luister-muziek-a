@@ -1,7 +1,7 @@
 <!--<mat-progress-spinner *ngIf="!author"></mat-progress-spinner>-->
 <div class="author-books" *ngIf="author">
   <div class="author">
-    {{ author.first }} {{ author.last }}
+    {{ author.first }} {{ author.last }} ({{ books.length }})
   </div>
   <div class="book-wrapper">
     <div *ngFor="let book of books" class="book-card">

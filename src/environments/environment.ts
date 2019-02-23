@@ -36,6 +36,7 @@ if (hostname.includes('xip.io')
 }
 console.log('api server', apiServer);
 console.log('movie server', moviesServer);
+console.log('book server', booksServer);
 export const environment = {
   apiServer,
   moviesServer,

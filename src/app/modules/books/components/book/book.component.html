@@ -2,14 +2,21 @@
   <div class="book-row">
     <app-book-card [book]="book"></app-book-card>
     <div class="second">
-      <div class="notes">{{ book.notes }}</div>
-      <button (click)="scanCover()">scan</button> |
-      <button (click)="finishCover()">finish</button> |
-      <button (click)="getCover()">get</button> |
-      <button (click)="edit()">edit</button> |
-      <button (click)="add()">+</button> |
-      <button (click)="remove()">-</button>
-      <app-book-edit *ngIf="showEdit" [book]="book"></app-book-edit>
+      <div class="notes" *ngIf="!showEdit">
+        {{ book.notes }}
+      </div>
+      <div class="cmds">
+        <button (click)="scanCover()">scan</button> |
+        <button (click)="finishCover()">finish</button> |
+        <button (click)="getCover()" [disabled]="!book.imgurl">get</button> |
+        <button (click)="edit()">edit</button> |
+        <button (click)="add()">+</button> |
+        <button (click)="remove()">-</button>
+      </div>
+      <app-book-edit *ngIf="showEdit" [(book)]="book"></app-book-edit>
+    </div>
+    <div class="third">
+      <button (click)="bolcomcover()">bolcom cover</button>
     </div>
   </div>
 

@@ -2,11 +2,22 @@
   font-size: 18px;
   font-style: italic;
 }
-.second {
+.second,
+.third {
   padding-left: 64px;
+}
+.second {
+  max-width: 500px;
+}
+.third {
+  //width: 33%;
 }
 .notes {
   width: 300px;
+  margin-bottom: 18px;
+}
+.cmds {
+  margin-bottom: 18px;
 }
 .book-row {
   display: flex;

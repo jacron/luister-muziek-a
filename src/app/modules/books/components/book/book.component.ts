@@ -59,6 +59,7 @@ export class BookComponent implements OnInit {
     this.book = {
       id: -1,
       isbn: '',
+      isbn13: '',
       title: '',
       subtitle: '',
       imgurl: '',
@@ -81,6 +82,12 @@ export class BookComponent implements OnInit {
         response => console.log(response)
       )
     }
+  }
+
+  bolcomcover() {
+    this.booksService.getBolcomCover(this.book.isbn).subscribe(
+      response => console.log(response)
+    )
   }
 
   edit() {

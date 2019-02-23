@@ -39,6 +39,10 @@ export class BooksService {
     return this.getJson('/api/book/' + bookId);
   }
 
+  getBolcomCover(isbn) {
+    return this.getJson('/api/book/getbolcomcover/' + isbn);
+  }
+
   /* POST */
   postForm(cmd, params) {
     const headers = new HttpHeaders();
