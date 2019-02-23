@@ -3,11 +3,11 @@
     <a class="link" [routerLink]="['/books', book.id]">
     <mat-card class="book-card">
       <mat-card-header class="book-header">
-        <mat-card-title>
+        <mat-card-title class="book-title">
           {{ book.title }}
           <span *ngIf="book.date"> ({{ book.date }})</span>
         </mat-card-title>
-        <mat-card-title>
+        <mat-card-title class="book-subtitle">
           {{ book.subtitle }}
         </mat-card-title>
       </mat-card-header>
@@ -16,12 +16,16 @@
              class="book-image">
       </div>
       <mat-card-content class="book-card-content">
-        <a class="link"
-           [routerLink]="['/author', book.author_id]">
-          {{ book.author }}
-        </a>
-        <div class="translator">{{ book.translator }}</div>
-        <div class="pubinfo">{{ book.pubinfo }}</div>
+        <div class="book-footer">
+          <div class="author">
+            <a class="link"
+               [routerLink]="['/author', book.author_id]">
+              {{ book.author }}
+            </a>
+          </div>
+          <div class="translator">{{ book.translator }}</div>
+          <div class="pubinfo">{{ book.pubinfo }}</div>
+        </div>
         <button (click)="scanCover($event)">scan</button> |
         <button (click)="finishCover($event)">finish</button> |
         <button (click)="getCover($event)" [disabled]="!book.imgurl">get</button>

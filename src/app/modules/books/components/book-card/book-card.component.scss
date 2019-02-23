@@ -5,13 +5,22 @@
   //margin: 20px auto;
 }
 .book-card-content {
-  font-size: 18px;
+  font-size: 16px;
 }
-.book-image {
+.book-subtitle {
+  font-size: 14px;
 }
 .book-header {
   height: 160px;
   overflow: auto;
+}
+.book-footer {
+  padding-top: 6px;
+  height: 100px;
+  overflow: auto;
+}
+.author {
+  padding: 6px 0;
 }
 .book-container {
   height: 316px;
