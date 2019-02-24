@@ -1,6 +1,5 @@
-<mat-progress-spinner *ngIf="!book"></mat-progress-spinner>
+<!--<mat-progress-spinner *ngIf="!book"></mat-progress-spinner>-->
 <div class="book-card" *ngIf="book">
-    <a class="link" [routerLink]="['/books', book.id]">
     <mat-card class="book-card">
       <mat-card-header class="book-header">
         <mat-card-title class="book-title">
@@ -10,6 +9,7 @@
         <mat-card-title class="book-subtitle">
           {{ book.subtitle }}
         </mat-card-title>
+        <div class="genre">{{ book.genre}}</div>
       </mat-card-header>
       <div class="image-container">
         <img mat-card-image [src]="getImageSource()" alt=""
@@ -31,6 +31,5 @@
         <button (click)="getCover($event)" [disabled]="!book.imgurl">get</button>
       </mat-card-content>
     </mat-card>
-    </a>
 </div>
 

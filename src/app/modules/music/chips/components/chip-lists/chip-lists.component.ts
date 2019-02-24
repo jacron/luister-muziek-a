@@ -24,7 +24,7 @@ export class ChipListsComponent implements OnInit {
   @Input() editable: boolean;
   @Input() showimage: boolean;
   @Output() close = new EventEmitter();
-  imgUrl = environment.apiServer + '/image/';
+  imgUrl = environment.musicServer + '/image/';
 
   constructor(
     private router: Router,

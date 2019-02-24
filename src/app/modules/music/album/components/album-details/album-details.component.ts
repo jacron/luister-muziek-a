@@ -19,8 +19,8 @@ import {UtilService} from '../../../../../services/util.service';
 export class AlbumDetailsComponent implements OnInit, DoCheck {
   @Input() album: Album;
 
-  imgUrl = environment.apiServer + '/image/';
-  imgBackUrl = environment.apiServer + '/image/back/';
+  imgUrl = environment.musicServer + '/image/';
+  imgBackUrl = environment.musicServer + '/image/back/';
   imgTime = new Date();
   imgSrc;
   navBackwards = false;

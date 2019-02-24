@@ -23,7 +23,7 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() albums: Album[];
   @Input() q = '';
 
-  imgUrl = environment.apiServer + '/image/';
+  imgUrl = environment.musicServer + '/image/';
   lazyImages: any;
   lazyAttribute = 'data-src';
   filteredAlbums: Album[];

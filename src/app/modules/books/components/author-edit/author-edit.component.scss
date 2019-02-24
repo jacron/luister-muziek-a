@@ -1,0 +1,21 @@
+.first,
+.born {
+  width: calc(50% - 6px);
+  margin-right: 12px;
+}
+.last,
+.died {
+  width: calc(50% - 6px);
+}
+.first,
+.last,
+.born,
+.died {
+  display: inline-block;
+}
+.author-image {
+  height: 120px;
+}
+.dates {
+  margin-bottom: 6px;
+}

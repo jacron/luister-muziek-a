@@ -52,7 +52,7 @@ Solution: upgrade node-sass to 4.9.3 (after adding a line to package.json)
 
 ## Back-end
 
- apiServer: 'http://localhost:5000/api',
+ musicServer: 'http://localhost:5000/api',
 
 nb 
 

@@ -9,8 +9,8 @@ export class SubmenuComponent implements OnInit {
   @Input() sidenav;
   @Input() links;
   @Input() header;
-  menuExpanded = true;
-  expandMode = 'expand_less';
+  menuExpanded = false;
+  expandMode = 'expand_more';
 
   constructor() { }
 

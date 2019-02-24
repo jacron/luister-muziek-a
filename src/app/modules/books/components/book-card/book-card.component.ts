@@ -16,7 +16,6 @@ export class BookCardComponent implements OnInit {
   ) { }
 
   getImageSource() {
-    // return this.book.imgurl;
     const requestUrl = environment.booksServer;
     return requestUrl + '/cover/' + this.book.id;
   }

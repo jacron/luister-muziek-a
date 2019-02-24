@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BooksService} from '../../services/books.service';
 import {Book} from '../../../../classes/book/book';
+import {StateService} from '../../../../services/state.service';
 
 @Component({
   selector: 'app-book',
@@ -15,7 +16,7 @@ export class BookComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private booksService: BooksService,
-    // private stateService: StateService,
+    private stateService: StateService,
   ) {
     activatedRoute.params.subscribe(params => this.handleParams(params));
   }
@@ -23,7 +24,7 @@ export class BookComponent implements OnInit {
   afterGetBook(response) {
     console.log(response);
     this.book = response;
-    // this.stateService.setTitle(this.movie.Titel);
+    this.stateService.setTitle(this.book.title);
     document.title = this.book.title;
   }
 
@@ -78,7 +79,7 @@ export class BookComponent implements OnInit {
 
   remove() {
     if (confirm('Remove this book?')) {
-      this.booksService.remove(this.book.id).subscribe(
+      this.booksService.removeBook(this.book.id).subscribe(
         response => console.log(response)
       )
     }

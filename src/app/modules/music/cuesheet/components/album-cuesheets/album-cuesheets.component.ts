@@ -44,13 +44,13 @@ export class AlbumCuesheetsComponent implements OnInit {
 
   play(e, id) {
     e.stopPropagation();
-    if (this.playable) {
+    // if (this.playable) {
       this.musicService.play(id).subscribe(
         response => this.onPlayed(response, id)
       );
-    } else {
-      alert('Dit stuk is niet af te spelen (bestand niet gevonden)');
-    }
+    // } else {
+    //   alert('Dit stuk is niet af te spelen (bestand niet gevonden)');
+    // }
   }
 
   ngOnInit() {

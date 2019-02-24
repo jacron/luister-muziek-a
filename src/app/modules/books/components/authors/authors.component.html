@@ -1,0 +1,10 @@
+<div class="authors" *ngIf="authors">
+  <div class="header">
+    Auteurs ({{ authors.length }})
+  </div>
+  <div *ngFor="let author of authors">
+    <a [routerLink]="['/author', author.id]" class="link">
+      {{ author.first }} {{ author.last }} - {{ author.nbooks }}
+    </a>
+  </div>
+</div>

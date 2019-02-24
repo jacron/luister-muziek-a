@@ -4,7 +4,7 @@ import {MenuOption} from '../../../classes/shared/MenuOption';
 const movielinks: MenuOption[] = [
   {
     href: 'movies',
-    label: 'Movies',
+    label: 'Films',
     icon: 'movie'
   },
 ];

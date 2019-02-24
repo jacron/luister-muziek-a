@@ -13,7 +13,7 @@ import {DialogPicComponent} from '../../../album/dialogs/dialog-pic/dialog-pic.c
 })
 export class DialogPersonComponent implements OnInit {
 
-  imgUrl = environment.apiServer + '/image/';
+  imgUrl = environment.musicServer + '/image/';
   googleUrl = environment.googleUrl;
   person: Person;
   albumCount: number;

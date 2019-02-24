@@ -1,0 +1,23 @@
+
+<img [src]="getImageSource()" class="author-image">
+<div class="dates">
+  <span>{{ author.born }}</span> - <span>{{ author.died }}</span>
+</div>
+<div class="cmds">
+  <!--<button (click)="scanCover()">scan</button> |-->
+  <!--<button (click)="finishCover()">finish</button> |-->
+  <button (click)="getCover()" [disabled]="!author.imgurl">get</button> |
+  <button (click)="edit()">edit</button> |
+  <!--<button (click)="add()">+</button> |-->
+  <button (click)="remove()">-</button>
+</div>
+
+
+<form [formGroup]="formGroup" novalidate (ngSubmit)="save()" *ngIf="editAuthor">
+  <mat-form-field class="{{ option.name }}" *ngFor="let option of options">
+    <input matInput [placeholder]="option.label"
+           [name]="option.name" [formControlName]="option.name">
+  </mat-form-field>
+  <button mat-raised-button color="primary"
+          [disabled]="!formGroup.valid">Save</button>
+</form>

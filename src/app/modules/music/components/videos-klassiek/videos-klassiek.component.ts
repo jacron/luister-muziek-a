@@ -16,9 +16,7 @@ export class VideosKlassiekComponent implements OnInit {
   ) { }
 
   afterGetAlbums(results) {
-    console.log(results);
     this.videoalbums = results;
-    this.stateService.setTitle('Muziekvideo\'s Klassiek');
   }
 
   getAlbums() {
@@ -28,6 +26,7 @@ export class VideosKlassiekComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.stateService.setTitle('Muziekvideo\'s Klassiek');
     this.getAlbums();
   }
 

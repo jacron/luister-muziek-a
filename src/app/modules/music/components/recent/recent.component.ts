@@ -13,7 +13,7 @@ import {RecentItem} from '../../../../classes/music/RecentItem';
 })
 export class RecentComponent implements OnInit {
   items: RecentItem[];
-  imgUrl = environment.apiServer + '/image/';
+  imgUrl = environment.musicServer + '/image/';
 
   constructor(
     private musicService: MusicService,

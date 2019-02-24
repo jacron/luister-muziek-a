@@ -47,7 +47,7 @@ export class SearchFormComponent implements OnChanges, OnInit {
 
   getAlbums() {
     // send a request to get albums
-    // console.log(this.myControl.value);
+    // console.log(this.isbnFormControl.value);
     const params: SearchParams = {
       idcomp: this.choices[0].id || -1,
       idperf: this.choices[1].id || -1,

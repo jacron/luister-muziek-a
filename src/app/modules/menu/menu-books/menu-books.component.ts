@@ -4,9 +4,15 @@ import {MenuOption} from '../../../classes/shared/MenuOption';
 const booklinks: MenuOption[] = [
   {
     href: 'books',
-    label: 'Books',
+    label: 'Boeken',
     icon: 'book'
   },
+  {
+    href: 'authors',
+    label: 'Auteurs',
+    icon: 'book',
+    color: 'blue'
+  }
 ];
 
 @Component({

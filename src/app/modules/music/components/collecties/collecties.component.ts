@@ -10,7 +10,7 @@ import {environment} from '../../../../../environments/environment';
 export class CollectiesComponent implements OnInit {
   @Input() collections: Collection[];
   @Input() startletter: string;
-  imgUrl = environment.apiServer + '/image/';
+  imgUrl = environment.musicServer + '/image/';
 
   imageUrl(id) {
     return `${this.imgUrl}${id}/album/-1/100/`;

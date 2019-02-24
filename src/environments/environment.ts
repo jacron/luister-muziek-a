@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 const hostname = document.location.hostname;
-let apiServer;  // music-api
+let musicServer;  // music-api
 let moviesServer; // movies18
 let booksServer;
 let host;
@@ -16,29 +16,29 @@ if (hostname.includes('xip.io')
   || hostname.includes('vhx.cloud')
   || hostname.includes(myhost)) {
   host = 'http://' + myhost;
-  apiServer = host + ':8020/api';
+  musicServer = host + ':8020/api';
   moviesServer = host + ':5080';
   booksServer = host + '';
 } else if (hostname.includes('127.0.0.1') ||
       hostname.includes('localhost')) {
   // use dev
   host = 'http://127.0.0.1';
-  apiServer = host + ':8030/api';
+  musicServer = host + ':8030/api';
   moviesServer = host + ':5090';
   booksServer = host + ':5050';
 } else {
   // use 'prod'
   host = 'http://127.0.0.1';
-  apiServer = 'http://music-api/api';
+  musicServer = 'http://music-api/api';
   moviesServer = 'http://movies18';
   booksServer = 'http://booklibrary';
 
 }
-console.log('api server', apiServer);
+console.log('music server', musicServer);
 console.log('movie server', moviesServer);
 console.log('book server', booksServer);
 export const environment = {
-  apiServer,
+  musicServer,
   moviesServer,
   booksServer,
   googleUrl: 'https://google.nl/search?q=',

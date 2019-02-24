@@ -14,7 +14,7 @@ export class CodeListComponent implements OnInit {
 
   libraryCodes: LibraryCode[];
   googleUrl = environment.googleUrl;
-  imageUrl = environment.apiServer + '/image/';
+  imageUrl = environment.musicServer + '/image/';
   fav = false;
 
   constructor(

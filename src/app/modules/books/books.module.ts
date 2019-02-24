@@ -11,6 +11,11 @@ import { AuthorComponent } from './components/author/author.component';
 import { BookComponent } from './components/book/book.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
 import { BookEditComponent } from './components/book-edit/book-edit.component';
+import { AuthorsComponent } from './components/authors/authors.component';
+import { AuthorCardComponent } from './components/author-card/author-card.component';
+import { AuthorEditComponent } from './components/author-edit/author-edit.component';
+import { EditFieldComponent } from './components/edit-field/edit-field.component';
+import { TitleQueryComponent } from './components/title-query/title-query.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +26,11 @@ import { BookEditComponent } from './components/book-edit/book-edit.component';
     BookComponent,
     BookCardComponent,
     BookEditComponent,
+    AuthorsComponent,
+    AuthorCardComponent,
+    AuthorEditComponent,
+    EditFieldComponent,
+    TitleQueryComponent,
   ],
   imports: [
     CommonModule,

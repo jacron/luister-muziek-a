@@ -7,13 +7,41 @@
     <div>
       <app-title-autocomplete></app-title-autocomplete>
     </div>
+  </div>
+  <div class="selection-row">
     <div>
       <mat-form-field>
-        <input matInput placeholder="isbn" name="isbn"
-               [formControl]="myControl"
+        <input #query
+                matInput placeholder="isbn"
+               name="isbn"
+               [formControl]="isbnFormControl"
                (change)="onIsbnChange()"
         >
+        <button mat-button *ngIf="query.value" matSuffix
+                mat-icon-button aria-label="Clear"
+                class="closer"
+                (click)="clearQuery()">
+          <mat-icon>close</mat-icon>
+        </button>
       </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="titel (deel)"
+               name="title"
+               [formControl]="titleFormControl"
+               (change)="onTitleChange()"
+        >
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="not-found" *ngIf="notfound">niet in catalogus</div>
+  <app-book-edit [book]="proposal" *ngIf="proposal"></app-book-edit>
+  <div class="book-wrapper">
+    <div *ngFor="let book of books" class="book-card">
+      <a class="link" [routerLink]="['/books', book.id]">
+        <app-book-card [book]="book"></app-book-card>
+      </a>
     </div>
   </div>
 </div>
