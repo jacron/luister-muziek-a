@@ -15,4 +15,6 @@ export class Book {
   date: string;
   translator: string;
   original_title: string;
+  source?: string;
+  url?: string;
 }

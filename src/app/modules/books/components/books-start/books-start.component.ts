@@ -13,7 +13,8 @@ import {Router} from '@angular/router';
 export class BooksStartComponent implements OnInit {
   books: Book[];
   proposal: Book;
-  notfound = false;
+  notInCatalogue = false;
+  notfound = null;
   isbnFormControl = new FormControl();
   titleFormControl = new FormControl();
 
@@ -23,26 +24,41 @@ export class BooksStartComponent implements OnInit {
     private router: Router,
   ) { }
 
-  afterGetRemote(response) {
+  afterGetRemote(response, source) {
     console.log(response);
-    this.notfound = true;
-    this.proposal = response.matches[0];
-    this.proposal.id = -1;
+    this.notInCatalogue = true;
+    if (response.matches && response.matches[0]) {
+      this.proposal = response.matches[0];
+      this.proposal.id = -1;
+      this.proposal.source = source;
+      this.notfound = null;
+    } else {
+      this.notfound = source;
+    }
   }
 
   afterGetBookByIsbn(book: Book) {
     this.books = [];
+    this.notInCatalogue = true;
+    // return;  // testing
     if (book) {
-      this.notfound = false;
+      this.notInCatalogue = false;
       this.proposal = null;
       this.books.push(book);
     }
     else {
-      this.notfound = true;
-      this.booksService.getRemote(this.isbnFormControl.value, 'bolcom').subscribe(
-        response => this.afterGetRemote(response)
-      )
+      this.notInCatalogue = true;
     }
+  }
+
+  remote(source) {
+    const isbn = this.isbnFormControl.value;
+    console.log(isbn);
+    this.notfound = null;
+    this.proposal = null;
+    this.booksService.getRemote(isbn, source).subscribe(
+      response => this.afterGetRemote(response, source)
+    )
   }
 
   onTitleChange() {
@@ -50,9 +66,13 @@ export class BooksStartComponent implements OnInit {
     this.router.navigate(['books/search', query]);
   }
 
-  onIsbnChange() {
-    console.log(this.isbnFormControl.value);
-    this.booksService.getBookByIsbn(this.isbnFormControl.value).subscribe(
+  onIsbnChange(val) {
+    if (val) {  // testing
+      this.isbnFormControl.setValue(val);
+    }
+    const isbn = this.isbnFormControl.value;
+    console.log(isbn);
+    this.booksService.getBookByIsbn(isbn).subscribe(
       (book: Book) => this.afterGetBookByIsbn(book)
     )
   }
@@ -60,6 +80,7 @@ export class BooksStartComponent implements OnInit {
   clearQuery() {
     this.isbnFormControl.setValue(null);
     this.books = [];
+    this.proposal = null;
   }
 
   ngOnInit() {

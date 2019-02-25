@@ -6,7 +6,8 @@
 const hostname = document.location.hostname;
 let musicServer;  // music-api
 let moviesServer; // movies18
-let booksServer;
+let booksServer; // booklibrary_flask
+let scrapeServer = 'http://localhost:3033';  //
 let host;
 
 console.log(document.location);
@@ -41,6 +42,7 @@ export const environment = {
   musicServer,
   moviesServer,
   booksServer,
+  scrapeServer,
   googleUrl: 'https://google.nl/search?q=',
   freedbUrl: 'http://www.freedb.org/freedb_discid_check.php?discid=',
   amazonUrl: 'https://www.amazon.com/dp/',

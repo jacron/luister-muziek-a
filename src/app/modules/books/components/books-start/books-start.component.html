@@ -11,6 +11,7 @@
   <div class="selection-row">
     <div>
       <mat-form-field>
+        <!--<button (click)="onIsbnChange('9780198784920')">tst</button>-->
         <input #query
                 matInput placeholder="isbn"
                name="isbn"
@@ -35,8 +36,19 @@
       </mat-form-field>
     </div>
   </div>
-  <div class="not-found" *ngIf="notfound">niet in catalogus</div>
-  <app-book-edit [book]="proposal" *ngIf="proposal"></app-book-edit>
+  <div class="not-found" *ngIf="notInCatalogue">
+    niet in catalogus
+    <button (click)="remote('bolcom')">bolcom</button>
+    <button (click)="remote('kb')">kb</button>
+    <button (click)="remote('isbndb')">isbndb</button>
+  </div>
+  <div *ngIf="notfound">{{ notfound }}: niet gevonden</div>
+  <div *ngIf="proposal" class="website">
+    <a [href]="proposal.url" class="link" target="_blank">
+      {{ proposal?.source }}</a>
+  </div>
+  <app-book-edit [(book)]="proposal" [discard]="true"
+                 *ngIf="proposal"></app-book-edit>
   <div class="book-wrapper">
     <div *ngFor="let book of books" class="book-card">
       <a class="link" [routerLink]="['/books', book.id]" *ngIf="book">

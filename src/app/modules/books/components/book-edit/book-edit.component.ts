@@ -11,6 +11,7 @@ import {BooksService} from '../../services/books.service';
 export class BookEditComponent implements OnInit, OnChanges {
   @Input() book: Book;
   @Output() bookChange = new EventEmitter();
+  @Input() discard: boolean;
 
   formGroup: FormGroup;
 
@@ -30,7 +31,11 @@ export class BookEditComponent implements OnInit, OnChanges {
 
   afterSave(id, book: Book) {
     this.book = book;
-    this.bookChange.emit(book);
+    if (this.discard) {
+      this.bookChange.emit(null);
+    } else {
+      this.bookChange.emit(book);
+    }
   }
 
   save() {
