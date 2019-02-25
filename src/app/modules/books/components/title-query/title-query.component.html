@@ -1,7 +1,7 @@
 <div class="book-wrapper">
   <div *ngFor="let book of books" class="book-card">
-    <a class="link" [routerLink]="['/books', book.id]">
-      <app-book-card [book]="book"></app-book-card>
+    <a class="link" [routerLink]="['/books', book.id]" *ngIf="book">
+      <app-book-card [(book)]="book"></app-book-card>
     </a>
   </div>
 </div>

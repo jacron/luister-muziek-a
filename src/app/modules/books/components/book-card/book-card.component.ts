@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Book} from '../../../../classes/book/book';
 import {environment} from '../../../../../environments/environment';
 import {BooksService} from '../../services/books.service';
@@ -10,6 +10,7 @@ import {BooksService} from '../../services/books.service';
 })
 export class BookCardComponent implements OnInit {
   @Input() book: Book;
+  @Output() bookChange = new EventEmitter();
 
   constructor(
     private booksService: BooksService,
@@ -41,6 +42,21 @@ export class BookCardComponent implements OnInit {
     this.booksService.getCover(this.book.id).subscribe(
       response => console.log(response)
     )
+  }
+
+  afterRemove(response) {
+    // console.log(response);
+    this.bookChange.emit(null);
+  }
+
+  remove(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (confirm(`'${this.book.title}' verwijderen?`)) {
+      this.booksService.removeBook(this.book.id).subscribe(
+        response => this.afterRemove(response)
+      )
+    }
   }
 
   ngOnInit() {

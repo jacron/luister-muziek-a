@@ -1,6 +1,6 @@
 <div class="book-details" *ngIf="book">
   <div class="book-row">
-    <app-book-card [book]="book"></app-book-card>
+    <app-book-card [(book)]="book"></app-book-card>
     <div class="second">
       <div class="notes" *ngIf="!showEdit">
         {{ book.notes }}
