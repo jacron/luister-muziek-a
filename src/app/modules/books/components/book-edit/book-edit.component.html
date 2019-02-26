@@ -1,44 +1,16 @@
-<form [formGroup]="formGroup" novalidate (ngSubmit)="save()">
-  <mat-form-field class="genre">
-    <input matInput placeholder="genre" name="genre" formControlName="genre">
+
+<form [formGroup]="formGroup" novalidate (ngSubmit)="store()">
+  <mat-form-field class="{{ option.name }}" *ngFor="let option of options">
+    <textarea matInput placeholder="notes" *ngIf="option.name == 'notes'"
+              formControlName="notes"></textarea>
+    <img [src]="book.imgurl" *ngIf="option.name == 'imgurl'"
+         class="thumb" alt="book cover">
+    <input matInput [placeholder]="option.label"
+           *ngIf="option.name != 'notes'"
+           [name]="option.name" [formControlName]="option.name">
+    <mat-error *ngIf="hasError('title', 'required')">Titel is vereist</mat-error>
   </mat-form-field>
-  <mat-form-field class="date">
-    <input matInput placeholder="date" formControlName="date">
-  </mat-form-field>
-  <mat-form-field class="isbn">
-    <input matInput placeholder="isbn" formControlName="isbn">
-  </mat-form-field>
-  <mat-form-field class="isbn13">
-    <input matInput placeholder="isbn13" formControlName="isbn13">
-  </mat-form-field>
-  <mat-form-field class="fill block">
-    <input matInput placeholder="title" name="title" formControlName="title">
-    <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
-  </mat-form-field>
-  <mat-form-field class="fill block">
-    <input matInput placeholder="subtitle" formControlName="subtitle">
-  </mat-form-field>
-  <mat-form-field class="fill block">
-    <input matInput placeholder="original title" formControlName="original_title" name="original_title">
-  </mat-form-field>
-  <img [src]="book.imgurl" class="thumb">
-  <mat-form-field class="fill block">
-    <input matInput placeholder="imgurl" formControlName="imgurl">
-  </mat-form-field>
-  <mat-form-field class="fill block">
-    <textarea matInput placeholder="notes" formControlName="notes"></textarea>
-  </mat-form-field>
-  <mat-form-field class="fill block">
-    <input matInput placeholder="pub. info" formControlName="pubinfo">
-  </mat-form-field>
-  <mat-form-field class="author_id">
-    <input matInput placeholder="author id" formControlName="author_id">
-  </mat-form-field>
-  <mat-form-field class="author">
-    <input matInput placeholder="author" formControlName="author">
-  </mat-form-field>
-  <mat-form-field class="fill block">
-    <input matInput placeholder="translator" formControlName="translator" name="translator">
-  </mat-form-field>
-  <button mat-raised-button color="primary" [disabled]="!formGroup.valid">Save</button>
+  <button mat-raised-button color="primary"
+          *ngIf="save"
+          [disabled]="!formGroup.valid">Save</button>
 </form>

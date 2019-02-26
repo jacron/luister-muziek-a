@@ -1,5 +1,5 @@
 
-<img [src]="getImageSource()" class="author-image">
+<img [src]="getImageSource()" class="author-image" alt="author image">
 <div class="dates">
   <span>{{ author.born }}</span> - <span>{{ author.died }}</span>
 </div>
@@ -15,8 +15,9 @@
 
 <form [formGroup]="formGroup" novalidate (ngSubmit)="save()" *ngIf="editAuthor">
   <mat-form-field class="{{ option.name }}" *ngFor="let option of options">
-    <input matInput [placeholder]="option.label"
+    <input matInput [placeholder]="option.label" [title]="option.label"
            [name]="option.name" [formControlName]="option.name">
+    <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
   </mat-form-field>
   <button mat-raised-button color="primary"
           [disabled]="!formGroup.valid">Save</button>

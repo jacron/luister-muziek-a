@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {BooksService} from '../../services/books.service';
 import {Book} from '../../../../classes/book/book';
 import {StateService} from '../../../../services/state.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-book',
@@ -12,6 +13,8 @@ import {StateService} from '../../../../services/state.service';
 export class BookComponent implements OnInit {
   book: Book;
   showEdit = true;
+  proposal: Book;
+  notfound = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -85,9 +88,31 @@ export class BookComponent implements OnInit {
     }
   }
 
-  bolcomcover() {
-    this.booksService.getBolcomCover(this.book.isbn).subscribe(
-      response => console.log(response)
+  // bolcomcover() {
+  //   this.booksService.getBolcomCover(this.book.isbn).subscribe(
+  //     response => console.log(response)
+  //   )
+  // }
+
+  afterGetRemote(response, source) {
+    console.log(response);
+    if (response.matches && response.matches[0]) {
+      this.proposal = response.matches[0];
+      this.proposal.id = -1;
+      this.proposal.source = source;
+      this.notfound = null;
+    } else {
+      this.notfound = source;
+    }
+  }
+
+  remote(source) {
+    const isbn = this.book.isbn13;
+    console.log(isbn);
+    this.notfound = null;
+    this.proposal = null;
+    this.booksService.getRemote(isbn, source).subscribe(
+      response => this.afterGetRemote(response, source)
     )
   }
 

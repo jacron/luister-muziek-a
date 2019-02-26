@@ -13,19 +13,23 @@
   &.author {
     width: calc(100% - 112px);
   }
-  &.genre {
-    width: calc(50% - 6px);
-    margin-right: 12px;
-  }
-  &.date {
-    width: calc(50% - 6px);
-  }
+  &.genre,
   &.isbn {
     width: calc(50% - 6px);
     margin-right: 12px;
   }
+  &.date,
   &.isbn13 {
     width: calc(50% - 6px);
+  }
+  &.title,
+  &.subtitle,
+  &.imgurl,
+  &.notes,
+  &.pubinfo,
+  &.translator {
+    display: block;
+    width: 100%;
   }
 }
 .thumb {

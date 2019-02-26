@@ -13,10 +13,26 @@
         <button (click)="add()">+</button> |
         <button (click)="remove()">-</button>
       </div>
-      <app-book-edit *ngIf="showEdit" [(book)]="book"></app-book-edit>
+      <app-book-edit *ngIf="showEdit" [save]="true" [(book)]="book">
+
+      </app-book-edit>
     </div>
     <div class="third">
-      <button (click)="bolcomcover()">bolcom cover</button>
+      <div class="cmds">
+        <button (click)="remote('bolcom')">bolcom</button>
+        <button (click)="remote('kb')">kb</button>
+        <button (click)="remote('isbndb')">isbndb</button>
+      </div>
+
+      <div *ngIf="notfound">{{ notfound }}: niet gevonden</div>
+      <div *ngIf="proposal" class="website">
+        <a [href]="proposal.url" class="link" target="_blank">
+          {{ proposal?.source }}</a>
+      </div>
+      <app-book-edit [(book)]="proposal" [discard]="false" [save]="false"
+                     *ngIf="proposal"></app-book-edit>
+
+      <!--<button (click)="bolcomcover()">bolcom cover</button>-->
     </div>
   </div>
 

@@ -24,19 +24,6 @@ export class BooksStartComponent implements OnInit {
     private router: Router,
   ) { }
 
-  afterGetRemote(response, source) {
-    console.log(response);
-    this.notInCatalogue = true;
-    if (response.matches && response.matches[0]) {
-      this.proposal = response.matches[0];
-      this.proposal.id = -1;
-      this.proposal.source = source;
-      this.notfound = null;
-    } else {
-      this.notfound = source;
-    }
-  }
-
   afterGetBookByIsbn(book: Book) {
     this.books = [];
     this.notInCatalogue = true;
@@ -48,6 +35,19 @@ export class BooksStartComponent implements OnInit {
     }
     else {
       this.notInCatalogue = true;
+    }
+  }
+
+  afterGetRemote(response, source) {
+    console.log(response);
+    this.notInCatalogue = true;
+    if (response.matches && response.matches[0]) {
+      this.proposal = response.matches[0];
+      this.proposal.id = -1;
+      this.proposal.source = source;
+      this.notfound = null;
+    } else {
+      this.notfound = source;
     }
   }
 

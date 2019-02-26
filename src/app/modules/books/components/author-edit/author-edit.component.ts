@@ -3,6 +3,7 @@ import {Author} from '../../../../classes/book/author';
 import {BooksService} from '../../services/books.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {environment} from '../../../../../environments/environment';
+import {FormOption} from '../../../../classes/shared/FormOption';
 
 @Component({
   selector: 'app-author-edit',
@@ -13,11 +14,15 @@ export class AuthorEditComponent implements OnInit {
   @Input() author: Author;
   editAuthor = false;
   formGroup: FormGroup;
-  options;
+  options: FormOption[];
 
   constructor(
     private booksService: BooksService,
   ) { }
+
+  hasError(controlName, errorName) {
+    return this.formGroup.controls[controlName].hasError(errorName);
+  }
 
   edit() {
     this.editAuthor = !this.editAuthor;

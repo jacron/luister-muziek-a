@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Book} from '../../../../classes/book/book';
 import {BooksService} from '../../services/books.service';
+import {FormOption} from '../../../../classes/shared/FormOption';
 
 @Component({
   selector: 'app-book-edit',
@@ -12,8 +13,10 @@ export class BookEditComponent implements OnInit, OnChanges {
   @Input() book: Book;
   @Output() bookChange = new EventEmitter();
   @Input() discard: boolean;
+  @Input() save: boolean;
 
   formGroup: FormGroup;
+  options: FormOption[];
 
   constructor(
     private booksService: BooksService,
@@ -38,7 +41,7 @@ export class BookEditComponent implements OnInit, OnChanges {
     }
   }
 
-  save() {
+  store() {
     const b: Book = this.formGroup.value;
 
     const book: Book = {
@@ -64,24 +67,66 @@ export class BookEditComponent implements OnInit, OnChanges {
   }
 
   initForm() {
-    this.formGroup = new FormGroup({
-      title: new FormControl(this.book.title, [
-        Validators.required,
-      ]),
-      subtitle: new FormControl(this.book.subtitle),
-      imgurl: new FormControl(this.book.imgurl),
-      notes: new FormControl(this.book.notes),
-      pubinfo: new FormControl(this.book.pubinfo),
-      author: new FormControl(this.book.author),
-      author_id: new FormControl(this.book.author_id),
-      isbn: new FormControl(this.book.isbn),
-      isbn13: new FormControl(this.book.isbn13),
-      tags: new FormControl(this.book.tags),
-      genre: new FormControl(this.book.genre),
-      date: new FormControl(this.book.date),
-      translator: new FormControl(this.book.translator),
-      original_title: new FormControl(this.book.original_title),
-    })
+    const controls = {};
+    this.options = [
+      {
+        name: 'genre',
+        label: 'Genre'
+      },
+      {
+        name: 'date',
+        label: 'Date'
+      },
+      {
+        name: 'isbn',
+        label: 'isbn'
+      },
+      {
+        name: 'isbn13',
+        label: 'isbn13'
+      },
+      {
+        name: 'title',
+        label: 'Titel',
+        validators: [Validators.required]
+      },
+      {
+        name: 'subtitle',
+        label: 'Subtitel'
+      },
+      {
+        name: 'original_title',
+        label: 'Originele titel'
+      },
+      {
+        name: 'imgurl',
+        label: 'afbeeldingsurl'
+      },
+      {
+        name: 'notes',
+        label: 'Aantekeningen',
+      },
+      {
+        name: 'pubinfo',
+        label: 'Uitgever'
+      },
+      {
+        name: 'author_id',
+        label: 'auteur id'
+      },
+      {
+        name: 'author',
+        label: 'auteur'
+      },
+      {
+        name: 'translator',
+        label: 'Vertaler'
+      }
+    ];
+    this.options.forEach(option => {
+      controls[option.name] = new FormControl(this.book[option.name], option.validators);
+    });
+    this.formGroup = new FormGroup(controls);
   }
 
   ngOnInit() {
