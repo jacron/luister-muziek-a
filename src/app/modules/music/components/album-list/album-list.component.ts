@@ -3,13 +3,12 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  OnInit, // Renderer2,
+  OnInit,
   SimpleChanges,
 } from '@angular/core';
 import {Album} from '../../../../classes/music/Album';
 import {Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
-import {MusicService} from '../../services/music.service';
 import {StorageService} from '../../../../services/storage.service';
 import {List} from '../../../../classes/music/List';
 import {Piece} from '../../../../classes/music/Piece';
@@ -34,24 +33,24 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
     private storage: StorageService,
   ) { }
 
-  testInAlbum(album: Album, q) {
-    const s = album.Title.toLowerCase();
-    if (s.indexOf(q) !== -1) { return true; }
-    if (album.pieces) {
-      const filteredPieces: Piece[] = [];
-      for (let i = 0; i < album.pieces.length; i++) {
-        const piece = album.pieces[i];
-        if (piece.Name.toLowerCase().indexOf(q) !== -1) {
-          filteredPieces.push(piece);
-        }
-      }
-      if (filteredPieces.length) {
-        album.filteredPieces = filteredPieces;
-        return true;
-      }
-    }
-    return false;
-  }
+  // testInAlbum(album: Album, q) {
+  //   const s = album.Title.toLowerCase();
+  //   if (s.indexOf(q) !== -1) { return true; }
+  //   if (album.pieces) {
+  //     const filteredPieces: Piece[] = [];
+  //     for (let i = 0; i < album.pieces.length; i++) {
+  //       const piece = album.pieces[i];
+  //       if (piece.Name.toLowerCase().indexOf(q) !== -1) {
+  //         filteredPieces.push(piece);
+  //       }
+  //     }
+  //     if (filteredPieces.length) {
+  //       album.filteredPieces = filteredPieces;
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
 
   getIds() {
     const ids = [];
@@ -60,10 +59,13 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   storeIds(newValue) {
-    const list: List = this.storage.retrieveList();
-    list.albumIds = this.getIds();
-    list.query = newValue;
-    this.storage.storeList(list);
+    // todo: initialize lis if null
+    let list: List = this.storage.retrieveList();
+    if (list) {
+      list.albumIds = this.getIds();
+      list.query = newValue;
+      this.storage.storeList(list);
+    }
   }
 
   albumImage(id) {
@@ -141,7 +143,7 @@ export class AlbumListComponent implements OnInit, OnChanges, OnDestroy {
 
   onChangedAlbums(albums: Album[]) {
     if (Array.isArray(albums)) {
-      this.filteredAlbums = albums.slice();
+      this.filteredAlbums = albums; // .slice();
       setTimeout(() => {
         this.setLazy();
         this.lazyLoad();

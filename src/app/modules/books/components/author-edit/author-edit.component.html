@@ -17,7 +17,7 @@
   <mat-form-field class="{{ option.name }}" *ngFor="let option of options">
     <input matInput [placeholder]="option.label" [title]="option.label"
            [name]="option.name" [formControlName]="option.name">
-    <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
+    <mat-error *ngIf="hasError('last', 'required')">Title is required</mat-error>
   </mat-form-field>
   <button mat-raised-button color="primary"
           [disabled]="!formGroup.valid">Save</button>

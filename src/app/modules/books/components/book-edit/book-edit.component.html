@@ -1,16 +1,21 @@
-
-<form [formGroup]="formGroup" novalidate (ngSubmit)="store()">
-  <mat-form-field class="{{ option.name }}" *ngFor="let option of options">
-    <textarea matInput placeholder="notes" *ngIf="option.name == 'notes'"
+<div class="book-edit">
+  <form [formGroup]="formGroup"
+        novalidate (ngSubmit)="store()">
+    <mat-form-field class="{{ option.name }} form-field"
+                    *ngFor="let option of options">
+    <textarea matInput [placeholder]="option.label"
+              *ngIf="option.name == 'notes'"
               formControlName="notes"></textarea>
-    <img [src]="book.imgurl" *ngIf="option.name == 'imgurl'"
-         class="thumb" alt="book cover">
-    <input matInput [placeholder]="option.label"
-           *ngIf="option.name != 'notes'"
-           [name]="option.name" [formControlName]="option.name">
-    <mat-error *ngIf="hasError('title', 'required')">Titel is vereist</mat-error>
-  </mat-form-field>
-  <button mat-raised-button color="primary"
-          *ngIf="save"
-          [disabled]="!formGroup.valid">Save</button>
-</form>
+      <img [src]="book.imgurl" *ngIf="option.name == 'imgurl' && book.imgurl"
+           class="thumb" alt="book cover">
+      <input matInput [placeholder]="option.label"
+             *ngIf="option.name != 'notes'"
+             [name]="option.name" [formControlName]="option.name">
+      <mat-error *ngIf="hasError('title', 'required')">
+        Titel is vereist</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary"
+            *ngIf="save"
+            [disabled]="!formGroup.valid">Save</button>
+  </form>
+</div>

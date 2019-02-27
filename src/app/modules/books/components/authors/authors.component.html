@@ -1,10 +1,27 @@
 <div class="authors" *ngIf="authors">
+
   <div class="header">
     Auteurs ({{ authors.length }})
   </div>
-  <div *ngFor="let author of authors">
+
+  <mat-form-field>
+    <input #input matInput placeholder="zoek"
+           (ngModelChange)="search($event)"
+           [(ngModel)]="query"
+           name="author-query"
+           (click)="input.select()"
+    >
+    <button mat-button *ngIf="query"
+            matSuffix mat-icon-button aria-label="Clear"
+            (click)="resetSearch()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <div *ngFor="let author of filteredAuthors">
     <a [routerLink]="['/author', author.id]" class="link">
       {{ author.first }} {{ author.last }} - {{ author.nbooks }}
     </a>
   </div>
+
 </div>

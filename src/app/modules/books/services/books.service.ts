@@ -58,9 +58,13 @@ export class BooksService {
     }
   }
 
-  getBolcomCover(isbn) {
-    return this.getJson('/api/book/getbolcomcover/' + isbn);
+  getBooksCount() {
+    return this.getJson('/api/books/count');
   }
+
+  // getBolcomCover(isbn) {
+  //   return this.getJson('/api/book/getbolcomcover/' + isbn);
+  // }
 
   getAuthors() {
     return this.getJson('/api/authors/shallow');

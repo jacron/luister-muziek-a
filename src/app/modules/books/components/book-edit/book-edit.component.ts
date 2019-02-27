@@ -100,7 +100,7 @@ export class BookEditComponent implements OnInit, OnChanges {
       },
       {
         name: 'imgurl',
-        label: 'afbeeldingsurl'
+        label: 'URL voor afbeelding'
       },
       {
         name: 'notes',

@@ -1,37 +1,32 @@
-.mat-form-field {
-  width: 200px;
-  &.block {
-    display: block;
-  }
-  &.fill {
-    width: 100%;
-  }
-  &.author_id {
-    width: 100px;
-    margin-right: 12px;
-  }
-  &.author {
-    width: calc(100% - 112px);
-  }
-  &.genre,
-  &.isbn {
-    width: calc(50% - 6px);
-    margin-right: 12px;
-  }
-  &.date,
-  &.isbn13 {
-    width: calc(50% - 6px);
-  }
-  &.title,
-  &.subtitle,
-  &.imgurl,
-  &.notes,
-  &.pubinfo,
-  &.translator {
-    display: block;
-    width: 100%;
-  }
-}
 .thumb {
   width: 100px;
+}
+.author_id {
+  width: 100px;
+  margin-right: 12px;
+}
+.author {
+  width: calc(100% - 112px);
+}
+.genre,
+.isbn {
+  width: calc(50% - 6px);
+  margin-right: 12px;
+}
+.date,
+.isbn13 {
+  width: calc(50% - 6px);
+}
+.title,
+.subtitle,
+.original_title,
+.imgurl,
+.notes,
+.pubinfo,
+.translator {
+  display: inline-block;
+  width: 100%;
+}
+.form-field {
+  display: inline-block;
 }

@@ -19,7 +19,7 @@ if (hostname.includes('xip.io')
   host = 'http://' + myhost;
   musicServer = host + ':8020/api';
   moviesServer = host + ':5080';
-  booksServer = host + '';
+  booksServer = host + ':5050';
 } else if (hostname.includes('127.0.0.1') ||
       hostname.includes('localhost')) {
   // use dev

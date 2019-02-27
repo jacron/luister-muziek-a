@@ -83,8 +83,15 @@ export class BooksStartComponent implements OnInit {
     this.proposal = null;
   }
 
+  getBooksCount() {
+    this.booksService.getBooksCount().subscribe(
+      result => this.stateService.setTitle('Books (' + result + ')')
+    )
+  }
+
   ngOnInit() {
     this.stateService.setTitle('Books');
+    this.getBooksCount();
   }
 
 }
