@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Book} from '../../../../classes/book/book';
 import {environment} from '../../../../../environments/environment';
 import {BooksService} from '../../services/books.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-card',
@@ -14,6 +15,7 @@ export class BookCardComponent implements OnInit {
 
   constructor(
     private booksService: BooksService,
+    private toastr: ToastrService,
   ) { }
 
   getImageSource() {
@@ -39,8 +41,12 @@ export class BookCardComponent implements OnInit {
   getCover(e) {
     e.preventDefault();
     e.stopPropagation();
+    this.toastr.info('Boekomslag in cache', 'cover');
     this.booksService.getCover(this.book.id).subscribe(
-      response => console.log(response)
+      response => {
+        console.log(response);
+        this.toastr.success('boekomslag opgeslagen', 'cover');
+      }
     )
   }
 

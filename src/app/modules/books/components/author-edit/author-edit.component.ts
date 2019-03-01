@@ -4,6 +4,7 @@ import {BooksService} from '../../services/books.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {environment} from '../../../../../environments/environment';
 import {FormOption} from '../../../../classes/shared/FormOption';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-author-edit',
@@ -18,7 +19,9 @@ export class AuthorEditComponent implements OnInit {
 
   constructor(
     private booksService: BooksService,
-  ) { }
+    private toastr: ToastrService,
+  ) {
+  }
 
   hasError(controlName, errorName) {
     return this.formGroup.controls[controlName].hasError(errorName);
@@ -29,6 +32,7 @@ export class AuthorEditComponent implements OnInit {
   }
 
   getCover() {
+    this.toastr.info('afbeelding auteur naar cache', 'afbeelding');
     this.booksService.getPicture(this.author.id).subscribe(
       response => console.log(response)
     );
@@ -42,6 +46,11 @@ export class AuthorEditComponent implements OnInit {
   afterSave(id, author: Author) {
     this.author = author;
     // this.bookChange.emit(book);
+  }
+
+  google() {
+    window.open(environment.googleUrl + this.author.first + ' ' +
+      this.author.last);
   }
 
   remove() {

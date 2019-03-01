@@ -4,11 +4,9 @@
   <span>{{ author.born }}</span> - <span>{{ author.died }}</span>
 </div>
 <div class="cmds">
-  <!--<button (click)="scanCover()">scan</button> |-->
-  <!--<button (click)="finishCover()">finish</button> |-->
   <button (click)="getCover()" [disabled]="!author.imgurl">get</button> |
   <button (click)="edit()">edit</button> |
-  <!--<button (click)="add()">+</button> |-->
+  <button (click)="google()">google</button> |
   <button (click)="remove()">-</button>
 </div>
 

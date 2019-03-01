@@ -23,6 +23,7 @@ import {MovieRoutingModule} from './modules/movie-routing/movie-routing.module';
 import {BooksModule} from './modules/books/books.module';
 import {BookRoutingModule} from './modules/book-routing/book-routing.module';
 import {MusicModule} from './modules/music/music.module';
+import {ToastrModule} from 'ngx-toastr';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {MusicModule} from './modules/music/music.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     FormsModule,  // needed for ngModel
     HttpClientModule,
     AppRoutingModule,
@@ -61,7 +63,7 @@ import {MusicModule} from './modules/music/music.module';
     UtilService,
     CuesheetService,
     ChoiceService,
-    StateService
+    StateService,
   ],
   bootstrap: [AppComponent]
 })

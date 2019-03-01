@@ -25,6 +25,7 @@
               "src/styles.scss",
               "src/styles/theme.scss",
               "src/styles/mymaterial.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.js",
