@@ -29,7 +29,6 @@ if (hostname.includes('xip.io')
   booksServer = host + ':5050';
 } else {
   // use 'prod'
-  host = 'http://127.0.0.1';
   musicServer = 'http://music-api/api';
   moviesServer = 'http://movies18';
   booksServer = 'http://booklibrary';
