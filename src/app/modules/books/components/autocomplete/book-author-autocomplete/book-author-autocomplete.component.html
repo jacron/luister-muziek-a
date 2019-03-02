@@ -1,0 +1,23 @@
+<mat-form-field class="form-field book-author-autocomplete">
+  <input
+    type="text" title=""
+    placeholder="Author" matInput
+    [formControl]="myControl"
+    [matAutocomplete]="auto2">
+  <mat-autocomplete
+    #auto2="matAutocomplete"
+    [displayWith]="display"
+    (optionSelected)="toAuthor($event.option.value)">
+    <mat-option *ngFor="let item of filteredItems | async"
+                [title]="'author/' + item.id"
+                [value]="item">
+      {{ item.first }} {{ item.last }} ({{ item.nbooks }})
+    </mat-option>
+  </mat-autocomplete>
+  <button
+    *ngIf="myControl.value" mat-button=""
+    aria-label="Clear" class="closer" matSuffix mat-icon-button
+    (click)="clear()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

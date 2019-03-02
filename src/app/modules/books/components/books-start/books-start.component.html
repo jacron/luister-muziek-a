@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="not-found" *ngIf="notInCatalogue">
-    niet in catalogus
+    <span *ngIf="!proposal">niet in catalogus</span>
     <button (click)="remote('bolcom')">bolcom</button>
     <button (click)="remote('kb')">kb</button>
     <button (click)="remote('isbndb')">isbndb</button>
@@ -46,7 +46,9 @@
       <a [href]="proposal.url" class="link" target="_blank">
         {{ proposal?.source }}</a>
     </div>
-    <app-book-edit [(book)]="proposal" [discard]="true" [save]="true"
+    <app-book-edit [(book)]="proposal"
+                   [discard]="true"
+                   [save]="true"
                    *ngIf="proposal"></app-book-edit>
   </div>
   <div class="book-wrapper">

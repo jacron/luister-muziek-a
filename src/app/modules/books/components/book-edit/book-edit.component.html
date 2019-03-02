@@ -1,19 +1,27 @@
 <div class="book-edit">
   <form [formGroup]="formGroup"
         novalidate (ngSubmit)="store()">
-    <mat-form-field class="{{ option.name }} form-field"
+
+    <div [class]="option.name"
                     *ngFor="let option of options">
+      <mat-form-field  class="{{ option.name }} form-field">
     <textarea matInput [placeholder]="option.label"
               *ngIf="option.name == 'notes'"
               formControlName="notes"></textarea>
-      <img [src]="book.imgurl" *ngIf="option.name == 'imgurl' && book.imgurl"
-           class="thumb" alt="book cover">
-      <input matInput [placeholder]="option.label"
-             *ngIf="option.name != 'notes'"
-             [name]="option.name" [formControlName]="option.name">
-      <mat-error *ngIf="hasError('title', 'required')">
-        Titel is vereist</mat-error>
-    </mat-form-field>
+        <img [src]="book.imgurl" *ngIf="option.name == 'imgurl' && book.imgurl"
+             class="thumb" alt="book cover">
+        <input matInput [placeholder]="option.label"
+               *ngIf="option.name != 'notes'"
+               [name]="option.name" [formControlName]="option.name">
+
+        <mat-error *ngIf="hasError('title', 'required')">
+          Titel is vereist</mat-error>
+      </mat-form-field>
+      <app-book-author-autocomplete (select)="selectAuthor($event)"
+                                    *ngIf="option.name == 'author'">
+
+      </app-book-author-autocomplete>
+    </div>
     <button mat-raised-button color="primary"
             *ngIf="save"
             [disabled]="!formGroup.valid">Save</button>

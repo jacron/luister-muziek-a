@@ -35,14 +35,15 @@ export class BookCardComponent implements OnInit {
     e.preventDefault();
     e.stopPropagation();
     this.booksService.finishCover(this.book.id).subscribe(
-      response => console.log(response)
+      response => this.toastr.success('cover finished')
     )
   }
+
   getCover(e) {
     e.preventDefault();
     e.stopPropagation();
     this.toastr.info('Boekomslag in cache', 'cover');
-    this.booksService.getCover(this.book.id).subscribe(
+    this.booksService.getBookCover(this.book.id).subscribe(
       response => {
         console.log(response);
         this.toastr.success('boekomslag opgeslagen', 'cover');

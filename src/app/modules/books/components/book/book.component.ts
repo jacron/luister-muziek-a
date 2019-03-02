@@ -4,6 +4,8 @@ import {BooksService} from '../../services/books.service';
 import {Book} from '../../../../classes/book/book';
 import {StateService} from '../../../../services/state.service';
 import {FormControl} from '@angular/forms';
+import {environment} from '../../../../../environments/environment';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-book',
@@ -20,6 +22,7 @@ export class BookComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private booksService: BooksService,
     private stateService: StateService,
+    private toastr: ToastrService,
   ) {
     activatedRoute.params.subscribe(params => this.handleParams(params));
   }
@@ -49,12 +52,12 @@ export class BookComponent implements OnInit {
 
   finishCover() {
     this.booksService.finishCover(this.book.id).subscribe(
-      response => console.log(response)
+      response => this.toastr.success('cover finished')
     )
   }
 
   getCover() {
-    this.booksService.getCover(this.book.id).subscribe(
+    this.booksService.getBookCover(this.book.id).subscribe(
       response => console.log(response)
     )
   }
@@ -88,11 +91,10 @@ export class BookComponent implements OnInit {
     }
   }
 
-  // bolcomcover() {
-  //   this.booksService.getBolcomCover(this.book.isbn).subscribe(
-  //     response => console.log(response)
-  //   )
-  // }
+  google() {
+    window.open(environment.googleUrl + this.book.title + ' ' +
+      this.book.date);
+  }
 
   afterGetRemote(response, source) {
     console.log(response);
@@ -101,7 +103,9 @@ export class BookComponent implements OnInit {
       this.proposal.id = -1;
       this.proposal.source = source;
       this.notfound = null;
+      this.toastr.success('gegevens zijn opgehaald!', source)
     } else {
+      this.toastr.error('niet gevonden', source);
       this.notfound = source;
     }
   }
@@ -111,6 +115,7 @@ export class BookComponent implements OnInit {
     console.log(isbn);
     this.notfound = null;
     this.proposal = null;
+    this.toastr.info('haal gegevens op', source);
     this.booksService.getRemote(isbn, source).subscribe(
       response => this.afterGetRemote(response, source)
     )

@@ -62,12 +62,12 @@ export class BooksService {
     return this.getJson('/api/books/count');
   }
 
-  // getBolcomCover(isbn) {
-  //   return this.getJson('/api/book/getbolcomcover/' + isbn);
-  // }
-
   getAuthors() {
     return this.getJson('/api/authors/shallow');
+  }
+
+  wikiAuthor(authorName, lng) {
+    return this.getJson('/api/author/wiki/' + authorName + '/' + lng);
   }
 
   /* POST */
@@ -79,6 +79,10 @@ export class BooksService {
     );
   }
 
+  storeWikiAuthorImg(url, id) {
+    return this.postForm('/api/author/wiki/store', {url, id});
+  }
+
   scanCover() {
     return this.postForm('/api/book/scan', {});
   }
@@ -87,11 +91,11 @@ export class BooksService {
     return this.postForm('/api/book/scanfinish/' + bookId, {});
   }
 
-  getCover(bookId) {
+  getBookCover(bookId) {
     return this.postForm('/api/book/getcover/' + bookId, {});
   }
 
-  getPicture(authorId) {
+  getAuthorPicture(authorId) {
     return this.postForm('/api/author/getpicture/' + authorId, {});
   }
 

@@ -7,9 +7,15 @@
   <button (click)="getCover()" [disabled]="!author.imgurl">get</button> |
   <button (click)="edit()">edit</button> |
   <button (click)="google()">google</button> |
+  <button (click)="wikipedia('nl')">wiki nl</button> |
+  <button (click)="wikipedia('en')">wiki en</button> |
+  <button (click)="storeWiki()" [disabled]="!wikiImg">store</button>
   <button (click)="remove()">-</button>
 </div>
 
+<img [src]="wikiImg" class="wiki-img">
+<div class="wiki-description">{{ wikiDescription }}</div>
+<div class="wiki-extract">{{ wikiExtract }}</div>
 
 <form [formGroup]="formGroup" novalidate (ngSubmit)="save()" *ngIf="editAuthor">
   <mat-form-field class="{{ option.name }}" *ngFor="let option of options">

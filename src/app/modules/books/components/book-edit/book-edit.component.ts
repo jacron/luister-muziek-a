@@ -3,6 +3,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Book} from '../../../../classes/book/book';
 import {BooksService} from '../../services/books.service';
 import {FormOption} from '../../../../classes/shared/FormOption';
+import {Router} from '@angular/router';
+import {Author} from '../../../../classes/book/author';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-edit',
@@ -17,9 +20,12 @@ export class BookEditComponent implements OnInit, OnChanges {
 
   formGroup: FormGroup;
   options: FormOption[];
+  filteredItems;
 
   constructor(
     private booksService: BooksService,
+    private router: Router,
+    private toastr: ToastrService,
   ) { }
 
   hasError(controlName, errorName) {
@@ -32,12 +38,20 @@ export class BookEditComponent implements OnInit, OnChanges {
     }
   }
 
+  selectAuthor(author: Author) {
+    // console.log(e);
+    this.formGroup.controls.author_id.setValue(author.id);
+    this.formGroup.controls.author.setValue(author.first + ' ' + author.last);
+  }
+
   afterSave(id, book: Book) {
     this.book = book;
     if (this.discard) {
-      this.bookChange.emit(null);
+      this.router.navigate(['books', id]).then();
+      // this.bookChange.emit(null);
     } else {
       this.bookChange.emit(book);
+      this.toastr.success('Het boek is opgeslagen!', this.book.title);
     }
   }
 

@@ -16,6 +16,7 @@ import { AuthorCardComponent } from './components/author-card/author-card.compon
 import { AuthorEditComponent } from './components/author-edit/author-edit.component';
 import { EditFieldComponent } from './components/edit-field/edit-field.component';
 import { TitleQueryComponent } from './components/title-query/title-query.component';
+import { BookAuthorAutocompleteComponent } from './components/autocomplete/book-author-autocomplete/book-author-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TitleQueryComponent } from './components/title-query/title-query.compon
     AuthorEditComponent,
     EditFieldComponent,
     TitleQueryComponent,
+    BookAuthorAutocompleteComponent,
   ],
   imports: [
     CommonModule,

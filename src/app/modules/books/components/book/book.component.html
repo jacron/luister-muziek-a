@@ -10,6 +10,7 @@
         <button (click)="finishCover()">finish</button> |
         <button (click)="getCover()" [disabled]="!book.imgurl">get</button> |
         <button (click)="edit()">edit</button> |
+        <button (click)="google()">google</button> |
         <button (click)="add()">+</button> |
         <button (click)="remove()">-</button>
       </div>
@@ -18,9 +19,12 @@
     </div>
     <div class="third">
       <div class="cmds">
-        <button (click)="remote('bolcom')">bolcom</button>
-        <button (click)="remote('kb')">kb</button>
-        <button (click)="remote('isbndb')">isbndb</button>
+        <button (click)="remote('bolcom')" [disabled]="!book.isbn">
+          bolcom</button>
+        <button (click)="remote('kb')" [disabled]="!book.isbn">
+          kb</button>
+        <button (click)="remote('isbndb')" [disabled]="!book.isbn">
+          isbndb</button>
       </div>
 
       <div *ngIf="notfound">{{ notfound }}: niet gevonden</div>

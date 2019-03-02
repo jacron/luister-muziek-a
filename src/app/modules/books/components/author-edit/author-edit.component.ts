@@ -16,6 +16,10 @@ export class AuthorEditComponent implements OnInit {
   editAuthor = false;
   formGroup: FormGroup;
   options: FormOption[];
+  wikiImg: string;
+  wikiThumb: string;
+  wikiDescription;
+  wikiExtract;
 
   constructor(
     private booksService: BooksService,
@@ -33,7 +37,7 @@ export class AuthorEditComponent implements OnInit {
 
   getCover() {
     this.toastr.info('afbeelding auteur naar cache', 'afbeelding');
-    this.booksService.getPicture(this.author.id).subscribe(
+    this.booksService.getAuthorPicture(this.author.id).subscribe(
       response => console.log(response)
     );
   }
@@ -45,12 +49,40 @@ export class AuthorEditComponent implements OnInit {
 
   afterSave(id, author: Author) {
     this.author = author;
+    this.toastr.success('opgeslagen!', this.author.last);
     // this.bookChange.emit(book);
   }
 
+  afterWiki(result) {
+    console.log(result);
+    this.toastr.success('gegevens zijn opeghaald', 'wikipedia')
+    if (result && result.image) {
+      // console.log(result.image.source);
+      this.wikiImg = result.image.source;
+      // this.wikiThumb = result.thumbnail.source;
+      this.wikiDescription = result.description;
+      this.wikiExtract = result.extract;
+    }
+  }
+
+  wikipedia(lng) {
+    const name = this.author.first + ' ' + this.author.last
+    console.log(name);
+    this.toastr.info('haal gegevens op', 'wikipedia')
+    this.booksService.wikiAuthor(name, lng).subscribe(
+      result => this.afterWiki(result)
+    )
+  }
+
   google() {
-    window.open(environment.googleUrl + this.author.first + ' ' +
-      this.author.last);
+    window.open(environment.googleUrl +
+      this.author.first + ' ' + this.author.last);
+  }
+
+  storeWiki() {
+    this.booksService.storeWikiAuthorImg(this.wikiImg, this.author.id).subscribe(
+      () => this.toastr.success('Wiki afbeelding opgeslagen', 'wiki')
+    )
   }
 
   remove() {

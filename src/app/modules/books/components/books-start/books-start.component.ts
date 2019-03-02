@@ -4,6 +4,7 @@ import {FormControl} from '@angular/forms';
 import {StateService} from '../../../../services/state.service';
 import {Book} from '../../../../classes/book/book';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-books-start',
@@ -22,6 +23,7 @@ export class BooksStartComponent implements OnInit {
     private booksService: BooksService,
     private stateService: StateService,
     private router: Router,
+    private toastr: ToastrService,
   ) { }
 
   afterGetBookByIsbn(book: Book) {
@@ -40,6 +42,7 @@ export class BooksStartComponent implements OnInit {
 
   afterGetRemote(response, source) {
     console.log(response);
+    this.toastr.success('Gegevens zijn opgehaald!')
     this.notInCatalogue = true;
     if (response.matches && response.matches[0]) {
       this.proposal = response.matches[0];
@@ -54,6 +57,7 @@ export class BooksStartComponent implements OnInit {
   remote(source) {
     const isbn = this.isbnFormControl.value;
     console.log(isbn);
+    this.toastr.info('haal gegevens op van ' + source);
     this.notfound = null;
     this.proposal = null;
     this.booksService.getRemote(isbn, source).subscribe(
