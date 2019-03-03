@@ -28,74 +28,91 @@ $darkcolor: #eeeeee;
   body {
     background-color: $darkbackground;
   }
+
   //.cdk-overlay-container {
   //  background-color: inherit;
   //}
   .cdk-overlay-pane {
     background-color: $darkbackground;
+
     .mat-menu-panel {
       background-color: $darkbackground;
+
       span {
         color: $darkcolor;
         font-size: 16px;
       }
     }
   }
+
   .mat-toolbar,
   .mat-drawer-container,
   .mat-dialog-container {
     background-color: $darkbackground;
     color: $darkcolor;
   }
+
   .mat-expansion-panel,
   .mat-list-item {
     background-color: $darkerbackground;
     color: $darkcolor;
   }
+
   .mat-drawer-container {
     position: inherit;
   }
+
   .pieces,
   .mat-expansion-panel-header-title,
   .mat-expansion-panel-header-description,
   .mat-card {
     color: $darkcolor;
   }
+
   .mat-form-field-label {
     color: #ceffff;
   }
+
   .mat-form-field.mat-focused .mat-form-field-label {
     color: #aeffff;
   }
+
   .mat-icon {
     color: $darkcolor;
   }
+
   .mat-form-field-infix input {
-    background-color: rgba(215,215,215,.8);
+    background-color: rgba(215, 215, 215, .8);
     color: #333;
   }
+
   .tags {
     .key {
       color: #eeffdd;
     }
+
     .value {
       color: #eeeeee;
     }
   }
+
   .mat-card,
   .home {
     background-color: $cardbackground;
   }
+
   .mat-card-title,
   .cuesheet-header,
   .part-line,
   nav a,
   .movie-card-content a,
   .mat-menu-panel button:not([disabled]),
-  .mat-card-content
-  //.mat-form-field-label
-  {
+  .mat-card-content {
     color: $darkcolor;
+  }
+
+  .book-card-content a {
+    color: #ffa;
   }
   .mat-form-field-label.mat-focused {
     color: lightblue;

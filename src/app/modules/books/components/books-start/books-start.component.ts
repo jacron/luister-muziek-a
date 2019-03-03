@@ -22,6 +22,11 @@ export class BooksStartComponent implements OnInit {
     private router: Router,
   ) { }
 
+  onTitleChange() {
+    const query = this.titleFormControl.value;
+    this.router.navigate(['books/search', query]).then();
+  }
+
   afterGetBookByIsbn(book: Book) {
     this.books = [];
     this.notInCatalogue = true;
@@ -34,18 +39,8 @@ export class BooksStartComponent implements OnInit {
     }
   }
 
-  onTitleChange() {
-    const query = this.titleFormControl.value;
-    this.router.navigate(['books/search', query]).then();
-  }
-
-  onIsbnChange(val) {
-    if (val) {  // testing
-      this.isbnFormControl.setValue(val);
-    }
-    const isbn = this.isbnFormControl.value;
-    console.log(isbn);
-    this.booksService.getBookByIsbn(isbn).subscribe(
+  onIsbnChange() {
+    this.booksService.getBookByIsbn(this.isbnFormControl.value).subscribe(
       (book: Book) => this.afterGetBookByIsbn(book)
     )
   }

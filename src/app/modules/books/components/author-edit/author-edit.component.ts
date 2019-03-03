@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Author} from '../../../../classes/book/author';
 import {BooksService} from '../../services/books.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -17,9 +17,10 @@ export class AuthorEditComponent implements OnInit {
   formGroup: FormGroup;
   options: FormOption[];
   wikiImg: string;
-  wikiThumb: string;
   wikiDescription;
   wikiExtract;
+  imageUrl = environment.booksServer + '/authorpicture/';
+  refresh = '?';
 
   constructor(
     private booksService: BooksService,
@@ -42,10 +43,10 @@ export class AuthorEditComponent implements OnInit {
     );
   }
 
-  getImageSource() {
-    const requestUrl = environment.booksServer;
-    return requestUrl + '/authorpicture/' + this.author.id;
-  }
+  // getImageSource() {
+  //   const requestUrl = environment.booksServer;
+  //   return requestUrl + '/authorpicture/' + this.author.id;
+  // }
 
   afterSave(id, author: Author) {
     this.author = author;
@@ -79,9 +80,15 @@ export class AuthorEditComponent implements OnInit {
       this.author.first + ' ' + this.author.last);
   }
 
+  afterStoreWiki() {
+    this.toastr.success('Wiki afbeelding opgeslagen', 'wiki');
+    this.refresh = '?' + new Date();
+    this.wikiImg = null;
+  }
+
   storeWiki() {
     this.booksService.storeWikiAuthorImg(this.wikiImg, this.author.id).subscribe(
-      () => this.toastr.success('Wiki afbeelding opgeslagen', 'wiki')
+      () => this.afterStoreWiki()
     )
   }
 

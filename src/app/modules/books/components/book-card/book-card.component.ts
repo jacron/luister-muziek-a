@@ -12,16 +12,18 @@ import {ToastrService} from 'ngx-toastr';
 export class BookCardComponent implements OnInit {
   @Input() book: Book;
   @Output() bookChange = new EventEmitter();
+  imageUrl = environment.booksServer + '/cover/';
+  refresh = '?';
 
   constructor(
     private booksService: BooksService,
     private toastr: ToastrService,
   ) { }
 
-  getImageSource() {
-    const requestUrl = environment.booksServer;
-    return requestUrl + '/cover/' + this.book.id;
-  }
+  // getImageSource() {
+  //   const requestUrl = environment.booksServer;
+  //   return requestUrl + '/cover/' + this.book.id;
+  // }
 
   scanCover(e) {
     e.preventDefault();
@@ -31,12 +33,22 @@ export class BookCardComponent implements OnInit {
     )
   }
 
+  afterFinishCover() {
+    this.toastr.success('cover finished');
+    this.refresh = '?' + new Date();
+  }
+
   finishCover(e) {
     e.preventDefault();
     e.stopPropagation();
     this.booksService.finishCover(this.book.id).subscribe(
-      response => this.toastr.success('cover finished')
+      response => this.afterFinishCover()
     )
+  }
+
+  afterGetCover() {
+    this.toastr.success('boekomslag opgeslagen', 'cover');
+    this.refresh = '?' + new Date();
   }
 
   getCover(e) {
@@ -44,10 +56,7 @@ export class BookCardComponent implements OnInit {
     e.stopPropagation();
     this.toastr.info('Boekomslag in cache', 'cover');
     this.booksService.getBookCover(this.book.id).subscribe(
-      response => {
-        console.log(response);
-        this.toastr.success('boekomslag opgeslagen', 'cover');
-      }
+      response => this.afterGetCover()
     )
   }
 

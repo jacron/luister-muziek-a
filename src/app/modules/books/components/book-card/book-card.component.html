@@ -12,7 +12,7 @@
         <div class="genre">{{ book.genre}}</div>
       </mat-card-header>
       <div class="image-container">
-        <img mat-card-image [src]="getImageSource()" alt=""
+        <img mat-card-image [src]="imageUrl + book.id + refresh" alt=""
              class="book-image">
       </div>
       <mat-card-content class="book-card-content">
@@ -26,10 +26,10 @@
           <div class="translator">{{ book.translator }}</div>
           <div class="pubinfo">{{ book.pubinfo }}</div>
         </div>
-        <button (click)="scanCover($event)">scan</button> |
-        <button (click)="finishCover($event)">finish</button> |
-        <button (click)="getCover($event)" [disabled]="!book.imgurl">get</button> |
-        <button (click)="remove($event)">-</button>
+        <button mat-button (click)="scanCover($event)">scan</button>
+        <button mat-button (click)="finishCover($event)">finish</button>
+        <button mat-button (click)="getCover($event)" [disabled]="!book.imgurl">get</button>
+        <button mat-button (click)="remove($event)">-</button>
       </mat-card-content>
     </mat-card>
 </div>
