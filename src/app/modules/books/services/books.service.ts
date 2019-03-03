@@ -95,6 +95,10 @@ export class BooksService {
     return this.postForm('/api/book/scanfinish/' + bookId, {});
   }
 
+  pasteBookCover(bookId) {
+    return this.postForm('/api/book/pastecover/' + bookId, {});
+  }
+
   getBookCover(bookId) {
     return this.postForm('/api/book/getcover/' + bookId, {});
   }

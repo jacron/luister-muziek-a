@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MenuOption} from '../../../../classes/shared/MenuOption';
 import {BooksService} from '../../services/books.service';
 import {ToastrService} from 'ngx-toastr';
+import {Book} from '../../../../classes/book/book';
 
 @Component({
   selector: 'app-book-menu',
@@ -9,7 +10,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./book-menu.component.scss']
 })
 export class BookMenuComponent implements OnInit {
-  @Input() book;
+  @Input() book: Book;
   @Output() refresh = new EventEmitter();
   @Output() bookChange = new EventEmitter();
 
@@ -29,6 +30,12 @@ export class BookMenuComponent implements OnInit {
       icon: 'account_balance_wallet',
       color: 'green',
       action: this.getCover.bind(this)
+    },
+    {
+      label: 'Plak url',
+      icon: 'brush',
+      color: 'green',
+      action: this.pasteCover.bind(this)
     },
     {
       label: 'divider',
@@ -71,6 +78,17 @@ export class BookMenuComponent implements OnInit {
   afterGetCover() {
     this.toastr.success('boekomslag opgeslagen', 'cover');
     this.refresh.emit('?' + new Date());
+  }
+
+  afterPasteCover(response) {
+    this.book.imgurl = response.text;
+    this.toastr.success('url afbeelding ingeplakt', 'cover');
+  }
+
+  pasteCover() {
+    this.booksService.pasteBookCover(this.book.id).subscribe(
+      response => this.afterPasteCover(response)
+    )
   }
 
   getCover() {
