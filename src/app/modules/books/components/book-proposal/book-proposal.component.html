@@ -1,0 +1,15 @@
+<div class="book-proposal" *ngIf="isbn">
+  <div *ngIf="!proposal">niet in catalogus</div>
+  <button mat-button (click)="remote('bolcom')">bolcom</button>
+  <button mat-button (click)="remote('kb')">kb</button>
+  <button mat-button (click)="remote('isbndb')">isbndb</button>
+  <div *ngIf="notfound">{{ notfound }}: niet gevonden</div>
+  <div *ngIf="proposal" class="website">
+    <a [href]="proposal.url" class="link" target="_blank">
+      {{ proposal?.source }}</a>
+  </div>
+  <app-book-edit [(book)]="proposal"
+                 [discard]="true"
+                 [save]="true"
+                 *ngIf="proposal"></app-book-edit>
+</div>

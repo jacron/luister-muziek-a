@@ -28,10 +28,15 @@
 .image-container {
   height: 365px;
   img {
-    width: 252px;
-    margin-left: -6px;
+    width: 242px;
+    margin-left: -2px;
   }
 }
 .translator {
   font-style: italic;
+}
+.genre {
+  position: absolute;
+  right: 6px;
+  top: 2px;
 }

@@ -7,8 +7,6 @@
     <div>
       <app-title-autocomplete></app-title-autocomplete>
     </div>
-  </div>
-  <div class="selection-row">
     <div>
       <mat-form-field>
         <!--<button (click)="onIsbnChange('9780198784920')">tst</button>-->
@@ -37,19 +35,7 @@
     </div>
   </div>
   <div class="not-found" *ngIf="notInCatalogue">
-    <span *ngIf="!proposal">niet in catalogus</span>
-    <button (click)="remote('bolcom')">bolcom</button>
-    <button (click)="remote('kb')">kb</button>
-    <button (click)="remote('isbndb')">isbndb</button>
-    <div *ngIf="notfound">{{ notfound }}: niet gevonden</div>
-    <div *ngIf="proposal" class="website">
-      <a [href]="proposal.url" class="link" target="_blank">
-        {{ proposal?.source }}</a>
-    </div>
-    <app-book-edit [(book)]="proposal"
-                   [discard]="true"
-                   [save]="true"
-                   *ngIf="proposal"></app-book-edit>
+    <app-book-proposal [isbn]="isbnFormControl.value"></app-book-proposal>
   </div>
   <div class="book-wrapper">
     <div *ngFor="let book of books" class="book-card">

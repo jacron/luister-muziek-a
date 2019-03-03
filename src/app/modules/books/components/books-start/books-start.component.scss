@@ -1,7 +1,7 @@
 .selection-row {
   display: flex;
-  & > div:first-child {
-    margin-right: 12px;
+  & > div {
+    margin-right: 24px;
   }
 }
 .book-wrapper {

@@ -1,5 +1,6 @@
 
-<img [src]="getImageSource()" class="author-image" alt="author image">
+<img [src]="getImageSource()"
+     class="author-image" alt="author image">
 <div class="dates">
   <span>{{ author.born }}</span> - <span>{{ author.died }}</span>
 </div>
@@ -13,7 +14,7 @@
   <button (click)="remove()">-</button>
 </div>
 
-<img [src]="wikiImg" class="wiki-img">
+<img [src]="wikiImg" class="wiki-img" *ngIf="wikiImg">
 <div class="wiki-description">{{ wikiDescription }}</div>
 <div class="wiki-extract">{{ wikiExtract }}</div>
 

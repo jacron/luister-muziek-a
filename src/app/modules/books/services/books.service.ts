@@ -62,6 +62,10 @@ export class BooksService {
     return this.getJson('/api/books/count');
   }
 
+  getRecent(limit) {
+    return this.getJson('/api/books/recent/' + limit);
+  }
+
   getAuthors() {
     return this.getJson('/api/authors/shallow');
   }

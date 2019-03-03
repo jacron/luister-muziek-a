@@ -4,7 +4,6 @@ import {FormControl} from '@angular/forms';
 import {StateService} from '../../../../services/state.service';
 import {Book} from '../../../../classes/book/book';
 import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-books-start',
@@ -13,9 +12,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class BooksStartComponent implements OnInit {
   books: Book[];
-  proposal: Book;
   notInCatalogue = false;
-  notfound = null;
   isbnFormControl = new FormControl();
   titleFormControl = new FormControl();
 
@@ -23,16 +20,13 @@ export class BooksStartComponent implements OnInit {
     private booksService: BooksService,
     private stateService: StateService,
     private router: Router,
-    private toastr: ToastrService,
   ) { }
 
   afterGetBookByIsbn(book: Book) {
     this.books = [];
     this.notInCatalogue = true;
-    // return;  // testing
     if (book) {
       this.notInCatalogue = false;
-      this.proposal = null;
       this.books.push(book);
     }
     else {
@@ -40,34 +34,9 @@ export class BooksStartComponent implements OnInit {
     }
   }
 
-  afterGetRemote(response, source) {
-    console.log(response);
-    this.toastr.success('Gegevens zijn opgehaald!')
-    this.notInCatalogue = true;
-    if (response.matches && response.matches[0]) {
-      this.proposal = response.matches[0];
-      this.proposal.id = -1;
-      this.proposal.source = source;
-      this.notfound = null;
-    } else {
-      this.notfound = source;
-    }
-  }
-
-  remote(source) {
-    const isbn = this.isbnFormControl.value;
-    console.log(isbn);
-    this.toastr.info('haal gegevens op van ' + source);
-    this.notfound = null;
-    this.proposal = null;
-    this.booksService.getRemote(isbn, source).subscribe(
-      response => this.afterGetRemote(response, source)
-    )
-  }
-
   onTitleChange() {
     const query = this.titleFormControl.value;
-    this.router.navigate(['books/search', query]);
+    this.router.navigate(['books/search', query]).then();
   }
 
   onIsbnChange(val) {
@@ -84,7 +53,6 @@ export class BooksStartComponent implements OnInit {
   clearQuery() {
     this.isbnFormControl.setValue(null);
     this.books = [];
-    this.proposal = null;
   }
 
   getBooksCount() {
@@ -93,9 +61,20 @@ export class BooksStartComponent implements OnInit {
     )
   }
 
+  afterGetRecent(result) {
+    this.books = result;
+  }
+
+  getRecent() {
+    this.booksService.getRecent(30).subscribe(
+      result => this.afterGetRecent(result)
+    )
+  }
+
   ngOnInit() {
     this.stateService.setTitle('Books');
     this.getBooksCount();
+    this.getRecent();
   }
 
 }
