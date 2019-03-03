@@ -2,6 +2,10 @@
 <div class="book-card" *ngIf="book">
     <mat-card class="book-card">
       <mat-card-header class="book-header">
+        <app-book-menu [book]="book"
+                       (refresh)="setRefresh($event)"
+                       (bookChange)="emitBookChange($event)"
+        ></app-book-menu>
         <mat-card-title class="book-title">
           {{ book.title }}
           <span *ngIf="book.date"> ({{ book.date }})</span>
@@ -11,10 +15,12 @@
         </mat-card-title>
         <div class="genre">{{ book.genre}}</div>
       </mat-card-header>
-      <div class="image-container">
-        <img mat-card-image [src]="imageUrl + book.id + refresh" alt=""
-             class="book-image">
-      </div>
+      <a class="link" [routerLink]="['/books', book.id]" *ngIf="book">
+        <div class="image-container">
+          <img mat-card-image [src]="imageUrl + book.id + refresh" alt=""
+               class="book-image">
+        </div>
+      </a>
       <mat-card-content class="book-card-content">
         <div class="book-footer">
           <div class="author">
@@ -26,10 +32,6 @@
           <div class="translator">{{ book.translator }}</div>
           <div class="pubinfo">{{ book.pubinfo }}</div>
         </div>
-        <button mat-button (click)="scanCover($event)">scan</button>
-        <button mat-button (click)="finishCover($event)">finish</button>
-        <button mat-button (click)="getCover($event)" [disabled]="!book.imgurl">get</button>
-        <button mat-button (click)="remove($event)">-</button>
       </mat-card-content>
     </mat-card>
 </div>

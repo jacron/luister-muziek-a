@@ -18,6 +18,7 @@ import { EditFieldComponent } from './components/edit-field/edit-field.component
 import { TitleQueryComponent } from './components/title-query/title-query.component';
 import { BookAuthorAutocompleteComponent } from './components/autocomplete/book-author-autocomplete/book-author-autocomplete.component';
 import { BookProposalComponent } from './components/book-proposal/book-proposal.component';
+import { BookMenuComponent } from './components/book-menu/book-menu.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { BookProposalComponent } from './components/book-proposal/book-proposal.
     TitleQueryComponent,
     BookAuthorAutocompleteComponent,
     BookProposalComponent,
+    BookMenuComponent,
   ],
   imports: [
     CommonModule,
