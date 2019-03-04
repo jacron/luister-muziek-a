@@ -19,6 +19,8 @@ import { BookAuthorAutocompleteComponent } from './components/autocomplete/book-
 import { BookProposalComponent } from './components/book-proposal/book-proposal.component';
 import { BookMenuComponent } from './components/book-menu/book-menu.component';
 import { AuthorMenuComponent } from './components/author-menu/author-menu.component';
+import { AuthorCardComponent } from './components/author-card/author-card.component';
+import { AuthorWikiComponent } from './components/author-wiki/author-wiki.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { AuthorMenuComponent } from './components/author-menu/author-menu.compon
     BookProposalComponent,
     BookMenuComponent,
     AuthorMenuComponent,
+    AuthorCardComponent,
+    AuthorWikiComponent,
   ],
   imports: [
     CommonModule,

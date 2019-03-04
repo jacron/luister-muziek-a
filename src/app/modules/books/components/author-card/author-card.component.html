@@ -1,0 +1,19 @@
+<mat-card class="author-card">
+  <div class="author-header">
+    <app-author-menu
+      class="author-menu"
+      [author]="author"
+      (wiki)="setWiki($event)"
+      (edit)="toggleEdit()"
+      (refresh)="setRefresh($event)"
+    ></app-author-menu>
+    {{ author.first }} {{ author.last }} ({{ booksCount }})
+  </div>
+  <img [src]="imageUrl + author.id + refresh"
+       class="author-image" alt="author image">
+  <mat-card-content>
+    <div class="dates">
+      <span>{{ author.born }}</span> - <span>{{ author.died }}</span>
+    </div>
+  </mat-card-content>
+</mat-card>

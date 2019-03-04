@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Author} from '../../../../classes/book/author';
 import {BooksService} from '../../services/books.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -13,26 +13,17 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class AuthorEditComponent implements OnInit {
   @Input() author: Author;
+  @Output() close = new EventEmitter();
+
   editAuthor = false;
   formGroup: FormGroup;
   options: FormOption[];
   wiki;
-  imageUrl = environment.booksServer + '/authorpicture/';
-  refresh = '?';
 
   constructor(
     private booksService: BooksService,
     private toastr: ToastrService,
   ) {
-  }
-
-  setWiki(e) {
-    this.wiki = e;
-  }
-
-  setRefresh(e) {
-    this.refresh = e;
-    this.wiki.imgurl = null;
   }
 
   hasError(controlName, errorName) {
@@ -41,6 +32,10 @@ export class AuthorEditComponent implements OnInit {
 
   edit() {
     this.editAuthor = !this.editAuthor;
+  }
+
+  closeEdit() {
+    this.close.emit();
   }
 
   afterSave(id, author: Author) {

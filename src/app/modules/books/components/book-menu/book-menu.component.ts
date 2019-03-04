@@ -27,16 +27,16 @@ export class BookMenuComponent implements OnInit {
       action: this.finishCover.bind(this),
     },
     {
-      label: 'Gebruik url',
-      icon: 'account_balance_wallet',
-      color: 'green',
-      action: this.getCover.bind(this)
-    },
-    {
       label: 'Plak url',
       icon: 'brush',
       color: 'green',
       action: this.pasteCover.bind(this)
+    },
+    {
+      label: 'Gebruik url',
+      icon: 'account_balance_wallet',
+      color: 'green',
+      action: this.getCover.bind(this)
     },
     {
       label: 'divider',

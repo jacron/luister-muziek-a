@@ -15,12 +15,24 @@ export class AuthorMenuComponent implements OnInit {
   wikiCache;
   @Output() wiki = new EventEmitter();
   @Output() refresh = new EventEmitter();
+  @Output() edit = new EventEmitter();
 
   options: MenuOption[] = [
+    {
+      label: 'Bewerk',
+      icon: 'edit',
+      action: this.toggleEdit.bind(this)
+    },
     {
       label: 'Google',
       icon: 'search',
       action: this.google.bind(this)
+    },
+    {
+      label: 'Plak url',
+      icon: 'brush',
+      color: 'green',
+      action: this.pastePicture.bind(this)
     },
     {
       label: 'Gebruik url',
@@ -29,10 +41,8 @@ export class AuthorMenuComponent implements OnInit {
       action: this.getCover.bind(this)
     },
     {
-      label: 'Plak url',
-      icon: 'brush',
-      color: 'green',
-      action: this.pastePicture.bind(this)
+      label: 'divider',
+      icon: '',
     },
     {
       label: 'wiki nl',
@@ -43,11 +53,6 @@ export class AuthorMenuComponent implements OnInit {
       label: 'wiki en',
       icon: 'wiki',
       action: this.wikipedia_en.bind(this)
-    },
-    {
-      label: 'store',
-      icon: '',
-      action: this.storeWiki.bind(this)
     },
     {
       label: 'divider',
@@ -68,6 +73,10 @@ export class AuthorMenuComponent implements OnInit {
 
   act(f: Function) {
     f();
+  }
+
+  toggleEdit() {
+    this.edit.emit();
   }
 
   afterGetCover() {
@@ -94,7 +103,7 @@ export class AuthorMenuComponent implements OnInit {
   }
 
   afterWiki(result) {
-    console.log(result);
+    // console.log(result);
     this.toastr.success('gegevens zijn opeghaald', 'wikipedia');
     if (result && result.image) {
       this.wikiCache = {
@@ -116,8 +125,8 @@ export class AuthorMenuComponent implements OnInit {
 
   wikipedia(lng) {
     const name = this.author.first + ' ' + this.author.last;
-    console.log(name);
-    this.toastr.info('haal gegevens op', 'wikipedia');
+    // console.log(name);
+    // this.toastr.info('haal gegevens op', 'wikipedia');
     this.booksService.wikiAuthor(name, lng).subscribe(
       result => this.afterWiki(result)
     )
@@ -126,18 +135,6 @@ export class AuthorMenuComponent implements OnInit {
   google() {
     window.open(environment.googleUrl +
       this.author.first + ' ' + this.author.last);
-  }
-
-  afterStoreWiki() {
-    this.toastr.success('Wiki afbeelding opgeslagen', 'wiki');
-    this.refresh.emit('?' + new Date());
-    // this.wikiImg = null;
-  }
-
-  storeWiki() {
-    this.booksService.storeWikiAuthorImg(this.wikiCache.imgurl, this.author.id).subscribe(
-      () => this.afterStoreWiki()
-    )
   }
 
   remove() {

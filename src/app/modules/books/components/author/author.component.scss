@@ -7,7 +7,13 @@
 .book-card {
   margin: 30px;
 }
-.author {
-  font-size: 20px;
-  margin: 0 0 20px 0;
+.author-wrapper {
+  display: flex;
+}
+.col-edit {
+  margin-left: 12px;
+  width: 280px;
+}
+.col-wiki {
+  margin-left: 12px;
 }

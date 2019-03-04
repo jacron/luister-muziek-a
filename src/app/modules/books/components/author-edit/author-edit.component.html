@@ -1,24 +1,6 @@
-<img [src]="imageUrl + author.id + refresh"
-     class="author-image" alt="author image">
-<div class="dates">
-  <app-author-menu
-    [author]="author"
-    (wiki)="setWiki($event)"
-    (refresh)="setRefresh($event)"
-  ></app-author-menu>
-  <span>{{ author.born }}</span> - <span>{{ author.died }}</span>
-  <button mat-button mat-icon-button (click)="edit()">
-    <mat-icon>edit</mat-icon>
-  </button>
-</div>
-
-<div *ngIf="wiki">
-  <div class="wiki-description">{{ wiki.description }}</div>
-  <div class="wiki-extract">{{ wiki.extract }}</div>
-  <img [src]="wiki.imgurl" class="wiki-img" *ngIf="wiki.imgurl">
-</div>
-
-<form [formGroup]="formGroup" novalidate (ngSubmit)="save()" *ngIf="editAuthor">
+<form [formGroup]="formGroup"
+      novalidate
+      (ngSubmit)="save()">
   <mat-form-field class="{{ option.name }}" *ngFor="let option of options">
     <img [src]="author.imgurl" *ngIf="option.name == 'imgurl' && author.imgurl"
          class="thumb" alt="author picture">
@@ -27,6 +9,9 @@
     <mat-error *ngIf="hasError('last', 'required')">Title is required</mat-error>
 
   </mat-form-field>
+  <button mat-raised-button 
+          (click)="closeEdit()"
+  >Annuleer</button>
   <button mat-raised-button color="primary"
-          [disabled]="!formGroup.valid">Save</button>
+          [disabled]="!formGroup.valid">Bewaar</button>
 </form>

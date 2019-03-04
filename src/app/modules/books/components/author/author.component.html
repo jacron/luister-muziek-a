@@ -1,9 +1,24 @@
 <!--<mat-progress-spinner *ngIf="!author"></mat-progress-spinner>-->
 <div class="author-books" *ngIf="author">
-  <div class="author">
-    {{ author.first }} {{ author.last }} ({{ books.length }})
+  <div class="author-wrapper">
+    <app-author-card [author]="author"
+                     [booksCount]="books.length"
+                     [refresh]="refresh"
+                     (edit)="toggleEdit()"
+                     (wiki)="setWiki($event)"
+    ></app-author-card>
+    <div *ngIf="authorEdit" class="col-edit">
+      <app-author-edit
+        (close)="authorEdit = false"
+        [author]="author"></app-author-edit>
+    </div>
+    <div *ngIf="wiki" class="col-wiki">
+      <app-author-wiki
+        [wiki]="wiki"
+        (picture)="storeWikiPicture($event)"
+      ></app-author-wiki>
+    </div>
   </div>
-  <app-author-edit [author]="author"></app-author-edit>
   <div class="book-wrapper">
     <div *ngFor="let book of books" class="book-card">
       <app-book-card [(book)]="book"></app-book-card>
