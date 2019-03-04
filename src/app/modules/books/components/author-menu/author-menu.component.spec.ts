@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthorCardComponent } from './author-card.component';
+import { AuthorMenuComponent } from './author-menu.component';
 
-describe('AuthorCardComponent', () => {
-  let component: AuthorCardComponent;
-  let fixture: ComponentFixture<AuthorCardComponent>;
+describe('AuthorMenuComponent', () => {
+  let component: AuthorMenuComponent;
+  let fixture: ComponentFixture<AuthorMenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthorCardComponent ]
+      declarations: [ AuthorMenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthorCardComponent);
+    fixture = TestBed.createComponent(AuthorMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -75,11 +75,6 @@ export class BookMenuComponent implements OnInit {
     )
   }
 
-  afterGetCover() {
-    this.toastr.success('boekomslag opgeslagen', 'cover');
-    this.refresh.emit('?' + new Date());
-  }
-
   afterPasteCover(response) {
     this.book.imgurl = response.text;
     this.toastr.success('url afbeelding ingeplakt', 'cover');
@@ -89,6 +84,11 @@ export class BookMenuComponent implements OnInit {
     this.booksService.pasteBookCover(this.book.id).subscribe(
       response => this.afterPasteCover(response)
     )
+  }
+
+  afterGetCover() {
+    this.toastr.success('boekomslag opgeslagen', 'cover');
+    this.refresh.emit('?' + new Date());
   }
 
   getCover() {

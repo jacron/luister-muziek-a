@@ -99,6 +99,10 @@ export class BooksService {
     return this.postForm('/api/book/pastecover/' + bookId, {});
   }
 
+  pasteAuthorPicture(authorId) {
+    return this.postForm('/api/author/pastepicture/' + authorId, {});
+  }
+
   getBookCover(bookId) {
     return this.postForm('/api/book/getcover/' + bookId, {});
   }

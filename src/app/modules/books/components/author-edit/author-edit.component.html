@@ -1,23 +1,21 @@
 
-<img #authorimage
-     [src]="imageUrl + author.id + refresh"
+<img [src]="imageUrl + author.id + refresh"
      class="author-image" alt="author image">
 <div class="dates">
+  <app-author-menu
+    [author]="author" (wiki)="setWiki($event)" (refresh)="setRefresh($event)"
+  ></app-author-menu>
   <span>{{ author.born }}</span> - <span>{{ author.died }}</span>
-</div>
-<div class="cmds">
-  <button mat-button (click)="getCover()" [disabled]="!author.imgurl">get</button>
-  <button mat-button (click)="edit()">edit</button>
-  <button mat-button (click)="google()">google</button>
-  <button mat-button (click)="wikipedia('nl')">wiki nl</button>
-  <button mat-button (click)="wikipedia('en')">wiki en</button>
-  <button mat-button (click)="storeWiki()" [disabled]="!wikiImg">store</button>
-  <button mat-button (click)="remove()">-</button>
+  <button mat-button mat-icon-button (click)="edit()">
+    <mat-icon>edit</mat-icon>
+  </button>
 </div>
 
-<img [src]="wikiImg" class="wiki-img" *ngIf="wikiImg">
-<div class="wiki-description">{{ wikiDescription }}</div>
-<div class="wiki-extract">{{ wikiExtract }}</div>
+<div *ngIf="wiki">
+  <div class="wiki-description">{{ wiki.description }}</div>
+  <div class="wiki-extract">{{ wiki.extract }}</div>
+  <img [src]="wiki.imgurl" class="wiki-img" *ngIf="wiki.imgurl">
+</div>
 
 <form [formGroup]="formGroup" novalidate (ngSubmit)="save()" *ngIf="editAuthor">
   <mat-form-field class="{{ option.name }}" *ngFor="let option of options">

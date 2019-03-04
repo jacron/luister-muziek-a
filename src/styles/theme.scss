@@ -111,7 +111,8 @@ $darkcolor: #eeeeee;
     color: $darkcolor;
   }
 
-  .book-card-content a {
+  .book-card-content a,
+  .author-books .author {
     color: #ffa;
   }
   .mat-form-field-label.mat-focused {

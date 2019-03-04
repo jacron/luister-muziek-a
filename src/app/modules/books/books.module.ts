@@ -12,13 +12,13 @@ import { BookComponent } from './components/book/book.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
 import { BookEditComponent } from './components/book-edit/book-edit.component';
 import { AuthorsComponent } from './components/authors/authors.component';
-import { AuthorCardComponent } from './components/author-card/author-card.component';
 import { AuthorEditComponent } from './components/author-edit/author-edit.component';
 import { EditFieldComponent } from './components/edit-field/edit-field.component';
 import { TitleQueryComponent } from './components/title-query/title-query.component';
 import { BookAuthorAutocompleteComponent } from './components/autocomplete/book-author-autocomplete/book-author-autocomplete.component';
 import { BookProposalComponent } from './components/book-proposal/book-proposal.component';
 import { BookMenuComponent } from './components/book-menu/book-menu.component';
+import { AuthorMenuComponent } from './components/author-menu/author-menu.component';
 
 @NgModule({
   declarations: [
@@ -30,13 +30,13 @@ import { BookMenuComponent } from './components/book-menu/book-menu.component';
     BookCardComponent,
     BookEditComponent,
     AuthorsComponent,
-    AuthorCardComponent,
     AuthorEditComponent,
     EditFieldComponent,
     TitleQueryComponent,
     BookAuthorAutocompleteComponent,
     BookProposalComponent,
     BookMenuComponent,
+    AuthorMenuComponent,
   ],
   imports: [
     CommonModule,

@@ -16,9 +16,7 @@ export class AuthorEditComponent implements OnInit {
   editAuthor = false;
   formGroup: FormGroup;
   options: FormOption[];
-  wikiImg: string;
-  wikiDescription;
-  wikiExtract;
+  wiki;
   imageUrl = environment.booksServer + '/authorpicture/';
   refresh = '?';
 
@@ -26,6 +24,15 @@ export class AuthorEditComponent implements OnInit {
     private booksService: BooksService,
     private toastr: ToastrService,
   ) {
+  }
+
+  setWiki(e) {
+    this.wiki = e;
+  }
+
+  setRefresh(e) {
+    this.refresh = e;
+    this.wiki.imgurl = null;
   }
 
   hasError(controlName, errorName) {
@@ -36,68 +43,10 @@ export class AuthorEditComponent implements OnInit {
     this.editAuthor = !this.editAuthor;
   }
 
-  getCover() {
-    this.toastr.info('afbeelding auteur naar cache', 'afbeelding');
-    this.booksService.getAuthorPicture(this.author.id).subscribe(
-      response => console.log(response)
-    );
-  }
-
-  // getImageSource() {
-  //   const requestUrl = environment.booksServer;
-  //   return requestUrl + '/authorpicture/' + this.author.id;
-  // }
-
   afterSave(id, author: Author) {
     this.author = author;
     this.toastr.success('opgeslagen!', this.author.last);
     // this.bookChange.emit(book);
-  }
-
-  afterWiki(result) {
-    console.log(result);
-    this.toastr.success('gegevens zijn opeghaald', 'wikipedia')
-    if (result && result.image) {
-      // console.log(result.image.source);
-      this.wikiImg = result.image.source;
-      // this.wikiThumb = result.thumbnail.source;
-      this.wikiDescription = result.description;
-      this.wikiExtract = result.extract;
-    }
-  }
-
-  wikipedia(lng) {
-    const name = this.author.first + ' ' + this.author.last
-    console.log(name);
-    this.toastr.info('haal gegevens op', 'wikipedia')
-    this.booksService.wikiAuthor(name, lng).subscribe(
-      result => this.afterWiki(result)
-    )
-  }
-
-  google() {
-    window.open(environment.googleUrl +
-      this.author.first + ' ' + this.author.last);
-  }
-
-  afterStoreWiki() {
-    this.toastr.success('Wiki afbeelding opgeslagen', 'wiki');
-    this.refresh = '?' + new Date();
-    this.wikiImg = null;
-  }
-
-  storeWiki() {
-    this.booksService.storeWikiAuthorImg(this.wikiImg, this.author.id).subscribe(
-      () => this.afterStoreWiki()
-    )
-  }
-
-  remove() {
-    if (confirm('Remove this author?')) {
-      this.booksService.removeAuthor(this.author.id).subscribe(
-        response => console.log(response)
-      )
-    }
   }
 
   save() {
@@ -130,10 +79,6 @@ export class AuthorEditComponent implements OnInit {
         label: 'Achternaam',
       },
       {
-        name: 'country',
-        label: 'Land',
-      },
-      {
         name: 'born',
         label: 'Geboren',
       },
@@ -144,6 +89,10 @@ export class AuthorEditComponent implements OnInit {
       {
         name: 'imgurl',
         label: 'Afbeeldingsurl',
+      },
+      {
+        name: 'country',
+        label: 'Land',
       },
       {
         name: 'url',
