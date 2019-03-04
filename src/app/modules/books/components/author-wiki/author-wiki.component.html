@@ -1,6 +1,9 @@
-<div class="wiki-description">{{ wiki.description }}</div>
-<div class="wiki-extract">{{ wiki.extract }}</div>
-<img [src]="wiki.imgurl"
-     (click)="usePicture()"
-     class="wiki-img"
-     *ngIf="wiki.imgurl">
+<div class="author-wiki">
+  <div class="closer" (click)="closeWiki()">x</div>
+  <div class="wiki-description">{{ wiki.description }}</div>
+  <div class="wiki-extract">{{ wiki.extract }}</div>
+  <img [src]="wiki.imgurl"
+       (click)="usePicture()"
+       class="wiki-img"
+       *ngIf="wiki.imgurl">
+</div>

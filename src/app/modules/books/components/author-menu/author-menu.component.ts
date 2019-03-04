@@ -21,12 +21,34 @@ export class AuthorMenuComponent implements OnInit {
     {
       label: 'Bewerk',
       icon: 'edit',
+      color: '#ffa',
       action: this.toggleEdit.bind(this)
+    },
+    {
+      label: 'divider',
+      icon: '',
     },
     {
       label: 'Google',
       icon: 'search',
+      color: 'violet',
       action: this.google.bind(this)
+    },
+    {
+      label: 'wiki nl',
+      icon: 'search',
+      color: 'gold',
+      action: this.wikipedia_nl.bind(this)
+    },
+    {
+      label: 'wiki en',
+      icon: 'search',
+      color: 'blue',
+      action: this.wikipedia_en.bind(this)
+    },
+    {
+      label: 'divider',
+      icon: '',
     },
     {
       label: 'Plak url',
@@ -39,20 +61,6 @@ export class AuthorMenuComponent implements OnInit {
       icon: 'account_balance_wallet',
       color: 'green',
       action: this.getCover.bind(this)
-    },
-    {
-      label: 'divider',
-      icon: '',
-    },
-    {
-      label: 'wiki nl',
-      icon: 'wiki',
-      action: this.wikipedia_nl.bind(this)
-    },
-    {
-      label: 'wiki en',
-      icon: 'wiki',
-      action: this.wikipedia_en.bind(this)
     },
     {
       label: 'divider',

@@ -10,11 +10,12 @@
     <div *ngIf="authorEdit" class="col-edit">
       <app-author-edit
         (close)="authorEdit = false"
-        [author]="author"></app-author-edit>
+        [(author)]="author"></app-author-edit>
     </div>
     <div *ngIf="wiki" class="col-wiki">
       <app-author-wiki
         [wiki]="wiki"
+        (close)="wiki = null"
         (picture)="storeWikiPicture($event)"
       ></app-author-wiki>
     </div>

@@ -1,3 +1,6 @@
+<div class="closer"
+        (click)="closeEdit()"
+>x</div>
 <form [formGroup]="formGroup"
       novalidate
       (ngSubmit)="save()">
@@ -9,9 +12,6 @@
     <mat-error *ngIf="hasError('last', 'required')">Title is required</mat-error>
 
   </mat-form-field>
-  <button mat-raised-button 
-          (click)="closeEdit()"
-  >Annuleer</button>
   <button mat-raised-button color="primary"
           [disabled]="!formGroup.valid">Bewaar</button>
 </form>

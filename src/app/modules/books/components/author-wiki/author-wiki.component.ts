@@ -9,11 +9,16 @@ import {Wiki} from '../../../../classes/book/wiki';
 export class AuthorWikiComponent implements OnInit {
   @Input() wiki: Wiki;
   @Output() picture = new EventEmitter();
+  @Output() close = new EventEmitter();
 
   constructor() { }
 
   usePicture() {
     this.picture.emit(this.wiki.imgurl);
+  }
+
+  closeWiki() {
+    this.close.emit();
   }
 
   ngOnInit() {

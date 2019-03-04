@@ -19,3 +19,15 @@
 .thumb {
   width: 100px;
 }
+.closer {
+  float: right;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 10px;
+  &:hover {
+    background-color: #666;
+  }
+}
+form {
+  margin-top: 30px;
+}

@@ -14,6 +14,7 @@ import {ToastrService} from 'ngx-toastr';
 export class AuthorEditComponent implements OnInit {
   @Input() author: Author;
   @Output() close = new EventEmitter();
+  @Output() authorChange = new EventEmitter();
 
   editAuthor = false;
   formGroup: FormGroup;
@@ -41,7 +42,8 @@ export class AuthorEditComponent implements OnInit {
   afterSave(id, author: Author) {
     this.author = author;
     this.toastr.success('opgeslagen!', this.author.last);
-    // this.bookChange.emit(book);
+    this.authorChange.emit(author);
+    this.close.emit();
   }
 
   save() {

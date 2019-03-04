@@ -51,10 +51,11 @@ export class AuthorComponent implements OnInit {
   }
 
   afterGetAuthorBooks(response) {
-    console.log(response);
-    this.books = response.books;
+    // console.log(response);
     this.author = response.author;
-    document.title = this.author.first + ' ' + this.author.last;
+    const name = this.author.first + ' ' + this.author.last;
+    this.books = response.books;
+    document.title = name;
     this.stateService.setTitle(document.title);
   }
 
