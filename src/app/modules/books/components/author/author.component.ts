@@ -4,7 +4,7 @@ import {BooksService} from '../../services/books.service';
 import {Book} from '../../../../classes/book/book';
 import {Author} from '../../../../classes/book/author';
 import {StateService} from '../../../../services/state.service';
-import {Wiki} from '../../../../classes/book/wiki';
+// import {Wiki} from '../../../../classes/book/wiki';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -13,10 +13,10 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./author.component.scss']
 })
 export class AuthorComponent implements OnInit {
-  books: Book[];
+  books: Book[] = [];
   author: Author;
   authorEdit = false;
-  wiki: Wiki;
+  wiki;
   refresh = '?';
 
   constructor(
@@ -41,7 +41,7 @@ export class AuthorComponent implements OnInit {
     )
   }
 
-  setWiki(e: Wiki) {
+  setWiki(e) {
     this.wiki = e;
   }
 
@@ -52,16 +52,23 @@ export class AuthorComponent implements OnInit {
 
   afterGetAuthorBooks(response) {
     // console.log(response);
-    this.author = response.author;
+    this.books = response;
+  }
+
+  afterGetAuthor(author: Author) {
+    this.author = author
     const name = this.author.first + ' ' + this.author.last;
-    this.books = response.books;
     document.title = name;
     this.stateService.setTitle(document.title);
   }
 
   handleParams(params) {
     if (params) {
-      if (params.idauthor) {
+      const {idauthor} = params;
+      if (idauthor) {
+        this.booksService.getAuthor(idauthor).subscribe(
+          (author: Author) => this.afterGetAuthor(author)
+        );
         this.booksService.getAuthorBooks(params.idauthor).subscribe(
           response => this.afterGetAuthorBooks(response)
         );

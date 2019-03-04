@@ -11,7 +11,7 @@ let scrapeServer = 'http://localhost:3033';  //
 let host;
 
 console.log(document.location);
-const myhost = '10.0.1.3';
+const myhost = '10.0.1.3';  // imac or macbook
 
 if (hostname.includes('xip.io')
   || hostname.includes('vhx.cloud')
@@ -27,6 +27,8 @@ if (hostname.includes('xip.io')
   musicServer = host + ':8030/api';
   moviesServer = host + ':5090';
   booksServer = host + ':5050';
+  // new back-end test
+  booksServer = host + ':3000';
 } else {
   // use 'prod'
   musicServer = 'http://music-api/api';

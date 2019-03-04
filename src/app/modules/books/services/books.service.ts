@@ -39,7 +39,7 @@ export class BooksService {
   }
 
   getAuthorBooks(authorId) {
-    return this.getJson('/api/author/books/' + authorId);
+    return this.getJson('/api/books/author/' + authorId);
   }
 
   getBook(bookId) {
@@ -51,12 +51,12 @@ export class BooksService {
   }
 
   getBookByIsbn(isbn) {
-    return this.getJson('/api/book/isbn/' + isbn);
+    return this.getJson('/api/books/isbn/' + isbn); // s added
   }
 
   getRemote(isbn, source) {
     if (source === 'bolcom') {
-      return this.getJson('/api/book/remote/' + isbn + '/' + source);
+      return this.getJson('/api/books/remote/' + isbn + '/' + source);  // s added
     } else {
       return this.remoteService.getRemote(isbn, source);
     }

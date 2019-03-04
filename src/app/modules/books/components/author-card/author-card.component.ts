@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Author} from '../../../../classes/book/author';
 import {environment} from '../../../../../environments/environment';
-import {Wiki} from '../../../../classes/book/wiki';
+// import {Wiki} from '../../../../classes/book/wiki';
 
 @Component({
   selector: 'app-author-card',
@@ -15,12 +15,12 @@ export class AuthorCardComponent implements OnInit {
   @Output() edit = new EventEmitter();
   @Output() wiki = new EventEmitter();
 
-  imageUrl = environment.booksServer + '/authorpicture/';
-  wikiCache: Wiki;
+  imageUrl = environment.booksServer + '/image/author/';
+  wikiCache;
 
   constructor() { }
 
-  setWiki(e: Wiki) {
+  setWiki(e) {
     this.wikiCache = e;
     this.wiki.emit(this.wikiCache);
   }

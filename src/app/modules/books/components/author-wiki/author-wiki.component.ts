@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Wiki} from '../../../../classes/book/wiki';
+// import {Wiki} from '../../../../classes/book/wiki';
 
 @Component({
   selector: 'app-author-wiki',
@@ -7,7 +7,7 @@ import {Wiki} from '../../../../classes/book/wiki';
   styleUrls: ['./author-wiki.component.scss']
 })
 export class AuthorWikiComponent implements OnInit {
-  @Input() wiki: Wiki;
+  @Input() wiki;
   @Output() picture = new EventEmitter();
   @Output() close = new EventEmitter();
 

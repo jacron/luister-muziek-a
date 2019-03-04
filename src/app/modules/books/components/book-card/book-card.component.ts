@@ -10,7 +10,7 @@ import {environment} from '../../../../../environments/environment';
 export class BookCardComponent implements OnInit {
   @Input() book: Book;
   @Output() bookChange = new EventEmitter();
-  imageUrl = environment.booksServer + '/cover/';
+  imageUrl = environment.booksServer + '/image/book/';
   refresh = '?';
 
   constructor(

@@ -28,6 +28,7 @@ export class BooksStartComponent implements OnInit {
   }
 
   afterGetBookByIsbn(book: Book) {
+    console.log(book);
     this.books = [];
     this.notInCatalogue = true;
     if (book) {
@@ -41,7 +42,8 @@ export class BooksStartComponent implements OnInit {
 
   onIsbnChange() {
     this.booksService.getBookByIsbn(this.isbnFormControl.value).subscribe(
-      (book: Book) => this.afterGetBookByIsbn(book)
+      (book: Book) => this.afterGetBookByIsbn(book),
+      err => console.log(err)
     )
   }
 
@@ -52,7 +54,7 @@ export class BooksStartComponent implements OnInit {
 
   getBooksCount() {
     this.booksService.getBooksCount().subscribe(
-      result => this.stateService.setTitle('Books (' + result + ')')
+      result => this.stateService.setTitle('Books (' + result['count'] + ')')
     )
   }
 
