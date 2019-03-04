@@ -3,6 +3,7 @@ import {MenuOption} from '../../../../classes/shared/MenuOption';
 import {BooksService} from '../../services/books.service';
 import {ToastrService} from 'ngx-toastr';
 import {Book} from '../../../../classes/book/book';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-book-menu',
@@ -42,6 +43,11 @@ export class BookMenuComponent implements OnInit {
       icon: '',
     },
     {
+      label: 'Google',
+      icon: 'search',
+      action: this.google.bind(this)
+    },
+    {
       label: 'Verwijder',
       icon: 'clear',
       color: 'rgb(245, 24, 24)',
@@ -56,6 +62,24 @@ export class BookMenuComponent implements OnInit {
 
   act(f: Function) {
     f();
+  }
+
+  afterGetAuthor(response) {
+    window.open(environment.googleUrl + this.book.title +
+      ' ' + response.first + ' ' + response.last);
+  }
+
+  google() {
+    console.log(this.book);
+    const author = this.book.author;
+    if (!author) {
+      this.booksService.getAuthor(this.book.author_id).subscribe(
+        response => this.afterGetAuthor(response)
+      );
+    } else {
+      window.open(environment.googleUrl + this.book.title +
+        ' ' + author);
+    }
   }
 
   scanCover() {

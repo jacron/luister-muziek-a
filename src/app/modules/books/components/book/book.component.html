@@ -6,13 +6,8 @@
         {{ book.notes }}
       </div>
       <div class="cmds">
-        <button (click)="scanCover()">scan</button> |
-        <button (click)="finishCover()">finish</button> |
-        <button (click)="getCover()" [disabled]="!book.imgurl">get</button> |
-        <button (click)="edit()">edit</button> |
-        <button (click)="google()">google</button> |
-        <button (click)="add()">+</button> |
-        <button (click)="remove()">-</button>
+        <button (click)="edit()">edit</button>
+        <button (click)="add()">+</button>
       </div>
       <app-book-edit *ngIf="showEdit" [save]="true" [(book)]="book">
       </app-book-edit>

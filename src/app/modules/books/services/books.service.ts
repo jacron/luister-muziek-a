@@ -46,6 +46,10 @@ export class BooksService {
     return this.getJson('/api/book/' + bookId);
   }
 
+  getAuthor(authorId) {
+    return this.getJson('/api/author/' + authorId);
+  }
+
   getBookByIsbn(isbn) {
     return this.getJson('/api/book/isbn/' + isbn);
   }

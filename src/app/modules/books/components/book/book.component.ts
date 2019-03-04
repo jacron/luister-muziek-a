@@ -3,8 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import {BooksService} from '../../services/books.service';
 import {Book} from '../../../../classes/book/book';
 import {StateService} from '../../../../services/state.service';
-import {FormControl} from '@angular/forms';
-import {environment} from '../../../../../environments/environment';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -44,24 +42,6 @@ export class BookComponent implements OnInit {
     }
   }
 
-  scanCover() {
-    this.booksService.scanCover().subscribe(
-      response => console.log(response)
-    )
-  }
-
-  finishCover() {
-    this.booksService.finishCover(this.book.id).subscribe(
-      response => this.toastr.success('cover finished')
-    )
-  }
-
-  getCover() {
-    this.booksService.getBookCover(this.book.id).subscribe(
-      response => console.log(response)
-    )
-  }
-
   add() {
     this.book = {
       id: -1,
@@ -89,11 +69,6 @@ export class BookComponent implements OnInit {
         response => console.log(response)
       )
     }
-  }
-
-  google() {
-    window.open(environment.googleUrl + this.book.title + ' ' +
-      this.book.date);
   }
 
   afterGetRemote(response, source) {

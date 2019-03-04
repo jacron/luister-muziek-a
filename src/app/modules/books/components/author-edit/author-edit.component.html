@@ -1,9 +1,10 @@
-
 <img [src]="imageUrl + author.id + refresh"
      class="author-image" alt="author image">
 <div class="dates">
   <app-author-menu
-    [author]="author" (wiki)="setWiki($event)" (refresh)="setRefresh($event)"
+    [author]="author"
+    (wiki)="setWiki($event)"
+    (refresh)="setRefresh($event)"
   ></app-author-menu>
   <span>{{ author.born }}</span> - <span>{{ author.died }}</span>
   <button mat-button mat-icon-button (click)="edit()">
@@ -19,9 +20,12 @@
 
 <form [formGroup]="formGroup" novalidate (ngSubmit)="save()" *ngIf="editAuthor">
   <mat-form-field class="{{ option.name }}" *ngFor="let option of options">
+    <img [src]="author.imgurl" *ngIf="option.name == 'imgurl' && author.imgurl"
+         class="thumb" alt="author picture">
     <input matInput [placeholder]="option.label" [title]="option.label"
            [name]="option.name" [formControlName]="option.name">
     <mat-error *ngIf="hasError('last', 'required')">Title is required</mat-error>
+
   </mat-form-field>
   <button mat-raised-button color="primary"
           [disabled]="!formGroup.valid">Save</button>

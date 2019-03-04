@@ -70,10 +70,15 @@ export class AuthorMenuComponent implements OnInit {
     f();
   }
 
+  afterGetCover() {
+    this.toastr.success('schrijversfoto opgeslagen', 'afbeelding');
+    this.refresh.emit('?' + new Date());
+  }
+
   getCover() {
     this.toastr.info('afbeelding auteur naar cache', 'afbeelding');
     this.booksService.getAuthorPicture(this.author.id).subscribe(
-      response => console.log(response)
+      () => this.afterGetCover()
     );
   }
 
