@@ -47,6 +47,12 @@ export class AuthorMenuComponent implements OnInit {
       action: this.wikipedia_en.bind(this)
     },
     {
+      label: 'wiki de',
+      icon: 'search',
+      color: 'aqua',
+      action: this.wikipedia_de.bind(this)
+    },
+    {
       label: 'divider',
       icon: '',
     },
@@ -100,13 +106,14 @@ export class AuthorMenuComponent implements OnInit {
   }
 
   afterPastePicture(response) {
-    this.author.imgurl = response.text;
+    this.author.imgurl = response;
     this.toastr.success('url afbeelding ingeplakt', 'cover');
   }
 
   pastePicture() {
     this.booksService.pasteAuthorPicture(this.author.id).subscribe(
-      response => this.afterPastePicture(response)
+      response => this.afterPastePicture(response),
+      err => console.log(err)
     )
   }
 
@@ -129,6 +136,10 @@ export class AuthorMenuComponent implements OnInit {
 
   wikipedia_en() {
     this.wikipedia('en');
+  }
+
+  wikipedia_de() {
+    this.wikipedia('de');
   }
 
   wikipedia(lng) {

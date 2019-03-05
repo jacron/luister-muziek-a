@@ -50,6 +50,7 @@ export class BookEditComponent implements OnInit, OnChanges {
       this.router.navigate(['books', id]).then();
       // this.bookChange.emit(null);
     } else {
+      console.log(book);
       this.bookChange.emit(book);
       this.toastr.success('Het boek is opgeslagen!', this.book.title);
     }

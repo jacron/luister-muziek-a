@@ -39,7 +39,7 @@ export class BooksService {
   }
 
   getAuthorBooks(authorId) {
-    return this.getJson('/api/books/author/' + authorId);
+    return this.getJson('/api/book/author/' + authorId);
   }
 
   getBook(bookId) {
@@ -51,31 +51,31 @@ export class BooksService {
   }
 
   getBookByIsbn(isbn) {
-    return this.getJson('/api/books/isbn/' + isbn); // s added
+    return this.getJson('/api/book/isbn/' + isbn); // s added
   }
 
   getRemote(isbn, source) {
     if (source === 'bolcom') {
-      return this.getJson('/api/books/remote/' + isbn + '/' + source);  // s added
+      return this.getJson('/api/book/remote/' + isbn + '/' + source);  // s added
     } else {
       return this.remoteService.getRemote(isbn, source);
     }
   }
 
   getBooksCount() {
-    return this.getJson('/api/books/count');
+    return this.getJson('/api/book/count');
   }
 
   getRecent(limit) {
-    return this.getJson('/api/books/recent/' + limit);
+    return this.getJson('/api/book/recent/' + limit);
   }
 
   getAuthors() {
-    return this.getJson('/api/authors/shallow');
+    return this.getJson('/api/author');
   }
 
   wikiAuthor(authorName, lng) {
-    return this.getJson('/api/author/wiki/' + authorName + '/' + lng);
+    return this.getJson('/api/wiki/' + lng + '/' + authorName);
   }
 
   /* POST */
@@ -96,23 +96,23 @@ export class BooksService {
   }
 
   finishCover(bookId) {
-    return this.postForm('/api/book/scanfinish/' + bookId, {});
+    return this.postForm('/api/book/use/' + bookId, {});
   }
 
   pasteBookCover(bookId) {
-    return this.postForm('/api/book/pastecover/' + bookId, {});
+    return this.postForm('/api/paste/book/' + bookId, {});
   }
 
   pasteAuthorPicture(authorId) {
-    return this.postForm('/api/author/pastepicture/' + authorId, {});
+    return this.postForm('/api/paste/author/' + authorId, {});
   }
 
   getBookCover(bookId) {
-    return this.postForm('/api/book/getcover/' + bookId, {});
+    return this.postForm('/api/getimage/book/' + bookId, {});
   }
 
   getAuthorPicture(authorId) {
-    return this.postForm('/api/author/getpicture/' + authorId, {});
+    return this.postForm('/api/getimage/author/' + authorId, {});
   }
 
   removeBook(bookId) {
