@@ -15,7 +15,7 @@
         </mat-card-title>
         <div class="genre">{{ book.genre}}</div>
       </mat-card-header>
-      <a class="link" [routerLink]="['/books', book.id]" *ngIf="book">
+      <a class="link" [routerLink]="['/books', book.id]">
         <div class="image-container">
           <img mat-card-image [src]="imageUrl + book.id + refresh" alt=""
                class="book-image">
@@ -23,7 +23,7 @@
       </a>
       <mat-card-content class="book-card-content">
         <div class="book-footer">
-          <div class="author">
+          <div class="author" *ngIf="book.author_id">
             <a class="link"
                [routerLink]="['/author', book.author_id]">
               {{ book.author }}

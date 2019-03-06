@@ -7,7 +7,6 @@ const hostname = document.location.hostname;
 let musicServer;  // music-api
 let moviesServer; // movies18
 let booksServer; // booklibrary_flask
-let scrapeServer = 'http://localhost:3033';  //
 let host;
 
 console.log(document.location);
@@ -34,8 +33,8 @@ if (hostname.includes('xip.io')
   musicServer = 'http://music-api/api';
   moviesServer = 'http://movies18';
   booksServer = 'http://booklibrary';
-
 }
+
 console.log('music server', musicServer);
 console.log('movie server', moviesServer);
 console.log('book server', booksServer);
@@ -43,7 +42,6 @@ export const environment = {
   musicServer,
   moviesServer,
   booksServer,
-  scrapeServer,
   googleUrl: 'https://google.nl/search?q=',
   freedbUrl: 'http://www.freedb.org/freedb_discid_check.php?discid=',
   amazonUrl: 'https://www.amazon.com/dp/',

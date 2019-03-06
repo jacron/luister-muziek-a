@@ -28,8 +28,13 @@ export class BookComponent implements OnInit {
   afterGetBook(response) {
     console.log(response);
     this.book = response;
-    this.stateService.setTitle(this.book.title);
-    document.title = this.book.title;
+    if (this.book) {
+      this.stateService.setTitle(this.book.title);
+      document.title = this.book.title;
+    } else {
+      this.stateService.setTitle('not found');
+      document.title = 'not found';
+    }
   }
 
   handleParams(params) {
@@ -73,8 +78,8 @@ export class BookComponent implements OnInit {
 
   afterGetRemote(response, source) {
     console.log(response);
-    if (response.matches && response.matches[0]) {
-      this.proposal = response.matches[0];
+    if (response) {
+      this.proposal = response;
       this.proposal.id = -1;
       this.proposal.source = source;
       this.notfound = null;
@@ -85,6 +90,11 @@ export class BookComponent implements OnInit {
     }
   }
 
+  errorGetRemote(err, source) {
+    console.log(err);
+    this.toastr.error(err.statusText, source);
+  }
+
   remote(source) {
     const isbn = this.book.isbn13;
     console.log(isbn);
@@ -92,7 +102,8 @@ export class BookComponent implements OnInit {
     this.proposal = null;
     this.toastr.info('haal gegevens op', source);
     this.booksService.getRemote(isbn, source).subscribe(
-      response => this.afterGetRemote(response, source)
+      response => this.afterGetRemote(response, source),
+      err => this.errorGetRemote(err, source)
     )
   }
 

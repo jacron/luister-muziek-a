@@ -19,11 +19,11 @@ export class BookProposalComponent implements OnInit {
   ) { }
 
   afterGetRemote(response, source) {
-    console.log(response);
+    // console.log(response);
     this.toastr.success('Gegevens zijn opgehaald!', source);
     // this.notInCatalogue = true;
-    if (response.matches && response.matches[0]) {
-      this.proposal = response.matches[0];
+    if (response) {
+      this.proposal = response;
       this.proposal.id = -1;
       this.proposal.source = source;
       this.notfound = null;

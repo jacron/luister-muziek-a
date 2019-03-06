@@ -28,9 +28,9 @@ export class BooksStartComponent implements OnInit {
   }
 
   afterGetBookByIsbn(book: Book) {
-    console.log(book);
+    // console.log(book);
     this.books = [];
-    this.notInCatalogue = true;
+    // this.notInCatalogue = true;
     if (book) {
       this.notInCatalogue = false;
       this.books.push(book);

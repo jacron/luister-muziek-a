@@ -3,7 +3,6 @@ import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Book} from '../../../classes/book/book';
 import {Author} from '../../../classes/book/author';
-import {RemoteService} from './remote.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,6 @@ export class BooksService {
 
   constructor(
     private http: HttpClient,
-    private remoteService: RemoteService,
   ) { }
 
   /* GET */
@@ -55,11 +53,7 @@ export class BooksService {
   }
 
   getRemote(isbn, source) {
-    if (source === 'bolcom') {
-      return this.getJson('/api/book/remote/' + isbn + '/' + source);  // s added
-    } else {
-      return this.remoteService.getRemote(isbn, source);
-    }
+    return this.getJson('/api/book/remote/' + isbn + '/' + source);  // s added
   }
 
   getBooksCount() {
