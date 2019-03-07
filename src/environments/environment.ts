@@ -27,7 +27,7 @@ if (hostname.includes('xip.io')
   moviesServer = host + ':5090';
   booksServer = host + ':5050';
   // new back-end test
-  booksServer = host + ':3000';
+  booksServer = host + ':3004';
 } else {
   // use 'prod'
   musicServer = 'http://music-api/api';
