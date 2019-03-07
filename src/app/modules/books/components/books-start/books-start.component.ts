@@ -27,13 +27,11 @@ export class BooksStartComponent implements OnInit {
     this.router.navigate(['books/search', query]).then();
   }
 
-  afterGetBookByIsbn(book: Book) {
-    // console.log(book);
+  afterGetBookByIsbn(books: Book[]) {
     this.books = [];
-    // this.notInCatalogue = true;
-    if (book) {
+    if (books) {
       this.notInCatalogue = false;
-      this.books.push(book);
+      this.books = books;
     }
     else {
       this.notInCatalogue = true;
@@ -42,7 +40,7 @@ export class BooksStartComponent implements OnInit {
 
   onIsbnChange() {
     this.booksService.getBookByIsbn(this.isbnFormControl.value).subscribe(
-      (book: Book) => this.afterGetBookByIsbn(book),
+      (books: Book[]) => this.afterGetBookByIsbn(books),
       err => console.log(err)
     )
   }

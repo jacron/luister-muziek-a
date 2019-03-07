@@ -49,11 +49,11 @@ export class BooksService {
   }
 
   getBookByIsbn(isbn) {
-    return this.getJson('/api/book/isbn/' + isbn); // s added
+    return this.getJson('/api/book/isbn/' + isbn);
   }
 
   getRemote(isbn, source) {
-    return this.getJson('/api/book/remote/' + isbn + '/' + source);  // s added
+    return this.getJson('/api/book/remote/' + isbn + '/' + source);
   }
 
   getBooksCount() {

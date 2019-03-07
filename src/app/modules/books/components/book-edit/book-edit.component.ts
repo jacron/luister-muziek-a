@@ -21,6 +21,7 @@ export class BookEditComponent implements OnInit, OnChanges {
   formGroup: FormGroup;
   options: FormOption[];
   filteredItems;
+  authorSelectable = false;
 
   constructor(
     private booksService: BooksService,
@@ -47,8 +48,10 @@ export class BookEditComponent implements OnInit, OnChanges {
   afterSave(id, book: Book) {
     this.book = book;
     if (this.discard) {
-      this.router.navigate(['books', id]).then();
-      // this.bookChange.emit(null);
+      if (id) {
+        this.router.navigate(['books', id]).then();
+        // this.bookChange.emit(null);
+      }
     } else {
       console.log(book);
       this.bookChange.emit(book);

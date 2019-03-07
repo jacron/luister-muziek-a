@@ -3,6 +3,7 @@
         novalidate (ngSubmit)="store()">
 
     <div [class]="option.name"
+         style="display: inline-block"
                     *ngFor="let option of options">
       <mat-form-field  class="{{ option.name }} form-field">
     <textarea matInput [placeholder]="option.label"
@@ -13,13 +14,15 @@
         <input matInput [placeholder]="option.label"
                *ngIf="option.name != 'notes'"
                [name]="option.name" [formControlName]="option.name">
-
+        <button *ngIf="option.name == 'author'"
+                (click)="authorSelectable = !authorSelectable"
+        >edit</button>
         <mat-error *ngIf="hasError('title', 'required')">
           Titel is vereist</mat-error>
       </mat-form-field>
-      <app-book-author-autocomplete (select)="selectAuthor($event)"
-                                    *ngIf="option.name == 'author'">
-
+      <app-book-author-autocomplete
+        (select)="selectAuthor($event)"
+        *ngIf="option.name == 'author' && authorSelectable">
       </app-book-author-autocomplete>
     </div>
     <button mat-raised-button color="primary"
