@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   ) {
     route.params.subscribe((params: SearchParams) => {
       if (params) {
+        console.log(params);
         this.fetchThings(params);
         this.params = params;
         this.storageService.storeSearchParameters(params);

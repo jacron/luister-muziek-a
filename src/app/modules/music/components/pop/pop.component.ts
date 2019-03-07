@@ -4,7 +4,6 @@ import {Person} from '../../../../classes/music/Person';
 import {MusicService} from '../../services/music.service';
 import {Album} from '../../../../classes/music/Album';
 import {Router} from '@angular/router';
-import {Movie} from '../../../../classes/movies/Movie';
 
 @Component({
   selector: 'app-pop',

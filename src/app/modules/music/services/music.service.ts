@@ -7,14 +7,28 @@ import {SearchParams} from '../../../classes/music/SearchParams';
 export class MusicService {
   requestUrl = environment.musicServer;
 
+
   constructor(
     private http: HttpClient
   ) { }
 
   /* GET */
   getJson(cmd) {
-    return this.http.get(this.requestUrl + cmd, {
+    const musicLibrary = 'http://localhost:3005'
+    return this.http.get(musicLibrary + cmd, {
       responseType: 'json'});
+  }
+
+  getPerformersGenre(genre) {
+    return this.getJson('/performers/genre/' + genre);
+  }
+
+  getPerformerAlbums(idPerformer) {
+    return this.getJson('/performers/' + idPerformer + '/albums');
+  }
+
+  getPiecesRecentlyPlayed(n = 20) {
+    return this.getJson('/pieces/recent/' + n);
   }
 
   getVideoAlbums(genre) {
@@ -28,10 +42,6 @@ export class MusicService {
 
   getPerformers(mode) {
     return this.getJson('/performers/mode/' + mode);
-  }
-
-  getPerformersGenre(genre) {
-    return this.getJson('/performers/genre/' + genre);
   }
 
   getCollections() {
@@ -98,10 +108,6 @@ export class MusicService {
   //   return this.getJson('/composer/' + idComposer + '/albums');
   // }
 
-  getPerformerAlbums(idPerformer) {
-    return this.getJson('/performer/' + idPerformer + '/albums');
-  }
-
   getTagAlbums(id) {
     return this.getJson('/tag/' + id + '/albums');
   }
@@ -123,10 +129,6 @@ export class MusicService {
   //     chips
   //   });
   // }
-
-  getPiecesRecentlyPlayed(n = 20) {
-    return this.getJson('/pieces/recent/' + n);
-  }
 
   /* POST */
   postForm(cmd, params) {

@@ -18,14 +18,14 @@ if (hostname.includes('xip.io')
   host = 'http://' + myhost;
   musicServer = host + ':8020/api';
   moviesServer = host + ':5080';
-  booksServer = host + ':5050';
+  booksServer = host + ':3004';
 } else if (hostname.includes('127.0.0.1') ||
       hostname.includes('localhost')) {
   // use dev
   host = 'http://127.0.0.1';
   musicServer = host + ':8030/api';
   moviesServer = host + ':5090';
-  booksServer = host + ':5050';
+  // booksServer = host + ':5050';
   // new back-end test
   booksServer = host + ':3004';
 } else {
