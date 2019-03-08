@@ -23,7 +23,8 @@ if (hostname.includes('xip.io')
       hostname.includes('localhost')) {
   // use dev
   host = 'http://127.0.0.1';
-  musicServer = host + ':8030/api';
+  // musicServer = host + ':8030/api';
+  musicServer = host + ':3005';
   moviesServer = host + ':5090';
   // booksServer = host + ':5050';
   // new back-end test

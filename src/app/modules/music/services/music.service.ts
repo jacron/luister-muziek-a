@@ -14,8 +14,7 @@ export class MusicService {
 
   /* GET */
   getJson(cmd) {
-    const musicLibrary = 'http://localhost:3005'
-    return this.http.get(musicLibrary + cmd, {
+    return this.http.get(this.requestUrl + cmd, {
       responseType: 'json'});
   }
 

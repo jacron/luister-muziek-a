@@ -15,7 +15,6 @@
           <img [src]="imgSrc"
                (click)="openPic('front')"
                alt="cover"
-               default="assets/not-found.png"
                class="thumb">
           <img *ngIf="album.album_back_image"
                [src]="albumBackImage(album.ID)"
