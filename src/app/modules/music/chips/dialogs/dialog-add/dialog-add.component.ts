@@ -102,15 +102,24 @@ export class DialogAddComponent implements OnInit {
     );
   }
 
-  afterNewPerformer(response, choice) {
-    this.album.album_performers.push(response);
+  afterAddPerformer(response, choice, mockPerformer) {
+    this.album.album_performers.push(mockPerformer);
     choice.text = '';
   }
 
   addPerformer(choice) {
+    const mockPerformer = {
+      FullName: choice.items.find(item => item.ID === choice.id).FullName,
+      ID: choice.id
+    };
     this.musicService.addPerformer(choice.id, this.album.ID).subscribe(
-      (response) => this.afterNewPerformer(response, choice)
+      (response) => this.afterAddPerformer(response, choice, mockPerformer)
     );
+  }
+
+  afterNewPerformer(response, choice) {
+    this.album.album_performers.push(response);
+    choice.text = '';
   }
 
   newPerformer(choice) {
@@ -131,16 +140,25 @@ export class DialogAddComponent implements OnInit {
     );
   }
 
-  afterNewComposer(response, choice) {
-    this.album.album_componisten.push(response);
+  afterAddComposer(response, choice, mockComposer) {
+    this.album.album_componisten.push(mockComposer);
     choice.text = '';
   }
 
   addComposer(choice) {
+    const mockComposer = {
+      FullName: choice.items.find(item => item.ID === choice.id).FullName,
+      ID: choice.id
+    };
     this.musicService.addComposer(choice.id, this.album.ID).subscribe(
-      (response) => this.afterNewComposer(response, choice),
+      (response) => this.afterAddComposer(response, choice, mockComposer),
       (error) => console.error(error)
     );
+  }
+
+  afterNewComposer(response, choice, ) {
+    this.album.album_componisten.push(response);
+    choice.text = '';
   }
 
   newComposer(choice) {

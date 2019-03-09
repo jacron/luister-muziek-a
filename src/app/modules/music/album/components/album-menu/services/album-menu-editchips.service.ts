@@ -8,7 +8,7 @@ import {Album} from '../../../../../../classes/music/Album';
 })
 export class AlbumMenuEditchipsService {
   private option =     {
-    label: 'Bewerk album chips',
+    label: 'Albumgegevens',
     action: this.editChips.bind(this),
     icon: 'edit',
     color: 'orange',

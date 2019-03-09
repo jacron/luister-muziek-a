@@ -18,8 +18,36 @@ export class MusicService {
       responseType: 'json'});
   }
 
+  /*
+  * albums
+  */
+  getSearchedAlbums(params: SearchParams) {
+    const search = params.search && params.search.length ? params.search : '@@';
+    const cmd = '/albums/cql/' + search + '/' +
+      params.idcomp + '/' + params.idperf + '/' + params.idcoll + '/' +
+      params.idtag + '/' + params.idinstrument;
+    return this.getJson(cmd);
+  }
+
+
+  /*
+  * composers
+   */
+  getComposers(mode) {
+    // mode = 'dropdown' || 'typeahead' || 'startletter'
+    return this.getJson('/composers/mode/' + mode);
+  }
+
+
+  /*
+   * performers
+   */
   getPerformersGenre(genre) {
     return this.getJson('/performers/genre/' + genre);
+  }
+
+  getPerformers(mode) {
+    return this.getJson('/performers/mode/' + mode);
   }
 
   getPerformerAlbums(idPerformer) {
@@ -32,15 +60,6 @@ export class MusicService {
 
   getVideoAlbums(genre) {
     return this.getJson('/videos/' + genre);
-  }
-
-  getComposers(mode) {
-    // mode = 'dropdown' || 'typeahead' || 'startletter'
-    return this.getJson('/composers/mode/' + mode);
-  }
-
-  getPerformers(mode) {
-    return this.getJson('/performers/mode/' + mode);
   }
 
   getCollections() {
@@ -115,14 +134,6 @@ export class MusicService {
   //   return this.getJson('/collection/' + id + '/albums');
   // }
 
-  getSearchedAlbums(params: SearchParams) {
-    const search = params.search && params.search.length ? params.search : '@@';
-    const cmd = '/cql/' + search + '/' +
-      params.idcomp + '/' + params.idperf + '/' + params.idcoll + '/' +
-      params.idtag + '/' + params.idinstrument;
-    return this.getJson(cmd);
-  }
-
   // getNewSearchedAlbums(chips) {
   //   return this.postForm('/search/chips', {
   //     chips
@@ -138,6 +149,62 @@ export class MusicService {
     );
   }
 
+  /*
+  *   albums
+  */
+  updateAlbum(albumid, title, description, asin) {
+    return this.postForm(`/albums/${albumid}/update`, {
+      title: title,
+      description: description,
+      asin: asin,
+    });
+  }
+
+  pasteAlbumImage(albumid) {
+    return this.postForm(`/albums/${albumid}/paste`, {});
+  }
+
+  addComposer(composerId: number, albumId: number) {
+    return this.postForm(`/albums/${albumId}/composer/${composerId}/add`, {});
+  }
+
+  removeComposer(composerId: number, albumId: number) {
+    return this.postForm(`/albums/${albumId}/composer/${composerId}/remove`, {});
+  }
+
+  addPerformer(performerId: number, albumId: number) {
+    return this.postForm(`/albums/${albumId}/performer/${performerId}/add`, {});
+  }
+
+  removePerformer(performerId: number, albumId: number) {
+    return this.postForm(`/albums/${albumId}/performer/${performerId}/remove`, {});
+  }
+
+  addTag(tagId: number, albumId: number) {
+    return this.postForm('/tag/add',
+      {tagId: tagId, albumId: albumId});
+  }
+
+  addInstrument(instrumentId: number, albumId: number) {
+    return this.postForm('/instrument/add',
+      {instrumentId: instrumentId, albumId: albumId});
+  }
+
+  removeTag(tagId: number, albumId: number) {
+    return this.postForm('/tag/remove', {
+      tagId: tagId, albumId: albumId
+    });
+  }
+
+  removeInstrument(instrumentId: number, albumId: number) {
+    return this.postForm('/instrument/remove', {
+      instrumentId: instrumentId, albumId: albumId
+    });
+  }
+
+  /*
+  *
+  */
   saveAliasPiece(id, displayname) {
     return this.postForm('/piece/alias', {
       id: id,
@@ -174,26 +241,6 @@ export class MusicService {
     return this.postForm('/finder/album/' + id, {});
   }
 
-  addComposer(composerId: number, albumId: number) {
-    return this.postForm('/composer/add',
-      {composerId: composerId, albumId: albumId});
-  }
-
-  addPerformer(performerId: number, albumId: number) {
-    return this.postForm('/performer/add',
-      {performerId: performerId, albumId: albumId});
-  }
-
-  addTag(tagId: number, albumId: number) {
-    return this.postForm('/tag/add',
-      {tagId: tagId, albumId: albumId});
-  }
-
-  addInstrument(instrumentId: number, albumId: number) {
-    return this.postForm('/instrument/add',
-      {instrumentId: instrumentId, albumId: albumId});
-  }
-
   newInstrument(name, albumId) {
     return this.postForm('/instrument/new',
       {name: name, albumId: albumId});
@@ -224,30 +271,6 @@ export class MusicService {
     });
   }
 
-  removeComposer(composerId: number, albumId: number) {
-    return this.postForm('/composer/remove', {
-      composerId: composerId, albumId: albumId
-    });
-  }
-
-  removePerformer(performerId: number, albumId: number) {
-    return this.postForm('/performer/remove', {
-      performerId: performerId, albumId: albumId
-    });
-  }
-
-  removeTag(tagId: number, albumId: number) {
-    return this.postForm('/tag/remove', {
-      tagId: tagId, albumId: albumId
-    });
-  }
-
-  removeInstrument(instrumentId: number, albumId: number) {
-    return this.postForm('/instrument/remove', {
-      instrumentId: instrumentId, albumId: albumId
-    });
-  }
-
   refetch(id) {
     return this.postForm('/pieces/reload', {
       albumId: id
@@ -259,14 +282,6 @@ export class MusicService {
       albumId: albumid,
       pieceId: id,
       title: title
-    });
-  }
-
-  updateAlbum(albumid, title, description, asin) {
-    return this.postForm(`/albums/${albumid}/update`, {
-      title: title,
-      description: description,
-      asin: asin,
     });
   }
 
@@ -318,10 +333,6 @@ export class MusicService {
       personId: personId,
       type: type
     });
-  }
-
-  pasteAlbumImage(albumid) {
-    return this.postForm('/image/paste/album/' + albumid, {});
   }
 
   updateLibraryCodeAlias(code, text) {
