@@ -1,14 +1,12 @@
 <mat-progress-spinner *ngIf="!album"></mat-progress-spinner>
 <div *ngIf="album" class="album"
-            (keydown)="browse($event)"
             tabindex="0">
     <mat-card class="album-card">
       <app-album-header
         (reload)="reload($event)"
-        (back)="back()" (forward)="forward()" (toList)="toList()"
         (updateimage)="updateImage($event)"
-        [album]="album" [list]="list"
-        [navBackwards]="navBackwards" [navForwards]="navForwards">
+        [album]="album"
+        [list]="list">
       </app-album-header>
       <div class="wrapper">
         <div class="thumb-container">

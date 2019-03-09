@@ -9,7 +9,7 @@ import {StateService} from '../../../../../../services/state.service';
 })
 export class AlbumMenuEditalbumService {
   private option =     {
-    label: 'Bewerk album',
+    label: 'Wijzig titel',
     action: this.editAlbum.bind(this),
     icon: 'edit',
     color: '',

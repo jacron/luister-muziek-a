@@ -263,8 +263,7 @@ export class MusicService {
   }
 
   updateAlbum(albumid, title, description, asin) {
-    return this.postForm('/album/update', {
-      albumId: albumid,
+    return this.postForm(`/albums/${albumid}/update`, {
       title: title,
       description: description,
       asin: asin,
@@ -322,9 +321,7 @@ export class MusicService {
   }
 
   pasteAlbumImage(albumid) {
-    return this.postForm('/image/paste/album', {
-      albumId: albumid,
-    });
+    return this.postForm('/image/paste/album/' + albumid, {});
   }
 
   updateLibraryCodeAlias(code, text) {
