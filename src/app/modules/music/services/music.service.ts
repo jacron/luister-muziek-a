@@ -163,7 +163,7 @@ export class MusicService {
   }
 
   tagEditor(albumId) {
-    return this.postForm('/tag/editor', { albumid: albumId});
+    return this.postForm('/tags/edit/' + albumId, {});
   }
 
   deleteCue(id, albumid) {
@@ -171,8 +171,7 @@ export class MusicService {
   }
 
   openFinder(id) {
-    const params = {objectid: id};
-    return this.postForm('/finder/album', params);
+    return this.postForm('/finder/album/' + id, {});
   }
 
   addComposer(composerId: number, albumId: number) {
@@ -271,20 +270,6 @@ export class MusicService {
       asin: asin,
     });
   }
-
-  // updateAlbumTitle(albumid, title) {
-  //   return this.postForm('/album/update/title', {
-  //     albumId: albumid,
-  //     title: title
-  //   });
-  // }
-  //
-  // updateAlbumDescription(albumid, text) {
-  //   return this.postForm('/album/update/description', {
-  //     albumId: albumid,
-  //     description: text
-  //   });
-  // }
 
   updatePerson(options) {
     return this.postForm('/person/update', {

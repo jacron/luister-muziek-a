@@ -175,7 +175,7 @@ export class AlbumDetailsComponent implements OnInit, DoCheck {
 
   openAlbum(album: Album): void {
     this.album = album;
-    // console.log(album);
+    console.log(album);
     if (album) {
       this.imgSrc = this.albumImage();
       // console.log(album);
