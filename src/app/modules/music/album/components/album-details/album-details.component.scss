@@ -81,6 +81,12 @@ img.thumb {
   width: 300px;
   border: 1px solid #bfbfbf;
 }
+.thumb-container {
+  img:nth-child(2) {
+    margin-left: -100px;
+    border: 1px solid #bfbfbf;
+  }
+}
 img.back-thumb {
   width: 100px;
   //position: absolute;

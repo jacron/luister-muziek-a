@@ -5,7 +5,7 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <div *ngFor="let option of options">
+    <div *ngFor="let option of filteredOption">
       <mat-divider *ngIf="option.label == 'divider'"></mat-divider>
       <button mat-menu-item
               *ngIf="option.label != 'divider'"

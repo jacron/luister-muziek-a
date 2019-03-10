@@ -14,10 +14,11 @@
                (click)="openPic('front')"
                alt="cover"
                class="thumb">
-          <img *ngIf="album.album_back_image"
+          <img
                [src]="albumBackImage(album.ID)"
                (click)="openPic('back')"
                alt="back-cover"
+               default="assets/one.png"
                class="back-thumb">
         </div>
         <app-album-metatags

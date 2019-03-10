@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Album} from '../../../../../classes/music/Album';
-import {environment} from '../../../../../../environments/environment';
+// import {environment} from '../../../../../../environments/environment';
 import {MusicService} from '../../../services/music.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StateService} from '../../../../../services/state.service';
@@ -15,9 +15,9 @@ import {SettingsService} from '../../../../../services/settings.service';
 export class AlbumDetailsComponent implements OnInit {
   @Input() album: Album;
 
-  imgUrl = environment.musicServer + '/image/';
-  imgBackUrl = environment.musicServer + '/image/back/';
-  imgTime = new Date();
+  // imgUrl = environment.musicServer + '/image/';
+  // imgBackUrl = environment.musicServer + '/image/back/';
+  // imgTime = new Date();
   imgSrc;
   idpiece = -1;
   coverSize = -1;
@@ -48,11 +48,12 @@ export class AlbumDetailsComponent implements OnInit {
 
   albumImage() {
     // {{ imgUrl }}{{ album.ID }}/album/-1/{{ coverSize }}
-    return `${this.imgUrl}${this.album.ID}/album/-1/${this.coverSize}?stamp=${this.imgTime}`;
+    return this.musicService.albumImageUrl(this.album.ID, -1, this.coverSize);
+    //`${this.imgUrl}${this.album.ID}/album/-1/${this.coverSize}`;  // ?stamp=${this.imgTime}`;
   }
 
   albumBackImage(id) {
-    return `${this.imgBackUrl}${id}/album/100/-1`;
+    return this.musicService.albumBackImageUrl(id, 100, -1);  // alimgBackUrl}${id}/album/100/-1`;
   }
 
   updateImage() {
@@ -91,8 +92,10 @@ export class AlbumDetailsComponent implements OnInit {
   }
 
   openPic(mode): void {
-    const imgUrl = this.imgUrl + this.album.ID + '/album';
-    const backUrl = this.album.album_back_image ? this.imgBackUrl + this.album.ID + '/album' : null;
+    const imgUrl = this.musicService.albumImageUrl(this.album.ID);  //  this.imgUrl + this.album.ID + '/album';
+    // const backUrl = this.album.album_back_image ?
+    //   this.musicService.albumBackImageUrl(this.album.ID) : null;
+    const backUrl = this.musicService.albumBackImageUrl(this.album.ID);
     this.albumService.openPic({
       data: {
         imgUrl: imgUrl,

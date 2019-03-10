@@ -44,15 +44,25 @@ export class DialogAddComponent implements OnInit {
     }
   }
 
-  afterNewTag(response, choice) {
-    this.album.album_tags.push(response);
+  afterAddTag(response, choice, mockTag) {
+    this.album.album_tags.push(mockTag);
     choice.text = '';
   }
 
   addTag(choice) {
+    console.log(choice.items);
+    const mockTag = {
+      Name: choice.items.find(item => item.ID === choice.id).Name,
+      ID: choice.id
+    };
     this.musicService.addTag(choice.id, this.album.ID).subscribe(
-      (response) => this.afterNewTag(response, choice)
+      (response) => this.afterAddTag(response, choice, mockTag)
     );
+  }
+
+  afterNewTag(response, choice) {
+    this.album.album_tags.push(response);
+    choice.text = '';
   }
 
   newTag(choice) {

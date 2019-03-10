@@ -12,6 +12,17 @@ export class MusicService {
     private http: HttpClient
   ) { }
 
+  /*
+  utility
+   */
+  albumImageUrl(albumId, w=-1, h=-1) {
+    return `${this.requestUrl}/image/${albumId}/album/${w}/${h}`;
+  }
+
+  albumBackImageUrl(albumId, w=-1, h=-1) {
+    return `${this.requestUrl}/image/back/${albumId}/album/${w}/${h}`;
+  }
+
   /* GET */
   getJson(cmd) {
     return this.http.get(this.requestUrl + cmd, {
@@ -181,23 +192,23 @@ export class MusicService {
   }
 
   addTag(tagId: number, albumId: number) {
-    return this.postForm('/tag/add',
+    return this.postForm(`/albums/${albumId}/tag/${tagId}/add`,
       {tagId: tagId, albumId: albumId});
   }
 
-  addInstrument(instrumentId: number, albumId: number) {
-    return this.postForm('/instrument/add',
-      {instrumentId: instrumentId, albumId: albumId});
-  }
-
   removeTag(tagId: number, albumId: number) {
-    return this.postForm('/tag/remove', {
+    return this.postForm(`/albums/${albumId}/tag/${tagId}/remove`, {
       tagId: tagId, albumId: albumId
     });
   }
 
+  addInstrument(instrumentId: number, albumId: number) {
+    return this.postForm(`/albums/${albumId}/instrument/${instrumentId}/add`,
+      {instrumentId: instrumentId, albumId: albumId});
+  }
+
   removeInstrument(instrumentId: number, albumId: number) {
-    return this.postForm('/instrument/remove', {
+    return this.postForm(`/albums/${albumId}/instrument/${instrumentId}/remove`, {
       instrumentId: instrumentId, albumId: albumId
     });
   }
