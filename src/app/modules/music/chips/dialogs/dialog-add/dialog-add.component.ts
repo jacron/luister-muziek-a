@@ -44,69 +44,44 @@ export class DialogAddComponent implements OnInit {
     }
   }
 
-  afterAddTag(response, choice, mockTag) {
-    this.album.album_tags.push(mockTag);
+  afterAddComposer(response, choice, mockComposer) {
+    this.album.album_componisten.push(mockComposer);
     choice.text = '';
   }
 
-  addTag(choice) {
-    console.log(choice.items);
-    const mockTag = {
-      Name: choice.items.find(item => item.ID === choice.id).Name,
+  addComposer(choice) {
+    const mockComposer = {
+      FullName: choice.items.find(item => item.ID === choice.id).FullName,
       ID: choice.id
     };
-    this.musicService.addTag(choice.id, this.album.ID).subscribe(
-      (response) => this.afterAddTag(response, choice, mockTag)
+    this.musicService.addComposer(choice.id, this.album.ID).subscribe(
+      (response) => this.afterAddComposer(response, choice, mockComposer),
+      (error) => console.error(error)
     );
   }
 
-  afterNewTag(response, choice) {
-    this.album.album_tags.push(response);
-    choice.text = '';
+  createComposer(choice, name) {
+    this.musicService.newComposer(name, this.album.ID).subscribe(
+      response => {
+        this.afterAddComposer(response, choice, {
+          FullName: name,
+          ID: response
+        });
+      }
+    );
   }
 
-  newTag(choice) {
+  newComposer(choice) {
     const dialogRef = this.dialog.open(DialogInputComponent, {
       data: {
-        prompt: 'Name of the new tag',
+        prompt: 'Name of the new composer',
         default: choice.text,
       }
     });
     dialogRef.afterClosed().subscribe(
       name => {
         if (name && name.length > 0) {
-            this.musicService.newTag(name, this.album.ID).subscribe(
-              response => this.afterNewTag(response, choice)
-            );
-        }
-      }
-    );
-  }
-
-  afterNewInstrument(response: Instrument, choice) {
-    this.album.album_instrument = response;
-    choice.text = '';
-  }
-
-  addInstrument(choice) {
-    this.musicService.addInstrument(choice.id, this.album.ID).subscribe(
-      response => this.afterNewInstrument(<Instrument>response, choice)
-    );
-  }
-
-  newInstrument(choice) {
-    const dialogRef = this.dialog.open(DialogInputComponent, {
-      data: {
-        prompt: 'Name of the new instrument',
-        default: choice.text,
-      }
-    });
-    dialogRef.afterClosed().subscribe(
-      name => {
-        if (name && name.length > 0) {
-          this.musicService.newInstrument(name, this.album.ID).subscribe(
-            response => this.afterNewInstrument(<Instrument>response, choice)
-          );
+          this.createComposer(choice, name);
         }
       }
     );
@@ -127,9 +102,13 @@ export class DialogAddComponent implements OnInit {
     );
   }
 
-  afterNewPerformer(response, choice) {
-    this.album.album_performers.push(response);
-    choice.text = '';
+  createPerformer(choice, name) {
+    this.musicService.newPerformer(name, this.album.ID).subscribe(
+      response => this.afterAddPerformer(response, choice, {
+        FullName: name,
+        ID: response
+      })
+    );
   }
 
   newPerformer(choice) {
@@ -142,48 +121,87 @@ export class DialogAddComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       name => {
         if (name && name.length > 0) {
-          this.musicService.newPerformer(name, this.album.ID).subscribe(
-            response => this.afterNewPerformer(response, choice)
-          );
+          this.createPerformer(choice, name);
         }
       }
     );
   }
 
-  afterAddComposer(response, choice, mockComposer) {
-    this.album.album_componisten.push(mockComposer);
+  afterAddTag(response, choice, mockTag) {
+    this.album.album_tags.push(mockTag);
     choice.text = '';
   }
 
-  addComposer(choice) {
-    const mockComposer = {
-      FullName: choice.items.find(item => item.ID === choice.id).FullName,
+  addTag(choice) {
+    const mockTag = {
+      Name: choice.items.find(item => item.ID === choice.id).Name,
       ID: choice.id
     };
-    this.musicService.addComposer(choice.id, this.album.ID).subscribe(
-      (response) => this.afterAddComposer(response, choice, mockComposer),
-      (error) => console.error(error)
+    this.musicService.addTag(choice.id, this.album.ID).subscribe(
+      (response) => this.afterAddTag(response, choice, mockTag)
     );
   }
 
-  afterNewComposer(response, choice, ) {
-    this.album.album_componisten.push(response);
-    choice.text = '';
+  createTag(choice, name) {
+    this.musicService.newTag(name, this.album.ID).subscribe(
+      response => this.afterAddTag(response, choice, {
+        Name: name,
+        ID: response
+      })
+    );
   }
 
-  newComposer(choice) {
+  newTag(choice) {
     const dialogRef = this.dialog.open(DialogInputComponent, {
       data: {
-        prompt: 'Name of the new composer',
+        prompt: 'Name of the new tag',
         default: choice.text,
       }
     });
     dialogRef.afterClosed().subscribe(
       name => {
         if (name && name.length > 0) {
-          this.musicService.newComposer(name, this.album.ID).subscribe(
-            response => this.afterNewComposer(response, choice)
-          );
+          this.createTag(choice, name);
+        }
+      }
+    );
+  }
+
+  afterAddInstrument(response, choice, mockInstrument) {
+    this.album.album_instrument = mockInstrument;
+    choice.text = '';
+  }
+
+  addInstrument(choice) {
+    const name = choice.items.find(item => item.ID === choice.id).Name;
+    this.musicService.addInstrument(choice.id, this.album.ID).subscribe(
+      response => this.afterAddInstrument(response, choice, {
+        Name: name,
+        ID: choice.id
+      })
+    );
+  }
+
+  createInstrument(choice, name) {
+    this.musicService.newInstrument(name, this.album.ID).subscribe(
+      response => this.afterAddInstrument(response, choice, {
+        Name: name,
+        ID: response
+      })
+    );
+  }
+
+  newInstrument(choice) {
+    const dialogRef = this.dialog.open(DialogInputComponent, {
+      data: {
+        prompt: 'Name of the new instrument',
+        default: choice.text,
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      name => {
+        if (name && name.length > 0) {
+          this.createInstrument(choice, name);
         }
       }
     );

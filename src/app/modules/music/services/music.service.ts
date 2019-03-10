@@ -179,6 +179,12 @@ export class MusicService {
     return this.postForm(`/albums/${albumId}/composer/${composerId}/add`, {});
   }
 
+  newComposer(name, albumId) {
+    return this.postForm(`/albums/${albumId}/composer/new`, {
+      name: name
+    });
+  }
+
   removeComposer(composerId: number, albumId: number) {
     return this.postForm(`/albums/${albumId}/composer/${composerId}/remove`, {});
   }
@@ -187,13 +193,23 @@ export class MusicService {
     return this.postForm(`/albums/${albumId}/performer/${performerId}/add`, {});
   }
 
+  newPerformer(name, albumId) {
+    return this.postForm(`/albums/${albumId}/performer/new`, {
+      name: name
+    });
+  }
+
   removePerformer(performerId: number, albumId: number) {
     return this.postForm(`/albums/${albumId}/performer/${performerId}/remove`, {});
   }
 
   addTag(tagId: number, albumId: number) {
-    return this.postForm(`/albums/${albumId}/tag/${tagId}/add`,
-      {tagId: tagId, albumId: albumId});
+    return this.postForm(`/albums/${albumId}/tag/${tagId}/add`, {});
+  }
+
+  newTag(name: string, albumId: number) {
+    return this.postForm(`/albums/${albumId}/tag/new`,
+      {name: name});
   }
 
   removeTag(tagId: number, albumId: number) {
@@ -205,6 +221,11 @@ export class MusicService {
   addInstrument(instrumentId: number, albumId: number) {
     return this.postForm(`/albums/${albumId}/instrument/${instrumentId}/add`,
       {instrumentId: instrumentId, albumId: albumId});
+  }
+
+  newInstrument(name, albumId) {
+    return this.postForm(`/albums/${albumId}/instrument/new`,
+      {name: name});
   }
 
   removeInstrument(instrumentId: number, albumId: number) {
@@ -250,30 +271,6 @@ export class MusicService {
 
   openFinder(id) {
     return this.postForm('/finder/album/' + id, {});
-  }
-
-  newInstrument(name, albumId) {
-    return this.postForm('/instrument/new',
-      {name: name, albumId: albumId});
-  }
-
-  newTag(name: string, albumId: number) {
-    return this.postForm('/tag/new',
-      {name: name, albumId: albumId});
-  }
-
-  newPerformer(name, albumId) {
-    return this.postForm('/performer/new', {
-      albumid: albumId,
-      name: name
-    });
-  }
-
-  newComposer(name, albumId) {
-    return this.postForm('/composer/new', {
-      albumid: albumId,
-      name: name
-    });
   }
 
   removeAlbum(albumId: number) {
