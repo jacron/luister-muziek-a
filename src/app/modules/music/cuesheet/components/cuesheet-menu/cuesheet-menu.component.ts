@@ -23,6 +23,7 @@ export class CuesheetMenuComponent implements OnInit {
   ) { }
 
   afterRenameTitle(title: string, id: number) {
+    console.log(title);
     this.titleChange.emit({
       title: title,
       id: id
@@ -40,9 +41,10 @@ export class CuesheetMenuComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       title => {
         if (title && title.length > 0) {
-          this.musicService.updateCuesheetTitle(this.cuesheet.ID, this.album.ID, title)
+          this.musicService.updateCuesheetTitle(this.cuesheet.Filename, this.album.ID, title)
             .subscribe(
-              () => this.afterRenameTitle(title, this.cuesheet.ID)
+              () => this.afterRenameTitle(title, this.cuesheet.ID),
+              error1 => console.log(error1)
             );
         }
       }
@@ -62,7 +64,8 @@ export class CuesheetMenuComponent implements OnInit {
   }
 
   edit() {
-    this.musicService.editCue(this.cuesheet.Title, this.album.ID).subscribe(
+    console.log(this.cuesheet);
+    this.musicService.editCue(this.cuesheet.Filename, this.album.ID).subscribe(
       () => {},
       (error) => console.error(error)
     );
@@ -74,7 +77,7 @@ export class CuesheetMenuComponent implements OnInit {
 
   remove() {
     if (confirm('delete "' + this.cuesheet.Title + '"?')) {
-      this.musicService.deleteCue(this.cuesheet.ID, this.album.ID)
+      this.musicService.deleteCue(this.cuesheet.Filename, this.cuesheet.ID, this.album.ID)
         .subscribe(() => this.afterDelete(this.cuesheet.ID)
         );
     }

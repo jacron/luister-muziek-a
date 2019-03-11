@@ -238,16 +238,16 @@ export class MusicService {
     return this.postForm(`/albums/${albumId}/cuesheet/new`, {proposal});
   }
 
-  updateCuesheetTitle(id, albumId, title) {
-    return this.postForm(`/albums/${albumId}/cuesheet/${id}/updatetitle`, {title});
+  updateCuesheetTitle(cuesheetFilename, albumId, title) {
+    return this.postForm(`/albums/${albumId}/cuesheet/updatetitle`, {cuesheetFilename, title});
   }
 
-  deleteCue(id, albumId) {
-    return this.postForm(`/albums/${albumId}/cuesheet/${id}/delete`, {});
+  deleteCue(cuesheetFilename, id, albumId) {
+    return this.postForm(`/albums/${albumId}/cuesheet/${id}/delete`, {cuesheetFilename});
   }
 
-  editCue(name, albumId) {
-    return this.postForm(`/albums/${albumId}/cuesheet/edit`, {name});
+  editCue(filename, albumId) {
+    return this.postForm(`/albums/${albumId}/cuesheet/edit`, {filename});
   }
 
   /*
