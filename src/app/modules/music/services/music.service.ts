@@ -229,9 +229,25 @@ export class MusicService {
   }
 
   removeInstrument(instrumentId: number, albumId: number) {
-    return this.postForm(`/albums/${albumId}/instrument/${instrumentId}/remove`, {
+    return this.postForm(`/albums/${albumId}/instrument/remove`, {
       instrumentId: instrumentId, albumId: albumId
     });
+  }
+
+  makeCuesheet(proposal, albumId) {
+    return this.postForm(`/albums/${albumId}/cuesheet/new`, {proposal});
+  }
+
+  updateCuesheetTitle(id, albumId, title) {
+    return this.postForm(`/albums/${albumId}/cuesheet/${id}/updatetitle`, {title});
+  }
+
+  deleteCue(id, albumId) {
+    return this.postForm(`/albums/${albumId}/cuesheet/${id}/delete`, {});
+  }
+
+  editCue(name, albumId) {
+    return this.postForm(`/albums/${albumId}/cuesheet/edit`, {name});
   }
 
   /*
@@ -255,18 +271,8 @@ export class MusicService {
     return this.postForm('/album/path', { path: path });
   }
 
-  editCue(id, albumid) {
-    return this.postForm('/cuesheet/edit', {
-      id: id, albumid: albumid
-    });
-  }
-
   tagEditor(albumId) {
     return this.postForm('/tags/edit/' + albumId, {});
-  }
-
-  deleteCue(id, albumid) {
-    return this.postForm('/cuesheet/delete', {id: id, albumid: albumid});
   }
 
   openFinder(id) {
@@ -282,14 +288,6 @@ export class MusicService {
   refetch(id) {
     return this.postForm('/pieces/reload', {
       albumId: id
-    });
-  }
-
-  updateCuesheetTitle(id, albumid, title) {
-    return this.postForm('/cuesheet/update', {
-      albumId: albumid,
-      pieceId: id,
-      title: title
     });
   }
 
@@ -417,21 +415,6 @@ export class MusicService {
   //   // return this.http.post(
   //   //   this.requestUrl, params, { headers: headers}
   //   // );
-  // }
-
-  makeCuesheet2(proposal, albumId) {
-    return this.postForm('/cuesheet/create', {
-      proposal: proposal,
-      albumId: albumId
-    });
-  }
-
-  // makeCuesheet(cueName, ids, albumId) {
-  //   return this.postForm('/cuesheet/make', {
-  //     ids: ids,
-  //     name: cueName,
-  //     albumId: albumId
-  //   });
   // }
 
   toggleFavoriteLibrarycode(code, favorite) {

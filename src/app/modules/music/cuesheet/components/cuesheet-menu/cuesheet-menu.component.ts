@@ -62,7 +62,7 @@ export class CuesheetMenuComponent implements OnInit {
   }
 
   edit() {
-    this.musicService.editCue(this.cuesheet.ID, this.album.ID).subscribe(
+    this.musicService.editCue(this.cuesheet.Title, this.album.ID).subscribe(
       () => {},
       (error) => console.error(error)
     );

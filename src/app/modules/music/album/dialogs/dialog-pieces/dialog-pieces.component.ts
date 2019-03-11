@@ -169,7 +169,7 @@ export class DialogPiecesComponent implements OnInit {
   makeAllProposals() {
     const q = [];
     this.proposals.forEach((proposal: Proposal) => {
-      q.push(this.musicService.makeCuesheet2(
+      q.push(this.musicService.makeCuesheet(
         proposal,
         this.data.albumId));
     });
@@ -184,7 +184,7 @@ export class DialogPiecesComponent implements OnInit {
   }
 
   makeCuesheet(proposal: Proposal) {
-    this.musicService.makeCuesheet2(
+    this.musicService.makeCuesheet(
       proposal,
       this.data.albumId).subscribe(
       () => this.afterMakeCuesheet(proposal)
