@@ -250,9 +250,44 @@ export class MusicService {
     return this.postForm(`/albums/${albumId}/cuesheet/edit`, {filename});
   }
 
+  playByName(albumId, name) {
+    return this.postForm(`/albums/${albumId}/play`, {name});
+  }
+
   /*
-  *
+  * tags
   */
+  tagEditor(albumId) {
+    return this.postForm('/tags/edit/' + albumId, {});
+  }
+
+  /*
+    finder
+   */
+  openFinder(id) {
+    return this.postForm('/finder/album/' + id, {});
+  }
+
+  /*
+    pieces
+   */
+  play(id) {  // media center 24
+    return this.postForm('/pieces/play/0/' + id, {});
+  }
+
+  play2(id) {  // vlc
+    return this.postForm('/pieces/play/1/' + id, {});
+  }
+
+  /*
+
+   */
+  controlPlayer(cmd) {
+    return this.postForm('/player', {
+      cmd: cmd,
+    });
+  }
+
   saveAliasPiece(id, displayname) {
     return this.postForm('/piece/alias', {
       id: id,
@@ -269,14 +304,6 @@ export class MusicService {
 
   getAlbumByPath(path) {
     return this.postForm('/album/path', { path: path });
-  }
-
-  tagEditor(albumId) {
-    return this.postForm('/tags/edit/' + albumId, {});
-  }
-
-  openFinder(id) {
-    return this.postForm('/finder/album/' + id, {});
   }
 
   removeAlbum(albumId: number) {
@@ -306,31 +333,6 @@ export class MusicService {
       albumId: albumid,
       pieceId: id,
       name: name,
-    });
-  }
-
-  play(id) {  // media center 24
-    return this.postForm('/play', {
-      pieceId: id,
-    });
-  }
-
-  play2(id) {  // vlc
-    return this.postForm('/play2', {
-      pieceId: id,
-    });
-  }
-
-  playByName(albumId, name) {
-    return this.postForm('/play/name', {
-      albumId: albumId,
-      name,
-    });
-  }
-
-  controlPlayer(cmd) {
-    return this.postForm('/play/control', {
-      cmd: cmd,
     });
   }
 
