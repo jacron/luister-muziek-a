@@ -180,6 +180,8 @@ export class DialogPiecesComponent implements OnInit {
 
   afterMakeCuesheet(proposal: Proposal) {
     proposal.created = true;
+    console.log(proposal);
+    console.log(this.data.album.cuesheets);
     // this.reload();
   }
 

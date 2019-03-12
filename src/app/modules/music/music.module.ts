@@ -43,7 +43,6 @@ import {MusicService} from './services/music.service';
 import {PieceService} from './album/services/piece.service';
 import {StorageService} from '../../services/storage.service';
 import {UtilService} from '../../services/util.service';
-import {CuesheetService} from './cuesheet/services/cuesheet.service';
 import {ChoiceService} from './services/choice.service';
 import {StateService} from '../../services/state.service';
 import {AlbumModule} from './album/album.module';
@@ -115,7 +114,6 @@ import {ChipsModule} from './chips/chips.module';
     TypedTitlePipe,
     StorageService,
     UtilService,
-    CuesheetService,
     ChoiceService,
     StateService
   ],

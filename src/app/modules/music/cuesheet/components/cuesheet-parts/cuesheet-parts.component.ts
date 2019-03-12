@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Album} from '../../../../../classes/music/Album';
-import {CuesheetService} from '../../services/cuesheet.service';
 import {Cuesheet} from '../../../../../classes/music/Cuesheet';
 import {Person} from '../../../../../classes/music/Person';
 import {MusicService} from '../../../services/music.service';
@@ -23,7 +22,6 @@ export class CuesheetPartsComponent implements OnInit {
   title: string;
 
   constructor(
-    private cuesheetService: CuesheetService,
     private musicService: MusicService,
     private util: UtilService,
   ) { }
@@ -59,11 +57,23 @@ export class CuesheetPartsComponent implements OnInit {
     );
   }
 
+  makeStukken() {
+    this.tracknames = [];
+    this.files = [];
+
+    this.cuesheet.files.forEach(file => {
+      if (file.tracks.length > 1) {
+        file.tracks.forEach(track => {
+          this.tracknames.push(track.title);
+        });
+      } else {
+        this.files.push(file);
+      }
+    });
+  }
   ngOnInit() {
-    const stukken = this.cuesheetService.makeStukken(this.cuesheet);
-    this.tracknames = stukken.tracknames;
-    this.files = stukken.files;
-    this.performers = this.cuesheet.cue.performers;
+    this.makeStukken();
+    this.performers = this.cuesheet.performers;
   }
 
 }

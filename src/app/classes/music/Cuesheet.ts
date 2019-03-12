@@ -1,13 +1,19 @@
 import {Cue} from './Cue';
+import {CFile} from './CFile';
 
 export class Cuesheet {
-  Filename?: string;
-  Title: string;
-  ID: number;
+  filename?: string;
+  title: string;
+  id: number;
   cue: Cue;
   // Code: string;
-  Invalid: boolean;
+  invalid: boolean;
+  LibraryCode?: string;
   played: boolean;
   asin: string;
   discid: string;
+  performer: string;
+  performers: string[];
+  files: CFile[];
+  rem: string[];
 }

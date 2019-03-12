@@ -17,7 +17,6 @@ import {MatModule} from './modules/mat/mat.module';
 import {StateService} from './services/state.service';
 import {SharedModule} from './modules/shared/shared.module';
 import {PieceService} from './modules/music/album/services/piece.service';
-import {CuesheetService} from './modules/music/cuesheet/services/cuesheet.service';
 import {MoviesModule} from './modules/movies/movies.module';
 import {MovieRoutingModule} from './modules/movie-routing/movie-routing.module';
 import {BooksModule} from './modules/books/books.module';
@@ -61,7 +60,6 @@ import {ToastrModule} from 'ngx-toastr';
     TypedTitlePipe,
     StorageService,
     UtilService,
-    CuesheetService,
     ChoiceService,
     StateService,
   ],

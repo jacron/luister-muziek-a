@@ -21,7 +21,7 @@ export class AlbumCuesheetsComponent implements OnInit {
 
   getCuesheetById(id: number, cuesheets: Cuesheet[]): Cuesheet | null {
     for (let i = 0; i < cuesheets.length; i++) {
-      if (cuesheets[i].ID === id) {
+      if (cuesheets[i].id === id) {
         return cuesheets[i];
       }
     }
@@ -34,7 +34,7 @@ export class AlbumCuesheetsComponent implements OnInit {
     //   (album: Album) => this.album.cuesheets = this.cuesheets =  album.cuesheets
     // );
     this.album.cuesheets = this.cuesheets = this.cuesheets.filter(
-      cuesheet => cuesheet.ID != id);
+      cuesheet => cuesheet.id != id);
   }
 
   onPlayed(response, id) {

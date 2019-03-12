@@ -77,7 +77,7 @@ export class AlbumDetailsComponent implements OnInit {
 
   openAlbum(album: Album): void {
     this.album = album;
-    // console.log(album);
+    console.log(album);
     if (album) {
       this.imgSrc = this.albumImage();
       this.stateService.setTitle(album.Title);

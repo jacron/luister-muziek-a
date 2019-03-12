@@ -35,15 +35,15 @@ export class CuesheetMenuComponent implements OnInit {
       width: '75%',
       data: {
         prompt: '',
-        default: this.cuesheet.Title
+        default: this.cuesheet.title
       }
     });
     dialogRef.afterClosed().subscribe(
       title => {
         if (title && title.length > 0) {
-          this.musicService.updateCuesheetTitle(this.cuesheet.Filename, this.album.ID, title)
+          this.musicService.updateCuesheetTitle(this.cuesheet.filename, this.album.ID, title)
             .subscribe(
-              () => this.afterRenameTitle(title, this.cuesheet.ID),
+              () => this.afterRenameTitle(title, this.cuesheet.id),
               error1 => console.log(error1)
             );
         }
@@ -65,7 +65,7 @@ export class CuesheetMenuComponent implements OnInit {
 
   edit() {
     console.log(this.cuesheet);
-    this.musicService.editCue(this.cuesheet.Filename, this.album.ID).subscribe(
+    this.musicService.editCue(this.cuesheet.filename, this.album.ID).subscribe(
       () => {},
       (error) => console.error(error)
     );
@@ -76,9 +76,9 @@ export class CuesheetMenuComponent implements OnInit {
   }
 
   remove() {
-    if (confirm('delete "' + this.cuesheet.Title + '"?')) {
-      this.musicService.deleteCue(this.cuesheet.Filename, this.cuesheet.ID, this.album.ID)
-        .subscribe(() => this.afterDelete(this.cuesheet.ID)
+    if (confirm('delete "' + this.cuesheet.title + '"?')) {
+      this.musicService.deleteCue(this.cuesheet.filename, this.cuesheet.id, this.album.ID)
+        .subscribe(() => this.afterDelete(this.cuesheet.id)
         );
     }
   }

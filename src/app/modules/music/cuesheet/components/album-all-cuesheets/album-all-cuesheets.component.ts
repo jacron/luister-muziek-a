@@ -21,7 +21,7 @@ export class AlbumAllCuesheetsComponent implements OnInit, OnChanges {
     this.invalidCuesheets = [];
     this.validCuesheets = [];
     this.album.cuesheets.forEach(cuesheet => {
-      if (cuesheet.Invalid) {
+      if (cuesheet.invalid) {
         this.invalidCuesheets.push(cuesheet);
       } else {
         this.validCuesheets.push(cuesheet);
