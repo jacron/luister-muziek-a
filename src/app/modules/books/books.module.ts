@@ -21,6 +21,9 @@ import { BookMenuComponent } from './components/book-menu/book-menu.component';
 import { AuthorMenuComponent } from './components/author-menu/author-menu.component';
 import { AuthorCardComponent } from './components/author-card/author-card.component';
 import { AuthorWikiComponent } from './components/author-wiki/author-wiki.component';
+import { IsbnInputComponent } from './components/isbn-input/isbn-input.component';
+import { TitleQueryInputComponent } from './components/title-query-input/title-query-input.component';
+import { GenreSelectComponent } from './components/genre-select/genre-select.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { AuthorWikiComponent } from './components/author-wiki/author-wiki.compon
     AuthorMenuComponent,
     AuthorCardComponent,
     AuthorWikiComponent,
+    IsbnInputComponent,
+    TitleQueryInputComponent,
+    GenreSelectComponent,
   ],
   imports: [
     CommonModule,

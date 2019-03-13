@@ -1,6 +1,8 @@
 <div class="books-start">
-  <mat-icon>search</mat-icon>
   <div class="selection-row">
+    <div>
+      <app-genre-select [genre]="genre" (genreChange)="onGenreChange($event)"></app-genre-select>
+    </div>
     <div>
       <app-author-autocomplete></app-author-autocomplete>
     </div>
@@ -8,35 +10,16 @@
       <app-title-autocomplete></app-title-autocomplete>
     </div>
     <div>
-      <mat-form-field>
-        <!--<button (click)="query.value='9780571336210'">tst</button>-->
-        <input #query
-                matInput placeholder="isbn"
-               name="isbn"
-               [formControl]="isbnFormControl"
-               (change)="onIsbnChange()"
-        >
-        <button mat-button *ngIf="query.value" matSuffix
-                mat-icon-button aria-label="Clear"
-                class="closer"
-                (click)="clearQuery()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+      <app-isbn-input (isbnchange)="onIsbnChange($event)"></app-isbn-input>
     </div>
     <div>
-      <mat-form-field>
-        <input matInput placeholder="titel (deel)"
-               name="title"
-               [formControl]="titleFormControl"
-               (change)="onTitleChange()"
-        >
-      </mat-form-field>
+      <app-title-query-input (titlechange)="onTitleChange($event)"></app-title-query-input>
     </div>
   </div>
   <div class="not-found" *ngIf="notInCatalogue">
-    <app-book-proposal [isbn]="isbnFormControl.value"></app-book-proposal>
+    <app-book-proposal [isbn]="isbn"></app-book-proposal>
   </div>
+  <h3 *ngIf="books?.length">{{ listHeader }}</h3>
   <div class="book-wrapper">
     <div *ngFor="let book of books" class="book-card">
       <app-book-card [(book)]="book"></app-book-card>

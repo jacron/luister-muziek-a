@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('music-client App', () => {
+describe('media-client App', () => {
   let page: AppPage;
 
   beforeEach(() => {

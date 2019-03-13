@@ -1,0 +1,14 @@
+<mat-form-field>
+  <input #query
+         matInput placeholder="isbn"
+         name="isbn"
+         [formControl]="isbnFormControl"
+         (change)="onIsbnChange()"
+  >
+  <button mat-button *ngIf="query.value" matSuffix
+          mat-icon-button aria-label="Clear"
+          class="closer"
+          (click)="clearQuery()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

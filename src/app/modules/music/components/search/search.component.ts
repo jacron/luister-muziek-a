@@ -111,7 +111,7 @@ export class SearchComponent implements OnInit {
   storeTitle() {
     let title =  this.makeTitle(this.params);
     if (title.length === 0) {
-      title = 'music-client';
+      title = 'media-client';
     } else {
       // this.storageService.storeListTitle(title);
       this.musicService.addSearchToHistory(title, this.params);

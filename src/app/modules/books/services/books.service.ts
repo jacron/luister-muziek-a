@@ -8,7 +8,7 @@ import {Author} from '../../../classes/book/author';
   providedIn: 'root'
 })
 export class BooksService {
-  requestUrl = environment.booksServer;
+  requestUrl = environment.booksServer + '/api';
 
   constructor(
     private http: HttpClient,
@@ -21,55 +21,59 @@ export class BooksService {
   }
 
   // getBooks() {
-  //   return this.getJson('/api/books');
+  //   return this.getJson('/books');
   // }
 
+  getGenres() {
+    return this.getJson('/book/genres')
+  }
+
   searchAuthors(query) {
-    return this.getJson('/api/search/authors/' + query);
+    return this.getJson('/search/authors/' + query);
   }
 
-  searchTitles(query) {
-    return this.getJson('/api/search/books/' + query);
+  searchTitles(query) {  // for autocomplete
+    return this.getJson('/search/books/' + query);
   }
 
-  searchTitlesFull(query) {
-    return this.getJson('/api/search/books/full/' + query);
+  searchTitlesFull(query) { // for full list
+    return this.getJson('/search/books/' + query);
   }
 
   getAuthorBooks(authorId) {
-    return this.getJson('/api/book/author/' + authorId);
+    return this.getJson('/book/author/' + authorId);
   }
 
   getBook(bookId) {
-    return this.getJson('/api/book/' + bookId);
+    return this.getJson('/book/' + bookId);
   }
 
   getAuthor(authorId) {
-    return this.getJson('/api/author/' + authorId);
+    return this.getJson('/author/' + authorId);
   }
 
   getBookByIsbn(isbn) {
-    return this.getJson('/api/book/isbn/' + isbn);
+    return this.getJson('/book/isbn/' + isbn);
   }
 
   getRemote(isbn, source) {
-    return this.getJson('/api/book/remote/' + isbn + '/' + source);
+    return this.getJson('/book/remote/' + isbn + '/' + source);
   }
 
-  getBooksCount() {
-    return this.getJson('/api/book/count');
+  getBooksCount(genre) {
+    return this.getJson('/book/count/' + genre);
   }
 
-  getRecent(limit) {
-    return this.getJson('/api/book/recent/' + limit);
+  getRecent(limit, genre) {
+    return this.getJson(`/book/recent/${limit}/${genre}`);
   }
 
   getAuthors() {
-    return this.getJson('/api/author');
+    return this.getJson('/author');
   }
 
   wikiAuthor(authorName, lng) {
-    return this.getJson('/api/wiki/' + lng + '/' + authorName);
+    return this.getJson('/wiki/' + lng + '/' + authorName);
   }
 
   /* POST */
@@ -82,46 +86,46 @@ export class BooksService {
   }
 
   storeWikiAuthorImg(url, id) {
-    return this.postForm('/api/author/wiki/store', {url, id});
+    return this.postForm('/author/wiki/store', {url, id});
   }
 
   scanCover() {
-    return this.postForm('/api/book/scan', {});
+    return this.postForm('/book/scan', {});
   }
 
   finishCover(bookId) {
-    return this.postForm('/api/book/use/' + bookId, {});
+    return this.postForm('/book/use/' + bookId, {});
   }
 
   pasteBookCover(bookId) {
-    return this.postForm('/api/paste/book/' + bookId, {});
+    return this.postForm('/paste/book/' + bookId, {});
   }
 
   pasteAuthorPicture(authorId) {
-    return this.postForm('/api/paste/author/' + authorId, {});
+    return this.postForm('/paste/author/' + authorId, {});
   }
 
   getBookCover(bookId) {
-    return this.postForm('/api/getimage/book/' + bookId, {});
+    return this.postForm('/getimage/book/' + bookId, {});
   }
 
   getAuthorPicture(authorId) {
-    return this.postForm('/api/getimage/author/' + authorId, {});
+    return this.postForm('/getimage/author/' + authorId, {});
   }
 
   removeBook(bookId) {
-    return this.postForm('/api/book/remove/' + bookId, {});
+    return this.postForm('/book/remove/' + bookId, {});
   }
 
   removeAuthor(authorId) {
-    return this.postForm('/api/author/remove/' + authorId, {});
+    return this.postForm('/author/remove/' + authorId, {});
   }
 
   saveBook(book: Book) {
-    return this.postForm('/api/book/save', {book});
+    return this.postForm('/book/save', {book});
   }
 
   saveAuthor(author: Author) {
-    return this.postForm('/api/author/save', {author});
+    return this.postForm('/author/save', {author});
   }
 }
