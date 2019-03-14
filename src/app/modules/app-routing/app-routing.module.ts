@@ -19,9 +19,11 @@ import {HomeComponent} from '../music/components/home/home.component';
 import {VideosKlassiekComponent} from '../music/components/videos-klassiek/videos-klassiek.component';
 import {VideosPopComponent} from '../music/components/videos-pop/videos-pop.component';
 import {VideoDocumentaireComponent} from '../music/components/video-documentaire/video-documentaire.component';
+import {DebugComponent} from '../../components/debug/debug.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'debug', component: DebugComponent},
   {path: 'search', component: SearchComponent},
   {path: 'search/:idcomp/:idperf/:idcoll/:idtag', component: SearchComponent},
   {path: 'album/:idalbum', component: AlbumDetailsComponent},

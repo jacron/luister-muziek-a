@@ -17,7 +17,12 @@ export class MovieMenuComponent implements OnInit {
     {
       label: 'Play (vlc)',
       icon: 'play_arrow',
-      action: this.play.bind(this)
+      action: this.play.bind(this, 'vlc')
+    },
+    {
+      label: 'Play (media center)',
+      icon: 'play_arrow',
+      action: this.play.bind(this, 'media center')
     },
     {
       label: 'Finder',
@@ -48,7 +53,8 @@ export class MovieMenuComponent implements OnInit {
     {
       label: 'Uit kijklijst',
       icon: 'clear',
-      action: this.setUnwatch.bind(this)
+      action: this.setUnwatch.bind(this),
+      hide: true
     },
   ];
   constructor(
@@ -93,8 +99,8 @@ export class MovieMenuComponent implements OnInit {
     }
   }
 
-  play() {
-    this.moviesService.play(this.movie.ID, 'vlc').subscribe(
+  play(player) {
+    this.moviesService.play(this.movie.ID, player).subscribe(
       response => this.afterPlay(response)
     );
   }

@@ -13,7 +13,6 @@ export class IsbnInputComponent implements OnInit {
   constructor() { }
 
   onIsbnChange() {
-    console.log(this.isbnFormControl.value);
     this.isbnchange.emit(this.isbnFormControl.value);
   }
 

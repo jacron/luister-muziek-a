@@ -23,12 +23,14 @@ import {BooksModule} from './modules/books/books.module';
 import {BookRoutingModule} from './modules/book-routing/book-routing.module';
 import {MusicModule} from './modules/music/music.module';
 import {ToastrModule} from 'ngx-toastr';
+import { DebugComponent } from './components/debug/debug.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    DebugComponent,
   ],
   imports: [
     BrowserModule,

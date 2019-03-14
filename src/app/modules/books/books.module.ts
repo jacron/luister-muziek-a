@@ -24,6 +24,8 @@ import { AuthorWikiComponent } from './components/author-wiki/author-wiki.compon
 import { IsbnInputComponent } from './components/isbn-input/isbn-input.component';
 import { TitleQueryInputComponent } from './components/title-query-input/title-query-input.component';
 import { GenreSelectComponent } from './components/genre-select/genre-select.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { GenreSelectComponent } from './components/genre-select/genre-select.com
   imports: [
     CommonModule,
     SharedModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     MatModule,
     RouterModule,
     FormsModule,  // needed for input

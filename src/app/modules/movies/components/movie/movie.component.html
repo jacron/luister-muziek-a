@@ -7,6 +7,7 @@
         <mat-card-title>
           {{ movie.DisplayTitle }}
         </mat-card-title>
+        <app-movie-menu [movie]="movie"></app-movie-menu>
       </mat-card-header>
       <div class="image-container">
         <img mat-card-image [src]="movie.ImageUrl" alt="cover missing"

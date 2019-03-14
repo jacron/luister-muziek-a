@@ -9,22 +9,6 @@
   <span>IMDb</span>
   <span class="rating"> {{ movie.Rating }}</span>
 </button>
-<div class="cmd">
-  <button mat-icon-button class="link vlc"
-          (click)="play('vlc')">
-    <mat-icon>play_arrow</mat-icon>vlc
-  </button>
-</div><div class="cmd">
-  <button mat-icon-button class="link" style="width: 120px"
-          (click)="play('media center')">
-    <mat-icon>play_arrow</mat-icon>media player
-  </button>
-</div>
-<div>
-  <a class="link" (click)="toFinder()" [class.finderopened]="finderOpened">
-    open Finder</a>
-</div>
-<br>
 <div>
   {{ movie.Gemaakt }}
 </div>

@@ -3,6 +3,7 @@ import {BooksService} from '../../services/books.service';
 import {StateService} from '../../../../services/state.service';
 import {Book} from '../../../../classes/book/book';
 import {Router} from '@angular/router';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-books-start',
@@ -16,6 +17,7 @@ export class BooksStartComponent implements OnInit {
   recentLimit = 30;
   isbn = null;
   genre = 'alle';
+  recentLimitFormControl = new FormControl();
 
   constructor(
     private booksService: BooksService,
@@ -28,12 +30,14 @@ export class BooksStartComponent implements OnInit {
   }
 
   afterGetBookByIsbn(books: Book[]) {
+    console.log(books);
     this.books = [];
-    if (books) {
+    if (books && books.length) {
       this.notInCatalogue = false;
       this.books = books;
     }
     else {
+      // this will show proposal
       this.notInCatalogue = true;
     }
   }
@@ -52,6 +56,12 @@ export class BooksStartComponent implements OnInit {
       (books: Book[]) => this.afterGetBookByIsbn(books),
       err => console.log(err)
     )
+  }
+
+  onLimitChange() {
+    this.recentLimit = this.recentLimitFormControl.value;
+    console.log(this.recentLimit);
+    this.getRecent();
   }
 
   getBooksCount() {

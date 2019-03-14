@@ -4,24 +4,78 @@
     Auteurs ({{ authors.length }})
   </div>
 
+  <!--<mat-form-field>-->
+    <!--<input #input matInput placeholder="zoek"-->
+           <!--(ngModelChange)="search($event)"-->
+           <!--[(ngModel)]="query"-->
+           <!--name="author-query"-->
+           <!--(click)="input.select()"-->
+    <!--&gt;-->
+    <!--<button mat-button *ngIf="query"-->
+            <!--matSuffix mat-icon-button aria-label="Clear"-->
+            <!--(click)="resetSearch()">-->
+      <!--<mat-icon>close</mat-icon>-->
+    <!--</button>-->
+  <!--</mat-form-field>-->
+
+  <!--<div *ngFor="let author of filteredAuthors">-->
+    <!--<a [routerLink]="['/author', author.id]" class="link">-->
+      <!--{{ author.first }} {{ author.last }} - {{ author.nbooks }}-->
+    <!--</a>-->
+  <!--</div>-->
+
   <mat-form-field>
-    <input #input matInput placeholder="zoek"
-           (ngModelChange)="search($event)"
-           [(ngModel)]="query"
-           name="author-query"
-           (click)="input.select()"
-    >
-    <button mat-button *ngIf="query"
-            matSuffix mat-icon-button aria-label="Clear"
-            (click)="resetSearch()">
-      <mat-icon>close</mat-icon>
-    </button>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
-  <div *ngFor="let author of filteredAuthors">
-    <a [routerLink]="['/author', author.id]" class="link">
-      {{ author.first }} {{ author.last }} - {{ author.nbooks }}
-    </a>
-  </div>
+  <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows
+         class="mat-elevation-z8">
+    <!--<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">-->
+      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>-->
+      <!--<td mat-cell *matCellDef="let element"> {{element[column]}} </td>-->
+    <!--</ng-container>-->
+    <ng-container matColumnDef="first">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
+      <td mat-cell *matCellDef="let element"> {{ element.first }} </td>
+    </ng-container>
+    <ng-container matColumnDef="last">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Achternaam </th>
+      <td mat-cell *matCellDef="let element"> {{ element.last }} </td>
+    </ng-container>
+    <ng-container matColumnDef="born">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Geboren </th>
+      <td mat-cell *matCellDef="let element"> {{ element.born }} </td>
+    </ng-container>
+    <ng-container matColumnDef="died">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Dood </th>
+      <td mat-cell *matCellDef="let element"> {{ element.died }} </td>
+    </ng-container>
+    <ng-container matColumnDef="nbooks">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Boeken </th>
+      <td mat-cell *matCellDef="let element"> {{ element.nbooks }} </td>
+    </ng-container>
+    <!--<ng-container matColumnDef="expandedDetail">-->
+      <!--<td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">-->
+        <!--<div class="element-detail"-->
+             <!--[@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">-->
+          <!--<div class="element-diagram">-->
+            <!--<img [src]="element.imgUrl">-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</td>-->
+    <!--</ng-container>-->
 
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"
+        (click)="edit(row)"
+    ></tr>
+    <!--<tr mat-row *matRowDef="let element; columns: displayedColumns;"-->
+        <!--class="element-row"-->
+        <!--[class.expanded-row]="expandedElement === element"-->
+        <!--(click)="expandedElement = expandedElement === element ? null : element"-->
+    <!--&gt;</tr>-->
+    <!--<tr mat-row *matRowDef="let row; columns: ['expandedDetail']"-->
+        <!--class="detail-row"></tr>-->
+  </table>
 </div>

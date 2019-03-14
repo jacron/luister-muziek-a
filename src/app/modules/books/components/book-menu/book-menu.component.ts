@@ -64,9 +64,12 @@ export class BookMenuComponent implements OnInit {
     f();
   }
 
-  afterGetAuthor(response) {
-    window.open(environment.googleUrl + this.book.title +
-      ' ' + response.first + ' ' + response.last);
+  afterGetAuthor(author) {
+    let url = environment.googleUrl + this.book.title;
+    if (author) {
+      url += ' ' + author.first + ' ' + author.last;
+    }
+    window.open(url);
   }
 
   google() {

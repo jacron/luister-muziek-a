@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class MoviesService {
-  requestUrl = environment.moviesServer;
+  requestUrl = environment.moviesServer + '/api';
 
   constructor(
     private http: HttpClient
@@ -22,73 +22,73 @@ export class MoviesService {
   }
 
   searchMovies(query): Observable<Suggestion[]> {
-    return this.getJson('/api/search/movie/' + query)
+    return this.getJson('/search/movie/' + query)
       .pipe(map(
         response => response['options']));
   }
 
   getMovie(id) {
-    return this.getJson('/api/film/' + id);
+    return this.getJson('/film/' + id);
   }
 
   getMovieByImdbId(id) {
-    return this.getJson('/api/imdb/movie/' + id);
+    return this.getJson('/imdb/movie/' + id);
   }
 
   getNewMovie(imdb_id) {
-    return this.getJson('/api/film/new/' + imdb_id);
+    return this.getJson('/film/new/' + imdb_id);
   }
 
   searchSpelers(query) {
-    return this.getJson('/api/search/speler/' + query);
+    return this.getJson('/search/speler/' + query);
   }
 
   searchDirectors(query) {
-    return this.getJson('/api/search/director/' + query)
+    return this.getJson('/search/director/' + query)
       .pipe(map(response => response['options']));
   }
 
   getSpelerMovies(id) {
-    return this.getJson('/api/speler/' + id);
+    return this.getJson('/speler/' + id);
   }
 
   getSpelerNaamMovies(naam) {
-    return this.getJson('/api/speler/naam/' + naam);
+    return this.getJson('/speler/naam/' + naam);
   }
 
   getJaarMovies(jaar) {
-    return this.getJson('/api/films/jaar/' + jaar + '/1');
+    return this.getJson('/films/jaar/' + jaar + '/1');
   }
 
   getDirectorMovies(id) {
-    return this.getJson('/api/director/' + id);
+    return this.getJson('/director/' + id);
   }
 
   getRecentlyPlayedMovies(pageNr, n) {
-    return this.getJson('/api/films/filter/recentlyplayed/' + pageNr + '/' + n)
+    return this.getJson('/films/filter/recentlyplayed/' + pageNr + '/' + n)
       .pipe(map(response => response['films']));
   }
 
   getRecentlySeenMovies(pageNr, n) {
-    return this.getJson('/api/films/filter/recentlyseen/' + pageNr + '/' + n)
+    return this.getJson('/films/filter/recentlyseen/' + pageNr + '/' + n)
       .pipe(map(response => response['films']));
   }
 
   getRecentlyAcquiredMovies(pageNr, n) {
-    return this.getJson('/api/films/filter/recentlymade/' + pageNr + '/' + n)
+    return this.getJson('/films/filter/recentlymade/' + pageNr + '/' + n)
       .pipe(map(response => response['films']));
   }
 
   play(id, player) {
-    return this.getJson('/api/film/play/' + id + '/' + player);
+    return this.getJson('/film/play/' + id + '/' + player);
   }
 
   openFinder(id) {
-    return this.getJson('/api/film/folder/' + id);
+    return this.getJson('/film/folder/' + id);
   }
 
   addToday(id) {
-    return this.getJson('/api/film/add/today/' + id);
+    return this.getJson('/film/add/today/' + id);
   }
 
   /* POST */
@@ -101,23 +101,23 @@ export class MoviesService {
   }
 
   addDirectorImage(imdb_id) {
-    return this.postForm('/api/director/image/add', { imdb_id });
+    return this.postForm('/director/image/add', { imdb_id });
   }
 
   addImage(imdb_id) {
-    return this.postForm('/api/image/add', { imdb_id });
+    return this.postForm('/image/add', { imdb_id });
   }
 
   pasteImage(imdb_id) {
-    return this.postForm('/api/image/paste', { imdb_id });
+    return this.postForm('/image/paste', { imdb_id });
   }
 
   unwatch(id) {
-    return this.postForm('/api/film/unwatch', { id });
+    return this.postForm('/film/unwatch', { id });
   }
 
   saveNew(imdb_id) {
-    return this.postForm('/api/film/save/imdb', { imdb_id} );
+    return this.postForm('/film/save/imdb', { imdb_id} );
   }
 
 

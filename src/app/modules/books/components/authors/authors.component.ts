@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BooksService} from '../../services/books.service';
 import {StateService} from '../../../../services/state.service';
 import {Author} from '../../../../classes/book/author';
+import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-authors',
@@ -11,11 +12,17 @@ import {Author} from '../../../../classes/book/author';
 export class AuthorsComponent implements OnInit {
   authors: Author[];
   filteredAuthors: Author[];
+  displayedColumns = ['first', 'last', 'born', 'died', 'nbooks'];
   query: string;
+  dataSource;
+  expandedElement;
+
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private booksService: BooksService,
     private stateService: StateService,
+    private dialog: MatDialog,
   ) { }
 
   resetSearch() {
@@ -35,9 +42,23 @@ export class AuthorsComponent implements OnInit {
     );
   }
 
+  edit(row) {
+    console.log(row);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   afterGetAuthors(result) {
-    // console.log(result);
+    // result.splice(0, 900); // testing
+    console.log(result[0]);
     this.filteredAuthors = this.authors = result;
+    this.dataSource = new MatTableDataSource(this.filteredAuthors);
+    setTimeout(() => {
+      this.dataSource.sort = this.sort;
+    });
+    // this.table.renderRows();
   }
 
   ngOnInit() {
