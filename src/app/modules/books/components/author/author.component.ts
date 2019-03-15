@@ -46,19 +46,17 @@ export class AuthorComponent implements OnInit {
   }
 
   toggleEdit() {
-    console.log('toggle edit - in author');
+    // console.log('toggle edit - in author');
     this.authorEdit= ! this.authorEdit;
   }
 
   afterGetAuthorBooks(response) {
-    // console.log(response);
     this.books = response;
   }
 
   afterGetAuthor(author: Author) {
-    this.author = author
-    const name = this.author.first + ' ' + this.author.last;
-    document.title = name;
+    this.author = author;
+    document.title = this.author.first + ' ' + this.author.last;
     this.stateService.setTitle(document.title);
   }
 

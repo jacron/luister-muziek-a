@@ -38,19 +38,19 @@ export class AuthorMenuComponent implements OnInit {
       label: 'wiki nl',
       icon: 'search',
       color: 'gold',
-      action: this.wikipedia_nl.bind(this)
+      action: this.wikipedia.bind(this, 'nl')
     },
     {
       label: 'wiki en',
       icon: 'search',
       color: 'blue',
-      action: this.wikipedia_en.bind(this)
+      action: this.wikipedia.bind(this, 'en')
     },
     {
       label: 'wiki de',
       icon: 'search',
       color: 'aqua',
-      action: this.wikipedia_de.bind(this)
+      action: this.wikipedia.bind(this, 'de')
     },
     {
       label: 'divider',
@@ -118,7 +118,6 @@ export class AuthorMenuComponent implements OnInit {
   }
 
   afterWiki(result) {
-    // console.log(result);
     this.toastr.success('gegevens zijn opeghaald', 'wikipedia');
     if (result && result.image) {
       this.wikiCache = {
@@ -130,22 +129,8 @@ export class AuthorMenuComponent implements OnInit {
     }
   }
 
-  wikipedia_nl() {
-    this.wikipedia('nl');
-  }
-
-  wikipedia_en() {
-    this.wikipedia('en');
-  }
-
-  wikipedia_de() {
-    this.wikipedia('de');
-  }
-
   wikipedia(lng) {
     const name = this.author.first + ' ' + this.author.last;
-    // console.log(name);
-    // this.toastr.info('haal gegevens op', 'wikipedia');
     this.booksService.wikiAuthor(name, lng).subscribe(
       result => this.afterWiki(result)
     )

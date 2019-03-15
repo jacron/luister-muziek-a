@@ -3,6 +3,7 @@ import {BooksService} from '../../services/books.service';
 import {StateService} from '../../../../services/state.service';
 import {Author} from '../../../../classes/book/author';
 import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
+import {DialogAuthorComponent} from '../../dialogs/dialog-author/dialog-author.component';
 
 @Component({
   selector: 'app-authors',
@@ -15,7 +16,6 @@ export class AuthorsComponent implements OnInit {
   displayedColumns = ['first', 'last', 'born', 'died', 'nbooks'];
   query: string;
   dataSource;
-  expandedElement;
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -42,8 +42,21 @@ export class AuthorsComponent implements OnInit {
     );
   }
 
+  afterEdit(result) {
+    console.log(result);
+  }
+
   edit(row) {
     console.log(row);
+    const dialogRef = this.dialog.open(DialogAuthorComponent, {
+      data: {
+        width: '600px',
+        author: row
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      result => this.afterEdit(result)
+    );
   }
 
   applyFilter(filterValue: string) {

@@ -26,6 +26,9 @@ import { TitleQueryInputComponent } from './components/title-query-input/title-q
 import { GenreSelectComponent } from './components/genre-select/genre-select.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
+import { DialogAuthorComponent } from './dialogs/dialog-author/dialog-author.component';
+import { AuthorEditCardComponent } from './components/author-edit-card/author-edit-card.component';
+import { AuthorEditMenuComponent } from './components/author-edit-menu/author-edit-menu.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import {BrowserModule} from '@angular/platform-browser';
     IsbnInputComponent,
     TitleQueryInputComponent,
     GenreSelectComponent,
+    DialogAuthorComponent,
+    AuthorEditCardComponent,
+    AuthorEditMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -61,7 +67,10 @@ import {BrowserModule} from '@angular/platform-browser';
     ReactiveFormsModule, // needed for formcontrol
   ],
   exports: [
-    BooksStartComponent
-  ]
+    BooksStartComponent,
+  ],
+  entryComponents: [
+    DialogAuthorComponent,
+  ],
 })
 export class BooksModule { }

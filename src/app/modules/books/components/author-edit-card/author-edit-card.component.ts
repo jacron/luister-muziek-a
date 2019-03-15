@@ -1,41 +1,54 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Author} from '../../../../classes/book/author';
-import {BooksService} from '../../services/books.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormOption} from '../../../../classes/shared/FormOption';
+import {Author} from '../../../../classes/book/author';
+import {BooksService} from '../../services/books.service';
 import {ToastrService} from 'ngx-toastr';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
-  selector: 'app-author-edit',
-  templateUrl: './author-edit.component.html',
-  styleUrls: ['./author-edit.component.scss']
+  selector: 'app-author-edit-card',
+  templateUrl: './author-edit-card.component.html',
+  styleUrls: ['./author-edit-card.component.scss']
 })
-export class AuthorEditComponent implements OnInit {
+export class AuthorEditCardComponent implements OnInit {
   @Input() author: Author;
+  @Input() refresh: string;
   @Output() close = new EventEmitter();
   @Output() authorChange = new EventEmitter();
 
-  editAuthor = false;
   formGroup: FormGroup;
   options: FormOption[];
-  wiki;
+  imageUrl = environment.booksServer + '/image/author/';
 
   constructor(
     private booksService: BooksService,
     private toastr: ToastrService,
-  ) {
-  }
+  ) { }
 
   hasError(controlName, errorName) {
     return this.formGroup.controls[controlName].hasError(errorName);
   }
 
-  edit() {
-    this.editAuthor = !this.editAuthor;
+  onRefresh() {
+    this.refresh = '?now=' + new Date();
   }
 
-  closeEdit() {
-    this.close.emit();
+  onClose(e) {
+    this.close.emit(e);
+  }
+
+  afterRemove() {
+    this.toastr.success('verwijderd!', this.author.last);
+    this.close.emit('removed');
+  }
+
+  remove() {
+    if (confirm('Remove this author?')) {
+      this.booksService.removeAuthor(this.author.id).subscribe(
+        () => this.afterRemove()
+      )
+    }
   }
 
   afterSave(id, author: Author) {

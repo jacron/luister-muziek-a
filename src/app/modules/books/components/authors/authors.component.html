@@ -4,28 +4,12 @@
     Auteurs ({{ authors.length }})
   </div>
 
-  <!--<mat-form-field>-->
-    <!--<input #input matInput placeholder="zoek"-->
-           <!--(ngModelChange)="search($event)"-->
-           <!--[(ngModel)]="query"-->
-           <!--name="author-query"-->
-           <!--(click)="input.select()"-->
-    <!--&gt;-->
-    <!--<button mat-button *ngIf="query"-->
-            <!--matSuffix mat-icon-button aria-label="Clear"-->
-            <!--(click)="resetSearch()">-->
-      <!--<mat-icon>close</mat-icon>-->
-    <!--</button>-->
-  <!--</mat-form-field>-->
-
-  <!--<div *ngFor="let author of filteredAuthors">-->
-    <!--<a [routerLink]="['/author', author.id]" class="link">-->
-      <!--{{ author.first }} {{ author.last }} - {{ author.nbooks }}-->
-    <!--</a>-->
-  <!--</div>-->
-
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <input
+      matInput
+      autofocus
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Filter">
   </mat-form-field>
 
   <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows
@@ -54,28 +38,11 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Boeken </th>
       <td mat-cell *matCellDef="let element"> {{ element.nbooks }} </td>
     </ng-container>
-    <!--<ng-container matColumnDef="expandedDetail">-->
-      <!--<td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">-->
-        <!--<div class="element-detail"-->
-             <!--[@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">-->
-          <!--<div class="element-diagram">-->
-            <!--<img [src]="element.imgUrl">-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</td>-->
-    <!--</ng-container>-->
 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"
         (click)="edit(row)"
     ></tr>
-    <!--<tr mat-row *matRowDef="let element; columns: displayedColumns;"-->
-        <!--class="element-row"-->
-        <!--[class.expanded-row]="expandedElement === element"-->
-        <!--(click)="expandedElement = expandedElement === element ? null : element"-->
-    <!--&gt;</tr>-->
-    <!--<tr mat-row *matRowDef="let row; columns: ['expandedDetail']"-->
-        <!--class="detail-row"></tr>-->
   </table>
 </div>
