@@ -8,4 +8,5 @@ export class Author {
   imgurl: string;
   url: string;
   nbooks?: number;
+  deleted?: boolean;
 }

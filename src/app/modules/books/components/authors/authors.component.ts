@@ -42,12 +42,44 @@ export class AuthorsComponent implements OnInit {
     );
   }
 
+  afterSaved(author) {
+    for (let i = 0; i < this.authors.length; i++) {
+      if (this.authors[i].id === author.id) {
+        for (let prop in author) {
+          if (author.hasOwnProperty(prop)) {
+            this.authors[i][prop] = author[prop];
+          }
+        }
+      }
+    }
+  }
+
+  afterRemoved(author) {
+    for (let i = 0; i < this.filteredAuthors.length; i++) {
+      if (this.filteredAuthors[i].id === author.id) {
+        this.filteredAuthors[i].deleted = true;
+        // this.filteredAuthors.splice(i, 1);
+        // this.renderAuthors();
+      }
+    }
+  }
+
   afterEdit(result) {
-    console.log(result);
+    if (!result || !result.author) {
+      return;
+    }
+    const {status, author} = result;
+    switch(status) {
+      case 'saved':
+        this.afterSaved(author);
+        break;
+      case 'removed':
+        this.afterRemoved(author);
+        break;
+    }
   }
 
   edit(row) {
-    console.log(row);
     const dialogRef = this.dialog.open(DialogAuthorComponent, {
       data: {
         width: '600px',
@@ -63,15 +95,17 @@ export class AuthorsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  afterGetAuthors(result) {
-    // result.splice(0, 900); // testing
-    console.log(result[0]);
-    this.filteredAuthors = this.authors = result;
+  renderAuthors() {
     this.dataSource = new MatTableDataSource(this.filteredAuthors);
     setTimeout(() => {
       this.dataSource.sort = this.sort;
     });
-    // this.table.renderRows();
+  }
+
+  afterGetAuthors(result) {
+    console.log(result[0]);
+    this.filteredAuthors = this.authors = result;
+    this.renderAuthors();
   }
 
   ngOnInit() {

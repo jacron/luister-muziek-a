@@ -42,7 +42,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"
-        (click)="edit(row)"
+        (click)="edit(row)" [class.deleted]="row.deleted"
     ></tr>
   </table>
 </div>

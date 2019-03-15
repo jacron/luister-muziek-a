@@ -3,7 +3,8 @@
     {{ author.first }} {{ author.last }} ({{ author.nbooks }})
     <app-author-edit-menu
       class="author-menu"
-      [(author)]="author"
+      [author]="author"
+      (authorChange)="changeAuthor($event)"
       (close)="onClose($event)"
       (refresh)="onRefresh()"
     ></app-author-edit-menu>

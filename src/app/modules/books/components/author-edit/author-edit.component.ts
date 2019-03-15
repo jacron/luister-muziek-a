@@ -42,7 +42,7 @@ export class AuthorEditComponent implements OnInit {
     this.author = author;
     this.toastr.success('opgeslagen!', this.author.last);
     this.authorChange.emit(author);
-    this.close.emit();
+    this.close.emit('saved');
   }
 
   save() {

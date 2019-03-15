@@ -75,6 +75,7 @@ export class AuthorEditMenuComponent implements OnInit {
   }
 
   afterPastePicture(response) {
+    console.log(response);
     this.author.imgurl = response;
     this.authorChange.emit(this.author);
     this.toastr.success('url afbeelding ingeplakt', 'cover');

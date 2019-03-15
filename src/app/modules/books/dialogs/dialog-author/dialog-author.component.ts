@@ -18,8 +18,9 @@ export class DialogAuthorComponent implements OnInit {
 
   ) { }
 
-  onClose() {
-    this.dialogRef.close();
+  onClose(e) {
+    // console.log(e);
+    this.dialogRef.close({status: e, author: this.author});
   }
 
   ngOnInit() {

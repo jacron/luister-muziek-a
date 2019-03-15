@@ -27,3 +27,6 @@ tr.element-row:not(.expanded-row):active {
   overflow: hidden;
   display: flex;
 }
+.deleted {
+  display: none;
+}

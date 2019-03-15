@@ -55,7 +55,7 @@ export class AuthorEditCardComponent implements OnInit {
     this.author = author;
     this.toastr.success('opgeslagen!', this.author.last);
     this.authorChange.emit(author);
-    this.close.emit();
+    this.close.emit('saved');
   }
 
   save() {
@@ -113,6 +113,11 @@ export class AuthorEditCardComponent implements OnInit {
       controls[option.name] = new FormControl(this.author[option.name], option.validators);
     });
     this.formGroup = new FormGroup(controls);
+  }
+
+  changeAuthor(author: Author) {
+    // console.log(author);
+    this.formGroup.controls.imgurl.setValue(author.imgurl);
   }
 
   ngOnInit() {
