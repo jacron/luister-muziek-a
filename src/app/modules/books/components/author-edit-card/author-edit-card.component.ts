@@ -43,7 +43,7 @@ export class AuthorEditCardComponent implements OnInit {
   }
 
   afterRemove() {
-    this.toastr.success('verwijderd!', this.author.last);
+    this.toastr.success('verwijderd!', this.author.first + ' ' + this.author.last);
     this.close.emit('removed');
   }
 
@@ -57,9 +57,9 @@ export class AuthorEditCardComponent implements OnInit {
 
   afterSave(id, author: Author) {
     this.author = author;
-    this.toastr.success('opgeslagen!', this.author.last);
+    this.toastr.success('opgeslagen!', this.author.first + ' ' + this.author.last);
     this.authorChange.emit(author);
-    // this.close.emit('saved');
+    this.close.emit('saved');
   }
 
   save() {
@@ -71,6 +71,7 @@ export class AuthorEditCardComponent implements OnInit {
       last: a.last,
       born: a.born,
       died: a.died,
+      genre: a.genre,
     };
     this.booksService.saveAuthor(author).subscribe(
       response => this.afterSave(response, author)
@@ -95,6 +96,10 @@ export class AuthorEditCardComponent implements OnInit {
       {
         name: 'died',
         label: 'Overleden',
+      },
+      {
+        name: 'genre',
+        label: 'Genre',
       },
     ];
     const controls = {};

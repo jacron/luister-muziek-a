@@ -16,11 +16,11 @@ export class BookMenuComponent implements OnInit {
   @Output() bookChange = new EventEmitter();
 
   options: MenuOption[] = [
-    {
-      label: 'Scan',
-      icon: 'search',
-      action: this.scanCover.bind(this)
-    },
+    // {
+    //   label: 'Scan',
+    //   icon: 'search',
+    //   action: this.scanCover.bind(this)
+    // },
     {
       label: 'Gebruik scan',
       icon: 'account_balance_wallet',

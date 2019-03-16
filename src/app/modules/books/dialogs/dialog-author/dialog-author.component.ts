@@ -48,13 +48,10 @@ export class DialogAuthorComponent implements OnInit {
     )
   }
 
-  afterWikipedia(result, lng) {
-    console.log(result);
+  afterWikipedia(result) {
+    // console.log(result);
     if (result) {
-      this.wiki = {
-        description: result.description,
-        extract: result.extract
-      };
+      this.wiki = result;
       if (result.image) {
         this.wiki.imgurl = result.image.source
       }
@@ -64,8 +61,8 @@ export class DialogAuthorComponent implements OnInit {
   wikipedia(lng) {
     const name = this.author.first + ' ' + this.author.last;
     this.booksService.wikiAuthor(name, lng).subscribe(
-      result => this.afterWikipedia(result, lng),
-      error => this.toastr.error('Geen wiki-gegevens voor taal: ' + lng)
+      result => this.afterWikipedia(result),
+      () => this.toastr.error('Geen wiki-gegevens voor taal: ' + lng)
     )
   }
 
@@ -76,7 +73,6 @@ export class DialogAuthorComponent implements OnInit {
   ngOnInit() {
     this.author = this.data.author;
     this.refresh = '?date=' + new Date();
-    // this.fetchBooks();
     this.wikipedia('nl');
   }
 

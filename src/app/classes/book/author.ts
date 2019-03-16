@@ -4,6 +4,7 @@ export class Author {
   last: string;
   born: string;
   died: string;
+  genre: string;
   country?: string;
   imgurl?: string;
   url?: string;

@@ -57,6 +57,7 @@ export class AuthorEditComponent implements OnInit {
       country: a.country,
       imgurl: a.imgurl,
       url: a.url,
+      genre: a.genre,
     };
     this.booksService.saveAuthor(author).subscribe(
       response => this.afterSave(response, author)

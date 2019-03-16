@@ -6,18 +6,21 @@
 
   <mat-form-field>
     <input
+      #filterInput
       matInput
       autofocus
-      (keyup)="applyFilter($event.target.value)"
+      (keyup)="applyFilter($event.target['value'])"
       placeholder="Filter">
+    <button
+      *ngIf="filterInput.value.length"
+      mat-button mat-icon-button matSuffix
+      (click)="clearFilter(filterInput); filterInput.focus()"
+      class="clear-filter"
+    ><mat-icon>close</mat-icon></button>
   </mat-form-field>
 
   <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows
          class="mat-elevation-z8">
-    <!--<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">-->
-      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>-->
-      <!--<td mat-cell *matCellDef="let element"> {{element[column]}} </td>-->
-    <!--</ng-container>-->
     <ng-container matColumnDef="first">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
       <td mat-cell *matCellDef="let element"> {{ element.first }} </td>
@@ -35,13 +38,17 @@
       <td mat-cell *matCellDef="let element"> {{ element.died }} </td>
     </ng-container>
     <ng-container matColumnDef="nbooks">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Boeken </th>
-      <td mat-cell *matCellDef="let element"> {{ element.nbooks }} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right">#</th>
+      <td mat-cell *matCellDef="let element" style="text-align: right"> {{ element.nbooks }} </td>
     </ng-container>
-
+    <ng-container matColumnDef="genre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Genre </th>
+      <td mat-cell *matCellDef="let element"> {{ element.genre }} </td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"
+        [title]="row.id"
         (click)="edit(row)" [class.deleted]="row.deleted"
     ></tr>
   </table>

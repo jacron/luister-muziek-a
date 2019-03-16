@@ -24,8 +24,9 @@
         {{ item[model.displayField] }}
       </mat-option>
     </mat-autocomplete>
-    <button *ngIf="myControl.value" mat-button=""
-            aria-label="Clear" class="closer" matSuffix mat-icon-button
+    <button *ngIf="myControl.value" mat-button
+            aria-label="Clear" class="closer"
+            matSuffix mat-icon-button
             (click)="clear()">
       <mat-icon>close</mat-icon>
     </button>

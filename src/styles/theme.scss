@@ -120,6 +120,11 @@ $darkcolor: #eeeeee;
     color: $darkcolor;
   }
 
+  .wiki-footer a {
+    color: $darkcolor !important;
+  }
+
+
   .book-card-content a,
   .author-header {
     color: #ffa;

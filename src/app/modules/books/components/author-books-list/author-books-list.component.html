@@ -4,7 +4,9 @@
   </mat-card-header>
   <mat-card-content class="books-list">
     <div *ngFor="let book of books">
-      <span (click)="toBook(book.id)" class="link">{{book.title}}</span>
+      <span (click)="toBook(book.id)"
+            [title]="book.id"
+            class="link">{{book.title}}</span>
     </div>
   </mat-card-content>
 </mat-card>

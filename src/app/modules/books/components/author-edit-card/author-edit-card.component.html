@@ -1,6 +1,7 @@
 <mat-card class="author-card">
   <div class="author-header">
     <span (click)="toAuthor()"
+          [title]="author.id"
     class="link">
       {{ author.first }} {{ author.last }}
     </span>

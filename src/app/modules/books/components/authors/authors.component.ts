@@ -13,9 +13,10 @@ import {DialogAuthorComponent} from '../../dialogs/dialog-author/dialog-author.c
 export class AuthorsComponent implements OnInit {
   authors: Author[];
   filteredAuthors: Author[];
-  displayedColumns = ['first', 'last', 'born', 'died', 'nbooks'];
+  displayedColumns = ['first', 'last', 'born', 'died', 'genre', 'nbooks'];
   query: string;
   dataSource;
+  genre;
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -25,21 +26,9 @@ export class AuthorsComponent implements OnInit {
     private dialog: MatDialog,
   ) { }
 
-  resetSearch() {
-    this.query = null;
-    this.search(null);
-  }
-
-  search(newValue: string) {
-    if (!newValue || !newValue.length) {
-      this.filteredAuthors = this.authors.slice();
-      return;
-    }
-    const q = newValue.toLowerCase();
-    this.filteredAuthors = this.authors.filter(
-      (author: Author) => author.last.toLowerCase().indexOf(q) !== -1
-        || author.first.toLowerCase().indexOf(q) !== -1
-    );
+  clearFilter(input) {
+    input.value = '';
+    this.applyFilter('');
   }
 
   afterSaved(author) {
@@ -58,8 +47,6 @@ export class AuthorsComponent implements OnInit {
     for (let i = 0; i < this.filteredAuthors.length; i++) {
       if (this.filteredAuthors[i].id === author.id) {
         this.filteredAuthors[i].deleted = true;
-        // this.filteredAuthors.splice(i, 1);
-        // this.renderAuthors();
       }
     }
   }
@@ -103,7 +90,7 @@ export class AuthorsComponent implements OnInit {
   }
 
   afterGetAuthors(result) {
-    console.log(result[0]);
+    // console.log(result[0]);
     this.filteredAuthors = this.authors = result;
     this.renderAuthors();
   }
