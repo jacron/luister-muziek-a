@@ -1,4 +1,25 @@
-<app-author-edit-card [(author)]="author"
-                      [refresh]="refresh"
-                      (close)="onClose($event)"
-></app-author-edit-card>
+<div class="card-wrapper">
+  <app-author-edit-card [(author)]="author"
+                        [refresh]="refresh"
+                        (toggleBooksList)="toggleBooksList()"
+                        (close)="onClose($event)"
+                        (wiki)="changeWiki($event)"
+  ></app-author-edit-card>
+  <div class="second-column" *ngIf="books">
+    <div class="books-list-header">
+      {{ author.nbooks }} {{ booksCountLabel(author.nbooks) }}
+    </div>
+    <div class="books-list">
+      <div *ngFor="let book of books">
+        <span (click)="toBook(book.id)" class="link">{{book.title}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="second-column" *ngIf="wiki">
+    <app-author-wiki
+      [wiki]="wiki"
+      (close)="wiki = null"
+      (picture)="storeWikiPicture($event)"
+    ></app-author-wiki>
+  </div>
+</div>

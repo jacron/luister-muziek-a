@@ -72,10 +72,6 @@ export class BooksService {
     return this.getJson('/author');
   }
 
-  wikiAuthor(authorName, lng) {
-    return this.getJson('/wiki/' + lng + '/' + authorName);
-  }
-
   /* POST */
   postForm(cmd, params) {
     const headers = new HttpHeaders();
@@ -85,8 +81,12 @@ export class BooksService {
     );
   }
 
+  wikiAuthor(authorName, lng) {
+    return this.postForm('/wiki/' + lng, {q: authorName});
+  }
+
   storeWikiAuthorImg(url, id) {
-    return this.postForm('/author/wiki/store', {url, id});
+    return this.postForm(`/author/${id}/wiki/store`, {url});
   }
 
   scanCover() {

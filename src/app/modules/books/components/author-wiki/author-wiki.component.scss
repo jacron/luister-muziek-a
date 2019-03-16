@@ -14,11 +14,16 @@
   margin: 10px 0;
 }
 .closer {
-  float: right;
+  position: absolute;
+  right: 4px;
+  top: 2px;
   cursor: pointer;
   padding: 6px 10px;
   border-radius: 10px;
   &:hover {
     background-color: #666;
   }
+}
+.mat-card {
+  width: 200px;
 }

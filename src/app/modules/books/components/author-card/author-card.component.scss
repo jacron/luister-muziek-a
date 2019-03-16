@@ -1,7 +1,7 @@
 .author-card {
   width: 240px;
 }
-.author-header {
+.author-header a {
   font-size: 20px;
   margin: 0 0 20px 0;
 }
@@ -9,5 +9,7 @@
   height: 120px;
 }
 .author-menu {
-  float: right;
+  position: absolute;
+  top: 4px;
+  right: 5px;
 }

@@ -4,7 +4,6 @@ import {BooksService} from '../../services/books.service';
 import {ToastrService} from 'ngx-toastr';
 import {MenuOption} from '../../../../classes/shared/MenuOption';
 import {environment} from '../../../../../environments/environment';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-author-edit-menu',
@@ -16,6 +15,8 @@ export class AuthorEditMenuComponent implements OnInit {
   @Output() authorChange = new EventEmitter();
   @Output() refresh = new EventEmitter();
   @Output() close = new EventEmitter();
+  @Output() toggle = new EventEmitter();
+  @Output() wiki = new EventEmitter();
 
   options: MenuOption[] = [
     {
@@ -25,58 +26,49 @@ export class AuthorEditMenuComponent implements OnInit {
       action: this.google.bind(this)
     },
     {
-      label: 'Plak url',
+      label: 'Plak afbeelding',
       icon: 'brush',
       color: 'green',
       action: this.pastePicture.bind(this)
     },
     {
-      label: 'Gebruik url',
-      icon: 'account_balance_wallet',
-      color: 'green',
-      action: this.getCover.bind(this)
-    },
-    {
-      label: 'divider',
-      icon: '',
-    },
-    {
       label: 'Boeken',
       icon: 'book',
-      action: this.toBooks.bind(this)
-    }
+      action: this.showBooks.bind(this)
+    },
+    {
+      label: 'Wiki nl',
+      icon: 'wiki',
+      action: this.wikipedia.bind(this, 'nl')
+    },
+    {
+      label: 'Wiki de',
+      icon: '',
+      action: this.wikipedia.bind(this, 'de')
+    },
+    {
+      label: 'Wiki en',
+      icon: '',
+      action: this.wikipedia.bind(this, 'en')
+    },
   ];
 
   constructor(
     private booksService: BooksService,
     private toastr: ToastrService,
-    private router: Router,
   ) { }
 
   act(f: Function) {
     f();
   }
 
-  toBooks() {
-    this.router.navigate(['author', this.author.id]).then();
-    this.close.emit('to books');
-  }
-
-  afterGetCover() {
-    this.toastr.success('schrijversfoto opgeslagen', 'afbeelding');
-    this.refresh.emit('?' + new Date());
-  }
-
-  getCover() {
-    this.toastr.info('afbeelding auteur naar cache', 'afbeelding');
-    this.booksService.getAuthorPicture(this.author.id).subscribe(
-      () => this.afterGetCover()
-    );
+  wikipedia(lng) {
+    this.wiki.emit(lng);
   }
 
   afterPastePicture(response) {
     console.log(response);
-    this.author.imgurl = response;
+    // this.author.imgurl = response;
     this.authorChange.emit(this.author);
     this.toastr.success('url afbeelding ingeplakt', 'cover');
   }
@@ -91,6 +83,10 @@ export class AuthorEditMenuComponent implements OnInit {
   google() {
     window.open(environment.googleUrl +
       this.author.first + ' ' + this.author.last);
+  }
+
+  showBooks() {
+    this.toggle.emit();
   }
 
   ngOnInit() {

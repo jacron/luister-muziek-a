@@ -6,4 +6,5 @@ export class MenuOption {
   label: string;
   action?: Function;
   hide?: boolean;
+  menus?: MenuOption[];
 }

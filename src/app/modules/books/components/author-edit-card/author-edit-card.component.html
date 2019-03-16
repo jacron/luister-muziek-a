@@ -1,16 +1,24 @@
 <mat-card class="author-card">
   <div class="author-header">
-    {{ author.first }} {{ author.last }} ({{ author.nbooks }})
-    <app-author-edit-menu
-      class="author-menu"
-      [author]="author"
-      (authorChange)="changeAuthor($event)"
-      (close)="onClose($event)"
-      (refresh)="onRefresh()"
-    ></app-author-edit-menu>
+    <span (click)="toAuthor()"
+    class="link">
+      {{ author.first }} {{ author.last }}
+    </span>
+    <div class="author-menu">
+      <app-author-edit-menu
+        [author]="author"
+        (authorChange)="changeAuthor()"
+        (close)="onClose($event)"
+        (toggle)="toggle()"
+        (refresh)="onRefresh()"
+        (wiki)="changeWiki($event)"
+      ></app-author-edit-menu>
+    </div>
   </div>
-  <img [src]="imageUrl + author.id + refresh"
-       class="author-image" alt="author image">
+  <div class="image-container">
+    <img [src]="imageUrl + author.id + refresh"
+         class="author-image" alt="author image">
+  </div>
   <mat-card-content>
     <form [formGroup]="formGroup"
           novalidate

@@ -5,6 +5,7 @@ import {Author} from '../../../../classes/book/author';
 import {BooksService} from '../../services/books.service';
 import {ToastrService} from 'ngx-toastr';
 import {environment} from '../../../../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-author-edit-card',
@@ -16,6 +17,8 @@ export class AuthorEditCardComponent implements OnInit {
   @Input() refresh: string;
   @Output() close = new EventEmitter();
   @Output() authorChange = new EventEmitter();
+  @Output() toggleBooksList = new EventEmitter();
+  @Output() wiki = new EventEmitter();
 
   formGroup: FormGroup;
   options: FormOption[];
@@ -24,6 +27,7 @@ export class AuthorEditCardComponent implements OnInit {
   constructor(
     private booksService: BooksService,
     private toastr: ToastrService,
+    private router: Router,
   ) { }
 
   hasError(controlName, errorName) {
@@ -36,6 +40,10 @@ export class AuthorEditCardComponent implements OnInit {
 
   onClose(e) {
     this.close.emit(e);
+  }
+
+  toggle() {
+    this.toggleBooksList.emit();
   }
 
   afterRemove() {
@@ -67,9 +75,6 @@ export class AuthorEditCardComponent implements OnInit {
       last: a.last,
       born: a.born,
       died: a.died,
-      country: a.country,
-      imgurl: a.imgurl,
-      url: a.url,
     };
     this.booksService.saveAuthor(author).subscribe(
       response => this.afterSave(response, author)
@@ -95,18 +100,6 @@ export class AuthorEditCardComponent implements OnInit {
         name: 'died',
         label: 'Overleden',
       },
-      {
-        name: 'imgurl',
-        label: 'Afbeeldingsurl',
-      },
-      {
-        name: 'country',
-        label: 'Land',
-      },
-      {
-        name: 'url',
-        label: 'Url',
-      },
     ];
     const controls = {};
     this.options.forEach(option => {
@@ -115,9 +108,18 @@ export class AuthorEditCardComponent implements OnInit {
     this.formGroup = new FormGroup(controls);
   }
 
-  changeAuthor(author: Author) {
-    // console.log(author);
-    this.formGroup.controls.imgurl.setValue(author.imgurl);
+  toAuthor() {
+    this.router.navigate(['author', this.author.id]).then(
+      () => this.onClose('navigated')
+    );
+  }
+
+  changeAuthor() {
+    this.refresh = '?now=' + new Date();
+  }
+
+  changeWiki(lng) {
+    this.wiki.emit(lng);
   }
 
   ngOnInit() {
