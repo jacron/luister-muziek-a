@@ -6,5 +6,5 @@ export class Director {
   imdb_id?: string;
   Geboortejaar: string;
   Sterfjaar: string;
-  name: string;
+  name?: string;
 }

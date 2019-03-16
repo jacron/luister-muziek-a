@@ -3,6 +3,7 @@ import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {StateService} from '../../../../services/state.service';
 import {MoviesService} from '../../services/movies.service';
 import {Director} from '../../../../classes/movies/Director';
+import {DialogDirectorComponent} from '../../dialogs/dialog-director/dialog-director.component';
 
 @Component({
   selector: 'app-directors',
@@ -33,13 +34,13 @@ export class DirectorsComponent implements OnInit {
     this.filteredCount = this.dataSource.filteredData.length;
   }
 
-  edit() {
-    // const dialogRef = this.dialog.open(DialogAuthorComponent, {
-    //   data: {
-    //     width: '600px',
-    //     author: row
-    //   }
-    // });
+  edit(row) {
+    const dialogRef = this.dialog.open(DialogDirectorComponent, {
+      data: {
+        width: '600px',
+        director: row
+      }
+    });
     // dialogRef.afterClosed().subscribe(
     //   result => this.afterEdit(result)
     // );

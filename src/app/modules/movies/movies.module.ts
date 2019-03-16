@@ -23,6 +23,10 @@ import { MoviesNewFromImdbComponent } from './components/movies-new-from-imdb/mo
 import {SharedModule} from '../shared/shared.module';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { DirectorsComponent } from './components/directors/directors.component';
+import { DialogDirectorComponent } from './dialogs/dialog-director/dialog-director.component';
+import { DirectorEditCardComponent } from './components/director-edit-card/director-edit-card.component';
+import { DirectorWikiComponent } from './components/director-wiki/director-wiki.component';
+import { DirectorFilmsListComponent } from './components/director-films-list/director-films-list.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,10 @@ import { DirectorsComponent } from './components/directors/directors.component';
     MoviesNewFromImdbComponent,
     MovieDetailsComponent,
     DirectorsComponent,
+    DialogDirectorComponent,
+    DirectorEditCardComponent,
+    DirectorWikiComponent,
+    DirectorFilmsListComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +64,9 @@ import { DirectorsComponent } from './components/directors/directors.component';
   ],
   exports: [
     MoviesStartComponent
-  ]
+  ],
+  entryComponents: [
+    DialogDirectorComponent
+  ],
 })
 export class MoviesModule { }
