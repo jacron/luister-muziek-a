@@ -29,7 +29,7 @@ export class AuthorBooksListComponent implements OnInit {
   }
 
   afterFetchBooks(result) {
-    console.log(result);
+    // console.log(result);
     this.books = result;
   }
 

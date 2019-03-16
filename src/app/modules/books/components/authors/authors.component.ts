@@ -17,6 +17,7 @@ export class AuthorsComponent implements OnInit {
   query: string;
   dataSource;
   genre;
+  filteredCount;
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -80,6 +81,7 @@ export class AuthorsComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.filteredCount = this.dataSource.filteredData.length;
   }
 
   renderAuthors() {

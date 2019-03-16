@@ -9,7 +9,7 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit {
   appTitle = 'media-client';
   darkOn = false;
-  mobileQuery: MediaQueryList;
+  // mobileQuery: MediaQueryList;
 
   setDarkOn(e) {
     this.darkOn = e;

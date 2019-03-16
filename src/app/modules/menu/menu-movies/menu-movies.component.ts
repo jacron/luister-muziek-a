@@ -5,7 +5,13 @@ const movielinks: MenuOption[] = [
   {
     href: 'movies',
     label: 'Films',
-    icon: 'movie'
+    icon: 'movie',
+  },
+  {
+    href: 'directors',
+    label: 'Regisseurs',
+    icon: 'person',
+    color: 'blue',
   },
 ];
 

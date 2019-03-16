@@ -22,6 +22,7 @@ import { MoviesToNewFromImdbComponent } from './components/movies-to-new-from-im
 import { MoviesNewFromImdbComponent } from './components/movies-new-from-imdb/movies-new-from-imdb.component';
 import {SharedModule} from '../shared/shared.module';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { DirectorsComponent } from './components/directors/directors.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
     MoviesToNewFromImdbComponent,
     MoviesNewFromImdbComponent,
     MovieDetailsComponent,
+    DirectorsComponent,
   ],
   imports: [
     CommonModule,

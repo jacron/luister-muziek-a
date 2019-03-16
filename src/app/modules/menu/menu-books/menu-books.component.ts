@@ -10,7 +10,7 @@ const booklinks: MenuOption[] = [
   {
     href: 'authors',
     label: 'Auteurs',
-    icon: 'book',
+    icon: 'person',
     color: 'blue'
   }
 ];

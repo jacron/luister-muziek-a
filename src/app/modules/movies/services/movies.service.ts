@@ -21,22 +21,69 @@ export class MoviesService {
       responseType: 'json'});
   }
 
+  /*
+    get films
+   */
+  getMovie(id) {
+    return this.getJson('/films/' + id);
+  }
+
   searchMovies(query): Observable<Suggestion[]> {
     return this.getJson('/search/movie/' + query)
       .pipe(map(
         response => response['options']));
   }
 
-  getMovie(id) {
-    return this.getJson('/film/' + id);
+  getJaarMovies(jaar) {
+    return this.getJson('/films/jaar/' + jaar + '/1');
   }
 
-  getMovieByImdbId(id) {
-    return this.getJson('/imdb/movie/' + id);
+  getRecentlyPlayedMovies(pageNr, n) {
+    return this.getJson('/films/filter/recentlyplayed/' + pageNr + '/' + n)
+      .pipe(map(response => response['films']));
+  }
+
+  getRecentlySeenMovies(pageNr, n) {
+    return this.getJson('/films/filter/recentlyseen/' + pageNr + '/' + n)
+      .pipe(map(response => response['films']));
+  }
+
+  getRecentlyAcquiredMovies(pageNr, n) {
+    return this.getJson('/films/filter/recentlymade/' + pageNr + '/' + n)
+      .pipe(map(response => response['films']));
   }
 
   getNewMovie(imdb_id) {
-    return this.getJson('/film/new/' + imdb_id);
+    return this.getJson('/films/new/' + imdb_id);
+  }
+
+  play(id, player) {
+    return this.getJson(`/films/${id}/play/${player}`);
+  }
+
+  openFinder(id) {
+    return this.getJson(`/films/${id}/folder`);
+  }
+
+  addToday(id) {
+    return this.getJson(`/films/${id}/add/today/`);
+  }
+
+  /*
+    get directors
+   */
+  getDirectors() {
+    return this.getJson('/directors');
+  }
+
+  getDirectorMovies(id) {
+    return this.getJson('/directors/' + id);
+  }
+
+
+
+  getMovieByImdbId(id) {
+    return this.getJson('/imdb/movie/' + id);
   }
 
   searchSpelers(query) {
@@ -56,40 +103,6 @@ export class MoviesService {
     return this.getJson('/speler/naam/' + naam);
   }
 
-  getJaarMovies(jaar) {
-    return this.getJson('/films/jaar/' + jaar + '/1');
-  }
-
-  getDirectorMovies(id) {
-    return this.getJson('/director/' + id);
-  }
-
-  getRecentlyPlayedMovies(pageNr, n) {
-    return this.getJson('/films/filter/recentlyplayed/' + pageNr + '/' + n)
-      .pipe(map(response => response['films']));
-  }
-
-  getRecentlySeenMovies(pageNr, n) {
-    return this.getJson('/films/filter/recentlyseen/' + pageNr + '/' + n)
-      .pipe(map(response => response['films']));
-  }
-
-  getRecentlyAcquiredMovies(pageNr, n) {
-    return this.getJson('/films/filter/recentlymade/' + pageNr + '/' + n)
-      .pipe(map(response => response['films']));
-  }
-
-  play(id, player) {
-    return this.getJson('/film/play/' + id + '/' + player);
-  }
-
-  openFinder(id) {
-    return this.getJson('/film/folder/' + id);
-  }
-
-  addToday(id) {
-    return this.getJson('/film/add/today/' + id);
-  }
 
   /* POST */
   postForm(cmd, params) {

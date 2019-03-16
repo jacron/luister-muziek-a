@@ -10,12 +10,14 @@ import {MoviesRecentlyPlayedComponent} from '../movies/components/movies-recentl
 import {MoviesRecentlyAddedComponent} from '../movies/components/movies-recently-added/movies-recently-added.component';
 import {MoviesRecentlySeenComponent} from '../movies/components/movies-recently-seen/movies-recently-seen.component';
 import {MoviesNewFromImdbComponent} from '../movies/components/movies-new-from-imdb/movies-new-from-imdb.component';
+import {DirectorsComponent} from '../movies/components/directors/directors.component';
 
 const routes: Routes = [
   {path: 'movies', component: MoviesStartComponent},
   {path: 'movies/jaar/:jaar', component: MovieJaarComponent},
   {path: 'movies/:idmovie', component: MovieComponent},
   {path: 'director/:iddirector', component: DirectorComponent},
+  {path: 'directors', component: DirectorsComponent},
   {path: 'speler/naam/:naamspeler', component: SpelerComponent},
   {path: 'speler/:idspeler', component: SpelerComponent},
   {path: 'recentlyplayed', component: MoviesRecentlyPlayedComponent},

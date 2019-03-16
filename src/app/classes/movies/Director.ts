@@ -4,4 +4,7 @@ export class Director {
   Voornaam: string;
   ImageUrl: string;
   imdb_id?: string;
+  Geboortejaar: string;
+  Sterfjaar: string;
+  name: string;
 }
