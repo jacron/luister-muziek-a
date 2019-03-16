@@ -46,7 +46,6 @@ export class AuthorComponent implements OnInit {
   }
 
   toggleEdit() {
-    // console.log('toggle edit - in author');
     this.authorEdit= ! this.authorEdit;
   }
 

@@ -1,6 +1,3 @@
-.author-wiki {
-  width: 300px;
-}
 .wiki-img {
   height: 120px;
   margin-top: 10px;
@@ -24,6 +21,21 @@
     background-color: #666;
   }
 }
-.mat-card {
-  width: 200px;
+.content-wrapper {
+  display: flex;
+}
+.image-container {
+  padding-right: 20px;
+}
+.nl {
+  color: #5ff;
+}
+.de {
+  color: #aaa;
+}
+.fr {
+  color: #3cf;
+}
+.en {
+  color: #f55;
 }

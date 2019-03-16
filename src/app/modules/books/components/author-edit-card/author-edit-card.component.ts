@@ -34,10 +34,6 @@ export class AuthorEditCardComponent implements OnInit {
     return this.formGroup.controls[controlName].hasError(errorName);
   }
 
-  onRefresh() {
-    this.refresh = '?now=' + new Date();
-  }
-
   onClose(e) {
     this.close.emit(e);
   }
@@ -63,7 +59,7 @@ export class AuthorEditCardComponent implements OnInit {
     this.author = author;
     this.toastr.success('opgeslagen!', this.author.last);
     this.authorChange.emit(author);
-    this.close.emit('saved');
+    // this.close.emit('saved');
   }
 
   save() {

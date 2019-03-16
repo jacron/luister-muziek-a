@@ -5,21 +5,21 @@
                         (close)="onClose($event)"
                         (wiki)="changeWiki($event)"
   ></app-author-edit-card>
-  <div class="second-column" *ngIf="books">
-    <div class="books-list-header">
-      {{ author.nbooks }} {{ booksCountLabel(author.nbooks) }}
+  <div class="second-column">
+    <div *ngIf="wiki">
+      <app-author-wiki
+        [wiki]="wiki"
+        (language)="onLanguage($event)"
+        (close)="wiki = null"
+        (picture)="storeWikiPicture($event)"
+      ></app-author-wiki>
     </div>
-    <div class="books-list">
-      <div *ngFor="let book of books">
-        <span (click)="toBook(book.id)" class="link">{{book.title}}</span>
-      </div>
+    <div *ngIf="wiki" class="vertical-spacer"></div>
+    <div *ngIf="showBooks">
+      <app-author-books-list [author]="author"
+                             (close)="onClose($event)"
+                             class="books-list"
+      ></app-author-books-list>
     </div>
-  </div>
-  <div class="second-column" *ngIf="wiki">
-    <app-author-wiki
-      [wiki]="wiki"
-      (close)="wiki = null"
-      (picture)="storeWikiPicture($event)"
-    ></app-author-wiki>
   </div>
 </div>

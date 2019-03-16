@@ -8,8 +8,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class AuthorWikiComponent implements OnInit {
   @Input() wiki;
+  @Input() showActions = true;
   @Output() picture = new EventEmitter();
   @Output() close = new EventEmitter();
+  @Output() language = new EventEmitter();
 
   constructor() { }
 
@@ -19,6 +21,10 @@ export class AuthorWikiComponent implements OnInit {
 
   closeWiki() {
     this.close.emit();
+  }
+
+  changeLanguage(lng) {
+    this.language.emit(lng);
   }
 
   ngOnInit() {

@@ -29,6 +29,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import { DialogAuthorComponent } from './dialogs/dialog-author/dialog-author.component';
 import { AuthorEditCardComponent } from './components/author-edit-card/author-edit-card.component';
 import { AuthorEditMenuComponent } from './components/author-edit-menu/author-edit-menu.component';
+import { AuthorBooksListComponent } from './components/author-books-list/author-books-list.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AuthorEditMenuComponent } from './components/author-edit-menu/author-ed
     DialogAuthorComponent,
     AuthorEditCardComponent,
     AuthorEditMenuComponent,
+    AuthorBooksListComponent,
   ],
   imports: [
     CommonModule,

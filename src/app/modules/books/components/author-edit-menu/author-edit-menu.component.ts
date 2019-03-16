@@ -13,8 +13,8 @@ import {environment} from '../../../../../environments/environment';
 export class AuthorEditMenuComponent implements OnInit {
   @Input() author: Author;
   @Output() authorChange = new EventEmitter();
-  @Output() refresh = new EventEmitter();
-  @Output() close = new EventEmitter();
+  // @Output() refresh = new EventEmitter();
+  // @Output() close = new EventEmitter();
   @Output() toggle = new EventEmitter();
   @Output() wiki = new EventEmitter();
 
@@ -37,19 +37,32 @@ export class AuthorEditMenuComponent implements OnInit {
       action: this.showBooks.bind(this)
     },
     {
+      label: 'divider',
+      icon: ''
+    },
+    {
       label: 'Wiki nl',
-      icon: 'wiki',
+      icon: 'info',
+      color: '#5ff',
       action: this.wikipedia.bind(this, 'nl')
     },
     {
       label: 'Wiki de',
-      icon: '',
+      icon: 'info',
+      color: '#aaa',
       action: this.wikipedia.bind(this, 'de')
     },
     {
       label: 'Wiki en',
-      icon: '',
+      icon: 'info',
+      color: '#f55',
       action: this.wikipedia.bind(this, 'en')
+    },
+    {
+      label: 'Wiki fr',
+      icon: 'info',
+      color: '#3cf',
+      action: this.wikipedia.bind(this, 'fr')
     },
   ];
 
@@ -68,7 +81,6 @@ export class AuthorEditMenuComponent implements OnInit {
 
   afterPastePicture(response) {
     console.log(response);
-    // this.author.imgurl = response;
     this.authorChange.emit(this.author);
     this.toastr.success('url afbeelding ingeplakt', 'cover');
   }

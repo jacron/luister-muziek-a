@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Author} from '../../../../classes/book/author';
 import {AuthorsComponent} from '../../components/authors/authors.component';
 import {BooksService} from '../../services/books.service';
-import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-dialog-author',
@@ -13,14 +13,14 @@ import {Router} from '@angular/router';
 export class DialogAuthorComponent implements OnInit {
   author: Author;
   refresh;
-  books = null;
   wiki = null;
+  showBooks = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AuthorsComponent>,
     private booksService: BooksService,
-    private router: Router,
+    private toastr: ToastrService,
   ) { }
 
   onClose(e) {
@@ -28,52 +28,18 @@ export class DialogAuthorComponent implements OnInit {
     this.dialogRef.close({status: e, author: this.author});
   }
 
-  booksCountLabel(n) {
-    return n === 1 ? 'boek' : 'boeken';
-  }
-
-  toBook(id) {
-    this.router.navigate(['books', id]).then(
-      () => this.onClose('navigated')
-    );
-  }
-
   toggleBooksList() {
-    if (this.books) {
-      this.books = null;
-    } else {
-      this.fetchBooks();
-    }
+    this.showBooks = !this.showBooks;
   }
 
-  afterFetchBooks(result) {
-    console.log(result);
-    this.books = result;
-  }
-
-  fetchBooks() {
-    this.booksService.getAuthorBooks(this.author.id).subscribe(
-      result => this.afterFetchBooks(result)
-    );
-  }
-
-  afterWiki(result) {
-    // this.toastr.success('gegevens zijn opeghaald', 'wikipedia');
-    if (result && result.image) {
-      this.wiki = {
-        imgurl: result.image.source,
-        description: result.description,
-        extract: result.extract
-      };
-      // this.wiki.emit(this.wikiCache);
-    }
+  onLanguage(lng) {
+    this.wikipedia(lng);
   }
 
   afterStoreWiki() {
     // this.toastr.success('Wiki afbeelding opgeslagen', 'wiki');
     this.refresh = '?' + new Date();
     this.wiki.imgurl = null;
-    // this.wikiImg = null;
   }
 
   storeWikiPicture(e: string) {
@@ -82,10 +48,24 @@ export class DialogAuthorComponent implements OnInit {
     )
   }
 
+  afterWikipedia(result, lng) {
+    console.log(result);
+    if (result) {
+      this.wiki = {
+        description: result.description,
+        extract: result.extract
+      };
+      if (result.image) {
+        this.wiki.imgurl = result.image.source
+      }
+    }
+  }
+
   wikipedia(lng) {
     const name = this.author.first + ' ' + this.author.last;
     this.booksService.wikiAuthor(name, lng).subscribe(
-      result => this.afterWiki(result)
+      result => this.afterWikipedia(result, lng),
+      error => this.toastr.error('Geen wiki-gegevens voor taal: ' + lng)
     )
   }
 
