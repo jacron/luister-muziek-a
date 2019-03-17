@@ -5,6 +5,44 @@ import {Author} from '../../../../classes/book/author';
 import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogAuthorComponent} from '../../dialogs/dialog-author/dialog-author.component';
 
+export interface DataField {
+  name: string,
+  label: string,
+  // thStyle?: string,
+  tdClass?: string,
+}
+
+const dataFields: DataField[] = [
+  {
+    name: 'first',
+    label: 'Voornaam',
+  },
+  {
+    name: 'last',
+    label: 'Achternaam',
+  },
+  {
+    name: 'born',
+    label: 'Geboren',
+  },
+  {
+    name: 'died',
+    label: 'Dood',
+  },
+  {
+    name: 'genre',
+    label: 'Genre',
+  },
+  {
+    name: 'country',
+    label: 'Land',
+  },
+  {
+    name: 'nbooks',
+    label: '#',
+  },
+];
+
 @Component({
   selector: 'app-authors',
   templateUrl: './authors.component.html',
@@ -13,7 +51,9 @@ import {DialogAuthorComponent} from '../../dialogs/dialog-author/dialog-author.c
 export class AuthorsComponent implements OnInit {
   authors: Author[];
   filteredAuthors: Author[];
-  displayedColumns = ['first', 'last', 'born', 'died', 'genre', 'nbooks'];
+  displayedColumns = ['first', 'last', 'born', 'died', 'genre',
+    'country', 'nbooks'];
+  fields = dataFields;
   query: string;
   dataSource;
   genre;

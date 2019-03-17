@@ -67,16 +67,20 @@ export class AuthorEditCardComponent implements OnInit {
   }
 
   save() {
-    const a: Author = this.formGroup.value;
-
-    const author: Author = {
+    const author = {
+      ...this.formGroup.value,
       id: this.author.id,
-      first: a.first,
-      last: a.last,
-      born: a.born,
-      died: a.died,
-      genre: a.genre,
     };
+    // const a: Author = this.formGroup.value;
+    //
+    // const author: Author = {
+    //   id: this.author.id,
+    //   first: a.first,
+    //   last: a.last,
+    //   born: a.born,
+    //   died: a.died,
+    //   genre: a.genre,
+    // };
     this.booksService.saveAuthor(author).subscribe(
       response => this.afterSave(response, author)
     )
@@ -104,6 +108,10 @@ export class AuthorEditCardComponent implements OnInit {
       {
         name: 'genre',
         label: 'Genre',
+      },
+      {
+        name:'country',
+        label: 'Land'
       },
     ];
     const controls = {};

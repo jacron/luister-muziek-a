@@ -1,15 +1,21 @@
 <div class="author-wiki">
   <mat-card>
-    <mat-card-header>
+    <mat-card-actions *ngIf="showActions">
+      <button mat-button (click)="changeLanguage('nl')" class="nl">nl</button>
+      <button mat-button (click)="changeLanguage('en')" class="en">en</button>
+      <button mat-button (click)="changeLanguage('de')" class="de">de</button>
+      <button mat-button (click)="changeLanguage('fr')" class="fr">fr</button>
+    </mat-card-actions>
+    <mat-card-header *ngIf="wiki">
       <div>{{ wiki.title }}</div>
       <div class="closer" (click)="closeWiki()">x</div>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content *ngIf="wiki">
       <div class="content-wrapper">
         <div class="image-container">
           <img [src]="wiki.imgurl"
                (click)="usePicture()"
-               class="wiki-img"
+               class="wiki-img" alt="wiki picture"
                *ngIf="wiki.imgurl">
         </div>
         <div class="text-container">
@@ -23,11 +29,5 @@
         >wikipedia</a>
       </div>
     </mat-card-content>
-    <mat-card-actions *ngIf="showActions">
-      <button mat-button (click)="changeLanguage('nl')" class="nl">nl</button>
-      <button mat-button (click)="changeLanguage('en')" class="en">en</button>
-      <button mat-button (click)="changeLanguage('de')" class="de">de</button>
-      <button mat-button (click)="changeLanguage('fr')" class="fr">fr</button>
-    </mat-card-actions>
   </mat-card>
 </div>

@@ -57,11 +57,15 @@ export class DialogAuthorComponent implements OnInit {
     }
   }
 
+  afterWikipediaError(err) {
+    console.log(err);
+  }
+
   wikipedia(lng) {
     const name = this.author.first + ' ' + this.author.last;
     this.booksService.wikiAuthor(name, lng).subscribe(
       result => this.afterWikipedia(result),
-      () => this.toastr.error('Geen wiki-gegevens voor taal: ' + lng)
+      err => this.afterWikipediaError(err)
     )
   }
 
