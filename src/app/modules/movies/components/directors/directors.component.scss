@@ -1,0 +1,19 @@
+.header {
+  font-size: 20px;
+  padding: 10px;
+}
+:host {
+  line-height: 1.6;
+}
+table {
+  width: 600px;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+.deleted {
+  display: none;
+}
+.clear-filter {
+  display: inline-block;
+}

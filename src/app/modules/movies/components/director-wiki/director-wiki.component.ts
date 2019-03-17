@@ -8,6 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class DirectorWikiComponent implements OnInit {
   @Input() wiki;
   @Output() picture = new EventEmitter();
+  @Output() pictureUrl = new EventEmitter();
   @Output() close = new EventEmitter();
   @Output() language = new EventEmitter();
 
@@ -15,6 +16,10 @@ export class DirectorWikiComponent implements OnInit {
 
   usePicture() {
     this.picture.emit(this.wiki.imgurl);
+  }
+
+  usePictureUrl() {
+    this.pictureUrl.emit(this.wiki.imgurl);
   }
 
   closeWiki() {

@@ -61,7 +61,7 @@ export class DirectorsComponent implements OnInit {
     if (!result || !result.director) {
       return;
     }
-    // console.log(result);
+    console.log(result);
     const {status, director} = result;
     switch(status) {
       case 'saved':

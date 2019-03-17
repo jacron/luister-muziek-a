@@ -15,6 +15,7 @@ export class DirectorEditMenuComponent implements OnInit {
   @Output() directorChange = new EventEmitter();
   @Output() toggle = new EventEmitter();
   @Output() wiki = new EventEmitter();
+  @Output() close = new EventEmitter();
 
   options: MenuOption[] = [
     {
@@ -68,6 +69,16 @@ export class DirectorEditMenuComponent implements OnInit {
       color: '#3cf',
       action: this.wikipedia.bind(this, 'fr')
     },
+    {
+      label: 'divider',
+      icon: ''
+    },
+    {
+      label: 'Verwijderen',
+      icon: 'clear',
+      color: 'red',
+      action: this.remove.bind(this)
+    },
   ];
 
   constructor(
@@ -115,6 +126,19 @@ export class DirectorEditMenuComponent implements OnInit {
 
   showFilms() {
     this.toggle.emit();
+  }
+
+  afterRemove(id) {
+    console.log(id);
+    this.close.emit('removed');
+  }
+
+  remove() {
+    if (confirm('Regisseur verwijderen?')) {
+      this.moviesService.removeDirector(this.director.id).subscribe(
+        response => this.afterRemove(response)
+      )
+    }
   }
 
   ngOnInit() {

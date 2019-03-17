@@ -137,6 +137,10 @@ export class MoviesService {
     return this.postForm(`/directors/save`, {director});
   }
 
+  removeDirector(id) {
+    return this.postForm(`/directors/${id}/delete`, {});
+  }
+
   unwatch(id) {
     return this.postForm('/film/unwatch', { id });
   }

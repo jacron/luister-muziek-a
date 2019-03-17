@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Director} from '../../../../classes/movies/Director';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormOption} from '../../../../classes/shared/FormOption';
@@ -12,7 +12,7 @@ import {environment} from '../../../../../environments/environment';
   templateUrl: './director-edit-card.component.html',
   styleUrls: ['./director-edit-card.component.scss']
 })
-export class DirectorEditCardComponent implements OnInit {
+export class DirectorEditCardComponent implements OnInit, OnChanges {
   @Input() director: Director;
   @Input() refresh: string;
   @Output() close = new EventEmitter();
@@ -47,18 +47,8 @@ export class DirectorEditCardComponent implements OnInit {
     this.toggleFilmsList.emit();
   }
 
-  afterRemove() {
-    this.toastr.success('verwijderd!', this.director.Voornaam +
-      ' ' + this.director.Achternaam);
-    this.close.emit('removed');
-  }
-
-  remove() {
-    if (confirm('Remove this author?')) {
-      // this.moviesService.removeDirector(this.director.id).subscribe(
-      //   () => this.afterRemove()
-      // )
-    }
+  closeDialog() {
+    this.close.emit('canceled');
   }
 
   afterSave(id, director: Director) {
@@ -117,7 +107,10 @@ export class DirectorEditCardComponent implements OnInit {
     ];
     const controls = {};
     this.options.forEach(option => {
-      controls[option.name] = new FormControl(this.director[option.name], option.validators);
+      controls[option.name] = new FormControl({
+        value: this.director[option.name],
+        disabled: false
+      }, option.validators);
     });
     this.formGroup = new FormGroup(controls);
   }
@@ -128,6 +121,13 @@ export class DirectorEditCardComponent implements OnInit {
 
   changeWiki(lng) {
     this.wiki.emit(lng);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // wiki component may have changed image url
+    if (changes.director && this.formGroup) {
+      this.formGroup.controls['ImageUrl'].setValue(changes.director.currentValue.ImageUrl);
+    }
   }
 
   ngOnInit() {

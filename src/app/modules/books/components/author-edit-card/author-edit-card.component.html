@@ -11,11 +11,13 @@
         (authorChange)="changeAuthor()"
         (toggle)="toggle()"
         (wiki)="changeWiki($event)"
+        (close)="onClose($event)"
       ></app-author-edit-menu>
     </div>
   </div>
   <div class="image-container">
     <img [src]="imageUrl + author.id + refresh"
+         default="assets/images/one.png"
          class="author-image" alt="author image">
   </div>
   <mat-card-content>
@@ -34,7 +36,7 @@
       <button mat-raised-button color="primary"
               [disabled]="!formGroup.valid">Bewaar</button>
     </form>
-    <button mat-flat-button (click)="remove()" class="button-remove"
-    >Verwijder</button>
+    <button mat-flat-button (click)="closeDialog()" class="button-remove"
+    >Annuleren</button>
   </mat-card-content>
 </mat-card>

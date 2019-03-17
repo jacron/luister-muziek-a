@@ -1,24 +1,23 @@
-<mat-card class="author-card">
-  <div class="author-header">
-    <span (click)="toDirector()"
-          [title]="director.id"
+<mat-card class="book-card">
+  <div class="book-header">
+    <span (click)="toBook()"
+          [title]="book.id"
           class="link">
-      {{ director.Voornaam }} {{ director.Achternaam}}
+      {{ book.title }}
     </span>
-    <div class="director-menu">
-      <app-director-edit-menu
-        [director]="director"
-        (directorChange)="changeDirector()"
+    <div class="book-menu">
+      <app-book-edit-menu
+        [book]="book"
+        (bookChange)="changeBook()"
         (toggle)="toggle()"
-        (close)="onClose($event)"
         (wiki)="changeWiki($event)"
-      ></app-director-edit-menu>
+        (close)="onClose($event)"
+      ></app-book-edit-menu>
     </div>
   </div>
   <div class="image-container">
-    <img [src]="viewUrl + director.id + refresh"
-         default="assets/images/one.png"
-         class="director-image" alt="director image">
+    <img [src]="viewUrl + book.id + refresh"
+         class="book-image" alt="book image">
   </div>
   <mat-card-content>
     <form [formGroup]="formGroup"
@@ -26,11 +25,11 @@
           class="form"
           (ngSubmit)="save()">
       <mat-form-field class="{{ option.name }}" *ngFor="let option of options">
-        <img [src]="director.ImageUrl + refresh" *ngIf="option.name == 'ImageUrl' && director.ImageUrl"
-             class="thumb" alt="director picture">
+        <img [src]="book.imgurl + refresh" *ngIf="option.name == 'imgurl' && book.imgurl"
+             class="thumb" alt="book picture">
         <input matInput [placeholder]="option.label" [title]="option.label"
                [name]="option.name" [formControlName]="option.name">
-        <mat-error *ngIf="hasError('Achternaam', 'required')">Achternaam is verplicht</mat-error>
+        <mat-error *ngIf="hasError('title', 'required')">Titel is verplicht</mat-error>
 
       </mat-form-field>
       <button mat-raised-button color="primary"

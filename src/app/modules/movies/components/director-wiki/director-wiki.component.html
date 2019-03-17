@@ -11,6 +11,9 @@
                (click)="usePicture()"
                class="wiki-img"
                *ngIf="wiki.imgurl">
+          <div (click)="usePictureUrl()"
+               *ngIf="wiki.imgurl"
+               class="link">url</div>
         </div>
         <div class="text-container">
           <div class="wiki-description">{{ wiki.description }}</div>

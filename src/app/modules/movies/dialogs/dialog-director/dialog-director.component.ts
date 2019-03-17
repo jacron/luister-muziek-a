@@ -39,9 +39,16 @@ export class DialogDirectorComponent implements OnInit {
   }
 
   afterStoreWiki() {
-    // this.toastr.success('Wiki afbeelding opgeslagen', 'wiki');
     this.refresh = '?' + new Date();
     this.wiki.imgurl = null;
+  }
+
+  useWikiPictureUrl(url: string) {
+    // this.director.ImageUrl = url;
+    this.director = {
+      ...this.director,
+      ImageUrl: url
+    };
   }
 
   storeWikiPicture(url: string) {

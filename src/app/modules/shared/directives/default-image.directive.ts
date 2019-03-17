@@ -4,7 +4,7 @@ import {Directive, HostBinding, Input} from '@angular/core';
   selector: 'img[default]',
   host: {
     '(error)': 'updateUrl()',
-    '(load)': 'load()',
+    // '(load)': 'load()',
     '[src]': 'src'
   }
 })
@@ -15,10 +15,15 @@ export class DefaultImageDirective {
 
   updateUrl() {
     this.src = this.default;
+    const cls = this.className;
+    this.className = 'default-image';
+    if (cls) {
+      this.className += ' ' + cls;
+    }
   }
 
-  load() {
-    this.className = 'image-loaded';
-  }
+  // load() {
+  //   this.className = 'image-loaded';
+  // }
 
 }

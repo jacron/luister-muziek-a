@@ -13,10 +13,9 @@ import {environment} from '../../../../../environments/environment';
 export class AuthorEditMenuComponent implements OnInit {
   @Input() author: Author;
   @Output() authorChange = new EventEmitter();
-  // @Output() refresh = new EventEmitter();
-  // @Output() close = new EventEmitter();
   @Output() toggle = new EventEmitter();
   @Output() wiki = new EventEmitter();
+  @Output() close = new EventEmitter();
 
   options: MenuOption[] = [
     {
@@ -64,6 +63,16 @@ export class AuthorEditMenuComponent implements OnInit {
       color: '#3cf',
       action: this.wikipedia.bind(this, 'fr')
     },
+    {
+      label: 'divider',
+      icon: ''
+    },
+    {
+      label: 'Verwijderen',
+      icon: 'clear',
+      color: 'red',
+      action: this.remove.bind(this)
+    },
   ];
 
   constructor(
@@ -99,6 +108,19 @@ export class AuthorEditMenuComponent implements OnInit {
 
   showBooks() {
     this.toggle.emit();
+  }
+
+  afterRemove(id) {
+    console.log(id);
+    this.close.emit('removed');
+  }
+
+  remove() {
+    if (confirm('Regisseur verwijderen?')) {
+      this.booksService.removeAuthor(this.author.id).subscribe(
+        response => this.afterRemove(response)
+      )
+    }
   }
 
   ngOnInit() {

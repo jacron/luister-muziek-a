@@ -30,6 +30,10 @@ import { DialogAuthorComponent } from './dialogs/dialog-author/dialog-author.com
 import { AuthorEditCardComponent } from './components/author-edit-card/author-edit-card.component';
 import { AuthorEditMenuComponent } from './components/author-edit-menu/author-edit-menu.component';
 import { AuthorBooksListComponent } from './components/author-books-list/author-books-list.component';
+import { BookEditCardComponent } from './components/book-edit-card/book-edit-card.component';
+import { BookWikiComponent } from './components/book-wiki/book-wiki.component';
+import { BookEditMenuComponent } from './components/book-edit-menu/book-edit-menu.component';
+import { DialogBookComponent } from './dialogs/dialog-book/dialog-book.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,10 @@ import { AuthorBooksListComponent } from './components/author-books-list/author-
     AuthorEditCardComponent,
     AuthorEditMenuComponent,
     AuthorBooksListComponent,
+    BookEditCardComponent,
+    BookWikiComponent,
+    BookEditMenuComponent,
+    DialogBookComponent,
   ],
   imports: [
     CommonModule,
@@ -73,6 +81,7 @@ import { AuthorBooksListComponent } from './components/author-books-list/author-
   ],
   entryComponents: [
     DialogAuthorComponent,
+    DialogBookComponent,
   ],
 })
 export class BooksModule { }

@@ -55,6 +55,10 @@ export class AuthorEditCardComponent implements OnInit {
     }
   }
 
+  closeDialog() {
+    this.close.emit('canceled');
+  }
+
   afterSave(id, author: Author) {
     this.author = author;
     this.toastr.success('opgeslagen!', this.author.first + ' ' + this.author.last);

@@ -1,34 +1,30 @@
 import {Component, Inject, OnInit} from '@angular/core';
+import {Book} from '../../../../classes/book/book';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Author} from '../../../../classes/book/author';
 import {AuthorsComponent} from '../../components/authors/authors.component';
 import {BooksService} from '../../services/books.service';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: 'app-dialog-author',
-  templateUrl: './dialog-author.component.html',
-  styleUrls: ['./dialog-author.component.scss']
+  selector: 'app-dialog-book',
+  templateUrl: './dialog-book.component.html',
+  styleUrls: ['./dialog-book.component.scss']
 })
-export class DialogAuthorComponent implements OnInit {
-  author: Author;
+export class DialogBookComponent implements OnInit {
+  book: Book;
   refresh;
   wiki = null;
-  showBooks = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AuthorsComponent>,
     private booksService: BooksService,
     private toastr: ToastrService,
+
   ) { }
 
   onClose(e) {
-    this.dialogRef.close({status: e, author: this.author});
-  }
-
-  toggleBooksList() {
-    this.showBooks = !this.showBooks;
+    this.dialogRef.close({status: e, author: this.book});
   }
 
   onLanguage(lng) {
@@ -42,7 +38,7 @@ export class DialogAuthorComponent implements OnInit {
   }
 
   storeWikiPicture(e: string) {
-    this.booksService.storeWikiAuthorImg(e, this.author.id).subscribe(
+    this.booksService.storeWikiAuthorImg(e, this.book.id).subscribe(
       () => this.afterStoreWikiPicture()
     )
   }
@@ -58,7 +54,7 @@ export class DialogAuthorComponent implements OnInit {
   }
 
   wikipedia(lng) {
-    const name = this.author.first + ' ' + this.author.last;
+    const name = this.book.title;
     this.booksService.wikiAuthor(name, lng).subscribe(
       result => this.afterWikipedia(result),
       () => this.toastr.error('Geen wiki-gegevens voor taal: ' + lng)
@@ -70,7 +66,7 @@ export class DialogAuthorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.author = this.data.author;
+    this.book = this.data.book;
     this.refresh = '?date=' + new Date();
     this.wikipedia('nl');
   }

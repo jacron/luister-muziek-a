@@ -1,7 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Author} from '../../../../classes/book/author';
 import {BooksService} from '../../services/books.service';
-import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material';
+import {Book} from '../../../../classes/book/book';
+import {DialogBookComponent} from '../../dialogs/dialog-book/dialog-book.component';
 
 @Component({
   selector: 'app-author-books-list',
@@ -15,21 +17,31 @@ export class AuthorBooksListComponent implements OnInit {
 
   constructor(
     private booksService: BooksService,
-    private router: Router,
+    private dialog: MatDialog,
   ) { }
 
   booksCountLabel(n) {
     return n === 1 ? 'boek' : 'boeken';
   }
 
-  toBook(id) {
-    this.router.navigate(['books', id]).then(
-      () => this.close.emit('navigated')
+  afterEdit(result) {
+    console.log(result);
+  }
+
+  edit(book: Book) {
+    this.close.emit('saved');
+    const dialogRef = this.dialog.open(DialogBookComponent, {
+      data: {
+        width: '600px',
+        book
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      result => this.afterEdit(result)
     );
   }
 
   afterFetchBooks(result) {
-    // console.log(result);
     this.books = result;
   }
 
