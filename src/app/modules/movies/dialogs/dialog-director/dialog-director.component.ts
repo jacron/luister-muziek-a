@@ -4,6 +4,7 @@ import {DirectorsComponent} from '../../components/directors/directors.component
 import {Director} from '../../../../classes/movies/Director';
 import {BooksService} from '../../../books/services/books.service';
 import {ToastrService} from 'ngx-toastr';
+import {MoviesService} from '../../services/movies.service';
 
 @Component({
   selector: 'app-dialog-director',
@@ -20,11 +21,12 @@ export class DialogDirectorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<DirectorsComponent>,
     private booksService: BooksService,
+    private moviesService: MoviesService,
     private toastr: ToastrService,
   ) { }
 
   onClose(e) {
-    // console.log(e);
+    console.log(e);
     this.dialogRef.close({status: e, director: this.director});
   }
 
@@ -42,8 +44,8 @@ export class DialogDirectorComponent implements OnInit {
     this.wiki.imgurl = null;
   }
 
-  storeWikiPicture(e: string) {
-    this.booksService.storeWikiAuthorImg(e, this.director.id).subscribe(
+  storeWikiPicture(url: string) {
+    this.moviesService.storeWikiDirectorImage(url, this.director.id).subscribe(
       () => this.afterStoreWiki()
     )
   }

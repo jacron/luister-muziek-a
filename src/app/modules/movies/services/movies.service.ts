@@ -125,12 +125,30 @@ export class MoviesService {
     return this.postForm('/image/paste', { imdb_id });
   }
 
+  pasteDirectorPicture(id, url) {
+    return this.postForm(`/directors/${id}/image/paste`, { url });
+  }
+
+  pasteDirectorClipboardImage(id) {
+    return this.postForm(`/directors/${id}/image/clipboard/paste`, {});
+  }
+
+  saveDirector(director) {
+    return this.postForm(`/directors/save`, {director});
+  }
+
   unwatch(id) {
     return this.postForm('/film/unwatch', { id });
   }
 
   saveNew(imdb_id) {
     return this.postForm('/film/save/imdb', { imdb_id} );
+  }
+
+  storeWikiDirectorImage(url, id) {
+    return this.postForm(`/directors/${id}/wiki`, {
+      url
+    });
   }
 
 

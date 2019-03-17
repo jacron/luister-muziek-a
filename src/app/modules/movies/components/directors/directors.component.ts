@@ -14,7 +14,8 @@ export class DirectorsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   directors: Director[];
   filteredDirectors: Director[];
-  displayedColumns = ['Voornaam', 'Achternaam', 'Geboortejaar', 'Sterfjaar', 'imdb_id'];
+  displayedColumns = ['Voornaam', 'Achternaam', 'Geboortejaar', 'Sterfjaar',
+    'imdb_id', 'nfilms'];
   dataSource;
   filteredCount;
 
@@ -34,6 +35,44 @@ export class DirectorsComponent implements OnInit {
     this.filteredCount = this.dataSource.filteredData.length;
   }
 
+  afterSaved(director) {
+    // console.log(director);
+    for (let i = 0; i < this.filteredDirectors.length; i++) {
+      if (this.filteredDirectors[i].id === director.id) {
+        for (let prop in director) {
+          if (director.hasOwnProperty(prop)) {
+            console.log(prop);
+            this.filteredDirectors[i][prop] = director[prop];
+          }
+        }
+      }
+    }
+  }
+
+  afterRemoved(director) {
+    for (let i = 0; i < this.filteredDirectors.length; i++) {
+      if (this.filteredDirectors[i].id === director.id) {
+        this.filteredDirectors[i].deleted = true;
+      }
+    }
+  }
+
+  afterEdit(result) {
+    if (!result || !result.director) {
+      return;
+    }
+    // console.log(result);
+    const {status, director} = result;
+    switch(status) {
+      case 'saved':
+        this.afterSaved(director);
+        break;
+      case 'removed':
+        this.afterRemoved(director);
+        break;
+    }
+  }
+
   edit(row) {
     const dialogRef = this.dialog.open(DialogDirectorComponent, {
       data: {
@@ -41,9 +80,9 @@ export class DirectorsComponent implements OnInit {
         director: row
       }
     });
-    // dialogRef.afterClosed().subscribe(
-    //   result => this.afterEdit(result)
-    // );
+    dialogRef.afterClosed().subscribe(
+      result => this.afterEdit(result)
+    );
   }
 
   renderDirectors() {
@@ -54,8 +93,7 @@ export class DirectorsComponent implements OnInit {
   }
 
   afterFetchDirectors(result) {
-    console.log(result[0]);
-    // this.directors = result;
+    // console.log(result[0]);
     this.filteredDirectors = this.directors = result;
     this.renderDirectors();
   }

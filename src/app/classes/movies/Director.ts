@@ -7,4 +7,6 @@ export class Director {
   Geboortejaar: string;
   Sterfjaar: string;
   name?: string;
+  deleted?: boolean;
+  nfilms?: number;
 }

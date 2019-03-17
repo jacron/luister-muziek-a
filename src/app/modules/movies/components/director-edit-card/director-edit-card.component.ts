@@ -4,9 +4,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormOption} from '../../../../classes/shared/FormOption';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
-import {Author} from '../../../../classes/book/author';
 import {MoviesService} from '../../services/movies.service';
-// import {MoviesService} from '../../services/movies.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-director-edit-card',
@@ -22,6 +21,7 @@ export class DirectorEditCardComponent implements OnInit {
   @Output() wiki = new EventEmitter();
   formGroup: FormGroup;
   options: FormOption[];
+  viewUrl = environment.moviesServer + '/image/director/';
 
   constructor(
     private toastr: ToastrService,
@@ -30,7 +30,7 @@ export class DirectorEditCardComponent implements OnInit {
   ) { }
 
   toDirector() {
-    this.router.navigate(['directors', this.director.id]).then(
+    this.router.navigate(['director', this.director.id]).then(
       () => this.onClose('navigated')
     );
   }
@@ -81,9 +81,10 @@ export class DirectorEditCardComponent implements OnInit {
       imdb_id: a.imdb_id,
       ImageUrl: a.ImageUrl
     };
-    // this.moviesService.saveDirector(director).subscribe(
-    //   response => this.afterSave(response, director)
-    // )
+    // console.log(director);
+    this.moviesService.saveDirector(director).subscribe(
+      response => this.afterSave(response, director)
+    )
   }
 
   initForm() {
@@ -119,6 +120,14 @@ export class DirectorEditCardComponent implements OnInit {
       controls[option.name] = new FormControl(this.director[option.name], option.validators);
     });
     this.formGroup = new FormGroup(controls);
+  }
+
+  changeDirector() {
+    this.refresh = '?now=' + new Date();
+  }
+
+  changeWiki(lng) {
+    this.wiki.emit(lng);
   }
 
   ngOnInit() {
