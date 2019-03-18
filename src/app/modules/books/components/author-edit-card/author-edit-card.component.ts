@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormOption} from '../../../../classes/shared/FormOption';
 import {Author} from '../../../../classes/book/author';
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
   templateUrl: './author-edit-card.component.html',
   styleUrls: ['./author-edit-card.component.scss']
 })
-export class AuthorEditCardComponent implements OnInit {
+export class AuthorEditCardComponent implements OnInit, OnChanges {
   @Input() author: Author;
   @Input() refresh: string;
   @Output() close = new EventEmitter();
@@ -66,21 +66,30 @@ export class AuthorEditCardComponent implements OnInit {
     this.close.emit('saved');
   }
 
+  fromShortCountry(country) {
+    switch(country) {
+      case 'nl':
+        return 'Nederland';
+      case 'gb':
+        return 'Engeland';
+      case 'u':
+        return 'USA';
+      case 'de':
+        return 'Duitsland';
+      case 'fr':
+        return 'Frankrijk';
+      default:
+        return country;
+    }
+  }
+
   save() {
+    const country = this.fromShortCountry(this.formGroup.value.country);
     const author = {
       ...this.formGroup.value,
+      country,
       id: this.author.id,
     };
-    // const a: Author = this.formGroup.value;
-    //
-    // const author: Author = {
-    //   id: this.author.id,
-    //   first: a.first,
-    //   last: a.last,
-    //   born: a.born,
-    //   died: a.died,
-    //   genre: a.genre,
-    // };
     this.booksService.saveAuthor(author).subscribe(
       response => this.afterSave(response, author)
     )
@@ -106,12 +115,12 @@ export class AuthorEditCardComponent implements OnInit {
         label: 'Overleden',
       },
       {
-        name: 'genre',
-        label: 'Genre',
-      },
-      {
         name:'country',
         label: 'Land'
+      },
+      {
+        name: 'genre',
+        label: 'Genre',
       },
     ];
     const controls = {};
@@ -133,6 +142,14 @@ export class AuthorEditCardComponent implements OnInit {
 
   changeWiki(lng) {
     this.wiki.emit(lng);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.author && this.formGroup) {
+      const author: Author = changes.author.currentValue;
+      this.formGroup.controls['died'].setValue(author.died);
+      this.formGroup.controls['born'].setValue(author.born);
+    }
   }
 
   ngOnInit() {

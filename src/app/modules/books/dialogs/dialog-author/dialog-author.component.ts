@@ -3,7 +3,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Author} from '../../../../classes/book/author';
 import {AuthorsComponent} from '../../components/authors/authors.component';
 import {BooksService} from '../../services/books.service';
-import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-dialog-author',
@@ -20,8 +19,21 @@ export class DialogAuthorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AuthorsComponent>,
     private booksService: BooksService,
-    private toastr: ToastrService,
   ) { }
+
+  useBorn(born) {
+    this.author = {
+      ...this.author,
+      born
+    }
+  }
+
+  useDied(died) {
+    this.author = {
+      ...this.author,
+      died
+    }
+  }
 
   onClose(e) {
     this.dialogRef.close({status: e, author: this.author});
@@ -36,7 +48,6 @@ export class DialogAuthorComponent implements OnInit {
   }
 
   afterStoreWikiPicture() {
-    // this.toastr.success('Wiki afbeelding opgeslagen', 'wiki');
     this.refresh = '?' + new Date();
     this.wiki.imgurl = null;
   }

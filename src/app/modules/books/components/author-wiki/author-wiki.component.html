@@ -24,6 +24,14 @@
         </div>
       </div>
       <div class="wiki-footer">
+        <span *ngIf="getYears()">
+          <a (click)="useYear1()" class="link" *ngIf="years.length > 0">
+            <span>{{ years[0] }}&nbsp;</span> |&nbsp;
+          </a>
+          <a (click)="useYear2()" class="link" *ngIf="years.length > 1">
+            <span>{{ years[1] }}&nbsp;</span> |&nbsp;
+          </a>
+        </span>
         <a target="_blank" [href]="wiki.url"
            class="link"
         >wikipedia</a>

@@ -12,6 +12,8 @@
         (language)="onLanguage($event)"
         (close)="wiki = null"
         (picture)="storeWikiPicture($event)"
+        (born)="useBorn($event)"
+        (died)="useDied($event)"
       ></app-author-wiki>
     </div>
     <div *ngIf="wiki" class="vertical-spacer"></div>

@@ -44,7 +44,6 @@ export class DialogDirectorComponent implements OnInit {
   }
 
   useWikiPictureUrl(url: string) {
-    // this.director.ImageUrl = url;
     this.director = {
       ...this.director,
       ImageUrl: url
@@ -58,7 +57,6 @@ export class DialogDirectorComponent implements OnInit {
   }
 
   afterWikipedia(result) {
-    // console.log(result);
     if (result) {
       this.wiki = result;
       if (result.image) {

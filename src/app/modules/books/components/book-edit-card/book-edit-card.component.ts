@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormOption} from '../../../../classes/shared/FormOption';
 import {environment} from '../../../../../environments/environment';
@@ -12,7 +12,7 @@ import {BooksService} from '../../services/books.service';
   templateUrl: './book-edit-card.component.html',
   styleUrls: ['./book-edit-card.component.scss']
 })
-export class BookEditCardComponent implements OnInit {
+export class BookEditCardComponent implements OnInit, OnChanges {
   @Input() book: Book;
   @Input() refresh: string;
   @Output() close = new EventEmitter();
@@ -59,17 +59,6 @@ export class BookEditCardComponent implements OnInit {
   }
 
   save() {
-    // const a: Book = this.formGroup.value;
-    //
-    // const book: Book = {
-    //   id: this.book.id,
-    //   Voornaam: a.Voornaam,
-    //   Achternaam: a.Achternaam,
-    //   Geboortejaar: a.Geboortejaar,
-    //   Sterfjaar: a.Sterfjaar,
-    //   imdb_id: a.imdb_id,
-    //   ImageUrl: a.ImageUrl
-    // };
     const book = {
       ...this.formGroup.value,
       id: this.book.id
@@ -128,6 +117,12 @@ export class BookEditCardComponent implements OnInit {
 
   changeWiki(lng) {
     this.wiki.emit(lng);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.book) {
+
+    }
   }
 
   ngOnInit() {

@@ -60,18 +60,10 @@ export class DirectorEditCardComponent implements OnInit, OnChanges {
   }
 
   save() {
-    const a: Director = this.formGroup.value;
-
     const director: Director = {
+      ...this.formGroup.value,
       id: this.director.id,
-      Voornaam: a.Voornaam,
-      Achternaam: a.Achternaam,
-      Geboortejaar: a.Geboortejaar,
-      Sterfjaar: a.Sterfjaar,
-      imdb_id: a.imdb_id,
-      ImageUrl: a.ImageUrl
     };
-    // console.log(director);
     this.moviesService.saveDirector(director).subscribe(
       response => this.afterSave(response, director)
     )
