@@ -37,37 +37,20 @@ export class DirectorEditMenuComponent implements OnInit {
       action: this.pasteClipboardImage.bind(this)
     },
     {
+      label: 'Haal afbeelding van IMDb',
+      icon: 'person',
+      action: this.getPicture.bind(this),
+    },
+    {
       label: 'Films',
       icon: 'movie',
       action: this.showFilms.bind(this)
     },
     {
-      label: 'divider',
-      icon: ''
-    },
-    {
-      label: 'Wiki nl',
-      icon: 'info',
-      color: '#5ff',
-      action: this.wikipedia.bind(this, 'nl')
-    },
-    {
-      label: 'Wiki de',
-      icon: 'info',
-      color: '#aaa',
-      action: this.wikipedia.bind(this, 'de')
-    },
-    {
-      label: 'Wiki en',
-      icon: 'info',
-      color: '#f55',
-      action: this.wikipedia.bind(this, 'en')
-    },
-    {
-      label: 'Wiki fr',
-      icon: 'info',
-      color: '#3cf',
-      action: this.wikipedia.bind(this, 'fr')
+      label: 'IMDb',
+      icon: 'movie',
+      color: 'gold',
+      action: this.toImdb.bind(this)
     },
     {
       label: 'divider',
@@ -90,14 +73,15 @@ export class DirectorEditMenuComponent implements OnInit {
     f();
   }
 
-  wikipedia(lng) {
-    this.wiki.emit(lng);
-  }
-
   afterPastePicture(response) {
     console.log(response);
+    const {status} = response;
     this.directorChange.emit(this.director);
-    this.toastr.success('url afbeelding ingeplakt', 'cover');
+    if (status === 200) {
+      this.toastr.success('afbeelding van url gedownload', 'cover');
+    } else {
+      this.toastr.error('regisseur pad niet gevonden', 'cover');
+    }
   }
 
   pastePicture() {
@@ -119,6 +103,27 @@ export class DirectorEditMenuComponent implements OnInit {
     )
   }
 
+  afterGetPicture(result) {
+    console.log(result);
+    if (!result) {
+      this.toastr.error('geen IMDb afbeelding gevonden');
+      return;
+    }
+    const director: Director = {
+      ...this.director,
+      ImageUrl: result
+    };
+    // this.director.ImageUrl = result;
+    this.directorChange.emit(director);
+    this.toastr.success('IMDb afbeelding opgehaald', 'cover');
+  }
+
+  getPicture() {
+    this.moviesService.getDirectorPicture(this.director.imdb_id).subscribe(
+      result => this.afterGetPicture(result)
+    )
+  }
+
   google() {
     window.open(environment.googleUrl +
       this.director.Voornaam + ' ' + this.director.Achternaam);
@@ -126,6 +131,10 @@ export class DirectorEditMenuComponent implements OnInit {
 
   showFilms() {
     this.toggle.emit();
+  }
+
+  toImdb() {
+    window.open(environment.imdbNameUrl + this.director.imdb_id);
   }
 
   afterRemove(id) {

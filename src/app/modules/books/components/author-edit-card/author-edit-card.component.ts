@@ -6,6 +6,36 @@ import {BooksService} from '../../services/books.service';
 import {ToastrService} from 'ngx-toastr';
 import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
+import {FormEditService} from '../../../shared/services/form-edit.service';
+
+const formOptions: FormOption[] = [
+  {
+    name: 'first',
+    label: 'Voornaam',
+  },
+  {
+    name: 'last',
+    validators: [Validators.required],
+    label: 'Achternaam',
+  },
+  {
+    name: 'born',
+    label: 'Geboren',
+  },
+  {
+    name: 'died',
+    label: 'Overleden',
+  },
+  {
+    name:'country',
+    label: 'Land'
+  },
+  {
+    name: 'genre',
+    label: 'Genre',
+  },
+];
+
 
 @Component({
   selector: 'app-author-edit-card',
@@ -28,6 +58,7 @@ export class AuthorEditCardComponent implements OnInit, OnChanges {
     private booksService: BooksService,
     private toastr: ToastrService,
     private router: Router,
+    private formEditService: FormEditService,
   ) { }
 
   hasError(controlName, errorName) {
@@ -36,10 +67,6 @@ export class AuthorEditCardComponent implements OnInit, OnChanges {
 
   onClose(e) {
     this.close.emit(e);
-  }
-
-  toggle() {
-    this.toggleBooksList.emit();
   }
 
   afterRemove() {
@@ -66,28 +93,16 @@ export class AuthorEditCardComponent implements OnInit, OnChanges {
     this.close.emit('saved');
   }
 
-  fromShortCountry(country) {
-    switch(country) {
-      case 'nl':
-        return 'Nederland';
-      case 'gb':
-        return 'Engeland';
-      case 'u':
-        return 'USA';
-      case 'de':
-        return 'Duitsland';
-      case 'fr':
-        return 'Frankrijk';
-      default:
-        return country;
-    }
-  }
-
   save() {
-    const country = this.fromShortCountry(this.formGroup.value.country);
+    const current: Author = this.formGroup.value;
+    const country = this.formEditService.fromShortCountry(current.country);
+    const born = this.formEditService.fromShortYear(current.born);
+    const died = this.formEditService.fromShortYear(current.died);
     const author = {
-      ...this.formGroup.value,
+      ...current,
       country,
+      born,
+      died,
       id: this.author.id,
     };
     this.booksService.saveAuthor(author).subscribe(
@@ -96,33 +111,7 @@ export class AuthorEditCardComponent implements OnInit, OnChanges {
   }
 
   initForm() {
-    this.options = [
-      {
-        name: 'first',
-        label: 'Voornaam',
-      },
-      {
-        name: 'last',
-        validators: [Validators.required],
-        label: 'Achternaam',
-      },
-      {
-        name: 'born',
-        label: 'Geboren',
-      },
-      {
-        name: 'died',
-        label: 'Overleden',
-      },
-      {
-        name:'country',
-        label: 'Land'
-      },
-      {
-        name: 'genre',
-        label: 'Genre',
-      },
-    ];
+    this.options = formOptions;
     const controls = {};
     this.options.forEach(option => {
       controls[option.name] = new FormControl(this.author[option.name], option.validators);
@@ -138,10 +127,6 @@ export class AuthorEditCardComponent implements OnInit, OnChanges {
 
   changeAuthor() {
     this.refresh = '?now=' + new Date();
-  }
-
-  changeWiki(lng) {
-    this.wiki.emit(lng);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

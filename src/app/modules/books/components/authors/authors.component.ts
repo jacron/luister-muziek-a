@@ -4,11 +4,7 @@ import {StateService} from '../../../../services/state.service';
 import {Author} from '../../../../classes/book/author';
 import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogAuthorComponent} from '../../dialogs/dialog-author/dialog-author.component';
-
-export interface DataField {
-  name: string,
-  label: string,
-}
+import {DataField} from '../../../movies/components/directors/DataField';
 
 const dataFields: DataField[] = [
   {

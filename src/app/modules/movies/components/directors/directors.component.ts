@@ -4,6 +4,42 @@ import {StateService} from '../../../../services/state.service';
 import {MoviesService} from '../../services/movies.service';
 import {Director} from '../../../../classes/movies/Director';
 import {DialogDirectorComponent} from '../../dialogs/dialog-director/dialog-director.component';
+import {DataField} from './DataField';
+
+const dataFields: DataField[] = [
+  {
+    name: 'Voornaam',
+    label: 'Voornaam'
+  },
+  {
+    name: 'Achternaam',
+    label: 'Achternaam'
+  },
+  {
+    name: 'Geboortejaar',
+    label: 'Geboortejaar'
+  },
+  {
+    name: 'Sterfjaar',
+    label: 'Sterfjaar'
+  },
+  {
+    name: 'ImageUrl',
+    label: 'Afbeelding'
+  },
+  {
+    name: 'imdb_id',
+    label: 'IMDb id'
+  },
+  {
+    name: 'Land',
+    label: 'Land'
+  },
+  {
+    name: 'nfilms',
+    label: '#'
+  }
+];
 
 @Component({
   selector: 'app-directors',
@@ -12,10 +48,12 @@ import {DialogDirectorComponent} from '../../dialogs/dialog-director/dialog-dire
 })
 export class DirectorsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
+
   directors: Director[];
   filteredDirectors: Director[];
   displayedColumns = ['Voornaam', 'Achternaam', 'Geboortejaar', 'Sterfjaar',
-    'imdb_id', 'nfilms'];
+    'Land', 'nfilms'];
+  fields = dataFields;
   dataSource;
   filteredCount;
 

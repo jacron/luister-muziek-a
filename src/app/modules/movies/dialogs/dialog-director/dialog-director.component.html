@@ -6,7 +6,7 @@
                         (wiki)="changeWiki($event)"
   ></app-director-edit-card>
   <div class="second-column">
-    <div *ngIf="wiki">
+    <div>
       <app-director-wiki
         [wiki]="wiki"
         (language)="onLanguage($event)"
@@ -15,7 +15,7 @@
         (pictureUrl)="useWikiPictureUrl($event)"
       ></app-director-wiki>
     </div>
-    <div *ngIf="wiki" class="vertical-spacer"></div>
+    <div class="vertical-spacer"></div>
     <div *ngIf="showFilms">
       <app-director-films-list [director]="director"
                              (close)="onClose($event)"

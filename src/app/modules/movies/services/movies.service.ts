@@ -137,6 +137,10 @@ export class MoviesService {
     return this.postForm(`/directors/save`, {director});
   }
 
+  getDirectorPicture(imdb_id) {
+    return this.postForm(`/directors/${imdb_id}/imdb/picture`, {});
+  }
+
   removeDirector(id) {
     return this.postForm(`/directors/${id}/delete`, {});
   }

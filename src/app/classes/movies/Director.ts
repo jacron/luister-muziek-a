@@ -6,6 +6,7 @@ export class Director {
   imdb_id?: string;
   Geboortejaar: string;
   Sterfjaar: string;
+  Land: string;
   name?: string;
   deleted?: boolean;
   nfilms?: number;

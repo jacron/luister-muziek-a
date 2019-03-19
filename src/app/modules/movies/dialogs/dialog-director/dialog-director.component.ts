@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {DirectorsComponent} from '../../components/directors/directors.component';
 import {Director} from '../../../../classes/movies/Director';
 import {BooksService} from '../../../books/services/books.service';
-import {ToastrService} from 'ngx-toastr';
+// import {ToastrService} from 'ngx-toastr';
 import {MoviesService} from '../../services/movies.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class DialogDirectorComponent implements OnInit {
     public dialogRef: MatDialogRef<DirectorsComponent>,
     private booksService: BooksService,
     private moviesService: MoviesService,
-    private toastr: ToastrService,
+    // private toastr: ToastrService,
   ) { }
 
   onClose(e) {
@@ -69,7 +69,7 @@ export class DialogDirectorComponent implements OnInit {
     const name = this.director.Voornaam + ' ' + this.director.Achternaam;
     this.booksService.wikiAuthor(name, lng).subscribe(
       result => this.afterWikipedia(result),
-      () => this.toastr.error('Geen wiki-gegevens voor taal: ' + lng)
+      () => console.log('Geen wiki-gegevens voor taal: ' + lng)
     )
   }
 

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Wiki} from '../../../../classes/shared/Wiki';
+// import {Wiki} from '../../../../classes/shared/Wiki';
 
 @Component({
   selector: 'app-author-wiki',

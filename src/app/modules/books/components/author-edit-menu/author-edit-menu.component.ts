@@ -13,8 +13,6 @@ import {environment} from '../../../../../environments/environment';
 export class AuthorEditMenuComponent implements OnInit {
   @Input() author: Author;
   @Output() authorChange = new EventEmitter();
-  @Output() toggle = new EventEmitter();
-  @Output() wiki = new EventEmitter();
   @Output() close = new EventEmitter();
 
   options: MenuOption[] = [
@@ -29,43 +27,6 @@ export class AuthorEditMenuComponent implements OnInit {
       icon: 'brush',
       color: 'green',
       action: this.pastePicture.bind(this)
-    },
-    {
-      label: 'Boeken',
-      icon: 'book',
-      action: this.showBooks.bind(this)
-    },
-    {
-      label: 'divider',
-      icon: ''
-    },
-    {
-      label: 'Wiki nl',
-      icon: 'info',
-      color: '#5ff',
-      action: this.wikipedia.bind(this, 'nl')
-    },
-    {
-      label: 'Wiki de',
-      icon: 'info',
-      color: '#aaa',
-      action: this.wikipedia.bind(this, 'de')
-    },
-    {
-      label: 'Wiki en',
-      icon: 'info',
-      color: '#f55',
-      action: this.wikipedia.bind(this, 'en')
-    },
-    {
-      label: 'Wiki fr',
-      icon: 'info',
-      color: '#3cf',
-      action: this.wikipedia.bind(this, 'fr')
-    },
-    {
-      label: 'divider',
-      icon: ''
     },
     {
       label: 'Verwijderen',
@@ -84,30 +45,22 @@ export class AuthorEditMenuComponent implements OnInit {
     f();
   }
 
-  wikipedia(lng) {
-    this.wiki.emit(lng);
-  }
-
   afterPastePicture(response) {
     console.log(response);
     this.authorChange.emit(this.author);
-    this.toastr.success('url afbeelding ingeplakt', 'cover');
+    // this.toastr.success('url afbeelding ingeplakt', 'cover');
   }
 
   pastePicture() {
     this.booksService.pasteAuthorPicture(this.author.id).subscribe(
       response => this.afterPastePicture(response),
-      err => console.log(err)
+      err => this.toastr.error(err)
     )
   }
 
   google() {
     window.open(environment.googleUrl +
       this.author.first + ' ' + this.author.last);
-  }
-
-  showBooks() {
-    this.toggle.emit();
   }
 
   afterRemove(id) {

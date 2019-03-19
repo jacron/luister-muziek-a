@@ -6,6 +6,39 @@ import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {MoviesService} from '../../services/movies.service';
 import {environment} from '../../../../../environments/environment';
+import {FormEditService} from '../../../shared/services/form-edit.service';
+
+const formOptions: FormOption[] = [
+  {
+    name: 'Voornaam',
+    label: 'Voornaam',
+  },
+  {
+    name: 'Achternaam',
+    validators: [Validators.required],
+    label: 'Achternaam',
+  },
+  {
+    name: 'Geboortejaar',
+    label: 'Geboren',
+  },
+  {
+    name: 'Sterfjaar',
+    label: 'Overleden',
+  },
+  {
+    name: 'imdb_id',
+    label: 'imdb_id',
+  },
+  {
+    name: 'ImageUrl',
+    label: 'Afbeelding'
+  },
+  {
+    name: 'Land',
+    label: 'Land'
+  }
+];
 
 @Component({
   selector: 'app-director-edit-card',
@@ -27,6 +60,7 @@ export class DirectorEditCardComponent implements OnInit, OnChanges {
     private toastr: ToastrService,
     private router: Router,
     private moviesService: MoviesService,
+    private formEditService: FormEditService,
   ) { }
 
   toDirector() {
@@ -60,8 +94,15 @@ export class DirectorEditCardComponent implements OnInit, OnChanges {
   }
 
   save() {
+    const current: Director = this.formGroup.value;
+    const Land = this.formEditService.fromShortCountry(current.Land);
+    const Geboortejaar = this.formEditService.fromShortYear(current.Geboortejaar);
+    const Sterfjaar = this.formEditService.fromShortYear(current.Sterfjaar);
     const director: Director = {
-      ...this.formGroup.value,
+      ...current,
+      Land,
+      Geboortejaar,
+      Sterfjaar,
       id: this.director.id,
     };
     this.moviesService.saveDirector(director).subscribe(
@@ -70,33 +111,7 @@ export class DirectorEditCardComponent implements OnInit, OnChanges {
   }
 
   initForm() {
-    this.options = [
-      {
-        name: 'Voornaam',
-        label: 'Voornaam',
-      },
-      {
-        name: 'Achternaam',
-        validators: [Validators.required],
-        label: 'Achternaam',
-      },
-      {
-        name: 'Geboortejaar',
-        label: 'Geboren',
-      },
-      {
-        name: 'Sterfjaar',
-        label: 'Overleden',
-      },
-      {
-        name: 'imdb_id',
-        label: 'imdb_id',
-      },
-      {
-        name: 'ImageUrl',
-        label: 'Afbeelding'
-      },
-    ];
+    this.options = formOptions;
     const controls = {};
     this.options.forEach(option => {
       controls[option.name] = new FormControl({
