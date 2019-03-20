@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {MatSort} from '@angular/material';
 
 @Component({
   selector: 'app-persons-table',
@@ -11,6 +12,8 @@ export class PersonsTableComponent implements OnInit {
   @Input() displayedColumns;
   @Output() select = new EventEmitter();
   @Output() setFilter = new EventEmitter();
+
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor() { }
 
@@ -28,6 +31,7 @@ export class PersonsTableComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSource.sort = this.sort;
   }
 
 }

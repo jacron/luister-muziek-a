@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog, MatTableDataSource} from '@angular/material';
 import {StateService} from '../../../../services/state.service';
 import {MoviesService} from '../../services/movies.service';
 import {Director} from '../../../../classes/movies/Director';
@@ -51,7 +51,6 @@ const dataFields: DataField[] = [
   styleUrls: ['./directors.component.scss']
 })
 export class DirectorsComponent implements OnInit {
-  @ViewChild(MatSort) sort: MatSort;
 
   directors: Director[];
   displayedColumns = dataColumns;
@@ -79,6 +78,7 @@ export class DirectorsComponent implements OnInit {
             items[i][prop] = director[prop];
           }
         }
+        items[i].changed = true;
       }
     }
   }
@@ -122,9 +122,6 @@ export class DirectorsComponent implements OnInit {
   afterFetchDirectors(result) {
     this.directors = result;
     this.dataSource = new MatTableDataSource(this.directors);
-    setTimeout(() => {
-      this.dataSource.sort = this.sort;
-    });
   }
 
   fetchDirectors() {
