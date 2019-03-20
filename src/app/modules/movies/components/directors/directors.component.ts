@@ -6,6 +6,10 @@ import {Director} from '../../../../classes/movies/Director';
 import {DialogDirectorComponent} from '../../dialogs/dialog-director/dialog-director.component';
 import {DataField} from './DataField';
 
+const dataColumns = [
+  'Voornaam', 'Achternaam', 'Geboortejaar', 'Sterfjaar', 'Land', 'nfilms'
+];
+
 const dataFields: DataField[] = [
   {
     name: 'Voornaam',
@@ -38,7 +42,7 @@ const dataFields: DataField[] = [
   {
     name: 'nfilms',
     label: '#'
-  }
+  },
 ];
 
 @Component({
@@ -50,9 +54,7 @@ export class DirectorsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   directors: Director[];
-  filteredDirectors: Director[];
-  displayedColumns = ['Voornaam', 'Achternaam', 'Geboortejaar', 'Sterfjaar',
-    'Land', 'nfilms'];
+  displayedColumns = dataColumns;
   fields = dataFields;
   dataSource;
   filteredCount;
@@ -63,24 +65,18 @@ export class DirectorsComponent implements OnInit {
     private moviesService: MoviesService,
   ) { }
 
-  clearFilter(input) {
-    input.value = '';
-    this.applyFilter('');
-  }
-
-  applyFilter(filterValue: string) {
+  setFilter(filterValue) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     this.filteredCount = this.dataSource.filteredData.length;
   }
 
-  afterSaved(director) {
-    // console.log(director);
-    for (let i = 0; i < this.filteredDirectors.length; i++) {
-      if (this.filteredDirectors[i].id === director.id) {
+  afterSaved(director: Director) {
+    const items = this.dataSource.filteredData;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].id === director.id) {
         for (let prop in director) {
           if (director.hasOwnProperty(prop)) {
-            console.log(prop);
-            this.filteredDirectors[i][prop] = director[prop];
+            items[i][prop] = director[prop];
           }
         }
       }
@@ -88,9 +84,10 @@ export class DirectorsComponent implements OnInit {
   }
 
   afterRemoved(director) {
-    for (let i = 0; i < this.filteredDirectors.length; i++) {
-      if (this.filteredDirectors[i].id === director.id) {
-        this.filteredDirectors[i].deleted = true;
+    const items = this.dataSource.filteredData;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].id === director.id) {
+        items[i].deleted = true;
       }
     }
   }
@@ -99,7 +96,6 @@ export class DirectorsComponent implements OnInit {
     if (!result || !result.director) {
       return;
     }
-    console.log(result);
     const {status, director} = result;
     switch(status) {
       case 'saved':
@@ -123,17 +119,12 @@ export class DirectorsComponent implements OnInit {
     );
   }
 
-  renderDirectors() {
-    this.dataSource = new MatTableDataSource(this.filteredDirectors);
+  afterFetchDirectors(result) {
+    this.directors = result;
+    this.dataSource = new MatTableDataSource(this.directors);
     setTimeout(() => {
       this.dataSource.sort = this.sort;
     });
-  }
-
-  afterFetchDirectors(result) {
-    // console.log(result[0]);
-    this.filteredDirectors = this.directors = result;
-    this.renderDirectors();
   }
 
   fetchDirectors() {

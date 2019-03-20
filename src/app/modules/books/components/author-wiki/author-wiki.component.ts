@@ -22,7 +22,6 @@ export class AuthorWikiComponent implements OnInit {
 
   addYears(years) {
     if (years) {
-      console.log(years);
       for (let i = 0; i < years.length; i++) {
         if (this.years.length < 2) {
           this.years.push(years[i]);

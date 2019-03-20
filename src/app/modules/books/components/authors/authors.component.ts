@@ -32,6 +32,10 @@ const dataFields: DataField[] = [
     label: 'Land',
   },
   {
+    name: 'title',
+    label: '1e boek'
+  },
+  {
     name: 'booksCount',
     label: '#',
   },
@@ -46,7 +50,7 @@ export class AuthorsComponent implements OnInit {
   authors: Author[];
   filteredAuthors: Author[];
   displayedColumns = ['first', 'last', 'born', 'died', 'genre',
-    'country', 'booksCount'];
+    'country', 'title', 'booksCount'];
   fields = dataFields;
   query: string;
   dataSource;

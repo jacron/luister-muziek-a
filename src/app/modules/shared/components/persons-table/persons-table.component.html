@@ -1,0 +1,29 @@
+<mat-form-field>
+  <input
+    #filterInput
+    matInput
+    autofocus
+    (keyup)="applyFilter($event.target['value'])"
+    placeholder="Filter">
+  <button
+    *ngIf="filterInput.value.length"
+    mat-button mat-icon-button matSuffix
+    (click)="clearFilter(filterInput); filterInput.focus()"
+    class="clear-filter"
+  ><mat-icon>close</mat-icon></button>
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows
+       class="mat-elevation-z8">
+
+  <ng-container [matColumnDef]="field.name" *ngFor="let field of fields">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ field.label }} </th>
+    <td mat-cell *matCellDef="let element"> {{ element[field.name] }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"
+      [title]="row.id"
+      (click)="edit(row)" [class.deleted]="row.deleted"
+  ></tr>
+</table>

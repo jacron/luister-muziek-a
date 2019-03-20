@@ -6,6 +6,7 @@ import {MatModule} from '../mat/mat.module';
 import {DialogHeaderDirective} from './directives/dialog-header.directive';
 import {DefaultImageDirective} from './directives/default-image.directive';
 import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
+import { PersonsTableComponent } from './components/persons-table/persons-table.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
     DialogHeaderDirective,
     DefaultImageDirective,
     OptionsMenuComponent,
+    PersonsTableComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,7 @@ import { OptionsMenuComponent } from './components/options-menu/options-menu.com
     DialogHeaderDirective,
     DefaultImageDirective,
     OptionsMenuComponent,
+    PersonsTableComponent,
   ]
 })
 export class SharedModule { }

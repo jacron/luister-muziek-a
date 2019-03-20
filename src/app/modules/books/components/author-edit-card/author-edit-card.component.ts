@@ -96,8 +96,9 @@ export class AuthorEditCardComponent implements OnInit, OnChanges {
   save() {
     const current: Author = this.formGroup.value;
     const country = this.formEditService.fromShortCountry(current.country);
-    const born = this.formEditService.fromShortYear(current.born);
-    const died = this.formEditService.fromShortYear(current.died);
+    const {born, died} = this.formEditService.fromBornDied(current.born, current.died);
+    // const born = this.formEditService.fromShortYear(current.born);
+    // const died = this.formEditService.fromShortYear(current.died);
     const author = {
       ...current,
       country,
