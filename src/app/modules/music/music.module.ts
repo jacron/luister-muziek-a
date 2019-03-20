@@ -47,6 +47,10 @@ import {ChoiceService} from './services/choice.service';
 import {StateService} from '../../services/state.service';
 import {AlbumModule} from './album/album.module';
 import {ChipsModule} from './chips/chips.module';
+import { ComponistEditCardComponent } from './components/componist-edit-card/componist-edit-card.component';
+import { ComponistEditMenuComponent } from './components/componist-edit-menu/componist-edit-menu.component';
+import { DialogComponistComponent } from './dialogs/dialog-componist/dialog-componist.component';
+import { ComponistWikiComponent } from './components/componist-wiki/componist-wiki.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +89,10 @@ import {ChipsModule} from './chips/chips.module';
     ToolbarComponent,
     VideoDocumentaireComponent,
     MenuBooksComponent,
+    ComponistEditCardComponent,
+    ComponistEditMenuComponent,
+    DialogComponistComponent,
+    ComponistWikiComponent,
 
   ],
   imports: [
@@ -116,6 +124,9 @@ import {ChipsModule} from './chips/chips.module';
     UtilService,
     ChoiceService,
     StateService
+  ],
+  entryComponents: [
+    DialogComponistComponent
   ],
 })
 export class MusicModule { }

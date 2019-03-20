@@ -1,0 +1,25 @@
+<div class="card-wrapper">
+  <app-componist-edit-card [(composer)]="composer"
+                          [refresh]="refresh"
+                          (close)="onClose($event)"
+                          (wiki)="changeWiki($event)"
+  ></app-componist-edit-card>
+  <div class="second-column">
+    <div>
+      <app-componist-wiki
+        [wiki]="wiki"
+        (language)="onLanguage($event)"
+        (close)="wiki = null"
+        (picture)="storeWikiPicture($event)"
+        (pictureUrl)="useWikiPictureUrl($event)"
+      ></app-componist-wiki>
+    </div>
+    <!--<div class="vertical-spacer"></div>-->
+    <!--<div>-->
+      <!--<app-composer-albums-list [composer]="director"-->
+                               <!--(close)="onClose($event)"-->
+                               <!--class="books-list"-->
+      <!--&gt;</app-composer-albums-list>-->
+    <!--</div>-->
+  </div>
+</div>

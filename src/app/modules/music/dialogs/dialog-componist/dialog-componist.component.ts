@@ -1,37 +1,30 @@
 import {Component, Inject, OnInit} from '@angular/core';
+import {Componist} from '../../../../classes/music/Componist';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {DirectorsComponent} from '../../components/directors/directors.component';
-import {Director} from '../../../../classes/movies/Director';
+import {DirectorsComponent} from '../../../movies/components/directors/directors.component';
+import {MusicService} from '../../services/music.service';
 import {BooksService} from '../../../books/services/books.service';
-// import {ToastrService} from 'ngx-toastr';
-import {MoviesService} from '../../services/movies.service';
 
 @Component({
-  selector: 'app-dialog-director',
-  templateUrl: './dialog-director.component.html',
-  styleUrls: ['./dialog-director.component.scss']
+  selector: 'app-dialog-componist',
+  templateUrl: './dialog-componist.component.html',
+  styleUrls: ['./dialog-componist.component.scss']
 })
-export class DialogDirectorComponent implements OnInit {
-  director: Director;
-  showFilms = true;
+export class DialogComponistComponent implements OnInit {
+  composer: Componist;
   wiki = null;
   refresh;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<DirectorsComponent>,
+    private musicService: MusicService,
     private booksService: BooksService,
-    private moviesService: MoviesService,
-    // private toastr: ToastrService,
   ) { }
 
   onClose(e) {
     console.log(e);
-    this.dialogRef.close({status: e, director: this.director});
-  }
-
-  toggleFilmsList() {
-    this.showFilms = !this.showFilms;
+    this.dialogRef.close({status: e, director: this.composer});
   }
 
   onLanguage(lng) {
@@ -44,16 +37,16 @@ export class DialogDirectorComponent implements OnInit {
   }
 
   useWikiPictureUrl(url: string) {
-    this.director = {
-      ...this.director,
-      ImageUrl: url
+    this.composer = {
+      ...this.composer,
+      // ImageUrl: url
     };
   }
 
   storeWikiPicture(url: string) {
-    this.moviesService.storeWikiDirectorImage(url, this.director.id).subscribe(
-      () => this.afterStoreWikiPicture()
-    )
+    // this.musicService.storeWikiComposerImage(url, this.director.id).subscribe(
+    //   () => this.afterStoreWikiPicture()
+    // )
   }
 
   afterWikipedia(result) {
@@ -66,7 +59,7 @@ export class DialogDirectorComponent implements OnInit {
   }
 
   wikipedia(lng) {
-    const name = this.director.Voornaam + ' ' + this.director.Achternaam;
+    const name = this.composer.FirstName + ' ' + this.composer.LastName;
     this.booksService.wikiAuthor(name, lng).subscribe(
       result => this.afterWikipedia(result),
       () => console.log('Geen wiki-gegevens voor taal: ' + lng)
@@ -78,7 +71,7 @@ export class DialogDirectorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.director = this.data.director;
+    this.composer = this.data.composer;
     this.refresh = '?date=' + new Date();
     this.wikipedia('nl');
   }

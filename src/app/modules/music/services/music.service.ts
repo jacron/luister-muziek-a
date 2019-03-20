@@ -43,9 +43,10 @@ export class MusicService {
 
   /*
   * composers
+  * mode  = 'dropdown' || 'typeahead' || 'startletter'
+  * mode: soon to be obsolete
    */
   getComposers(mode) {
-    // mode = 'dropdown' || 'typeahead' || 'startletter'
     return this.getJson('/composers/mode/' + mode);
   }
 

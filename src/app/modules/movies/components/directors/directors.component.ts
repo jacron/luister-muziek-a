@@ -57,6 +57,8 @@ export class DirectorsComponent implements OnInit {
   fields = dataFields;
   dataSource;
   filteredCount;
+  saved = null;
+  removed = null;
 
   constructor(
     private stateService: StateService,
@@ -69,29 +71,6 @@ export class DirectorsComponent implements OnInit {
     this.filteredCount = this.dataSource.filteredData.length;
   }
 
-  afterSaved(director: Director) {
-    const items = this.dataSource.filteredData;
-    for (let i = 0; i < items.length; i++) {
-      if (items[i].id === director.id) {
-        for (let prop in director) {
-          if (director.hasOwnProperty(prop)) {
-            items[i][prop] = director[prop];
-          }
-        }
-        items[i].changed = true;
-      }
-    }
-  }
-
-  afterRemoved(director) {
-    const items = this.dataSource.filteredData;
-    for (let i = 0; i < items.length; i++) {
-      if (items[i].id === director.id) {
-        items[i].deleted = true;
-      }
-    }
-  }
-
   afterEdit(result) {
     if (!result || !result.director) {
       return;
@@ -99,10 +78,10 @@ export class DirectorsComponent implements OnInit {
     const {status, director} = result;
     switch(status) {
       case 'saved':
-        this.afterSaved(director);
+        this.saved = director;
         break;
       case 'removed':
-        this.afterRemoved(director);
+        this.removed = director;
         break;
     }
   }
@@ -121,6 +100,8 @@ export class DirectorsComponent implements OnInit {
 
   afterFetchDirectors(result) {
     this.directors = result;
+    const title = 'Regisseurs (' + this.directors.length + ')';
+    this.stateService.setTitle(title);
     this.dataSource = new MatTableDataSource(this.directors);
   }
 
@@ -131,7 +112,6 @@ export class DirectorsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stateService.setTitle('Regisseurs');
     this.fetchDirectors();
   }
 
