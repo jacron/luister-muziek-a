@@ -55,17 +55,13 @@ export class ComponistEditCardComponent implements OnInit, OnChanges {
     },
     {
       name: 'Birth',
-      validators: [
-        this.formEditService.jaartalValidator(),
-      ],
+      validators: [this.formEditService.jaartalValidator(),],
       label: 'Geboren',
       autocomplete: 'off'
     },
     {
       name: 'Death',
-      validators: [
-        this.formEditService.jaartalValidator(),
-      ],
+      validators: [this.formEditService.jaartalValidator(),],
       label: 'Gestorven',
       autocomplete: 'off'
     },
@@ -140,7 +136,7 @@ export class ComponistEditCardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // wiki component may have changed born/died
+    // wiki component may have changed born/died and years
     if (changes.composer && this.formGroup) {
       const value: Componist = changes.composer.currentValue;
       this.formGroup.controls['Birth'].setValue(value.Birth);

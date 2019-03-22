@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormGroup, Validators} from '@angular/forms';
 import {FormOption} from '../../../../classes/shared/FormOption';
 import {Author} from '../../../../classes/book/author';
 import {BooksService} from '../../services/books.service';
@@ -7,35 +7,7 @@ import {ToastrService} from 'ngx-toastr';
 import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
 import {FormEditService} from '../../../../services/form-edit.service';
-
-const formOptions: FormOption[] = [
-  {
-    name: 'first',
-    label: 'Voornaam',
-  },
-  {
-    name: 'last',
-    validators: [Validators.required],
-    label: 'Achternaam',
-  },
-  {
-    name: 'born',
-    label: 'Geboren',
-  },
-  {
-    name: 'died',
-    label: 'Overleden',
-  },
-  {
-    name:'country',
-    label: 'Land'
-  },
-  {
-    name: 'genre',
-    label: 'Genre',
-  },
-];
-
+import {FormError} from '../../../../classes/shared/FormError';
 
 @Component({
   selector: 'app-author-edit-card',
@@ -51,8 +23,57 @@ export class AuthorEditCardComponent implements OnInit, OnChanges {
   @Output() wiki = new EventEmitter();
 
   formGroup: FormGroup;
-  options: FormOption[];
+  // options: FormOption[];
   imageUrl = environment.booksServer + '/image/author/';
+  options: FormOption[] = [
+    {
+      name: 'first',
+      label: 'Voornaam',
+    },
+    {
+      name: 'last',
+      validators: [Validators.required],
+      label: 'Achternaam',
+    },
+    {
+      name: 'born',
+      validators: [this.formEditService.jaartalValidator(),],
+      label: 'Geboren',
+      autocomplete: 'off',
+    },
+    {
+      name: 'died',
+      validators: [this.formEditService.jaartalValidator(),],
+      label: 'Overleden',
+      autocomplete: 'off',
+    },
+    {
+      name:'country',
+      label: 'Land'
+    },
+    {
+      name: 'genre',
+      label: 'Genre',
+    },
+  ];
+
+  errors: FormError[] = [
+    {
+      name: 'last',
+      validator: 'required',
+      message: 'Achternaam is verplicht',
+    },
+    {
+      name: 'born',
+      validator: 'jaartal',
+      message: 'Een jaartal mag uit twee of vier cijfers bestaan',
+    },
+    {
+      name: 'died',
+      validator: 'jaartal',
+      message: 'Een jaartal mag uit twee of vier cijfers bestaan'
+    },
+  ];
 
   constructor(
     private booksService: BooksService,
@@ -82,8 +103,8 @@ export class AuthorEditCardComponent implements OnInit, OnChanges {
     }
   }
 
-  closeDialog() {
-    this.close.emit('canceled');
+  closeDialog(e) {
+    this.close.emit(e);
   }
 
   afterSave(id, author: Author) {
@@ -110,12 +131,8 @@ export class AuthorEditCardComponent implements OnInit, OnChanges {
   }
 
   initForm() {
-    this.options = formOptions;
-    const controls = {};
-    this.options.forEach(option => {
-      controls[option.name] = new FormControl(this.author[option.name], option.validators);
-    });
-    this.formGroup = new FormGroup(controls);
+    this.formGroup = this.formEditService.initForm(
+      this.options, this.author);
   }
 
   toAuthor() {

@@ -61,9 +61,12 @@ export class FormEditService {
   }
 
   jaartalValid(value) {
-    // een jaartal mag uit twee of vier cijfers bestaan
+    // een jaartal mag uit geen, twee of vier cijfers bestaan
+    // een jaartal mag ook null of undefined zijn
     return /^(\d{2})$/.test(value) ||
-           /^(\d{4})$/.test(value);
+           /^(\d{4})$/.test(value) ||
+           /^$/.test(value) ||
+          !value;
   }
 
   jaartalValidator():ValidatorFn {

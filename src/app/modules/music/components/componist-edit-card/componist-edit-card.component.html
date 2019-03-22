@@ -22,9 +22,9 @@
   <mat-card-content>
     <app-person-form
       [formGroup]="formGroup"
-      (save)="save()"
       [options]="options"
       [errorTable]="errors"
+      (save)="save()"
       (close)="closeDialog($event)"
     ></app-person-form>
   </mat-card-content>

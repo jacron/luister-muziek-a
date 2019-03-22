@@ -1,43 +1,30 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Director} from '../../../../classes/movies/Director';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormGroup, Validators} from '@angular/forms';
 import {FormOption} from '../../../../classes/shared/FormOption';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {MoviesService} from '../../services/movies.service';
 import {environment} from '../../../../../environments/environment';
 import {FormEditService} from '../../../../services/form-edit.service';
+import {FormError} from '../../../../classes/shared/FormError';
 
-const formOptions: FormOption[] = [
-  {
-    name: 'Voornaam',
-    label: 'Voornaam',
-  },
+const formErrors: FormError[] = [
   {
     name: 'Achternaam',
-    validators: [Validators.required],
-    label: 'Achternaam',
+    validator: 'required',
+    message: 'Achternaam is verplicht'
   },
   {
     name: 'Geboortejaar',
-    label: 'Geboren',
+    validator: 'jaartal',
+    message: 'Een jaartal mag uit twee of vier cijfers bestaan'
   },
   {
     name: 'Sterfjaar',
-    label: 'Overleden',
+    validator: 'jaartal',
+    message: 'Een jaartal mag uit twee of vier cijfers bestaan'
   },
-  {
-    name: 'imdb_id',
-    label: 'imdb_id',
-  },
-  {
-    name: 'ImageUrl',
-    label: 'Afbeelding'
-  },
-  {
-    name: 'Land',
-    label: 'Land'
-  }
 ];
 
 @Component({
@@ -53,8 +40,44 @@ export class DirectorEditCardComponent implements OnInit, OnChanges {
   @Output() toggleFilmsList = new EventEmitter();
   @Output() wiki = new EventEmitter();
   formGroup: FormGroup;
-  options: FormOption[];
+  errors: FormError[];
   viewUrl = environment.moviesServer + '/image/director/';
+  options: FormOption[] = [
+    {
+      name: 'Voornaam',
+      label: 'Voornaam',
+    },
+    {
+      name: 'Achternaam',
+      validators: [Validators.required],
+      label: 'Achternaam',
+    },
+    {
+      name: 'Geboortejaar',
+      validators: [this.formEditService.jaartalValidator()],
+      label: 'Geboren',
+      autocomplete: 'off'
+    },
+    {
+      name: 'Sterfjaar',
+      validators: [this.formEditService.jaartalValidator()],
+      label: 'Overleden',
+      autocomplete: 'off'
+    },
+    {
+      name: 'imdb_id',
+      label: 'imdb_id',
+    },
+    {
+      name: 'ImageUrl',
+      label: 'Afbeelding'
+    },
+    {
+      name: 'Land',
+      label: 'Land'
+    }
+  ];
+
 
   constructor(
     private toastr: ToastrService,
@@ -96,13 +119,13 @@ export class DirectorEditCardComponent implements OnInit, OnChanges {
   save() {
     const current: Director = this.formGroup.value;
     const Land = this.formEditService.fromShortCountry(current.Land);
-    const Geboortejaar = this.formEditService.fromShortYear(current.Geboortejaar);
-    const Sterfjaar = this.formEditService.fromShortYear(current.Sterfjaar);
+    const {born, died} = this.formEditService.fromBornDied(
+      current.Geboortejaar, current.Sterfjaar);
     const director: Director = {
       ...current,
       Land,
-      Geboortejaar,
-      Sterfjaar,
+      Geboortejaar: born,
+      Sterfjaar: died,
       id: this.director.id,
     };
     this.moviesService.saveDirector(director).subscribe(
@@ -111,15 +134,9 @@ export class DirectorEditCardComponent implements OnInit, OnChanges {
   }
 
   initForm() {
-    this.options = formOptions;
-    const controls = {};
-    this.options.forEach(option => {
-      controls[option.name] = new FormControl({
-        value: this.director[option.name],
-        disabled: false
-      }, option.validators);
-    });
-    this.formGroup = new FormGroup(controls);
+    this.errors = formErrors;
+    this.formGroup = this.formEditService.initForm(
+      this.options, this.director);
   }
 
   changeDirector() {
@@ -131,7 +148,7 @@ export class DirectorEditCardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // wiki component may have changed image url
+    // wiki component may have changed image url and years
     if (changes.director && this.formGroup) {
       const value: Director = changes.director.currentValue;
       this.formGroup.controls['ImageUrl'].setValue(value.ImageUrl);
