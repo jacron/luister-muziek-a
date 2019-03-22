@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
+import {FormOption} from '../classes/shared/FormOption';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,12 @@ export class FormEditService {
         return 'Duitsland';
       case 'fr':
         return 'Frankrijk';
+      case 'r':
+        return 'Rusland';
+      case 'i':
+        return 'Italie';
+      case 's':
+        return 'Spanje';
       default:
         return country;
     }
@@ -50,6 +58,30 @@ export class FormEditService {
     } else {
       return year;
     }
+  }
+
+  jaartalValid(value) {
+    // een jaartal mag uit twee of vier cijfers bestaan
+    return /^(\d{2})$/.test(value) ||
+           /^(\d{4})$/.test(value);
+  }
+
+  jaartalValidator():ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const valid = this.jaartalValid(control.value);
+      return valid ? null : {'jaartal': {value: control.value}};
+    }
+  }
+
+  initForm(options: FormOption[], person) {
+    const controls = {};
+    options.forEach(option => {
+      controls[option.name] = new FormControl({
+        value: person[option.name],
+        disabled: false
+      }, option.validators);
+    });
+    return new FormGroup(controls);
   }
 
 }

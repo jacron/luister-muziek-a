@@ -6,7 +6,7 @@ import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {MoviesService} from '../../services/movies.service';
 import {environment} from '../../../../../environments/environment';
-import {FormEditService} from '../../../shared/services/form-edit.service';
+import {FormEditService} from '../../../../services/form-edit.service';
 
 const formOptions: FormOption[] = [
   {

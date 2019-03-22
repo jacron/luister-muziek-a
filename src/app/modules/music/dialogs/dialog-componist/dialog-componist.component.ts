@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Componist} from '../../../../classes/music/Componist';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {DirectorsComponent} from '../../../movies/components/directors/directors.component';
 import {MusicService} from '../../services/music.service';
 import {BooksService} from '../../../books/services/books.service';
+import {ComponistComponent} from '../../components/componist/componist.component';
 
 @Component({
   selector: 'app-dialog-componist',
@@ -17,14 +17,14 @@ export class DialogComponistComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<DirectorsComponent>,
+    public dialogRef: MatDialogRef<ComponistComponent>,
     private musicService: MusicService,
     private booksService: BooksService,
   ) { }
 
   onClose(e) {
     console.log(e);
-    this.dialogRef.close({status: e, director: this.composer});
+    this.dialogRef.close({status: e, composer: this.composer});
   }
 
   onLanguage(lng) {
@@ -50,18 +50,16 @@ export class DialogComponistComponent implements OnInit {
     }
   }
 
-  // useWikiPictureUrl(url: string) {
-  //   this.composer = {
-  //     ...this.composer,
-  //     // ImageUrl: url
-  //   };
-  // }
+  afterStoreWikiPicture() {
+    this.refresh = '?' + new Date();
+    this.wiki.imgurl = null;
+  }
 
-  // storeWikiPicture(url: string) {
-  //   // this.musicService.storeWikiComposerImage(url, this.director.id).subscribe(
-  //   //   () => this.afterStoreWikiPicture()
-  //   // )
-  // }
+  storeWikiPicture(url: string) {
+    this.musicService.storeWikiComposerImage(url, this.composer.ID).subscribe(
+      () => this.afterStoreWikiPicture()
+    )
+  }
 
   afterWikipedia(result) {
     if (result) {

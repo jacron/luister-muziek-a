@@ -8,6 +8,7 @@ import {DefaultImageDirective} from './directives/default-image.directive';
 import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
 import { PersonsTableComponent } from './components/persons-table/persons-table.component';
 import {ItemWikiComponent} from './components/item-wiki/item-wiki.component';
+import { PersonFormComponent } from './components/person-form/person-form.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {ItemWikiComponent} from './components/item-wiki/item-wiki.component';
     OptionsMenuComponent,
     PersonsTableComponent,
     ItemWikiComponent,
+    PersonFormComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import {ItemWikiComponent} from './components/item-wiki/item-wiki.component';
     OptionsMenuComponent,
     PersonsTableComponent,
     ItemWikiComponent,
+    PersonFormComponent,
   ]
 })
 export class SharedModule { }

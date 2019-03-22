@@ -6,7 +6,7 @@ import {BooksService} from '../../services/books.service';
 import {ToastrService} from 'ngx-toastr';
 import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
-import {FormEditService} from '../../../shared/services/form-edit.service';
+import {FormEditService} from '../../../../services/form-edit.service';
 
 const formOptions: FormOption[] = [
   {
@@ -97,8 +97,6 @@ export class AuthorEditCardComponent implements OnInit, OnChanges {
     const current: Author = this.formGroup.value;
     const country = this.formEditService.fromShortCountry(current.country);
     const {born, died} = this.formEditService.fromBornDied(current.born, current.died);
-    // const born = this.formEditService.fromShortYear(current.born);
-    // const died = this.formEditService.fromShortYear(current.died);
     const author = {
       ...current,
       country,

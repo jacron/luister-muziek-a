@@ -12,7 +12,9 @@ const dataColumns: string[] = [
   'Birth',
   'Death',
   'Country',
-  'Genre'
+  'Genre',
+  'albumsCount',
+  // 'Title',
 ];
 
 const dataFields: DataField[] = [
@@ -39,6 +41,14 @@ const dataFields: DataField[] = [
   {
     name: 'Country',
     label: 'Land'
+  },
+  {
+    name: 'albumsCount',
+    label: '#'
+  },
+  {
+    name: 'Title',
+    label: 'First album'
   }
 ];
 
@@ -96,6 +106,7 @@ export class ComponistComponent implements OnInit {
 
   afterGetComponisten(response) {
     this.componisten = <Componist[]>response;
+    // console.log(this.componisten[0]);
     const title = 'Componisten (' + this.componisten.length + ')';
     this.stateService.setTitle(title);
     this.dataSource = new MatTableDataSource(response);

@@ -1,38 +1,30 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
-import {FormEditService} from '../../../shared/services/form-edit.service';
+import {FormEditService} from '../../../../services/form-edit.service';
 import {MusicService} from '../../services/music.service';
 import {FormOption} from '../../../../classes/shared/FormOption';
 import {environment} from '../../../../../environments/environment';
 import {Componist} from '../../../../classes/music/Componist';
+import {FormError} from '../../../../classes/shared/FormError';
 
-const formOptions: FormOption[] = [
-  {
-    name: 'FirstName',
-    label: 'Voornaam'
-  },
+const formErrors: FormError[] = [
   {
     name: 'LastName',
-    label: 'Achternaam'
+    validator: 'required',
+    message: 'Achternaam is verplicht'
   },
   {
     name: 'Birth',
-    label: 'Geboren'
+    validator: 'jaartal',
+    message: 'Een jaartal mag uit twee of vier cijfers bestaan'
   },
   {
     name: 'Death',
-    label: 'Gestorven'
+    validator: 'jaartal',
+    message: 'Een jaartal mag uit twee of vier cijfers bestaan'
   },
-  {
-    name: 'Country',
-    label: 'Land'
-  },
-  {
-    name: 'Genre',
-    label: 'Genre'
-  }
 ];
 
 @Component({
@@ -47,8 +39,45 @@ export class ComponistEditCardComponent implements OnInit, OnChanges {
   @Output() wiki = new EventEmitter();
   @Output() composerChange = new EventEmitter();
   formGroup: FormGroup;
-  options: FormOption[];
-  viewUrl = environment.musicServer + '/image/composer/';
+  // options: FormOption[];
+  errors;
+  viewUrl;
+
+  options: FormOption[] = [
+    {
+      name: 'FirstName',
+      label: 'Voornaam'
+    },
+    {
+      name: 'LastName',
+      validators: [Validators.required],
+      label: 'Achternaam',
+    },
+    {
+      name: 'Birth',
+      validators: [
+        this.formEditService.jaartalValidator(),
+      ],
+      label: 'Geboren',
+      autocomplete: 'off'
+    },
+    {
+      name: 'Death',
+      validators: [
+        this.formEditService.jaartalValidator(),
+      ],
+      label: 'Gestorven',
+      autocomplete: 'off'
+    },
+    {
+      name: 'Country',
+      label: 'Land'
+    },
+    // {
+    //   name: 'Genre',
+    //   label: 'Genre'
+    // }
+  ];
 
   constructor(
     private toastr: ToastrService,
@@ -63,19 +92,15 @@ export class ComponistEditCardComponent implements OnInit, OnChanges {
     );
   }
 
-  hasError(controlName, errorName) {
-    return this.formGroup.controls[controlName].hasError(errorName);
-  }
-
   onClose(e) {
     this.close.emit(e);
   }
 
-  closeDialog() {
-    this.close.emit('canceled');
+  closeDialog(msg) {
+    this.close.emit(msg);
   }
 
-  afterSave(id, composer: Componist) {
+  afterSave(composer: Componist) {
     this.composer = composer;
     this.toastr.success('opgeslagen!', this.composer.FirstName + ' ' +
       this.composer.LastName);
@@ -86,30 +111,24 @@ export class ComponistEditCardComponent implements OnInit, OnChanges {
   save() {
     const current: Componist = this.formGroup.value;
     const Country = this.formEditService.fromShortCountry(current.Country);
-    const Birth = this.formEditService.fromShortYear(current.Birth);
-    const Death = this.formEditService.fromShortYear(current.Death);
+    const {born, died} = this.formEditService.fromBornDied(current.Birth, current.Death);
     const composer: Componist = {
       ...current,
       Country,
-      Birth,
-      Death,
+      Birth: born,
+      Death: died,
       ID: this.composer.ID,
     };
     this.musicService.saveComposer(composer).subscribe(
-      response => this.afterSave(response, composer)
+      () => this.afterSave(composer)
     )
   }
 
   initForm() {
-    this.options = formOptions;
-    const controls = {};
-    this.options.forEach(option => {
-      controls[option.name] = new FormControl({
-        value: this.composer[option.name],
-        disabled: false
-      }, option.validators);
-    });
-    this.formGroup = new FormGroup(controls);
+    // this.options = formOptions;
+    this.errors = formErrors;
+    this.formGroup = this.formEditService.initForm(
+      this.options, this.composer);
   }
 
   changeComposer() {
@@ -131,6 +150,8 @@ export class ComponistEditCardComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.initForm();
+    this.viewUrl = environment.musicServer +
+      `/image/${this.composer.ID}/componist/`;
   }
 
 }

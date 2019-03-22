@@ -55,7 +55,6 @@ export class MusicService {
     return this.getJson(`/composers/${id}/albums`);
   }
 
-
   /*
    * performers
    */
@@ -195,6 +194,9 @@ export class MusicService {
     return this.postForm(`/albums/${albumId}/composer/${composerId}/remove`, {});
   }
 
+  /*
+
+   */
   addPerformer(performerId: number, albumId: number) {
     return this.postForm(`/albums/${albumId}/performer/${performerId}/add`, {});
   }
@@ -328,11 +330,15 @@ export class MusicService {
     Componist
    */
   saveComposer(composer: Componist) {
-    return this.postForm('/composers/save', {composer});
+    return this.postForm(`/composers/${composer.ID}/save`, {composer});
   }
 
   pasteComposerImage(id) {
     return this.postForm(`/composers/${id}/paste/image`, {});
+  }
+
+  storeWikiComposerImage(url, id) {
+    return this.postForm(`/composers/${id}/paste/fromurl`, {url});
   }
 
   /*

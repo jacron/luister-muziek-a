@@ -34,8 +34,14 @@ export class PersonsTableComponent implements OnInit, OnChanges {
 
   afterSaved(person) {
     const items = this.dataSource.filteredData;
+    const idField = person.id ? 'id' :
+      person.ID ? 'ID' : -1;
+    if (idField === -1) {
+      console.error('wrong idField for person', person);
+      return;
+    }
     for (let i = 0; i < items.length; i++) {
-      if (items[i].id === person.id) {
+      if (items[i][idField] === person[idField]) {
         for (let prop in person) {
           if (person.hasOwnProperty(prop)) {
             items[i][prop] = person[prop];
