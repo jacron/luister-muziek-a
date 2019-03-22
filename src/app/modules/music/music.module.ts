@@ -51,6 +51,7 @@ import { ComponistEditCardComponent } from './components/componist-edit-card/com
 import { ComponistEditMenuComponent } from './components/componist-edit-menu/componist-edit-menu.component';
 import { DialogComponistComponent } from './dialogs/dialog-componist/dialog-componist.component';
 import { ComponistWikiComponent } from './components/componist-wiki/componist-wiki.component';
+import { ComponistListComponent } from './components/componist-list/componist-list.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { ComponistWikiComponent } from './components/componist-wiki/componist-wi
     ComponistEditMenuComponent,
     DialogComponistComponent,
     ComponistWikiComponent,
+    ComponistListComponent,
 
   ],
   imports: [

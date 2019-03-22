@@ -56,6 +56,20 @@ export class DialogDirectorComponent implements OnInit {
     )
   }
 
+  useBorn(Geboortejaar) {
+    this.director = {
+      ...this.director,
+      Geboortejaar
+    }
+  }
+
+  useDied(Sterfjaar) {
+    this.director = {
+      ...this.director,
+      Sterfjaar
+    }
+  }
+
   afterWikipedia(result) {
     if (result) {
       this.wiki = result;

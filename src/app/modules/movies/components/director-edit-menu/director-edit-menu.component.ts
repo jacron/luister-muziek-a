@@ -3,7 +3,7 @@ import {MoviesService} from '../../services/movies.service';
 import {ToastrService} from 'ngx-toastr';
 import {Director} from '../../../../classes/movies/Director';
 import {MenuOption} from '../../../../classes/shared/MenuOption';
-import {environment} from '../../../../../environments/environment';
+import {InternetService} from '../../../../services/internet.service';
 
 @Component({
   selector: 'app-director-edit-menu',
@@ -16,6 +16,8 @@ export class DirectorEditMenuComponent implements OnInit {
   @Output() toggle = new EventEmitter();
   @Output() wiki = new EventEmitter();
   @Output() close = new EventEmitter();
+
+  ndirector: Director;
 
   options: MenuOption[] = [
     {
@@ -67,6 +69,7 @@ export class DirectorEditMenuComponent implements OnInit {
   constructor(
     private moviesService: MoviesService,
     private toastr: ToastrService,
+    private internet: InternetService,
   ) { }
 
   act(f: Function) {
@@ -125,8 +128,7 @@ export class DirectorEditMenuComponent implements OnInit {
   }
 
   google() {
-    window.open(environment.googleUrl +
-      this.director.Voornaam + ' ' + this.director.Achternaam);
+    this.internet.openGoogle(this.director.fullName());
   }
 
   showFilms() {
@@ -134,7 +136,7 @@ export class DirectorEditMenuComponent implements OnInit {
   }
 
   toImdb() {
-    window.open(environment.imdbNameUrl + this.director.imdb_id);
+    this.internet.openImdbName(this.director.imdb_id);
   }
 
   afterRemove(id) {
@@ -151,6 +153,7 @@ export class DirectorEditMenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ndirector = new Director(this.director);
   }
 
 }

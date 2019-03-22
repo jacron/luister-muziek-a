@@ -102,7 +102,6 @@ export class UtilService {
           item.fieldname, item.items));
     });
     return title;
-
   }
 
 

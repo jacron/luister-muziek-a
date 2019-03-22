@@ -7,4 +7,16 @@ export class Componist {
   Death: string;
   Genre: string;
   Country: string;
+
+  constructor(componist) {
+    for (let prop in componist) {
+      if (componist.hasOwnProperty(prop)) {
+        this[prop] = componist[prop];
+      }
+    }
+  }
+
+  fullName?() {
+    return this.FirstName + ' ' + this.LastName;
+  };
 }

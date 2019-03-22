@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DirectorWikiComponent } from './director-wiki.component';
+import { ItemWikiComponent } from './item-wiki.component';
 
-describe('DirectorWikiComponent', () => {
-  let component: DirectorWikiComponent;
-  let fixture: ComponentFixture<DirectorWikiComponent>;
+describe('ItemWikiComponent', () => {
+  let component: ItemWikiComponent;
+  let fixture: ComponentFixture<ItemWikiComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DirectorWikiComponent ]
+      declarations: [ ItemWikiComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DirectorWikiComponent);
+    fixture = TestBed.createComponent(ItemWikiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

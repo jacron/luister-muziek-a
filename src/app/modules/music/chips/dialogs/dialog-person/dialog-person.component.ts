@@ -48,7 +48,7 @@ export class DialogPersonComponent implements OnInit {
   }
 
   updatePerson(text, field) {
-    this.musicService.updatePerson (
+    this.musicService.updatePersonField (
       {
         personId: this.data.person.ID,
         type: this.data.type,

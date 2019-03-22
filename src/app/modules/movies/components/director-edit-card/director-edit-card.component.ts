@@ -133,7 +133,10 @@ export class DirectorEditCardComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // wiki component may have changed image url
     if (changes.director && this.formGroup) {
-      this.formGroup.controls['ImageUrl'].setValue(changes.director.currentValue.ImageUrl);
+      const value: Director = changes.director.currentValue;
+      this.formGroup.controls['ImageUrl'].setValue(value.ImageUrl);
+      this.formGroup.controls['Geboortejaar'].setValue(value.Geboortejaar);
+      this.formGroup.controls['Sterfjaar'].setValue(value.Sterfjaar);
     }
   }
 

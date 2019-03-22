@@ -6,13 +6,14 @@
   ></app-componist-edit-card>
   <div class="second-column">
     <div>
-      <app-componist-wiki
+      <app-item-wiki
         [wiki]="wiki"
         (language)="onLanguage($event)"
         (close)="wiki = null"
         (picture)="storeWikiPicture($event)"
-        (pictureUrl)="useWikiPictureUrl($event)"
-      ></app-componist-wiki>
+        (born)="useBorn($event)"
+        (died)="useDied($event)"
+      ></app-item-wiki>
     </div>
     <!--<div class="vertical-spacer"></div>-->
     <!--<div>-->

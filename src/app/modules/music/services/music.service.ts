@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {SearchParams} from '../../../classes/music/SearchParams';
+import {Componist} from '../../../classes/music/Componist';
 
 @Injectable()
 export class MusicService {
@@ -50,6 +51,10 @@ export class MusicService {
     return this.getJson('/composers/mode/' + mode);
   }
 
+  getComposerAlbums(id) {
+    return this.getJson(`/composers/${id}/albums`);
+  }
+
 
   /*
    * performers
@@ -62,8 +67,8 @@ export class MusicService {
     return this.getJson('/performers/mode/' + mode);
   }
 
-  getPerformerAlbums(idPerformer) {
-    return this.getJson('/performers/' + idPerformer + '/albums');
+  getPerformerAlbums(id) {
+    return this.getJson(`/performers/${id}/albums`);
   }
 
   getPiecesRecentlyPlayed(n = 20) {
@@ -319,7 +324,21 @@ export class MusicService {
     });
   }
 
-  updatePerson(options) {
+  /*
+    Componist
+   */
+  saveComposer(composer: Componist) {
+    return this.postForm('/composers/save', {composer});
+  }
+
+  pasteComposerImage(id) {
+    return this.postForm(`/composers/${id}/paste/image`, {});
+  }
+
+  /*
+
+   */
+  updatePersonField(options) {
     return this.postForm('/person/update', {
       personId: options.personId,
       personType: options.type,

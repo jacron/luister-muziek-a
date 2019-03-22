@@ -7,13 +7,15 @@
   ></app-director-edit-card>
   <div class="second-column">
     <div>
-      <app-director-wiki
+      <app-item-wiki
         [wiki]="wiki"
         (language)="onLanguage($event)"
         (close)="wiki = null"
         (picture)="storeWikiPicture($event)"
         (pictureUrl)="useWikiPictureUrl($event)"
-      ></app-director-wiki>
+        (born)="useBorn($event)"
+        (died)="useDied($event)"
+      ></app-item-wiki>
     </div>
     <div class="vertical-spacer"></div>
     <div *ngIf="showFilms">

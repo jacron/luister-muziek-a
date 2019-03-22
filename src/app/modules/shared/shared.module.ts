@@ -7,6 +7,7 @@ import {DialogHeaderDirective} from './directives/dialog-header.directive';
 import {DefaultImageDirective} from './directives/default-image.directive';
 import { OptionsMenuComponent } from './components/options-menu/options-menu.component';
 import { PersonsTableComponent } from './components/persons-table/persons-table.component';
+import {ItemWikiComponent} from './components/item-wiki/item-wiki.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PersonsTableComponent } from './components/persons-table/persons-table.
     DefaultImageDirective,
     OptionsMenuComponent,
     PersonsTableComponent,
+    ItemWikiComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { PersonsTableComponent } from './components/persons-table/persons-table.
     DefaultImageDirective,
     OptionsMenuComponent,
     PersonsTableComponent,
+    ItemWikiComponent,
   ]
 })
 export class SharedModule { }

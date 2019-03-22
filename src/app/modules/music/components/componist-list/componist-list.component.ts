@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {Album} from '../../../../classes/music/Album';
-import {MusicService} from '../../services/music.service';
 import {ActivatedRoute} from '@angular/router';
-import {Person} from '../../../../classes/music/Person';
+import {MusicService} from '../../services/music.service';
 import {StateService} from '../../../../services/state.service';
+import {Album} from '../../../../classes/music/Album';
+import {Person} from '../../../../classes/music/Person';
 
 @Component({
-  selector: 'app-pop-list',
-  templateUrl: './pop-list.component.html',
-  styleUrls: ['./pop-list.component.scss']
+  selector: 'app-componist-list',
+  templateUrl: './componist-list.component.html',
+  styleUrls: ['./componist-list.component.scss']
 })
-export class PopListComponent implements OnInit {
+export class ComponistListComponent implements OnInit {
   albums: Album[];
-  performer: Person;
+  person: Person;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,24 +28,25 @@ export class PopListComponent implements OnInit {
     }
   }
 
-  afterGetPerformer(performer, count) {
-    this.performer = performer;
-    const {FirstName, LastName} = this.performer;
+  afterGetComposer(performer, count) {
+    this.person = performer;
+    const {FirstName, LastName} = this.person;
     const title = `${FirstName} ${LastName} (${count})`;
     this.stateService.setTitle(title);
   }
 
   afterGetAlbums(albums, id) {
     this.albums = albums;
-    this.musicService.getPerformerById(id).subscribe(
-      performer => this.afterGetPerformer(performer, albums.length)
+    console.log(albums);
+    this.musicService.getComposerById(id).subscribe(
+      performer => this.afterGetComposer(performer, albums.length)
     )
   }
 
   fetchThings(params) {
     this.albums = [];
     const id = params.id;
-    this.musicService.getPerformerAlbums(id).subscribe(
+    this.musicService.getComposerAlbums(id).subscribe(
       (albums: Album[]) => this.afterGetAlbums(albums, id),
       err => console.error(err),
       () => {}

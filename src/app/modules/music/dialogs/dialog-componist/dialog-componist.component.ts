@@ -31,23 +31,37 @@ export class DialogComponistComponent implements OnInit {
     this.wikipedia(lng);
   }
 
-  afterStoreWikiPicture() {
-    this.refresh = '?' + new Date();
-    this.wiki.imgurl = null;
-  }
+  // afterStoreWikiPicture() {
+  //   this.refresh = '?' + new Date();
+  //   this.wiki.imgurl = null;
+  // }
 
-  useWikiPictureUrl(url: string) {
+  useBorn(Birth) {
     this.composer = {
       ...this.composer,
-      // ImageUrl: url
-    };
+      Birth
+    }
   }
 
-  storeWikiPicture(url: string) {
-    // this.musicService.storeWikiComposerImage(url, this.director.id).subscribe(
-    //   () => this.afterStoreWikiPicture()
-    // )
+  useDied(Death) {
+    this.composer = {
+      ...this.composer,
+      Death
+    }
   }
+
+  // useWikiPictureUrl(url: string) {
+  //   this.composer = {
+  //     ...this.composer,
+  //     // ImageUrl: url
+  //   };
+  // }
+
+  // storeWikiPicture(url: string) {
+  //   // this.musicService.storeWikiComposerImage(url, this.director.id).subscribe(
+  //   //   () => this.afterStoreWikiPicture()
+  //   // )
+  // }
 
   afterWikipedia(result) {
     if (result) {

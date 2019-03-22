@@ -4,4 +4,5 @@ export class Wiki {
   extract: string;
   imgurl: string;
   url: string;
+  language: string;
 }

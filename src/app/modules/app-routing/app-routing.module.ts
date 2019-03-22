@@ -20,6 +20,7 @@ import {VideosKlassiekComponent} from '../music/components/videos-klassiek/video
 import {VideosPopComponent} from '../music/components/videos-pop/videos-pop.component';
 import {VideoDocumentaireComponent} from '../music/components/video-documentaire/video-documentaire.component';
 import {DebugComponent} from '../../components/debug/debug.component';
+import {ComponistListComponent} from '../music/components/componist-list/componist-list.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
   {path: 'tools', component: ToolsComponent},
   {path: 'home', component: HomeComponent},
   {path: 'composer', component: ComponistComponent},
+  {path: 'composer/:id', component: ComponistListComponent},
   {path: 'performer', component: PerformerComponent},
   {path: 'collection', component: CollectieComponent},
   {path: 'tag', component: TagComponent},

@@ -25,7 +25,6 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
 import { DirectorsComponent } from './components/directors/directors.component';
 import { DialogDirectorComponent } from './dialogs/dialog-director/dialog-director.component';
 import { DirectorEditCardComponent } from './components/director-edit-card/director-edit-card.component';
-import { DirectorWikiComponent } from './components/director-wiki/director-wiki.component';
 import { DirectorFilmsListComponent } from './components/director-films-list/director-films-list.component';
 import { DirectorEditMenuComponent } from './components/director-edit-menu/director-edit-menu.component';
 
@@ -52,7 +51,6 @@ import { DirectorEditMenuComponent } from './components/director-edit-menu/direc
     DirectorsComponent,
     DialogDirectorComponent,
     DirectorEditCardComponent,
-    DirectorWikiComponent,
     DirectorFilmsListComponent,
     DirectorEditMenuComponent,
   ],
