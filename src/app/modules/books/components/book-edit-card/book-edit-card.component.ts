@@ -6,6 +6,8 @@ import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {Book} from '../../../../classes/book/book';
 import {BooksService} from '../../services/books.service';
+import {FormEditService} from '../../../../services/form-edit.service';
+import {FormError} from '../../../../classes/shared/FormError';
 
 @Component({
   selector: 'app-book-edit-card',
@@ -20,13 +22,51 @@ export class BookEditCardComponent implements OnInit, OnChanges {
   @Output() toggleFilmsList = new EventEmitter();
   @Output() wiki = new EventEmitter();
   formGroup: FormGroup;
-  options: FormOption[];
   viewUrl = environment.moviesServer + '/image/book/';
+  options: FormOption[] = [
+    {
+      name: 'title',
+      label: 'Titel',
+      validators: [Validators.required],
+    },
+    {
+      name: 'subtitle',
+      label: 'Ondertitel',
+    },
+    {
+      name: 'isbn',
+      label: 'isbn',
+    },
+    {
+      name: 'isbn13',
+      label: 'isbn13',
+    },
+    {
+      name: 'author',
+      label: 'Auteur',
+    },
+    {
+      name: 'author_id',
+      label: 'Auteur id'
+    },
+    {
+      name: 'imgurl',
+      label: 'afbeeldingspad'
+    },
+  ];
+  errors: FormError[] = [
+    {
+      name: 'title',
+      validator: 'required',
+      message: 'Dit veld is verplicht'
+    }
+  ];
 
   constructor(
     private toastr: ToastrService,
     private router: Router,
     private booksService: BooksService,
+    private formEditService: FormEditService,
   ) { }
 
   toBook() {
@@ -41,10 +81,6 @@ export class BookEditCardComponent implements OnInit, OnChanges {
 
   onClose(e) {
     this.close.emit(e);
-  }
-
-  toggle() {
-    this.toggleFilmsList.emit();
   }
 
   closeDialog() {
@@ -70,58 +106,17 @@ export class BookEditCardComponent implements OnInit, OnChanges {
 
 
   initForm() {
-    this.options = [
-      {
-        name: 'title',
-        label: 'Titel',
-        validators: [Validators.required],
-      },
-      {
-        name: 'subtitle',
-        label: 'Ondertitel',
-      },
-      {
-        name: 'isbn',
-        label: 'isbn',
-      },
-      {
-        name: 'isbn13',
-        label: 'isbn13',
-      },
-      {
-        name: 'author',
-        label: 'Auteur',
-      },
-      {
-        name: 'author_id',
-        label: 'Auteur id'
-      },
-      {
-        name: 'imgurl',
-        label: 'afbeeldingspad'
-      },
-    ];
-    const controls = {};
-    this.options.forEach(option => {
-      controls[option.name] = new FormControl({
-        value: this.book[option.name],
-        disabled: false
-      }, option.validators);
-    });
-    this.formGroup = new FormGroup(controls);
+    this.formGroup = this.formEditService.initForm(
+      this.options, this.book);
   }
 
   changeBook() {
     this.refresh = '?now=' + new Date();
   }
 
-  changeWiki(lng) {
-    this.wiki.emit(lng);
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.book) {
-
+      const book: Book = changes.book.currentValue;
     }
   }
 

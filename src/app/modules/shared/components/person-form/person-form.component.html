@@ -2,14 +2,19 @@
       novalidate
       class="form"
       (ngSubmit)="toSave()">
-  <mat-form-field class="{{ option.name }}" *ngFor="let option of options">
-    <!--<img [src]="composer.ImageUrl + refresh" *ngIf="option.name == 'ImageUrl' && composer.ImageUrl"-->
-    <!--class="thumb" alt="composer picture">-->
-    <input matInput [placeholder]="option.label"
-           [title]="option.label"
+  <mat-form-field class="{{ option.name }}"
+                  *ngFor="let option of options">
+    <input matInput
+           (mouseover)="option.hovered = true"
+           (mouseleave)="option.hovered = false"
+           [placeholder]="option.label"
            [name]="option.name"
            [autocomplete]="option.autocomplete"
            [formControlName]="option.name">
+    <img *ngIf="option.name == imgurl && option.hovered"
+         [src]="formGroup.controls[option.name].value"
+         class="thumb"
+         alt="person picture">
     <div *ngFor="let error of errorTable">
       <mat-error *ngIf="error.name === option.name && hasError(error.name, error.validator)">
         {{error.message}}</mat-error>

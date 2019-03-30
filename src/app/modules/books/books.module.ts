@@ -31,9 +31,9 @@ import { AuthorEditCardComponent } from './components/author-edit-card/author-ed
 import { AuthorEditMenuComponent } from './components/author-edit-menu/author-edit-menu.component';
 import { AuthorBooksListComponent } from './components/author-books-list/author-books-list.component';
 import { BookEditCardComponent } from './components/book-edit-card/book-edit-card.component';
-import { BookWikiComponent } from './components/book-wiki/book-wiki.component';
 import { BookEditMenuComponent } from './components/book-edit-menu/book-edit-menu.component';
 import { DialogBookComponent } from './dialogs/dialog-book/dialog-book.component';
+import { BookRemoteComponent } from './components/book-remote/book-remote.component';
 
 @NgModule({
   declarations: [
@@ -62,9 +62,9 @@ import { DialogBookComponent } from './dialogs/dialog-book/dialog-book.component
     AuthorEditMenuComponent,
     AuthorBooksListComponent,
     BookEditCardComponent,
-    BookWikiComponent,
     BookEditMenuComponent,
     DialogBookComponent,
+    BookRemoteComponent,
   ],
   imports: [
     CommonModule,

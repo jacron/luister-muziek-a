@@ -4,21 +4,23 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 const hostname = document.location.hostname;
-let musicServer;  // music-api
+let musicServer;  // musiclibrary
 let moviesServer; // movies18
-let booksServer; // booklibrary_flask
+let booksServer; // booklibrary
+let systemServer; // systemlibrary
 let host;
 
 console.log(document.location);
-const myhost = '10.0.1.3';  // imac or macbook
+const pchost = '10.0.1.3';  // imac or macbook
 
 if (hostname.includes('xip.io')
   || hostname.includes('vhx.cloud')
-  || hostname.includes(myhost)) {
-  host = 'http://' + myhost;
-  musicServer = host + ':8020/api';
+  || hostname.includes(pchost)) {
+  host = 'http://' + pchost;
+  musicServer = host + ':3005';
   moviesServer = host + ':5080';
   booksServer = host + ':3004';
+  systemServer = host + ':3006';
 } else if (hostname.includes('127.0.0.1') ||
       hostname.includes('localhost')) {
   // use dev
@@ -27,8 +29,8 @@ if (hostname.includes('xip.io')
   musicServer = host + ':3005';
   moviesServer = host + ':5090';
   // booksServer = host + ':5050';
-  // new back-end test
   booksServer = host + ':3004';
+  systemServer = host + ':3006';
 } else {
   // use 'prod'
   musicServer = 'http://music-api/api';
@@ -39,10 +41,13 @@ if (hostname.includes('xip.io')
 console.log('music server', musicServer);
 console.log('movie server', moviesServer);
 console.log('book server', booksServer);
+console.log('system server', systemServer);
+
 export const environment = {
   musicServer,
   moviesServer,
   booksServer,
+  systemServer,
   googleUrl: 'https://google.nl/search?q=',
   freedbUrl: 'http://www.freedb.org/freedb_discid_check.php?discid=',
   amazonUrl: 'https://www.amazon.com/dp/',

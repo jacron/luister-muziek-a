@@ -36,7 +36,7 @@ export class AuthorComponent implements OnInit {
   }
 
   storeWikiPicture(e: string) {
-    this.booksService.storeWikiAuthorImg(e, this.author.id).subscribe(
+    this.booksService.storeAuthorImgFromUrl(e, this.author.id).subscribe(
       () => this.afterStoreWiki()
     )
   }

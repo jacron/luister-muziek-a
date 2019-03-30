@@ -20,6 +20,12 @@
     ><mat-icon>close</mat-icon></button>
   </mat-form-field>
 
+<!--  <div class="hover-img"-->
+<!--       [ngStyle]="{'top.px': rowHovered.y}">-->
+<!--    <img [src]="imageUrl + rowHovered.id">-->
+<!--    {{rowHovered.id}}-->
+<!--    </div>-->
+
   <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows
          class="mat-elevation-z8">
 
@@ -30,8 +36,10 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"
-        [title]="row.id"
+        (mouseover)="getRowTooltip($event, row)"
+        [matTooltip]="rowHovered"
         (click)="edit(row)" [class.deleted]="row.deleted"
     ></tr>
   </table>
+
 </div>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BookWikiComponent } from './book-wiki.component';
+import { BookRemoteComponent } from './book-remote.component';
 
-describe('BookWikiComponent', () => {
-  let component: BookWikiComponent;
-  let fixture: ComponentFixture<BookWikiComponent>;
+describe('BookRemoteComponent', () => {
+  let component: BookRemoteComponent;
+  let fixture: ComponentFixture<BookRemoteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BookWikiComponent ]
+      declarations: [ BookRemoteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BookWikiComponent);
+    fixture = TestBed.createComponent(BookRemoteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

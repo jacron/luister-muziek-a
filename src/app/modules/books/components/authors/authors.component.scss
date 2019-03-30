@@ -20,3 +20,20 @@ th.mat-sort-header-sorted {
 tr td:last-child {
   text-align: right;
 }
+.hover-img {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  min-width: 20px;
+  min-height: 20px;
+  border: red solid 1px;
+  img {
+    width: 100px;
+  }
+}
+.mat-row:hover {
+  background: #7f7f7f;
+  .cdk-column-imgsrc {
+    border: red solid 1px;
+  }
+}

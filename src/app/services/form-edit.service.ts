@@ -63,8 +63,8 @@ export class FormEditService {
   jaartalValid(value) {
     // een jaartal mag uit geen, twee of vier cijfers bestaan
     // een jaartal mag ook null of undefined zijn
-    return /^(\d{2})$/.test(value) ||
-           /^(\d{4})$/.test(value) ||
+    // een jaartal mag met het minteken beginnen en kan dan ook1 of 3 cijfers bevatten
+    return /^-?\d{1,4}$/.test(value) ||
            /^$/.test(value) ||
           !value;
   }

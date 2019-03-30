@@ -5,6 +5,7 @@ import {Director} from '../../../../classes/movies/Director';
 import {BooksService} from '../../../books/services/books.service';
 // import {ToastrService} from 'ngx-toastr';
 import {MoviesService} from '../../services/movies.service';
+import {SystemService} from '../../../books/services/system.service';
 
 @Component({
   selector: 'app-dialog-director',
@@ -22,6 +23,7 @@ export class DialogDirectorComponent implements OnInit {
     public dialogRef: MatDialogRef<DirectorsComponent>,
     private booksService: BooksService,
     private moviesService: MoviesService,
+    private system: SystemService,
     // private toastr: ToastrService,
   ) { }
 
@@ -81,7 +83,7 @@ export class DialogDirectorComponent implements OnInit {
 
   wikipedia(lng) {
     const name = this.director.Voornaam + ' ' + this.director.Achternaam;
-    this.booksService.wikiAuthor(name, lng).subscribe(
+    this.system.wikiInfo(name, lng).subscribe(
       result => this.afterWikipedia(result),
       () => console.log('Geen wiki-gegevens voor taal: ' + lng)
     )

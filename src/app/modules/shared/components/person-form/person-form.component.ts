@@ -11,6 +11,7 @@ import {FormError} from '../../../../classes/shared/FormError';
 export class PersonFormComponent implements OnInit {
   @Input() formGroup: FormGroup;
   @Input() options: FormOption[];
+  @Input() imgurl: string;
   @Input() errorTable: FormError[];
   @Output() save = new EventEmitter();
   @Output() close = new EventEmitter();

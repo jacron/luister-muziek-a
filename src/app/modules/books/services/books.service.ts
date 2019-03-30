@@ -81,11 +81,7 @@ export class BooksService {
     );
   }
 
-  wikiAuthor(authorName, lng) {
-    return this.postForm('/wiki/' + lng, {q: authorName});
-  }
-
-  storeWikiAuthorImg(url, id) {
+  storeAuthorImgFromUrl(url, id) {
     return this.postForm(`/author/${id}/wiki/store`, {url});
   }
 

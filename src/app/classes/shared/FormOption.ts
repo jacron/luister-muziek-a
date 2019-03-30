@@ -3,4 +3,5 @@ export class FormOption {
   label: string;
   validators?: any[];
   autocomplete?: string;
+  hovered?: boolean;
 }

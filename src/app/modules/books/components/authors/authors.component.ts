@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {BooksService} from '../../services/books.service';
 import {StateService} from '../../../../services/state.service';
 import {Author} from '../../../../classes/book/author';
 import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogAuthorComponent} from '../../dialogs/dialog-author/dialog-author.component';
 import {DataField} from '../../../movies/components/directors/DataField';
+import {environment} from '../../../../../environments/environment';
 
 const dataFields: DataField[] = [
   {
@@ -39,6 +40,10 @@ const dataFields: DataField[] = [
     name: 'booksCount',
     label: '#',
   },
+  {
+    name: 'imgsrc',
+    label: 'img'
+  }
 ];
 
 @Component({
@@ -50,14 +55,17 @@ export class AuthorsComponent implements OnInit {
   authors: Author[];
   filteredAuthors: Author[];
   displayedColumns = ['first', 'last', 'born', 'died', 'genre',
-    'country', 'title', 'booksCount'];
+    'country', 'title', 'booksCount', 'imgsrc'];
   fields = dataFields;
   query: string;
   dataSource;
   genre;
   filteredCount;
+  rowHovered = {};
+  imageUrl = environment.booksServer + '/image/author/';
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('authorImage', {read: ElementRef}) authorImage;
 
   constructor(
     private booksService: BooksService,
@@ -120,6 +128,19 @@ export class AuthorsComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     this.filteredCount = this.dataSource.filteredData.length;
+  }
+
+  getRowTooltip(e, row) {
+    console.log(e);
+    console.log(row);
+    // const style = `left: ${e.screenX}; top: ${e.screenY}`
+    this.rowHovered = {
+      // x: e.clientX,
+      y: e.clientY + 60,
+      id: row.id
+    };
+    // console.log(this.authorImage.nativeElement);
+    // this.authorImage.nativeElement.style = style;
   }
 
   renderAuthors() {
