@@ -61,7 +61,6 @@ export class AuthorsComponent implements OnInit {
   dataSource;
   genre;
   filteredCount;
-  rowHovered = {};
   imageUrl = environment.booksServer + '/image/author/';
 
   @ViewChild(MatSort) sort: MatSort;
@@ -76,6 +75,7 @@ export class AuthorsComponent implements OnInit {
   clearFilter(input) {
     input.value = '';
     this.applyFilter('');
+    input.focus();
   }
 
   afterSaved(author) {
@@ -125,22 +125,14 @@ export class AuthorsComponent implements OnInit {
     );
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    this.filteredCount = this.dataSource.filteredData.length;
+  keyApplyFilter(e) {
+    this.applyFilter(e.target['value']);
   }
 
-  getRowTooltip(e, row) {
-    console.log(e);
-    console.log(row);
-    // const style = `left: ${e.screenX}; top: ${e.screenY}`
-    this.rowHovered = {
-      // x: e.clientX,
-      y: e.clientY + 60,
-      id: row.id
-    };
-    // console.log(this.authorImage.nativeElement);
-    // this.authorImage.nativeElement.style = style;
+  applyFilter(filterValue) {
+    const value = filterValue ? filterValue.trim().toLowerCase() : null;
+    this.dataSource.filter = value;
+    this.filteredCount = this.dataSource.filteredData.length;
   }
 
   renderAuthors() {

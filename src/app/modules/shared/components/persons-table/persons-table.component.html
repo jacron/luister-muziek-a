@@ -1,14 +1,15 @@
 <mat-form-field>
   <input
-    #filterInput
+    [(ngModel)]="filter"
     matInput
     autofocus
-    (keyup)="applyFilter($event.target['value'])"
+    #filterInput
+    (keyup)="applyFilter()"
     placeholder="Filter">
   <button
-    *ngIf="filterInput.value.length"
+    *ngIf="filter.length"
     mat-button mat-icon-button matSuffix
-    (click)="clearFilter(filterInput); filterInput.focus()"
+    (click)="clearFilter(filterInput)"
     class="clear-filter"
   ><mat-icon>close</mat-icon></button>
 </mat-form-field>

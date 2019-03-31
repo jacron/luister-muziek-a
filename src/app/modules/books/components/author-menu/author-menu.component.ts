@@ -108,7 +108,7 @@ export class AuthorMenuComponent implements OnInit {
 
   getCover() {
     this.toastr.info('afbeelding auteur naar cache', 'afbeelding');
-    this.booksService.getAuthorPicture(this.author.id).subscribe(
+    this.booksService.getAuthorPictureFromUrl(this.author.id).subscribe(
       () => this.afterGetCover()
     );
   }

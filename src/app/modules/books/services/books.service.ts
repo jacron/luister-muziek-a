@@ -85,12 +85,16 @@ export class BooksService {
     return this.postForm(`/author/${id}/wiki/store`, {url});
   }
 
-  scanCover() {
-    return this.postForm('/book/scan', {});
-  }
+  // scanCover() {
+  //   return this.postForm('/book/scan', {});
+  // }
 
   finishCover(bookId) {
     return this.postForm('/book/use/' + bookId, {});
+  }
+
+  pasteBookCoverUrl(bookId) {
+    return this.postForm('/paste/url/book/' + bookId, {});
   }
 
   pasteBookCover(bookId) {
@@ -101,11 +105,11 @@ export class BooksService {
     return this.postForm('/paste/author/' + authorId, {});
   }
 
-  getBookCover(bookId) {
+  getBookCoverFromUrl(bookId) {
     return this.postForm('/getimage/book/' + bookId, {});
   }
 
-  getAuthorPicture(authorId) {
+  getAuthorPictureFromUrl(authorId) {
     return this.postForm('/getimage/author/' + authorId, {});
   }
 

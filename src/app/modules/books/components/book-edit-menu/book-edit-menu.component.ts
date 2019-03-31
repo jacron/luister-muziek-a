@@ -51,7 +51,7 @@ export class BookEditMenuComponent implements OnInit {
   }
 
   pastePicture() {
-    this.booksService.pasteBookCover(this.book.id).subscribe(
+    this.booksService.pasteBookCoverUrl(this.book.id).subscribe(
       response => this.afterPastePicture(response),
       err => this.toastr.error(err)
     )

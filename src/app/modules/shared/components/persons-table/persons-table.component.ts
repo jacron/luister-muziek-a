@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material';
+import {DataField} from '../../../movies/components/directors/DataField';
 
 @Component({
   selector: 'app-persons-table',
@@ -7,7 +8,7 @@ import {MatSort} from '@angular/material';
   styleUrls: ['./persons-table.component.scss']
 })
 export class PersonsTableComponent implements OnInit, OnChanges {
-  @Input() fields;
+  @Input() fields: DataField[];
   @Input() dataSource;
   @Input() displayedColumns;
   @Input() saved;
@@ -16,16 +17,18 @@ export class PersonsTableComponent implements OnInit, OnChanges {
   @Output() setFilter = new EventEmitter();
 
   @ViewChild(MatSort) sort: MatSort;
+  filter = '';
 
   constructor() { }
 
-  clearFilter(input) {
-    input.value = '';
-    this.applyFilter('');
+  clearFilter(filterInput) {
+    this.filter = '';
+    this.applyFilter();
+    filterInput.focus()
   }
 
-  applyFilter(filterValue: string) {
-    this.setFilter.emit(filterValue);
+  applyFilter() {
+    this.setFilter.emit(this.filter);
   }
 
   edit(row) {

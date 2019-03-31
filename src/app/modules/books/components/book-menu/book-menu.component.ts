@@ -27,10 +27,16 @@ export class BookMenuComponent implements OnInit {
       action: this.finishCover.bind(this),
     },
     {
+      label: 'Plak afbeelding',
+      icon: 'brush',
+      color: 'orange',
+      action: this.pasteCover.bind(this),
+    },
+    {
       label: 'Plak url',
       icon: 'brush',
       color: 'green',
-      action: this.pasteCover.bind(this)
+      action: this.pasteCoverUrl.bind(this)
     },
     {
       label: 'Gebruik url',
@@ -85,11 +91,11 @@ export class BookMenuComponent implements OnInit {
     }
   }
 
-  scanCover() {
-    this.booksService.scanCover().subscribe(
-      response => console.log(response)
-    )
-  }
+  // scanCover() {
+  //   this.booksService.scanCover().subscribe(
+  //     response => console.log(response)
+  //   )
+  // }
 
   afterFinishCover() {
     this.toastr.success('cover finished');
@@ -102,9 +108,20 @@ export class BookMenuComponent implements OnInit {
     )
   }
 
-  afterPasteCover(response) {
+  afterPasteCoverUrl(response) {
     this.book.imgurl = response.text;
     this.toastr.success('url afbeelding ingeplakt', 'cover');
+  }
+
+  pasteCoverUrl() {
+    this.booksService.pasteBookCoverUrl(this.book.id).subscribe(
+      response => this.afterPasteCoverUrl(response)
+    )
+  }
+
+  afterPasteCover(response) {
+    this.toastr.success('boekomslag opgeslagen', 'cover');
+    this.refresh.emit('?' + new Date());
   }
 
   pasteCover() {
@@ -120,7 +137,7 @@ export class BookMenuComponent implements OnInit {
 
   getCover() {
     this.toastr.info('Boekomslag in cache', 'cover');
-    this.booksService.getBookCover(this.book.id).subscribe(
+    this.booksService.getBookCoverFromUrl(this.book.id).subscribe(
       () => this.afterGetCover()
     )
   }
