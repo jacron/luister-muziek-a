@@ -55,7 +55,7 @@ export class AuthorsComponent implements OnInit {
   authors: Author[];
   filteredAuthors: Author[];
   displayedColumns = ['first', 'last', 'born', 'died', 'genre',
-    'country', 'title', 'booksCount', 'imgsrc'];
+    'country', 'title', 'booksCount'];
   fields = dataFields;
   query: string;
   dataSource;

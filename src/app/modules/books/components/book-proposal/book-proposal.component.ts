@@ -19,9 +19,7 @@ export class BookProposalComponent implements OnInit {
   ) { }
 
   afterGetRemote(response, source) {
-    // console.log(response);
     this.toastr.success('Gegevens zijn opgehaald!', source);
-    // this.notInCatalogue = true;
     if (response) {
       this.proposal = response;
       this.proposal.id = -1;
@@ -39,6 +37,28 @@ export class BookProposalComponent implements OnInit {
     this.booksService.getRemote(this.isbn, source).subscribe(
       response => this.afterGetRemote(response, source)
     )
+  }
+
+  newbook() {
+    this.proposal = {
+      isbn: this.isbn,
+      id: -1,
+      source: null,
+      title: '',
+      genre: '',
+      subtitle: '',
+      isbn13: '',
+      imgurl: '',
+      notes: '',
+      pubinfo: '',
+      author: '',
+      author_id: -1,
+      tags: '',
+      date: '',
+      translator: '',
+      original_title: ''
+    };
+    this.notfound = null;
   }
 
   ngOnInit() {

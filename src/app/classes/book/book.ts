@@ -9,7 +9,7 @@ export class Book {
   pubinfo: string;
   author: string;
   author_id: number;
-  nbooks?: number;
+  // nbooks?: number;
   tags: string;
   genre: string;
   date: string;

@@ -26,7 +26,6 @@ export class BookComponent implements OnInit {
   }
 
   afterGetBook(response) {
-    console.log(response);
     this.book = response;
     if (this.book) {
       this.stateService.setTitle(this.book.title);

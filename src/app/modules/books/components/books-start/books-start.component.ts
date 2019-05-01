@@ -30,7 +30,6 @@ export class BooksStartComponent implements OnInit {
   }
 
   afterGetBookByIsbn(books: Book[]) {
-    console.log(books);
     this.books = [];
     if (books && books.length) {
       this.notInCatalogue = false;
@@ -50,7 +49,6 @@ export class BooksStartComponent implements OnInit {
   }
 
   onIsbnChange(isbn) {
-    console.log(isbn);
     this.isbn = isbn;
     this.booksService.getBookByIsbn(isbn).subscribe(
       (books: Book[]) => this.afterGetBookByIsbn(books),

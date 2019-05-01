@@ -2,6 +2,7 @@
   <button mat-button (click)="remote('bolcom')">bolcom</button>
   <button mat-button (click)="remote('kb')">kb</button>
   <button mat-button (click)="remote('isbndb')">isbndb</button>
+  <button mat-button (click)="newbook()">new book</button>
   <div *ngIf="notfound">{{ notfound }}: niet gevonden</div>
   <div *ngIf="proposal" class="website">
     <a [href]="proposal.url" class="link" target="_blank">
