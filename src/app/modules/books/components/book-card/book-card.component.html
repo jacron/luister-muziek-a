@@ -26,8 +26,11 @@
           <div class="author" *ngIf="book.author_id">
             <a class="link"
                [routerLink]="['/author', book.author_id]">
-              {{ book.author }}
+              {{ book.author_id }}
             </a>
+            <span (click)="editAuthor()" class="link">
+              {{ book.author }}
+            </span>
           </div>
           <div class="translator">{{ book.translator }}</div>
           <div class="pubinfo">{{ book.pubinfo }}</div>

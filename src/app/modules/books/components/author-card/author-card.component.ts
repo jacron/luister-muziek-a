@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Author} from '../../../../classes/book/author';
 import {environment} from '../../../../../environments/environment';
+import {DialogAuthorComponent} from '../../dialogs/dialog-author/dialog-author.component';
+import {MatDialog} from '@angular/material/dialog';
 // import {Wiki} from '../../../../classes/book/wiki';
 
 @Component({
@@ -18,7 +20,9 @@ export class AuthorCardComponent implements OnInit {
   imageUrl = environment.booksServer + '/image/author/';
   wikiCache;
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+  ) { }
 
   setWiki(e) {
     this.wikiCache = e;
@@ -31,8 +35,44 @@ export class AuthorCardComponent implements OnInit {
     this.wiki.emit(this.wikiCache);
   }
 
+  afterSaved(author) {
+      for (let prop in author) {
+        if (author.hasOwnProperty(prop)) {
+          this.author[prop] = author[prop];
+        }
+      }
+  }
+
+  afterRemoved(author) {
+      this.author.deleted = true;
+  }
+
+  afterEdit(result) {
+    if (!result || !result.author) {
+      return;
+    }
+    const {status, author} = result;
+    switch(status) {
+      case 'saved':
+        this.afterSaved(author);
+        break;
+      case 'removed':
+        this.afterRemoved(author);
+        break;
+    }
+  }
+
   toggleEdit() {
-    this.edit.emit();
+    // this.edit.emit();
+    const dialogRef = this.dialog.open(DialogAuthorComponent, {
+      data: {
+        width: '600px',
+        author: this.author
+      }
+    });
+    dialogRef.afterClosed().subscribe(
+      result => this.afterEdit(result)
+    );
   }
 
   ngOnInit() {
