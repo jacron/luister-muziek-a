@@ -21,7 +21,7 @@ export class TitleQueryComponent implements OnInit {
   }
 
   afterSearchTitles(response) {
-    console.log(response);
+    // console.log(response);
     this.books = response;
   }
 

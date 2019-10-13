@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BooksService} from '../../services/books.service';
 import {StateService} from '../../../../services/state.service';
 import {Book} from '../../../../classes/book/book';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 
 @Component({
@@ -16,14 +16,27 @@ export class BooksStartComponent implements OnInit {
   listHeader = '';
   recentLimit = 30;
   isbn = null;
-  genre = 'alle';
+  genre = null;
   recentLimitFormControl = new FormControl();
 
   constructor(
     private booksService: BooksService,
     private stateService: StateService,
     private router: Router,
-  ) { }
+    private activatedRoute: ActivatedRoute,
+  ) {
+    activatedRoute.params.subscribe(params => this.handleParams(params));
+  }
+
+  handleParams(params) {
+    if (params) {
+      if (params.genre) {
+        this.genre = params.genre;
+        this.getBooksCount();
+        this.getRecent();
+      }
+    }
+  }
 
   onTitleChange(title) {
     this.router.navigate(['books/search', title]).then();
@@ -42,10 +55,11 @@ export class BooksStartComponent implements OnInit {
   }
 
   onGenreChange(e) {
-    this.genre = e;
-    console.log(e);
-    this.getBooksCount();
-    this.getRecent();
+    // this.genre = e;
+    // console.log(e);
+    // this.getBooksCount();
+    // this.getRecent();
+    this.router.navigate(['books/genre', e]).then();
   }
 
   onIsbnChange(isbn) {
@@ -80,9 +94,13 @@ export class BooksStartComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.stateService.setTitle('Books');
-    this.getBooksCount();
-    this.getRecent();
+    if (!this.genre) {
+      this.getBooksCount();
+      // console.log('get recent in init');
+      this.getRecent();
+    }
   }
 
 }
