@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'books', component: BooksStartComponent},
   {path: 'books/:idbook', component: BookComponent},
   {path: 'books/search/:query', component: TitleQueryComponent},
-  {path: 'books/genre/:genre', component: BooksStartComponent},
+  {path: 'books/:genre/:limit', component: BooksStartComponent},
   {path: 'authors', component: AuthorsComponent},
   {path: 'author/:idauthor', component: AuthorComponent},
 ];

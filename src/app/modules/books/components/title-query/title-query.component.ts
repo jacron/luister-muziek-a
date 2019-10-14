@@ -20,23 +20,24 @@ export class TitleQueryComponent implements OnInit {
     activatedRoute.params.subscribe(params => this.handleParams(params));
   }
 
-  afterSearchTitles(response) {
+  afterSearchTitles(response, query) {
     // console.log(response);
     this.books = response;
+    this.stateService.setTitle(`'${query}' (${response.length})`)
   }
 
   handleParams(params) {
     if (params) {
       if (params.query) {
         this.booksService.searchTitlesFull(params.query).subscribe(
-          response => this.afterSearchTitles(response)
+          response => this.afterSearchTitles(response, params.query)
         )
       }
     }
   }
 
   ngOnInit() {
-    this.stateService.setTitle('Query');
+    // this.stateService.setTitle('Query');
   }
 
 }

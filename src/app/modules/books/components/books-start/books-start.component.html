@@ -15,18 +15,18 @@
     <div>
       <app-title-query-input (titlechange)="onTitleChange($event)"></app-title-query-input>
     </div>
+    <mat-form-field>
+      <input matInput placeholder="limit"
+             name="count"
+             [value]="recentLimit"
+             [formControl]="recentLimitFormControl"
+             (change)="onLimitChange()">
+    </mat-form-field>
   </div>
   <div class="not-found" *ngIf="notInCatalogue">
     <div>Niet aanwezig in de catalogus</div>
     <app-book-proposal [isbn]="isbn"></app-book-proposal>
   </div>
-  <h3 *ngIf="books?.length">{{ listHeader }}</h3>
-  <mat-form-field>
-    <input matInput placeholder="aantal"
-           name="count"
-           [formControl]="recentLimitFormControl"
-           (change)="onLimitChange()">
-  </mat-form-field>
   <div class="book-wrapper">
     <div *ngFor="let book of books" class="book-card">
       <app-book-card [(book)]="book"></app-book-card>

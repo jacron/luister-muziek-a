@@ -32,6 +32,7 @@ export class BooksStartComponent implements OnInit {
     if (params) {
       if (params.genre) {
         this.genre = params.genre;
+        this.recentLimit = params.limit;
         this.getBooksCount();
         this.getRecent();
       }
@@ -55,11 +56,7 @@ export class BooksStartComponent implements OnInit {
   }
 
   onGenreChange(e) {
-    // this.genre = e;
-    // console.log(e);
-    // this.getBooksCount();
-    // this.getRecent();
-    this.router.navigate(['books/genre', e]).then();
+    this.router.navigate(['books', e, this.recentLimit]).then();
   }
 
   onIsbnChange(isbn) {
@@ -71,9 +68,7 @@ export class BooksStartComponent implements OnInit {
   }
 
   onLimitChange() {
-    this.recentLimit = this.recentLimitFormControl.value;
-    console.log(this.recentLimit);
-    this.getRecent();
+    this.router.navigate(['books', this.genre, this.recentLimitFormControl.value]).then();
   }
 
   getBooksCount() {
@@ -97,6 +92,7 @@ export class BooksStartComponent implements OnInit {
 
     this.stateService.setTitle('Books');
     if (!this.genre) {
+      this.genre = 'alle';
       this.getBooksCount();
       // console.log('get recent in init');
       this.getRecent();
