@@ -34,6 +34,7 @@ import { BookEditCardComponent } from './components/book-edit-card/book-edit-car
 import { BookEditMenuComponent } from './components/book-edit-menu/book-edit-menu.component';
 import { DialogBookComponent } from './dialogs/dialog-book/dialog-book.component';
 import { BookRemoteComponent } from './components/book-remote/book-remote.component';
+import { BookBarcodesComponent } from './components/book-barcodes/book-barcodes.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { BookRemoteComponent } from './components/book-remote/book-remote.compon
     BookEditMenuComponent,
     DialogBookComponent,
     BookRemoteComponent,
+    BookBarcodesComponent,
   ],
   imports: [
     CommonModule,

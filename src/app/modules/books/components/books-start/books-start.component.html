@@ -18,10 +18,14 @@
     <mat-form-field>
       <input matInput placeholder="limit"
              name="count"
-             [value]="recentLimit"
+             [value]="recentLimit.toString()"
              [formControl]="recentLimitFormControl"
              (change)="onLimitChange()">
     </mat-form-field>
+    <div>
+      <span class="link" (click)="createBarcodes()">barcodes</span>
+<!--      <a *ngIf="barcodesCreated" href=""></a>-->
+    </div>
   </div>
   <div class="not-found" *ngIf="notInCatalogue">
     <div>Niet aanwezig in de catalogus</div>

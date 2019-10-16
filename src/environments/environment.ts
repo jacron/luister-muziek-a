@@ -42,13 +42,15 @@ console.log('music server', musicServer);
 console.log('movie server', moviesServer);
 console.log('book server', booksServer);
 console.log('system server', systemServer);
-
+// https://www.google.nl/search?q=Rubaiyat+/+druk+1+Omar+Khayyam&sxsrf=ACYBGNTemh-hm_SZIuVZa_d4F4-joasRpQ:1571115355668&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjT07PlvJ3lAhUJZFAKHRdiAosQ_AUIEigB&biw=1540&bih=1211
+// https://www.google.nl/search?tbm=isch&q=rubaiyat+%2F+druk+1+omar+khayyam
 export const environment = {
   musicServer,
   moviesServer,
   booksServer,
   systemServer,
   googleUrl: 'https://google.nl/search?q=',
+  googleAfbUrl: 'https://www.google.nl/search?tbm=isch&q=',
   freedbUrl: 'http://www.freedb.org/freedb_discid_check.php?discid=',
   amazonUrl: 'https://www.amazon.com/dp/',
   musicbrainz: 'https://musicbrainz.org/otherlookup/freedbid?other-lookup.freedbid=',

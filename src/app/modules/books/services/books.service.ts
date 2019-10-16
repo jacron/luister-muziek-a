@@ -72,6 +72,10 @@ export class BooksService {
     return this.getJson('/author');
   }
 
+  getBarcodes() {
+    return this.getJson('/book/barcode/list');
+  }
+
   /* POST */
   postForm(cmd, params) {
     const headers = new HttpHeaders();
@@ -128,4 +132,13 @@ export class BooksService {
   saveAuthor(author: Author) {
     return this.postForm('/author/save', {author});
   }
+
+  addBarcode(isbn, title) {
+    return this.postForm('/book/barcode', {isbn, title});
+  }
+
+  deleteBarcodeList() {
+    return this.postForm('/book/barcode/deletelist', {});
+  }
+
 }

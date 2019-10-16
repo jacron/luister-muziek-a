@@ -13,9 +13,11 @@
   width: calc(50% - 6px);
   margin-right: 12px;
 }
-.date,
-.isbn13 {
+.date {
   width: calc(50% - 6px);
+}
+.isbn13 {
+  width: 120px;
 }
 .title,
 .subtitle,

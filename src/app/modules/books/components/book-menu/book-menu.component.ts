@@ -51,13 +51,26 @@ export class BookMenuComponent implements OnInit {
     {
       label: 'Google',
       icon: 'search',
-      action: this.google.bind(this)
+      color: 'brown',
+      action: this.google.bind(this, environment.googleUrl)
+    },
+    {
+      label: 'Google Afb.',
+      icon: 'search',
+      color: 'rgb(245, 245, 24)',
+      action: this.google.bind(this, environment.googleAfbUrl)
     },
     {
       label: 'Verwijder',
       icon: 'clear',
       color: 'rgb(245, 24, 24)',
       action: this.remove.bind(this)
+    },
+    {
+      label: 'Maak barcode',
+      icon: 'account_balance_wallet',
+      color: 'rgb(24, 24, 254)',
+      action: this.createBarcode.bind(this)
     },
   ];
 
@@ -70,23 +83,23 @@ export class BookMenuComponent implements OnInit {
     f();
   }
 
-  afterGetAuthor(author) {
-    let url = environment.googleUrl + this.book.title;
+  afterGetAuthor(author, g_url) {
+    let url = g_url + this.book.title;
     if (author) {
       url += ' ' + author.first + ' ' + author.last;
     }
     window.open(url);
   }
 
-  google() {
-    console.log(this.book);
+  google(url) {
+    // console.log(this.book);
     const author = this.book.author;
     if (!author) {
       this.booksService.getAuthor(this.book.author_id).subscribe(
-        response => this.afterGetAuthor(response)
+        response => this.afterGetAuthor(response, url)
       );
     } else {
-      window.open(environment.googleUrl + this.book.title +
+      window.open(url + this.book.title +
         ' ' + author);
     }
   }
@@ -119,14 +132,14 @@ export class BookMenuComponent implements OnInit {
     )
   }
 
-  afterPasteCover(response) {
+  afterPasteCover() {
     this.toastr.success('boekomslag opgeslagen', 'cover');
     this.refresh.emit('?' + new Date());
   }
 
   pasteCover() {
     this.booksService.pasteBookCover(this.book.id).subscribe(
-      response => this.afterPasteCover(response)
+      () => this.afterPasteCover()
     )
   }
 
@@ -152,6 +165,16 @@ export class BookMenuComponent implements OnInit {
         () => this.afterRemove()
       )
     }
+  }
+
+  afterCreateBarcode(result) {
+    console.log(result);
+  }
+
+  createBarcode() {
+    this.booksService.addBarcode(this.book.isbn13, this.book.title).subscribe(
+      (result) => this.afterCreateBarcode(result)
+    )
   }
 
 

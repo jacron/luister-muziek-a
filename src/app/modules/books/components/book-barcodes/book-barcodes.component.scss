@@ -1,0 +1,14 @@
+.tile {
+  width: 200px;
+  height: 300px;
+  float: left;
+}
+.tile:not(:first-child) {
+  margin-left: 30px;
+}
+h5 {
+  height: 40px;
+}
+.cmd {
+  margin-bottom: 15px;
+}

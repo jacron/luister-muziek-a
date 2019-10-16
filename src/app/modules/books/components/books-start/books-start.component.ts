@@ -67,6 +67,15 @@ export class BooksStartComponent implements OnInit {
     )
   }
 
+  afterCreateBarcodes() {
+    console.log('barcodes webpage created');
+  }
+
+  createBarcodes() {
+    this.router.navigate(['books-barcodes'], {}).then();
+    // this.booksService.createBarcodeWebpage().subscribe(() => this.afterCreateBarcodes());
+  }
+
   onLimitChange() {
     this.router.navigate(['books', this.genre, this.recentLimitFormControl.value]).then();
   }

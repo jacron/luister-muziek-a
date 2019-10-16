@@ -1,0 +1,6 @@
+<h3>Barcodes ({{ barcodesCount }})</h3>
+<div class="link cmd" (click)="deleteList()">delete list</div>
+<div *ngFor="let barcode of barcodes" class="tile">
+  <h5>{{ barcode.title }}</h5>
+  <img [src]="imageUrl + barcode.isbn">
+</div>
