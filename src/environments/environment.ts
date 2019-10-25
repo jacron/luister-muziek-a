@@ -27,7 +27,7 @@ if (hostname.includes('xip.io')
   host = 'http://127.0.0.1';
   // musicServer = host + ':8030/api';
   musicServer = host + ':3005';
-  moviesServer = host + ':5090';
+  moviesServer = host + ':5080';
   // booksServer = host + ':5050';
   booksServer = host + ':3004';
   systemServer = host + ':3006';
@@ -35,7 +35,11 @@ if (hostname.includes('xip.io')
   // use 'prod'
   musicServer = 'http://music-api/api';
   moviesServer = 'http://movies18';
-  booksServer = 'http://booklibrary';
+  // booksServer = 'http://booklibrary';
+  host = 'http://127.0.0.1';
+  booksServer = host + ':3004';
+  musicServer = host + ':3005';
+  // musicServer = host + ':8030/api'; // dev
 }
 
 console.log('music server', musicServer);
