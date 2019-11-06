@@ -3,7 +3,7 @@ import {Componist} from '../../../../classes/music/Componist';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {MusicService} from '../../services/music.service';
 import {ComponistComponent} from '../../components/componist/componist.component';
-import {SystemService} from '../../../books/services/system.service';
+import {BooksService} from '../../../books/services/books.service';
 
 @Component({
   selector: 'app-dialog-componist',
@@ -19,7 +19,7 @@ export class DialogComponistComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<ComponistComponent>,
     private musicService: MusicService,
-    private system: SystemService,
+    private booksService: BooksService,
   ) { }
 
   onClose(e) {
@@ -72,7 +72,7 @@ export class DialogComponistComponent implements OnInit {
 
   wikipedia(lng) {
     const name = this.composer.FirstName + ' ' + this.composer.LastName;
-    this.system.wikiInfo(name, lng).subscribe(
+    this.booksService.wikiInfo(name, lng).subscribe(
       result => this.afterWikipedia(result),
       () => console.log('Geen wiki-gegevens voor taal: ' + lng)
     )

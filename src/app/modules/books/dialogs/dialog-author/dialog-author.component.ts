@@ -3,7 +3,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Author} from '../../../../classes/book/author';
 import {AuthorsComponent} from '../../components/authors/authors.component';
 import {BooksService} from '../../services/books.service';
-import {SystemService} from '../../services/system.service';
 
 @Component({
   selector: 'app-dialog-author',
@@ -20,7 +19,6 @@ export class DialogAuthorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AuthorsComponent>,
     private booksService: BooksService,
-    private systemService: SystemService,
   ) { }
 
   useBorn(born) {
@@ -76,7 +74,7 @@ export class DialogAuthorComponent implements OnInit {
 
   wikipedia(lng) {
     const name = this.author.first + ' ' + this.author.last;
-    this.systemService.wikiInfo(name, lng).subscribe(
+    this.booksService.wikiInfo(name, lng).subscribe(
       result => this.afterWikipedia(result),
       err => this.afterWikipediaError(err)
     )

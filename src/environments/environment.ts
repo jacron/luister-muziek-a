@@ -7,7 +7,7 @@ const hostname = document.location.hostname;
 let musicServer;  // musiclibrary
 let moviesServer; // movies18
 let booksServer; // booklibrary
-let systemServer; // systemlibrary
+// let systemServer; // systemlibrary
 let host;
 
 console.log(document.location);
@@ -20,7 +20,7 @@ if (hostname.includes('xip.io')
   musicServer = host + ':3005';
   moviesServer = host + ':5080';
   booksServer = host + ':3004';
-  systemServer = host + ':3006';
+  // systemServer = host + ':3006';
 } else if (hostname.includes('127.0.0.1') ||
       hostname.includes('localhost')) {
   // use dev
@@ -30,14 +30,14 @@ if (hostname.includes('xip.io')
   moviesServer = host + ':5080';
   // booksServer = host + ':5050';
   booksServer = host + ':3004';
-  systemServer = host + ':3006';
+  // systemServer = host + ':3006';
 } else {
   // use 'prod'
-  musicServer = 'http://music-api/api';
+  // musicServer = 'http://music-api/api';
   moviesServer = 'http://movies18';
   // booksServer = 'http://booklibrary';
   host = 'http://127.0.0.1';
-  booksServer = host + ':3004';
+  booksServer = host + ':5050';// ':3004';
   musicServer = host + ':3005';
   // musicServer = host + ':8030/api'; // dev
 }
@@ -45,14 +45,14 @@ if (hostname.includes('xip.io')
 console.log('music server', musicServer);
 console.log('movie server', moviesServer);
 console.log('book server', booksServer);
-console.log('system server', systemServer);
+// console.log('system server', systemServer);
 // https://www.google.nl/search?q=Rubaiyat+/+druk+1+Omar+Khayyam&sxsrf=ACYBGNTemh-hm_SZIuVZa_d4F4-joasRpQ:1571115355668&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjT07PlvJ3lAhUJZFAKHRdiAosQ_AUIEigB&biw=1540&bih=1211
 // https://www.google.nl/search?tbm=isch&q=rubaiyat+%2F+druk+1+omar+khayyam
 export const environment = {
   musicServer,
   moviesServer,
   booksServer,
-  systemServer,
+  // systemServer,
   googleUrl: 'https://google.nl/search?q=',
   googleAfbUrl: 'https://www.google.nl/search?tbm=isch&q=',
   freedbUrl: 'http://www.freedb.org/freedb_discid_check.php?discid=',

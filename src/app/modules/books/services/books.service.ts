@@ -141,4 +141,8 @@ export class BooksService {
     return this.postForm('/book/barcode/deletelist', {});
   }
 
+  wikiInfo(q, lng) {
+    return this.postForm('/wiki/' + lng, {q});
+  }
+
 }

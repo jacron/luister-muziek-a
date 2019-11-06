@@ -4,7 +4,6 @@ import {environment} from '../../../../../environments/environment';
 import {BooksService} from '../../services/books.service';
 import {ToastrService} from 'ngx-toastr';
 import {Author} from '../../../../classes/book/author';
-import {SystemService} from '../../services/system.service';
 
 @Component({
   selector: 'app-author-menu',
@@ -90,7 +89,6 @@ export class AuthorMenuComponent implements OnInit {
   constructor(
     private booksService: BooksService,
     private toastr: ToastrService,
-    private system: SystemService,
   ) { }
 
   act(f: Function) {
@@ -138,7 +136,7 @@ export class AuthorMenuComponent implements OnInit {
 
   wikipedia(lng) {
     const name = this.author.first + ' ' + this.author.last;
-    this.system.wikiInfo(name, lng).subscribe(
+    this.booksService.wikiInfo(name, lng).subscribe(
       result => this.afterWiki(result),
       () => this.toastr.error('Geen wiki-gegevens voor taal: ' + lng)
     )
