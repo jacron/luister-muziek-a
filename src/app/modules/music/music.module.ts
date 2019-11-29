@@ -52,6 +52,8 @@ import { ComponistEditMenuComponent } from './components/componist-edit-menu/com
 import { DialogComponistComponent } from './dialogs/dialog-componist/dialog-componist.component';
 import { ComponistWikiComponent } from './components/componist-wiki/componist-wiki.component';
 import { ComponistListComponent } from './components/componist-list/componist-list.component';
+import { CollectionDetailsComponent } from './components/collection-details/collection-details.component';
+import { AlbumsComponent } from './components/albums/albums.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +97,8 @@ import { ComponistListComponent } from './components/componist-list/componist-li
     DialogComponistComponent,
     ComponistWikiComponent,
     ComponistListComponent,
+    CollectionDetailsComponent,
+    AlbumsComponent,
 
   ],
   imports: [

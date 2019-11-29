@@ -21,6 +21,7 @@ import {VideosPopComponent} from '../music/components/videos-pop/videos-pop.comp
 import {VideoDocumentaireComponent} from '../music/components/video-documentaire/video-documentaire.component';
 import {DebugComponent} from '../../components/debug/debug.component';
 import {ComponistListComponent} from '../music/components/componist-list/componist-list.component';
+import {CollectionDetailsComponent} from '../music/components/collection-details/collection-details.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
   {path: 'composer/:id', component: ComponistListComponent},
   {path: 'performer', component: PerformerComponent},
   {path: 'collection', component: CollectieComponent},
+  {path: 'collection/:idcoll', component: CollectionDetailsComponent},
   {path: 'tag', component: TagComponent},
   {path: 'tag/:id', component: TagListComponent},
   {path: 'code', component: CodeComponent},

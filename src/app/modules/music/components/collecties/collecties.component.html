@@ -3,7 +3,7 @@
   <div class="" *ngFor="let collectie of result">
     <mat-card class="collectie-card">
         <div class="img-container">
-          <a [routerLink]="['/search', {idcoll: collectie.ID}]">
+          <a [routerLink]="['/collection', collectie.ID]">
             <img alt="thumb"
               [src]="imageUrl(collectie.ID)"
               class="thumb"

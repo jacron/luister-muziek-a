@@ -6,8 +6,7 @@ import {Componist} from '../../../classes/music/Componist';
 
 @Injectable()
 export class MusicService {
-  requestUrl = environment.musicServer;
-
+  requestUrl = environment.musicServer + '/api';
 
   constructor(
     private http: HttpClient
@@ -17,11 +16,11 @@ export class MusicService {
   utility
    */
   albumImageUrl(albumId, w=-1, h=-1) {
-    return `${this.requestUrl}/image/${albumId}/album/${w}/${h}`;
+    return `${environment.musicServer}/image/${albumId}/album/${w}/${h}`;
   }
 
   albumBackImageUrl(albumId, w=-1, h=-1) {
-    return `${this.requestUrl}/image/back/${albumId}/album/${w}/${h}`;
+    return `${environment.musicServer}/image/back/${albumId}/album/${w}/${h}`;
   }
 
   /* GET */
@@ -103,11 +102,11 @@ export class MusicService {
   }
 
   getCollectionById(id) {
-    return this.getJson('collections/' + id);
+    return this.getJson('/collections/' + id);
   }
 
   getTagById(id) {
-    return this.getJson('tag/' + id);
+    return this.getJson('/tag/' + id);
   }
 
   getAlbumById(id) {

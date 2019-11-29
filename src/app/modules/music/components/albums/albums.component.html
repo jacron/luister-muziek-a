@@ -1,0 +1,21 @@
+<div class="app-collecties"
+     *ngIf="albums">
+  <div class="" *ngFor="let album of albums">
+    <mat-card class="collectie-card">
+      <div class="img-container">
+        <a [routerLink]="['/album', album.ID]">
+          <img alt="thumb"
+               [src]="imageUrl(album.ID)"
+               class="thumb"
+          >
+        </a>
+      </div>
+      <mat-card-content>
+        <div>
+          {{ album.Title }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

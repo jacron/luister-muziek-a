@@ -41,7 +41,9 @@ import { DialogAliassingPartsComponent } from './dialogs/dialog-aliassing-parts/
     FormsModule,  // needed for ngModel
   ],
   exports: [
-    AlbumDetailsComponent
+    AlbumDetailsComponent,
+    AlbumHeaderComponent,
+    AlbumMetatagsComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA

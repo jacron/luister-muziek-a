@@ -14,13 +14,9 @@ import {SettingsService} from '../../../../../services/settings.service';
 })
 export class AlbumDetailsComponent implements OnInit {
   @Input() album: Album;
-
-  // imgUrl = environment.musicServer + '/image/';
-  // imgBackUrl = environment.musicServer + '/image/back/';
-  // imgTime = new Date();
   imgSrc;
   idpiece = -1;
-  coverSize = -1;
+  coverHeight = -1;
 
   constructor(
     private musicService: MusicService,
@@ -47,13 +43,11 @@ export class AlbumDetailsComponent implements OnInit {
   }
 
   albumImage() {
-    // {{ imgUrl }}{{ album.ID }}/album/-1/{{ coverSize }}
-    return this.musicService.albumImageUrl(this.album.ID, -1, this.coverSize);
-    //`${this.imgUrl}${this.album.ID}/album/-1/${this.coverSize}`;  // ?stamp=${this.imgTime}`;
+    return this.musicService.albumImageUrl(this.album.ID, -1, this.coverHeight);
   }
 
-  albumBackImage(id) {
-    return this.musicService.albumBackImageUrl(id, 100, -1);  // alimgBackUrl}${id}/album/100/-1`;
+  albumBackImage() {
+    return this.musicService.albumBackImageUrl(this.album.ID, 100, -1);
   }
 
   updateImage() {
@@ -93,17 +87,15 @@ export class AlbumDetailsComponent implements OnInit {
 
   openPic(mode): void {
     const imgUrl = this.musicService.albumImageUrl(this.album.ID);  //  this.imgUrl + this.album.ID + '/album';
-    // const backUrl = this.album.album_back_image ?
-    //   this.musicService.albumBackImageUrl(this.album.ID) : null;
     const backUrl = this.musicService.albumBackImageUrl(this.album.ID);
     this.albumService.openPic({
-      data: {
-        imgUrl: imgUrl,
-        backUrl: backUrl,
-        mode: mode
+        data: {
+          imgUrl: imgUrl,
+          backUrl: backUrl,
+          mode: mode
+        }
       }
-    }
-  );
+    );
   }
 
   restorePieces(album: Album) {
@@ -121,11 +113,11 @@ export class AlbumDetailsComponent implements OnInit {
   }
 
   afterGetSizeFromSetting(size) {
-    this.coverSize = size || 300;
+    this.coverHeight = size || 300;
   }
 
   ngOnInit() {
-    this.coverSize = +this.settingsService.getCoverSize(300);
+    this.coverHeight = +this.settingsService.getCoverSize(300);
     this.settingsService.currentCoverSize.subscribe(size => this.afterGetSizeFromSetting(size));
   }
 }

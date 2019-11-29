@@ -6,7 +6,7 @@ import {Person} from '../classes/music/Person';
 })
 export class StartletterPipe implements PipeTransform {
 
-  transform(items: Person[], filterBy: string, fieldName: string): any {
+  transform(items: any[], filterBy: string, fieldName: string): any {
     if (!items) {
       return items;
     }

@@ -1,0 +1,42 @@
+<mat-progress-spinner *ngIf="!album"></mat-progress-spinner>
+<div *ngIf="album" class="album"
+     tabindex="0">
+  <mat-card class="album-card">
+    <app-album-header
+      (reload)="reload($event)"
+      (updateimage)="updateImage()"
+      [album]="album"
+      [list]="list">
+    </app-album-header>
+    <div class="wrapper">
+      <div class="thumb-container">
+        <img [src]="imgSrc"
+             (click)="openPic('front')"
+             alt="cover"
+             class="thumb">
+        <img
+          [src]="albumBackImage()"
+          (click)="openPic('back')"
+          alt="back-cover"
+          default="assets/one.png"
+          class="back-thumb">
+      </div>
+      <app-album-metatags
+        class="album-metatags"
+        [album]="album"></app-album-metatags>
+    </div>
+  </mat-card>
+  <app-chip-lists [album]="album"></app-chip-lists>
+  <app-albums
+    [albums]="albums">
+  </app-albums>
+
+<!--  <app-album-all-cuesheets [album]="album"-->
+<!--                           [idpiece]="idpiece"-->
+<!--  ></app-album-all-cuesheets>-->
+<!--  <app-album-pieces [pieces]="album.pieces"-->
+<!--                    [idpiece]="idpiece"-->
+<!--                    [album]="album"-->
+<!--  ></app-album-pieces>-->
+
+</div>

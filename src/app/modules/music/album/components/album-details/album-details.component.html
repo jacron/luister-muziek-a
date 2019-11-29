@@ -4,7 +4,7 @@
     <mat-card class="album-card">
       <app-album-header
         (reload)="reload($event)"
-        (updateimage)="updateImage($event)"
+        (updateimage)="updateImage()"
         [album]="album"
         [list]="list">
       </app-album-header>
@@ -15,7 +15,7 @@
                alt="cover"
                class="thumb">
           <img
-               [src]="albumBackImage(album.ID)"
+               [src]="albumBackImage()"
                (click)="openPic('back')"
                alt="back-cover"
                default="assets/one.png"

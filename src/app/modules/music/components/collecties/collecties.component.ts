@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Collection} from '../../../../classes/music/Collection';
-import {environment} from '../../../../../environments/environment';
+import {MusicService} from '../../services/music.service';
 
 @Component({
   selector: 'app-collecties',
@@ -10,14 +10,17 @@ import {environment} from '../../../../../environments/environment';
 export class CollectiesComponent implements OnInit {
   @Input() collections: Collection[];
   @Input() startletter: string;
-  imgUrl = environment.musicServer + '/image/';
-
-  imageUrl(id) {
-    return `${this.imgUrl}${id}/album/-1/100/`;
-  }
+  coverHeight = 100;
+  result: Collection[];
 
   constructor(
+    private musicService: MusicService,
   ) { }
+
+  imageUrl(id) {
+    // return `${this.imgUrl}${id}/album/-1/100/`;
+    return this.musicService.albumImageUrl(id, -1, this.coverHeight);
+  }
 
   ngOnInit() {
   }
