@@ -254,6 +254,7 @@ export class MusicService {
   }
 
   editCue(filename, albumId) {
+    console.log('filename', filename);
     return this.postForm(`/albums/${albumId}/cuesheet/edit`, {filename});
   }
 
