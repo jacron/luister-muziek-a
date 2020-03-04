@@ -11,6 +11,7 @@ let booksServer; // booklibrary
 let host;
 
 console.log(document.location);
+console.log(hostname);
 const pchost = '10.0.1.3';  // imac or macbook
 
 if (hostname.includes('xip.io')
